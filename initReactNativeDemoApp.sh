@@ -1,71 +1,65 @@
-# BlinkID SDK wrapper for React Native
+#!/bin/bash
 
-This repository contains example wrapper for BlinkID native SDK for [Android](https://github.com/BlinkID/blinkid-android). For 100% of features and maximum control, consider using native SDK.
+# remove any existing code
+rm -rf BlinkIDReactNative
 
+# create a sample application
+react-native init --version="0.44.2" BlinkIDReactNative
 
-### Licensing
+# enter into demo project folder
+cd BlinkIDReactNative
 
-- [Generate](https://microblink.com/login?url=/customer/generatedemolicence) a **free demo license key** to start using the SDK in your app (registration required)
-
-- Get information about pricing and licensing of [BlinkID](https://microblink.com/blinkid)
-
-## Installation
-
-First generate an empty project if needed:
-
-```shell
-react-native init NameOfYourProject
-```
-
-Add the **blinkid-react-native** module to your project:
-
-```shell
-cd <path_to_your_project>
+# download npm package
+echo "Downloading blinkid-react-native module"
 npm i --save blinkid-react-native
-```
 
-Link module with your project: 
+npm install
 
-```shell
+# link package with project
+echo "Linking blinkid-react-native module with project"
 react-native link blinkid-react-native
-```
 
-## Demo
-This repository contains **initReactNativeDemoApp.sh** script that will create React Native project and download all of its dependencies. Put that script in your wanted folder and run this command: 
-```shell
-./initReactNativeDemoApp.sh
-```
+# remove index.js
+rm -f index.js
 
-## Usage
+# remove index.ios.js
+rm -f index.ios.js
 
-To use the module you call it in your index.android.js file like the example below:
+# remove index.android.js
+rm -f index.android.js
 
-```javascript
-
+# create demp app index.js with content
+cat > index.js << EOF
 /**
+ * Sample React Native App for BlinkID
+ * https://github.com/BlinkID/blinkid-react-native
+ */
+
+ /**
 * Use these recognizer types
 * Available: RECOGNIZER_USDL, RECOGNIZER_MRTD, RECOGNIZER_EUDL, RECOGNIZER_DOCUMENT_FACE
-* RECOGNIZER_USDL - scans barcodes located on the back of US driver's license
+* RECOGNIZER_USDL - scans barcodes located on the back of US driver license
 * RECOGNIZER_MRTD - scans Machine Readable Travel Document, contained in various IDs and passports
-* RECOGNIZER_EUDL - scans the front of European driver's license
+* RECOGNIZER_EUDL - scans the front of European driver license
 * RECOGNIZER_DOCUMENT_FACE - scans documents with face image and returns document images
 */
 
 /**
  * There are several options you need to pass to scan function to add recognizers and to obtain the image and results
  * available:
- *  "useFrontCamera" : if it's set to false, back camera is used, else front
- *  "shouldReturnCroppedImage": if true, cropped images in the recognition process will be returned
- *  "shouldReturnSuccessfulImage": if true, image on which scan gave valid scanning result will be returned
- *  "recognizers": array which contains recognizers that will be activated
+ * useFrontCamera : if it is set to false, back camera is used, else front
+ * shouldReturnCroppedImage : if true, cropped images in the recognition process will be returned
+ * shouldReturnSuccessfulImage : if true, image on which scan gave valid scanning result will be returned
+ * recognizers : array which contains recognizers that will be activated
  */
 
 /**
  * Scan method returns scan fields in JSON format and image(s) (image is returned as Base64 encoded JPEG)
- *  "scanningResult.resultImageCropped" : cropped document image
- *  "scanningResult.resultImageSuccessful" : full image on which scan gave valid scanning result
- *  "scanningResult.resultList" : array of scanning results in JSON format (each activated recognizer can produce its own result)
+ * scanningResult.resultImageCropped : cropped document image
+ * scanningResult.resultImageSuccessful : full image on which scan gave valid scanning result
+ * scanningResult.resultList : array of scanning results in JSON format (each activated recognizer can produce its own result)
  */
+
 
 import React, { Component } from 'react';
 import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys} from 'blinkid-react-native';
@@ -267,18 +261,12 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('BlinkIDReactNative', () => BlinkIDReactNative);
+EOF
 
-```
-+ Available recognizers are:
-    + **RECOGNIZER_USDL**  - scans barcodes located on the back of US driver's license
-    + **RECOGNIZER_MRTD** - scans Machine Readable Travel Document, contained in various IDs and passports
-    + **RECOGNIZER_EUDL** - scans the front of European driver's license
-    + **RECOGNIZER\_DOCUMENT\_FACE** - scans documents with face image and returns document images
-	
-+ Scan method returns scan fields in JSON format and images (image is returned as Base64 encoded JPEG)
-	+ **scanningResult.resultList** : array of scanning results in JSON format (each activated recognizer can produce its own result)
-	+ **scanningResult.resultImageCropped** : cropped document image
- 	+ **scanningResult.resultImageSuccessful** : full image on which scan gave valid scanning result
+# use the same index.js file for Android and iOS
+cp index.js index.ios.js
+cp index.js index.android.js
 
-+ LicenseKey parameter must be provided.
-
+echo "Go to React Native project folder: cd BlinkIDReactNative"
+echo "To run on Android execute: react-native run-android"
+echo "To run on iOS: react-native run-ios"

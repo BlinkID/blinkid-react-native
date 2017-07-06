@@ -1,0 +1,31 @@
+{
+  "name": "blinkid-react-native",
+  "version": "1.0.0",
+  "description": "A small and powerful ID card scanning library. Powered by MicroBlink (www.microblink.com).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlinkID/blinkid-react-native.git"
+  },
+  "keywords": [
+    "microblink",
+    "react-native",
+    "blinkid",
+    "ID",
+    "scanner",
+    "OCR",
+    "ios",
+    "android"
+  ],
+  "author": "MicroBlink",
+  "license": "MIT",
+  "homepage": "https://github.com/BlinkID/blinkid-react-native",
+  "bugs": {
+    "url": "https://github.com/BlinkID/blinkid-react-native/issues"
+  },
+  "rnpm": {
+    "android": {
+      "sourceDir": "./src/android"
+    }
+  }
+}
