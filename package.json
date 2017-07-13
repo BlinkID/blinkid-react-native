@@ -27,5 +27,8 @@
     "android": {
       "sourceDir": "./src/android"
     }
+    "ios": {
+      "sourceDir": "./src/ios"
+    }
   }
 }

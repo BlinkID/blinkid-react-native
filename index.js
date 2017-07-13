@@ -17,7 +17,7 @@
 import { Platform, NativeModules } from 'react-native';
 
 export const BlinkID = Platform.select({
-      ios: undefined,
+      ios: NativeModules.BlinkIDReactNative,
       android: NativeModules.BlinkIDAndroid
 })
 

@@ -19,6 +19,31 @@ npm install
 echo "Linking blinkid-react-native module with project"
 react-native link blinkid-react-native
 
+# enter into ios project folder
+cd ios
+
+# initialize Podfile
+echo "Initializing and installing Podfile"
+pod init
+
+# remove Podfile
+rm -f Podfile
+
+# replace Podfile with new Podfile
+cat > Podfile << EOF
+platform :ios, '8.0'
+
+target 'BlinkIDReactNative' do
+  pod 'PPBlinkID', '~> 2.10.0'
+end
+EOF
+
+# install pod
+pod install
+
+# go to react native root project
+cd ..
+
 # remove index.js
 rm -f index.js
 
