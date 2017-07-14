@@ -65,6 +65,11 @@ static NSString* const kUSDLResultType = @"USDL result";
 static NSString* const kEUDLResultType = @"EUDL result";
 static NSString* const kDocumentFaceResultType = @"DocumentFace result";
 
+// recognizer result keys
+static NSString* const kRaw = @"raw";
+static NSString* const kMRTDDateOfBirth = @"DateOfBirth";
+static NSString* const kMRTDDateOExpiry = @"DateOfExpiry";
+
 // NSError Domain
 static NSString* const MBErrorDomain = @"microblink.error";
 
@@ -306,10 +311,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
 - (void)setDictionary:(NSMutableDictionary *)dict withMrtdRecognizerResult:(PPMrtdRecognizerResult *)mrtdResult {
     NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[mrtdResult getAllStringElements]];
-    [stringElements setObject:[mrtdResult rawDateOfBirth] forKey:@"DateOfBirth"];
-    [stringElements setObject:[mrtdResult rawDateOfExpiry] forKey:@"DateOfExpiry"];
+    [stringElements setObject:[mrtdResult rawDateOfBirth] forKey:kMRTDDateOfBirth];
+    [stringElements setObject:[mrtdResult rawDateOfExpiry] forKey:kMRTDDateOExpiry];
     [dict setObject:stringElements forKey:kFields];
-    [dict setObject:[mrtdResult mrzText] forKey:@"raw"];
+    [dict setObject:[mrtdResult mrzText] forKey:kRaw];
     [dict setObject:kMRTDResultType forKey:kResultType];
 }
 
@@ -325,7 +330,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
 - (void)returnResults:(NSArray *)results cancelled:(BOOL)cancelled {
     NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
-    [resultDict setObject:[NSNumber numberWithInt:(cancelled ? 1 : 0)] forKey:@"cancelled"];
+    [resultDict setObject:[NSNumber numberWithInt:(cancelled ? 1 : 0)] forKey:kStatusScanCanceled];
     
     NSMutableArray *resultArray = [[NSMutableArray alloc] init];
     
@@ -376,7 +381,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     if (!cancelled) {
         if (self.scannedImageDewarped) {
             NSData *imageData = UIImageJPEGRepresentation(self.scannedImageDewarped, 0.9f);
-            NSString *encodedImage = [NSString stringWithFormat:@"%@%@", @"data:image/jpg;base64,", [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+            NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             if (self.shouldReturnCroppedImage) {
                 [resultDict setObject:encodedImage
                                forKey:kResultImageCropped];
@@ -385,7 +390,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         
         if (self.scannedImageSuccesful) {
             NSData *imageData = UIImageJPEGRepresentation(self.scannedImageSuccesful, 0.9f);
-            NSString *encodedImage = [NSString stringWithFormat:@"%@%@", @"data:image/jpg;base64,", [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+            NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             if (self.shouldReturnSuccessfulImage) {
                 [resultDict setObject:encodedImage
                                forKey:kResultImageSuccessful];
