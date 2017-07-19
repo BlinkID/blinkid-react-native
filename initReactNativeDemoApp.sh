@@ -294,4 +294,4 @@ cp index.js index.android.js
 
 echo "Go to React Native project folder: cd BlinkIDReactNative"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: go to BlinkIDReactNative/ios and open BlinkIDReactNative.xcworkspace; set your development team and press run"
+echo "To run on iOS: go to BlinkIDReactNative/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
