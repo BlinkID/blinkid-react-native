@@ -1,6 +1,6 @@
 # BlinkID SDK wrapper for React Native
 
-This repository contains example wrapper for BlinkID native SDK for [Android](https://github.com/BlinkID/blinkid-android). For 100% of features and maximum control, consider using native SDK.
+This repository contains example wrapper for BlinkID native SDK for [Android](https://github.com/BlinkID/blinkid-android) and [iOS](https://github.com/BlinkID/blinkid-ios). For 100% of features and maximum control, consider using native SDK.
 
 
 ### Licensing
@@ -31,14 +31,52 @@ react-native link blinkid-react-native
 ```
 
 ## Demo
+
 This repository contains **initReactNativeDemoApp.sh** script that will create React Native project and download all of its dependencies. Put that script in your wanted folder and run this command: 
 ```shell
 ./initReactNativeDemoApp.sh
 ```
 
+## iOS Installation and Settings
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects. See the ["Getting Started" guide for more information](https://github.com/BlinkID/blinkid-ios/wiki/Getting-started).
+
+- If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
+
+```shell
+brew install git-lfs
+git lfs install
+```
+
+- **Be sure to restart your console after installing Git LFS**
+
+Go to NameOfYourProject/ios folder and create Podfile
+
+```shell
+pod init
+```
+
+### Podfile
+
+```ruby
+platform :ios, '9.0'
+
+target 'TargetName' do
+  pod 'PPBlinkID', '~> 2.10.0'
+end
+```
+
+After setting Your Podfile, run in terminal
+
+```shell
+pod install
+```
+
+**To run iOS application, open NameOfYourProject.xcworkspace, set Your team for every Target in General settings and add Privacy - Camera Usage Description key to Your info.plist file and press run**
+
 ## Usage
 
-To use the module you call it in your index.android.js file like the example below:
+To use the module you call it in your index.android.js or index.ios.js file like the example below:
 
 ```javascript
 
@@ -82,7 +120,7 @@ import {
 
 const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-      ios: '',
+      ios: '4AMPFP2U-EO3W6VZS-DJ6LRUEI-XZB5PYXG-3ZOUHV7C-43PF2Q6X-4LTN57K7-5E5WSJ6B',
       // android license key for applicationID: com.blinkidreactnative
       android: 'QZV7NMCQ-L3BUIQ2R-VGM4QE5P-RLA2TGFM-2QZO73JY-L3DTQXWH-HBPMOOC6-Y44CTRRX'
 })
