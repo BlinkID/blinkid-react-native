@@ -19,6 +19,31 @@ npm install
 echo "Linking blinkid-react-native module with project"
 react-native link blinkid-react-native
 
+# enter into ios project folder
+cd ios
+
+# initialize Podfile
+echo "Initializing and installing Podfile"
+pod init
+
+# remove Podfile
+rm -f Podfile
+
+# replace Podfile with new Podfile
+cat > Podfile << EOF
+platform :ios, '8.0'
+
+target 'BlinkIDReactNative' do
+  pod 'PPBlinkID', '~> 2.10.0'
+end
+EOF
+
+# install pod
+pod install
+
+# go to react native root project
+cd ..
+
 # remove index.js
 rm -f index.js
 
@@ -76,7 +101,7 @@ import {
 
 const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-      ios: '',
+      ios: '4AMPFP2U-EO3W6VZS-DJ6LRUEI-XZB5PYXG-3ZOUHV7C-43PF2Q6X-4LTN57K7-5E5WSJ6B',
       // android license key for applicationID: com.blinkidreactnative
       android: 'QZV7NMCQ-L3BUIQ2R-VGM4QE5P-RLA2TGFM-2QZO73JY-L3DTQXWH-HBPMOOC6-Y44CTRRX'
 })
@@ -269,4 +294,4 @@ cp index.js index.android.js
 
 echo "Go to React Native project folder: cd BlinkIDReactNative"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: react-native run-ios"
+echo "To run on iOS: go to BlinkIDReactNative/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
