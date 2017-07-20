@@ -9,6 +9,10 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 - Get information about pricing and licensing of [BlinkID](https://microblink.com/blinkid)
 
+## React Native Version
+
+BlinkID React Native was built and tested with [React Native v0.44.2](https://github.com/facebook/react-native/releases/tag/v0.44.0)
+
 ## Installation
 
 First generate an empty project if needed:
@@ -39,7 +43,7 @@ This repository contains **initReactNativeDemoApp.sh** script that will create R
 
 ## iOS Installation and Settings
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects. See the ["Getting Started" guide for more information](https://github.com/BlinkID/blinkid-ios/wiki/Getting-started).
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
 
 - If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
 
