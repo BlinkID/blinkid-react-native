@@ -39,6 +39,8 @@ import com.microblink.recognizers.blinkid.eudl.EUDLRecognitionResult;
 import com.microblink.recognizers.blinkid.eudl.EUDLRecognizerSettings;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings;
+import com.microblink.recognizers.blinkid.malaysia.MyKadRecognitionResult;
+import com.microblink.recognizers.blinkid.malaysia.MyKadRecognizerSettings;
 import com.microblink.recognizers.settings.RecognitionSettings;
 import com.microblink.recognizers.settings.RecognizerSettings;
 import com.microblink.results.date.DateResult;
@@ -70,6 +72,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String RECOGNIZER_USDL_JS_KEY = "RECOGNIZER_USDL";
     private static final String RECOGNIZER_EUDL_JS_KEY = "RECOGNIZER_EUDL";
     private static final String RECOGNIZER_DOCUMENT_FACE_JS_KEY = "RECOGNIZER_DOCUMENT_FACE";
+    private static final String RECOGNIZER_MYKAD_JS_KEY = "RECOGNIZER_MYKAD";
 
     // js result keys
     private static final String RESULT_LIST = "resultList";
@@ -83,12 +86,14 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String USDL_RESULT_TYPE = "USDL result";
     private static final String EUDL_RESULT_TYPE = "EUDL result";
     private static final String DOCUMENT_FACE_RESULT_TYPE = "DocumentFace result";
+    private static final String MYKAD_RESULT_TYPE = "MyKad result";
 
     // java mappings for recognizer types
     private static final int RECOGNIZER_MRTD = 1;
     private static final int RECOGNIZER_USDL = 2;
     private static final int RECOGNIZER_EUDL = 3;
     private static final int RECOGNIZER_DOCUMENT_FACE = 4;
+    private static final int RECOGNIZER_MYKAD = 5;
 
     private static final int COMPRESSED_IMAGE_QUALITY = 90;
 
@@ -120,6 +125,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         constants.put(RECOGNIZER_USDL_JS_KEY, RECOGNIZER_USDL);
         constants.put(RECOGNIZER_EUDL_JS_KEY, RECOGNIZER_EUDL);
         constants.put(RECOGNIZER_DOCUMENT_FACE_JS_KEY, RECOGNIZER_DOCUMENT_FACE);
+        constants.put(RECOGNIZER_MYKAD_JS_KEY, RECOGNIZER_MYKAD);
         return constants;
     }
 
@@ -225,6 +231,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                 return buildEudlSettings();
             case RECOGNIZER_DOCUMENT_FACE:
                 return buildDocumentFaceSettings();
+            case RECOGNIZER_MYKAD:
+                return buildMyKadSettings();
             default:
                 throw new IllegalArgumentException("Unknown recognizer type");
         }
@@ -305,6 +313,19 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
             documentFace.setShowFullDocument(true);
         }
         return documentFace;
+    }
+
+    /**
+     * Builds settings for the MyKad (Malaysian ID card) recognizer.
+     * @return settings for the MyKad (Malaysian ID card) recognizer.
+     */
+    private MyKadRecognizerSettings buildMyKadSettings() {
+        // prepare settings for the MyKad (Malaysian ID card) recognizer
+        MyKadRecognizerSettings myKad = new MyKadRecognizerSettings();
+        if (mShouldReturnCroppedImage) {
+            myKad.setShowFullDocument(true);
+        }
+        return myKad;
     }
 
     /**
@@ -489,6 +510,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         return result;
     }
 
+    /**
+     * Builds MyKad result for returning to JS.
+     * @param res MyKad result.
+     * @return map representation of the given {@code res} for returning to JS.
+     */
+    private WritableMap buildMyKadResult(MyKadRecognitionResult res) {
+        return buildKeyValueResult(res, MYKAD_RESULT_TYPE);
+    }
+
     private WritableMap buildKeyValueResult(BaseRecognitionResult res, String resultType) {
         WritableMap fields = new WritableNativeMap();
         IResultHolder resultHolder = res.getResultHolder();
@@ -521,7 +551,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                         BaseRecognitionResult[] resultArray = results.getRecognitionResults();
 
                         // Each recognition result corresponds to active recognizer. Available recognizers are:
-                        // MRTD, USDL, EUDL, DocumentFace
+                        // MRTD, USDL, EUDL, DocumentFace, MyKad
 
                         WritableArray resultsList = new WritableNativeArray();
                         for (BaseRecognitionResult res : resultArray) {
@@ -531,8 +561,10 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                                 resultsList.pushMap(buildUSDLResult((USDLScanResult) res));
                             } else if (res instanceof EUDLRecognitionResult) { // check if scan result is result of EUDL recognizer
                                 resultsList.pushMap(buildEUDLResult((EUDLRecognitionResult) res));
-                            } else if (res instanceof DocumentFaceRecognitionResult) { // check if scan result is result of MyKad recognizer
+                            } else if (res instanceof DocumentFaceRecognitionResult) { // check if scan result is result of DocumentFace recognizer
                                 resultsList.pushMap(buildDocumentFaceResult((DocumentFaceRecognitionResult) res));
+                            } else if (res instanceof MyKadRecognitionResult) { // check if scan result is result of MyKad recognizer
+                                resultsList.pushMap(buildMyKadResult((MyKadRecognitionResult) res));
                             }
                         }
 
