@@ -50,8 +50,8 @@ static NSString* const kRecognizersArrayJsKey = @"recognizers";
 static NSString* const kRecognizerMRTDJsKey = @"RECOGNIZER_MRTD";
 static NSString* const kRecognizerUSDLJsKey = @"RECOGNIZER_USDL";
 static NSString* const kRecognizerEUDLJsKey = @"RECOGNIZER_EUDL";
-static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
 static NSString* const kRecognizerMyKadJsKey = @"RECOGNIZER_MYKAD";
+static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
 
 // js result keys
 static NSString* const kResultList = @"resultList";
@@ -64,14 +64,14 @@ static NSString* const kFields = @"fields";
 static NSString* const kMRTDResultType = @"MRTD result";
 static NSString* const kUSDLResultType = @"USDL result";
 static NSString* const kEUDLResultType = @"EUDL result";
-static NSString* const kDocumentFaceResultType = @"DocumentFace result";
 static NSString* const kMyKadResultType = @"MyKad result";
+static NSString* const kDocumentFaceResultType = @"DocumentFace result";
 
 // recognizer result keys
 static NSString* const kRaw = @"raw";
 static NSString* const kMRTDDateOfBirth = @"DateOfBirth";
 static NSString* const kMRTDDateOExpiry = @"DateOfExpiry";
-static NSString* const kMyKadOwnerBirthDate = @"ownerBirthDate";
+static NSString* const kMyKadBirthDate = @"ownerBirthDate";
 
 // NSError Domain
 static NSString* const MBErrorDomain = @"microblink.error";
@@ -96,8 +96,8 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
-    [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
     [constants setObject:@"MyKad result" forKey:kMyKadResultType];
+    [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
     return [NSDictionary dictionaryWithDictionary:constants];
 }
 
@@ -343,9 +343,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
 - (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadRecognizerResult *)myKadResult {
     NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[myKadResult getAllStringElements]];
-    [stringElements setObject:myKadResult.ownerBirthDate forKey:kMyKadOwnerBirthDate];
+    [stringElements setObject:myKadResult.ownerBirthDate forKey:kMyKadBirthDate];
     [dict setObject:stringElements forKey:kFields];
-    [dict setObject:@"MyKad result" forKey:kResultType];
+    [dict setObject:kMyKadResultType forKey:kResultType];
 }
 
 - (void)returnResults:(NSArray *)results cancelled:(BOOL)cancelled {
@@ -364,7 +364,6 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             
             [resultArray addObject:dict];
         }
-        
         
         if ([result isKindOfClass:[PPMrtdRecognizerResult class]]) {
             PPMrtdRecognizerResult *mrtdDecoderResult = (PPMrtdRecognizerResult *)result;
