@@ -28,3 +28,4 @@ export const BlinkID = Platform.select({
 export const MRTDKeys = require('./keys/mrtd_keys')
 export const USDLKeys = require('./keys/usdl_keys')
 export const EUDLKeys = require('./keys/eudl_keys')
+export const MYKADKeys = require('./keys/mykad_keys')
