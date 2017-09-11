@@ -51,6 +51,7 @@ static NSString* const kRecognizerMRTDJsKey = @"RECOGNIZER_MRTD";
 static NSString* const kRecognizerUSDLJsKey = @"RECOGNIZER_USDL";
 static NSString* const kRecognizerEUDLJsKey = @"RECOGNIZER_EUDL";
 static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
+static NSString* const kRecognizerMyKadJsKey = @"RECOGNIZER_MYKAD";
 
 // js result keys
 static NSString* const kResultList = @"resultList";
@@ -64,11 +65,13 @@ static NSString* const kMRTDResultType = @"MRTD result";
 static NSString* const kUSDLResultType = @"USDL result";
 static NSString* const kEUDLResultType = @"EUDL result";
 static NSString* const kDocumentFaceResultType = @"DocumentFace result";
+static NSString* const kMyKadResultType = @"MyKad result";
 
 // recognizer result keys
 static NSString* const kRaw = @"raw";
 static NSString* const kMRTDDateOfBirth = @"DateOfBirth";
 static NSString* const kMRTDDateOExpiry = @"DateOfExpiry";
+static NSString* const kMyKadOwnerBirthDate = @"ownerBirthDate";
 
 // NSError Domain
 static NSString* const MBErrorDomain = @"microblink.error";
@@ -89,10 +92,12 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"RECOGNIZER_USDL" forKey:kRecognizerUSDLJsKey];
     [constants setObject:@"RECOGNIZER_EUDL" forKey:kRecognizerEUDLJsKey];
     [constants setObject:@"RECOGNIZER_DOCUMENT_FACE" forKey:kRecognizerDocumentFaceJsKey];
+    [constants setObject:@"RECOGNIZER_MYKAD" forKey:kRecognizerMyKadJsKey];
     [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
     [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
+    [constants setObject:@"MyKad result" forKey:kMyKadResultType];
     return [NSDictionary dictionaryWithDictionary:constants];
 }
 
@@ -230,6 +235,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         [settings.scanSettings addRecognizerSettings:[self documentFaceRecognizerSettings]];
     }
     
+    if ([self shouldUseMyKadRecognizer]) {
+        [settings.scanSettings addRecognizerSettings:[self myKadRecognizerSettings]];
+    }
+    
     /** 4. Initialize the Scanning Coordinator object */
     
     PPCameraCoordinator *coordinator = [[PPCameraCoordinator alloc] initWithSettings:settings];
@@ -302,6 +311,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return [self.recognizers containsObject:kRecognizerDocumentFaceJsKey];
 }
 
+- (BOOL)shouldUseMyKadRecognizer {
+    return [self.recognizers containsObject:kRecognizerMyKadJsKey];
+}
+
 #pragma mark - Utils
 
 - (void)setDictionary:(NSMutableDictionary *)dict withUsdlResult:(PPUsdlRecognizerResult *)usdlResult {
@@ -326,6 +339,13 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 - (void)setDictionary:(NSMutableDictionary *)dict withDocumentFaceResult:(PPDocumentFaceRecognizerResult *)documentFaceResult {
     [dict setObject:[documentFaceResult getAllStringElements] forKey:kFields];
     [dict setObject:kDocumentFaceResultType forKey:kResultType];
+}
+
+- (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadRecognizerResult *)myKadResult {
+    NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[myKadResult getAllStringElements]];
+    [stringElements setObject:myKadResult.ownerBirthDate forKey:kMyKadOwnerBirthDate];
+    [dict setObject:stringElements forKey:kFields];
+    [dict setObject:@"MyKad result" forKey:kResultType];
 }
 
 - (void)returnResults:(NSArray *)results cancelled:(BOOL)cancelled {
@@ -369,6 +389,15 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withDocumentFaceResult:documentFaceResult];
+            
+            [resultArray addObject:dict];
+        }
+        
+        if ([result isKindOfClass:[PPMyKadRecognizerResult class]]) {
+            PPMyKadRecognizerResult *myKadDecoderResult = (PPMyKadRecognizerResult *)result;
+            
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [self setDictionary:dict withMyKadRecognizerResult:myKadDecoderResult];
             
             [resultArray addObject:dict];
         }
@@ -536,6 +565,19 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     }
     
     return documentFaceReconizerSettings;
+}
+
+- (PPMyKadRecognizerSettings *)myKadRecognizerSettings {
+    
+    PPMyKadRecognizerSettings *myKadRecognizerSettings = [[PPMyKadRecognizerSettings alloc] init];
+    
+    if (self.shouldReturnCroppedImage) {
+        myKadRecognizerSettings.showFullDocument = YES;
+    } else {
+        myKadRecognizerSettings.showFullDocument = NO;
+    }
+    
+    return myKadRecognizerSettings;
 }
 
 @end
