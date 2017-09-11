@@ -34,6 +34,22 @@ Link module with your project:
 react-native link blinkid-react-native
 ```
 
+Add microblink maven repository to project level build.gradle:
+
+```
+allprojects {
+  repositories {
+    // don't forget to add maven and jcenter
+    mavenLocal()
+    jcenter()
+    
+    // ... other repositories your project may need
+    
+    maven { url "http://maven.microblink.com" }
+  }
+}
+```
+
 ## Demo
 
 This repository contains **initReactNativeDemoApp.sh** script that will create React Native project and download all of its dependencies. Put that script in your wanted folder and run this command: 
@@ -83,34 +99,40 @@ pod install
 To use the module you call it in your index.android.js or index.ios.js file like the example below:
 
 ```javascript
-
 /**
+ * Sample React Native App for BlinkID
+ * https://github.com/BlinkID/blinkid-react-native
+ */
+
+ /**
 * Use these recognizer types
 * Available: RECOGNIZER_USDL, RECOGNIZER_MRTD, RECOGNIZER_EUDL, RECOGNIZER_DOCUMENT_FACE
-* RECOGNIZER_USDL - scans barcodes located on the back of US driver's license
+* RECOGNIZER_USDL - scans barcodes located on the back of US driver license
 * RECOGNIZER_MRTD - scans Machine Readable Travel Document, contained in various IDs and passports
-* RECOGNIZER_EUDL - scans the front of European driver's license
+* RECOGNIZER_EUDL - scans the front of European driver license
+* RECOGNIZER_MYKAD - scans the front of Malaysian ID
 * RECOGNIZER_DOCUMENT_FACE - scans documents with face image and returns document images
 */
 
 /**
  * There are several options you need to pass to scan function to add recognizers and to obtain the image and results
  * available:
- *  "useFrontCamera" : if it's set to false, back camera is used, else front
- *  "shouldReturnCroppedImage": if true, cropped images in the recognition process will be returned
- *  "shouldReturnSuccessfulImage": if true, image on which scan gave valid scanning result will be returned
- *  "recognizers": array which contains recognizers that will be activated
+ * useFrontCamera : if it is set to false, back camera is used, else front
+ * shouldReturnCroppedImage : if true, cropped images in the recognition process will be returned
+ * shouldReturnSuccessfulImage : if true, image on which scan gave valid scanning result will be returned
+ * recognizers : array which contains recognizers that will be activated
  */
 
 /**
  * Scan method returns scan fields in JSON format and image(s) (image is returned as Base64 encoded JPEG)
- *  "scanningResult.resultImageCropped" : cropped document image
- *  "scanningResult.resultImageSuccessful" : full image on which scan gave valid scanning result
- *  "scanningResult.resultList" : array of scanning results in JSON format (each activated recognizer can produce its own result)
+ * scanningResult.resultImageCropped : cropped document image
+ * scanningResult.resultImageSuccessful : full image on which scan gave valid scanning result
+ * scanningResult.resultList : array of scanning results in JSON format (each activated recognizer can produce its own result)
  */
 
+
 import React, { Component } from 'react';
-import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys} from 'blinkid-react-native';
+import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys} from 'blinkid-react-native';
 import {
   AppRegistry,
   Platform,
@@ -126,7 +148,7 @@ const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
       ios: '4AMPFP2U-EO3W6VZS-DJ6LRUEI-XZB5PYXG-3ZOUHV7C-43PF2Q6X-4LTN57K7-5E5WSJ6B',
       // android license key for applicationID: com.blinkidreactnative
-      android: 'QZV7NMCQ-L3BUIQ2R-VGM4QE5P-RLA2TGFM-2QZO73JY-L3DTQXWH-HBPMOOC6-Y44CTRRX'
+      android: 'VF2QEAKE-IZYWGJZJ-6T43WTEY-VTKDF37N-HBPMOOC6-Y44F5RZY-L3DTQXWH-HBPLB7DZ'
 })
 
 var renderIf = function(condition, content) {
@@ -160,7 +182,9 @@ export default class BlinkIDReactNative extends Component {
           // scans USDL (US Driver License)
           BlinkID.RECOGNIZER_USDL,
           // scans EUDL (EU Driver License)
-          BlinkID.RECOGNIZER_EUDL
+          BlinkID.RECOGNIZER_EUDL,
+          // scans MyKad (Malaysian ID)
+          BlinkID.RECOGNIZER_MYKAD
         ]
       })
       if (scanningResult) {
@@ -226,6 +250,22 @@ export default class BlinkIDReactNative extends Component {
                                       "Driver Number: " + fields[EUDLKeys.DriverNumber] + fieldDelim +
                                       "Address: " + fields[EUDLKeys.Address] + fieldDelim +
                                       "Birth Data: " + fields[EUDLKeys.BirthData] + fieldDelim;
+
+          } else if (recognizerResult.resultType == "MyKad result") {
+    
+              var fields = recognizerResult.fields
+              // MYKADKeys are keys from keys/mykad_keys.js
+              resultsFormattedText += /** Personal information */
+                                      "Full name: " + fields[MYKADKeys.FullName] + fieldDelim +
+                                      "NRIC Number: " + fields[MYKADKeys.NricNumber] + fieldDelim +
+                                      "Address: " + fields[MYKADKeys.Address] + fieldDelim +
+                                      "City: " + fields[MYKADKeys.AddressCity] + fieldDelim +
+                                      "State: " + fields[MYKADKeys.AddressState] + fieldDelim +
+                                      "Street: " + fields[MYKADKeys.AddressStreet] + fieldDelim +
+                                      "Zip code: " + fields[MYKADKeys.AddressZipCode] + fieldDelim +
+                                      "Date of birth: " + fields[MYKADKeys.DateOfBirth] + fieldDelim +
+                                      "Religion: " + fields[MYKADKeys.Religion] + fieldDelim +
+                                      "Sex: " + fields[MYKADKeys.Sex] + fieldDelim;
 
           } else if (recognizerResult.resultType == "DocumentFace result") {
             // document face recognizer returns only images
@@ -315,6 +355,7 @@ AppRegistry.registerComponent('BlinkIDReactNative', () => BlinkIDReactNative);
     + **RECOGNIZER_USDL**  - scans barcodes located on the back of US driver's license
     + **RECOGNIZER_MRTD** - scans Machine Readable Travel Document, contained in various IDs and passports
     + **RECOGNIZER_EUDL** - scans the front of European driver's license
+    + **RECOGNIZER\_MYKAD** - scans the front of Malaysian ID
     + **RECOGNIZER\_DOCUMENT\_FACE** - scans documents with face image and returns document images
 	
 + Scan method returns scan fields in JSON format and images (image is returned as Base64 encoded JPEG)
