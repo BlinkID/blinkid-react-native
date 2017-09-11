@@ -19,6 +19,41 @@ npm install
 echo "Linking blinkid-react-native module with project"
 react-native link blinkid-react-native
 
+# enter into android project folder
+cd android
+
+# add the microblink maven repository to build.gradle
+cat > build.gradle << EOF
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "\$rootDir/../node_modules/react-native/android"
+        }
+        maven { url 'http://maven.microblink.com' }
+    }
+}
+EOF
+
+# go to react native root project
+cd ..
+
 # enter into ios project folder
 cd ios
 
