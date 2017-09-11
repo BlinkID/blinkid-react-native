@@ -368,4 +368,5 @@ AppRegistry.registerComponent('BlinkIDReactNative', () => BlinkIDReactNative);
 ## FAQ
 
 **Can I create a custom UI overlay?**
+
 Yes you can, but you will have to implement it natively for android and ios, you can see native implementation guides [here(Android)](https://github.com/BlinkID/blinkid-android#recognizerView) and [here(ios)](https://github.com/BlinkID/blinkid-ios/wiki/Customizing-Camera-UI#steps-for-providing-custom-camera-overlay-view).
