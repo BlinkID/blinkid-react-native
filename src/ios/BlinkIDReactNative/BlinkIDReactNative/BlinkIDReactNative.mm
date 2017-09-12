@@ -259,7 +259,14 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
 - (void)scanningViewControllerDidClose:(UIViewController<PPScanningViewController> *)scanningViewController {
     // As scanning view controller is presented full screen and modally, dismiss it
-    [scanningViewController dismissViewControllerAnimated:YES completion:nil];
+    if (self.promiseReject) {
+        NSError *error = [NSError errorWithDomain:MBErrorDomain
+                                             code:-58
+                                         userInfo:nil];
+        self.promiseReject(kStatusScanCanceled, @"Scanning has been canceled", error);
+    }
+
+    [self dismissScanningView];
 }
 
 -(void)scanningViewController:(UIViewController<PPScanningViewController> *)scanningViewController didOutputMetadata:(PPMetadata *)metadata {
@@ -283,7 +290,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // first, pause scanning until we process all the results
     [scanningViewController pauseScanning];
     
-    [self returnResults:results cancelled:(results == nil)];
+    [self returnResults:results];
 }
 
 - (void)scanningViewController:(UIViewController<PPScanningViewController> *)scanningViewController didFinishDetectionWithResult:(PPDetectorResult *)result {
@@ -348,10 +355,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     [dict setObject:kMyKadResultType forKey:kResultType];
 }
 
-- (void)returnResults:(NSArray *)results cancelled:(BOOL)cancelled {
+- (void)returnResults:(NSArray *)results{
     NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
-    [resultDict setObject:[NSNumber numberWithInt:(cancelled ? 1 : 0)] forKey:kStatusScanCanceled];
-    
+
     NSMutableArray *resultArray = [[NSMutableArray alloc] init];
     
     for (PPRecognizerResult *result in results) {
@@ -406,23 +412,21 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         [resultDict setObject:resultArray forKey:kResultList];
     }
     
-    if (!cancelled) {
-        if (self.scannedImageDewarped) {
-            NSData *imageData = UIImageJPEGRepresentation(self.scannedImageDewarped, 0.9f);
-            NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            if (self.shouldReturnCroppedImage) {
-                [resultDict setObject:encodedImage
-                               forKey:kResultImageCropped];
-            }
+    if (self.scannedImageDewarped) {
+        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageDewarped, 0.9f);
+        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        if (self.shouldReturnCroppedImage) {
+            [resultDict setObject:encodedImage
+                            forKey:kResultImageCropped];
         }
-        
-        if (self.scannedImageSuccesful) {
-            NSData *imageData = UIImageJPEGRepresentation(self.scannedImageSuccesful, 0.9f);
-            NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            if (self.shouldReturnSuccessfulImage) {
-                [resultDict setObject:encodedImage
-                               forKey:kResultImageSuccessful];
-            }
+    }
+
+    if (self.scannedImageSuccesful) {
+        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageSuccesful, 0.9f);
+        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        if (self.shouldReturnSuccessfulImage) {
+            [resultDict setObject:encodedImage
+                            forKey:kResultImageSuccessful];
         }
     }
     
