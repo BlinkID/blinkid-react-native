@@ -118,7 +118,7 @@
 		A27CCA231E9E57A500BED675 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 830;
 				ORGANIZATIONNAME = "Jura Skrlec";
 				TargetAttributes = {
 					A27CCA2A1E9E57A500BED675 = {
@@ -259,12 +259,7 @@
 					"<MicroBlink/MicroBlink.h>",
 					"$(SRCROOT)/../../../iOS/**",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../react-native/**",
-					"$(SRCROOT)/../../../../react-native/React/**",
-					"$(SRCROOT)/../../../../../ios",
-				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -289,12 +284,7 @@
 					"<MicroBlink/MicroBlink.h>",
 					"$(SRCROOT)/../../../iOS/**",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../../react-native/**",
-					"$(SRCROOT)/../../../../react-native/React/**",
-					"$(SRCROOT)/../../../../../ios",
-				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",

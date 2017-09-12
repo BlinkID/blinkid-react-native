@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BlinkIDReactNative.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 #import <MicroBlink/MicroBlink.h>
 
 @interface BlinkIDReactNative () <PPScanningDelegate>
