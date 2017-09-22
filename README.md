@@ -11,7 +11,7 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.44.2](https://github.com/facebook/react-native/releases/tag/v0.44.0)
+BlinkID React Native was built and tested with [React Native v0.48.3](https://github.com/facebook/react-native/releases/tag/v0.48.3)
 
 ## Installation
 
@@ -43,7 +43,7 @@ allprojects {
     mavenLocal()
     jcenter()
     
-    // ... other repositories your project may need
+    // ... other repositories your project needs
     
     maven { url "http://maven.microblink.com" }
   }
