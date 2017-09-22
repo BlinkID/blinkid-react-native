@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BlinkIDReactNative.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 #import <MicroBlink/MicroBlink.h>
 
 @interface BlinkIDReactNative () <PPScanningDelegate>
@@ -350,7 +350,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
 - (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadRecognizerResult *)myKadResult {
     NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[myKadResult getAllStringElements]];
-    [stringElements setObject:myKadResult.ownerBirthDate forKey:kMyKadBirthDate];
+    [stringElements setObject:[NSString stringWithFormat:@"%@", myKadResult.ownerBirthDate] forKey:kMyKadBirthDate];
     [dict setObject:stringElements forKey:kFields];
     [dict setObject:kMyKadResultType forKey:kResultType];
 }

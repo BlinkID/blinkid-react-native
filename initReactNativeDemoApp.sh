@@ -4,7 +4,7 @@
 rm -rf BlinkIDReactNative
 
 # create a sample application
-react-native init --version="0.44.2" BlinkIDReactNative
+react-native init --version="0.48.3" BlinkIDReactNative
 
 # enter into demo project folder
 cd BlinkIDReactNative
