@@ -108,6 +108,7 @@ cat > index.js << EOF
 /**
  * There are several options you need to pass to scan function to add recognizers and to obtain the image and results
  * available:
+ * enableBeep : if it is set to true, successful scan will play a sound
  * useFrontCamera : if it is set to false, back camera is used, else front
  * shouldReturnCroppedImage : if true, cropped images in the recognition process will be returned
  * shouldReturnSuccessfulImage : if true, image on which scan gave valid scanning result will be returned
@@ -162,6 +163,7 @@ export default class BlinkIDReactNative extends Component {
       const scanningResult = await BlinkID.scan(
       licenseKey,
       {
+        enableBeep: true,
         useFrontCamera: false,
         shouldReturnCroppedImage: true,
         shouldReturnSuccessfulImage: false,
