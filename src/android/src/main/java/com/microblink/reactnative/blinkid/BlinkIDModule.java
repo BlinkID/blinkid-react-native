@@ -63,6 +63,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     // js keys for scanning options
     private static final String OPTION_USE_FRONT_CAMERA_JS_KEY = "useFrontCamera";
+    private static final String OPTION_ENABLE_BEEP_JS_KEY = "enableBeep";
     private static final String OPTION_SHOULD_RETURN_CROPPED_IMAGE_JS_KEY = "shouldReturnCroppedImage";
     private static final String OPTION_SHOULD_RETURN_SUCCESSFUL_IMAGE_JS_KEY = "shouldReturnSuccessfulImage";
     private static final String RECOGNIZERS_ARRAY_JS_KEY = "recognizers";
@@ -181,8 +182,12 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         scanIntent.putExtra(ScanCard.EXTRAS_LICENSE_KEY, licenseKey);
         scanIntent.putExtra(ScanCard.EXTRAS_CAMERA_TYPE, (Parcelable) (useFrontCamera ? CameraType.CAMERA_FRONTFACE : CameraType.CAMERA_DEFAULT));
         scanIntent.putExtra(ScanCard.EXTRAS_RECOGNITION_SETTINGS, recognitionSettings);
-        // if scan sound should be played when scanning is done, pass its resource ID
-        scanIntent.putExtra(ScanCard.EXTRAS_BEEP_RESOURCE, R.raw.beep);
+        
+        boolean enableBeep = readBooleanValue(scanningOptions, OPTION_ENABLE_BEEP_JS_KEY, true);
+        if(enableBeep) {
+            // if scan sound should be played when scanning is done, pass its resource ID
+            scanIntent.putExtra(ScanCard.EXTRAS_BEEP_RESOURCE, R.raw.beep);
+        }
 
         // set image metadata settings to define which images will be obtained as metadata during scan process
         MetadataSettings.ImageMetadataSettings ims = new MetadataSettings.ImageMetadataSettings();
