@@ -13,6 +13,8 @@
 
 @interface BlinkIDReactNative () <PPScanningDelegate>
 
+@property (nonatomic, assign) BOOL enableBeep;
+
 @property (nonatomic) PPCameraType cameraType;
 
 @property (nonatomic, strong) NSDictionary* options;
@@ -41,6 +43,7 @@ static NSString* const kErrorCoordniatorDoesNotExists = @"COORDINATOR_DOES_NOT_E
 static NSString* const kStatusScanCanceled = @"STATUS_SCAN_CANCELED";
 
 // js keys for scanning options
+static NSString* const kOptionEnableBeepKey = @"enableBeep";
 static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
 static NSString* const kOptionReturnCroppedImageJsKey = @"shouldReturnCroppedImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
@@ -123,7 +126,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     } else {
         self.cameraType = PPCameraTypeFront;
     }
-    
+
+    self.enableBeep = [[scanOptions valueForKey:kOptionEnableBeepKey] boolValue];
+
     self.promiseResolve = resolve;
     self.promiseReject  = reject;
     
@@ -289,7 +294,11 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // Here you process scanning results. Scanning results are given in the array of PPRecognizerResult objects.
     // first, pause scanning until we process all the results
     [scanningViewController pauseScanning];
-    
+
+    if (self.enableBeep) {
+        [scanningViewController playScanSuccesSound];
+    }
+
     [self returnResults:results];
 }
 
@@ -417,7 +426,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         if (self.shouldReturnCroppedImage) {
             [resultDict setObject:encodedImage
-                            forKey:kResultImageCropped];
+                           forKey:kResultImageCropped];
         }
     }
 
@@ -426,7 +435,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         if (self.shouldReturnSuccessfulImage) {
             [resultDict setObject:encodedImage
-                            forKey:kResultImageSuccessful];
+                           forKey:kResultImageSuccessful];
         }
     }
     
