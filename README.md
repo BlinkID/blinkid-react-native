@@ -57,6 +57,15 @@ This repository contains **initReactNativeDemoApp.sh** script that will create R
 ./initReactNativeDemoApp.sh
 ```
 
+### Video tutorial
+Step by step guide how to start BlinkID React Native. A tutorial flows from git clone to successfully deployed demo application on iOS device with real-time screen mirroring. Application demo contains simple use of USDL recognizer with Ontario DL card.
+<p align="center" >
+  <a href="https://vimeo.com/241003187" target="_blank">
+    <img src="https://i.vimeocdn.com/video/664456443.webp" alt="Video tutorial" />
+  </a>
+  <a href="https://vimeo.com/241003187" target="_blank">Watch on Vimeo</a>
+</p>
+
 ## iOS Installation and Settings
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
