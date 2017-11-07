@@ -124,7 +124,7 @@ cat > index.js << EOF
 
 
 import React, { Component } from 'react';
-import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys} from 'blinkid-react-native';
+import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys} from 'blinkid-react-native';
 import {
   AppRegistry,
   Platform,
@@ -177,7 +177,9 @@ export default class BlinkIDReactNative extends Component {
           // scans EUDL (EU Driver License)
           BlinkID.RECOGNIZER_EUDL,
           // scans MyKad (Malaysian ID)
-          BlinkID.RECOGNIZER_MYKAD
+          BlinkID.RECOGNIZER_MYKAD,
+          // scans PDF417 type of barcode
+          BlinkID.RECOGNIZER_PDF417
         ]
       })
       if (scanningResult) {
@@ -259,6 +261,11 @@ export default class BlinkIDReactNative extends Component {
                                       "Date of birth: " + fields[MYKADKeys.DateOfBirth] + fieldDelim +
                                       "Religion: " + fields[MYKADKeys.Religion] + fieldDelim +
                                       "Sex: " + fields[MYKADKeys.Sex] + fieldDelim;
+          } else if (recognizerResult.resultType == "PDF417 result") {
+
+            var fields = recognizerResult.fields
+            // PDF417Keys are keys from keys/pdf417_keys.js
+            resultsFormattedText += "Barcode data: " + fields[PDF417Keys.BarcodeData] + fieldDelim;
 
           } else if (recognizerResult.resultType == "DocumentFace result") {
             // document face recognizer returns only images
