@@ -153,8 +153,10 @@ var renderIf = function(condition, content) {
 export default class BlinkIDReactNative extends Component {
   constructor(props) {
     super(props);
-    this.state = {showImage: false, 
-                  resultImage: '',
+    this.state = {showImageCropped: false,
+                  resultImageCropped: '',
+                  showImageFace: false,
+                  resultImageFace: '',
                   results: '',
                   licenseKeyErrorMessage: ''};
   }
@@ -167,9 +169,11 @@ export default class BlinkIDReactNative extends Component {
         useFrontCamera: false,
         shouldReturnCroppedImage: true,
         shouldReturnSuccessfulImage: false,
+        // Returns face image when BlinkID.RECOGNIZER_DOCUMENT_FACE is used
+        shouldReturnFaceImage: true,
         recognizers: [
           // scans documents with face image and returns document images
-          // BlinkID.RECOGNIZER_DOCUMENT_FACE,
+          BlinkID.RECOGNIZER_DOCUMENT_FACE,
           // scans documents with MRZ (Machine Readable Zone)
           BlinkID.RECOGNIZER_MRTD,
           // scans USDL (US Driver License)
@@ -274,16 +278,17 @@ export default class BlinkIDReactNative extends Component {
         }
         // image is returned as base64 encoded JPEG, we expect resultImageCorpped because we have activated obtaining of cropped images (shouldReturnCroppedImage: true)
         // to obtain image from successful scan, activate option (shouldReturnSuccessfulImage: true) and get is with scanningResult.resultImageSuccessful
-        this.setState({ showImage: scanningResult.resultImageCropped, resultImage: 'data:image/jpg;base64,' + scanningResult.resultImageCropped, results: resultsFormattedText});
-      }
+        this.setState({showImageCropped: scanningResult.resultImageCropped, resultImageCropped: 'data:image/jpg;base64,' + scanningResult.resultImageCropped,
+                       showImageFace: scanningResult.resultImageFace, resultImageFace: 'data:image/jpg;base64,' + scanningResult.resultImageFace, results: resultsFormattedText});}
     } catch(error) {
-        this.setState({ showImage: false, resultImage: '', results: error.message});
+        this.setState({ showImageCropped: false, resultImageCropped: '', showImageFace: false, resultImageFace: '', results: error.message});
     }
     
   }
 
   render() {
-    let displayImage = this.state.resultImage;
+    let displayImageCropped = this.state.resultImageCropped;
+    let displayImageFace = this.state.resultImageFace;
     let displayFields = this.state.results;
     let licenseKeyErrorMessage = this.state.licenseKeyErrorMessage;
     return (
@@ -299,11 +304,18 @@ export default class BlinkIDReactNative extends Component {
         <ScrollView
           automaticallyAdjustContentInsets={false}
           scrollEventThrottle={200}y> 
-          {renderIf(this.state.showImage,
+          {renderIf(this.state.showImageCropped,
               <View style={styles.imageContainer}>
               <Image
                 resizeMode='contain'
-                source={{uri: displayImage, scale: 3}} style={styles.imageResult}/>
+                source={{uri: displayImageCropped, scale: 3}} style={styles.imageResult}/>
+              </View>
+          )}
+          {renderIf(this.state.showImageFace,
+              <View style={styles.imageContainer}>
+              <Image
+                resizeMode='contain'
+                source={{uri: displayImageFace, scale: 3}} style={styles.imageResult}/>
               </View>
           )}
           <Text style={styles.results}>{displayFields}</Text>
