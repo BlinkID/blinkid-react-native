@@ -55,6 +55,7 @@ static NSString* const kRecognizerUSDLJsKey = @"RECOGNIZER_USDL";
 static NSString* const kRecognizerEUDLJsKey = @"RECOGNIZER_EUDL";
 static NSString* const kRecognizerMyKadJsKey = @"RECOGNIZER_MYKAD";
 static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
+static NSString* const kRecognizerPDF417JsKey = @"RECOGNIZER_PDF417";
 
 // js result keys
 static NSString* const kResultList = @"resultList";
@@ -69,6 +70,7 @@ static NSString* const kUSDLResultType = @"USDL result";
 static NSString* const kEUDLResultType = @"EUDL result";
 static NSString* const kMyKadResultType = @"MyKad result";
 static NSString* const kDocumentFaceResultType = @"DocumentFace result";
+static NSString* const kPDF417ResultType = @"PDF417 result";
 
 // recognizer result keys
 static NSString* const kRaw = @"raw";
@@ -100,6 +102,7 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
     [constants setObject:@"MyKad result" forKey:kMyKadResultType];
+    [constants setObject:@"PDF417 result" forKey:kPDF417ResultType];
     [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
     return [NSDictionary dictionaryWithDictionary:constants];
 }
@@ -243,7 +246,11 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     if ([self shouldUseMyKadRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self myKadRecognizerSettings]];
     }
-    
+
+    if ([self shouldUsePDF417Recognizer]) {
+        [settings.scanSettings addRecognizerSettings:[self pdf417RecognizerSettings]];
+    }
+
     /** 4. Initialize the Scanning Coordinator object */
     
     PPCameraCoordinator *coordinator = [[PPCameraCoordinator alloc] initWithSettings:settings];
@@ -331,6 +338,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return [self.recognizers containsObject:kRecognizerMyKadJsKey];
 }
 
+- (BOOL)shouldUsePDF417Recognizer {
+    return [self.recognizers containsObject:kRecognizerPDF417JsKey];
+}
+
 #pragma mark - Utils
 
 - (void)setDictionary:(NSMutableDictionary *)dict withUsdlResult:(PPUsdlRecognizerResult *)usdlResult {
@@ -362,6 +373,11 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     [stringElements setObject:myKadResult.rawOwnerBirthDate forKey:kMyKadBirthDate];
     [dict setObject:stringElements forKey:kFields];
     [dict setObject:kMyKadResultType forKey:kResultType];
+}
+
+- (void)setDictionary:(NSMutableDictionary *)dict withPdf417Result:(PPPdf417RecognizerResult *)pdf417Result {
+    [dict setObject:[pdf417Result getAllStringElements] forKey:kFields];
+    [dict setObject:kPDF417ResultType forKey:kResultType];
 }
 
 - (void)returnResults:(NSArray *)results{
@@ -413,6 +429,15 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withMyKadRecognizerResult:myKadDecoderResult];
             
+            [resultArray addObject:dict];
+        }
+
+        if ([result isKindOfClass:[PPPdf417RecognizerResult class]]) {
+            PPPdf417RecognizerResult *pdf417Result = (PPPdf417RecognizerResult *)result;
+
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [self setDictionary:dict withPdf417Result:pdf417Result];
+
             [resultArray addObject:dict];
         }
     }
@@ -584,6 +609,28 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     }
     
     return myKadRecognizerSettings;
+}
+
+- (PPPdf417RecognizerSettings *)pdf417RecognizerSettings {
+
+    PPPdf417RecognizerSettings *pdf417RecognizerSettings = [[PPPdf417RecognizerSettings alloc] init];
+
+    /********* All recognizer settings are set to their default values. Change accordingly. *********/
+
+    /**
+     * Set this to YES to scan even barcode not compliant with standards
+     * For example, malformed PDF417 barcodes which were incorrectly encoded
+     * Use only if necessary because it slows down the recognition process
+     */
+    pdf417RecognizerSettings.scanUncertain = NO;
+
+    /**
+     * Set this to YES to scan barcodes which don't have quiet zone (white area) around it
+     * Disable if you need a slight speed boost
+     */
+    pdf417RecognizerSettings.allowNullQuietZone = YES;
+
+    return pdf417RecognizerSettings;
 }
 
 @end
