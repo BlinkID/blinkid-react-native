@@ -173,7 +173,7 @@ export default class BlinkIDReactNative extends Component {
         shouldReturnFaceImage: true,
         recognizers: [
           // scans documents with face image and returns document images
-          BlinkID.RECOGNIZER_DOCUMENT_FACE,
+          // BlinkID.RECOGNIZER_DOCUMENT_FACE,
           // scans documents with MRZ (Machine Readable Zone)
           BlinkID.RECOGNIZER_MRTD,
           // scans USDL (US Driver License)
