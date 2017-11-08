@@ -29,11 +29,15 @@
 
 @property (nonatomic) UIImage *scannedImageSuccesful;
 
+@property (nonatomic) UIImage *scannedImageFace;
+
 @property (nonatomic, strong) NSArray *recognizers;
 
 @property (nonatomic) BOOL shouldReturnCroppedImage;
 
 @property (nonatomic) BOOL shouldReturnSuccessfulImage;
+
+@property (nonatomic) BOOL shouldReturnFaceImage;
 
 @end
 
@@ -47,6 +51,7 @@ static NSString* const kOptionEnableBeepKey = @"enableBeep";
 static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
 static NSString* const kOptionReturnCroppedImageJsKey = @"shouldReturnCroppedImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
+static NSString* const kOptionReturnFaceImageJsKey = @"shouldReturnFaceImage";
 static NSString* const kRecognizersArrayJsKey = @"recognizers";
 
 // js keys for recognizer types
@@ -61,6 +66,7 @@ static NSString* const kRecognizerPDF417JsKey = @"RECOGNIZER_PDF417";
 static NSString* const kResultList = @"resultList";
 static NSString* const kResultImageCropped = @"resultImageCropped";
 static NSString* const kResultImageSuccessful = @"resultImageSuccessful";
+static NSString* const kResultImageFace = @"resultImageFace";
 static NSString* const kResultType = @"resultType";
 static NSString* const kFields = @"fields";
 
@@ -98,6 +104,7 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"RECOGNIZER_EUDL" forKey:kRecognizerEUDLJsKey];
     [constants setObject:@"RECOGNIZER_DOCUMENT_FACE" forKey:kRecognizerDocumentFaceJsKey];
     [constants setObject:@"RECOGNIZER_MYKAD" forKey:kRecognizerMyKadJsKey];
+    [constants setObject:@"RECOGNIZER_PDF417" forKey:kRecognizerPDF417JsKey];
     [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
@@ -195,7 +202,8 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     
     self.shouldReturnCroppedImage = NO;
     self.shouldReturnSuccessfulImage = NO;
-    
+    self.shouldReturnFaceImage = NO;
+
     if ([[self.options valueForKey:kOptionShouldReturnSuccessfulImageJsKey] boolValue]) {
         settings.metadataSettings.successfulFrame = YES;
         self.shouldReturnSuccessfulImage = YES;
@@ -205,11 +213,17 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         settings.metadataSettings.dewarpedImage = YES;
         self.shouldReturnCroppedImage = YES;
     }
-    
+
+    if ([[self.options valueForKey:kOptionReturnFaceImageJsKey] boolValue]) {
+        settings.metadataSettings.dewarpedImage = YES;
+        self.shouldReturnFaceImage = YES;
+    }
+
     settings.cameraSettings.cameraType = self.cameraType;
     
     self.scannedImageDewarped = nil;
     self.scannedImageSuccesful = nil;
+    self.scannedImageFace = nil;
     
     // Do not timeout
     settings.scanSettings.partialRecognitionTimeout = 0.0f;
@@ -286,7 +300,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     if ([metadata isKindOfClass:[PPImageMetadata class]]) {
         PPImageMetadata *imageMetadata = (PPImageMetadata *)metadata;
         PPImageMetadataType imageMetadataType = imageMetadata.imageType;
-        if (imageMetadataType == PPImageMetadataTypeDewarpedImage && self.shouldReturnCroppedImage == YES) {
+        if (imageMetadataType == PPImageMetadataTypeDewarpedImage && self.shouldReturnFaceImage == YES && [imageMetadata.name isEqualToString:[PPDocumentFaceRecognizerSettings ID_FACE]]) {
+            self.scannedImageFace = imageMetadata.image;
+        }
+        else if (imageMetadataType == PPImageMetadataTypeDewarpedImage && self.shouldReturnCroppedImage == YES) {
             self.scannedImageDewarped = imageMetadata.image;
         }
         else if (imageMetadataType == PPImageMetadataTypeSuccessfulFrame && self.shouldReturnSuccessfulImage == YES) {
@@ -463,7 +480,16 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
                            forKey:kResultImageSuccessful];
         }
     }
-    
+
+    if (self.scannedImageFace) {
+        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageFace, 0.9f);
+        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        if (self.shouldReturnFaceImage) {
+            [resultDict setObject:encodedImage
+                           forKey:kResultImageFace];
+        }
+    }
+
     [self finishWithScanningResults:resultDict];
 }
 
@@ -510,12 +536,8 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
     // as PPImageMetadata objects with name @"MRTD"
     
-    if (self.shouldReturnCroppedImage) {
-        mrtdRecognizerSettings.dewarpFullDocument = YES;
-    } else {
-        mrtdRecognizerSettings.dewarpFullDocument = NO;
-    }
-    
+    mrtdRecognizerSettings.dewarpFullDocument = self.shouldReturnCroppedImage;
+
     return mrtdRecognizerSettings;
 }
 
@@ -549,11 +571,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
     // as PPImageMetadata objects with name @"MRTD"
     
-    if (self.shouldReturnCroppedImage) {
-        eudlRecognizerSettings.showFullDocument = YES;
-    } else {
-        eudlRecognizerSettings.showFullDocument = NO;
-    }
+    eudlRecognizerSettings.showFullDocument = self.shouldReturnCroppedImage;
     
     return eudlRecognizerSettings;
 }
@@ -589,11 +607,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
     // as PPImageMetadata objects with name @"MRTD"
     
-    if (self.shouldReturnCroppedImage) {
-        documentFaceReconizerSettings.returnFullDocument = YES;
-    } else {
-        documentFaceReconizerSettings.returnFullDocument = NO;
-    }
+    documentFaceReconizerSettings.returnFaceImage = self.shouldReturnFaceImage;
+
+    documentFaceReconizerSettings.returnFullDocument = self.shouldReturnCroppedImage;
     
     return documentFaceReconizerSettings;
 }
@@ -602,11 +618,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     
     PPMyKadRecognizerSettings *myKadRecognizerSettings = [[PPMyKadRecognizerSettings alloc] init];
     
-    if (self.shouldReturnCroppedImage) {
-        myKadRecognizerSettings.showFullDocument = YES;
-    } else {
-        myKadRecognizerSettings.showFullDocument = NO;
-    }
+    myKadRecognizerSettings.showFullDocument = self.shouldReturnCroppedImage;
     
     return myKadRecognizerSettings;
 }
