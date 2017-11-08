@@ -69,7 +69,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 2.10.0'
+  pod 'PPBlinkID', '~> 2.12.0'
 end
 EOF
 
@@ -124,7 +124,7 @@ cat > index.js << EOF
 
 
 import React, { Component } from 'react';
-import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys} from 'blinkid-react-native';
+import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys} from 'blinkid-react-native';
 import {
   AppRegistry,
   Platform,
@@ -140,7 +140,7 @@ const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
       ios: 'E2ONP7QK-SGLUN3RH-YIEFNMOT-Q23AMHC6-U7EIRDKV-ZZJO73HG-3ZOUG574-VLZMR3HC',
       // android license key for applicationID: com.blinkidreactnative
-      android: 'VF2QEAKE-IZYWGJZJ-6T43WTEY-VTKDF37N-HBPMOOC6-Y44F5RZY-L3DTQXWH-HBPLB7DZ'
+      android: 'FDHBV6QZ-BW3EPUBO-U4LQEDFN-PPHKWSW6-HSYM5K2K-3Y6LBTVL-JLPDZMGO-VNFKTKTX'
 })
 
 var renderIf = function(condition, content) {
@@ -177,7 +177,9 @@ export default class BlinkIDReactNative extends Component {
           // scans EUDL (EU Driver License)
           BlinkID.RECOGNIZER_EUDL,
           // scans MyKad (Malaysian ID)
-          BlinkID.RECOGNIZER_MYKAD
+          BlinkID.RECOGNIZER_MYKAD,
+          // scans PDF417 type of barcode
+          BlinkID.RECOGNIZER_PDF417
         ]
       })
       if (scanningResult) {
@@ -259,6 +261,11 @@ export default class BlinkIDReactNative extends Component {
                                       "Date of birth: " + fields[MYKADKeys.DateOfBirth] + fieldDelim +
                                       "Religion: " + fields[MYKADKeys.Religion] + fieldDelim +
                                       "Sex: " + fields[MYKADKeys.Sex] + fieldDelim;
+          } else if (recognizerResult.resultType == "PDF417 result") {
+
+            var fields = recognizerResult.fields
+            // PDF417Keys are keys from keys/pdf417_keys.js
+            resultsFormattedText += "Barcode data: " + fields[PDF417Keys.BarcodeData] + fieldDelim;
 
           } else if (recognizerResult.resultType == "DocumentFace result") {
             // document face recognizer returns only images

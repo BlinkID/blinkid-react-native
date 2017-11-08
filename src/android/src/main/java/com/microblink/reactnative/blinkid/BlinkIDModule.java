@@ -29,6 +29,8 @@ import com.microblink.metadata.MetadataSettings;
 import com.microblink.recognizers.BaseRecognitionResult;
 import com.microblink.recognizers.IResultHolder;
 import com.microblink.recognizers.RecognitionResults;
+import com.microblink.recognizers.blinkbarcode.pdf417.Pdf417RecognizerSettings;
+import com.microblink.recognizers.blinkbarcode.pdf417.Pdf417ScanResult;
 import com.microblink.recognizers.blinkbarcode.usdl.USDLRecognizerSettings;
 import com.microblink.recognizers.blinkbarcode.usdl.USDLScanResult;
 import com.microblink.recognizers.blinkid.documentface.DocumentFaceDetectorType;
@@ -37,10 +39,10 @@ import com.microblink.recognizers.blinkid.documentface.DocumentFaceRecognizerSet
 import com.microblink.recognizers.blinkid.eudl.EUDLCountry;
 import com.microblink.recognizers.blinkid.eudl.EUDLRecognitionResult;
 import com.microblink.recognizers.blinkid.eudl.EUDLRecognizerSettings;
-import com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult;
-import com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings;
 import com.microblink.recognizers.blinkid.malaysia.MyKadRecognitionResult;
 import com.microblink.recognizers.blinkid.malaysia.MyKadRecognizerSettings;
+import com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult;
+import com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings;
 import com.microblink.recognizers.settings.RecognitionSettings;
 import com.microblink.recognizers.settings.RecognizerSettings;
 import com.microblink.results.date.DateResult;
@@ -74,6 +76,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String RECOGNIZER_EUDL_JS_KEY = "RECOGNIZER_EUDL";
     private static final String RECOGNIZER_DOCUMENT_FACE_JS_KEY = "RECOGNIZER_DOCUMENT_FACE";
     private static final String RECOGNIZER_MYKAD_JS_KEY = "RECOGNIZER_MYKAD";
+    private static final String RECOGNIZER_PDF417_JS_KEY = "RECOGNIZER_PDF417";
 
     // js result keys
     private static final String RESULT_LIST = "resultList";
@@ -88,6 +91,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String EUDL_RESULT_TYPE = "EUDL result";
     private static final String DOCUMENT_FACE_RESULT_TYPE = "DocumentFace result";
     private static final String MYKAD_RESULT_TYPE = "MyKad result";
+    private static final String PDF417_RESULT_TYPE = "PDF417 result";
 
     // java mappings for recognizer types
     private static final int RECOGNIZER_MRTD = 1;
@@ -95,10 +99,13 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final int RECOGNIZER_EUDL = 3;
     private static final int RECOGNIZER_DOCUMENT_FACE = 4;
     private static final int RECOGNIZER_MYKAD = 5;
+    private static final int RECOGNIZER_PDF417 = 6;
 
     private static final int COMPRESSED_IMAGE_QUALITY = 90;
 
-    /** Request code for scan activity */
+    /**
+     * Request code for scan activity
+     */
     private static final int REQ_CODE_SCAN = 0x123;
 
     private static final String LOG_TAG = "BlinkID";
@@ -127,22 +134,23 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         constants.put(RECOGNIZER_EUDL_JS_KEY, RECOGNIZER_EUDL);
         constants.put(RECOGNIZER_DOCUMENT_FACE_JS_KEY, RECOGNIZER_DOCUMENT_FACE);
         constants.put(RECOGNIZER_MYKAD_JS_KEY, RECOGNIZER_MYKAD);
+        constants.put(RECOGNIZER_PDF417_JS_KEY, RECOGNIZER_PDF417);
         return constants;
     }
 
     /**
      * React native method which invokes ScanCard activity with given BlinkID license key
      * and {@code scanningOptions}. It returns results as JS Promise object.
-     * @param licenseKey BlinkID license key which is bound to the application ID. To obtain
-     *                   valid license key, please visit http://microblink.com/login or
-     *                   contact us at http://help.microblink.com
+     *
+     * @param licenseKey      BlinkID license key which is bound to the application ID. To obtain
+     *                        valid license key, please visit http://microblink.com/login or
+     *                        contact us at http://help.microblink.com
      * @param scanningOptions scanning options map with following key-value pairs:
      *                        {@Link #OPTION_USE_FRONT_CAMERA_JS_KEY} -> boolean
      *                        {@link #OPTION_SHOULD_RETURN_CROPPED_IMAGE_JS_KEY} -> boolean
      *                        {@link #OPTION_SHOULD_RETURN_SUCCESSFUL_IMAGE_JS_KEY} -> boolean
      *                        {@link #RECOGNIZERS_ARRAY_JS_KEY} -> array of enabled recognizers
-     *
-     * @param promise Promise for returning scan results.
+     * @param promise         Promise for returning scan results.
      */
     @ReactMethod
     public void scan(String licenseKey, ReadableMap scanningOptions, Promise promise) {
@@ -182,9 +190,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         scanIntent.putExtra(ScanCard.EXTRAS_LICENSE_KEY, licenseKey);
         scanIntent.putExtra(ScanCard.EXTRAS_CAMERA_TYPE, (Parcelable) (useFrontCamera ? CameraType.CAMERA_FRONTFACE : CameraType.CAMERA_DEFAULT));
         scanIntent.putExtra(ScanCard.EXTRAS_RECOGNITION_SETTINGS, recognitionSettings);
-        
+
         boolean enableBeep = readBooleanValue(scanningOptions, OPTION_ENABLE_BEEP_JS_KEY, true);
-        if(enableBeep) {
+        if (enableBeep) {
             // if scan sound should be played when scanning is done, pass its resource ID
             scanIntent.putExtra(ScanCard.EXTRAS_BEEP_RESOURCE, R.raw.beep);
         }
@@ -222,6 +230,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds recognizer settings for the given recognizer type.
+     *
      * @param recognizerType code for the supported recognizer type.
      * @return Recognizer settings for the chosen recognizer.
      * @throws IllegalArgumentException If the given recognizer type code is unknown.
@@ -238,6 +247,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                 return buildDocumentFaceSettings();
             case RECOGNIZER_MYKAD:
                 return buildMyKadSettings();
+            case RECOGNIZER_PDF417:
+                return buildPdf417Settings();
             default:
                 throw new IllegalArgumentException("Unknown recognizer type");
         }
@@ -245,6 +256,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds settings for the MRTD (Machine Readable Travel Document) recognizer.
+     *
      * @return settings for the MRTD (Machine Readable Travel Document) recognizer.
      */
     private MRTDRecognizerSettings buildMrtdSettings() {
@@ -262,6 +274,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds settings for the USDL (US Driver's Licence) recognizer.
+     *
      * @return settings for the USDL (US Driver's Licence) recognizer.
      */
     private USDLRecognizerSettings buildUsdlSettings() {
@@ -287,6 +300,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds settings for the EUDL (EU Driver's License) recognizer.
+     *
      * @return settings for the EUDL (EU Driver's License) recognizer.
      */
     private EUDLRecognizerSettings buildEudlSettings() {
@@ -308,6 +322,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds settings for the Document Face recognizer.
+     *
      * @return settings for the Document Face recognizer.
      */
     private DocumentFaceRecognizerSettings buildDocumentFaceSettings() {
@@ -322,6 +337,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds settings for the MyKad (Malaysian ID card) recognizer.
+     *
      * @return settings for the MyKad (Malaysian ID card) recognizer.
      */
     private MyKadRecognizerSettings buildMyKadSettings() {
@@ -331,6 +347,31 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
             myKad.setShowFullDocument(true);
         }
         return myKad;
+    }
+
+    /**
+     * Builds settings for the Pdf417recognizer.
+     *
+     * @return settings for the Pdf417 recognizer.
+     */
+    private Pdf417RecognizerSettings buildPdf417Settings() {
+        // prepare settings for the PDF417 recognizer
+        Pdf417RecognizerSettings pdf417 = new Pdf417RecognizerSettings();
+
+        /**
+         * Set this to true to scan even if barcode is not compliant with standards.
+         * For example, malformed PDF417 barcodes which were incorrectly encoded.
+         * Use only if necessary because it slows down the recognition process.
+         */
+        pdf417.setUncertainScanning(false);
+
+        /**
+         * Set this to true to scan barcodes which don't have quiet zone (white area) around it.
+         * Disable if you need a slight speed boost.
+         */
+        pdf417.setNullQuietZoneAllowed(true);
+
+        return pdf417;
     }
 
     /**
@@ -440,7 +481,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Rejects scan promise with the given status/error code and message.
-     * @param code status/error code.
+     *
+     * @param code    status/error code.
      * @param message status/error message.
      */
     private void rejectPromise(String code, String message) {
@@ -453,6 +495,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Converts given image to base64 encoded JPEG image.
+     *
      * @param image image to convert.
      * @return Base64 encoded JPEG image or null if the given {@code image} is {@code null},
      * or conversion has failed.
@@ -470,13 +513,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
             }
             try {
                 byteArrayOutputStream.close();
-            } catch (IOException ignorable) {}
+            } catch (IOException ignorable) {
+            }
         }
         return null;
     }
 
     /**
      * Builds USDL result for returning to JS.
+     *
      * @param res USDL result.
      * @return map representation of the given {@code res} for returning to JS.
      */
@@ -486,6 +531,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds EUDL result for returning to JS.
+     *
      * @param res EUDL result.
      * @return map representation of the given {@code res} for returning to JS.
      */
@@ -495,6 +541,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds MRTD result for returning to JS.
+     *
      * @param res MRTD result.
      * @return map representation of the given {@code res} for returning to JS.
      */
@@ -504,6 +551,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds DocumentFace result for returning to JS.
+     *
      * @param res DocumentFace result.
      * @return map representation of the given {@code res} for returning to JS.
      */
@@ -517,11 +565,22 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     /**
      * Builds MyKad result for returning to JS.
+     *
      * @param res MyKad result.
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildMyKadResult(MyKadRecognitionResult res) {
         return buildKeyValueResult(res, MYKAD_RESULT_TYPE);
+    }
+
+    /**
+     * Builds PDF417 result for returning to JS.
+     *
+     * @param res PDF417 result.
+     * @return map representation of the given {@code res} for returning to JS.
+     */
+    private WritableMap buildPDF417Result(Pdf417ScanResult res) {
+        return buildKeyValueResult(res, PDF417_RESULT_TYPE);
     }
 
     private WritableMap buildKeyValueResult(BaseRecognitionResult res, String resultType) {
@@ -570,6 +629,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                                 resultsList.pushMap(buildDocumentFaceResult((DocumentFaceRecognitionResult) res));
                             } else if (res instanceof MyKadRecognitionResult) { // check if scan result is result of MyKad recognizer
                                 resultsList.pushMap(buildMyKadResult((MyKadRecognitionResult) res));
+                            } else if (res instanceof Pdf417ScanResult) { // check if scan result is result of PDF417 recognizer
+                                resultsList.pushMap(buildPDF417Result((Pdf417ScanResult) res));
                             }
                         }
 
