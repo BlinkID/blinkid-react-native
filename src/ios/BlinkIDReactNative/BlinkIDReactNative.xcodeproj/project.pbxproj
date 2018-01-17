@@ -253,13 +253,17 @@
 				DEVELOPMENT_TEAM = CQTJWP89J7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PODS_ROOT)/PPBlinkID",
 					"$(SRCROOT)/../../../../../ios/**",
 					"$(PROJECT_DIR)",
-					"#import",
-					"<MicroBlink/MicroBlink.h>",
-					"$(SRCROOT)/../../../iOS/**",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../node_modules/react-native/React",
+					"$(SRCROOT)/../../node_modules/react-native/ReactCommon",
+					"${PODS_ROOT}/Headers/Public/React",
+					"${PODS_ROOT}/Headers/Public/yoga",
+					"${PODS_ROOT}/Headers/Public",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -267,6 +271,7 @@
 					"-lc++",
 					"-lz",
 				);
+				PODS_ROOT = "${SRCROOT}/../../../../../ios/Pods";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -278,13 +283,17 @@
 				DEVELOPMENT_TEAM = CQTJWP89J7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PODS_ROOT)/PPBlinkID",
 					"$(SRCROOT)/../../../../../ios/**",
 					"$(PROJECT_DIR)",
-					"#import",
-					"<MicroBlink/MicroBlink.h>",
-					"$(SRCROOT)/../../../iOS/**",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../node_modules/react-native/React",
+					"$(SRCROOT)/../../node_modules/react-native/ReactCommon",
+					"${PODS_ROOT}/Headers/Public/React",
+					"${PODS_ROOT}/Headers/Public/yoga",
+					"${PODS_ROOT}/Headers/Public",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -292,6 +301,7 @@
 					"-lc++",
 					"-lz",
 				);
+				PODS_ROOT = "${SRCROOT}/../../../../../ios/Pods";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
