@@ -140,7 +140,7 @@ const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
       ios: 'E2ONP7QK-SGLUN3RH-YIEFNMOT-Q23AMHC6-U7EIRDKV-ZZJO73HG-3ZOUG574-VLZMR3HC',
       // android license key for applicationID: com.blinkidreactnative
-      android: 'FDHBV6QZ-BW3EPUBO-U4LQEDFN-PPHKWSW6-HSYM5K2K-3Y6LBTVL-JLPDZMGO-VNFKTKTX'
+      android: 'GXGKDUE2-3Y752W4Y-VTOX3N5M-2QZO73JY-L3DTQXWH-HBPMOOC6-Y44F5RZY-L3DU6TK3'
 })
 
 var renderIf = function(condition, content) {
