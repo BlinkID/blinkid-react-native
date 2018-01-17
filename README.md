@@ -91,7 +91,7 @@ pod init
 platform :ios, '9.0'
 
 target 'TargetName' do
-  pod 'PPBlinkID', '~> 2.10.0'
+  pod 'PPBlinkID', '~> 2.15.0'
 end
 ```
 

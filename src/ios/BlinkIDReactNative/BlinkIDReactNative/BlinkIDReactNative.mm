@@ -385,7 +385,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     [dict setObject:kDocumentFaceResultType forKey:kResultType];
 }
 
-- (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadRecognizerResult *)myKadResult {
+- (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadFrontRecognizerResult *)myKadResult {
     NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[myKadResult getAllStringElements]];
     [stringElements setObject:myKadResult.rawOwnerBirthDate forKey:kMyKadBirthDate];
     [dict setObject:stringElements forKey:kFields];
@@ -440,8 +440,8 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             [resultArray addObject:dict];
         }
         
-        if ([result isKindOfClass:[PPMyKadRecognizerResult class]]) {
-            PPMyKadRecognizerResult *myKadDecoderResult = (PPMyKadRecognizerResult *)result;
+        if ([result isKindOfClass:[PPMyKadFrontRecognizerResult class]]) {
+            PPMyKadFrontRecognizerResult *myKadDecoderResult = (PPMyKadFrontRecognizerResult *)result;
             
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withMyKadRecognizerResult:myKadDecoderResult];
@@ -614,9 +614,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return documentFaceReconizerSettings;
 }
 
-- (PPMyKadRecognizerSettings *)myKadRecognizerSettings {
+- (PPMyKadFrontRecognizerSettings *)myKadRecognizerSettings {
     
-    PPMyKadRecognizerSettings *myKadRecognizerSettings = [[PPMyKadRecognizerSettings alloc] init];
+    PPMyKadFrontRecognizerSettings *myKadRecognizerSettings = [[PPMyKadFrontRecognizerSettings alloc] init];
     
     myKadRecognizerSettings.showFullDocument = self.shouldReturnCroppedImage;
     
