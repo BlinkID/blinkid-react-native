@@ -39,8 +39,8 @@ import com.microblink.recognizers.blinkid.documentface.DocumentFaceRecognizerSet
 import com.microblink.recognizers.blinkid.eudl.EUDLCountry;
 import com.microblink.recognizers.blinkid.eudl.EUDLRecognitionResult;
 import com.microblink.recognizers.blinkid.eudl.EUDLRecognizerSettings;
-import com.microblink.recognizers.blinkid.malaysia.MyKadRecognitionResult;
-import com.microblink.recognizers.blinkid.malaysia.MyKadRecognizerSettings;
+import com.microblink.recognizers.blinkid.malaysia.mykad.front.MyKadFrontSideRecognitionResult;
+import com.microblink.recognizers.blinkid.malaysia.mykad.front.MyKadFrontSideRecognizerSettings;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings;
 import com.microblink.recognizers.settings.RecognitionSettings;
@@ -344,9 +344,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      *
      * @return settings for the MyKad (Malaysian ID card) recognizer.
      */
-    private MyKadRecognizerSettings buildMyKadSettings() {
+    private MyKadFrontSideRecognizerSettings buildMyKadSettings() {
         // prepare settings for the MyKad (Malaysian ID card) recognizer
-        MyKadRecognizerSettings myKad = new MyKadRecognizerSettings();
+        MyKadFrontSideRecognizerSettings myKad = new MyKadFrontSideRecognizerSettings();
         if (mShouldReturnCroppedImage) {
             myKad.setShowFullDocument(true);
         }
@@ -594,7 +594,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @param res MyKad result.
      * @return map representation of the given {@code res} for returning to JS.
      */
-    private WritableMap buildMyKadResult(MyKadRecognitionResult res) {
+    private WritableMap buildMyKadResult(MyKadFrontSideRecognitionResult res) {
         return buildKeyValueResult(res, MYKAD_RESULT_TYPE);
     }
 
@@ -652,8 +652,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                                 resultsList.pushMap(buildEUDLResult((EUDLRecognitionResult) res));
                             } else if (res instanceof DocumentFaceRecognitionResult) { // check if scan result is result of DocumentFace recognizer
                                 resultsList.pushMap(buildDocumentFaceResult((DocumentFaceRecognitionResult) res));
-                            } else if (res instanceof MyKadRecognitionResult) { // check if scan result is result of MyKad recognizer
-                                resultsList.pushMap(buildMyKadResult((MyKadRecognitionResult) res));
+                            } else if (res instanceof MyKadFrontSideRecognitionResult) { // check if scan result is result of MyKad recognizer
+                                resultsList.pushMap(buildMyKadResult((MyKadFrontSideRecognitionResult) res));
                             } else if (res instanceof Pdf417ScanResult) { // check if scan result is result of PDF417 recognizer
                                 resultsList.pushMap(buildPDF417Result((Pdf417ScanResult) res));
                             }
