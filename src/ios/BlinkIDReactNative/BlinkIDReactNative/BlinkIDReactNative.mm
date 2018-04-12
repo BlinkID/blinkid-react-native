@@ -52,6 +52,7 @@ static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
 static NSString* const kOptionReturnCroppedImageJsKey = @"shouldReturnCroppedImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
 static NSString* const kOptionReturnFaceImageJsKey = @"shouldReturnFaceImage";
+static NSString* const kOptionQuality = @"quality";
 static NSString* const kRecognizersArrayJsKey = @"recognizers";
 
 // js keys for recognizer types
@@ -64,9 +65,10 @@ static NSString* const kRecognizerPDF417JsKey = @"RECOGNIZER_PDF417";
 
 // js result keys
 static NSString* const kResultList = @"resultList";
-static NSString* const kResultImageCropped = @"resultImageCropped";
-static NSString* const kResultImageSuccessful = @"resultImageSuccessful";
-static NSString* const kResultImageFace = @"resultImageFace";
+static NSString* const kResultImages = @"images";
+static NSString* const kResultImageCropped = @"cropped";
+static NSString* const kResultImageSuccessful = @"successful";
+static NSString* const kResultImageFace = @"face";
 static NSString* const kResultType = @"resultType";
 static NSString* const kFields = @"fields";
 
@@ -227,10 +229,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     
     // Do not timeout
     settings.scanSettings.partialRecognitionTimeout = 0.0f;
-    
-    
+
     /** 2. Setup the license key */
-    
+
     // Visit www.microblink.com to get the license key for your app
     settings.licenseSettings.licenseKey = self.licenseKey;
     
@@ -462,34 +463,21 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     if ([resultArray count] > 0) {
         [resultDict setObject:resultArray forKey:kResultList];
     }
-    
-    if (self.scannedImageDewarped) {
-        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageDewarped, 0.9f);
-        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        if (self.shouldReturnCroppedImage) {
-            [resultDict setObject:encodedImage
-                           forKey:kResultImageCropped];
-        }
+
+    NSMutableDictionary* images = [NSMutableDictionary dictionary];
+    if (self.scannedImageDewarped && self.shouldReturnCroppedImage) {
+        [images setObject:[self exportImage:self.scannedImageDewarped] forKey:kResultImageCropped];
     }
 
-    if (self.scannedImageSuccesful) {
-        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageSuccesful, 0.9f);
-        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        if (self.shouldReturnSuccessfulImage) {
-            [resultDict setObject:encodedImage
-                           forKey:kResultImageSuccessful];
-        }
+    if (self.scannedImageSuccesful && self.shouldReturnSuccessfulImage) {
+        [images setObject:[self exportImage:self.scannedImageSuccesful] forKey:kResultImageSuccessful];
     }
 
-    if (self.scannedImageFace) {
-        NSData *imageData = UIImageJPEGRepresentation(self.scannedImageFace, 0.9f);
-        NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        if (self.shouldReturnFaceImage) {
-            [resultDict setObject:encodedImage
-                           forKey:kResultImageFace];
-        }
+    if (self.scannedImageFace && self.shouldReturnFaceImage) {
+        [images setObject:[self exportImage:self.scannedImageFace] forKey:kResultImageFace];
     }
 
+    [resultDict setObject:[NSDictionary dictionaryWithDictionary:images] forKey:kResultImages];
     [self finishWithScanningResults:resultDict];
 }
 
@@ -643,6 +631,16 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     pdf417RecognizerSettings.allowNullQuietZone = YES;
 
     return pdf417RecognizerSettings;
+}
+
+- (NSDictionary*) exportImage:(UIImage*)image {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
+    NSMutableDictionary* imageInfo = [NSMutableDictionary dictionary];
+    NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [imageInfo setObject:@(image.size.width) forKey:@"width"];
+    [imageInfo setObject:@(image.size.height) forKey:@"height"];
+    [imageInfo setObject:encodedImage forKey:@"base64"];
+    return [NSDictionary dictionaryWithDictionary:imageInfo];
 }
 
 @end
