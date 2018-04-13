@@ -31,6 +31,10 @@
 
 @property (nonatomic) UIImage *scannedImageFace;
 
+@property (nonatomic) NSData *scannedImageFaceData;
+
+@property (nonatomic) NSData *scannedImageSignatureData;
+
 @property (nonatomic, strong) NSArray *recognizers;
 
 @property (nonatomic) BOOL shouldReturnCroppedImage;
@@ -38,6 +42,8 @@
 @property (nonatomic) BOOL shouldReturnSuccessfulImage;
 
 @property (nonatomic) BOOL shouldReturnFaceImage;
+
+@property (nonatomic) BOOL shouldReturnSignatureImage;
 
 @end
 
@@ -52,13 +58,14 @@ static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
 static NSString* const kOptionReturnCroppedImageJsKey = @"shouldReturnCroppedImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
 static NSString* const kOptionReturnFaceImageJsKey = @"shouldReturnFaceImage";
-static NSString* const kOptionQuality = @"quality";
+static NSString* const kOptionReturnSignatureImageJsKey = @"shouldReturnSignatureImage";
 static NSString* const kRecognizersArrayJsKey = @"recognizers";
 
 // js keys for recognizer types
 static NSString* const kRecognizerMRTDJsKey = @"RECOGNIZER_MRTD";
 static NSString* const kRecognizerUSDLJsKey = @"RECOGNIZER_USDL";
 static NSString* const kRecognizerEUDLJsKey = @"RECOGNIZER_EUDL";
+static NSString* const kRecognizerNZDLJsKey = @"RECOGNIZER_NZDL";
 static NSString* const kRecognizerMyKadJsKey = @"RECOGNIZER_MYKAD";
 static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
 static NSString* const kRecognizerPDF417JsKey = @"RECOGNIZER_PDF417";
@@ -69,6 +76,7 @@ static NSString* const kResultImages = @"images";
 static NSString* const kResultImageCropped = @"cropped";
 static NSString* const kResultImageSuccessful = @"successful";
 static NSString* const kResultImageFace = @"face";
+static NSString* const kResultImageSignature = @"signature";
 static NSString* const kResultType = @"resultType";
 static NSString* const kFields = @"fields";
 
@@ -76,6 +84,7 @@ static NSString* const kFields = @"fields";
 static NSString* const kMRTDResultType = @"MRTD result";
 static NSString* const kUSDLResultType = @"USDL result";
 static NSString* const kEUDLResultType = @"EUDL result";
+static NSString* const kNZDLResultType = @"NZDL result";
 static NSString* const kMyKadResultType = @"MyKad result";
 static NSString* const kDocumentFaceResultType = @"DocumentFace result";
 static NSString* const kPDF417ResultType = @"PDF417 result";
@@ -104,12 +113,14 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"RECOGNIZER_MRTD" forKey:kRecognizerMRTDJsKey];
     [constants setObject:@"RECOGNIZER_USDL" forKey:kRecognizerUSDLJsKey];
     [constants setObject:@"RECOGNIZER_EUDL" forKey:kRecognizerEUDLJsKey];
+    [constants setObject:@"RECOGNIZER_NZDL" forKey:kRecognizerNZDLJsKey];
     [constants setObject:@"RECOGNIZER_DOCUMENT_FACE" forKey:kRecognizerDocumentFaceJsKey];
     [constants setObject:@"RECOGNIZER_MYKAD" forKey:kRecognizerMyKadJsKey];
     [constants setObject:@"RECOGNIZER_PDF417" forKey:kRecognizerPDF417JsKey];
     [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
+    [constants setObject:@"NZDL result" forKey:kNZDLResultType];
     [constants setObject:@"MyKad result" forKey:kMyKadResultType];
     [constants setObject:@"PDF417 result" forKey:kPDF417ResultType];
     [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
@@ -205,6 +216,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     self.shouldReturnCroppedImage = NO;
     self.shouldReturnSuccessfulImage = NO;
     self.shouldReturnFaceImage = NO;
+    self.shouldReturnSignatureImage = NO;
 
     if ([[self.options valueForKey:kOptionShouldReturnSuccessfulImageJsKey] boolValue]) {
         settings.metadataSettings.successfulFrame = YES;
@@ -221,12 +233,18 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         self.shouldReturnFaceImage = YES;
     }
 
+    if ([[self.options valueForKey:kOptionReturnSignatureImageJsKey] boolValue]) {
+        self.shouldReturnSignatureImage = YES;
+    }
+
     settings.cameraSettings.cameraType = self.cameraType;
     
     self.scannedImageDewarped = nil;
     self.scannedImageSuccesful = nil;
     self.scannedImageFace = nil;
-    
+    self.scannedImageFaceData = nil;
+    self.scannedImageSignatureData = nil;
+
     // Do not timeout
     settings.scanSettings.partialRecognitionTimeout = 0.0f;
 
@@ -253,7 +271,11 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     if ([self shouldUseEudlRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self eudlRecognizerSettingsWithCountry:PPEudlCountryAny]];
     }
-    
+
+    if ([self shouldUseNzdlRecognizer]) {
+        [settings.scanSettings addRecognizerSettings:[self nzdlRecognizerSettings]];
+    }
+
     if ([self shouldUseDocumentFaceRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self documentFaceRecognizerSettings]];
     }
@@ -348,6 +370,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return [self.recognizers containsObject:kRecognizerEUDLJsKey];
 }
 
+- (BOOL)shouldUseNzdlRecognizer {
+    return [self.recognizers containsObject:kRecognizerNZDLJsKey];
+}
+
 - (BOOL)shouldUseDocumentFaceRecognizer {
     return [self.recognizers containsObject:kRecognizerDocumentFaceJsKey];
 }
@@ -379,6 +405,22 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 - (void)setDictionary:(NSMutableDictionary *)dict withEudlRecognizerResult:(PPEudlRecognizerResult *)eudlResult {
     [dict setObject:[eudlResult getAllStringElements] forKey:kFields];
     [dict setObject:kEUDLResultType forKey:kResultType];
+}
+
+- (void)setDictionary:(NSMutableDictionary *)dict withNzdlRecognizerResult:(PPNewZealandDLFrontRecognizerResult *)nzdlResult {
+    if (self.shouldReturnFaceImage) {
+        self.scannedImageFaceData = [nzdlResult getDataElement:@"NewZealandDLFront.Face.Image"];
+    }
+
+    if (self.shouldReturnSignatureImage) {
+        self.scannedImageSignatureData = [nzdlResult getDataElement:@"NewZealandDLFront.Signature.Image"];
+    }
+
+    NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithDictionary:[nzdlResult getAllStringElements]];
+    [tmp removeObjectForKey:@"NewZealandDLFront.Face.Image"];
+    [tmp removeObjectForKey:@"NewZealandDLFront.Signature.Image"];
+    [dict setObject:[NSDictionary dictionaryWithDictionary:tmp] forKey:kFields];
+    [dict setObject:kNZDLResultType forKey:kResultType];
 }
 
 - (void)setDictionary:(NSMutableDictionary *)dict withDocumentFaceResult:(PPDocumentFaceRecognizerResult *)documentFaceResult {
@@ -431,7 +473,16 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             
             [resultArray addObject:dict];
         }
-        
+
+        if ([result isKindOfClass:[PPNewZealandDLFrontRecognizerResult class]]) {
+            PPNewZealandDLFrontRecognizerResult *nzdlDecoderResult = (PPNewZealandDLFrontRecognizerResult *)result;
+
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [self setDictionary:dict withNzdlRecognizerResult:nzdlDecoderResult];
+
+            [resultArray addObject:dict];
+        }
+
         if ([result isKindOfClass:[PPDocumentFaceRecognizerResult class]]) {
             PPDocumentFaceRecognizerResult *documentFaceResult = (PPDocumentFaceRecognizerResult *)result;
             
@@ -473,8 +524,16 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         [images setObject:[self exportImage:self.scannedImageSuccesful] forKey:kResultImageSuccessful];
     }
 
-    if (self.scannedImageFace && self.shouldReturnFaceImage) {
-        [images setObject:[self exportImage:self.scannedImageFace] forKey:kResultImageFace];
+    if (self.shouldReturnFaceImage) {
+        if (self.scannedImageFaceData) {
+            [images setObject:[self exportImageData:self.scannedImageFaceData] forKey:kResultImageFace];
+        } else if (self.scannedImageFace) {
+            [images setObject:[self exportImage:self.scannedImageFace] forKey:kResultImageFace];
+        }
+    }
+
+    if (self.scannedImageSignatureData && self.shouldReturnSignatureImage) {
+        [images setObject:[self exportImageData:self.scannedImageSignatureData] forKey:kResultImageSignature];
     }
 
     [resultDict setObject:[NSDictionary dictionaryWithDictionary:images] forKey:kResultImages];
@@ -564,6 +623,56 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return eudlRecognizerSettings;
 }
 
+- (PPNewZealandDLFrontRecognizerSettings *)nzdlRecognizerSettings {
+
+    PPNewZealandDLFrontRecognizerSettings *nzdlRecognizerSettings = [[PPNewZealandDLFrontRecognizerSettings alloc] init];
+
+    /********* All recognizer settings are set to their default values. Change accordingly. *********/
+
+    /**
+     * If YES, document issue date will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    nzdlRecognizerSettings.extractIssueDate = YES;
+
+    /**
+     * If YES, owner's address will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    nzdlRecognizerSettings.extractAddress = YES;
+
+    /**
+     * Sets whether face photo from ID card should be sent to didOutputMetadata method of scanDelegate object.
+     * If you want to recieve this image, be sure to enable dewarpedImage in MetadataSettings.
+     *
+     * Default: NO
+     */
+    nzdlRecognizerSettings.displayFacePhoto = self.shouldReturnFaceImage;
+
+    /**
+     * Sets whether signature photo of ID card should be sent to didOutputMetadata method of scanDelegate object.
+     * If you want to recieve this image, be sure to enable dewarpedImage in MetadataSettings.
+     *
+     * Default: NO
+     */
+    nzdlRecognizerSettings.displaySignaturePhoto = self.shouldReturnSignatureImage;
+
+    /**
+     * Sets whether full image of ID card should be sent to didOutputMetadata method of scanDelegate object.
+     * If you want to recieve this image, be sure to enable dewarpedImage in MetadataSettings.
+     *
+     * Default: NO
+     */
+    nzdlRecognizerSettings.displayFullDocumentImage = self.shouldReturnSuccessfulImage;
+
+    /**
+     * If YES, document expiry date will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    nzdlRecognizerSettings.extractExpiryDate = YES;
+    return nzdlRecognizerSettings;
+}
+
 - (PPUsdlRecognizerSettings *)usdlRecognizerSettings {
     
     PPUsdlRecognizerSettings *usdlRecognizerSettings = [[PPUsdlRecognizerSettings alloc] init];
@@ -636,11 +745,22 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 - (NSDictionary*) exportImage:(UIImage*)image {
     NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
     NSMutableDictionary* imageInfo = [NSMutableDictionary dictionary];
-    NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *encodedImage = [self dataToBase64:imageData];
     [imageInfo setObject:@(image.size.width) forKey:@"width"];
     [imageInfo setObject:@(image.size.height) forKey:@"height"];
     [imageInfo setObject:encodedImage forKey:@"base64"];
     return [NSDictionary dictionaryWithDictionary:imageInfo];
+}
+
+- (NSDictionary*) exportImageData:(NSData*)imageData {
+    NSMutableDictionary* imageInfo = [NSMutableDictionary dictionary];
+    NSString *encodedImage = [self dataToBase64:imageData];
+    [imageInfo setObject:encodedImage forKey:@"base64"];
+    return [NSDictionary dictionaryWithDictionary:imageInfo];
+}
+
+- (NSString*) dataToBase64:(NSData*)data {
+    return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 @end

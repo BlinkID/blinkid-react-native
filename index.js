@@ -1,6 +1,6 @@
 'use strict';
 /**
- * This exposes the appropriate native BlinkID module module as a JS module, based on 
+ * This exposes the appropriate native BlinkID module module as a JS module, based on
  * detected platvorm: Android or iOS. This has a
  * function 'scan' which takes the following parameters:
  *
@@ -41,5 +41,6 @@ BlinkID.scan = async (...args) => {
 export const MRTDKeys = require('./keys/mrtd_keys')
 export const USDLKeys = require('./keys/usdl_keys')
 export const EUDLKeys = require('./keys/eudl_keys')
+export const NZDLKeys = require('./keys/nzdl_keys')
 export const MYKADKeys = require('./keys/mykad_keys')
 export const PDF417Keys = require('./keys/pdf417_keys')
