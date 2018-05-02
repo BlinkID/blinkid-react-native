@@ -81,9 +81,10 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     // js result keys
     private static final String RESULT_LIST = "resultList";
-    private static final String RESULT_IMAGE_CROPPED = "resultImageCropped";
-    private static final String RESULT_IMAGE_SUCCESSFUL = "resultImageSuccessful";
-    private static final String RESULT_IMAGE_FACE = "resultImageFace";
+    private static final String RESULT_IMAGES = "images";
+    private static final String RESULT_IMAGE_CROPPED = "cropped";
+    private static final String RESULT_IMAGE_SUCCESSFUL = "successful";
+    private static final String RESULT_IMAGE_FACE = "face";
     private static final String RESULT_TYPE = "resultType";
     private static final String FIELDS = "fields";
 
@@ -661,27 +662,32 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
                         WritableMap root = new WritableNativeMap();
                         root.putArray(RESULT_LIST, resultsList);
+
+                        WritableMap images = new WritableNativeMap();
                         if (mShouldReturnCroppedImage) {
-                            Image croppedImage = ImageHolder.getInstance().getLastDewarpedImage();
-                            String croppedImageBase64 = convertImageToJPEGBase64Encoded(croppedImage);
-                            if (croppedImageBase64 != null) {
-                                root.putString(RESULT_IMAGE_CROPPED, croppedImageBase64);
+                            Image image = ImageHolder.getInstance().getLastDewarpedImage();
+                            WritableMap map = exportImage(image);
+                            if (map != null) {
+                                images.putMap(RESULT_IMAGE_CROPPED, map);
                             }
                         }
                         if (mShouldReturnSuccessfulImage) {
-                            Image successfulImage = ImageHolder.getInstance().getSuccessfulImage();
-                            String successfulImageBase64 = convertImageToJPEGBase64Encoded(successfulImage);
-                            if (successfulImageBase64 != null) {
-                                root.putString(RESULT_IMAGE_SUCCESSFUL, successfulImageBase64);
+                            Image image = ImageHolder.getInstance().getSuccessfulImage();
+                            WritableMap map = exportImage(image);
+                            if (map != null) {
+                                images.putMap(RESULT_IMAGE_SUCCESSFUL, map);
                             }
                         }
                         if (mShouldReturnFaceImage) {
-                            Image faceImage = ImageHolder.getInstance().getFaceImage();
-                            String faceImageBase64 = convertImageToJPEGBase64Encoded(faceImage);
-                            if (faceImageBase64 != null) {
-                                root.putString(RESULT_IMAGE_FACE, faceImageBase64);
+                            Image image = ImageHolder.getInstance().getFaceImage();
+                            WritableMap map = exportImage(image);
+                            if (map != null) {
+                                images.putMap(RESULT_IMAGE_FACE, map);
                             }
                         }
+
+                        root.putMap(RESULT_IMAGES, images);
+
                         mScanPromise.resolve(root);
                     } else if (resultCode == ScanCard.RESULT_CANCELED) {
                         rejectPromise(STATUS_SCAN_CANCELED, "Scanning has been canceled");
@@ -692,4 +698,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
             }
         }
     };
+
+    private WritableMap exportImage (Image image) {
+        WritableMap info = new WritableNativeMap();
+        String base64 = convertImageToJPEGBase64Encoded(image);
+        if (base64 == null) return null;
+
+        info.putString("base64", base64);
+        info.putInt("width", image.getWidth());
+        info.putInt("height", image.getHeight());
+        return info;
+    }
 }
