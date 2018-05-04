@@ -102,6 +102,7 @@ cat > index.js << EOF
 * RECOGNIZER_MRTD - scans Machine Readable Travel Document, contained in various IDs and passports
 * RECOGNIZER_EUDL - scans the front of European driver license
 * RECOGNIZER_MYKAD - scans the front of Malaysian ID
+* RECOGNIZER_NZDL_FRONT - scans the front side of New Zealand DL
 * RECOGNIZER_DOCUMENT_FACE - scans documents with face image and returns document images
 * RECOGNIZER_PDF417 - scans PDF417 type of barcode
 */
@@ -127,7 +128,7 @@ cat > index.js << EOF
 
 
 import React, { Component } from 'react';
-import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys} from 'blinkid-react-native';
+import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys, NZDLFrontKeys} from 'blinkid-react-native';
 import {
   AppRegistry,
   Platform,
@@ -185,6 +186,8 @@ export default class BlinkIDReactNative extends Component {
           BlinkID.RECOGNIZER_EUDL,
           // scans MyKad (Malaysian ID)
           BlinkID.RECOGNIZER_MYKAD,
+          // scans the front side of New Zealand DL
+          BlinkID.RECOGNIZER_NZDL_FRONT,
           // scans PDF417 type of barcode
           BlinkID.RECOGNIZER_PDF417
         ]
@@ -272,6 +275,23 @@ export default class BlinkIDReactNative extends Component {
                                       "Date of birth: " + fields[MYKADKeys.DateOfBirth] + fieldDelim +
                                       "Religion: " + fields[MYKADKeys.Religion] + fieldDelim +
                                       "Sex: " + fields[MYKADKeys.Sex] + fieldDelim;
+
+          } else if (recognizerResult.resultType == "NZDLFront result") {
+    
+              var fields = recognizerResult.fields
+              // NZDLFrontKeys are keys from keys/nzdl_front_keys.js
+              resultsFormattedText += /** Personal information */
+                                      "First names: " + fields[NZDLFrontKeys.FirstNames] + fieldDelim +
+                                      "Surname: " + fields[NZDLFrontKeys.Surname] + fieldDelim +
+                                      "Date of birth: " + fields[NZDLFrontKeys.DateOfBirth] + fieldDelim +
+                                      "Address: " + fields[NZDLFrontKeys.Address] + fieldDelim +
+                                      "Date of expiry: " + fields[NZDLFrontKeys.ExpiryDate] + fieldDelim +
+                                      "Date of issue: " + fields[NZDLFrontKeys.IssueDate] + fieldDelim +
+                                      "License number: " + fields[NZDLFrontKeys.LicenseNumber] + fieldDelim +
+                                      "Card version: " + fields[NZDLFrontKeys.CardVersion] + fieldDelim +
+                                      "Donor indicator: " + fields[NZDLFrontKeys.DonorIndicator] + fieldDelim;
+                                      
+
           } else if (recognizerResult.resultType == "PDF417 result") {
 
             var fields = recognizerResult.fields

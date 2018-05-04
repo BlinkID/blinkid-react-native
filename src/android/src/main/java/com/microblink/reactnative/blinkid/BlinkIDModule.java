@@ -42,6 +42,8 @@ import com.microblink.recognizers.blinkid.malaysia.mykad.front.MyKadFrontSideRec
 import com.microblink.recognizers.blinkid.malaysia.mykad.front.MyKadFrontSideRecognizerSettings;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognitionResult;
 import com.microblink.recognizers.blinkid.mrtd.MRTDRecognizerSettings;
+import com.microblink.recognizers.blinkid.newzealand.driversLicense.front.NewZealandDLFrontRecognitionResult;
+import com.microblink.recognizers.blinkid.newzealand.driversLicense.front.NewZealandDLFrontRecognizerSettings;
 import com.microblink.recognizers.settings.RecognitionSettings;
 import com.microblink.recognizers.settings.RecognizerSettings;
 import com.microblink.results.date.DateResult;
@@ -77,6 +79,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String RECOGNIZER_DOCUMENT_FACE_JS_KEY = "RECOGNIZER_DOCUMENT_FACE";
     private static final String RECOGNIZER_MYKAD_JS_KEY = "RECOGNIZER_MYKAD";
     private static final String RECOGNIZER_PDF417_JS_KEY = "RECOGNIZER_PDF417";
+    private static final String RECOGNIZER_NZDL_FRONT_JS_KEY = "RECOGNIZER_NZDL_FRONT";
 
     // js result keys
     private static final String RESULT_LIST = "resultList";
@@ -93,6 +96,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String DOCUMENT_FACE_RESULT_TYPE = "DocumentFace result";
     private static final String MYKAD_RESULT_TYPE = "MyKad result";
     private static final String PDF417_RESULT_TYPE = "PDF417 result";
+    private static final String NZDL_FRONT_RESULT_TYPE = "NZDLFront result";
 
     // java mappings for recognizer types
     private static final int RECOGNIZER_MRTD = 1;
@@ -101,6 +105,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final int RECOGNIZER_DOCUMENT_FACE = 4;
     private static final int RECOGNIZER_MYKAD = 5;
     private static final int RECOGNIZER_PDF417 = 6;
+    private static final int RECOGNIZER_NZDL_FRONT = 7;
 
     private static final int COMPRESSED_IMAGE_QUALITY = 90;
 
@@ -143,6 +148,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         constants.put(RECOGNIZER_DOCUMENT_FACE_JS_KEY, RECOGNIZER_DOCUMENT_FACE);
         constants.put(RECOGNIZER_MYKAD_JS_KEY, RECOGNIZER_MYKAD);
         constants.put(RECOGNIZER_PDF417_JS_KEY, RECOGNIZER_PDF417);
+        constants.put(RECOGNIZER_NZDL_FRONT_JS_KEY, RECOGNIZER_NZDL_FRONT);
         return constants;
     }
 
@@ -261,6 +267,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                 return buildMyKadSettings();
             case RECOGNIZER_PDF417:
                 return buildPdf417Settings();
+            case RECOGNIZER_NZDL_FRONT:
+                return buildNzdlFrontSettings();
             default:
                 throw new IllegalArgumentException("Unknown recognizer type");
         }
@@ -380,6 +388,27 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                     MyKadFrontSideRecognitionResult.class);
         }
         return myKad;
+    }
+
+    /**
+     * Builds settings for the New Zealand Driver's license (front side) recognizer.
+     *
+     * @return settings for the New Zealand Driver's license (front side) recognizer.
+     */
+    private NewZealandDLFrontRecognizerSettings buildNzdlFrontSettings() {
+        // prepare settings for the New Zealand Driver's license (front side) recognizer
+        NewZealandDLFrontRecognizerSettings nzdl = new NewZealandDLFrontRecognizerSettings();
+        if (mShouldReturnDocumentImage) {
+            nzdl.setDisplayFullDocumentImage(true);
+            sFullDocumentImageResultTypes.put(NewZealandDLFrontRecognizerSettings.FULL_DOCUMENT_IMAGE,
+                    NewZealandDLFrontRecognitionResult.class);
+        }
+        if (mShouldReturnFaceImage) {
+            nzdl.setDisplayFaceImage(true);
+            sFaceImageResultTypes.put(NewZealandDLFrontRecognizerSettings.FACE_IMAGE_NAME,
+                    NewZealandDLFrontRecognitionResult.class);
+        }
+        return nzdl;
     }
 
     /**
@@ -650,7 +679,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildUSDLResult(USDLScanResult res) {
-        return buildKeyValueResult(res, USDL_RESULT_TYPE);
+        return buildNativeKeyValueResult(res, USDL_RESULT_TYPE);
     }
 
     /**
@@ -660,7 +689,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildEUDLResult(EUDLRecognitionResult res) {
-        WritableMap result = buildKeyValueResult(res, EUDL_RESULT_TYPE);
+        WritableMap result = buildNativeKeyValueResult(res, EUDL_RESULT_TYPE);
         putImagesToResult(result, EUDLRecognitionResult.class);
         return result;
     }
@@ -672,7 +701,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildMRTDResult(MRTDRecognitionResult res) {
-        WritableMap result = buildKeyValueResult(res, MRTD_RESULT_TYPE);
+        WritableMap result = buildNativeKeyValueResult(res, MRTD_RESULT_TYPE);
         putImagesToResult(result, MRTDRecognitionResult.class);
         return result;
     }
@@ -684,10 +713,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildDocumentFaceResult(DocumentFaceRecognitionResult res) {
-        WritableMap fields = new WritableNativeMap();
-        WritableMap result = new WritableNativeMap();
-        result.putString(RESULT_TYPE, DOCUMENT_FACE_RESULT_TYPE);
-        result.putMap(FIELDS, fields);
+        WritableMap result = buildResult(DOCUMENT_FACE_RESULT_TYPE, new WritableNativeMap());
         putImagesToResult(result, DocumentFaceRecognitionResult.class);
         return result;
     }
@@ -699,8 +725,23 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildMyKadResult(MyKadFrontSideRecognitionResult res) {
-        WritableMap result = buildKeyValueResult(res, MYKAD_RESULT_TYPE);
+        WritableMap result = buildNativeKeyValueResult(res, MYKAD_RESULT_TYPE);
         putImagesToResult(result, MyKadFrontSideRecognitionResult.class);
+        return result;
+    }
+
+    /**
+     * Builds New Zealand DL front result for returning to JS.
+     *
+     * @param res New Zealand DL front result.
+     * @return map representation of the given {@code res} for returning to JS.
+     */
+    private WritableMap buildNewZealandDLFrontResult(NewZealandDLFrontRecognitionResult res) {
+        WritableMap resultFields = buildFieldsMapFromNativeResult(res);
+        resultFields.putBoolean("NewZealandDLDonorIndicator.DonorIndicator", res.getDonorIndicator());
+
+        WritableMap result = buildResult(NZDL_FRONT_RESULT_TYPE, resultFields);
+        putImagesToResult(result, NewZealandDLFrontRecognitionResult.class);
         return result;
     }
 
@@ -711,10 +752,21 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildPDF417Result(Pdf417ScanResult res) {
-        return buildKeyValueResult(res, PDF417_RESULT_TYPE);
+        return buildNativeKeyValueResult(res, PDF417_RESULT_TYPE);
     }
 
-    private WritableMap buildKeyValueResult(BaseRecognitionResult res, String resultType) {
+    private WritableMap buildResult(String resultType, WritableMap fieldsMap) {
+        WritableMap result = new WritableNativeMap();
+        result.putString(RESULT_TYPE, resultType);
+        result.putMap(FIELDS, fieldsMap);
+        return result;
+    }
+
+    private WritableMap buildNativeKeyValueResult(BaseRecognitionResult res, String resultType) {
+        return buildResult(resultType, buildFieldsMapFromNativeResult(res));
+    }
+
+    private WritableMap buildFieldsMapFromNativeResult(BaseRecognitionResult res) {
         WritableMap fields = new WritableNativeMap();
         IResultHolder resultHolder = res.getResultHolder();
         for (String key : resultHolder.keySet()) {
@@ -727,10 +779,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                 Log.d(LOG_TAG, "Ignoring result key '" + key + "'");
             }
         }
-        WritableMap result = new WritableNativeMap();
-        result.putString(RESULT_TYPE, resultType);
-        result.putMap(FIELDS, fields);
-        return result;
+        return fields;
     }
 
     private final ActivityEventListener mScanActivityListener = new BaseActivityEventListener() {
@@ -760,6 +809,8 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
                                 resultsList.pushMap(buildDocumentFaceResult((DocumentFaceRecognitionResult) res));
                             } else if (res instanceof MyKadFrontSideRecognitionResult) { // check if scan result is result of MyKad recognizer
                                 resultsList.pushMap(buildMyKadResult((MyKadFrontSideRecognitionResult) res));
+                            } else if (res instanceof NewZealandDLFrontRecognitionResult) {
+                                resultsList.pushMap(buildNewZealandDLFrontResult((NewZealandDLFrontRecognitionResult) res));
                             } else if (res instanceof Pdf417ScanResult) { // check if scan result is result of PDF417 recognizer
                                 resultsList.pushMap(buildPDF417Result((Pdf417ScanResult) res));
                             }
