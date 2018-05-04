@@ -21,19 +21,6 @@ export const BlinkID = Platform.select({
       android: NativeModules.BlinkIDAndroid
 })
 
-const { scan } = BlinkID
-// backwards compat
-BlinkID.scan = async (...args) => {
-  const result = await scan(...args)
-  const { successful={}, cropped={}, face={} } = result.images
-  return {
-    get resultImageSuccessful() { return successful.base64 },
-    get resultImageCropped() { return cropped.base64 },
-    get resultImageFace() { return face.base64 },
-    ...result,
-  }
-}
-
 /**
  * Following exports expose the keys (string constants) for obtaining result values for
  * corresponding result types.

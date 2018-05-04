@@ -24,7 +24,6 @@ import com.microblink.activity.ScanCard;
 import com.microblink.hardware.camera.CameraType;
 import com.microblink.image.Image;
 import com.microblink.image.ImageListener;
-import com.microblink.image.ImageType;
 import com.microblink.metadata.MetadataSettings;
 import com.microblink.recognizers.BaseRecognitionResult;
 import com.microblink.recognizers.IResultHolder;
@@ -66,7 +65,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     // js keys for scanning options
     private static final String OPTION_USE_FRONT_CAMERA_JS_KEY = "useFrontCamera";
     private static final String OPTION_ENABLE_BEEP_JS_KEY = "enableBeep";
-    private static final String OPTION_SHOULD_RETURN_CROPPED_IMAGE_JS_KEY = "shouldReturnCroppedImage";
+    private static final String OPTION_SHOULD_RETURN_DOCUMENT_IMAGE_JS_KEY = "shouldReturnDocumentImage";
     private static final String OPTION_SHOULD_RETURN_SUCCESSFUL_IMAGE_JS_KEY = "shouldReturnSuccessfulImage";
     private static final String OPTION_SHOULD_RETURN_FACE_IMAGE_JS_KEY = "shouldReturnFaceImage";
     private static final String RECOGNIZERS_ARRAY_JS_KEY = "recognizers";
@@ -81,10 +80,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
     // js result keys
     private static final String RESULT_LIST = "resultList";
-    private static final String RESULT_IMAGES = "images";
-    private static final String RESULT_IMAGE_CROPPED = "cropped";
-    private static final String RESULT_IMAGE_SUCCESSFUL = "successful";
-    private static final String RESULT_IMAGE_FACE = "face";
+    private static final String RESULT_IMAGE_DOCUMENT = "resultImageDocument";
+    private static final String RESULT_IMAGE_SUCCESSFUL = "resultImageSuccessful";
+    private static final String RESULT_IMAGE_FACE = "resultImageFace";
     private static final String RESULT_TYPE = "resultType";
     private static final String FIELDS = "fields";
 
@@ -114,9 +112,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static final String LOG_TAG = "BlinkID";
 
     private Promise mScanPromise;
-    private boolean mShouldReturnCroppedImage;
+    private boolean mShouldReturnDocumentImage;
     private boolean mShouldReturnSuccessfulImage;
     private boolean mShouldReturnFaceImage;
+
+    private static Map<String, Class<? extends BaseRecognitionResult>>
+            sFullDocumentImageResultTypes = new HashMap<>();
+
+    private static Map<String, Class<? extends BaseRecognitionResult>>
+            sFaceImageResultTypes = new HashMap<>();
 
     public BlinkIDModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -151,7 +155,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      *                        contact us at http://help.microblink.com
      * @param scanningOptions scanning options map with following key-value pairs:
      *                        {@Link #OPTION_USE_FRONT_CAMERA_JS_KEY} -> boolean
-     *                        {@link #OPTION_SHOULD_RETURN_CROPPED_IMAGE_JS_KEY} -> boolean
+     *                        {@link #OPTION_SHOULD_RETURN_DOCUMENT_IMAGE_JS_KEY} -> boolean
      *                        {@link #OPTION_SHOULD_RETURN_SUCCESSFUL_IMAGE_JS_KEY} -> boolean
      *                        {@link #RECOGNIZERS_ARRAY_JS_KEY} -> array of enabled recognizers
      * @param promise         Promise for returning scan results.
@@ -168,10 +172,12 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         mScanPromise = promise;
 
         boolean useFrontCamera = readBooleanValue(scanningOptions, OPTION_USE_FRONT_CAMERA_JS_KEY, false);
-        mShouldReturnCroppedImage = readBooleanValue(scanningOptions, OPTION_SHOULD_RETURN_CROPPED_IMAGE_JS_KEY, false);
+        mShouldReturnDocumentImage = readBooleanValue(scanningOptions, OPTION_SHOULD_RETURN_DOCUMENT_IMAGE_JS_KEY, false);
         mShouldReturnSuccessfulImage = readBooleanValue(scanningOptions, OPTION_SHOULD_RETURN_SUCCESSFUL_IMAGE_JS_KEY, false);
         mShouldReturnFaceImage = readBooleanValue(scanningOptions, OPTION_SHOULD_RETURN_FACE_IMAGE_JS_KEY, false);
 
+        sFullDocumentImageResultTypes.clear();
+        sFaceImageResultTypes.clear();
         List<RecognizerSettings> recSettList = new ArrayList<>();
         if (scanningOptions.hasKey(RECOGNIZERS_ARRAY_JS_KEY)) {
             ReadableArray recognizerArray = scanningOptions.getArray(RECOGNIZERS_ARRAY_JS_KEY);
@@ -204,7 +210,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
         // set image metadata settings to define which images will be obtained as metadata during scan process
         MetadataSettings.ImageMetadataSettings ims = new MetadataSettings.ImageMetadataSettings();
-        if (mShouldReturnCroppedImage || mShouldReturnFaceImage) {
+        if (mShouldReturnDocumentImage || mShouldReturnFaceImage) {
             // enable obtaining of dewarped (cropped) images
             ims.setDewarpedImageEnabled(true);
         }
@@ -218,7 +224,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // pass image listener to scan activity
         scanIntent.putExtra(ScanCard.EXTRAS_IMAGE_LISTENER,
                 new ScanImageListener(
-                        mShouldReturnCroppedImage,
+                        mShouldReturnDocumentImage,
                         mShouldReturnSuccessfulImage,
                         mShouldReturnFaceImage
                 )
@@ -273,7 +279,11 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // data quality when returning results.
         mrtd.setAllowUnparsedResults(false);
 
-        mrtd.setShowFullDocument(mShouldReturnCroppedImage);
+        if (mShouldReturnDocumentImage) {
+            mrtd.setShowFullDocument(true);
+            sFullDocumentImageResultTypes.put(MRTDRecognizerSettings.FULL_DOCUMENT_IMAGE,
+                    MRTDRecognitionResult.class);
+        }
 
         return mrtd;
     }
@@ -295,7 +305,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // increase recognition time. Default is true.
         usdl.setNullQuietZoneAllowed(true);
 
-        // USDLRecognizer does no return cropped image
+        // USDLRecognizer does no return full document nor face image
         return usdl;
     }
 
@@ -308,17 +318,24 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // To specify we want to perform EUDL (EU Driver's License) recognition,
         // prepare settings for EUDL recognizer. Pass country as parameter to EUDLRecognizerSettings
         // constructor. Here we choose AUTO - automatic country recognition.
-        EUDLRecognizerSettings ukdl = new EUDLRecognizerSettings(EUDLCountry.EUDL_COUNTRY_AUTO);
+        EUDLRecognizerSettings eudl = new EUDLRecognizerSettings(EUDLCountry.EUDL_COUNTRY_AUTO);
         // Defines if issue date should be extracted. Default is true
-        ukdl.setExtractIssueDate(true);
+        eudl.setExtractIssueDate(true);
         // Defines if expiry date should be extracted. Default is true.
-        ukdl.setExtractExpiryDate(true);
+        eudl.setExtractExpiryDate(true);
         // Defines if address should be extracted. Default is true.
-        ukdl.setExtractAddress(true);
-        if (mShouldReturnCroppedImage) {
-            ukdl.setShowFullDocument(true);
+        eudl.setExtractAddress(true);
+        if (mShouldReturnDocumentImage) {
+            sFullDocumentImageResultTypes.put(EUDLRecognizerSettings.FULL_DOCUMENT_IMAGE,
+                    EUDLRecognitionResult.class);
+            eudl.setShowFullDocument(true);
         }
-        return ukdl;
+        if (mShouldReturnFaceImage) {
+            sFaceImageResultTypes.put(EUDLRecognizerSettings.FACE_IMAGE_NAME,
+                    EUDLRecognitionResult.class);
+            eudl.setShowFaceImage(true);
+        }
+        return eudl;
     }
 
     /**
@@ -330,11 +347,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // prepare settings for Document Face recognizer
         // choose apropriate DocumentFaceDetectorType, here we use DocumentFaceDetectorType.IDENTITY_CARD_TD1
         DocumentFaceRecognizerSettings documentFace = new DocumentFaceRecognizerSettings(DocumentFaceDetectorType.IDENTITY_CARD_TD1);
-        if (mShouldReturnCroppedImage) {
+        if (mShouldReturnDocumentImage) {
             documentFace.setShowFullDocument(true);
+            sFullDocumentImageResultTypes.put(DocumentFaceRecognizerSettings.FULL_DOCUMENT_IMAGE,
+                    DocumentFaceRecognitionResult.class);
         }
         if (mShouldReturnFaceImage) {
             documentFace.setShowFaceImage(true);
+            sFaceImageResultTypes.put(DocumentFaceRecognizerSettings.FACE_IMAGE_NAME,
+                    DocumentFaceRecognitionResult.class);
         }
 
         return documentFace;
@@ -348,8 +369,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private MyKadFrontSideRecognizerSettings buildMyKadSettings() {
         // prepare settings for the MyKad (Malaysian ID card) recognizer
         MyKadFrontSideRecognizerSettings myKad = new MyKadFrontSideRecognizerSettings();
-        if (mShouldReturnCroppedImage) {
+        if (mShouldReturnDocumentImage) {
             myKad.setShowFullDocument(true);
+            sFullDocumentImageResultTypes.put(MyKadFrontSideRecognizerSettings.FULL_DOCUMENT_IMAGE,
+                    MyKadFrontSideRecognitionResult.class);
+        }
+        if (mShouldReturnFaceImage) {
+            myKad.setShowFaceImage(true);
+            sFaceImageResultTypes.put(MyKadFrontSideRecognizerSettings.FACE_IMAGE_NAME,
+                    MyKadFrontSideRecognitionResult.class);
         }
         return myKad;
     }
@@ -384,12 +412,12 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      */
     public static class ScanImageListener implements ImageListener {
 
-        private boolean mShouldStoreCroppedImage;
+        private boolean mShouldStoreDocumentImage;
         private boolean mShouldStoreSuccessfulImage;
         private boolean mShouldStoreFaceImage;
 
-        public ScanImageListener(boolean shouldStoreCroppedImage, boolean shouldStoreSuccessfulImage, boolean shouldStoreFaceImage) {
-            mShouldStoreCroppedImage = shouldStoreCroppedImage;
+        public ScanImageListener(boolean shouldStoreDocumentImage, boolean shouldStoreSuccessfulImage, boolean shouldStoreFaceImage) {
+            mShouldStoreDocumentImage = shouldStoreDocumentImage;
             mShouldStoreSuccessfulImage = shouldStoreSuccessfulImage;
             mShouldStoreFaceImage = shouldStoreFaceImage;
         }
@@ -399,14 +427,38 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
          */
         @Override
         public void onImageAvailable(Image image) {
-            ImageType imageType = image.getImageType();
-            if (mShouldStoreFaceImage && imageType == ImageType.DEWARPED && image.getImageName().equals(DocumentFaceRecognizerSettings.FACE_IMAGE_NAME)) {
-                ImageHolder.getInstance().setFaceImage(image.clone());
-            } else if (mShouldStoreCroppedImage && imageType == ImageType.DEWARPED) {
-                ImageHolder.getInstance().setDewarpedImage(image.clone());
-            } else if (mShouldStoreSuccessfulImage && imageType == ImageType.SUCCESSFUL_SCAN) {
-                ImageHolder.getInstance().setSuccessFulImage(image.clone());
+            switch (image.getImageType()) {
+                case DEWARPED:
+                    if (mShouldStoreFaceImage && storeFaceImage(image)) {
+                        return;
+                    } else if (mShouldStoreDocumentImage && storeDocumentImage(image)) {
+                        return;
+                    }
+                    break;
+                case SUCCESSFUL_SCAN:
+                    ImageHolder.getInstance().setSuccessfulImage(image.clone());
+                    break;
             }
+        }
+
+        private boolean storeFaceImage(Image image) {
+            String imageName = image.getImageName();
+            Class<? extends BaseRecognitionResult> resultType = sFaceImageResultTypes.get(imageName);
+            if (resultType != null) {
+                ImageHolder.getInstance().setFaceImage(resultType, image.clone());
+                return true;
+            }
+            return false;
+        }
+
+        private boolean storeDocumentImage(Image image) {
+            String imageName = image.getImageName();
+            Class<? extends BaseRecognitionResult> resultType = sFullDocumentImageResultTypes.get(imageName);
+            if (resultType != null) {
+                ImageHolder.getInstance().setDocumentImage(resultType, image.clone());
+                return true;
+            }
+            return false;
         }
 
         /**
@@ -420,7 +472,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeByte(mShouldStoreCroppedImage ? (byte) 1 : 0);
+            dest.writeByte(mShouldStoreDocumentImage ? (byte) 1 : 0);
             dest.writeByte(mShouldStoreSuccessfulImage ? (byte) 1 : 0);
             dest.writeByte(mShouldStoreFaceImage ? (byte) 1 : 0);
         }
@@ -428,7 +480,11 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         public static final Creator<ScanImageListener> CREATOR = new Creator<ScanImageListener>() {
             @Override
             public ScanImageListener createFromParcel(Parcel source) {
-                return new ScanImageListener(source.readByte() == 1, source.readByte() == 1, source.readByte() == 1);
+                return new ScanImageListener(
+                        source.readByte() == 1,
+                        source.readByte() == 1,
+                        source.readByte() == 1
+                );
             }
 
             @Override
@@ -438,59 +494,78 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         };
     }
 
-    /**
-     * Holds obtained images.
-     */
     public static class ImageHolder {
 
         private static ImageHolder sInstance = new ImageHolder();
-        private Image mLastDewarpedImage = null;
-        private Image mSuccessFulImage = null;
-        private Image mFaceImage = null;
+        private Map<Class<? extends BaseRecognitionResult>, ImagesBundle> mImages;
+        private Image mLastSuccessfulImage;
 
         private ImageHolder() {
-
+            mImages = new HashMap<>();
         }
 
         public static ImageHolder getInstance() {
             return sInstance;
         }
 
-        public void setDewarpedImage(Image image) {
-            if (mLastDewarpedImage != null) {
-                mLastDewarpedImage.dispose();
-            }
-            mLastDewarpedImage = image;
+        public void setSuccessfulImage(Image image) {
+            mLastSuccessfulImage = image;
         }
 
-        public void setSuccessFulImage(Image image) {
-            if (mSuccessFulImage != null) {
-                mSuccessFulImage.dispose();
-            }
-            mSuccessFulImage = image;
+        public void setDocumentImage(Class<? extends BaseRecognitionResult> resultClass, Image image) {
+            getAndCreateBundle(resultClass).setDocumentImage(image);
         }
 
-        public Image getLastDewarpedImage() {
-            return mLastDewarpedImage;
+        public void setFaceImage(Class<? extends BaseRecognitionResult> resultClass, Image image) {
+            getAndCreateBundle(resultClass).setFaceImage(image);
+        }
+
+        private ImagesBundle getAndCreateBundle(Class<? extends BaseRecognitionResult> resultClass) {
+            ImagesBundle imagesBundle = mImages.get(resultClass);
+            if (imagesBundle == null) {
+                imagesBundle = new ImagesBundle();
+                mImages.put(resultClass, imagesBundle);
+            }
+            return imagesBundle;
+        }
+
+        public ImagesBundle getImages(Class<? extends BaseRecognitionResult> resultClass) {
+            return mImages.get(resultClass);
         }
 
         public Image getSuccessfulImage() {
-            return mSuccessFulImage;
+            return mLastSuccessfulImage;
         }
 
         public void clear() {
-            if (mLastDewarpedImage != null) {
-                mLastDewarpedImage.dispose();
+            for (ImagesBundle ib : mImages.values()) {
+                ib.dispose();
             }
-            if (mSuccessFulImage != null) {
-                mSuccessFulImage.dispose();
+            mImages.clear();
+            if (mLastSuccessfulImage != null) {
+                mLastSuccessfulImage.dispose();
+                mLastSuccessfulImage = null;
             }
-            if (mFaceImage != null) {
-                mFaceImage.dispose();
+        }
+    }
+
+    private static class ImagesBundle {
+        private Image mDocumentImage;
+        private Image mFaceImage;
+
+        public Image getDocumentImage() {
+            return mDocumentImage;
+        }
+
+        public void setDocumentImage(Image documentImage) {
+            if (mDocumentImage != null) {
+                mDocumentImage.dispose();
             }
-            mSuccessFulImage = null;
-            mLastDewarpedImage = null;
-            mFaceImage = null;
+            mDocumentImage = documentImage;
+        }
+
+        public Image getFaceImage() {
+            return mFaceImage;
         }
 
         public void setFaceImage(Image faceImage) {
@@ -500,8 +575,15 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
             mFaceImage = faceImage;
         }
 
-        public Image getFaceImage() {
-            return mFaceImage;
+        public void dispose() {
+            if (mDocumentImage != null) {
+                mDocumentImage.dispose();
+                mDocumentImage = null;
+            }
+            if (mFaceImage != null) {
+                mFaceImage.dispose();
+                mFaceImage = null;
+            }
         }
     }
 
@@ -545,6 +627,22 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         return null;
     }
 
+    private void putImagesToResult(WritableMap resultMap, Class<? extends BaseRecognitionResult> resultType) {
+        ImagesBundle imagesBundle =  ImageHolder.getInstance().getImages(resultType);
+        WritableMap documentImageMap = null;
+        WritableMap faceImageMap = null;
+        if (imagesBundle != null) {
+            documentImageMap = exportImage(imagesBundle.getDocumentImage());
+            faceImageMap = exportImage(imagesBundle.getFaceImage());
+        }
+        if (documentImageMap != null) {
+            resultMap.putMap(RESULT_IMAGE_DOCUMENT, documentImageMap);
+        }
+        if (faceImageMap != null) {
+            resultMap.putMap(RESULT_IMAGE_FACE, faceImageMap);
+        }
+    }
+
     /**
      * Builds USDL result for returning to JS.
      *
@@ -562,7 +660,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildEUDLResult(EUDLRecognitionResult res) {
-        return buildKeyValueResult(res, EUDL_RESULT_TYPE);
+        WritableMap result = buildKeyValueResult(res, EUDL_RESULT_TYPE);
+        putImagesToResult(result, EUDLRecognitionResult.class);
+        return result;
     }
 
     /**
@@ -572,7 +672,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildMRTDResult(MRTDRecognitionResult res) {
-        return buildKeyValueResult(res, MRTD_RESULT_TYPE);
+        WritableMap result = buildKeyValueResult(res, MRTD_RESULT_TYPE);
+        putImagesToResult(result, MRTDRecognitionResult.class);
+        return result;
     }
 
     /**
@@ -586,6 +688,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         WritableMap result = new WritableNativeMap();
         result.putString(RESULT_TYPE, DOCUMENT_FACE_RESULT_TYPE);
         result.putMap(FIELDS, fields);
+        putImagesToResult(result, DocumentFaceRecognitionResult.class);
         return result;
     }
 
@@ -596,7 +699,9 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
      * @return map representation of the given {@code res} for returning to JS.
      */
     private WritableMap buildMyKadResult(MyKadFrontSideRecognitionResult res) {
-        return buildKeyValueResult(res, MYKAD_RESULT_TYPE);
+        WritableMap result = buildKeyValueResult(res, MYKAD_RESULT_TYPE);
+        putImagesToResult(result, MyKadFrontSideRecognitionResult.class);
+        return result;
     }
 
     /**
@@ -662,32 +767,13 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
 
                         WritableMap root = new WritableNativeMap();
                         root.putArray(RESULT_LIST, resultsList);
-
-                        WritableMap images = new WritableNativeMap();
-                        if (mShouldReturnCroppedImage) {
-                            Image image = ImageHolder.getInstance().getLastDewarpedImage();
-                            WritableMap map = exportImage(image);
-                            if (map != null) {
-                                images.putMap(RESULT_IMAGE_CROPPED, map);
-                            }
-                        }
                         if (mShouldReturnSuccessfulImage) {
-                            Image image = ImageHolder.getInstance().getSuccessfulImage();
-                            WritableMap map = exportImage(image);
-                            if (map != null) {
-                                images.putMap(RESULT_IMAGE_SUCCESSFUL, map);
+                            Image successfulImage = ImageHolder.getInstance().getSuccessfulImage();
+                            WritableMap successfulImageMap = exportImage(successfulImage);
+                            if (successfulImageMap != null) {
+                                root.putMap(RESULT_IMAGE_SUCCESSFUL, successfulImageMap);
                             }
                         }
-                        if (mShouldReturnFaceImage) {
-                            Image image = ImageHolder.getInstance().getFaceImage();
-                            WritableMap map = exportImage(image);
-                            if (map != null) {
-                                images.putMap(RESULT_IMAGE_FACE, map);
-                            }
-                        }
-
-                        root.putMap(RESULT_IMAGES, images);
-
                         mScanPromise.resolve(root);
                     } else if (resultCode == ScanCard.RESULT_CANCELED) {
                         rejectPromise(STATUS_SCAN_CANCELED, "Scanning has been canceled");
@@ -699,14 +785,16 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         }
     };
 
-    private WritableMap exportImage (Image image) {
-        WritableMap info = new WritableNativeMap();
+    private WritableMap exportImage(Image image) {
+        WritableMap imageMap = new WritableNativeMap();
         String base64 = convertImageToJPEGBase64Encoded(image);
-        if (base64 == null) return null;
-
-        info.putString("base64", base64);
-        info.putInt("width", image.getWidth());
-        info.putInt("height", image.getHeight());
-        return info;
+        if (base64 == null) {
+            return null;
+        }
+        imageMap.putString("base64", base64);
+        imageMap.putInt("width", image.getWidth());
+        imageMap.putInt("height", image.getHeight());
+        return imageMap;
     }
+
 }
