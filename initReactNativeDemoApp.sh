@@ -97,12 +97,14 @@ cat > index.js << EOF
 
  /**
 * Use these recognizer types
-* Available: RECOGNIZER_USDL, RECOGNIZER_MRTD, RECOGNIZER_EUDL, RECOGNIZER_DOCUMENT_FACE
+* Available:
 * RECOGNIZER_USDL - scans barcodes located on the back of US driver license
 * RECOGNIZER_MRTD - scans Machine Readable Travel Document, contained in various IDs and passports
 * RECOGNIZER_EUDL - scans the front of European driver license
 * RECOGNIZER_MYKAD - scans the front of Malaysian ID
+* RECOGNIZER_NZDL_FRONT - scans the front side of New Zealand DL
 * RECOGNIZER_DOCUMENT_FACE - scans documents with face image and returns document images
+* RECOGNIZER_PDF417 - scans PDF417 type of barcode
 */
 
 /**
@@ -110,21 +112,23 @@ cat > index.js << EOF
  * available:
  * enableBeep : if it is set to true, successful scan will play a sound
  * useFrontCamera : if it is set to false, back camera is used, else front
- * shouldReturnCroppedImage : if true, cropped images in the recognition process will be returned
+ * shouldReturnDocumentImage : if true, cropped document images in the recognition process will be returned
+ * shouldReturnFaceImage : if true, cropped face images in the recognition process will be returned
  * shouldReturnSuccessfulImage : if true, image on which scan gave valid scanning result will be returned
  * recognizers : array which contains recognizers that will be activated
  */
 
 /**
  * Scan method returns scan fields in JSON format and image(s) (image is returned as Base64 encoded JPEG)
- * scanningResult.resultImageCropped : cropped document image
  * scanningResult.resultImageSuccessful : full image on which scan gave valid scanning result
  * scanningResult.resultList : array of scanning results in JSON format (each activated recognizer can produce its own result)
+ * scanningResult.resultList[i].resultImageDocument : cropped document image
+ * scanningResult.resultList[i].resultImageFace : cropped face image
  */
 
 
 import React, { Component } from 'react';
-import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys} from 'blinkid-react-native';
+import {BlinkID, MRTDKeys, USDLKeys, EUDLKeys, MYKADKeys, PDF417Keys, NZDLFrontKeys} from 'blinkid-react-native';
 import {
   AppRegistry,
   Platform,
@@ -140,7 +144,7 @@ const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
       ios: 'E2ONP7QK-SGLUN3RH-YIEFNMOT-Q23AMHC6-U7EIRDKV-ZZJO73HG-3ZOUG574-VLZMR3HC',
       // android license key for applicationID: com.blinkidreactnative
-      android: 'GXGKDUE2-3Y752W4Y-VTOX3N5M-2QZO73JY-L3DTQXWH-HBPMOOC6-Y44F5RZY-L3DU6TK3'
+      android: 'JMXSJB6V-B3JBFNNF-DJWHC444-YZDHLI2P-P6XYVQNJ-TCWNIMXP-5U4F5RZY-L3DU6TK3'
 })
 
 var renderIf = function(condition, content) {
@@ -153,8 +157,8 @@ var renderIf = function(condition, content) {
 export default class BlinkIDReactNative extends Component {
   constructor(props) {
     super(props);
-    this.state = {showImageCropped: false,
-                  resultImageCropped: '',
+    this.state = {showImageDocument: false,
+                  resultImageDocument: '',
                   showImageFace: false,
                   resultImageFace: '',
                   results: '',
@@ -167,7 +171,7 @@ export default class BlinkIDReactNative extends Component {
       {
         enableBeep: true,
         useFrontCamera: false,
-        shouldReturnCroppedImage: true,
+        shouldReturnDocumentImage: true,
         shouldReturnSuccessfulImage: false,
         // Returns face image when BlinkID.RECOGNIZER_DOCUMENT_FACE is used
         shouldReturnFaceImage: true,
@@ -182,6 +186,8 @@ export default class BlinkIDReactNative extends Component {
           BlinkID.RECOGNIZER_EUDL,
           // scans MyKad (Malaysian ID)
           BlinkID.RECOGNIZER_MYKAD,
+          // scans the front side of New Zealand DL
+          BlinkID.RECOGNIZER_NZDL_FRONT,
           // scans PDF417 type of barcode
           BlinkID.RECOGNIZER_PDF417
         ]
@@ -190,6 +196,10 @@ export default class BlinkIDReactNative extends Component {
         let resultList = scanningResult.resultList;
         let resultsFormattedText = "";
         let fieldDelim = ";\n";
+        let shouldShowResultImageDocument = false;
+        let shouldShowResultImageFace = false;
+        let imageDocument = "";
+        let imageFace = "";
         for (let i = 0; i < resultList.length; i++) {
           // Get individual resilt
           var recognizerResult = resultList[i];
@@ -265,6 +275,23 @@ export default class BlinkIDReactNative extends Component {
                                       "Date of birth: " + fields[MYKADKeys.DateOfBirth] + fieldDelim +
                                       "Religion: " + fields[MYKADKeys.Religion] + fieldDelim +
                                       "Sex: " + fields[MYKADKeys.Sex] + fieldDelim;
+
+          } else if (recognizerResult.resultType == "NZDLFront result") {
+    
+              var fields = recognizerResult.fields
+              // NZDLFrontKeys are keys from keys/nzdl_front_keys.js
+              resultsFormattedText += /** Personal information */
+                                      "First names: " + fields[NZDLFrontKeys.FirstNames] + fieldDelim +
+                                      "Surname: " + fields[NZDLFrontKeys.Surname] + fieldDelim +
+                                      "Date of birth: " + fields[NZDLFrontKeys.DateOfBirth] + fieldDelim +
+                                      "Address: " + fields[NZDLFrontKeys.Address] + fieldDelim +
+                                      "Date of expiry: " + fields[NZDLFrontKeys.ExpiryDate] + fieldDelim +
+                                      "Date of issue: " + fields[NZDLFrontKeys.IssueDate] + fieldDelim +
+                                      "License number: " + fields[NZDLFrontKeys.LicenseNumber] + fieldDelim +
+                                      "Card version: " + fields[NZDLFrontKeys.CardVersion] + fieldDelim +
+                                      "Donor indicator: " + fields[NZDLFrontKeys.DonorIndicator] + fieldDelim;
+                                      
+
           } else if (recognizerResult.resultType == "PDF417 result") {
 
             var fields = recognizerResult.fields
@@ -275,19 +302,30 @@ export default class BlinkIDReactNative extends Component {
             // document face recognizer returns only images
           }
           resultsFormattedText += '\n';
+
+          if (recognizerResult.resultImageDocument) {
+            shouldShowResultImageDocument = true;
+            imageDocument = 'data:image/jpg;base64,' + recognizerResult.resultImageDocument.base64;
+          }
+          if (recognizerResult.resultImageFace) {
+            shouldShowResultImageFace = true;
+            imageFace = 'data:image/jpg;base64,' + recognizerResult.resultImageFace.base64;
+          }
+
         }
-        // image is returned as base64 encoded JPEG, we expect resultImageCorpped because we have activated obtaining of cropped images (shouldReturnCroppedImage: true)
+        // image is returned as base64 encoded JPEG, we expect resultImageDocument and resultImageFace because we have activated obtaining of document and face images (shouldReturnDocumentImage: true, shouldReturnFaceImage: true)
         // to obtain image from successful scan, activate option (shouldReturnSuccessfulImage: true) and get is with scanningResult.resultImageSuccessful
-        this.setState({showImageCropped: scanningResult.resultImageCropped, resultImageCropped: 'data:image/jpg;base64,' + scanningResult.resultImageCropped,
-                       showImageFace: scanningResult.resultImageFace, resultImageFace: 'data:image/jpg;base64,' + scanningResult.resultImageFace, results: resultsFormattedText});}
+        this.setState({showImageDocument: shouldShowResultImageDocument, resultImageDocument: imageDocument,
+                       showImageFace: shouldShowResultImageFace, resultImageFace: imageFace, results: resultsFormattedText});
+      }
     } catch(error) {
-        this.setState({ showImageCropped: false, resultImageCropped: '', showImageFace: false, resultImageFace: '', results: error.message});
+        this.setState({ showImageDocument: false, resultImageDocument: '', showImageFace: false, resultImageFace: '', results: error.message});
     }
     
   }
 
   render() {
-    let displayImageCropped = this.state.resultImageCropped;
+    let displayImageDocument = this.state.resultImageDocument;
     let displayImageFace = this.state.resultImageFace;
     let displayFields = this.state.results;
     let licenseKeyErrorMessage = this.state.licenseKeyErrorMessage;
@@ -304,11 +342,11 @@ export default class BlinkIDReactNative extends Component {
         <ScrollView
           automaticallyAdjustContentInsets={false}
           scrollEventThrottle={200}y> 
-          {renderIf(this.state.showImageCropped,
+          {renderIf(this.state.showImageDocument,
               <View style={styles.imageContainer}>
               <Image
                 resizeMode='contain'
-                source={{uri: displayImageCropped, scale: 3}} style={styles.imageResult}/>
+                source={{uri: displayImageDocument, scale: 3}} style={styles.imageResult}/>
               </View>
           )}
           {renderIf(this.state.showImageFace,

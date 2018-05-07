@@ -21,19 +21,6 @@ export const BlinkID = Platform.select({
       android: NativeModules.BlinkIDAndroid
 })
 
-const { scan } = BlinkID
-// backwards compat
-BlinkID.scan = async (...args) => {
-  const result = await scan(...args)
-  const { successful={}, cropped={}, face={} } = result.images
-  return {
-    get resultImageSuccessful() { return successful.base64 },
-    get resultImageCropped() { return cropped.base64 },
-    get resultImageFace() { return face.base64 },
-    ...result,
-  }
-}
-
 /**
  * Following exports expose the keys (string constants) for obtaining result values for
  * corresponding result types.
@@ -43,3 +30,4 @@ export const USDLKeys = require('./keys/usdl_keys')
 export const EUDLKeys = require('./keys/eudl_keys')
 export const MYKADKeys = require('./keys/mykad_keys')
 export const PDF417Keys = require('./keys/pdf417_keys')
+export const NZDLFrontKeys = require('./keys/nzdl_front_keys')
