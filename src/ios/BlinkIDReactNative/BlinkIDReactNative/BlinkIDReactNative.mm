@@ -45,6 +45,7 @@
 static NSString* const kErrorLicenseKeyDoesNotExists = @"ERROR_LICENSE_KEY_DOES_NOT_EXISTS";
 static NSString* const kErrorCoordniatorDoesNotExists = @"COORDINATOR_DOES_NOT_EXISTS";
 static NSString* const kStatusScanCanceled = @"STATUS_SCAN_CANCELED";
+static NSString* const kStatusScanCanceledProgrammatically = @"STATUS_SCAN_CANCELED_PROGRAMMATICALLY";
 
 // js keys for scanning options
 static NSString* const kOptionEnableBeepKey = @"enableBeep";
@@ -177,7 +178,17 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     dispatch_sync(dispatch_get_main_queue(), ^{
         [rootViewController presentViewController:scanningViewController animated:YES completion:nil];
     });
-    
+
+}
+
+RCT_REMAP_METHOD(cancel, cancel) {
+    if (!self.promiseReject) return;
+
+    NSError *error = [NSError errorWithDomain:MBErrorDomain
+                                         code:-57
+                                     userInfo:nil];
+    self.promiseReject(kStatusScanCanceledProgrammatically, @"Scanning has been canceled programmatically", error);
+    [self dismissScanningView];
 }
 
 #pragma mark - BlinkID specifics
