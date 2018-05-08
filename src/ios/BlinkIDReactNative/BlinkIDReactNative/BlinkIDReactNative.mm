@@ -11,7 +11,15 @@
 #import <React/RCTConvert.h>
 #import <MicroBlink/MicroBlink.h>
 
+typedef NS_ENUM(NSUInteger, PPImageType) {
+    PPImageTypeFace,
+    PPImageTypeDocument,
+    PPImageTypeSuccessful,
+};
+
 @interface BlinkIDReactNative () <PPScanningDelegate>
+
+@property (nonatomic) NSMutableDictionary<NSString *, NSMutableDictionary *> *imageMetadatas;
 
 @property (nonatomic, assign) BOOL enableBeep;
 
@@ -25,15 +33,11 @@
 
 @property (nonatomic, strong) NSString* licenseKey;
 
-@property (nonatomic) UIImage *scannedImageDewarped;
-
-@property (nonatomic) UIImage *scannedImageSuccesful;
-
-@property (nonatomic) UIImage *scannedImageFace;
+@property (nonatomic) PPImageMetadata *scannedImageSuccesful;
 
 @property (nonatomic, strong) NSArray *recognizers;
 
-@property (nonatomic) BOOL shouldReturnCroppedImage;
+@property (nonatomic) BOOL shouldReturnDocumentImage;
 
 @property (nonatomic) BOOL shouldReturnSuccessfulImage;
 
@@ -49,34 +53,35 @@ static NSString* const kStatusScanCanceled = @"STATUS_SCAN_CANCELED";
 // js keys for scanning options
 static NSString* const kOptionEnableBeepKey = @"enableBeep";
 static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
-static NSString* const kOptionReturnCroppedImageJsKey = @"shouldReturnCroppedImage";
+static NSString* const kOptionReturnDocumentImageJsKey = @"shouldReturnDocumentImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
 static NSString* const kOptionReturnFaceImageJsKey = @"shouldReturnFaceImage";
-static NSString* const kOptionQuality = @"quality";
 static NSString* const kRecognizersArrayJsKey = @"recognizers";
 
 // js keys for recognizer types
-static NSString* const kRecognizerMRTDJsKey = @"RECOGNIZER_MRTD";
 static NSString* const kRecognizerUSDLJsKey = @"RECOGNIZER_USDL";
+static NSString* const kRecognizerMRTDJsKey = @"RECOGNIZER_MRTD";
 static NSString* const kRecognizerEUDLJsKey = @"RECOGNIZER_EUDL";
 static NSString* const kRecognizerMyKadJsKey = @"RECOGNIZER_MYKAD";
+static NSString* const kRecognizerNZDLFrontJsKey = @"RECOGNIZER_NZDL_FRONT";
 static NSString* const kRecognizerDocumentFaceJsKey = @"RECOGNIZER_DOCUMENT_FACE";
 static NSString* const kRecognizerPDF417JsKey = @"RECOGNIZER_PDF417";
 
 // js result keys
 static NSString* const kResultList = @"resultList";
 static NSString* const kResultImages = @"images";
-static NSString* const kResultImageCropped = @"cropped";
+static NSString* const kResultImageDocument = @"resultImageDocument";
 static NSString* const kResultImageSuccessful = @"successful";
-static NSString* const kResultImageFace = @"face";
+static NSString* const kResultImageFace = @"resultImageFace";
 static NSString* const kResultType = @"resultType";
 static NSString* const kFields = @"fields";
 
 // result values for resultType
-static NSString* const kMRTDResultType = @"MRTD result";
 static NSString* const kUSDLResultType = @"USDL result";
+static NSString* const kMRTDResultType = @"MRTD result";
 static NSString* const kEUDLResultType = @"EUDL result";
 static NSString* const kMyKadResultType = @"MyKad result";
+static NSString* const kNZDLFrontResultType = @"NZDLFront result";
 static NSString* const kDocumentFaceResultType = @"DocumentFace result";
 static NSString* const kPDF417ResultType = @"PDF417 result";
 
@@ -85,6 +90,18 @@ static NSString* const kRaw = @"raw";
 static NSString* const kMRTDDateOfBirth = @"DateOfBirth";
 static NSString* const kMRTDDateOExpiry = @"DateOfExpiry";
 static NSString* const kMyKadBirthDate = @"ownerBirthDate";
+static NSString* const kNZDLFrontDonorIndicator = @"NewZealandDLDonorIndicator.DonorIndicator";
+static NSString* const kNZDLFrontDateOfBirth = @"NewZealandDLDateOfBirth.DateOfBirth";
+static NSString* const kNZDLFrontExpiryDate = @"NewZealandDLExpiryDate.ExpiryDate";
+static NSString* const kNZDLFrontIssueDate = @"NewZealandDLIssueDate.IssueDate";
+
+// image result keys
+static NSString* const kWidth = @"width";
+static NSString* const kHeight = @"height";
+static NSString* const kBase64 = @"base64";
+
+// date conversion keys
+static NSString* const kNZDLDateFormat = @"dd-MM-yyyy";
 
 // NSError Domain
 static NSString* const MBErrorDomain = @"microblink.error";
@@ -106,11 +123,13 @@ RCT_EXPORT_MODULE();
     [constants setObject:@"RECOGNIZER_EUDL" forKey:kRecognizerEUDLJsKey];
     [constants setObject:@"RECOGNIZER_DOCUMENT_FACE" forKey:kRecognizerDocumentFaceJsKey];
     [constants setObject:@"RECOGNIZER_MYKAD" forKey:kRecognizerMyKadJsKey];
+    [constants setObject:@"RECOGNIZER_NZDL_FRONT" forKey:kRecognizerNZDLFrontJsKey];
     [constants setObject:@"RECOGNIZER_PDF417" forKey:kRecognizerPDF417JsKey];
-    [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"USDL result" forKey:kUSDLResultType];
+    [constants setObject:@"MRTD result" forKey:kMRTDResultType];
     [constants setObject:@"EUDL result" forKey:kEUDLResultType];
     [constants setObject:@"MyKad result" forKey:kMyKadResultType];
+    [constants setObject:@"NZDLFront result" forKey:kNZDLFrontResultType];
     [constants setObject:@"PDF417 result" forKey:kPDF417ResultType];
     [constants setObject:@"DocumentFace result" forKey:kDocumentFaceResultType];
     return [NSDictionary dictionaryWithDictionary:constants];
@@ -131,7 +150,7 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     else {
         self.licenseKey = key;
     }
-    
+
     BOOL isFrontCamera = [[scanOptions valueForKey:kOptionUseFrontCameraJsKey] boolValue];
     if (!isFrontCamera) {
         self.cameraType = PPCameraTypeBack;
@@ -143,14 +162,14 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
     self.promiseResolve = resolve;
     self.promiseReject  = reject;
-    
+
     self.options = scanOptions;
     self.recognizers = [scanOptions valueForKey:kRecognizersArrayJsKey];
-    
+
     /** Instantiate the scanning coordinator */
     NSError *error;
     PPCameraCoordinator *coordinator = [self coordinatorWithError:&error];
-    
+
     /** If scanning isn't supported, present an error */
     if (coordinator == nil) {
         NSDictionary *userInfo = @{
@@ -162,22 +181,22 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
                                              code:-57
                                          userInfo:userInfo];
         reject(kErrorCoordniatorDoesNotExists, @"Coordinator does not exists", error);
-        
+
         return;
     }
-    
+
     /** Allocate and present the scanning view controller */
     UIViewController<PPScanningViewController>* scanningViewController = [PPViewControllerFactory cameraViewControllerWithDelegate:self coordinator:coordinator error:nil];
-    
+
     // allow rotation if VC is displayed as a modal view controller
     scanningViewController.autorotate = YES;
     scanningViewController.supportedOrientations = UIInterfaceOrientationMaskAll;
-    
+
     UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     dispatch_sync(dispatch_get_main_queue(), ^{
         [rootViewController presentViewController:scanningViewController animated:YES completion:nil];
     });
-    
+
 }
 
 #pragma mark - BlinkID specifics
@@ -192,17 +211,19 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
  */
 - (PPCameraCoordinator *)coordinatorWithError:(NSError**)error {
     /** 0. Check if scanning is supported */
-    
+
     if ([PPCameraCoordinator isScanningUnsupportedForCameraType:self.cameraType error:error]) {
         return nil;
     }
-    
+
     /** 1. Initialize the Scanning settings */
-    
+
     // Initialize the scanner settings object. This initialize settings with all default values.
     PPSettings *settings = [[PPSettings alloc] init];
-    
-    self.shouldReturnCroppedImage = NO;
+
+    self.imageMetadatas = [[NSMutableDictionary alloc] init];
+
+    self.shouldReturnDocumentImage = NO;
     self.shouldReturnSuccessfulImage = NO;
     self.shouldReturnFaceImage = NO;
 
@@ -210,10 +231,10 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
         settings.metadataSettings.successfulFrame = YES;
         self.shouldReturnSuccessfulImage = YES;
     }
-    
-    if ([[self.options valueForKey:kOptionReturnCroppedImageJsKey] boolValue]) {
+
+    if ([[self.options valueForKey:kOptionReturnDocumentImageJsKey] boolValue]) {
         settings.metadataSettings.dewarpedImage = YES;
-        self.shouldReturnCroppedImage = YES;
+        self.shouldReturnDocumentImage = YES;
     }
 
     if ([[self.options valueForKey:kOptionReturnFaceImageJsKey] boolValue]) {
@@ -222,11 +243,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     }
 
     settings.cameraSettings.cameraType = self.cameraType;
-    
-    self.scannedImageDewarped = nil;
+
     self.scannedImageSuccesful = nil;
-    self.scannedImageFace = nil;
-    
+
     // Do not timeout
     settings.scanSettings.partialRecognitionTimeout = 0.0f;
 
@@ -234,32 +253,36 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
 
     // Visit www.microblink.com to get the license key for your app
     settings.licenseSettings.licenseKey = self.licenseKey;
-    
-    
+
+
     /** 3. Set up what is being scanned. See detailed guides for specific use cases. */
-    
+
     /**
      * Add all needed recognizers
      */
-    
+
     if ([self shouldUseUsdlRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self usdlRecognizerSettings]];
     }
-    
+
     if ([self shouldUseMrtdRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self mrtdRecognizerSettings]];
     }
-    
+
     if ([self shouldUseEudlRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self eudlRecognizerSettingsWithCountry:PPEudlCountryAny]];
     }
-    
+
     if ([self shouldUseDocumentFaceRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self documentFaceRecognizerSettings]];
     }
-    
+
     if ([self shouldUseMyKadRecognizer]) {
         [settings.scanSettings addRecognizerSettings:[self myKadRecognizerSettings]];
+    }
+
+    if ([self shouldUseNzdlFrontRecognizer]) {
+        [settings.scanSettings addRecognizerSettings:[self nzdlFrontRecognizerSettings]];
     }
 
     if ([self shouldUsePDF417Recognizer]) {
@@ -267,9 +290,9 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     }
 
     /** 4. Initialize the Scanning Coordinator object */
-    
+
     PPCameraCoordinator *coordinator = [[PPCameraCoordinator alloc] initWithSettings:settings];
-    
+
     return coordinator;
 }
 
@@ -300,22 +323,29 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     // Check if metadata obtained is image. You can set what type of image is outputed by setting different properties of PPMetadataSettings (currently, dewarpedImage is set at line 207)
     if ([metadata isKindOfClass:[PPImageMetadata class]]) {
         PPImageMetadata *imageMetadata = (PPImageMetadata *)metadata;
-        PPImageMetadataType imageMetadataType = imageMetadata.imageType;
-        if (imageMetadataType == PPImageMetadataTypeDewarpedImage && self.shouldReturnFaceImage == YES && [imageMetadata.name isEqualToString:[PPDocumentFaceRecognizerSettings ID_FACE]]) {
-            self.scannedImageFace = imageMetadata.image;
-        }
-        else if (imageMetadataType == PPImageMetadataTypeDewarpedImage && self.shouldReturnCroppedImage == YES) {
-            self.scannedImageDewarped = imageMetadata.image;
-        }
-        else if (imageMetadataType == PPImageMetadataTypeSuccessfulFrame && self.shouldReturnSuccessfulImage == YES) {
-            self.scannedImageSuccesful = imageMetadata.image;
+
+        if ([imageMetadata imageType] == PPImageMetadataTypeSuccessfulFrame && self.shouldReturnSuccessfulImage) {
+            self.scannedImageSuccesful = imageMetadata;
+
+        } else if ([imageMetadata imageType] == PPImageMetadataTypeDewarpedImage) {
+
+            [self setImageMetadata:imageMetadata forName:[PPMrtdRecognizerSettings FULL_DOCUMENT_IMAGE] imageType:PPImageTypeDocument resultClass:[PPMrtdRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPEudlRecognizerSettings FULL_DOCUMENT_IMAGE] imageType:PPImageTypeDocument resultClass:[PPEudlRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPMyKadFrontRecognizerSettings FULL_DOCUMENT_IMAGE] imageType:PPImageTypeDocument resultClass:[PPMyKadFrontRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPNewZealandDLFrontRecognizerSettings FULL_DOCUMENT_IMAGE] imageType:PPImageTypeDocument resultClass:[PPNewZealandDLFrontRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPDocumentFaceRecognizerSettings FULL_DOCUMENT_IMAGE] imageType:PPImageTypeDocument resultClass:[PPDocumentFaceRecognizerResult class]];
+
+            [self setImageMetadata:imageMetadata forName:[PPEudlRecognizerSettings ID_FACE] imageType:PPImageTypeFace resultClass:[PPEudlRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPMyKadFrontRecognizerSettings ID_FACE] imageType:PPImageTypeFace resultClass:[PPMyKadFrontRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPNewZealandDLFrontRecognizerSettings ID_FACE] imageType:PPImageTypeFace resultClass:[PPNewZealandDLFrontRecognizerResult class]];
+            [self setImageMetadata:imageMetadata forName:[PPDocumentFaceRecognizerSettings ID_FACE] imageType:PPImageTypeFace resultClass:[PPDocumentFaceRecognizerResult class]];
         }
     }
 }
 
 - (void)scanningViewController:(UIViewController<PPScanningViewController> *)scanningViewController
               didOutputResults:(NSArray<PPRecognizerResult*> *)results {
-    
+
     // Here you process scanning results. Scanning results are given in the array of PPRecognizerResult objects.
     // first, pause scanning until we process all the results
     [scanningViewController pauseScanning];
@@ -348,19 +378,23 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     return [self.recognizers containsObject:kRecognizerEUDLJsKey];
 }
 
-- (BOOL)shouldUseDocumentFaceRecognizer {
-    return [self.recognizers containsObject:kRecognizerDocumentFaceJsKey];
-}
-
 - (BOOL)shouldUseMyKadRecognizer {
     return [self.recognizers containsObject:kRecognizerMyKadJsKey];
+}
+
+- (BOOL)shouldUseNzdlFrontRecognizer {
+    return [self.recognizers containsObject:kRecognizerNZDLFrontJsKey];
+}
+
+- (BOOL)shouldUseDocumentFaceRecognizer {
+    return [self.recognizers containsObject:kRecognizerDocumentFaceJsKey];
 }
 
 - (BOOL)shouldUsePDF417Recognizer {
     return [self.recognizers containsObject:kRecognizerPDF417JsKey];
 }
 
-#pragma mark - Utils
+#pragma mark - RecognizerResults
 
 - (void)setDictionary:(NSMutableDictionary *)dict withUsdlResult:(PPUsdlRecognizerResult *)usdlResult {
     [dict setObject:[usdlResult getAllStringElements] forKey:kFields];
@@ -374,16 +408,13 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     [dict setObject:stringElements forKey:kFields];
     [dict setObject:[mrtdResult mrzText] forKey:kRaw];
     [dict setObject:kMRTDResultType forKey:kResultType];
+    [self setupDictionary:dict withImagesForResult:mrtdResult];
 }
 
 - (void)setDictionary:(NSMutableDictionary *)dict withEudlRecognizerResult:(PPEudlRecognizerResult *)eudlResult {
     [dict setObject:[eudlResult getAllStringElements] forKey:kFields];
     [dict setObject:kEUDLResultType forKey:kResultType];
-}
-
-- (void)setDictionary:(NSMutableDictionary *)dict withDocumentFaceResult:(PPDocumentFaceRecognizerResult *)documentFaceResult {
-    [dict setObject:[documentFaceResult getAllStringElements] forKey:kFields];
-    [dict setObject:kDocumentFaceResultType forKey:kResultType];
+    [self setupDictionary:dict withImagesForResult:eudlResult];
 }
 
 - (void)setDictionary:(NSMutableDictionary *)dict withMyKadRecognizerResult:(PPMyKadFrontRecognizerResult *)myKadResult {
@@ -391,6 +422,36 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     [stringElements setObject:myKadResult.rawOwnerBirthDate forKey:kMyKadBirthDate];
     [dict setObject:stringElements forKey:kFields];
     [dict setObject:kMyKadResultType forKey:kResultType];
+    [self setupDictionary:dict withImagesForResult:myKadResult];
+}
+
+- (void)setDictionary:(NSMutableDictionary *)dict withNzdlFrontResult:(PPNewZealandDLFrontRecognizerResult *)nzdlFrontResult {
+    NSMutableDictionary *stringElements = [NSMutableDictionary dictionaryWithDictionary:[nzdlFrontResult getAllStringElements]];
+    [stringElements setObject:@([nzdlFrontResult donorIndicator]) forKey:kNZDLFrontDonorIndicator];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = kNZDLDateFormat;
+    dateFormatter.timeZone = [NSTimeZone systemTimeZone];
+
+    if (nzdlFrontResult.dateOfBirth) {
+        [stringElements setObject:[dateFormatter stringFromDate:[nzdlFrontResult dateOfBirth]] forKey:kNZDLFrontDateOfBirth];
+    }
+    if (nzdlFrontResult.issueDate) {
+        [stringElements setObject:[dateFormatter stringFromDate:[nzdlFrontResult issueDate]] forKey:kNZDLFrontIssueDate];
+    }
+    if (nzdlFrontResult.expiryDate) {
+        [stringElements setObject:[dateFormatter stringFromDate:[nzdlFrontResult expiryDate]] forKey:kNZDLFrontExpiryDate];
+    }
+
+    [dict setObject:stringElements forKey:kFields];
+    [dict setObject:kNZDLFrontResultType forKey:kResultType];
+    [self setupDictionary:dict withImagesForResult:nzdlFrontResult];
+}
+
+- (void)setDictionary:(NSMutableDictionary *)dict withDocumentFaceResult:(PPDocumentFaceRecognizerResult *)documentFaceResult {
+    [dict setObject:[documentFaceResult getAllStringElements] forKey:kFields];
+    [dict setObject:kDocumentFaceResultType forKey:kResultType];
+    [self setupDictionary:dict withImagesForResult:documentFaceResult];
 }
 
 - (void)setDictionary:(NSMutableDictionary *)dict withPdf417Result:(PPPdf417RecognizerResult *)pdf417Result {
@@ -402,51 +463,60 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] init];
 
     NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-    
+
     for (PPRecognizerResult *result in results) {
-        
+
         if ([result isKindOfClass:[PPUsdlRecognizerResult class]]) {
             PPUsdlRecognizerResult *usdlResult = (PPUsdlRecognizerResult *)result;
-            
+
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withUsdlResult:usdlResult];
-            
+
             [resultArray addObject:dict];
         }
-        
+
         if ([result isKindOfClass:[PPMrtdRecognizerResult class]]) {
             PPMrtdRecognizerResult *mrtdDecoderResult = (PPMrtdRecognizerResult *)result;
-            
+
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withMrtdRecognizerResult:mrtdDecoderResult];
-            
+
             [resultArray addObject:dict];
         }
-        
+
         if ([result isKindOfClass:[PPEudlRecognizerResult class]]) {
             PPEudlRecognizerResult *eudlDecoderResult = (PPEudlRecognizerResult *)result;
-            
+
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withEudlRecognizerResult:eudlDecoderResult];
-            
+
             [resultArray addObject:dict];
         }
-        
-        if ([result isKindOfClass:[PPDocumentFaceRecognizerResult class]]) {
-            PPDocumentFaceRecognizerResult *documentFaceResult = (PPDocumentFaceRecognizerResult *)result;
-            
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            [self setDictionary:dict withDocumentFaceResult:documentFaceResult];
-            
-            [resultArray addObject:dict];
-        }
-        
+
         if ([result isKindOfClass:[PPMyKadFrontRecognizerResult class]]) {
             PPMyKadFrontRecognizerResult *myKadDecoderResult = (PPMyKadFrontRecognizerResult *)result;
-            
+
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [self setDictionary:dict withMyKadRecognizerResult:myKadDecoderResult];
-            
+
+            [resultArray addObject:dict];
+        }
+
+        if ([result isKindOfClass:[PPNewZealandDLFrontRecognizerResult class]]) {
+            PPNewZealandDLFrontRecognizerResult *nzdlFrontResult = (PPNewZealandDLFrontRecognizerResult *)result;
+
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [self setDictionary:dict withNzdlFrontResult:nzdlFrontResult];
+
+            [resultArray addObject:dict];
+        }
+
+        if ([result isKindOfClass:[PPDocumentFaceRecognizerResult class]]) {
+            PPDocumentFaceRecognizerResult *documentFaceResult = (PPDocumentFaceRecognizerResult *)result;
+
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [self setDictionary:dict withDocumentFaceResult:documentFaceResult];
+
             [resultArray addObject:dict];
         }
 
@@ -459,156 +529,279 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
             [resultArray addObject:dict];
         }
     }
-    
+
     if ([resultArray count] > 0) {
         [resultDict setObject:resultArray forKey:kResultList];
     }
 
-    NSMutableDictionary* images = [NSMutableDictionary dictionary];
-    if (self.scannedImageDewarped && self.shouldReturnCroppedImage) {
-        [images setObject:[self exportImage:self.scannedImageDewarped] forKey:kResultImageCropped];
-    }
+    [self setupDictionary:resultDict withImageMetadata:self.scannedImageSuccesful resultKey:kResultImageSuccessful];
 
-    if (self.scannedImageSuccesful && self.shouldReturnSuccessfulImage) {
-        [images setObject:[self exportImage:self.scannedImageSuccesful] forKey:kResultImageSuccessful];
-    }
-
-    if (self.scannedImageFace && self.shouldReturnFaceImage) {
-        [images setObject:[self exportImage:self.scannedImageFace] forKey:kResultImageFace];
-    }
-
-    [resultDict setObject:[NSDictionary dictionaryWithDictionary:images] forKey:kResultImages];
     [self finishWithScanningResults:resultDict];
 }
 
-- (void) reset {
+#pragma mark - Utils
+
+- (void)setupDictionary:(NSMutableDictionary *)dict withImageMetadata:(PPImageMetadata *)imageMetadata resultKey:(NSString *)resultKey {
+
+    if (imageMetadata == nil) return;
+    if (imageMetadata.image == nil) return;
+
+    [dict setObject:[self exportImage:imageMetadata.image] forKey:resultKey];
+}
+
+- (void)setupDictionary:(NSMutableDictionary *)dict withImagesForResult:(PPRecognizerResult *)result {
+    NSDictionary *metadatas = [self.imageMetadatas objectForKey:NSStringFromClass([result class])];
+
+    [metadatas enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        switch ([key intValue]) {
+            case PPImageTypeFace:
+                [self setupDictionary:dict withImageMetadata:obj resultKey:kResultImageFace];
+                break;
+            case PPImageTypeDocument:
+                [self setupDictionary:dict withImageMetadata:obj resultKey:kResultImageDocument];
+                break;
+        }
+    }];
+}
+
+- (void)setImageMetadata:(PPImageMetadata *)metadata forName:(NSString *)name imageType:(PPImageType)type resultClass:(Class)result {
+    if ([[metadata name] isEqualToString:name]) {
+        NSMutableDictionary *dict = [self.imageMetadatas objectForKey:NSStringFromClass(result)];
+        [dict setObject:metadata forKey:@(type)];
+    }
+}
+
+- (NSMutableDictionary *)getInitializedImagesDictionaryForClass:(Class)klass {
+    NSMutableDictionary *dict = [self.imageMetadatas objectForKey:NSStringFromClass(klass)];
+    if (dict != nil) {
+        return dict;
+    }
+
+    NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+    [self.imageMetadatas setObject:newDict forKey:NSStringFromClass(klass)];
+    return newDict;
+}
+
+- (NSDictionary*)exportImage:(UIImage*)image {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
+    NSMutableDictionary* imageInfo = [NSMutableDictionary dictionary];
+    NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [imageInfo setObject:@(image.size.width) forKey:kWidth];
+    [imageInfo setObject:@(image.size.height) forKey:kHeight];
+    [imageInfo setObject:encodedImage forKey:kBase64];
+    return [NSDictionary dictionaryWithDictionary:imageInfo];
+}
+
+- (UIViewController*) getRootViewController {
+    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+
+    return rootViewController;
+}
+
+- (void)reset {
     self.promiseResolve = nil;
     self.promiseReject = nil;
     self.options = nil;
 }
 
 
-- (void) dismissScanningView {
+- (void)dismissScanningView {
     [self reset];
     [[self getRootViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) finishWithScanningResults:(NSDictionary*) results {
+- (void)finishWithScanningResults:(NSDictionary*) results {
     if (self.promiseResolve && results) {
         self.promiseResolve(results);
     }
-    
+
     [self dismissScanningView];
 }
 
-- (UIViewController*) getRootViewController {
-    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    
-    return rootViewController;
-}
-
-- (PPMrtdRecognizerSettings *)mrtdRecognizerSettings {
-    
-    PPMrtdRecognizerSettings *mrtdRecognizerSettings = [[PPMrtdRecognizerSettings alloc] init];
-    
-    /********* All recognizer settings are set to their default values. Change accordingly. *********/
-    
-    
-    // Setting this will give you the chance to parse MRZ result, if Mrtd recognizer wasn't
-    // successful in parsing (this can happen since MRZ isn't always formatted accoring to ICAO Document 9303 standard.
-    // @see http://www.icao.int/Security/mrtd/pages/Document9303.aspx
-    mrtdRecognizerSettings.allowUnparsedResults = NO;
-    
-    // This property is useful if you're at the same time obtaining Dewarped image metadata, since it allows you to obtain dewarped and
-    // cropped
-    // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
-    // as PPImageMetadata objects with name @"MRTD"
-    
-    mrtdRecognizerSettings.dewarpFullDocument = self.shouldReturnCroppedImage;
-
-    return mrtdRecognizerSettings;
-}
-
-
-- (PPEudlRecognizerSettings *)eudlRecognizerSettingsWithCountry:(PPEudlCountry)country {
-    
-    PPEudlRecognizerSettings *eudlRecognizerSettings = [[PPEudlRecognizerSettings alloc] initWithEudlCountry:country];
-    
-    /********* All recognizer settings are set to their default values. Change accordingly. *********/
-    
-    /**
-     * If YES, document issue date will be extracted
-     * Set this to NO if youre not interested in this data to speed up the scanning process!
-     */
-    eudlRecognizerSettings.extractIssueDate = YES;
-    
-    /**
-     * If YES, document expiry date will be extracted
-     * Set this to NO if youre not interested in this data to speed up the scanning process!
-     */
-    eudlRecognizerSettings.extractExpiryDate = YES;
-    
-    /**
-     * If YES, owner's address will be extracted
-     * Set this to NO if youre not interested in this data to speed up the scanning process!
-     */
-    eudlRecognizerSettings.extractAddress = YES;
-    
-    // This property is useful if you're at the same time obtaining Dewarped image metadata, since it allows you to obtain dewarped and
-    // cropped
-    // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
-    // as PPImageMetadata objects with name @"MRTD"
-    
-    eudlRecognizerSettings.showFullDocument = self.shouldReturnCroppedImage;
-    
-    return eudlRecognizerSettings;
-}
+#pragma mark - RecognizerSettings
 
 - (PPUsdlRecognizerSettings *)usdlRecognizerSettings {
-    
+
     PPUsdlRecognizerSettings *usdlRecognizerSettings = [[PPUsdlRecognizerSettings alloc] init];
-    
+
     /********* All recognizer settings are set to their default values. Change accordingly. *********/
-    
+
     /**
      * Set this to YES to scan even barcode not compliant with standards
      * For example, malformed PDF417 barcodes which were incorrectly encoded
      * Use only if necessary because it slows down the recognition process
      */
     usdlRecognizerSettings.scanUncertain = NO;
-    
+
     /**
      * Set this to YES to scan barcodes which don't have quiet zone (white area) around it
      * Disable if you need a slight speed boost
      */
     usdlRecognizerSettings.allowNullQuietZone = YES;
-    
+
     return usdlRecognizerSettings;
 }
 
-- (PPDocumentFaceRecognizerSettings *)documentFaceRecognizerSettings {
-    
-    PPDocumentFaceRecognizerSettings *documentFaceReconizerSettings = [[PPDocumentFaceRecognizerSettings alloc] init];
-    
+- (PPMrtdRecognizerSettings *)mrtdRecognizerSettings {
+
+    PPMrtdRecognizerSettings *mrtdRecognizerSettings = [[PPMrtdRecognizerSettings alloc] init];
+
+    /********* All recognizer settings are set to their default values. Change accordingly. *********/
+
+
+    // Setting this will give you the chance to parse MRZ result, if Mrtd recognizer wasn't
+    // successful in parsing (this can happen since MRZ isn't always formatted accoring to ICAO Document 9303 standard.
+    // @see http://www.icao.int/Security/mrtd/pages/Document9303.aspx
+    mrtdRecognizerSettings.allowUnparsedResults = NO;
+
     // This property is useful if you're at the same time obtaining Dewarped image metadata, since it allows you to obtain dewarped and
     // cropped
     // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
     // as PPImageMetadata objects with name @"MRTD"
-    
-    documentFaceReconizerSettings.returnFaceImage = self.shouldReturnFaceImage;
 
-    documentFaceReconizerSettings.returnFullDocument = self.shouldReturnCroppedImage;
-    
-    return documentFaceReconizerSettings;
+    // Setup returning document image
+
+    if ([self shouldReturnDocumentImage]) {
+        mrtdRecognizerSettings.dewarpFullDocument = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPMrtdRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeDocument)];
+    }
+    return mrtdRecognizerSettings;
+}
+
+- (PPEudlRecognizerSettings *)eudlRecognizerSettingsWithCountry:(PPEudlCountry)country {
+
+    PPEudlRecognizerSettings *eudlRecognizerSettings = [[PPEudlRecognizerSettings alloc] initWithEudlCountry:country];
+
+    /********* All recognizer settings are set to their default values. Change accordingly. *********/
+
+    /**
+     * If YES, document issue date will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    eudlRecognizerSettings.extractIssueDate = YES;
+
+    /**
+     * If YES, document expiry date will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    eudlRecognizerSettings.extractExpiryDate = YES;
+
+    /**
+     * If YES, owner's address will be extracted
+     * Set this to NO if youre not interested in this data to speed up the scanning process!
+     */
+    eudlRecognizerSettings.extractAddress = YES;
+
+    // This property is useful if you're at the same time obtaining Dewarped image metadata, since it allows you to obtain dewarped and
+    // cropped
+    // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
+    // as PPImageMetadata objects with name @"MRTD"
+
+    // Setup returning document image
+
+    if ([self shouldReturnDocumentImage]) {
+        eudlRecognizerSettings.showFullDocument = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPEudlRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeDocument)];
+    }
+
+    // Setup returning face image
+
+    if ([self shouldReturnFaceImage]) {
+        eudlRecognizerSettings.showFaceImage = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPEudlRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeFace)];
+    }
+
+    return eudlRecognizerSettings;
 }
 
 - (PPMyKadFrontRecognizerSettings *)myKadRecognizerSettings {
-    
+
     PPMyKadFrontRecognizerSettings *myKadRecognizerSettings = [[PPMyKadFrontRecognizerSettings alloc] init];
-    
-    myKadRecognizerSettings.showFullDocument = self.shouldReturnCroppedImage;
-    
+
+    // Setup returning document image
+
+    if ([self shouldReturnDocumentImage]) {
+        myKadRecognizerSettings.showFullDocument = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPMyKadFrontRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeDocument)];
+    }
+
+    // Setup returning face image
+
+    if ([self shouldReturnFaceImage]) {
+        myKadRecognizerSettings.showFaceImage = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPMyKadFrontRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeFace)];
+    }
+
     return myKadRecognizerSettings;
+}
+
+- (PPNewZealandDLFrontRecognizerSettings *)nzdlFrontRecognizerSettings {
+
+    PPNewZealandDLFrontRecognizerSettings *nzdlFrontRecognizerSettings = [[PPNewZealandDLFrontRecognizerSettings alloc] init];
+
+    /********* All recognizer settings are set to their default values. Change accordingly. *********/
+
+
+    // Setup returning document image
+
+    if ([self shouldReturnDocumentImage]) {
+        nzdlFrontRecognizerSettings.displayFullDocumentImage = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPNewZealandDLFrontRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeDocument)];
+    }
+
+    // Setup returning face image
+
+    if ([self shouldReturnFaceImage]) {
+        nzdlFrontRecognizerSettings.displayFacePhoto = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPNewZealandDLFrontRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeFace)];
+    }
+
+
+    return nzdlFrontRecognizerSettings;
+}
+
+- (PPDocumentFaceRecognizerSettings *)documentFaceRecognizerSettings {
+
+    PPDocumentFaceRecognizerSettings *documentFaceReconizerSettings = [[PPDocumentFaceRecognizerSettings alloc] init];
+
+    // This property is useful if you're at the same time obtaining Dewarped image metadata, since it allows you to obtain dewarped and
+    // cropped
+    // images of MRTD documents. Dewarped images are returned to scanningViewController:didOutputMetadata: callback,
+    // as PPImageMetadata objects with name @"MRTD"
+
+    // Setup returning document image
+
+    if ([self shouldReturnDocumentImage]) {
+        documentFaceReconizerSettings.returnFullDocument = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPDocumentFaceRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeDocument)];
+    }
+
+    // Setup returning face image
+
+    if ([self shouldReturnFaceImage]) {
+        documentFaceReconizerSettings.returnFaceImage = YES;
+
+        NSMutableDictionary *dict = [self getInitializedImagesDictionaryForClass:[PPDocumentFaceRecognizerResult class]];
+        [dict setObject:[NSNull null] forKey:@(PPImageTypeFace)];
+    }
+
+    return documentFaceReconizerSettings;
 }
 
 - (PPPdf417RecognizerSettings *)pdf417RecognizerSettings {
@@ -631,16 +824,6 @@ RCT_REMAP_METHOD(scan, scan:(NSString *)key withOptions:(NSDictionary*)scanOptio
     pdf417RecognizerSettings.allowNullQuietZone = YES;
 
     return pdf417RecognizerSettings;
-}
-
-- (NSDictionary*) exportImage:(UIImage*)image {
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
-    NSMutableDictionary* imageInfo = [NSMutableDictionary dictionary];
-    NSString *encodedImage = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [imageInfo setObject:@(image.size.width) forKey:@"width"];
-    [imageInfo setObject:@(image.size.height) forKey:@"height"];
-    [imageInfo setObject:encodedImage forKey:@"base64"];
-    return [NSDictionary dictionaryWithDictionary:imageInfo];
 }
 
 @end
