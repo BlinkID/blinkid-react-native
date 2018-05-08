@@ -201,6 +201,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         // default is false, which means that as soon as first barcode is found (no matter which type)
         // its contents will be returned.
         recognitionSettings.setAllowMultipleScanResultsOnSingleImage(true);
+        recognitionSettings.setNumMsBeforeTimeout(60_000);
 
         // create scan intent fore ScanCard activity
         Intent scanIntent = new Intent(currentActivity, ScanCard.class);
@@ -641,18 +642,18 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
         if (image == null) {
             return null;
         }
-        Bitmap imageBmp = image.convertToBitmap();
-        if (imageBmp != null) {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            boolean success = imageBmp.compress(Bitmap.CompressFormat.JPEG, COMPRESSED_IMAGE_QUALITY, byteArrayOutputStream);
-            if (success) {
-                return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
-            }
-            try {
+        try {
+            Bitmap imageBmp = image.convertToBitmap();
+            if (imageBmp != null) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                boolean success = imageBmp.compress(Bitmap.CompressFormat.JPEG, COMPRESSED_IMAGE_QUALITY, byteArrayOutputStream);
+                if (success) {
+                    return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+                }
                 byteArrayOutputStream.close();
-            } catch (IOException ignorable) {
             }
-        }
+
+        } catch (Exception ignore) {}
         return null;
     }
 
