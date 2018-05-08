@@ -56,7 +56,6 @@ static NSString* const kOptionUseFrontCameraJsKey = @"useFrontCamera";
 static NSString* const kOptionReturnDocumentImageJsKey = @"shouldReturnDocumentImage";
 static NSString* const kOptionShouldReturnSuccessfulImageJsKey = @"shouldReturnSuccessfulImage";
 static NSString* const kOptionReturnFaceImageJsKey = @"shouldReturnFaceImage";
-static NSString* const kOptionQuality = @"quality";
 static NSString* const kRecognizersArrayJsKey = @"recognizers";
 
 // js keys for recognizer types
