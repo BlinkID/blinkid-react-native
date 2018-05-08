@@ -142,7 +142,7 @@ import {
 
 const licenseKey = Platform.select({
       // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-      ios: 'E2ONP7QK-SGLUN3RH-YIEFNMOT-Q23AMHC6-U7EIRDKV-ZZJO73HG-3ZOUG574-VLZMR3HC',
+      ios: 'JGB6SUY2-MH7ZOUKB-L7UA7GP5-L3TYCFZQ-I3XGO774-UL225CKU-EOYRYXVH-ZCEPUZN4',
       // android license key for applicationID: com.blinkidreactnative
       android: 'JMXSJB6V-B3JBFNNF-DJWHC444-YZDHLI2P-P6XYVQNJ-TCWNIMXP-5U4F5RZY-L3DU6TK3'
 })
