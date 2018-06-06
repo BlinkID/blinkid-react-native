@@ -1,20 +1,21 @@
-package com.microblink.reactnative.blinkid;
+package com.microblink.reactnative;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
+import com.microblink.reactnative.MicroblinkModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BlinkIDReactPackage implements ReactPackage {
+public class MicroblinkReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> nativeModules = new ArrayList<>();
-        nativeModules.add(new BlinkIDModule(reactContext));
+        nativeModules.add(new MicroblinkModule(reactContext));
         return nativeModules;
     }
 

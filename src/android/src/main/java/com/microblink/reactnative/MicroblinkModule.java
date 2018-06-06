@@ -1,4 +1,4 @@
-package com.microblink.reactnative.blinkid;
+package com.microblink.reactnative;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +25,7 @@ import com.microblink.hardware.camera.CameraType;
 import com.microblink.image.Image;
 import com.microblink.image.ImageListener;
 import com.microblink.metadata.MetadataSettings;
+import com.microblink.reactnative.blinkid.R;
 import com.microblink.recognizers.BaseRecognitionResult;
 import com.microblink.recognizers.IResultHolder;
 import com.microblink.recognizers.RecognitionResults;
@@ -58,7 +59,7 @@ import java.util.Map;
 /**
  * React Native module for BlinkID.
  */
-public class BlinkIDModule extends ReactContextBaseJavaModule {
+public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     // promise reject message codes
     private static final String ERROR_ACTIVITY_DOES_NOT_EXIST = "ERROR_ACTIVITY_DOES_NOT_EXIST";
@@ -127,7 +128,7 @@ public class BlinkIDModule extends ReactContextBaseJavaModule {
     private static Map<String, Class<? extends BaseRecognitionResult>>
             sFaceImageResultTypes = new HashMap<>();
 
-    public BlinkIDModule(ReactApplicationContext reactContext) {
+    public MicroblinkModule(ReactApplicationContext reactContext) {
         super(reactContext);
 
         // Add the listener for `onActivityResult`
