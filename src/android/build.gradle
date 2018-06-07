@@ -19,7 +19,8 @@ android {
 repositories {
     jcenter()
     mavenCentral()
-    maven { url 'http://maven.microblink.com' }
+//    maven { url 'http://maven.microblink.com' }
+    mavenLocal()
 }
 
 dependencies {
