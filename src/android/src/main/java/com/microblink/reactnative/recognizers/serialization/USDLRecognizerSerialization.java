@@ -14,7 +14,14 @@ import com.microblink.reactnative.recognizers.SerializationUtils;
 public final class USDLRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        return null;
+        com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer();
+        if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
+            recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
+        }
+        if (jsonRecognizer.hasKey("uncertainDecoding")) {
+            recognizer.setUncertainDecoding(jsonRecognizer.getBoolean("uncertainDecoding"));
+        }
+        return recognizer;
     }
 
     @Override
