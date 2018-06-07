@@ -2,6 +2,8 @@
 
 import { Platform, NativeModules } from 'react-native';
 
+import { RecognizerResultState } from './recognizer'
+
 const BlinkIDNative = Platform.select({
       ios: NativeModules.BlinkIDIOS,
       android: NativeModules.BlinkIDAndroid
@@ -17,24 +19,36 @@ const BlinkIDNative = Platform.select({
  *                       valid license key, please visit http://microblink.com/login or
  *                       contact us at http://help.microblink.com
  */
-export default class BlinkID {
-      static async scanWithCamera(overlaySettings, recognizerCollection, licenseKey) {
+class BlinkIDWrapper {
+      async scanWithCamera(overlaySettings, recognizerCollection, licenseKey) {
             try {
                   const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
                   if (nativeResults.length != recognizerCollection.recognizerArray.length) {
                         console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
+                        return [];
                   } else {
+                        let results = [];
                         for (let i = 0; i < nativeResults.length; ++i) {
                               // native plugin must ensure types match
-                              recognizerCollection.recognizerArray[i] = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+                              // recognizerCollection.recognizerArray[i].result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+
+                              // unlike Cordova, ReactNative does not allow mutation of user-provided recognizers, so we need to 
+                              // return results and let user handle them manually.
+                              let result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+                              if (result.resultState != RecognizerResultState.empty) {
+                                    results.push(result);
+                              }      
                         }
+                        return results;
                   }
-                  return true;
             } catch (error) {
-                  return false;
+                  console.log(error);
+                  return [];
             }
       }
 }
+
+export var BlinkID = new BlinkIDWrapper();
 
 import { Recognizer } from './recognizer'
 
