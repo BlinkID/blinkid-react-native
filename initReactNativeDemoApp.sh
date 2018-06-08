@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current_path=$(pwd)
+blink_id_plugin_path=`pwd`/BlinkID
 
 # remove any existing code
 rm -rf BlinkIDReactNative
@@ -21,7 +21,7 @@ else
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
   pushd node_modules
-    ln -s $current_path blinkid-react-native
+    ln -s $blink_id_plugin_path blinkid-react-native
   popd
 fi
 
