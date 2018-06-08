@@ -4,9 +4,9 @@ import { Platform, NativeModules } from 'react-native';
 
 import { RecognizerResultState } from './recognizer'
 
-const BlinkIDNative = Platform.select({
-      ios: NativeModules.BlinkIDIOS,
-      android: NativeModules.BlinkIDAndroid
+const BlinkIdNative = Platform.select({
+      ios: NativeModules.BlinkIdIos,
+      android: NativeModules.BlinkIdAndroid
 })
 
 /**
@@ -22,7 +22,9 @@ const BlinkIDNative = Platform.select({
 class BlinkIDWrapper {
       async scanWithCamera(overlaySettings, recognizerCollection, licenseKey) {
             try {
-                  const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
+                  var bla = NativeModules;
+                  console.log(bla);
+                  const nativeResults = await BlinkIdNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
                   if (nativeResults.length != recognizerCollection.recognizerArray.length) {
                         console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
                         return [];

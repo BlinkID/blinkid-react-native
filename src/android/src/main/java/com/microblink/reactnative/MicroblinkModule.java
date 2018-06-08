@@ -47,7 +47,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "BlinkIDAndroid";
+        return "BlinkIdAndroid";
     }
 
     @ReactMethod

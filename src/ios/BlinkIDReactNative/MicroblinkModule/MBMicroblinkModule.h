@@ -8,7 +8,7 @@
 
 #import <React/RCTBridgeModule.h>
 
-@interface BlinkIDReactNative : NSObject<RCTBridgeModule>
+@interface MBMicroblinkModule : NSObject<RCTBridgeModule>
 
 
 @end
