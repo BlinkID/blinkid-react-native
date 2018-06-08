@@ -7,8 +7,6 @@ export class Recognizer {
     constructor(recognizerType) {
           /** Type of recognizer */
           this.recognizerType = recognizerType;
-          /** Recognizer's result */
-          this.result = null;
     }
 }
 
