@@ -4,9 +4,9 @@ import { Platform, NativeModules } from 'react-native';
 
 import { RecognizerResultState } from './recognizer'
 
-const BlinkIdNative = Platform.select({
-      ios: NativeModules.BlinkIdIos,
-      android: NativeModules.BlinkIdAndroid
+const BlinkIDNative = Platform.select({
+      ios: NativeModules.BlinkIDIos,
+      android: NativeModules.BlinkIDAndroid
 })
 
 /**
@@ -24,7 +24,7 @@ class BlinkIDWrapper {
             try {
                   var bla = NativeModules;
                   console.log(bla);
-                  const nativeResults = await BlinkIdNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
+                  const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
                   if (nativeResults.length != recognizerCollection.recognizerArray.length) {
                         console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
                         return [];
@@ -95,5 +95,64 @@ export * from './overlays/barcodeOverlays'
 export * from './overlays/blinkidOverlays'
 
 // export recognizers that can be used and their results
-export * from './recognizers/mrtdRecognizer'
+export * from './recognizers/australiaDLBackSideRecognizer'
+export * from './recognizers/australiaDLFrontSideRecognizer'
+export * from './recognizers/austriaCombinedRecognizer'
+export * from './recognizers/austriaIDBackSideRecognizer'
+export * from './recognizers/austriaIDFrontSideRecognizer'
+export * from './recognizers/austriaPassportRecognizer'
+export * from './recognizers/barcodeRecognizer'
+export * from './recognizers/colombiaIDBackSideRecognizer'
+export * from './recognizers/colombiaIDFrontSideRecognizer'
+export * from './recognizers/croatiaCombinedRecognizer'
+export * from './recognizers/croatiaIDBackSideRecognizer'
+export * from './recognizers/croatiaIDFrontSideRecognizer'
+export * from './recognizers/czechiaCombinedRecognizer'
+export * from './recognizers/czechiaIDBackSideRecognizer'
+export * from './recognizers/czechiaIDFrontSideRecognizer'
+export * from './recognizers/documentFaceRecognizer'
+export * from './recognizers/eUDLRecognizer'
+export * from './recognizers/egyptIDFrontRecognizer'
+export * from './recognizers/germanyCombinedRecognizer'
+export * from './recognizers/germanyIDBackSideRecognizer'
+export * from './recognizers/germanyIDFrontSideRecognizer'
+export * from './recognizers/germanyOldIDRecognizer'
+export * from './recognizers/germanyPassportRecognizer'
+export * from './recognizers/hongKongIDFrontRecognizer'
+export * from './recognizers/iKadRecognizer'
+export * from './recognizers/indonesiaIDFrontRecognizer'
+export * from './recognizers/jordanCombinedRecognizer'
+export * from './recognizers/jordanIDBackRecognizer'
+export * from './recognizers/jordanIDFrontRecognizer'
+export * from './recognizers/mRTDCombinedRecognizer'
+export * from './recognizers/mRTDRecognizer'
+export * from './recognizers/malaysiaDLFrontRecognizer'
+export * from './recognizers/myKadBackRecognizer'
+export * from './recognizers/myKadFrontRecognizer'
+export * from './recognizers/myTenteraRecognizer'
+export * from './recognizers/newZealandDLFrontRecognizer'
+export * from './recognizers/pdf417Recognizer'
+export * from './recognizers/polandCombinedRecognizer'
+export * from './recognizers/polandIDBackSideRecognizer'
+export * from './recognizers/polandIDFrontSideRecognizer'
+export * from './recognizers/romaniaIDFrontRecognizer'
+export * from './recognizers/serbiaCombinedRecognizer'
+export * from './recognizers/serbiaIDBackRecognizer'
+export * from './recognizers/serbiaIDFrontRecognizer'
+export * from './recognizers/simNumberRecognizer'
+export * from './recognizers/singaporeCombinedRecognizer'
+export * from './recognizers/singaporeIDBackRecognizer'
+export * from './recognizers/singaporeIDFrontRecognizer'
+export * from './recognizers/slovakiaCombinedRecognizer'
+export * from './recognizers/slovakiaIDBackRecognizer'
+export * from './recognizers/slovakiaIDFrontRecognizer'
+export * from './recognizers/sloveniaCombinedRecognizer'
+export * from './recognizers/sloveniaIDBackRecognizer'
+export * from './recognizers/sloveniaIDFrontRecognizer'
+export * from './recognizers/switzerlandIDBackRecognizer'
+export * from './recognizers/switzerlandIDFrontRecognizer'
+export * from './recognizers/switzerlandPassportRecognizer'
+export * from './recognizers/unitedArabEmiratesIDBackRecognizer'
+export * from './recognizers/unitedArabEmiratesIDFrontRecognizer'
+export * from './recognizers/vinRecognizer'
 export * from './recognizers/usdlRecognizer'

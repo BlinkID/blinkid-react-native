@@ -1,4 +1,4 @@
-package com.microblink.reactnative.recognizers;
+package com.microblink.reactnative.recognizers.serialization;
 
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;

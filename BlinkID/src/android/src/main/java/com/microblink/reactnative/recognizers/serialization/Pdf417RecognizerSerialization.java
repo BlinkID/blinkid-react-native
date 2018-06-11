@@ -1,19 +1,18 @@
 package com.microblink.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.USDLKeys;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class USDLRecognizerSerialization implements RecognizerSerialization {
+public final class Pdf417RecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer();
+        com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer();
+        if (jsonRecognizer.hasKey("inverseScanning")) {
+            recognizer.setInverseScanning(jsonRecognizer.getBoolean("inverseScanning"));
+        }
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
         }
@@ -25,32 +24,23 @@ public final class USDLRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        USDLRecognizer.Result result = ((USDLRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer.Result result = ((com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putArray("optionalElements", SerializationUtils.serializeStringArray(result.getOptionalElements()));
+        jsonResult.putInt("barcodeFormat", SerializationUtils.serializeEnum(result.getBarcodeFormat()));
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
-        jsonResult.putString("rawStringData", result.getRawStringData());
+        jsonResult.putString("stringData", result.getStringData());
         jsonResult.putBoolean("uncertain", result.isUncertain());
-        jsonResult.putArray("fields", serializeFields(result));
         return jsonResult;
-    }
-
-    private WritableArray serializeFields(USDLRecognizer.Result result) {
-        WritableArray fieldsArr = new WritableNativeArray();
-        for (int i = 0; i < USDLKeys.values().length; ++i) {
-            fieldsArr.pushString(result.getField(USDLKeys.values()[i]));
-        }
-        return fieldsArr;
     }
 
     @Override
     public String getJsonName() {
-        return "USDLRecognizer";
+        return "Pdf417Recognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer.class;
+        return com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer.class;
     }
 }

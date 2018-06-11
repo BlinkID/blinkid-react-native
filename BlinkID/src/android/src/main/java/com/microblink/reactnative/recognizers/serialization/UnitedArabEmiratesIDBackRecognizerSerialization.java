@@ -6,49 +6,36 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MRTDRecognizerSerialization implements RecognizerSerialization {
+public final class UnitedArabEmiratesIDBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer();
-        if (jsonRecognizer.hasKey("allowUnparsedResults")) {
-            recognizer.setAllowUnparsedResults(jsonRecognizer.getBoolean("allowUnparsedResults"));
-        }
-        if (jsonRecognizer.hasKey("allowUnverifiedResults")) {
-            recognizer.setAllowUnverifiedResults(jsonRecognizer.getBoolean("allowUnverifiedResults"));
-        }
+        com.microblink.entities.recognizers.blinkid.unitedArabEmirates.UnitedArabEmiratesIDBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.unitedArabEmirates.UnitedArabEmiratesIDBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
-        if (jsonRecognizer.hasKey("returnMRZImage")) {
-            recognizer.setReturnMRZImage(jsonRecognizer.getBoolean("returnMRZImage"));
-        }
-        if (jsonRecognizer.hasKey("saveImageDPI")) {
-            recognizer.setSaveImageDPI(jsonRecognizer.getInt("saveImageDPI"));
-        }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.unitedArabEmirates.UnitedArabEmiratesIDBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.unitedArabEmirates.UnitedArabEmiratesIDBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("MRZResult", BlinkIDSerializationUtils.serializeMRZResult(result.getMRZResult()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("mrzImage", SerializationUtils.encodeImageBase64(result.getMrzImage()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "MRTDRecognizer";
+        return "UnitedArabEmiratesIDBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.unitedArabEmirates.UnitedArabEmiratesIDBackRecognizer.class;
     }
 }

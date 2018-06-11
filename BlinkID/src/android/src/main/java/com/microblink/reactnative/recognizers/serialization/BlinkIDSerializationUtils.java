@@ -1,4 +1,4 @@
-package com.microblink.reactnative.recognizers;
+package com.microblink.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;

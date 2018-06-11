@@ -22,8 +22,68 @@ public enum RecognizerSerializers {
     }
 
     RecognizerSerializers() {
+        registerMapping(new AustraliaDLBackSideRecognizerSerialization());
+        registerMapping(new AustraliaDLFrontSideRecognizerSerialization());
+        registerMapping(new AustriaCombinedRecognizerSerialization());
+        registerMapping(new AustriaIDBackSideRecognizerSerialization());
+        registerMapping(new AustriaIDFrontSideRecognizerSerialization());
+        registerMapping(new AustriaPassportRecognizerSerialization());
+        registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new ColombiaIDBackSideRecognizerSerialization());
+        registerMapping(new ColombiaIDFrontSideRecognizerSerialization());
+        registerMapping(new CroatiaCombinedRecognizerSerialization());
+        registerMapping(new CroatiaIDBackSideRecognizerSerialization());
+        registerMapping(new CroatiaIDFrontSideRecognizerSerialization());
+        registerMapping(new CzechiaCombinedRecognizerSerialization());
+        registerMapping(new CzechiaIDBackSideRecognizerSerialization());
+        registerMapping(new CzechiaIDFrontSideRecognizerSerialization());
+        registerMapping(new DocumentFaceRecognizerSerialization());
+        registerMapping(new EUDLRecognizerSerialization());
+        registerMapping(new EgyptIDFrontRecognizerSerialization());
+        registerMapping(new GermanyCombinedRecognizerSerialization());
+        registerMapping(new GermanyIDBackSideRecognizerSerialization());
+        registerMapping(new GermanyIDFrontSideRecognizerSerialization());
+        registerMapping(new GermanyOldIDRecognizerSerialization());
+        registerMapping(new GermanyPassportRecognizerSerialization());
+        registerMapping(new HongKongIDFrontRecognizerSerialization());
+        registerMapping(new IKadRecognizerSerialization());
+        registerMapping(new IndonesiaIDFrontRecognizerSerialization());
+        registerMapping(new JordanCombinedRecognizerSerialization());
+        registerMapping(new JordanIDBackRecognizerSerialization());
+        registerMapping(new JordanIDFrontRecognizerSerialization());
+        registerMapping(new MRTDCombinedRecognizerSerialization());
         registerMapping(new MRTDRecognizerSerialization());
+        registerMapping(new MalaysiaDLFrontRecognizerSerialization());
+        registerMapping(new MyKadBackRecognizerSerialization());
+        registerMapping(new MyKadFrontRecognizerSerialization());
+        registerMapping(new MyTenteraRecognizerSerialization());
+        registerMapping(new NewZealandDLFrontRecognizerSerialization());
+        registerMapping(new Pdf417RecognizerSerialization());
+        registerMapping(new PolandCombinedRecognizerSerialization());
+        registerMapping(new PolandIDBackSideRecognizerSerialization());
+        registerMapping(new PolandIDFrontSideRecognizerSerialization());
+        registerMapping(new RomaniaIDFrontRecognizerSerialization());
+        registerMapping(new SerbiaCombinedRecognizerSerialization());
+        registerMapping(new SerbiaIDBackRecognizerSerialization());
+        registerMapping(new SerbiaIDFrontRecognizerSerialization());
+        registerMapping(new SimNumberRecognizerSerialization());
+        registerMapping(new SingaporeCombinedRecognizerSerialization());
+        registerMapping(new SingaporeIDBackRecognizerSerialization());
+        registerMapping(new SingaporeIDFrontRecognizerSerialization());
+        registerMapping(new SlovakiaCombinedRecognizerSerialization());
+        registerMapping(new SlovakiaIDBackRecognizerSerialization());
+        registerMapping(new SlovakiaIDFrontRecognizerSerialization());
+        registerMapping(new SloveniaCombinedRecognizerSerialization());
+        registerMapping(new SloveniaIDBackRecognizerSerialization());
+        registerMapping(new SloveniaIDFrontRecognizerSerialization());
+        registerMapping(new SwitzerlandIDBackRecognizerSerialization());
+        registerMapping(new SwitzerlandIDFrontRecognizerSerialization());
+        registerMapping(new SwitzerlandPassportRecognizerSerialization());
+        registerMapping(new UnitedArabEmiratesIDBackRecognizerSerialization());
+        registerMapping(new UnitedArabEmiratesIDFrontRecognizerSerialization());
+        registerMapping(new VinRecognizerSerialization());
         registerMapping(new USDLRecognizerSerialization());
+        
     }
 
     private RecognizerSerialization getRecognizerSerialization(ReadableMap jsonRecognizer) {
