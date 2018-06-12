@@ -37,12 +37,12 @@ public final class CroatiaCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("citizenship", result.getCitizenship());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putString("digitalSignatureVersion", result.getDigitalSignatureVersion());
         jsonResult.putBoolean("documentBilingual", result.isDocumentBilingual());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
-        jsonResult.putMap("documentDateOfExpiry", SerializationUtils.serializeDate(result.getDocumentDateOfExpiry()));
-        jsonResult.putBoolean("documentDateOfExpiryPermanent", result.getDocumentDateOfExpiryPermanent());
         jsonResult.putMap("documentDateOfIssue", SerializationUtils.serializeDate(result.getDocumentDateOfIssue()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());

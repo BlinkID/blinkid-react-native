@@ -11,7 +11,7 @@ export class Pdf417RecognizerResult extends RecognizerResult {
         /** 
          * The format of the scanned barcode. 
          */
-        this.barcodeFormat = nativeResult.barcodeFormat;
+        this.barcodeType = nativeResult.barcodeType;
         
         /** 
          * The raw bytes contained inside barcode. 

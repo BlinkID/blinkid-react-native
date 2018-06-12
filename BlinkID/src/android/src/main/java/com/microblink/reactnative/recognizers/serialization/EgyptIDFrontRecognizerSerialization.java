@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class EgyptIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class EgyptIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.egypt.EgyptIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.egypt.EgyptIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.egypt.EgyptIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.egypt.EgyptIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -27,7 +27,7 @@ public final class EgyptIDFrontRecognizerSerialization implements RecognizerSeri
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.egypt.EgyptIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.egypt.EgyptIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.egypt.EgyptIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.egypt.EgyptIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("documentNumber", result.getDocumentNumber());
@@ -39,11 +39,11 @@ public final class EgyptIDFrontRecognizerSerialization implements RecognizerSeri
 
     @Override
     public String getJsonName() {
-        return "EgyptIDFrontRecognizer";
+        return "EgyptIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.egypt.EgyptIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.egypt.EgyptIdFrontRecognizer.class;
     }
 }

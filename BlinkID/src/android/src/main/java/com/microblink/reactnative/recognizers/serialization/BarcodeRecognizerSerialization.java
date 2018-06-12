@@ -13,9 +13,6 @@ public final class BarcodeRecognizerSerialization implements RecognizerSerializa
         if (jsonRecognizer.hasKey("autoScaleDetection")) {
             recognizer.setAutoScaleDetection(jsonRecognizer.getBoolean("autoScaleDetection"));
         }
-        if (jsonRecognizer.hasKey("inverseScanning")) {
-            recognizer.setInverseScanning(jsonRecognizer.getBoolean("inverseScanning"));
-        }
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
         }
@@ -31,35 +28,38 @@ public final class BarcodeRecognizerSerialization implements RecognizerSerializa
         if (jsonRecognizer.hasKey("scanCode39")) {
             recognizer.setScanCode39(jsonRecognizer.getBoolean("scanCode39"));
         }
-        if (jsonRecognizer.hasKey("scanDataMatrixCode")) {
-            recognizer.setScanDataMatrixCode(jsonRecognizer.getBoolean("scanDataMatrixCode"));
+        if (jsonRecognizer.hasKey("scanDataMatrix")) {
+            recognizer.setScanDataMatrix(jsonRecognizer.getBoolean("scanDataMatrix"));
         }
-        if (jsonRecognizer.hasKey("scanEAN13Code")) {
-            recognizer.setScanEAN13Code(jsonRecognizer.getBoolean("scanEAN13Code"));
+        if (jsonRecognizer.hasKey("scanEan13")) {
+            recognizer.setScanEan13(jsonRecognizer.getBoolean("scanEan13"));
         }
-        if (jsonRecognizer.hasKey("scanEAN8Code")) {
-            recognizer.setScanEAN8Code(jsonRecognizer.getBoolean("scanEAN8Code"));
+        if (jsonRecognizer.hasKey("scanEan8")) {
+            recognizer.setScanEan8(jsonRecognizer.getBoolean("scanEan8"));
         }
-        if (jsonRecognizer.hasKey("scanITFCode")) {
-            recognizer.setScanITFCode(jsonRecognizer.getBoolean("scanITFCode"));
+        if (jsonRecognizer.hasKey("scanInverse")) {
+            recognizer.setScanInverse(jsonRecognizer.getBoolean("scanInverse"));
         }
-        if (jsonRecognizer.hasKey("scanPDF417")) {
-            recognizer.setScanPDF417(jsonRecognizer.getBoolean("scanPDF417"));
+        if (jsonRecognizer.hasKey("scanItf")) {
+            recognizer.setScanItf(jsonRecognizer.getBoolean("scanItf"));
+        }
+        if (jsonRecognizer.hasKey("scanPdf417")) {
+            recognizer.setScanPdf417(jsonRecognizer.getBoolean("scanPdf417"));
         }
         if (jsonRecognizer.hasKey("scanQRCode")) {
             recognizer.setScanQRCode(jsonRecognizer.getBoolean("scanQRCode"));
         }
-        if (jsonRecognizer.hasKey("scanUPCACode")) {
-            recognizer.setScanUPCACode(jsonRecognizer.getBoolean("scanUPCACode"));
+        if (jsonRecognizer.hasKey("scanUncertain")) {
+            recognizer.setScanUncertain(jsonRecognizer.getBoolean("scanUncertain"));
         }
-        if (jsonRecognizer.hasKey("scanUPCECode")) {
-            recognizer.setScanUPCECode(jsonRecognizer.getBoolean("scanUPCECode"));
+        if (jsonRecognizer.hasKey("scanUpca")) {
+            recognizer.setScanUpca(jsonRecognizer.getBoolean("scanUpca"));
+        }
+        if (jsonRecognizer.hasKey("scanUpce")) {
+            recognizer.setScanUpce(jsonRecognizer.getBoolean("scanUpce"));
         }
         if (jsonRecognizer.hasKey("slowerThoroughScan")) {
             recognizer.setSlowerThoroughScan(jsonRecognizer.getBoolean("slowerThoroughScan"));
-        }
-        if (jsonRecognizer.hasKey("uncertainDecoding")) {
-            recognizer.setUncertainDecoding(jsonRecognizer.getBoolean("uncertainDecoding"));
         }
         return recognizer;
     }
@@ -69,7 +69,7 @@ public final class BarcodeRecognizerSerialization implements RecognizerSerializa
         com.microblink.entities.recognizers.blinkbarcode.barcode.BarcodeRecognizer.Result result = ((com.microblink.entities.recognizers.blinkbarcode.barcode.BarcodeRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putInt("barcodeFormat", SerializationUtils.serializeEnum(result.getBarcodeFormat()));
+        jsonResult.putInt("barcodeType", SerializationUtils.serializeEnum(result.getBarcodeType()));
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
         jsonResult.putString("stringData", result.getStringData());
         jsonResult.putBoolean("uncertain", result.isUncertain());

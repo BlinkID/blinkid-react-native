@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for MalaysiaDLFrontRecognizer.
+ * Result object for MalaysiaDlFrontRecognizer.
  */
-export class MalaysiaDLFrontRecognizerResult extends RecognizerResult {
+export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -80,9 +80,9 @@ export class MalaysiaDLFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading Malaysian driving license document.
 
  */
-export class MalaysiaDLFrontRecognizer extends Recognizer {
+export class MalaysiaDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('MalaysiaDLFrontRecognizer');
+        super('MalaysiaDlFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -122,7 +122,7 @@ export class MalaysiaDLFrontRecognizer extends Recognizer {
         /** 
          * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
-        this.fullDocumentImageDPI = 250;
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -134,6 +134,6 @@ export class MalaysiaDLFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new MalaysiaDLFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MalaysiaDlFrontRecognizerResult(nativeResult); }
     }
 }

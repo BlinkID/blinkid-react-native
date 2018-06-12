@@ -48,9 +48,6 @@ public final class GermanyPassportRecognizerSerialization implements RecognizerS
         com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZParsed", result.isMRZParsed());
-        jsonResult.putString("MRZText", result.getMRZText());
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("alienNumber", result.getAlienNumber());
         jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putString("authority", result.getAuthority());
@@ -64,6 +61,9 @@ public final class GermanyPassportRecognizerSerialization implements RecognizerS
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
+        jsonResult.putString("mrzText", result.getMrzText());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("name", result.getName());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("opt1", result.getOpt1());

@@ -6,14 +6,14 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.USDLKeys;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer;
+import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlKeys;
+import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class USDLRecognizerSerialization implements RecognizerSerialization {
+public final class UsdlRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer();
+        com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer();
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
         }
@@ -25,7 +25,7 @@ public final class USDLRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        USDLRecognizer.Result result = ((USDLRecognizer)recognizer).getResult();
+        UsdlRecognizer.Result result = ((UsdlRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putArray("optionalElements", SerializationUtils.serializeStringArray(result.getOptionalElements()));
@@ -36,21 +36,21 @@ public final class USDLRecognizerSerialization implements RecognizerSerializatio
         return jsonResult;
     }
 
-    private WritableArray serializeFields(USDLRecognizer.Result result) {
+    private WritableArray serializeFields(UsdlRecognizer.Result result) {
         WritableArray fieldsArr = new WritableNativeArray();
-        for (int i = 0; i < USDLKeys.values().length; ++i) {
-            fieldsArr.pushString(result.getField(USDLKeys.values()[i]));
+        for (int i = 0; i < UsdlKeys.values().length; ++i) {
+            fieldsArr.pushString(result.getField(UsdlKeys.values()[i]));
         }
         return fieldsArr;
     }
 
     @Override
     public String getJsonName() {
-        return "USDLRecognizer";
+        return "UsdlRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkbarcode.usdl.USDLRecognizer.class;
+        return com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer.class;
     }
 }

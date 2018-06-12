@@ -29,6 +29,16 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
+         * the document date of expiry of the Croatian ID. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * true if document expiry is permanent 
+         */
+        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        
+        /** 
          * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
@@ -47,16 +57,6 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of expiry of the Croatian ID. 
-         */
-        this.documentDateOfExpiry = nativeResult.documentDateOfExpiry;
-        
-        /** 
-         * true if document expiry is permanent 
-         */
-        this.documentDateOfExpiryPermanent = nativeResult.documentDateOfExpiryPermanent;
         
         /** 
          * the document date of issue of the Croatian ID. 

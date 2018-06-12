@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MRTDCombinedRecognizerSerialization implements RecognizerSerialization {
+public final class MrtdCombinedRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MRTDCombinedRecognizer();
+        com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer();
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -27,12 +27,9 @@ public final class MRTDCombinedRecognizerSerialization implements RecognizerSeri
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MRTDCombinedRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZParsed", result.isMRZParsed());
-        jsonResult.putString("MRZText", result.getMRZText());
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("alienNumber", result.getAlienNumber());
         jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -49,6 +46,9 @@ public final class MRTDCombinedRecognizerSerialization implements RecognizerSeri
         jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
         jsonResult.putString("mrzImage", SerializationUtils.encodeImageBase64(result.getMrzImage()));
+        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
+        jsonResult.putString("mrzText", result.getMrzText());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("opt1", result.getOpt1());
         jsonResult.putString("opt2", result.getOpt2());
@@ -61,11 +61,11 @@ public final class MRTDCombinedRecognizerSerialization implements RecognizerSeri
 
     @Override
     public String getJsonName() {
-        return "MRTDCombinedRecognizer";
+        return "MrtdCombinedRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.mrtd.MRTDCombinedRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer.class;
     }
 }

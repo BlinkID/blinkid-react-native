@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SlovakiaIDFrontRecognizer.
+ * Result object for SlovakiaIdFrontRecognizer.
  */
-export class SlovakiaIDFrontRecognizerResult extends RecognizerResult {
+export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -80,9 +80,9 @@ export class SlovakiaIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer which can scan front side of slovak national ID cards.
 
  */
-export class SlovakiaIDFrontRecognizer extends Recognizer {
+export class SlovakiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('SlovakiaIDFrontRecognizer');
+        super('SlovakiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -139,6 +139,6 @@ export class SlovakiaIDFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SlovakiaIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SlovakiaIdFrontRecognizerResult(nativeResult); }
     }
 }

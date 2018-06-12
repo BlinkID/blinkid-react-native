@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for HongKongIDFrontRecognizer.
+ * Result object for HongKongIdFrontRecognizer.
  */
-export class HongKongIDFrontRecognizerResult extends RecognizerResult {
+export class HongKongIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -55,9 +55,9 @@ export class HongKongIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading Hong Kong ID front document.
 
  */
-export class HongKongIDFrontRecognizer extends Recognizer {
+export class HongKongIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('HongKongIDFrontRecognizer');
+        super('HongKongIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -99,6 +99,6 @@ export class HongKongIDFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new HongKongIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new HongKongIdFrontRecognizerResult(nativeResult); }
     }
 }

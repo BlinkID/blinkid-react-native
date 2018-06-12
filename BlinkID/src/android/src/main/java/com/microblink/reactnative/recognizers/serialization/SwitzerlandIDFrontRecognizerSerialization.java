@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class SwitzerlandIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class SwitzerlandIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -33,7 +33,7 @@ public final class SwitzerlandIDFrontRecognizerSerialization implements Recogniz
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -47,11 +47,11 @@ public final class SwitzerlandIDFrontRecognizerSerialization implements Recogniz
 
     @Override
     public String getJsonName() {
-        return "SwitzerlandIDFrontRecognizer";
+        return "SwitzerlandIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdFrontRecognizer.class;
     }
 }

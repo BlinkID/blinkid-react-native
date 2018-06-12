@@ -13,8 +13,8 @@ public final class MyKadFrontRecognizerSerialization implements RecognizerSerial
         if (jsonRecognizer.hasKey("extractArmyNumber")) {
             recognizer.setExtractArmyNumber(jsonRecognizer.getBoolean("extractArmyNumber"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));

@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class EUDLRecognizerSerialization implements RecognizerSerialization {
+public final class EudlRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.eudl.EUDLRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.eudl.EUDLRecognizer();
+        com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer();
         if (jsonRecognizer.hasKey("extractAddress")) {
             recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
         }
@@ -31,22 +31,30 @@ public final class EUDLRecognizerSerialization implements RecognizerSerializatio
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
         if (jsonRecognizer.hasKey("country")) {
-            recognizer.setCountry(com.microblink.entities.recognizers.blinkid.eudl.EUDLCountry.values()[jsonRecognizer.getInt("country") - 1]);
+            recognizer.setCountry(com.microblink.entities.recognizers.blinkid.eudl.EudlCountry.values()[jsonRecognizer.getInt("country") - 1]);
         }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.eudl.EUDLRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.eudl.EUDLRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("driverNumber", result.getDriverNumber());
+        jsonResult.putMap("expiryDate", SerializationUtils.serializeDate(result.getExpiryDate().getDate()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
+        jsonResult.putMap("issueDate", SerializationUtils.serializeDate(result.getIssueDate().getDate()));
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("personalNumber", result.getPersonalNumber());
@@ -57,11 +65,11 @@ public final class EUDLRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public String getJsonName() {
-        return "EUDLRecognizer";
+        return "EudlRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.eudl.EUDLRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer.class;
     }
 }

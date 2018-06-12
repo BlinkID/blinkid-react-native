@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SingaporeIDBackRecognizer.
+ * Result object for SingaporeIdBackRecognizer.
  */
-export class SingaporeIDBackRecognizerResult extends RecognizerResult {
+export class SingaporeIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -40,9 +40,9 @@ export class SingaporeIDBackRecognizerResult extends RecognizerResult {
  *  Recognizer for back side of Singapore ID.
 
  */
-export class SingaporeIDBackRecognizer extends Recognizer {
+export class SingaporeIdBackRecognizer extends Recognizer {
     constructor() {
-        super('SingaporeIDBackRecognizer');
+        super('SingaporeIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -64,6 +64,6 @@ export class SingaporeIDBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SingaporeIDBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SingaporeIdBackRecognizerResult(nativeResult); }
     }
 }

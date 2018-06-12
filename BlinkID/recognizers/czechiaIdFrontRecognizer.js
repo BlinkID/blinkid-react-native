@@ -2,16 +2,26 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SwitzerlandIdFrontRecognizer.
+ * Result object for CzechiaIdFrontRecognizer.
  */
-export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
+export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * the date of birth of Swiss ID owner 
+         * the date of birth of Czech ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
+        
+        /** 
+         * the date of expiry of Czech ID 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the date of issue of Czech ID 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          *  face image from the document 
@@ -19,7 +29,7 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the first name of the Swiss ID owner. 
+         * the first name of the Czech ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -29,9 +39,24 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the last name of the Swiss ID owner. 
+         * the identity card number of Czech ID. 
+         */
+        this.identityCardNumber = nativeResult.identityCardNumber;
+        
+        /** 
+         * the last name of the Czech ID owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * the place of birth of Czech ID owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * sex of the Czech ID owner. 
+         */
+        this.sex = nativeResult.sex;
         
         /** 
          *  signature image from the document 
@@ -42,27 +67,17 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan the front side of Swiss national ID cards.
+ *  Recognizer which can scan front side of czech national ID cards.
 
  */
-export class SwitzerlandIdFrontRecognizer extends Recognizer {
+export class CzechiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('SwitzerlandIdFrontRecognizer');
+        super('CzechiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
-        
-        /** 
-         * true if first name of Swiss ID owner is being extracted 
-         */
-        this.extractFirstName = true;
-        
-        /** 
-         * true if last name of Swiss ID owner is being extracted 
-         */
-        this.extractLastName = true;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -79,6 +94,6 @@ export class SwitzerlandIdFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SwitzerlandIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CzechiaIdFrontRecognizerResult(nativeResult); }
     }
 }

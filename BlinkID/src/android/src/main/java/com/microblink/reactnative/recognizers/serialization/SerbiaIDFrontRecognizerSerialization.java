@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class SerbiaIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class SerbiaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.serbia.SerbiaIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.serbia.SerbiaIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.serbia.SerbiaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.serbia.SerbiaIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -33,7 +33,7 @@ public final class SerbiaIDFrontRecognizerSerialization implements RecognizerSer
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.serbia.SerbiaIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.serbia.SerbiaIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.serbia.SerbiaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.serbia.SerbiaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("documentNumber", result.getDocumentNumber());
@@ -47,11 +47,11 @@ public final class SerbiaIDFrontRecognizerSerialization implements RecognizerSer
 
     @Override
     public String getJsonName() {
-        return "SerbiaIDFrontRecognizer";
+        return "SerbiaIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.serbia.SerbiaIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.serbia.SerbiaIdFrontRecognizer.class;
     }
 }

@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for EgyptIDFrontRecognizer.
+ * Result object for EgyptIdFrontRecognizer.
  */
-export class EgyptIDFrontRecognizerResult extends RecognizerResult {
+export class EgyptIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -35,9 +35,9 @@ export class EgyptIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading Egypt ID Front document.
 
  */
-export class EgyptIDFrontRecognizer extends Recognizer {
+export class EgyptIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('EgyptIDFrontRecognizer');
+        super('EgyptIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -59,6 +59,6 @@ export class EgyptIDFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new EgyptIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new EgyptIdFrontRecognizerResult(nativeResult); }
     }
 }

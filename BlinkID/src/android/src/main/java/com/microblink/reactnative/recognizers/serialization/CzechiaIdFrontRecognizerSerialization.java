@@ -6,18 +6,12 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class ColombiaIDFrontSideRecognizerSerialization implements RecognizerSerialization {
+public final class CzechiaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.colombia.ColombiaIDFrontSideRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.colombia.ColombiaIDFrontSideRecognizer();
+        com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
-        }
-        if (jsonRecognizer.hasKey("extractFirstName")) {
-            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
-        }
-        if (jsonRecognizer.hasKey("extractLastName")) {
-            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -33,25 +27,30 @@ public final class ColombiaIDFrontSideRecognizerSerialization implements Recogni
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.colombia.ColombiaIDFrontSideRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.colombia.ColombiaIDFrontSideRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("documentNumber", result.getDocumentNumber());
+        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("ownerFirsName", result.getOwnerFirsName());
-        jsonResult.putString("ownerLastName", result.getOwnerLastName());
+        jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
+        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
+        jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "ColombiaIDFrontSideRecognizer";
+        return "CzechiaIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.colombia.ColombiaIDFrontSideRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdFrontRecognizer.class;
     }
 }

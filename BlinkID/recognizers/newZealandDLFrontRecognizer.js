@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for NewZealandDLFrontRecognizer.
+ * Result object for NewZealandDlFrontRecognizer.
  */
-export class NewZealandDLFrontRecognizerResult extends RecognizerResult {
+export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -75,9 +75,9 @@ export class NewZealandDLFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading front side of New Zealand driver's licence.
 
  */
-export class NewZealandDLFrontRecognizer extends Recognizer {
+export class NewZealandDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('NewZealandDLFrontRecognizer');
+        super('NewZealandDlFrontRecognizer');
         
         /** 
          * true if address of New Zealand DL owner is being extracted 
@@ -129,6 +129,6 @@ export class NewZealandDLFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new NewZealandDLFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new NewZealandDlFrontRecognizerResult(nativeResult); }
     }
 }

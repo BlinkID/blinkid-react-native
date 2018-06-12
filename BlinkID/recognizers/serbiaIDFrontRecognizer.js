@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SerbiaIDFrontRecognizer.
+ * Result object for SerbiaIdFrontRecognizer.
  */
-export class SerbiaIDFrontRecognizerResult extends RecognizerResult {
+export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -45,9 +45,9 @@ export class SerbiaIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for front side of Serbian ID.
 
  */
-export class SerbiaIDFrontRecognizer extends Recognizer {
+export class SerbiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('SerbiaIDFrontRecognizer');
+        super('SerbiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -79,6 +79,6 @@ export class SerbiaIDFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SerbiaIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SerbiaIdFrontRecognizerResult(nativeResult); }
     }
 }

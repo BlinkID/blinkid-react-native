@@ -2,29 +2,14 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for CzechiaIDBackSideRecognizer.
+ * Result object for CroatiaIdBackRecognizer.
  */
-export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
+export class CroatiaIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
-         */
-        this.MRZParsed = nativeResult.MRZParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.MRZText = nativeResult.MRZText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
-        
-        /** 
-         * the address of the card holder. 
+         * the address of the Croatian ID owner. 
          */
         this.address = nativeResult.address;
         
@@ -37,11 +22,6 @@ export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
          * Defines application receipt number.<code>null</code> or empty string if not available. 
          */
         this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
-        
-        /** 
-         * the authority of Czech ID. 
-         */
-        this.authority = nativeResult.authority;
         
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
@@ -57,6 +37,16 @@ export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
          * Defines document code. Document code contains two characters. For MRTD the first character shall 
          */
         this.documentCode = nativeResult.documentCode;
+        
+        /** 
+         * true if date of expiry of the Croatian ID is permanent else false 
+         */
+        this.documentDateOfExpiryPermanent = nativeResult.documentDateOfExpiryPermanent;
+        
+        /** 
+         * the document date of issue of the Croatian ID 
+         */
+        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          * Defines document number. Document number contains up to 9 characters. 
@@ -84,6 +74,26 @@ export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
         this.issuer = nativeResult.issuer;
         
         /** 
+         * the issuing authority of Croatian ID. 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
@@ -97,11 +107,6 @@ export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
          * Defines second optional data.<code>null</code> or empty string if not available. 
          */
         this.opt2 = nativeResult.opt2;
-        
-        /** 
-         * personal number of the card holder. 
-         */
-        this.personalNumber = nativeResult.personalNumber;
         
         /** 
          * Defines the primary indentifier. If there is more than one component, they are separated with space. 
@@ -122,12 +127,12 @@ export class CzechiaIDBackSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for back side of Czech ID.
+ *  Recognizer for back side of Croatian ID.
 
  */
-export class CzechiaIDBackSideRecognizer extends Recognizer {
+export class CroatiaIdBackRecognizer extends Recognizer {
     constructor() {
-        super('CzechiaIDBackSideRecognizer');
+        super('CroatiaIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -135,10 +140,20 @@ export class CzechiaIDBackSideRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
+         * true if date of issue is being extracted from Croatian ID 
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * true if issuing authority is being extracted from Croatian ID 
+         */
+        this.extractIssuingAuthority = true;
+        
+        /** 
          * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new CzechiaIDBackSideRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CroatiaIdBackRecognizerResult(nativeResult); }
     }
 }

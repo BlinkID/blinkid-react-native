@@ -2,11 +2,21 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for ColombiaIDBackSideRecognizer.
+ * Result object for ColombiaIdBackRecognizer.
  */
-export class ColombiaIDBackSideRecognizerResult extends RecognizerResult {
+export class ColombiaIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * owner blood type 
+         */
+        this.bloodGroup = nativeResult.bloodGroup;
+        
+        /** 
+         * owner date of birth 
+         */
+        this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
          * the Colombian ID document number number. 
@@ -14,34 +24,24 @@ export class ColombiaIDBackSideRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * owner blood type 
-         */
-        this.ownerBloodGroup = nativeResult.ownerBloodGroup;
-        
-        /** 
-         * owner date of birth 
-         */
-        this.ownerDateOfBirth = nativeResult.ownerDateOfBirth;
-        
-        /** 
          * owner fingerprint 
          */
-        this.ownerFingerprint = nativeResult.ownerFingerprint;
+        this.fingerprint = nativeResult.fingerprint;
         
         /** 
          * owner first name 
          */
-        this.ownerFirsName = nativeResult.ownerFirsName;
+        this.firstName = nativeResult.firstName;
         
         /** 
          * owner first name 
          */
-        this.ownerLastName = nativeResult.ownerLastName;
+        this.lastName = nativeResult.lastName;
         
         /** 
          * owner sex 
          */
-        this.ownerSex = nativeResult.ownerSex;
+        this.sex = nativeResult.sex;
         
     }
 }
@@ -50,9 +50,9 @@ export class ColombiaIDBackSideRecognizerResult extends RecognizerResult {
  *  Recognizer for reading Colombia ID Back document.
 
  */
-export class ColombiaIDBackSideRecognizer extends Recognizer {
+export class ColombiaIdBackRecognizer extends Recognizer {
     constructor() {
-        super('ColombiaIDBackSideRecognizer');
+        super('ColombiaIdBackRecognizer');
         
         /** 
          * true if null quiet zone is allowed 
@@ -64,6 +64,6 @@ export class ColombiaIDBackSideRecognizer extends Recognizer {
          */
         this.scanUncertain = true;
         
-        this.createResultFromNative = function (nativeResult) { return new ColombiaIDBackSideRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new ColombiaIdBackRecognizerResult(nativeResult); }
     }
 }

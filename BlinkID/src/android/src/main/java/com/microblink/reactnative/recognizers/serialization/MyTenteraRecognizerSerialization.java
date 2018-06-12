@@ -19,8 +19,8 @@ public final class MyTenteraRecognizerSerialization implements RecognizerSeriali
         if (jsonRecognizer.hasKey("extractReligion")) {
             recognizer.setExtractReligion(jsonRecognizer.getBoolean("extractReligion"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));

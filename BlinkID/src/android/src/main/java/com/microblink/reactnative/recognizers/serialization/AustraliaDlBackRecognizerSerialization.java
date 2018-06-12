@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class AustraliaDLBackSideRecognizerSerialization implements RecognizerSerialization {
+public final class AustraliaDlBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.australia.AustraliaDLBackSideRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.australia.AustraliaDLBackSideRecognizer();
+        com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer();
         if (jsonRecognizer.hasKey("extractAddress")) {
             recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
         }
@@ -19,8 +19,8 @@ public final class AustraliaDLBackSideRecognizerSerialization implements Recogni
         if (jsonRecognizer.hasKey("extractLastName")) {
             recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
@@ -30,7 +30,7 @@ public final class AustraliaDLBackSideRecognizerSerialization implements Recogni
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.australia.AustraliaDLBackSideRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.australia.AustraliaDLBackSideRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
@@ -43,11 +43,11 @@ public final class AustraliaDLBackSideRecognizerSerialization implements Recogni
 
     @Override
     public String getJsonName() {
-        return "AustraliaDLBackSideRecognizer";
+        return "AustraliaDlBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.australia.AustraliaDLBackSideRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer.class;
     }
 }

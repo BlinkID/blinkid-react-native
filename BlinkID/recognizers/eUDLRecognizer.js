@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for EUDLRecognizer.
+ * Result object for EudlRecognizer.
  */
-export class EUDLRecognizerResult extends RecognizerResult {
+export class EudlRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -17,6 +17,11 @@ export class EUDLRecognizerResult extends RecognizerResult {
          * the driver number. 
          */
         this.driverNumber = nativeResult.driverNumber;
+        
+        /** 
+         * the expiry date of the Driver's Licence 
+         */
+        this.expiryDate = new Date(nativeResult.expiryDate);
         
         /** 
          *  face image from the document 
@@ -32,6 +37,11 @@ export class EUDLRecognizerResult extends RecognizerResult {
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
+        
+        /** 
+         * the issue date of the Driver's Licence 
+         */
+        this.issueDate = new Date(nativeResult.issueDate);
         
         /** 
          * document issuing authority. 
@@ -64,9 +74,9 @@ export class EUDLRecognizerResult extends RecognizerResult {
 /**
  * Recognizer for scanning driver's licence of several european countries
  */
-export class EUDLRecognizer extends Recognizer {
+export class EudlRecognizer extends Recognizer {
     constructor() {
-        super('EUDLRecognizer');
+        super('EudlRecognizer');
         
         /** 
          * Defines if address should be extracted from EU driver's license 
@@ -104,10 +114,20 @@ export class EUDLRecognizer extends Recognizer {
         this.returnFullDocumentImage = false;
         
         /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
          * currently used country. 
          */
-        this.country = EUDLCountry.Automatic;
+        this.country = EudlCountry.Automatic;
         
-        this.createResultFromNative = function (nativeResult) { return new EUDLRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new EudlRecognizerResult(nativeResult); }
     }
 }

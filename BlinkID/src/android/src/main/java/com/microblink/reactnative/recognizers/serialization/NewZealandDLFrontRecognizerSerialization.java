@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class NewZealandDLFrontRecognizerSerialization implements RecognizerSerialization {
+public final class NewZealandDlFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDLFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDLFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer();
         if (jsonRecognizer.hasKey("extractAddress")) {
             recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
         }
@@ -45,7 +45,7 @@ public final class NewZealandDLFrontRecognizerSerialization implements Recognize
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDLFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDLFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
@@ -65,11 +65,11 @@ public final class NewZealandDLFrontRecognizerSerialization implements Recognize
 
     @Override
     public String getJsonName() {
-        return "NewZealandDLFrontRecognizer";
+        return "NewZealandDlFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDLFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer.class;
     }
 }

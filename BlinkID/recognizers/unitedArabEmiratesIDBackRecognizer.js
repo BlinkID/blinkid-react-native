@@ -2,21 +2,21 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for UnitedArabEmiratesIDBackRecognizer.
+ * Result object for UnitedArabEmiratesIdBackRecognizer.
  */
-export class UnitedArabEmiratesIDBackRecognizerResult extends RecognizerResult {
+export class UnitedArabEmiratesIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * The data extracted from the machine readable zone. 
-         */
-        this.MRZResult = nativeResult.MRZResult;
         
         /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
+        
+        /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult;
         
     }
 }
@@ -24,9 +24,9 @@ export class UnitedArabEmiratesIDBackRecognizerResult extends RecognizerResult {
 /**
  * Recognizer which can scan back side of United Arab Emirates national ID cards.
  */
-export class UnitedArabEmiratesIDBackRecognizer extends Recognizer {
+export class UnitedArabEmiratesIdBackRecognizer extends Recognizer {
     constructor() {
-        super('UnitedArabEmiratesIDBackRecognizer');
+        super('UnitedArabEmiratesIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -38,6 +38,11 @@ export class UnitedArabEmiratesIDBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIDBackRecognizerResult(nativeResult); }
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIdBackRecognizerResult(nativeResult); }
     }
 }

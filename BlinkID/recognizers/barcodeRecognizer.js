@@ -11,7 +11,7 @@ export class BarcodeRecognizerResult extends RecognizerResult {
         /** 
          * The format of the scanned barcode. 
          */
-        this.barcodeFormat = nativeResult.barcodeFormat;
+        this.barcodeType = nativeResult.barcodeType;
         
         /** 
          * The raw bytes contained inside barcode. 
@@ -44,11 +44,6 @@ export class BarcodeRecognizer extends Recognizer {
         this.autoScaleDetection = true;
         
         /** 
-         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
-         */
-        this.inverseScanning = false;
-        
-        /** 
          * Allow scanning PDF417 barcodes which don't have quiet zone 
          */
         this.nullQuietZoneAllowed = false;
@@ -76,27 +71,32 @@ export class BarcodeRecognizer extends Recognizer {
         /** 
          * Should DataMatrix 2D barcode be scanned. 
          */
-        this.scanDataMatrixCode = false;
+        this.scanDataMatrix = false;
         
         /** 
          * Should EAN13 barcode be scanned. 
          */
-        this.scanEAN13Code = false;
+        this.scanEan13 = false;
         
         /** 
          * Should EAN8 barcode be scanned. 
          */
-        this.scanEAN8Code = false;
+        this.scanEan8 = false;
+        
+        /** 
+         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
+         */
+        this.scanInverse = false;
         
         /** 
          * Should ITF barcode be scanned. 
          */
-        this.scanITFCode = false;
+        this.scanItf = false;
         
         /** 
          * Should PDF417 2D barcode be scanned. 
          */
-        this.scanPDF417 = false;
+        this.scanPdf417 = false;
         
         /** 
          * Should QR code be scanned. 
@@ -104,24 +104,24 @@ export class BarcodeRecognizer extends Recognizer {
         this.scanQRCode = false;
         
         /** 
+         * Enable decoding of non-standard PDF417 barcodes, but without 
+         */
+        this.scanUncertain = true;
+        
+        /** 
          * Should UPCA barcode be scanned. 
          */
-        this.scanUPCACode = false;
+        this.scanUpca = false;
         
         /** 
          * Should UPCE barcode be scanned. 
          */
-        this.scanUPCECode = false;
+        this.scanUpce = false;
         
         /** 
          * Enable slower, but more thorough scanning, thus giving higher possibility of successful scan. 
          */
         this.slowerThoroughScan = true;
-        
-        /** 
-         * Enable decoding of non-standard PDF417 barcodes, but without 
-         */
-        this.uncertainDecoding = true;
         
         this.createResultFromNative = function (nativeResult) { return new BarcodeRecognizerResult(nativeResult); }
     }

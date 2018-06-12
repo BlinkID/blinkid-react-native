@@ -2,26 +2,11 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SerbiaIDBackRecognizer.
+ * Result object for SerbiaIdBackRecognizer.
  */
-export class SerbiaIDBackRecognizerResult extends RecognizerResult {
+export class SerbiaIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
-         */
-        this.MRZParsed = nativeResult.MRZParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.MRZText = nativeResult.MRZText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * Defines alien number.<code>null</code> or empty string if not available. 
@@ -74,6 +59,21 @@ export class SerbiaIDBackRecognizerResult extends RecognizerResult {
         this.issuer = nativeResult.issuer;
         
         /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
@@ -110,9 +110,9 @@ export class SerbiaIDBackRecognizerResult extends RecognizerResult {
  *  Recognizer for back side of Serbian ID.
 
  */
-export class SerbiaIDBackRecognizer extends Recognizer {
+export class SerbiaIdBackRecognizer extends Recognizer {
     constructor() {
-        super('SerbiaIDBackRecognizer');
+        super('SerbiaIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -124,6 +124,6 @@ export class SerbiaIDBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SerbiaIDBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SerbiaIdBackRecognizerResult(nativeResult); }
     }
 }

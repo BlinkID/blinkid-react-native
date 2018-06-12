@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for JordanIDFrontRecognizer.
+ * Result object for JordanIdFrontRecognizer.
  */
-export class JordanIDFrontRecognizerResult extends RecognizerResult {
+export class JordanIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -45,9 +45,9 @@ export class JordanIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading front side of Jordan ID.
 
  */
-export class JordanIDFrontRecognizer extends Recognizer {
+export class JordanIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('JordanIDFrontRecognizer');
+        super('JordanIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -72,7 +72,7 @@ export class JordanIDFrontRecognizer extends Recognizer {
         /** 
          * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
-        this.fullDocumentImageDPI = 250;
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -84,6 +84,6 @@ export class JordanIDFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new JordanIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new JordanIdFrontRecognizerResult(nativeResult); }
     }
 }

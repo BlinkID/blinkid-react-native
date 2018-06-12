@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MRTDRecognizerSerialization implements RecognizerSerialization {
+public final class MrtdRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer();
+        com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer();
         if (jsonRecognizer.hasKey("allowUnparsedResults")) {
             recognizer.setAllowUnparsedResults(jsonRecognizer.getBoolean("allowUnparsedResults"));
         }
@@ -33,22 +33,22 @@ public final class MRTDRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putMap("MRZResult", BlinkIDSerializationUtils.serializeMRZResult(result.getMRZResult()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("mrzImage", SerializationUtils.encodeImageBase64(result.getMrzImage()));
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "MRTDRecognizer";
+        return "MrtdRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.mrtd.MRTDRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer.class;
     }
 }

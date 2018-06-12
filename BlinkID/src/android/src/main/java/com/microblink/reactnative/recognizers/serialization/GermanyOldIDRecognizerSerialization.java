@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class GermanyOldIDRecognizerSerialization implements RecognizerSerialization {
+public final class GermanyOldIdRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.germany.GermanyOldIDRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.germany.GermanyOldIDRecognizer();
+        com.microblink.entities.recognizers.blinkid.germany.GermanyOldIdRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.germany.GermanyOldIdRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -27,12 +27,9 @@ public final class GermanyOldIDRecognizerSerialization implements RecognizerSeri
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.germany.GermanyOldIDRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyOldIDRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.germany.GermanyOldIdRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyOldIdRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZParsed", result.isMRZParsed());
-        jsonResult.putString("MRZText", result.getMRZText());
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("alienNumber", result.getAlienNumber());
         jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -44,6 +41,9 @@ public final class GermanyOldIDRecognizerSerialization implements RecognizerSeri
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
+        jsonResult.putString("mrzText", result.getMrzText());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("opt1", result.getOpt1());
         jsonResult.putString("opt2", result.getOpt2());
@@ -57,11 +57,11 @@ public final class GermanyOldIDRecognizerSerialization implements RecognizerSeri
 
     @Override
     public String getJsonName() {
-        return "GermanyOldIDRecognizer";
+        return "GermanyOldIdRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.germany.GermanyOldIDRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.germany.GermanyOldIdRecognizer.class;
     }
 }

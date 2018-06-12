@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class HongKongIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class HongKongIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.hongkong.HongKongIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.hongkong.HongKongIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -39,7 +39,7 @@ public final class HongKongIDFrontRecognizerSerialization implements RecognizerS
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.hongkong.HongKongIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.hongkong.HongKongIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
@@ -55,11 +55,11 @@ public final class HongKongIDFrontRecognizerSerialization implements RecognizerS
 
     @Override
     public String getJsonName() {
-        return "HongKongIDFrontRecognizer";
+        return "HongKongIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.hongkong.HongKongIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer.class;
     }
 }

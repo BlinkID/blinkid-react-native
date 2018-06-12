@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class AustriaIDBackSideRecognizerSerialization implements RecognizerSerialization {
+public final class AustriaIdBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.austria.AustriaIDBackSideRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.austria.AustriaIDBackSideRecognizer();
+        com.microblink.entities.recognizers.blinkid.austria.AustriaIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.austria.AustriaIdBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -31,19 +31,22 @@ public final class AustriaIDBackSideRecognizerSerialization implements Recognize
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.austria.AustriaIDBackSideRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.austria.AustriaIDBackSideRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.austria.AustriaIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.austria.AustriaIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putMap("MRZResult", BlinkIDSerializationUtils.serializeMRZResult(result.getMRZResult()));
         jsonResult.putMap("dateOfIssuance", SerializationUtils.serializeDate(result.getDateOfIssuance().getDate()));
         jsonResult.putString("eyeColour", result.getEyeColour());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
         jsonResult.putString("principalResidence", result.getPrincipalResidence());
         jsonResult.putInt("height", result.getHeight());
@@ -52,11 +55,11 @@ public final class AustriaIDBackSideRecognizerSerialization implements Recognize
 
     @Override
     public String getJsonName() {
-        return "AustriaIDBackSideRecognizer";
+        return "AustriaIdBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.austria.AustriaIDBackSideRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.austria.AustriaIdBackRecognizer.class;
     }
 }

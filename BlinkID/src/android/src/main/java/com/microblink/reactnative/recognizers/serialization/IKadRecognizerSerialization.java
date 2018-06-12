@@ -34,8 +34,8 @@ public final class IKadRecognizerSerialization implements RecognizerSerializatio
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));

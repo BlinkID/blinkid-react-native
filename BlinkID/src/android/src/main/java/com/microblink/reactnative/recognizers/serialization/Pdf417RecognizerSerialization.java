@@ -27,7 +27,7 @@ public final class Pdf417RecognizerSerialization implements RecognizerSerializat
         com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer.Result result = ((com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putInt("barcodeFormat", SerializationUtils.serializeEnum(result.getBarcodeFormat()));
+        jsonResult.putInt("barcodeType", SerializationUtils.serializeEnum(result.getBarcodeType()));
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
         jsonResult.putString("stringData", result.getStringData());
         jsonResult.putBoolean("uncertain", result.isUncertain());

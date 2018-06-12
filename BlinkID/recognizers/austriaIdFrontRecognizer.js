@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for AustriaIDFrontSideRecognizer.
+ * Result object for AustriaIdFrontRecognizer.
  */
-export class AustriaIDFrontSideRecognizerResult extends RecognizerResult {
+export class AustriaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -52,11 +52,11 @@ export class AustriaIDFrontSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front side of austrian national ID cards.
+ * Recognizer which can scan front side of Austrian national ID cards.
  */
-export class AustriaIDFrontSideRecognizer extends Recognizer {
+export class AustriaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('AustriaIDFrontSideRecognizer');
+        super('AustriaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -98,6 +98,21 @@ export class AustriaIDFrontSideRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new AustriaIDFrontSideRecognizerResult(nativeResult); }
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new AustriaIdFrontRecognizerResult(nativeResult); }
     }
 }

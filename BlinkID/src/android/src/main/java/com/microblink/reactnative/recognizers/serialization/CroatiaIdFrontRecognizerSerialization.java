@@ -6,12 +6,15 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class AustraliaDLFrontSideRecognizerSerialization implements RecognizerSerialization {
+public final class CroatiaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.australia.AustraliaDLFrontSideRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.australia.AustraliaDLFrontSideRecognizer();
-        if (jsonRecognizer.hasKey("extractAddress")) {
-            recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
+        com.microblink.entities.recognizers.blinkid.croatia.CroatiaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.croatia.CroatiaIdFrontRecognizer();
+        if (jsonRecognizer.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        }
+        if (jsonRecognizer.hasKey("extractCitizenship")) {
+            recognizer.setExtractCitizenship(jsonRecognizer.getBoolean("extractCitizenship"));
         }
         if (jsonRecognizer.hasKey("extractDateOfBirth")) {
             recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
@@ -19,11 +22,8 @@ public final class AustraliaDLFrontSideRecognizerSerialization implements Recogn
         if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
             recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
         }
-        if (jsonRecognizer.hasKey("extractLicenceNumber")) {
-            recognizer.setExtractLicenceNumber(jsonRecognizer.getBoolean("extractLicenceNumber"));
-        }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("extractSex")) {
+            recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -39,28 +39,31 @@ public final class AustraliaDLFrontSideRecognizerSerialization implements Recogn
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.australia.AustraliaDLFrontSideRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.australia.AustraliaDLFrontSideRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.croatia.CroatiaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.croatia.CroatiaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("address", result.getAddress());
+        jsonResult.putString("citizenship", result.getCitizenship());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
+        jsonResult.putBoolean("documentBilingual", result.isDocumentBilingual());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("licenceNumber", result.getLicenceNumber());
-        jsonResult.putString("licenceType", result.getLicenceType());
-        jsonResult.putString("name", result.getName());
+        jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
+        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "AustraliaDLFrontSideRecognizer";
+        return "CroatiaIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.australia.AustraliaDLFrontSideRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.croatia.CroatiaIdFrontRecognizer.class;
     }
 }

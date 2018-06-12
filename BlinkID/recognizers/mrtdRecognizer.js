@@ -2,16 +2,11 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for MRTDRecognizer.
+ * Result object for MrtdRecognizer.
  */
-export class MRTDRecognizerResult extends RecognizerResult {
+export class MrtdRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * The Data extracted from the machine readable zone. 
-         */
-        this.MRZResult = nativeResult.MRZResult;
         
         /** 
          *  image of the full document 
@@ -23,15 +18,20 @@ export class MRTDRecognizerResult extends RecognizerResult {
          */
         this.mrzImage = nativeResult.mrzImage;
         
+        /** 
+         * The Data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult;
+        
     }
 }
 
 /**
- * Recognizer that can recognizer Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
+ * Recognizer that can recognize Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
  */
-export class MRTDRecognizer extends Recognizer {
+export class MrtdRecognizer extends Recognizer {
     constructor() {
-        super('MRTDRecognizer');
+        super('MrtdRecognizer');
         
         /** 
          * Whether returning of unparsed results is allowed 
@@ -63,6 +63,6 @@ export class MRTDRecognizer extends Recognizer {
          */
         this.saveImageDPI = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new MRTDRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MrtdRecognizerResult(nativeResult); }
     }
 }

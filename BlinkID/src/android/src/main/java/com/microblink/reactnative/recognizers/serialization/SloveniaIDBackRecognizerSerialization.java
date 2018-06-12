@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class SloveniaIDBackRecognizerSerialization implements RecognizerSerialization {
+public final class SloveniaIdBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIDBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIDBackRecognizer();
+        com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -27,12 +27,9 @@ public final class SloveniaIDBackRecognizerSerialization implements RecognizerSe
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIDBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIDBackRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZParsed", result.isMRZParsed());
-        jsonResult.putString("MRZText", result.getMRZText());
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("alienNumber", result.getAlienNumber());
         jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
@@ -46,6 +43,9 @@ public final class SloveniaIDBackRecognizerSerialization implements RecognizerSe
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
+        jsonResult.putString("mrzText", result.getMrzText());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("opt1", result.getOpt1());
         jsonResult.putString("opt2", result.getOpt2());
@@ -57,11 +57,11 @@ public final class SloveniaIDBackRecognizerSerialization implements RecognizerSe
 
     @Override
     public String getJsonName() {
-        return "SloveniaIDBackRecognizer";
+        return "SloveniaIdBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIDBackRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdBackRecognizer.class;
     }
 }

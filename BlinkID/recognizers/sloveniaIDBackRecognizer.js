@@ -2,26 +2,11 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for SloveniaIDBackRecognizer.
+ * Result object for SloveniaIdBackRecognizer.
  */
-export class SloveniaIDBackRecognizerResult extends RecognizerResult {
+export class SloveniaIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
-         */
-        this.MRZParsed = nativeResult.MRZParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.MRZText = nativeResult.MRZText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * the address of the card holder. 
@@ -89,6 +74,21 @@ export class SloveniaIDBackRecognizerResult extends RecognizerResult {
         this.issuer = nativeResult.issuer;
         
         /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
@@ -125,9 +125,9 @@ export class SloveniaIDBackRecognizerResult extends RecognizerResult {
  *  Recognizer for the back side of Slovenian ID.
 
  */
-export class SloveniaIDBackRecognizer extends Recognizer {
+export class SloveniaIdBackRecognizer extends Recognizer {
     constructor() {
-        super('SloveniaIDBackRecognizer');
+        super('SloveniaIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -149,6 +149,6 @@ export class SloveniaIDBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SloveniaIDBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SloveniaIdBackRecognizerResult(nativeResult); }
     }
 }

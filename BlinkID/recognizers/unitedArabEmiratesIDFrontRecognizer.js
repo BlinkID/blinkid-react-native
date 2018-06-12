@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for UnitedArabEmiratesIDFrontRecognizer.
+ * Result object for UnitedArabEmiratesIdFrontRecognizer.
  */
-export class UnitedArabEmiratesIDFrontRecognizerResult extends RecognizerResult {
+export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -39,9 +39,9 @@ export class UnitedArabEmiratesIDFrontRecognizerResult extends RecognizerResult 
 /**
  * Recognizer which can scan front side of United Arab Emirates national ID cards.
  */
-export class UnitedArabEmiratesIDFrontRecognizer extends Recognizer {
+export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('UnitedArabEmiratesIDFrontRecognizer');
+        super('UnitedArabEmiratesIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -68,6 +68,16 @@ export class UnitedArabEmiratesIDFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIDFrontRecognizerResult(nativeResult); }
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIdFrontRecognizerResult(nativeResult); }
     }
 }

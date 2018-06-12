@@ -9,21 +9,6 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
-         */
-        this.MRZParsed = nativeResult.MRZParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.MRZText = nativeResult.MRZText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
-        
-        /** 
          * Defines alien number.<code>null</code> or empty string if not available. 
          */
         this.alienNumber = nativeResult.alienNumber;
@@ -92,6 +77,21 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
          */
         this.issuer = nativeResult.issuer;
+        
+        /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
          * the name of the Swiss passport owner. 

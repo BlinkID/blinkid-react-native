@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for AustraliaDLFrontSideRecognizer.
+ * Result object for AustraliaDlFrontRecognizer.
  */
-export class AustraliaDLFrontSideRecognizerResult extends RecognizerResult {
+export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -60,9 +60,9 @@ export class AustraliaDLFrontSideRecognizerResult extends RecognizerResult {
  *  Recognizer which can scan front side of austrian driver's license.
 
  */
-export class AustraliaDLFrontSideRecognizer extends Recognizer {
+export class AustraliaDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('AustraliaDLFrontSideRecognizer');
+        super('AustraliaDlFrontRecognizer');
         
         /** 
          * true if address of Australian DL owner is being extracted 
@@ -87,7 +87,7 @@ export class AustraliaDLFrontSideRecognizer extends Recognizer {
         /** 
          * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
-        this.fullDocumentImageDPI = 250;
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -104,6 +104,6 @@ export class AustraliaDLFrontSideRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new AustraliaDLFrontSideRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new AustraliaDlFrontRecognizerResult(nativeResult); }
     }
 }

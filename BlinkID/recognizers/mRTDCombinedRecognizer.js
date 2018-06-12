@@ -2,26 +2,11 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for MRTDCombinedRecognizer.
+ * Result object for MrtdCombinedRecognizer.
  */
-export class MRTDCombinedRecognizerResult extends RecognizerResult {
+export class MrtdCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
-         */
-        this.MRZParsed = nativeResult.MRZParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.MRZText = nativeResult.MRZText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * Defines alien number.<code>null</code> or empty string if not available. 
@@ -104,6 +89,21 @@ export class MRTDCombinedRecognizerResult extends RecognizerResult {
         this.mrzImage = nativeResult.mrzImage;
         
         /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
@@ -146,9 +146,9 @@ export class MRTDCombinedRecognizerResult extends RecognizerResult {
  Machine Readable Travel Document.
 
  */
-export class MRTDCombinedRecognizer extends Recognizer {
+export class MrtdCombinedRecognizer extends Recognizer {
     constructor() {
-        super('MRTDCombinedRecognizer');
+        super('MrtdCombinedRecognizer');
         
         /** 
          * Defines whether face image will be available in result. 
@@ -170,6 +170,6 @@ export class MRTDCombinedRecognizer extends Recognizer {
          */
         this.signResult = false;
         
-        this.createResultFromNative = function (nativeResult) { return new MRTDCombinedRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MrtdCombinedRecognizerResult(nativeResult); }
     }
 }

@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MalaysiaDLFrontRecognizerSerialization implements RecognizerSerialization {
+public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDLFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDLFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDlFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -31,8 +31,8 @@ public final class MalaysiaDLFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractValidUntil")) {
             recognizer.setExtractValidUntil(jsonRecognizer.getBoolean("extractValidUntil"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -45,7 +45,7 @@ public final class MalaysiaDLFrontRecognizerSerialization implements RecognizerS
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDLFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDLFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDlFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("city", result.getCity());
@@ -66,11 +66,11 @@ public final class MalaysiaDLFrontRecognizerSerialization implements RecognizerS
 
     @Override
     public String getJsonName() {
-        return "MalaysiaDLFrontRecognizer";
+        return "MalaysiaDlFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDLFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaDlFrontRecognizer.class;
     }
 }

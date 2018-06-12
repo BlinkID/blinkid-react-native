@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class JordanIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class JordanIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.jordan.JordanIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.jordan.JordanIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.jordan.JordanIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.jordan.JordanIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -22,8 +22,8 @@ public final class JordanIDFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDPI")) {
-            recognizer.setFullDocumentImageDPI(jsonRecognizer.getInt("fullDocumentImageDPI"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -36,7 +36,7 @@ public final class JordanIDFrontRecognizerSerialization implements RecognizerSer
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.jordan.JordanIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.jordan.JordanIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.jordan.JordanIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.jordan.JordanIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -50,11 +50,11 @@ public final class JordanIDFrontRecognizerSerialization implements RecognizerSer
 
     @Override
     public String getJsonName() {
-        return "JordanIDFrontRecognizer";
+        return "JordanIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.jordan.JordanIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.jordan.JordanIdFrontRecognizer.class;
     }
 }

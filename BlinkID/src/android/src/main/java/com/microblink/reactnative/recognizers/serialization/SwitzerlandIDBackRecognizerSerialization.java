@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class SwitzerlandIDBackRecognizerSerialization implements RecognizerSerialization {
+public final class SwitzerlandIdBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDBackRecognizer();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -39,12 +39,9 @@ public final class SwitzerlandIDBackRecognizerSerialization implements Recognize
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDBackRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZParsed", result.isMRZParsed());
-        jsonResult.putString("MRZText", result.getMRZText());
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("alienNumber", result.getAlienNumber());
         jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putString("authority", result.getAuthority());
@@ -58,6 +55,9 @@ public final class SwitzerlandIDBackRecognizerSerialization implements Recognize
         jsonResult.putString("height", result.getHeight());
         jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
+        jsonResult.putString("mrzText", result.getMrzText());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putMap("nonMRZDateOfExpiry", SerializationUtils.serializeDate(result.getNonMRZDateOfExpiry()));
         jsonResult.putString("nonMRZSex", result.getNonMRZSex());
@@ -72,11 +72,11 @@ public final class SwitzerlandIDBackRecognizerSerialization implements Recognize
 
     @Override
     public String getJsonName() {
-        return "SwitzerlandIDBackRecognizer";
+        return "SwitzerlandIdBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIDBackRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandIdBackRecognizer.class;
     }
 }

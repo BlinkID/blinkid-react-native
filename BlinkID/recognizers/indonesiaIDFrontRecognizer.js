@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for IndonesiaIDFrontRecognizer.
+ * Result object for IndonesiaIdFrontRecognizer.
  */
-export class IndonesiaIDFrontRecognizerResult extends RecognizerResult {
+export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -130,9 +130,9 @@ export class IndonesiaIDFrontRecognizerResult extends RecognizerResult {
  *  Recognizer for reading front side of indonesian ID document.
 
  */
-export class IndonesiaIDFrontRecognizer extends Recognizer {
+export class IndonesiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('IndonesiaIDFrontRecognizer');
+        super('IndonesiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -229,6 +229,6 @@ export class IndonesiaIDFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new IndonesiaIDFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new IndonesiaIdFrontRecognizerResult(nativeResult); }
     }
 }

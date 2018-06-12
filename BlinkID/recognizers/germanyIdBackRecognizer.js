@@ -2,26 +2,36 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for PolandIDBackSideRecognizer.
+ * Result object for GermanyIdBackRecognizer.
  */
-export class PolandIDBackSideRecognizerResult extends RecognizerResult {
+export class GermanyIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         * the full address of the card holder. 
          */
-        this.MRZParsed = nativeResult.MRZParsed;
+        this.address = nativeResult.address;
         
         /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         * extracted city from the address of the card holder. 
          */
-        this.MRZText = nativeResult.MRZText;
+        this.addressCity = nativeResult.addressCity;
         
         /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         * extracted house number from the address of the card holder. 
          */
-        this.MRZVerified = nativeResult.MRZVerified;
+        this.addressHouseNumber = nativeResult.addressHouseNumber;
+        
+        /** 
+         * extracted street name from the address of the card holder. 
+         */
+        this.addressStreet = nativeResult.addressStreet;
+        
+        /** 
+         * extracted ZIP code from the address of the card holder. 
+         */
+        this.addressZipCode = nativeResult.addressZipCode;
         
         /** 
          * Defines alien number.<code>null</code> or empty string if not available. 
@@ -34,6 +44,11 @@ export class PolandIDBackSideRecognizerResult extends RecognizerResult {
         this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
+         * the issuing authority of German ID. 
+         */
+        this.authority = nativeResult.authority;
+        
+        /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
@@ -42,6 +57,11 @@ export class PolandIDBackSideRecognizerResult extends RecognizerResult {
          * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the date of issue of the ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          * Defines document code. Document code contains two characters. For MRTD the first character shall 
@@ -59,9 +79,19 @@ export class PolandIDBackSideRecognizerResult extends RecognizerResult {
         this.documentType = nativeResult.documentType;
         
         /** 
+         * the card holder's eye colour. 
+         */
+        this.eyeColour = nativeResult.eyeColour;
+        
+        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
+        
+        /** 
+         * the height of the card holder. 
+         */
+        this.height = nativeResult.height;
         
         /** 
          * Defines immigrant case number.<code>null</code> or empty string if not available. 
@@ -72,6 +102,21 @@ export class PolandIDBackSideRecognizerResult extends RecognizerResult {
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
          */
         this.issuer = nativeResult.issuer;
+        
+        /** 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         */
+        this.mrzParsed = nativeResult.mrzParsed;
+        
+        /** 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
+         */
+        this.mrzText = nativeResult.mrzText;
+        
+        /** 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
@@ -107,12 +152,12 @@ export class PolandIDBackSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for the back side of Polish ID.
+ *  Recognizer which can scan the back side of German national ID cards.
 
  */
-export class PolandIDBackSideRecognizer extends Recognizer {
+export class GermanyIdBackRecognizer extends Recognizer {
     constructor() {
-        super('PolandIDBackSideRecognizer');
+        super('GermanyIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -124,6 +169,6 @@ export class PolandIDBackSideRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new PolandIDBackSideRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new GermanyIdBackRecognizerResult(nativeResult); }
     }
 }

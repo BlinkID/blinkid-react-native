@@ -2,26 +2,36 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for CzechiaIDFrontSideRecognizer.
+ * Result object for CroatiaIdFrontRecognizer.
  */
-export class CzechiaIDFrontSideRecognizerResult extends RecognizerResult {
+export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * the date of birth of Czech ID owner 
+         * citizenship of the Croatian ID owner. 
+         */
+        this.citizenship = nativeResult.citizenship;
+        
+        /** 
+         * the date of birth of Croatian ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
-         * the date of expiry of Czech ID 
+         * the document date of expiry of the Croatian ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry;
         
         /** 
-         * the date of issue of Czech ID 
+         * true if date of expiry of the Croatian ID is permanent else false 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        
+        /** 
+         * true if scanned document is bilingual 
+         */
+        this.documentBilingual = nativeResult.documentBilingual;
         
         /** 
          *  face image from the document 
@@ -29,7 +39,7 @@ export class CzechiaIDFrontSideRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the first name of the Czech ID owner. 
+         * the first name of the Croatian ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -39,22 +49,17 @@ export class CzechiaIDFrontSideRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the identity card number of Czech ID. 
+         * the identity card number of Croatian ID. 
          */
         this.identityCardNumber = nativeResult.identityCardNumber;
         
         /** 
-         * the last name of the Czech ID owner. 
+         * the last name of the Croatian ID owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * the place of birth of Czech ID owner. 
-         */
-        this.placeOfBirth = nativeResult.placeOfBirth;
-        
-        /** 
-         * sex of the Czech ID owner. 
+         * sex of the Croatian ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -67,17 +72,37 @@ export class CzechiaIDFrontSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan front side of czech national ID cards.
+ *  Recognizer which can scan front side of croatian national ID cards.
 
  */
-export class CzechiaIDFrontSideRecognizer extends Recognizer {
+export class CroatiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('CzechiaIDFrontSideRecognizer');
+        super('CroatiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * true if citizenship of Croatian ID owner is being extracted 
+         */
+        this.extractCitizenship = true;
+        
+        /** 
+         * true if date of birth of Croatian ID owner is being extracted 
+         */
+        this.extractDateOfBirth = true;
+        
+        /** 
+         * true if date of expiry is being extracted from Croatian ID 
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * true if sex of Croatian ID owner is being extracted 
+         */
+        this.extractSex = true;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -94,6 +119,6 @@ export class CzechiaIDFrontSideRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new CzechiaIDFrontSideRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CroatiaIdFrontRecognizerResult(nativeResult); }
     }
 }

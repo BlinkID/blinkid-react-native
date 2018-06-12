@@ -2,9 +2,9 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for ColombiaIDFrontSideRecognizer.
+ * Result object for ColombiaIdFrontRecognizer.
  */
-export class ColombiaIDFrontSideRecognizerResult extends RecognizerResult {
+export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -19,19 +19,19 @@ export class ColombiaIDFrontSideRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
+         * owner first name 
+         */
+        this.firstName = nativeResult.firstName;
+        
+        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * owner first name 
+         * owner last name 
          */
-        this.ownerFirsName = nativeResult.ownerFirsName;
-        
-        /** 
-         * owner first name 
-         */
-        this.ownerLastName = nativeResult.ownerLastName;
+        this.lastName = nativeResult.lastName;
         
         /** 
          *  signature image from the document 
@@ -42,12 +42,11 @@ export class ColombiaIDFrontSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading Colombia ID Front document.
-
+ * Recognizer which can scan front side of Colombian national ID cards.
  */
-export class ColombiaIDFrontSideRecognizer extends Recognizer {
+export class ColombiaIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('ColombiaIDFrontSideRecognizer');
+        super('ColombiaIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -55,12 +54,12 @@ export class ColombiaIDFrontSideRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * true if first name of Colombia ID Front owner is being extracted 
+         * Defines if first name of ID owner should be extracted 
          */
         this.extractFirstName = true;
         
         /** 
-         * true if last name of Colombia ID Front owner is being extracted 
+         * Defines if last name of ID owner should be extracted 
          */
         this.extractLastName = true;
         
@@ -79,6 +78,21 @@ export class ColombiaIDFrontSideRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new ColombiaIDFrontSideRecognizerResult(nativeResult); }
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new ColombiaIdFrontRecognizerResult(nativeResult); }
     }
 }

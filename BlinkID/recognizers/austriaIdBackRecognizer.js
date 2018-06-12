@@ -2,16 +2,11 @@ import { Recognizer, RecognizerResult } from '../recognizer'
 import * as Types from '../types'
 
 /**
- * Result object for AustriaIDBackSideRecognizer.
+ * Result object for AustriaIdBackRecognizer.
  */
-export class AustriaIDBackSideRecognizerResult extends RecognizerResult {
+export class AustriaIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * The data extracted from the machine readable zone. 
-         */
-        this.MRZResult = nativeResult.MRZResult;
         
         /** 
          * the date of issuance of the ID. 
@@ -34,6 +29,11 @@ export class AustriaIDBackSideRecognizerResult extends RecognizerResult {
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult;
+        
+        /** 
          * the place of birth of the card holder. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
@@ -52,11 +52,11 @@ export class AustriaIDBackSideRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan back side of austrian national ID cards.
+ * Recognizer which can scan back side of Austrian national ID cards.
  */
-export class AustriaIDBackSideRecognizer extends Recognizer {
+export class AustriaIdBackRecognizer extends Recognizer {
     constructor() {
-        super('AustriaIDBackSideRecognizer');
+        super('AustriaIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -93,6 +93,11 @@ export class AustriaIDBackSideRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new AustriaIDBackSideRecognizerResult(nativeResult); }
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new AustriaIdBackRecognizerResult(nativeResult); }
     }
 }

@@ -62,7 +62,7 @@ export class MyKadBackRecognizer extends Recognizer {
         /** 
          * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
-        this.fullDocumentImageDPI = 250;
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Defines whether full document image will be available in result. 

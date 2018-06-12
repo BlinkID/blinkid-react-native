@@ -39,6 +39,16 @@ export class DocumentFaceRecognizer extends Recognizer {
         this.returnFullDocumentImage = false;
         
         /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
          * currently used detector type. 
          */
         this.detectorType = DocumentFaceDetectorType.TD1;

@@ -9,11 +9,6 @@ export class AustriaPassportRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The data extracted from the machine readable zone. 
-         */
-        this.MRZResult = nativeResult.MRZResult;
-        
-        /** 
          * the date of birth of Austrian passport owner 
          */
         this.dateOfBirth = new Date(nativeResult.dateOfBirth);
@@ -47,6 +42,11 @@ export class AustriaPassportRecognizerResult extends RecognizerResult {
          * issuing authority of the Austrian passport. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult;
         
         /** 
          * nationality of the Austrian passport owner. 
@@ -87,7 +87,7 @@ export class AustriaPassportRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan austrian passport.
+ * Recognizer which can scan Austrian passport.
  */
 export class AustriaPassportRecognizer extends Recognizer {
     constructor() {
@@ -167,6 +167,21 @@ export class AustriaPassportRecognizer extends Recognizer {
          * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new AustriaPassportRecognizerResult(nativeResult); }
     }

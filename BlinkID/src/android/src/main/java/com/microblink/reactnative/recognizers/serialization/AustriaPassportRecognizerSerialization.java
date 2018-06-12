@@ -55,6 +55,15 @@ public final class AustriaPassportRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
+        }
         return recognizer;
     }
 
@@ -63,7 +72,6 @@ public final class AustriaPassportRecognizerSerialization implements RecognizerS
         com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putMap("MRZResult", BlinkIDSerializationUtils.serializeMRZResult(result.getMRZResult()));
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth().getDate()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry().getDate()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue().getDate()));
@@ -71,6 +79,7 @@ public final class AustriaPassportRecognizerSerialization implements RecognizerS
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("givenName", result.getGivenName());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("passportNumber", result.getPassportNumber());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());

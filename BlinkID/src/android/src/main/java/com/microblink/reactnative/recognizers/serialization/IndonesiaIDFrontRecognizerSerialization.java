@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class IndonesiaIDFrontRecognizerSerialization implements RecognizerSerialization {
+public final class IndonesiaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIDFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIDFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -72,7 +72,7 @@ public final class IndonesiaIDFrontRecognizerSerialization implements Recognizer
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIDFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIDFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
@@ -103,11 +103,11 @@ public final class IndonesiaIDFrontRecognizerSerialization implements Recognizer
 
     @Override
     public String getJsonName() {
-        return "IndonesiaIDFrontRecognizer";
+        return "IndonesiaIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIDFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.indonesia.IndonesiaIdFrontRecognizer.class;
     }
 }
