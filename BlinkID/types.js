@@ -3,16 +3,47 @@
  */
 export class Date {
     constructor(nativeDate) {
+        /** day in month */
         this.day = nativeDate.day;
+        /** month in year */
         this.month = nativeDate.month;
+        /** year */
         this.year = nativeDate.year;
     }    
 }
 
 /**
+ * Represents a point in image
+ */
+export class Point {
+    constructor(nativePoint) {
+        /** x coordinate of the point */
+        this.x = nativePoint.x;
+        /** y coordinate of the point */
+        this.y = nativePoint.y;
+    }
+}
+
+/**
+ * Represents a quadrilateral location in the image
+ */
+export class Quadrilateral {
+    constructor(nativeQuad) {
+        /** upper left point of the quadrilateral */
+        this.upperLeft = new Point(nativeQuad.upperLeft);
+        /** upper right point of the quadrilateral */
+        this.upperRight = new Point(nativeQuad.upperRight);
+        /** lower left point of the quadrilateral */
+        this.lowerLeft = new Point(nativeQuad.lowerLeft);
+        /** lower right point of the quadrilateral */
+        this.lowerRight = new Point(nativeQuad.lowerRight);
+    }
+}
+
+/**
  * Possible types of Machine Readable Travel Documents (MRTDs).
  */
-export const MRTDDocumentType = Object.freeze(
+export const MrtdDocumentType = Object.freeze(
     {
         /** Unknown document type */
         Unknown : 1,
@@ -32,7 +63,7 @@ export const MRTDDocumentType = Object.freeze(
 /**
  * Represents data extracted from MRZ (Machine Readable Zone) of Machine Readable Travel Document (MRTD).
  */
-export class MRZResult {
+export class MrzResult {
     constructor(nativeMRZResult) {
         /**
          * Type of recognized document. It is always one of the values represented by BlinkIDScanner.MRTDDocumentType
@@ -49,7 +80,7 @@ export class MRZResult {
          */
         this.issuer = nativeMRZResult.issuer;
         /** Holder's date of birth */
-        this.dateOfBirth = new Date(nativeMRZResult.dateOfBirth);
+        this.dateOfBirth = nativeMRZResult.dateOfBirth != null ? new Date(nativeMRZResult.dateOfBirth) : null;
         /**
          * The document number. Document number contains up to 9 characters.
          * Element does not exist on US Green Card. To see which document was scanned use documentType property.
@@ -78,7 +109,7 @@ export class MRZResult {
          */
         this.documentCode = nativeMRZResult.documentCode;
         /** The date of expiry */
-        this.dateOfExpiry = new Date(nativeMRZResult.dateOfExpiry);
+        this.dateOfExpiry = nativeMRZResult.dateOfExpiry != null ? new Date(nativeMRZResult.dateOfExpiry) : null;
         /**
          * The first optional data. Contains empty string if not available.
          * Element does not exist on US Green Card. To see which document was scanned use the documentType property.
@@ -120,7 +151,7 @@ export class MRZResult {
 /**
  * Possible values for EUDL country field.
  */
-export const EUDLCountry = Object.freeze(
+export const EudlCountry = Object.freeze(
     {
         /** UK Driver's license */
         UK : 1,

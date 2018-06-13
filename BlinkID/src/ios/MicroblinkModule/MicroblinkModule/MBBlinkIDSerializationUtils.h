@@ -11,6 +11,6 @@
 
 @interface MBBlinkIDSerializationUtils : NSObject
 
-+(NSDictionary *) serializeMRZResult:(MBMRZResult *)mrzResult;
++(NSDictionary *) serializeMrzResult:(MBMrzResult *)mrzResult;
 
 @end

@@ -7,18 +7,152 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A27CCA301E9E57A500BED675 /* MBMicroblinkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A27CCA2F1E9E57A500BED675 /* MBMicroblinkModule.m */; };
-		A27CCA311E9E57A500BED675 /* MBMicroblinkModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A27CCA2E1E9E57A500BED675 /* MBMicroblinkModule.h */; };
+		02874BBC916806FD0C90F9D0 /* MBRecognizerSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0E43C5BDEEB1AE4507066D /* MBRecognizerSerializers.m */; };
+		03F7473FBE821EC34D8624F1 /* MBMalaysiaDlFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 65594B9D8539A4CBB38366FD /* MBMalaysiaDlFrontRecognizerWrapper.m */; };
+		0560480FA12A8E6364A233A1 /* MBSimNumberRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F1664C99909E33DEA4A5935B /* MBSimNumberRecognizerWrapper.h */; };
+		07BB43788F0BC58E609FA464 /* MBEudlRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = BCA34849B2E1F9372102A8BD /* MBEudlRecognizerWrapper.h */; };
+		09A34778BB6680DD3194D884 /* MBIndonesiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EC824549AD01D0D0C2B69BCD /* MBIndonesiaIdFrontRecognizerWrapper.m */; };
+		09C34AC38FCB64C026939141 /* MBAustriaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E00B43A8B93DDA50BDD25068 /* MBAustriaIdFrontRecognizerWrapper.m */; };
+		0BBD4454A1B3463B8CCAFE79 /* MBDocumentFaceRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A48E4AC38ABF36D244C6DDD0 /* MBDocumentFaceRecognizerWrapper.h */; };
+		10E84706A5D2F81166C22824 /* MBSlovakiaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A994B8DBCA1D19E090ACE98 /* MBSlovakiaCombinedRecognizerWrapper.m */; };
+		134240D8B3636A4945CE455D /* MBColombiaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57424AB4B70EE01B2CB44533 /* MBColombiaIdBackRecognizerWrapper.m */; };
+		185345C480746BE0EAE172D8 /* MBDocumentOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = DB71401B9C4AC3B47AF84F95 /* MBDocumentOverlaySettingsSerialization.h */; };
+		1A4342C79B3634795AA5CCB1 /* MBAustriaPassportRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E57947B9961CB7EC5BA2CE51 /* MBAustriaPassportRecognizerWrapper.m */; };
+		1B4D42C4AE482FA139502894 /* MBiKadRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 583E4B05B014A9FBF39AAAFA /* MBiKadRecognizerWrapper.m */; };
+		1C6840DFB7F4D7FB76458997 /* MBRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE04E3E84DEDACA79CB8509 /* MBRecognizerWrapper.m */; };
+		1C9E4B1A85870F4ED3E0B2C6 /* MBGermanyIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1B4F269E7902F2A7D84720 /* MBGermanyIdBackRecognizerWrapper.m */; };
+		1D87491ABAEA4BA0A58D9350 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256443B8B7B53C68AEEEAD5 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.m */; };
+		1DD247BEAE7C0CFAE8141A9F /* MBSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 56734E529A3AD5C5C386CADF /* MBSerializationUtils.h */; };
+		1EA54FCD8D61BDCEB22E3951 /* MBBarcodeOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 902C4CF894D2B834AD2D8F09 /* MBBarcodeOverlaySettingsSerialization.m */; };
+		1FB14E09A06ABD30BB398D92 /* MBAustraliaDlFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6C948068239DCD9123468D4 /* MBAustraliaDlFrontRecognizerWrapper.h */; };
+		223C4B069B83EF334897B43E /* MBGermanyOldIdRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C741BCAB0B29AA090BD09C /* MBGermanyOldIdRecognizerWrapper.m */; };
+		22C944D4AE4FD2DE868F57EA /* MBPolandIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DEA4A79A954F5A31EFFE67A /* MBPolandIdFrontRecognizerWrapper.m */; };
+		22EA4EC18CFA1AEEF9803B6D /* MBSimNumberRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4063442AB0BAFA09344E690D /* MBSimNumberRecognizerWrapper.m */; };
+		25764486B124DADD92749BA1 /* MBAustraliaDlBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CA4DC58911CCE76B5B3E67 /* MBAustraliaDlBackRecognizerWrapper.m */; };
+		25D64AB7BAC9F967C4D05813 /* MBBarcodeRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DC7432D9F0BE93A2F681AC9 /* MBBarcodeRecognizerWrapper.h */; };
+		296347D79ABF4BD024EAC6F8 /* MBOverlaySettingsSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = F6114FDFB45D2E80CA6A4F2C /* MBOverlaySettingsSerializers.h */; };
+		2DB54C0F82B71C397B670018 /* MBRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 99464ECEB6CA12DCD6D1BBB2 /* MBRecognizerWrapper.h */; };
+		334549F69CEE946757607E37 /* MBSingaporeCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 750C4AAE9C55136013AD96B9 /* MBSingaporeCombinedRecognizerWrapper.h */; };
+		33A644D2B7DF2A2EF85275AB /* MBBlinkIDSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DE243239EF89A7B1BC89664 /* MBBlinkIDSerializationUtils.h */; };
+		340845A3B5E3A94B40AC5D8B /* MBCroatiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 88194448A4E866775B1EA03E /* MBCroatiaIdFrontRecognizerWrapper.m */; };
+		372D4ED4B21DD91589ED4B5F /* MBSerbiaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A349D497DFAD2355AA2A7D /* MBSerbiaIdBackRecognizerWrapper.m */; };
+		37904DA3B54CEB103537CF7D /* MBMrtdRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C7374C46AD53E71497F030D5 /* MBMrtdRecognizerWrapper.m */; };
+		380440DAA449475A727BD219 /* MBJordanIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 984C47C8AE9CC3BBE2A052DE /* MBJordanIdFrontRecognizerWrapper.h */; };
+		399A447CAB1ECB0836466573 /* MBEgyptIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9744219229E5245276EF00 /* MBEgyptIdFrontRecognizerWrapper.h */; };
+		3CE74B368DC95DADAA3E11FF /* MBSlovakiaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 059E4F95BCA398CFEDFB4C64 /* MBSlovakiaIdBackRecognizerWrapper.m */; };
+		3D3144988CD4FDE922BF9744 /* MBPdf417RecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C684D6080A6D14B298FED9E /* MBPdf417RecognizerWrapper.h */; };
+		3FCE4F5BBD3BAF5829C2BFD4 /* MBSwitzerlandIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B14C407F97CEBD777C10DDA1 /* MBSwitzerlandIdBackRecognizerWrapper.h */; };
+		40374FE799BD1FA7DE16D618 /* MBSloveniaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E726446C9FE3DDAB4C5B17BD /* MBSloveniaCombinedRecognizerWrapper.m */; };
+		41DD42FD9E7780624F1C42EE /* MBHongKongIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3220440C80D42F4486D7216C /* MBHongKongIdFrontRecognizerWrapper.h */; };
+		42784EF2A5E0627DD11B149D /* MBSloveniaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 007F4717B7815AB5A41FF211 /* MBSloveniaIdFrontRecognizerWrapper.m */; };
+		44824DF68F666D9E8BBD34C0 /* MBMyTenteraRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BE842B289B260EFC0D370C5 /* MBMyTenteraRecognizerWrapper.h */; };
+		45AF4153A654A2043A79C20F /* MBAustriaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 83DB4A6286440893CABD282D /* MBAustriaCombinedRecognizerWrapper.h */; };
+		45FA4EB295551738E358F75C /* MBNewZealandDlFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FEA8464A81A0A0443F402E83 /* MBNewZealandDlFrontRecognizerWrapper.h */; };
+		46684628B9996CDD4CA4A62E /* MBPolandIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E77942A19117DB8D4AAD5A3C /* MBPolandIdBackRecognizerWrapper.m */; };
+		48424E69B2E9D759B8B8215D /* MBRomaniaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5547EDBF82CAFA0624566D /* MBRomaniaIdFrontRecognizerWrapper.m */; };
+		48A14DC4B14124089748B443 /* MBCzechiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B0437589089E56714F6840 /* MBCzechiaIdFrontRecognizerWrapper.m */; };
+		4AF14D4B8B0F07DCDA933DCF /* MBGermanyCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D20B49859FF0ECD9580AFCB2 /* MBGermanyCombinedRecognizerWrapper.h */; };
+		4B144B7F9798ED4E073CB395 /* MBJordanIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 97724ACEB59299D08F72310E /* MBJordanIdBackRecognizerWrapper.h */; };
+		4B4447C0BCE34AEDAD61F07C /* MBJordanCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E74E9F851BBB5C07E4591D /* MBJordanCombinedRecognizerWrapper.h */; };
+		4B6C4F91A6DC9E6B064CE3B2 /* MBSloveniaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1647C597019B1FB328300D /* MBSloveniaIdFrontRecognizerWrapper.h */; };
+		4FB04A30A17D3ED1FE1AB3BE /* MBOverlaySettingsSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CB473C931F20FBB9099244 /* MBOverlaySettingsSerializers.m */; };
+		50014F28B8015E0447254DA3 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = DDD845B0816179FC5A709225 /* MBDocumentVerificationOverlaySettingsSerialization.h */; };
+		5160460FA6C8EF77983251CD /* MBOverlaySerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 58504DDD8FB5616BD4E5ECC3 /* MBOverlaySerializationUtils.h */; };
+		562E4BE2A274B40C8C5AA97C /* MBCroatiaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 85364F268305E77691D5BCF9 /* MBCroatiaCombinedRecognizerWrapper.m */; };
+		567649A6B7AC1C39089FFDB2 /* MBMyKadBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 49964B30B742BC14F151806A /* MBMyKadBackRecognizerWrapper.h */; };
+		597849A28854A4E19632808E /* MBSingaporeIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D4B0B8EBA51A5829E9A54 /* MBSingaporeIdBackRecognizerWrapper.m */; };
+		59794B528528056AE7FEE2CA /* MBRomaniaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = BA144672A7FB3FE30B6E461D /* MBRomaniaIdFrontRecognizerWrapper.h */; };
+		5AD44344819811B3F24B167C /* MBSlovakiaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EC460AA03A5498D69FC6C0 /* MBSlovakiaCombinedRecognizerWrapper.h */; };
+		5DC2425C9DE2A68060C80DE9 /* MBColombiaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D74F0DA7F7396186ED88A3 /* MBColombiaIdBackRecognizerWrapper.h */; };
+		5FA04DB3A70C1122961B6614 /* MBHongKongIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 63534FD69ABA75742E623F56 /* MBHongKongIdFrontRecognizerWrapper.m */; };
+		61AF40F398848797ECCB319F /* MBMyTenteraRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F04A69812073972FD7A2D7 /* MBMyTenteraRecognizerWrapper.m */; };
+		63344AB68CAD5C20EAEEA423 /* MBJordanIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D21E439981C4AE531288D184 /* MBJordanIdBackRecognizerWrapper.m */; };
+		63D44A298F2D6AF522FFFC0D /* MBDocumentFaceRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0835447295D881C4659A1C9A /* MBDocumentFaceRecognizerWrapper.m */; };
+		66A54B78B43CF7C9D475C550 /* MBBarcodeOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = E3714A668D0372FEB3221E4E /* MBBarcodeOverlaySettingsSerialization.h */; };
+		692F42459E9912BA761EAD22 /* MBSerbiaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B68343E2806F430DC2E765E2 /* MBSerbiaCombinedRecognizerWrapper.m */; };
+		6A864859B05BF78C8D78D68F /* MBCzechiaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C16849CFB236080851DA798F /* MBCzechiaIdBackRecognizerWrapper.h */; };
+		6F824500BF65477861F08D9D /* MBSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 64C84E0895EE6E31282E006F /* MBSerializationUtils.m */; };
+		701F4F1F90576DAFE75A589F /* MBOverlaySerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A744C8BE9EB9BFAD1AD9E2 /* MBOverlaySerializationUtils.m */; };
+		706A411F8B6936F3B03E3987 /* MBSlovakiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0842BDB005E14799B74571 /* MBSlovakiaIdFrontRecognizerWrapper.h */; };
+		728642F19DA8E43D42E09CF6 /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9F4F23BB2814F45355CA1D /* MBDocumentVerificationOverlaySettingsSerialization.m */; };
+		73F94976902037065FCCC22B /* MBOverlayViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E48407B98F8BA22F5B8D33F /* MBOverlayViewControllerDelegate.h */; };
+		75BB4DA18230A09600CB186A /* MBOverlayVCCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = 467349D48DB6E7C98BAC5776 /* MBOverlayVCCreator.h */; };
+		76904533A50C76AB8A757F52 /* MBJordanCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2D43C29D60CC23985CA6EE /* MBJordanCombinedRecognizerWrapper.m */; };
+		77724004A7380F16605F6810 /* MBCroatiaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E44E2189183B3B409E8628 /* MBCroatiaIdBackRecognizerWrapper.h */; };
+		784040ADB568CE2413C61FA1 /* MBSerbiaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 39F4418190F9CB871156CE67 /* MBSerbiaCombinedRecognizerWrapper.h */; };
+		7934463F8309DA8319661F25 /* MBSingaporeIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDC422489C867195C614938 /* MBSingaporeIdFrontRecognizerWrapper.m */; };
+		7A374E46A42B43A443785836 /* MBCzechiaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3A46A381BE52BF78242368 /* MBCzechiaCombinedRecognizerWrapper.m */; };
+		7A684061B1A20B74C267382E /* MBGermanyIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 911946DDA5F3EDF338835919 /* MBGermanyIdFrontRecognizerWrapper.m */; };
+		7E0043DDBE7A0F9D3B253741 /* MBSerbiaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F10D4B6AA90FF20D3F3D16FD /* MBSerbiaIdBackRecognizerWrapper.h */; };
+		800D4B4F81FB2D56C36DA8DD /* MBSingaporeCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A543499EC5D953A57EA34C /* MBSingaporeCombinedRecognizerWrapper.m */; };
+		808849D0A731C17B21D6EC93 /* MBRecognizerSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = 89274880ABF388677C6CEAA0 /* MBRecognizerSerializers.h */; };
+		82804C9DBFFC3C7E81B3C2A4 /* MBMalaysiaDlFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C2F4D22A608A9C678A3D22A /* MBMalaysiaDlFrontRecognizerWrapper.h */; };
+		83DE4A5FA9A542BB175E6D98 /* MBCzechiaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D67487BBA430405B993D1BD /* MBCzechiaCombinedRecognizerWrapper.h */; };
+		85F74F0B89F520366057AF8B /* MBGermanyOldIdRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9776497D94166C833F4849F1 /* MBGermanyOldIdRecognizerWrapper.h */; };
+		861C4005B693B1A2E6DC4F93 /* MBSwitzerlandPassportRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EAC4BE68FD7A93DEBE926FF /* MBSwitzerlandPassportRecognizerWrapper.h */; };
+		88D54A5EBB5A544142D7D13D /* MBSingaporeIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = E40F4B1AB096C13655D9E11B /* MBSingaporeIdFrontRecognizerWrapper.h */; };
+		89BF441C9CBE0F04F9FA98A7 /* MBMyKadFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2969493C9A0CA0228AC161DA /* MBMyKadFrontRecognizerWrapper.m */; };
+		8B674074BFCBB25EAD20F92D /* MBSingaporeIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D5D04E0CA7C13DEA03FCC2FD /* MBSingaporeIdBackRecognizerWrapper.h */; };
+		8CF24046BF170BEEF7528108 /* MBAustraliaDlBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A26844F697EA4E566C3B447F /* MBAustraliaDlBackRecognizerWrapper.h */; };
+		8D0445D890942DB0E42D3BF8 /* MBMicroblinkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5D4FDBB7C37262895EC5FA /* MBMicroblinkModule.m */; };
+		8FC54FC0ABB70FFE4E9FC860 /* MBSwitzerlandIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 997243DF805FC8F14ADFA21D /* MBSwitzerlandIdFrontRecognizerWrapper.h */; };
+		91D349A09D3AEC3A3558F6B7 /* MBSerbiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E4B4F99A181AB88C107FB /* MBSerbiaIdFrontRecognizerWrapper.m */; };
+		92E1463A8FF56E6D4AF53FAF /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E57428A8E01630360A5B9B0 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.h */; };
+		92E24E7D8DCAC0DC84C6DCAD /* MBCroatiaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EBF4F51B31AF0001A3CB97D /* MBCroatiaCombinedRecognizerWrapper.h */; };
+		93EB4E518794862A83E800BE /* MBCzechiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F03B42B6907F3A1022921C5F /* MBCzechiaIdFrontRecognizerWrapper.h */; };
+		9732495F8EA951A7882E46DE /* MBCzechiaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA4422A7390D7D4A208D22 /* MBCzechiaIdBackRecognizerWrapper.m */; };
+		98674E6D8C63740CD22008E5 /* MBAustriaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0754946B99FCE9969318085 /* MBAustriaIdBackRecognizerWrapper.m */; };
+		994A480EACD4A318DEFE8ADF /* MBNewZealandDlFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FE564A74898737D381F60332 /* MBNewZealandDlFrontRecognizerWrapper.m */; };
+		9EEE4C0E966A074D85D7F9A2 /* MBSloveniaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 420C4654802CADC215C564E5 /* MBSloveniaIdBackRecognizerWrapper.h */; };
+		A0B246EAB3BEF5E4736EDF34 /* MBAustriaCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 94944D339EA1A0033DBF6FCB /* MBAustriaCombinedRecognizerWrapper.m */; };
+		A1D34137BF5E8C3B53A27522 /* MBBarcodeRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 67EC4457B8B5FE4585D1C0B7 /* MBBarcodeRecognizerWrapper.m */; };
 		A27CCA401E9E5D8D00BED675 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA3A1E9E57CF00BED675 /* Accelerate.framework */; };
 		A27CCA421E9E5D9400BED675 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA411E9E5D9400BED675 /* CoreFoundation.framework */; };
 		A27CCA431E9E5D9900BED675 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA381E9E57C900BED675 /* AudioToolbox.framework */; };
 		A27CCA441E9E5DAE00BED675 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA3E1E9E57DA00BED675 /* CoreMedia.framework */; };
-		C9BE5CB320CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CB020CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.m */; };
-		C9BE5CB920CA737A009DB49E /* MBSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CB620CA737A009DB49E /* MBSerializationUtils.m */; };
-		C9BE5CD420CA7BFF009DB49E /* MBRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CD020CA7BFE009DB49E /* MBRecognizerWrapper.m */; };
-		C9BE5CD520CA7BFF009DB49E /* MBRecognizerSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CD120CA7BFE009DB49E /* MBRecognizerSerializers.m */; };
-		C9BE5CD820CA7C39009DB49E /* MBOverlaySerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CD720CA7C39009DB49E /* MBOverlaySerializationUtils.m */; };
-		C9BE5CDB20CAA636009DB49E /* MBOverlaySettingsSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BE5CD920CAA636009DB49E /* MBOverlaySettingsSerializers.m */; };
+		A78F4A6CB0ECF9B0293179AC /* MBAustriaPassportRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D540A6A23B0D49D254C83A /* MBAustriaPassportRecognizerWrapper.h */; };
+		A9FD488F95C4BC346F92D3A4 /* MBSwitzerlandIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F784CEFA1AF067FFB213028 /* MBSwitzerlandIdFrontRecognizerWrapper.m */; };
+		AB4049B9B32FA57EA53F005E /* MBCroatiaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D2604464B7362B023FE86077 /* MBCroatiaIdBackRecognizerWrapper.m */; };
+		AF75489586F1FD3BCEF1897C /* MBCroatiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D5F44AB7B22600C8DF5BF129 /* MBCroatiaIdFrontRecognizerWrapper.h */; };
+		AF7B4BF8B6A6B68B2380944A /* MBSwitzerlandIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A60E46E38719D16D9E55A372 /* MBSwitzerlandIdBackRecognizerWrapper.m */; };
+		B584453CA17F2EA7A61B2073 /* MBPolandIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 29504854A984AFD9E8943DA5 /* MBPolandIdBackRecognizerWrapper.h */; };
+		B5CE43C98D26D24538F50092 /* MBColombiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 66744AEBB41CFB0B26E76DE3 /* MBColombiaIdFrontRecognizerWrapper.h */; };
+		B6E440B5B8EC6355D0EF7647 /* MBMyKadBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C54161AE0904B506384B4E /* MBMyKadBackRecognizerWrapper.m */; };
+		B77F46E5958F781E33117C04 /* MBPdf417RecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AC418C9F9418F6006B65C2 /* MBPdf417RecognizerWrapper.m */; };
+		B96D49B995E7866720933F19 /* MBAustriaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 81E04B6D9051BB02A87875AD /* MBAustriaIdFrontRecognizerWrapper.h */; };
+		BA824AA99FC91D9796E7EE74 /* MBIndonesiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E064745A20D71544910E2E7 /* MBIndonesiaIdFrontRecognizerWrapper.h */; };
+		BEE24C6E9C8A97352E7444B1 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 59B74370AA7C5850FCA9B997 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.h */; };
+		BFBA40D29113A49C6B1A8278 /* MBPolandCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD04F85BC1010C995F11E48 /* MBPolandCombinedRecognizerWrapper.m */; };
+		C1104C71B40B547E589E197F /* MBSlovakiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B0496EAEF51EE8252B919E /* MBSlovakiaIdFrontRecognizerWrapper.m */; };
+		C25A4E45ACF33DB0F7989732 /* MBPolandCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = AECB4172B55F1515086AAE86 /* MBPolandCombinedRecognizerWrapper.h */; };
+		C31D46DD97F589CD93D15F24 /* MBAustriaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 271F49589943BF2BD8F02403 /* MBAustriaIdBackRecognizerWrapper.h */; };
+		C3E3426BA19781B39DBC2433 /* MBEgyptIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB744C29FC23F3520B1C794 /* MBEgyptIdFrontRecognizerWrapper.m */; };
+		C5C34846AD8581ACB16EB098 /* MBGermanyPassportRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F694FEDAE75E7776B896DD9 /* MBGermanyPassportRecognizerWrapper.h */; };
+		C6D740969C38596ACB06AED1 /* MBEudlRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E1304CC991E26744E342319A /* MBEudlRecognizerWrapper.m */; };
+		C76848E2BFF1D22C0DDBDD90 /* MBGermanyCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 71934B0C854CE93B33F62B23 /* MBGermanyCombinedRecognizerWrapper.m */; };
+		C9874D34BBBAE5621D8B3C3E /* MBAustraliaDlFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF4CF78C1B6F9EBE5F2E9C /* MBAustraliaDlFrontRecognizerWrapper.m */; };
+		CCE24A148B7D70F627E7736A /* MBUsdlRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 61FE413196C3B6B6822357BF /* MBUsdlRecognizerWrapper.h */; };
+		D0CD47E2B158CBEF7977F72A /* MBJordanIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 121543EBBDE0014C6FD14A48 /* MBJordanIdFrontRecognizerWrapper.m */; };
+		D0E444859C67DB39AE3A40F7 /* MBSloveniaIdBackRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4947C2A42FF1355B3EF265 /* MBSloveniaIdBackRecognizerWrapper.m */; };
+		D22C4115AEE88FABFA08EF60 /* MBiKadRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71469B9F4C0BFD04D00CE4 /* MBiKadRecognizerWrapper.h */; };
+		D34A4DB88A80142BAA124DD7 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DBB848329B94DE2B72853DE8 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.m */; };
+		D44A4A739B33592E89058082 /* MBBlinkIDSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B56D41768604223E2FAE6CAE /* MBBlinkIDSerializationUtils.m */; };
+		D5F44EE389ED6A2262DEA892 /* MBMicroblinkModule.h in Headers */ = {isa = PBXBuildFile; fileRef = EF774195A2ECFFE617A9ADF8 /* MBMicroblinkModule.h */; };
+		D98F428E9F03021252123147 /* MBGermanyPassportRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F4E0B80110424AC04BF84 /* MBGermanyPassportRecognizerWrapper.m */; };
+		DFE64EEDA03FF6CD3F4F07AA /* MBUsdlRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D91442FBA015846143D3B6A5 /* MBUsdlRecognizerWrapper.m */; };
+		DFE94501A34BEA7C0F0799FF /* MBSwitzerlandPassportRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AADB483C85CB0C193DEDC717 /* MBSwitzerlandPassportRecognizerWrapper.m */; };
+		E550436EA8F4CF2D23158841 /* MBSloveniaCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C2364030912F7F3305044D1A /* MBSloveniaCombinedRecognizerWrapper.h */; };
+		E5FB4E9CB2A80D4AA2ABAF15 /* MBMrtdRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = DB9B47E392A7AFBEF3823851 /* MBMrtdRecognizerWrapper.h */; };
+		E7084E07AF4A05FE6BEC84A2 /* MBGermanyIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2223480C8C23586E611665A4 /* MBGermanyIdFrontRecognizerWrapper.h */; };
+		E9D74DB5AD40DC95C2D01A22 /* MBPolandIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 602A4A7FA516DB6D25C035C3 /* MBPolandIdFrontRecognizerWrapper.h */; };
+		EF7740D6A3865932DA7FDC8C /* MBSerbiaIdFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C9948D393209AC942754147 /* MBSerbiaIdFrontRecognizerWrapper.h */; };
+		F0D34A109C85A588928E8176 /* MBMyKadFrontRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F74DA78F0908F68D72E454 /* MBMyKadFrontRecognizerWrapper.h */; };
+		F4BD4CE0AC15975203136216 /* MBSlovakiaIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B5DC43E0AFC476C9CA2EDA04 /* MBSlovakiaIdBackRecognizerWrapper.h */; };
+		F6BC4BD285CBC53588BF86BB /* MBVinRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = D15B46669CDED35786061ACB /* MBVinRecognizerWrapper.h */; };
+		F7824CFFAE63E10B42F11B2D /* MBDocumentOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 61014CF2810F6E9F7B97E771 /* MBDocumentOverlaySettingsSerialization.m */; };
+		F7C54F909305DB301D846C3D /* MBVinRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 206B4D40B6145D6DF2F8FE13 /* MBVinRecognizerWrapper.m */; };
+		FD874279BC210F175B9D0638 /* MBColombiaIdFrontRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4092461F991BE2CB05D07075 /* MBColombiaIdFrontRecognizerWrapper.m */; };
+		FECA4FE6A3892856AD1DEA12 /* MBGermanyIdBackRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C358423188A3E29A4A77F252 /* MBGermanyIdBackRecognizerWrapper.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,35 +162,160 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A27CCA311E9E57A500BED675 /* MBMicroblinkModule.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		007F4717B7815AB5A41FF211 /* MBSloveniaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSloveniaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		0256443B8B7B53C68AEEEAD5 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUnitedArabEmiratesIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUnitedArabEmiratesIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		059E4F95BCA398CFEDFB4C64 /* MBSlovakiaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSlovakiaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		0835447295D881C4659A1C9A /* MBDocumentFaceRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentFaceRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		0A9F4F23BB2814F45355CA1D /* MBDocumentVerificationOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentVerificationOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.m; sourceTree = SOURCE_ROOT; };
+		0C9948D393209AC942754147 /* MBSerbiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerbiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		121543EBBDE0014C6FD14A48 /* MBJordanIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBJordanIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBJordanIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		1C2F4D22A608A9C678A3D22A /* MBMalaysiaDlFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMalaysiaDlFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMalaysiaDlFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		1D1B4F269E7902F2A7D84720 /* MBGermanyIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBGermanyIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		1D1E4B4F99A181AB88C107FB /* MBSerbiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerbiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		1D5D4FDBB7C37262895EC5FA /* MBMicroblinkModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMicroblinkModule.m; path = MicroblinkModule/MBMicroblinkModule.m; sourceTree = SOURCE_ROOT; };
+		1DEA4A79A954F5A31EFFE67A /* MBPolandIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPolandIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPolandIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		1E4947C2A42FF1355B3EF265 /* MBSloveniaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSloveniaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		1F0842BDB005E14799B74571 /* MBSlovakiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSlovakiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		206B4D40B6145D6DF2F8FE13 /* MBVinRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBVinRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBVinRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		21A349D497DFAD2355AA2A7D /* MBSerbiaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerbiaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		2223480C8C23586E611665A4 /* MBGermanyIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBGermanyIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		22E74E9F851BBB5C07E4591D /* MBJordanCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBJordanCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBJordanCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		25AC418C9F9418F6006B65C2 /* MBPdf417RecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPdf417RecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPdf417RecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		25CB473C931F20FBB9099244 /* MBOverlaySettingsSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySettingsSerializers.m; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.m; sourceTree = SOURCE_ROOT; };
+		271F49589943BF2BD8F02403 /* MBAustriaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustriaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		29504854A984AFD9E8943DA5 /* MBPolandIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPolandIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPolandIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		2969493C9A0CA0228AC161DA /* MBMyKadFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMyKadFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMyKadFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		2A994B8DBCA1D19E090ACE98 /* MBSlovakiaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSlovakiaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		2E48407B98F8BA22F5B8D33F /* MBOverlayViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayViewControllerDelegate.h; path = MicroblinkModule/Overlays/MBOverlayViewControllerDelegate.h; sourceTree = SOURCE_ROOT; };
+		3220440C80D42F4486D7216C /* MBHongKongIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBHongKongIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBHongKongIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		39F4418190F9CB871156CE67 /* MBSerbiaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerbiaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		3AE04E3E84DEDACA79CB8509 /* MBRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerWrapper.m; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		3DC7432D9F0BE93A2F681AC9 /* MBBarcodeRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBarcodeRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBBarcodeRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		3EAC4BE68FD7A93DEBE926FF /* MBSwitzerlandPassportRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSwitzerlandPassportRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandPassportRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		3EDA4422A7390D7D4A208D22 /* MBCzechiaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCzechiaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		3FFF4CF78C1B6F9EBE5F2E9C /* MBAustraliaDlFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustraliaDlFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustraliaDlFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		4063442AB0BAFA09344E690D /* MBSimNumberRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSimNumberRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSimNumberRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		4092461F991BE2CB05D07075 /* MBColombiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBColombiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBColombiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		420C4654802CADC215C564E5 /* MBSloveniaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSloveniaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		42F74DA78F0908F68D72E454 /* MBMyKadFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMyKadFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMyKadFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		467349D48DB6E7C98BAC5776 /* MBOverlayVCCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayVCCreator.h; path = MicroblinkModule/Overlays/MBOverlayVCCreator.h; sourceTree = SOURCE_ROOT; };
+		47A543499EC5D953A57EA34C /* MBSingaporeCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSingaporeCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		49964B30B742BC14F151806A /* MBMyKadBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMyKadBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMyKadBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		49F04A69812073972FD7A2D7 /* MBMyTenteraRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMyTenteraRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMyTenteraRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		4E57428A8E01630360A5B9B0 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUnitedArabEmiratesIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUnitedArabEmiratesIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		54B0496EAEF51EE8252B919E /* MBSlovakiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSlovakiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		56734E529A3AD5C5C386CADF /* MBSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerializationUtils.h; path = MicroblinkModule/MBSerializationUtils.h; sourceTree = SOURCE_ROOT; };
+		57424AB4B70EE01B2CB44533 /* MBColombiaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBColombiaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBColombiaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		57C54161AE0904B506384B4E /* MBMyKadBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMyKadBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMyKadBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		583E4B05B014A9FBF39AAAFA /* MBiKadRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBiKadRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBiKadRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		58504DDD8FB5616BD4E5ECC3 /* MBOverlaySerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySerializationUtils.h; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.h; sourceTree = SOURCE_ROOT; };
+		59B74370AA7C5850FCA9B997 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUnitedArabEmiratesIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUnitedArabEmiratesIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		602A4A7FA516DB6D25C035C3 /* MBPolandIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPolandIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPolandIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		60D540A6A23B0D49D254C83A /* MBAustriaPassportRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustriaPassportRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaPassportRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		61014CF2810F6E9F7B97E771 /* MBDocumentOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.m; sourceTree = SOURCE_ROOT; };
+		61EC460AA03A5498D69FC6C0 /* MBSlovakiaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSlovakiaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		61FE413196C3B6B6822357BF /* MBUsdlRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUsdlRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		63534FD69ABA75742E623F56 /* MBHongKongIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBHongKongIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBHongKongIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		64C84E0895EE6E31282E006F /* MBSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerializationUtils.m; path = MicroblinkModule/MBSerializationUtils.m; sourceTree = SOURCE_ROOT; };
+		65594B9D8539A4CBB38366FD /* MBMalaysiaDlFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMalaysiaDlFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMalaysiaDlFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		66744AEBB41CFB0B26E76DE3 /* MBColombiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBColombiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBColombiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		67EC4457B8B5FE4585D1C0B7 /* MBBarcodeRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBarcodeRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBBarcodeRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		6D67487BBA430405B993D1BD /* MBCzechiaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCzechiaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		6F71469B9F4C0BFD04D00CE4 /* MBiKadRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBiKadRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBiKadRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		71934B0C854CE93B33F62B23 /* MBGermanyCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBGermanyCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		750C4AAE9C55136013AD96B9 /* MBSingaporeCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSingaporeCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		7B5547EDBF82CAFA0624566D /* MBRomaniaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRomaniaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBRomaniaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		7BE842B289B260EFC0D370C5 /* MBMyTenteraRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMyTenteraRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMyTenteraRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		81E04B6D9051BB02A87875AD /* MBAustriaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustriaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		83DB4A6286440893CABD282D /* MBAustriaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustriaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		85364F268305E77691D5BCF9 /* MBCroatiaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCroatiaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		88194448A4E866775B1EA03E /* MBCroatiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCroatiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		89274880ABF388677C6CEAA0 /* MBRecognizerSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerSerializers.h; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.h; sourceTree = SOURCE_ROOT; };
+		8AB744C29FC23F3520B1C794 /* MBEgyptIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBEgyptIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBEgyptIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		8B1647C597019B1FB328300D /* MBSloveniaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSloveniaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		8F694FEDAE75E7776B896DD9 /* MBGermanyPassportRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBGermanyPassportRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyPassportRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		902C4CF894D2B834AD2D8F09 /* MBBarcodeOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBarcodeOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBBarcodeOverlaySettingsSerialization.m; sourceTree = SOURCE_ROOT; };
+		911946DDA5F3EDF338835919 /* MBGermanyIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBGermanyIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		93D74F0DA7F7396186ED88A3 /* MBColombiaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBColombiaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBColombiaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		94944D339EA1A0033DBF6FCB /* MBAustriaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustriaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		97724ACEB59299D08F72310E /* MBJordanIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBJordanIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBJordanIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		9776497D94166C833F4849F1 /* MBGermanyOldIdRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBGermanyOldIdRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyOldIdRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		984C47C8AE9CC3BBE2A052DE /* MBJordanIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBJordanIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBJordanIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		99464ECEB6CA12DCD6D1BBB2 /* MBRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerWrapper.h; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		997243DF805FC8F14ADFA21D /* MBSwitzerlandIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSwitzerlandIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		9A0F4E0B80110424AC04BF84 /* MBGermanyPassportRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBGermanyPassportRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyPassportRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		9A1D4B0B8EBA51A5829E9A54 /* MBSingaporeIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSingaporeIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		9C684D6080A6D14B298FED9E /* MBPdf417RecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPdf417RecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPdf417RecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		9DE243239EF89A7B1BC89664 /* MBBlinkIDSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIDSerializationUtils.h; path = MicroblinkModule/MBBlinkIDSerializationUtils.h; sourceTree = SOURCE_ROOT; };
+		9E064745A20D71544910E2E7 /* MBIndonesiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBIndonesiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBIndonesiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		9EBF4F51B31AF0001A3CB97D /* MBCroatiaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCroatiaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		9F784CEFA1AF067FFB213028 /* MBSwitzerlandIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSwitzerlandIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		A0754946B99FCE9969318085 /* MBAustriaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustriaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		A26844F697EA4E566C3B447F /* MBAustraliaDlBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustraliaDlBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustraliaDlBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
 		A27CCA2B1E9E57A500BED675 /* libMicroblinkModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMicroblinkModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A27CCA2E1E9E57A500BED675 /* MBMicroblinkModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBMicroblinkModule.h; sourceTree = "<group>"; };
-		A27CCA2F1E9E57A500BED675 /* MBMicroblinkModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBMicroblinkModule.m; sourceTree = "<group>"; };
 		A27CCA381E9E57C900BED675 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A27CCA3A1E9E57CF00BED675 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A27CCA3C1E9E57D600BED675 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A27CCA3E1E9E57DA00BED675 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A27CCA411E9E5D9400BED675 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		C9BE5CA820CA7272009DB49E /* MBOverlayVCCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBOverlayVCCreator.h; sourceTree = "<group>"; };
-		C9BE5CA920CA7309009DB49E /* MBOverlayViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBOverlayViewControllerDelegate.h; sourceTree = "<group>"; };
-		C9BE5CAC20CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBarcodeOverlaySettingsSerialization.h; sourceTree = "<group>"; };
-		C9BE5CB020CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBarcodeOverlaySettingsSerialization.m; sourceTree = "<group>"; };
-		C9BE5CB620CA737A009DB49E /* MBSerializationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSerializationUtils.m; sourceTree = "<group>"; };
-		C9BE5CB720CA737A009DB49E /* MBSerializationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSerializationUtils.h; sourceTree = "<group>"; };
-		C9BE5CC920CA7BFE009DB49E /* MBRecognizerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRecognizerWrapper.h; sourceTree = "<group>"; };
-		C9BE5CCF20CA7BFE009DB49E /* MBRecognizerSerializers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRecognizerSerializers.h; sourceTree = "<group>"; };
-		C9BE5CD020CA7BFE009DB49E /* MBRecognizerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRecognizerWrapper.m; sourceTree = "<group>"; };
-		C9BE5CD120CA7BFE009DB49E /* MBRecognizerSerializers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBRecognizerSerializers.m; sourceTree = "<group>"; };
-		C9BE5CD620CA7C39009DB49E /* MBOverlaySerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBOverlaySerializationUtils.h; sourceTree = "<group>"; };
-		C9BE5CD720CA7C39009DB49E /* MBOverlaySerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBOverlaySerializationUtils.m; sourceTree = "<group>"; };
-		C9BE5CD920CAA636009DB49E /* MBOverlaySettingsSerializers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBOverlaySettingsSerializers.m; sourceTree = "<group>"; };
-		C9BE5CDA20CAA636009DB49E /* MBOverlaySettingsSerializers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBOverlaySettingsSerializers.h; sourceTree = "<group>"; };
+		A48E4AC38ABF36D244C6DDD0 /* MBDocumentFaceRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentFaceRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		A60E46E38719D16D9E55A372 /* MBSwitzerlandIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSwitzerlandIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		A6C948068239DCD9123468D4 /* MBAustraliaDlFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBAustraliaDlFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBAustraliaDlFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		A7C741BCAB0B29AA090BD09C /* MBGermanyOldIdRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBGermanyOldIdRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyOldIdRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		AADB483C85CB0C193DEDC717 /* MBSwitzerlandPassportRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSwitzerlandPassportRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandPassportRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		ABD04F85BC1010C995F11E48 /* MBPolandCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPolandCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPolandCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		AECB4172B55F1515086AAE86 /* MBPolandCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPolandCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPolandCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		B14C407F97CEBD777C10DDA1 /* MBSwitzerlandIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSwitzerlandIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSwitzerlandIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		B2B0437589089E56714F6840 /* MBCzechiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCzechiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		B56D41768604223E2FAE6CAE /* MBBlinkIDSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIDSerializationUtils.m; path = MicroblinkModule/MBBlinkIDSerializationUtils.m; sourceTree = SOURCE_ROOT; };
+		B5DC43E0AFC476C9CA2EDA04 /* MBSlovakiaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSlovakiaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSlovakiaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		B68343E2806F430DC2E765E2 /* MBSerbiaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerbiaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		BA144672A7FB3FE30B6E461D /* MBRomaniaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRomaniaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBRomaniaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		BCA34849B2E1F9372102A8BD /* MBEudlRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBEudlRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBEudlRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		C16849CFB236080851DA798F /* MBCzechiaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCzechiaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		C2364030912F7F3305044D1A /* MBSloveniaCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSloveniaCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		C358423188A3E29A4A77F252 /* MBGermanyIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBGermanyIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		C3E44E2189183B3B409E8628 /* MBCroatiaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCroatiaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		C7374C46AD53E71497F030D5 /* MBMrtdRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMrtdRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		CD3A46A381BE52BF78242368 /* MBCzechiaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCzechiaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		CF0E43C5BDEEB1AE4507066D /* MBRecognizerSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerSerializers.m; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.m; sourceTree = SOURCE_ROOT; };
+		D15B46669CDED35786061ACB /* MBVinRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBVinRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBVinRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		D20B49859FF0ECD9580AFCB2 /* MBGermanyCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBGermanyCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBGermanyCombinedRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		D21E439981C4AE531288D184 /* MBJordanIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBJordanIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBJordanIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		D2604464B7362B023FE86077 /* MBCroatiaIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCroatiaIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		D5A744C8BE9EB9BFAD1AD9E2 /* MBOverlaySerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySerializationUtils.m; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.m; sourceTree = SOURCE_ROOT; };
+		D5D04E0CA7C13DEA03FCC2FD /* MBSingaporeIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSingaporeIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		D5F44AB7B22600C8DF5BF129 /* MBCroatiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCroatiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCroatiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		D91442FBA015846143D3B6A5 /* MBUsdlRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUsdlRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		DA9744219229E5245276EF00 /* MBEgyptIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBEgyptIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBEgyptIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		DB71401B9C4AC3B47AF84F95 /* MBDocumentOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.h; sourceTree = SOURCE_ROOT; };
+		DB9B47E392A7AFBEF3823851 /* MBMrtdRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMrtdRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		DBB848329B94DE2B72853DE8 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUnitedArabEmiratesIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUnitedArabEmiratesIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		DDD845B0816179FC5A709225 /* MBDocumentVerificationOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentVerificationOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.h; sourceTree = SOURCE_ROOT; };
+		E00B43A8B93DDA50BDD25068 /* MBAustriaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustriaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		E1304CC991E26744E342319A /* MBEudlRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBEudlRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBEudlRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		E3714A668D0372FEB3221E4E /* MBBarcodeOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBarcodeOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBBarcodeOverlaySettingsSerialization.h; sourceTree = SOURCE_ROOT; };
+		E40F4B1AB096C13655D9E11B /* MBSingaporeIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSingaporeIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		E57947B9961CB7EC5BA2CE51 /* MBAustriaPassportRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustriaPassportRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustriaPassportRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		E726446C9FE3DDAB4C5B17BD /* MBSloveniaCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSloveniaCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSloveniaCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		E77942A19117DB8D4AAD5A3C /* MBPolandIdBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPolandIdBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPolandIdBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		EC824549AD01D0D0C2B69BCD /* MBIndonesiaIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBIndonesiaIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBIndonesiaIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		ED2D43C29D60CC23985CA6EE /* MBJordanCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBJordanCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBJordanCombinedRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		EF774195A2ECFFE617A9ADF8 /* MBMicroblinkModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMicroblinkModule.h; path = MicroblinkModule/MBMicroblinkModule.h; sourceTree = SOURCE_ROOT; };
+		EFDC422489C867195C614938 /* MBSingaporeIdFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSingaporeIdFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSingaporeIdFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		F03B42B6907F3A1022921C5F /* MBCzechiaIdFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCzechiaIdFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBCzechiaIdFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		F10D4B6AA90FF20D3F3D16FD /* MBSerbiaIdBackRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerbiaIdBackRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSerbiaIdBackRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		F1664C99909E33DEA4A5935B /* MBSimNumberRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSimNumberRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSimNumberRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
+		F2CA4DC58911CCE76B5B3E67 /* MBAustraliaDlBackRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBAustraliaDlBackRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBAustraliaDlBackRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		F6114FDFB45D2E80CA6A4F2C /* MBOverlaySettingsSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySettingsSerializers.h; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.h; sourceTree = SOURCE_ROOT; };
+		FE564A74898737D381F60332 /* MBNewZealandDlFrontRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBNewZealandDlFrontRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBNewZealandDlFrontRecognizerWrapper.m; sourceTree = SOURCE_ROOT; };
+		FEA8464A81A0A0443F402E83 /* MBNewZealandDlFrontRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBNewZealandDlFrontRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBNewZealandDlFrontRecognizerWrapper.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +333,184 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		484F4A7D9AE47EA3897BDE4F /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				F2CA4DC58911CCE76B5B3E67 /* MBAustraliaDlBackRecognizerWrapper.m */,
+				C2364030912F7F3305044D1A /* MBSloveniaCombinedRecognizerWrapper.h */,
+				C3E44E2189183B3B409E8628 /* MBCroatiaIdBackRecognizerWrapper.h */,
+				FE564A74898737D381F60332 /* MBNewZealandDlFrontRecognizerWrapper.m */,
+				2A994B8DBCA1D19E090ACE98 /* MBSlovakiaCombinedRecognizerWrapper.m */,
+				C16849CFB236080851DA798F /* MBCzechiaIdBackRecognizerWrapper.h */,
+				1D1B4F269E7902F2A7D84720 /* MBGermanyIdBackRecognizerWrapper.m */,
+				4092461F991BE2CB05D07075 /* MBColombiaIdFrontRecognizerWrapper.m */,
+				59B74370AA7C5850FCA9B997 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.h */,
+				4063442AB0BAFA09344E690D /* MBSimNumberRecognizerWrapper.m */,
+				997243DF805FC8F14ADFA21D /* MBSwitzerlandIdFrontRecognizerWrapper.h */,
+				3FFF4CF78C1B6F9EBE5F2E9C /* MBAustraliaDlFrontRecognizerWrapper.m */,
+				9776497D94166C833F4849F1 /* MBGermanyOldIdRecognizerWrapper.h */,
+				BCA34849B2E1F9372102A8BD /* MBEudlRecognizerWrapper.h */,
+				9C684D6080A6D14B298FED9E /* MBPdf417RecognizerWrapper.h */,
+				EC824549AD01D0D0C2B69BCD /* MBIndonesiaIdFrontRecognizerWrapper.m */,
+				F10D4B6AA90FF20D3F3D16FD /* MBSerbiaIdBackRecognizerWrapper.h */,
+				47A543499EC5D953A57EA34C /* MBSingaporeCombinedRecognizerWrapper.m */,
+				CD3A46A381BE52BF78242368 /* MBCzechiaCombinedRecognizerWrapper.m */,
+				ED2D43C29D60CC23985CA6EE /* MBJordanCombinedRecognizerWrapper.m */,
+				9EBF4F51B31AF0001A3CB97D /* MBCroatiaCombinedRecognizerWrapper.h */,
+				0835447295D881C4659A1C9A /* MBDocumentFaceRecognizerWrapper.m */,
+				8F694FEDAE75E7776B896DD9 /* MBGermanyPassportRecognizerWrapper.h */,
+				DBB848329B94DE2B72853DE8 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.m */,
+				E57947B9961CB7EC5BA2CE51 /* MBAustriaPassportRecognizerWrapper.m */,
+				6F71469B9F4C0BFD04D00CE4 /* MBiKadRecognizerWrapper.h */,
+				E40F4B1AB096C13655D9E11B /* MBSingaporeIdFrontRecognizerWrapper.h */,
+				7B5547EDBF82CAFA0624566D /* MBRomaniaIdFrontRecognizerWrapper.m */,
+				D21E439981C4AE531288D184 /* MBJordanIdBackRecognizerWrapper.m */,
+				3DC7432D9F0BE93A2F681AC9 /* MBBarcodeRecognizerWrapper.h */,
+				D5F44AB7B22600C8DF5BF129 /* MBCroatiaIdFrontRecognizerWrapper.h */,
+				C7374C46AD53E71497F030D5 /* MBMrtdRecognizerWrapper.m */,
+				121543EBBDE0014C6FD14A48 /* MBJordanIdFrontRecognizerWrapper.m */,
+				65594B9D8539A4CBB38366FD /* MBMalaysiaDlFrontRecognizerWrapper.m */,
+				57424AB4B70EE01B2CB44533 /* MBColombiaIdBackRecognizerWrapper.m */,
+				A60E46E38719D16D9E55A372 /* MBSwitzerlandIdBackRecognizerWrapper.m */,
+				61FE413196C3B6B6822357BF /* MBUsdlRecognizerWrapper.h */,
+				29504854A984AFD9E8943DA5 /* MBPolandIdBackRecognizerWrapper.h */,
+				206B4D40B6145D6DF2F8FE13 /* MBVinRecognizerWrapper.m */,
+				39F4418190F9CB871156CE67 /* MBSerbiaCombinedRecognizerWrapper.h */,
+				1D1E4B4F99A181AB88C107FB /* MBSerbiaIdFrontRecognizerWrapper.m */,
+				9A1D4B0B8EBA51A5829E9A54 /* MBSingaporeIdBackRecognizerWrapper.m */,
+				271F49589943BF2BD8F02403 /* MBAustriaIdBackRecognizerWrapper.h */,
+				2223480C8C23586E611665A4 /* MBGermanyIdFrontRecognizerWrapper.h */,
+				8B1647C597019B1FB328300D /* MBSloveniaIdFrontRecognizerWrapper.h */,
+				ABD04F85BC1010C995F11E48 /* MBPolandCombinedRecognizerWrapper.m */,
+				059E4F95BCA398CFEDFB4C64 /* MBSlovakiaIdBackRecognizerWrapper.m */,
+				E00B43A8B93DDA50BDD25068 /* MBAustriaIdFrontRecognizerWrapper.m */,
+				54B0496EAEF51EE8252B919E /* MBSlovakiaIdFrontRecognizerWrapper.m */,
+				AADB483C85CB0C193DEDC717 /* MBSwitzerlandPassportRecognizerWrapper.m */,
+				B2B0437589089E56714F6840 /* MBCzechiaIdFrontRecognizerWrapper.m */,
+				DA9744219229E5245276EF00 /* MBEgyptIdFrontRecognizerWrapper.h */,
+				57C54161AE0904B506384B4E /* MBMyKadBackRecognizerWrapper.m */,
+				71934B0C854CE93B33F62B23 /* MBGermanyCombinedRecognizerWrapper.m */,
+				1DEA4A79A954F5A31EFFE67A /* MBPolandIdFrontRecognizerWrapper.m */,
+				83DB4A6286440893CABD282D /* MBAustriaCombinedRecognizerWrapper.h */,
+				7BE842B289B260EFC0D370C5 /* MBMyTenteraRecognizerWrapper.h */,
+				420C4654802CADC215C564E5 /* MBSloveniaIdBackRecognizerWrapper.h */,
+				42F74DA78F0908F68D72E454 /* MBMyKadFrontRecognizerWrapper.h */,
+				3220440C80D42F4486D7216C /* MBHongKongIdFrontRecognizerWrapper.h */,
+				A7C741BCAB0B29AA090BD09C /* MBGermanyOldIdRecognizerWrapper.m */,
+				9F784CEFA1AF067FFB213028 /* MBSwitzerlandIdFrontRecognizerWrapper.m */,
+				A6C948068239DCD9123468D4 /* MBAustraliaDlFrontRecognizerWrapper.h */,
+				0256443B8B7B53C68AEEEAD5 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.m */,
+				F1664C99909E33DEA4A5935B /* MBSimNumberRecognizerWrapper.h */,
+				66744AEBB41CFB0B26E76DE3 /* MBColombiaIdFrontRecognizerWrapper.h */,
+				C358423188A3E29A4A77F252 /* MBGermanyIdBackRecognizerWrapper.h */,
+				61EC460AA03A5498D69FC6C0 /* MBSlovakiaCombinedRecognizerWrapper.h */,
+				3EDA4422A7390D7D4A208D22 /* MBCzechiaIdBackRecognizerWrapper.m */,
+				FEA8464A81A0A0443F402E83 /* MBNewZealandDlFrontRecognizerWrapper.h */,
+				D2604464B7362B023FE86077 /* MBCroatiaIdBackRecognizerWrapper.m */,
+				A26844F697EA4E566C3B447F /* MBAustraliaDlBackRecognizerWrapper.h */,
+				E726446C9FE3DDAB4C5B17BD /* MBSloveniaCombinedRecognizerWrapper.m */,
+				BA144672A7FB3FE30B6E461D /* MBRomaniaIdFrontRecognizerWrapper.h */,
+				EFDC422489C867195C614938 /* MBSingaporeIdFrontRecognizerWrapper.m */,
+				583E4B05B014A9FBF39AAAFA /* MBiKadRecognizerWrapper.m */,
+				4E57428A8E01630360A5B9B0 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.h */,
+				60D540A6A23B0D49D254C83A /* MBAustriaPassportRecognizerWrapper.h */,
+				9A0F4E0B80110424AC04BF84 /* MBGermanyPassportRecognizerWrapper.m */,
+				85364F268305E77691D5BCF9 /* MBCroatiaCombinedRecognizerWrapper.m */,
+				A48E4AC38ABF36D244C6DDD0 /* MBDocumentFaceRecognizerWrapper.h */,
+				22E74E9F851BBB5C07E4591D /* MBJordanCombinedRecognizerWrapper.h */,
+				750C4AAE9C55136013AD96B9 /* MBSingaporeCombinedRecognizerWrapper.h */,
+				21A349D497DFAD2355AA2A7D /* MBSerbiaIdBackRecognizerWrapper.m */,
+				6D67487BBA430405B993D1BD /* MBCzechiaCombinedRecognizerWrapper.h */,
+				9E064745A20D71544910E2E7 /* MBIndonesiaIdFrontRecognizerWrapper.h */,
+				25AC418C9F9418F6006B65C2 /* MBPdf417RecognizerWrapper.m */,
+				E1304CC991E26744E342319A /* MBEudlRecognizerWrapper.m */,
+				B5DC43E0AFC476C9CA2EDA04 /* MBSlovakiaIdBackRecognizerWrapper.h */,
+				007F4717B7815AB5A41FF211 /* MBSloveniaIdFrontRecognizerWrapper.m */,
+				AECB4172B55F1515086AAE86 /* MBPolandCombinedRecognizerWrapper.h */,
+				A0754946B99FCE9969318085 /* MBAustriaIdBackRecognizerWrapper.m */,
+				911946DDA5F3EDF338835919 /* MBGermanyIdFrontRecognizerWrapper.m */,
+				0C9948D393209AC942754147 /* MBSerbiaIdFrontRecognizerWrapper.h */,
+				D5D04E0CA7C13DEA03FCC2FD /* MBSingaporeIdBackRecognizerWrapper.h */,
+				B68343E2806F430DC2E765E2 /* MBSerbiaCombinedRecognizerWrapper.m */,
+				D91442FBA015846143D3B6A5 /* MBUsdlRecognizerWrapper.m */,
+				E77942A19117DB8D4AAD5A3C /* MBPolandIdBackRecognizerWrapper.m */,
+				D15B46669CDED35786061ACB /* MBVinRecognizerWrapper.h */,
+				B14C407F97CEBD777C10DDA1 /* MBSwitzerlandIdBackRecognizerWrapper.h */,
+				984C47C8AE9CC3BBE2A052DE /* MBJordanIdFrontRecognizerWrapper.h */,
+				93D74F0DA7F7396186ED88A3 /* MBColombiaIdBackRecognizerWrapper.h */,
+				1C2F4D22A608A9C678A3D22A /* MBMalaysiaDlFrontRecognizerWrapper.h */,
+				88194448A4E866775B1EA03E /* MBCroatiaIdFrontRecognizerWrapper.m */,
+				DB9B47E392A7AFBEF3823851 /* MBMrtdRecognizerWrapper.h */,
+				67EC4457B8B5FE4585D1C0B7 /* MBBarcodeRecognizerWrapper.m */,
+				97724ACEB59299D08F72310E /* MBJordanIdBackRecognizerWrapper.h */,
+				63534FD69ABA75742E623F56 /* MBHongKongIdFrontRecognizerWrapper.m */,
+				2969493C9A0CA0228AC161DA /* MBMyKadFrontRecognizerWrapper.m */,
+				1E4947C2A42FF1355B3EF265 /* MBSloveniaIdBackRecognizerWrapper.m */,
+				49F04A69812073972FD7A2D7 /* MBMyTenteraRecognizerWrapper.m */,
+				94944D339EA1A0033DBF6FCB /* MBAustriaCombinedRecognizerWrapper.m */,
+				602A4A7FA516DB6D25C035C3 /* MBPolandIdFrontRecognizerWrapper.h */,
+				D20B49859FF0ECD9580AFCB2 /* MBGermanyCombinedRecognizerWrapper.h */,
+				8AB744C29FC23F3520B1C794 /* MBEgyptIdFrontRecognizerWrapper.m */,
+				49964B30B742BC14F151806A /* MBMyKadBackRecognizerWrapper.h */,
+				F03B42B6907F3A1022921C5F /* MBCzechiaIdFrontRecognizerWrapper.h */,
+				81E04B6D9051BB02A87875AD /* MBAustriaIdFrontRecognizerWrapper.h */,
+				1F0842BDB005E14799B74571 /* MBSlovakiaIdFrontRecognizerWrapper.h */,
+				3EAC4BE68FD7A93DEBE926FF /* MBSwitzerlandPassportRecognizerWrapper.h */,
+			);
+			name = Wrappers;
+			path = "/Users/dodo/Work/Microblink/deployRepos/blinkid/blinkid-react-native/BlinkID/src/ios/MicroblinkModule/MicroblinkModule/Recognizers/Wrappers";
+			sourceTree = "<group>";
+		};
+		756E4B44B799825E6F20FEAF /* MicroblinkModule */ = {
+			isa = PBXGroup;
+			children = (
+				B56D41768604223E2FAE6CAE /* MBBlinkIDSerializationUtils.m */,
+				8EC54BE29F3762E7BABDCB48 /* Overlays */,
+				64C84E0895EE6E31282E006F /* MBSerializationUtils.m */,
+				1D5D4FDBB7C37262895EC5FA /* MBMicroblinkModule.m */,
+				9DE243239EF89A7B1BC89664 /* MBBlinkIDSerializationUtils.h */,
+				91D042D48D95A60EE011A253 /* Recognizers */,
+				EF774195A2ECFFE617A9ADF8 /* MBMicroblinkModule.h */,
+				56734E529A3AD5C5C386CADF /* MBSerializationUtils.h */,
+			);
+			name = MicroblinkModule;
+			path = "/Users/dodo/Work/Microblink/deployRepos/blinkid/blinkid-react-native/BlinkID/src/ios/MicroblinkModule/MicroblinkModule";
+			sourceTree = "<group>";
+		};
+		8EC54BE29F3762E7BABDCB48 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				D5A744C8BE9EB9BFAD1AD9E2 /* MBOverlaySerializationUtils.m */,
+				AAE34C5F8708002B6ED2C31B /* Serialization */,
+				467349D48DB6E7C98BAC5776 /* MBOverlayVCCreator.h */,
+				25CB473C931F20FBB9099244 /* MBOverlaySettingsSerializers.m */,
+				58504DDD8FB5616BD4E5ECC3 /* MBOverlaySerializationUtils.h */,
+				2E48407B98F8BA22F5B8D33F /* MBOverlayViewControllerDelegate.h */,
+				F6114FDFB45D2E80CA6A4F2C /* MBOverlaySettingsSerializers.h */,
+			);
+			name = Overlays;
+			path = "/Users/dodo/Work/Microblink/deployRepos/blinkid/blinkid-react-native/BlinkID/src/ios/MicroblinkModule/MicroblinkModule/Overlays";
+			sourceTree = "<group>";
+		};
+		91D042D48D95A60EE011A253 /* Recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				99464ECEB6CA12DCD6D1BBB2 /* MBRecognizerWrapper.h */,
+				484F4A7D9AE47EA3897BDE4F /* Wrappers */,
+				89274880ABF388677C6CEAA0 /* MBRecognizerSerializers.h */,
+				3AE04E3E84DEDACA79CB8509 /* MBRecognizerWrapper.m */,
+				CF0E43C5BDEEB1AE4507066D /* MBRecognizerSerializers.m */,
+			);
+			name = Recognizers;
+			path = "/Users/dodo/Work/Microblink/deployRepos/blinkid/blinkid-react-native/BlinkID/src/ios/MicroblinkModule/MicroblinkModule/Recognizers";
+			sourceTree = "<group>";
+		};
 		A27CCA221E9E57A500BED675 = {
 			isa = PBXGroup;
 			children = (
-				A27CCA2D1E9E57A500BED675 /* MicroblinkModule */,
 				A27CCA2C1E9E57A500BED675 /* Products */,
 				A27CCA371E9E57C900BED675 /* Frameworks */,
+				756E4B44B799825E6F20FEAF /* MicroblinkModule */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,19 +520,6 @@
 				A27CCA2B1E9E57A500BED675 /* libMicroblinkModule.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A27CCA2D1E9E57A500BED675 /* MicroblinkModule */ = {
-			isa = PBXGroup;
-			children = (
-				C9BE5CC820CA7BFE009DB49E /* Recognizers */,
-				C9BE5CB720CA737A009DB49E /* MBSerializationUtils.h */,
-				C9BE5CB620CA737A009DB49E /* MBSerializationUtils.m */,
-				C9BE5CA720CA724C009DB49E /* Overlays */,
-				A27CCA2E1E9E57A500BED675 /* MBMicroblinkModule.h */,
-				A27CCA2F1E9E57A500BED675 /* MBMicroblinkModule.m */,
-			);
-			path = MicroblinkModule;
 			sourceTree = "<group>";
 		};
 		A27CCA371E9E57C900BED675 /* Frameworks */ = {
@@ -116,49 +534,103 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C9BE5CA720CA724C009DB49E /* Overlays */ = {
+		AAE34C5F8708002B6ED2C31B /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
-				C9BE5CAA20CA731F009DB49E /* Serialization */,
-				C9BE5CA920CA7309009DB49E /* MBOverlayViewControllerDelegate.h */,
-				C9BE5CA820CA7272009DB49E /* MBOverlayVCCreator.h */,
-				C9BE5CD620CA7C39009DB49E /* MBOverlaySerializationUtils.h */,
-				C9BE5CD720CA7C39009DB49E /* MBOverlaySerializationUtils.m */,
-				C9BE5CDA20CAA636009DB49E /* MBOverlaySettingsSerializers.h */,
-				C9BE5CD920CAA636009DB49E /* MBOverlaySettingsSerializers.m */,
+				DB71401B9C4AC3B47AF84F95 /* MBDocumentOverlaySettingsSerialization.h */,
+				E3714A668D0372FEB3221E4E /* MBBarcodeOverlaySettingsSerialization.h */,
+				0A9F4F23BB2814F45355CA1D /* MBDocumentVerificationOverlaySettingsSerialization.m */,
+				61014CF2810F6E9F7B97E771 /* MBDocumentOverlaySettingsSerialization.m */,
+				DDD845B0816179FC5A709225 /* MBDocumentVerificationOverlaySettingsSerialization.h */,
+				902C4CF894D2B834AD2D8F09 /* MBBarcodeOverlaySettingsSerialization.m */,
 			);
-			path = Overlays;
-			sourceTree = "<group>";
-		};
-		C9BE5CAA20CA731F009DB49E /* Serialization */ = {
-			isa = PBXGroup;
-			children = (
-				C9BE5CAC20CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.h */,
-				C9BE5CB020CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.m */,
-			);
-			path = Serialization;
-			sourceTree = "<group>";
-		};
-		C9BE5CC820CA7BFE009DB49E /* Recognizers */ = {
-			isa = PBXGroup;
-			children = (
-				C9BE5CC920CA7BFE009DB49E /* MBRecognizerWrapper.h */,
-				C9BE5CCA20CA7BFE009DB49E /* Wrappers */,
-				C9BE5CCF20CA7BFE009DB49E /* MBRecognizerSerializers.h */,
-				C9BE5CD020CA7BFE009DB49E /* MBRecognizerWrapper.m */,
-				C9BE5CD120CA7BFE009DB49E /* MBRecognizerSerializers.m */,
-			);
-			path = Recognizers;
-			sourceTree = "<group>";
-		};
-		C9BE5CCA20CA7BFE009DB49E /* Wrappers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Wrappers;
+			name = Serialization;
+			path = "/Users/dodo/Work/Microblink/deployRepos/blinkid/blinkid-react-native/BlinkID/src/ios/MicroblinkModule/MicroblinkModule/Overlays/Serialization";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8EFD4CF2A2BA654C62A2EB90 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				185345C480746BE0EAE172D8 /* MBDocumentOverlaySettingsSerialization.h in Headers */,
+				66A54B78B43CF7C9D475C550 /* MBBarcodeOverlaySettingsSerialization.h in Headers */,
+				50014F28B8015E0447254DA3 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */,
+				75BB4DA18230A09600CB186A /* MBOverlayVCCreator.h in Headers */,
+				5160460FA6C8EF77983251CD /* MBOverlaySerializationUtils.h in Headers */,
+				73F94976902037065FCCC22B /* MBOverlayViewControllerDelegate.h in Headers */,
+				296347D79ABF4BD024EAC6F8 /* MBOverlaySettingsSerializers.h in Headers */,
+				33A644D2B7DF2A2EF85275AB /* MBBlinkIDSerializationUtils.h in Headers */,
+				2DB54C0F82B71C397B670018 /* MBRecognizerWrapper.h in Headers */,
+				E550436EA8F4CF2D23158841 /* MBSloveniaCombinedRecognizerWrapper.h in Headers */,
+				77724004A7380F16605F6810 /* MBCroatiaIdBackRecognizerWrapper.h in Headers */,
+				6A864859B05BF78C8D78D68F /* MBCzechiaIdBackRecognizerWrapper.h in Headers */,
+				BEE24C6E9C8A97352E7444B1 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.h in Headers */,
+				8FC54FC0ABB70FFE4E9FC860 /* MBSwitzerlandIdFrontRecognizerWrapper.h in Headers */,
+				85F74F0B89F520366057AF8B /* MBGermanyOldIdRecognizerWrapper.h in Headers */,
+				07BB43788F0BC58E609FA464 /* MBEudlRecognizerWrapper.h in Headers */,
+				3D3144988CD4FDE922BF9744 /* MBPdf417RecognizerWrapper.h in Headers */,
+				7E0043DDBE7A0F9D3B253741 /* MBSerbiaIdBackRecognizerWrapper.h in Headers */,
+				92E24E7D8DCAC0DC84C6DCAD /* MBCroatiaCombinedRecognizerWrapper.h in Headers */,
+				C5C34846AD8581ACB16EB098 /* MBGermanyPassportRecognizerWrapper.h in Headers */,
+				D22C4115AEE88FABFA08EF60 /* MBiKadRecognizerWrapper.h in Headers */,
+				88D54A5EBB5A544142D7D13D /* MBSingaporeIdFrontRecognizerWrapper.h in Headers */,
+				25D64AB7BAC9F967C4D05813 /* MBBarcodeRecognizerWrapper.h in Headers */,
+				AF75489586F1FD3BCEF1897C /* MBCroatiaIdFrontRecognizerWrapper.h in Headers */,
+				CCE24A148B7D70F627E7736A /* MBUsdlRecognizerWrapper.h in Headers */,
+				B584453CA17F2EA7A61B2073 /* MBPolandIdBackRecognizerWrapper.h in Headers */,
+				784040ADB568CE2413C61FA1 /* MBSerbiaCombinedRecognizerWrapper.h in Headers */,
+				C31D46DD97F589CD93D15F24 /* MBAustriaIdBackRecognizerWrapper.h in Headers */,
+				E7084E07AF4A05FE6BEC84A2 /* MBGermanyIdFrontRecognizerWrapper.h in Headers */,
+				4B6C4F91A6DC9E6B064CE3B2 /* MBSloveniaIdFrontRecognizerWrapper.h in Headers */,
+				399A447CAB1ECB0836466573 /* MBEgyptIdFrontRecognizerWrapper.h in Headers */,
+				45AF4153A654A2043A79C20F /* MBAustriaCombinedRecognizerWrapper.h in Headers */,
+				44824DF68F666D9E8BBD34C0 /* MBMyTenteraRecognizerWrapper.h in Headers */,
+				9EEE4C0E966A074D85D7F9A2 /* MBSloveniaIdBackRecognizerWrapper.h in Headers */,
+				F0D34A109C85A588928E8176 /* MBMyKadFrontRecognizerWrapper.h in Headers */,
+				41DD42FD9E7780624F1C42EE /* MBHongKongIdFrontRecognizerWrapper.h in Headers */,
+				1FB14E09A06ABD30BB398D92 /* MBAustraliaDlFrontRecognizerWrapper.h in Headers */,
+				0560480FA12A8E6364A233A1 /* MBSimNumberRecognizerWrapper.h in Headers */,
+				B5CE43C98D26D24538F50092 /* MBColombiaIdFrontRecognizerWrapper.h in Headers */,
+				FECA4FE6A3892856AD1DEA12 /* MBGermanyIdBackRecognizerWrapper.h in Headers */,
+				5AD44344819811B3F24B167C /* MBSlovakiaCombinedRecognizerWrapper.h in Headers */,
+				45FA4EB295551738E358F75C /* MBNewZealandDlFrontRecognizerWrapper.h in Headers */,
+				8CF24046BF170BEEF7528108 /* MBAustraliaDlBackRecognizerWrapper.h in Headers */,
+				59794B528528056AE7FEE2CA /* MBRomaniaIdFrontRecognizerWrapper.h in Headers */,
+				92E1463A8FF56E6D4AF53FAF /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.h in Headers */,
+				A78F4A6CB0ECF9B0293179AC /* MBAustriaPassportRecognizerWrapper.h in Headers */,
+				0BBD4454A1B3463B8CCAFE79 /* MBDocumentFaceRecognizerWrapper.h in Headers */,
+				4B4447C0BCE34AEDAD61F07C /* MBJordanCombinedRecognizerWrapper.h in Headers */,
+				334549F69CEE946757607E37 /* MBSingaporeCombinedRecognizerWrapper.h in Headers */,
+				83DE4A5FA9A542BB175E6D98 /* MBCzechiaCombinedRecognizerWrapper.h in Headers */,
+				BA824AA99FC91D9796E7EE74 /* MBIndonesiaIdFrontRecognizerWrapper.h in Headers */,
+				F4BD4CE0AC15975203136216 /* MBSlovakiaIdBackRecognizerWrapper.h in Headers */,
+				C25A4E45ACF33DB0F7989732 /* MBPolandCombinedRecognizerWrapper.h in Headers */,
+				EF7740D6A3865932DA7FDC8C /* MBSerbiaIdFrontRecognizerWrapper.h in Headers */,
+				8B674074BFCBB25EAD20F92D /* MBSingaporeIdBackRecognizerWrapper.h in Headers */,
+				F6BC4BD285CBC53588BF86BB /* MBVinRecognizerWrapper.h in Headers */,
+				3FCE4F5BBD3BAF5829C2BFD4 /* MBSwitzerlandIdBackRecognizerWrapper.h in Headers */,
+				380440DAA449475A727BD219 /* MBJordanIdFrontRecognizerWrapper.h in Headers */,
+				5DC2425C9DE2A68060C80DE9 /* MBColombiaIdBackRecognizerWrapper.h in Headers */,
+				82804C9DBFFC3C7E81B3C2A4 /* MBMalaysiaDlFrontRecognizerWrapper.h in Headers */,
+				E5FB4E9CB2A80D4AA2ABAF15 /* MBMrtdRecognizerWrapper.h in Headers */,
+				4B144B7F9798ED4E073CB395 /* MBJordanIdBackRecognizerWrapper.h in Headers */,
+				E9D74DB5AD40DC95C2D01A22 /* MBPolandIdFrontRecognizerWrapper.h in Headers */,
+				4AF14D4B8B0F07DCDA933DCF /* MBGermanyCombinedRecognizerWrapper.h in Headers */,
+				567649A6B7AC1C39089FFDB2 /* MBMyKadBackRecognizerWrapper.h in Headers */,
+				93EB4E518794862A83E800BE /* MBCzechiaIdFrontRecognizerWrapper.h in Headers */,
+				B96D49B995E7866720933F19 /* MBAustriaIdFrontRecognizerWrapper.h in Headers */,
+				706A411F8B6936F3B03E3987 /* MBSlovakiaIdFrontRecognizerWrapper.h in Headers */,
+				861C4005B693B1A2E6DC4F93 /* MBSwitzerlandPassportRecognizerWrapper.h in Headers */,
+				808849D0A731C17B21D6EC93 /* MBRecognizerSerializers.h in Headers */,
+				D5F44EE389ED6A2262DEA892 /* MBMicroblinkModule.h in Headers */,
+				1DD247BEAE7C0CFAE8141A9F /* MBSerializationUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		A27CCA2A1E9E57A500BED675 /* MicroblinkModule */ = {
@@ -168,6 +640,7 @@
 				A27CCA271E9E57A500BED675 /* Sources */,
 				A27CCA281E9E57A500BED675 /* Frameworks */,
 				A27CCA291E9E57A500BED675 /* CopyFiles */,
+				8EFD4CF2A2BA654C62A2EB90 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -194,7 +667,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A27CCA261E9E57A500BED675 /* Build configuration list for PBXProject "MicroblinkModule" */;
+			buildConfigurationList = A27CCA261E9E57A500BED675 /* Build configuration list for PBXProject "BlinkIDReactNative" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -216,13 +689,76 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A27CCA301E9E57A500BED675 /* MBMicroblinkModule.m in Sources */,
-				C9BE5CD520CA7BFF009DB49E /* MBRecognizerSerializers.m in Sources */,
-				C9BE5CDB20CAA636009DB49E /* MBOverlaySettingsSerializers.m in Sources */,
-				C9BE5CB920CA737A009DB49E /* MBSerializationUtils.m in Sources */,
-				C9BE5CB320CA731F009DB49E /* MBBarcodeOverlaySettingsSerialization.m in Sources */,
-				C9BE5CD820CA7C39009DB49E /* MBOverlaySerializationUtils.m in Sources */,
-				C9BE5CD420CA7BFF009DB49E /* MBRecognizerWrapper.m in Sources */,
+				D44A4A739B33592E89058082 /* MBBlinkIDSerializationUtils.m in Sources */,
+				701F4F1F90576DAFE75A589F /* MBOverlaySerializationUtils.m in Sources */,
+				728642F19DA8E43D42E09CF6 /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */,
+				F7824CFFAE63E10B42F11B2D /* MBDocumentOverlaySettingsSerialization.m in Sources */,
+				1EA54FCD8D61BDCEB22E3951 /* MBBarcodeOverlaySettingsSerialization.m in Sources */,
+				4FB04A30A17D3ED1FE1AB3BE /* MBOverlaySettingsSerializers.m in Sources */,
+				6F824500BF65477861F08D9D /* MBSerializationUtils.m in Sources */,
+				8D0445D890942DB0E42D3BF8 /* MBMicroblinkModule.m in Sources */,
+				25764486B124DADD92749BA1 /* MBAustraliaDlBackRecognizerWrapper.m in Sources */,
+				994A480EACD4A318DEFE8ADF /* MBNewZealandDlFrontRecognizerWrapper.m in Sources */,
+				10E84706A5D2F81166C22824 /* MBSlovakiaCombinedRecognizerWrapper.m in Sources */,
+				1C9E4B1A85870F4ED3E0B2C6 /* MBGermanyIdBackRecognizerWrapper.m in Sources */,
+				FD874279BC210F175B9D0638 /* MBColombiaIdFrontRecognizerWrapper.m in Sources */,
+				22EA4EC18CFA1AEEF9803B6D /* MBSimNumberRecognizerWrapper.m in Sources */,
+				C9874D34BBBAE5621D8B3C3E /* MBAustraliaDlFrontRecognizerWrapper.m in Sources */,
+				09A34778BB6680DD3194D884 /* MBIndonesiaIdFrontRecognizerWrapper.m in Sources */,
+				800D4B4F81FB2D56C36DA8DD /* MBSingaporeCombinedRecognizerWrapper.m in Sources */,
+				7A374E46A42B43A443785836 /* MBCzechiaCombinedRecognizerWrapper.m in Sources */,
+				76904533A50C76AB8A757F52 /* MBJordanCombinedRecognizerWrapper.m in Sources */,
+				63D44A298F2D6AF522FFFC0D /* MBDocumentFaceRecognizerWrapper.m in Sources */,
+				D34A4DB88A80142BAA124DD7 /* MBUnitedArabEmiratesIdFrontRecognizerWrapper.m in Sources */,
+				1A4342C79B3634795AA5CCB1 /* MBAustriaPassportRecognizerWrapper.m in Sources */,
+				48424E69B2E9D759B8B8215D /* MBRomaniaIdFrontRecognizerWrapper.m in Sources */,
+				63344AB68CAD5C20EAEEA423 /* MBJordanIdBackRecognizerWrapper.m in Sources */,
+				37904DA3B54CEB103537CF7D /* MBMrtdRecognizerWrapper.m in Sources */,
+				D0CD47E2B158CBEF7977F72A /* MBJordanIdFrontRecognizerWrapper.m in Sources */,
+				03F7473FBE821EC34D8624F1 /* MBMalaysiaDlFrontRecognizerWrapper.m in Sources */,
+				134240D8B3636A4945CE455D /* MBColombiaIdBackRecognizerWrapper.m in Sources */,
+				AF7B4BF8B6A6B68B2380944A /* MBSwitzerlandIdBackRecognizerWrapper.m in Sources */,
+				F7C54F909305DB301D846C3D /* MBVinRecognizerWrapper.m in Sources */,
+				91D349A09D3AEC3A3558F6B7 /* MBSerbiaIdFrontRecognizerWrapper.m in Sources */,
+				597849A28854A4E19632808E /* MBSingaporeIdBackRecognizerWrapper.m in Sources */,
+				BFBA40D29113A49C6B1A8278 /* MBPolandCombinedRecognizerWrapper.m in Sources */,
+				3CE74B368DC95DADAA3E11FF /* MBSlovakiaIdBackRecognizerWrapper.m in Sources */,
+				09C34AC38FCB64C026939141 /* MBAustriaIdFrontRecognizerWrapper.m in Sources */,
+				C1104C71B40B547E589E197F /* MBSlovakiaIdFrontRecognizerWrapper.m in Sources */,
+				DFE94501A34BEA7C0F0799FF /* MBSwitzerlandPassportRecognizerWrapper.m in Sources */,
+				48A14DC4B14124089748B443 /* MBCzechiaIdFrontRecognizerWrapper.m in Sources */,
+				B6E440B5B8EC6355D0EF7647 /* MBMyKadBackRecognizerWrapper.m in Sources */,
+				C76848E2BFF1D22C0DDBDD90 /* MBGermanyCombinedRecognizerWrapper.m in Sources */,
+				22C944D4AE4FD2DE868F57EA /* MBPolandIdFrontRecognizerWrapper.m in Sources */,
+				223C4B069B83EF334897B43E /* MBGermanyOldIdRecognizerWrapper.m in Sources */,
+				A9FD488F95C4BC346F92D3A4 /* MBSwitzerlandIdFrontRecognizerWrapper.m in Sources */,
+				1D87491ABAEA4BA0A58D9350 /* MBUnitedArabEmiratesIdBackRecognizerWrapper.m in Sources */,
+				9732495F8EA951A7882E46DE /* MBCzechiaIdBackRecognizerWrapper.m in Sources */,
+				AB4049B9B32FA57EA53F005E /* MBCroatiaIdBackRecognizerWrapper.m in Sources */,
+				40374FE799BD1FA7DE16D618 /* MBSloveniaCombinedRecognizerWrapper.m in Sources */,
+				7934463F8309DA8319661F25 /* MBSingaporeIdFrontRecognizerWrapper.m in Sources */,
+				1B4D42C4AE482FA139502894 /* MBiKadRecognizerWrapper.m in Sources */,
+				D98F428E9F03021252123147 /* MBGermanyPassportRecognizerWrapper.m in Sources */,
+				562E4BE2A274B40C8C5AA97C /* MBCroatiaCombinedRecognizerWrapper.m in Sources */,
+				372D4ED4B21DD91589ED4B5F /* MBSerbiaIdBackRecognizerWrapper.m in Sources */,
+				B77F46E5958F781E33117C04 /* MBPdf417RecognizerWrapper.m in Sources */,
+				C6D740969C38596ACB06AED1 /* MBEudlRecognizerWrapper.m in Sources */,
+				42784EF2A5E0627DD11B149D /* MBSloveniaIdFrontRecognizerWrapper.m in Sources */,
+				98674E6D8C63740CD22008E5 /* MBAustriaIdBackRecognizerWrapper.m in Sources */,
+				7A684061B1A20B74C267382E /* MBGermanyIdFrontRecognizerWrapper.m in Sources */,
+				692F42459E9912BA761EAD22 /* MBSerbiaCombinedRecognizerWrapper.m in Sources */,
+				DFE64EEDA03FF6CD3F4F07AA /* MBUsdlRecognizerWrapper.m in Sources */,
+				46684628B9996CDD4CA4A62E /* MBPolandIdBackRecognizerWrapper.m in Sources */,
+				340845A3B5E3A94B40AC5D8B /* MBCroatiaIdFrontRecognizerWrapper.m in Sources */,
+				A1D34137BF5E8C3B53A27522 /* MBBarcodeRecognizerWrapper.m in Sources */,
+				5FA04DB3A70C1122961B6614 /* MBHongKongIdFrontRecognizerWrapper.m in Sources */,
+				89BF441C9CBE0F04F9FA98A7 /* MBMyKadFrontRecognizerWrapper.m in Sources */,
+				D0E444859C67DB39AE3A40F7 /* MBSloveniaIdBackRecognizerWrapper.m in Sources */,
+				61AF40F398848797ECCB319F /* MBMyTenteraRecognizerWrapper.m in Sources */,
+				A0B246EAB3BEF5E4736EDF34 /* MBAustriaCombinedRecognizerWrapper.m in Sources */,
+				C3E3426BA19781B39DBC2433 /* MBEgyptIdFrontRecognizerWrapper.m in Sources */,
+				1C6840DFB7F4D7FB76458997 /* MBRecognizerWrapper.m in Sources */,
+				02874BBC916806FD0C90F9D0 /* MBRecognizerSerializers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +875,13 @@
 					"${PODS_ROOT}/Headers/Public",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/MicroblinkModule",
+					"$(SRCROOT)/MicroblinkModule/Overlays",
+					"$(SRCROOT)/MicroblinkModule/Overlays/Serialization",
+					"$(SRCROOT)/MicroblinkModule/Recognizers",
+					"$(SRCROOT)/MicroblinkModule/Recognizers/Wrappers",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-liconv",
@@ -369,6 +912,13 @@
 					"${PODS_ROOT}/Headers/Public",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/MicroblinkModule",
+					"$(SRCROOT)/MicroblinkModule/Overlays",
+					"$(SRCROOT)/MicroblinkModule/Overlays/Serialization",
+					"$(SRCROOT)/MicroblinkModule/Recognizers",
+					"$(SRCROOT)/MicroblinkModule/Recognizers/Wrappers",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-liconv",
@@ -384,7 +934,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A27CCA261E9E57A500BED675 /* Build configuration list for PBXProject "MicroblinkModule" */ = {
+		A27CCA261E9E57A500BED675 /* Build configuration list for PBXProject "BlinkIDReactNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A27CCA321E9E57A500BED675 /* Debug */,

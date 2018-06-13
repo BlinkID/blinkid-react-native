@@ -10,7 +10,7 @@
 
 @implementation MBBlinkIDSerializationUtils
 
-+(NSDictionary *) serializeMRZResult:(MBMRZResult *)mrzResult {
++(NSDictionary *) serializeMrzResult:(MBMrzResult *)mrzResult {
     return @{
         @"documentType" : [NSNumber numberWithInteger:(mrzResult.documentType + 1)],
         @"primaryId" : mrzResult.primaryID,

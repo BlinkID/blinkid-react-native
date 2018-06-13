@@ -1,11 +1,3 @@
-//
-//  BlinkIDReactNative.m
-//  BlinkIDReactNative
-//
-//  Created by Jura Skrlec on 12/04/2017.
-//  Copyright © 2017 Microblink. All rights reserved.
-//
-
 #import "MBOverlayViewControllerDelegate.h"
 #import "MBRecognizerSerializers.h"
 #import "MBOverlaySettingsSerializers.h"
@@ -42,7 +34,7 @@ static NSString* const MBErrorDomain = @"microblink.error";
 
 @implementation MBMicroblinkModule
 
-RCT_EXPORT_MODULE(BlinkIdIos);
+RCT_EXPORT_MODULE(BlinkIDIos);
 
 - (instancetype)init {
     if (self = [super init]) {
