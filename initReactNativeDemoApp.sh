@@ -6,7 +6,7 @@ blink_id_plugin_path=`pwd`/BlinkID
 rm -rf BlinkIDReactNative
 
 # create a sample application
-react-native init --version="0.55.0" BlinkIDReactNative
+react-native init --version="0.55.4" BlinkIDReactNative
 
 # enter into demo project folder
 pushd BlinkIDReactNative
