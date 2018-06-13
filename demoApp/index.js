@@ -46,16 +46,22 @@ export default class BlinkIDReactNativeApp extends Component {
   }
   async scan() {
     try {
-      // to scan US Driver's licenses, use USDLRecognizer
-      var usdlRecognizer = new BlinkIDReactNative.USDLRecognizer();
+      // to scan EU driver's licenses, use EudlRecognizer
+      var eudlRecognizer = new BlinkIDReactNative.EudlRecognizer();
+      eudlRecognizer.returnFaceImage = true;
+      eudlRecognizer.returnFullDocumentImage = true;
+
+      // to scan US Driver's licenses, use UsdlRecognizer
+      var usdlRecognizer = new BlinkIDReactNative.UsdlRecognizer();
 
       // to scan any machine readable travel document (passports, visa's and IDs with 
-      // machine readable zone), use MRTDRecognizer
-      var mrtdRecognizer = new BlinkIDReactNative.MRTDRecognizer();
+      // machine readable zone), use MrtdRecognizer
+      var mrtdRecognizer = new BlinkIDReactNative.MrtdRecognizer();
       mrtdRecognizer.returnFullDocumentImage = true;
+
       const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
         new BlinkIDReactNative.DocumentOverlaySettings(),
-        new BlinkIDReactNative.RecognizerCollection([usdlRecognizer, mrtdRecognizer]),
+        new BlinkIDReactNative.RecognizerCollection([eudlRecognizer, usdlRecognizer, mrtdRecognizer]),
         licenseKey
       );
 
@@ -69,10 +75,10 @@ export default class BlinkIDReactNativeApp extends Component {
 
         for (let i = 0; i < scanningResults.length; ++i) {
             let result = scanningResults[i];
-            if (result instanceof BlinkIDReactNative.USDLRecognizerResult) {
+            if (result instanceof BlinkIDReactNative.UsdlRecognizerResult) {
                 // handle USDL parsing result
                 let fields = result.fields
-                let USDLKeys = BlinkIDReactNative.USDLKeys;
+                let USDLKeys = BlinkIDReactNative.UsdlKeys;
                 resultsFormattedText += /** Personal information */
                     "USDL version: " + fields[USDLKeys.StandardVersionNumber] + fieldDelim +
                     "Family name: " + fields[USDLKeys.CustomerFamilyName] + fieldDelim +
@@ -94,23 +100,42 @@ export default class BlinkIDReactNativeApp extends Component {
                       "Restrictions: " + fields[USDLKeys.JurisdictionRestrictionCodes] + fieldDelim +
                       "Endorsments: " + fields[USDLKeys.JurisdictionEndorsementCodes] + fieldDelim +
                       "Customer ID: " + fields[USDLKeys.CustomerIdNumber] + fieldDelim;
-              } else if (result instanceof BlinkIDReactNative.MRTDRecognizerResult) {
+              } else if (result instanceof BlinkIDReactNative.MrtdRecognizerResult) {
                   let mrtdResult = result;
                   resultsFormattedText +=
-                      "First name: " + mrtdResult.MRZResult.secondaryId + fieldDelim +
-                      "Last name: " + mrtdResult.MRZResult.primaryId + fieldDelim +
-                      "Nationality: " + mrtdResult.MRZResult.nationality + fieldDelim +
-                      "Gender: " + mrtdResult.MRZResult.gender + fieldDelim +
+                      "First name: " + mrtdResult.mrzResult.secondaryId + fieldDelim +
+                      "Last name: " + mrtdResult.mrzResult.primaryId + fieldDelim +
+                      "Nationality: " + mrtdResult.mrzResult.nationality + fieldDelim +
+                      "Gender: " + mrtdResult.mrzResult.gender + fieldDelim +
                       "Date of birth: " +
-                          mrtdResult.MRZResult.dateOfBirth.day + "." +
-                          mrtdResult.MRZResult.dateOfBirth.month + "." +
-                          mrtdResult.MRZResult.dateOfBirth.year + ".";
+                          mrtdResult.mrzResult.dateOfBirth.day + "." +
+                          mrtdResult.mrzResult.dateOfBirth.month + "." +
+                          mrtdResult.mrzResult.dateOfBirth.year + ".";
                   
                     // Document image is returned as Base64 encoded JPEG
                     if (mrtdResult.fullDocumentImage) {
                       shouldShowResultImageDocument = true;
                       imageDocument = 'data:image/jpg;base64,' + mrtdResult.fullDocumentImage;
                     }
+              } else if (result instanceof BlinkIDReactNative.EudlRecognizerResult) {
+                  resultsFormattedText +=
+                      "First name: " + result.firstName + fieldDelim +
+                      "Last name: " + result.lastName + fieldDelim +
+                      "Address: " + result.address + fieldDelim +
+                      "Personal number: " + result.personalNumber + fieldDelim +
+                      "Driver number: " + result.driverNumber + fieldDelim;
+                  
+                  // Document image is returned as Base64 encoded JPEG
+                  if (result.fullDocumentImage) {
+                      shouldShowResultImageDocument = true;
+                      imageDocument = 'data:image/jpg;base64,' + result.fullDocumentImage;
+                  }
+              
+                  // Face image is returned as Base64 encoded JPEG
+                  if (result.faceImage) {
+                      shouldShowResultImageFace = true;
+                      imageFace = 'data:image/jpg;base64,' + result.faceImage;
+                  }
               }
         }
           resultsFormattedText += '\n';
