@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,16 +16,6 @@ import {
 export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
          * the authority of Swiss ID card. 
@@ -57,11 +48,6 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
@@ -70,11 +56,6 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
          * the height of the Swiss ID card owner. 
          */
         this.height = nativeResult.height;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -104,12 +85,12 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
         /** 
          * the date of expiry of Swiss ID card. 
          */
-        this.nonMRZDateOfExpiry = nativeResult.nonMRZDateOfExpiry;
+        this.nonMrzDateOfExpiry = nativeResult.nonMrzDateOfExpiry;
         
         /** 
          * the sex of the Swiss ID card owner. 
          */
-        this.nonMRZSex = nativeResult.nonMRZSex;
+        this.nonMrzSex = nativeResult.nonMrzSex;
         
         /** 
          * Defines first optional data.<code>null</code> or empty string if not available. 

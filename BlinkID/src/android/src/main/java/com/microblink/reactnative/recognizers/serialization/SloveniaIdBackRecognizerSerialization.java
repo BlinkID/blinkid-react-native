@@ -31,17 +31,13 @@ public final class SloveniaIdBackRecognizerSerialization implements RecognizerSe
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
-        jsonResult.putString("alienNumber", result.getAlienNumber());
-        jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putString("authority", result.getAuthority());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentCode", result.getDocumentCode());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
-        jsonResult.putInt("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
         jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
         jsonResult.putString("mrzText", result.getMrzText());

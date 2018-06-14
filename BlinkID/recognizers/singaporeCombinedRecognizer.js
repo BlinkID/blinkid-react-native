@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -42,6 +43,11 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
+         * the document date of issue of the Singapore ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
+        
+        /** 
          * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
@@ -55,11 +61,6 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of issue of the Singapore ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          *  face image from the document 

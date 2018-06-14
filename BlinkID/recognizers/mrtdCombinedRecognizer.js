@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,16 +16,6 @@ import {
 export class MrtdCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
@@ -62,11 +53,6 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
@@ -80,11 +66,6 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
          *  front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -171,7 +152,7 @@ export class MrtdCombinedRecognizer extends Recognizer {
         /** 
          * Defines whether MRZ image will be available in result. 
          */
-        this.returnMRZImage = false;
+        this.returnMrzImage = false;
         
         /** 
          * Defines whether or not recognition result should be signed. 

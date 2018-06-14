@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -97,19 +98,19 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
         this.province = nativeResult.province;
         
         /** 
+         * religion of Indonesian ID owner. 
+         */
+        this.religion = nativeResult.religion;
+        
+        /** 
          * RT of Indonesian ID. 
          */
-        this.rT = nativeResult.rT;
+        this.rt = nativeResult.rt;
         
         /** 
          * RW of Indonesian ID. 
          */
-        this.rW = nativeResult.rW;
-        
-        /** 
-         * religion of Indonesian ID owner. 
-         */
-        this.religion = nativeResult.religion;
+        this.rw = nativeResult.rw;
         
         /** 
          * sex of Indonesian ID owner. 
@@ -198,19 +199,19 @@ export class IndonesiaIdFrontRecognizer extends Recognizer {
         this.extractPlaceOfBirth = true;
         
         /** 
+         * true if religion of Indonesian ID owner is being extracted 
+         */
+        this.extractReligion = true;
+        
+        /** 
          * true if RT of Indonesian ID owner is being extracted 
          */
-        this.extractRT = true;
+        this.extractRt = true;
         
         /** 
          * true if RW of Indonesian ID owner is being extracted 
          */
-        this.extractRW = true;
-        
-        /** 
-         * true if religion of Indonesian ID owner is being extracted 
-         */
-        this.extractReligion = true;
+        this.extractRw = true;
         
         /** 
          * true if valid until of Indonesian ID owner is being extracted 

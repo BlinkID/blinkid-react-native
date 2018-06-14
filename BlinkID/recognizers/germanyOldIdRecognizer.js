@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,16 +16,6 @@ import {
 export class GermanyOldIdRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
@@ -47,11 +38,6 @@ export class GermanyOldIdRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
@@ -60,11 +46,6 @@ export class GermanyOldIdRecognizerResult extends RecognizerResult {
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -146,6 +127,11 @@ export class GermanyOldIdRecognizer extends Recognizer {
          * {true} if the place of birth is being extracted, {false} otherwise. 
          */
         this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines the extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 

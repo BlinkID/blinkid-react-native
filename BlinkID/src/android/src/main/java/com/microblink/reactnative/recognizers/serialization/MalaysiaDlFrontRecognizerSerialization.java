@@ -49,7 +49,7 @@ public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerS
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("city", result.getCity());
-        jsonResult.putString("dLClass", result.getDLClass());
+        jsonResult.putString("dlClass", result.getDlClass());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullAddress", result.getFullAddress());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));

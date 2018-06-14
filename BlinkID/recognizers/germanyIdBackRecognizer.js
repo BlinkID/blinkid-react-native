@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -42,16 +43,6 @@ export class GermanyIdBackRecognizerResult extends RecognizerResult {
         this.addressZipCode = nativeResult.addressZipCode;
         
         /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
-        
-        /** 
          * the issuing authority of German ID. 
          */
         this.authority = nativeResult.authority;
@@ -82,11 +73,6 @@ export class GermanyIdBackRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          * the card holder's eye colour. 
          */
         this.eyeColour = nativeResult.eyeColour;
@@ -100,11 +86,6 @@ export class GermanyIdBackRecognizerResult extends RecognizerResult {
          * the height of the card holder. 
          */
         this.height = nativeResult.height;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -196,6 +177,11 @@ export class GermanyIdBackRecognizer extends Recognizer {
          * {true} if the height is being extracted, {false} otherwise. 
          */
         this.extractHeight = true;
+        
+        /** 
+         * Defines the extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether full document image will be available in result. 

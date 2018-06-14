@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,16 +16,6 @@ import {
 export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
          * the authority of Swiss passport. 
@@ -57,11 +48,6 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
@@ -72,14 +58,14 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
+         * the given name of the Swiss passport owner. 
+         */
+        this.givenName = nativeResult.givenName;
+        
+        /** 
          * the height of the Swiss passport owner. 
          */
         this.height = nativeResult.height;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -102,11 +88,6 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * the name of the Swiss passport owner. 
-         */
-        this.name = nativeResult.name;
-        
-        /** 
          * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
@@ -114,17 +95,17 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Swiss passport. 
          */
-        this.nonMRZDateOfBirth = nativeResult.nonMRZDateOfBirth;
+        this.nonMrzDateOfBirth = nativeResult.nonMrzDateOfBirth;
         
         /** 
          * the date of expiry of Swiss passport. 
          */
-        this.nonMRZDateOfExpiry = nativeResult.nonMRZDateOfExpiry;
+        this.nonMrzDateOfExpiry = nativeResult.nonMrzDateOfExpiry;
         
         /** 
          * the sex of the Swiss passport owner. 
          */
-        this.nonMRZSex = nativeResult.nonMRZSex;
+        this.nonMrzSex = nativeResult.nonMrzSex;
         
         /** 
          * Defines first optional data.<code>null</code> or empty string if not available. 
@@ -142,9 +123,9 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         this.passportNumber = nativeResult.passportNumber;
         
         /** 
-         * the place of origin of the Swiss passport owner. 
+         * the place of birth of the Swiss passport owner. 
          */
-        this.placeOfOrigin = nativeResult.placeOfOrigin;
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
          * Defines the primary indentifier. If there is more than one component, they are separated with space. 

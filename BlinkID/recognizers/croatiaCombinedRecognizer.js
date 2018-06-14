@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,11 +16,6 @@ import {
 export class CroatiaCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * the address of the Croatian ID owner. 
@@ -47,6 +43,11 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
         /** 
+         * the document date of issue of the Croatian ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
+        
+        /** 
          * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
@@ -65,11 +66,6 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of issue of the Croatian ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          *  face image from the document 
@@ -105,6 +101,16 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
          * the last name of the Croatian ID owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
+         * true if document owner is non resident. 
+         */
+        this.nonResident = nativeResult.nonResident;
         
         /** 
          * personal identification number of the Croatian ID holder. 

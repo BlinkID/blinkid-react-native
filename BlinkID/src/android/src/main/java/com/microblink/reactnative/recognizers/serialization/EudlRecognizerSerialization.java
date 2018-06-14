@@ -49,8 +49,7 @@ public final class EudlRecognizerSerialization implements RecognizerSerializatio
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
-        jsonResult.putMap("birthDate", SerializationUtils.serializeDate(result.getBirthDate()));
-        jsonResult.putString("birthPlace", result.getBirthPlace());
+        jsonResult.putString("birthData", result.getBirthData());
         jsonResult.putInt("country", SerializationUtils.serializeEnum(result.getCountry()));
         jsonResult.putString("driverNumber", result.getDriverNumber());
         jsonResult.putMap("expiryDate", SerializationUtils.serializeDate(result.getExpiryDate()));

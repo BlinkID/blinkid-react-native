@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,11 +16,6 @@ import {
 export class PolandCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * the date of birth of Polish ID owner. 
@@ -80,6 +76,11 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
          * the issuer of the Polish ID. 
          */
         this.issuer = nativeResult.issuer;
+        
+        /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
          * the nationality of the Polish ID owner. 

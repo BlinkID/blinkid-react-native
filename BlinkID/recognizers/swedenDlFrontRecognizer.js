@@ -11,31 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for SlovakiaIdFrontRecognizer.
+ * Result object for SwedenDlFrontRecognizer.
  */
-export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
+export class SwedenDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * the date of birth of Slovak ID owner 
+         * date of birth of Sweden DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
-         * the date of expiry of Slovak ID 
+         * date of expiry of Sweden DL. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry;
         
         /** 
-         * the date of issue of Slovak ID 
+         * date of issue of Sweden DL. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue;
-        
-        /** 
-         * the identity card number of Slovak ID. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          *  face image from the document 
@@ -43,55 +38,55 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the first name of the Slovak ID owner. 
-         */
-        this.firstName = nativeResult.firstName;
-        
-        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the issuer of the Slovak ID. 
+         * issuing agency of Sweden DL card. 
          */
-        this.issuedBy = nativeResult.issuedBy;
+        this.issuingAgency = nativeResult.issuingAgency;
         
         /** 
-         * the last name of the Slovak ID owner. 
+         * licence categories of Sweden DL. 
          */
-        this.lastName = nativeResult.lastName;
+        this.licenceCategories = nativeResult.licenceCategories;
         
         /** 
-         * the nationality of the Slovak ID owner. 
+         * the licence number of Sweden DL card owner. 
          */
-        this.nationality = nativeResult.nationality;
+        this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * the personal number of the Slovak ID owner. 
+         * name of Sweden DL owner. 
          */
-        this.personalNumber = nativeResult.personalNumber;
+        this.name = nativeResult.name;
         
         /** 
-         * sex of the Slovak ID owner. 
+         * reference number of Sweden DL card. 
          */
-        this.sex = nativeResult.sex;
+        this.referenceNumber = nativeResult.referenceNumber;
         
         /** 
          *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * surname of Sweden DL owner. 
+         */
+        this.surname = nativeResult.surname;
+        
     }
 }
 
 /**
- *  Recognizer which can scan front side of slovak national ID cards.
+ *  Recognizer settings for reading front side of Sweden DL
 
  */
-export class SlovakiaIdFrontRecognizer extends Recognizer {
+export class SwedenDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('SlovakiaIdFrontRecognizer');
+        super('SwedenDlFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -99,39 +94,49 @@ export class SlovakiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * true if date of birth is being extracted from ID 
+         * true if date of birth of Sweden DL owner is being extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * true if date of expiry is being extracted from ID 
+         * true if date of expiry of Sweden DL is being extracted 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * true if date of issue is being extracted from ID 
+         * true if date of issue of Sweden DL is being extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * true if document number is being extracted from ID 
+         * true if issuing agency of Sweden DL is being extracted 
          */
-        this.extractDocumentNumber = true;
+        this.extractIssuingAgency = true;
         
         /** 
-         * true if issuer is being extracted from ID 
+         * true if licence categories of Sweden DL is being extracted 
          */
-        this.extractIssuedBy = true;
+        this.extractLicenceCategories = false;
         
         /** 
-         * true if nationality is being extracted from ID 
+         * true if name of Sweden DL owner is being extracted 
          */
-        this.extractNationality = true;
+        this.extractName = true;
         
         /** 
-         * true if sex is being extracted from ID 
+         * true if reference number of Sweden DL is being extracted 
          */
-        this.extractSex = true;
+        this.extractReferenceNumber = true;
+        
+        /** 
+         * true if surname of Sweden DL owner is being extracted 
+         */
+        this.extractSurname = true;
+        
+        /** 
+         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Defines whether face image will be available in result. 
@@ -148,6 +153,6 @@ export class SlovakiaIdFrontRecognizer extends Recognizer {
          */
         this.returnSignatureImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SlovakiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SwedenDlFrontRecognizerResult(nativeResult); }
     }
 }

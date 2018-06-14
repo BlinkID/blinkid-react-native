@@ -42,14 +42,14 @@ public final class HongKongIdFrontRecognizerSerialization implements RecognizerS
         com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.hongkong.HongKongIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
+        jsonResult.putString("commercialCode", result.getCommercialCode());
+        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putMap("ownerBirthDate", SerializationUtils.serializeDate(result.getOwnerBirthDate()));
-        jsonResult.putString("ownerCommercialCode", result.getOwnerCommercialCode());
-        jsonResult.putString("ownerFullName", result.getOwnerFullName());
-        jsonResult.putString("ownerSex", result.getOwnerSex());
+        jsonResult.putString("fullName", result.getFullName());
+        jsonResult.putString("sex", result.getSex());
         return jsonResult;
     }
 

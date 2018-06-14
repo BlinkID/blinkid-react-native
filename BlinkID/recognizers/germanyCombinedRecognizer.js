@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -17,19 +18,29 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
-        
-        /** 
          * the address of the German ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
+         * the CAN number of German ID. 
+         */
+        this.canNumber = nativeResult.canNumber;
+        
+        /** 
          * the date of birth of German ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
+        
+        /** 
+         * the document date of expiry of the German ID. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the document date of issue of the German ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          * Defines digital signature of recognition results. 
@@ -45,16 +56,6 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of expiry of the German ID. 
-         */
-        this.documentDateOfExpiry = nativeResult.documentDateOfExpiry;
-        
-        /** 
-         * the document date of issue of the German ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          * the issuing authority of German ID. 
@@ -102,6 +103,11 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * nationality of the German ID owner. 
          */
         this.nationality = nativeResult.nationality;
@@ -141,6 +147,11 @@ export class GermanyCombinedRecognizer extends Recognizer {
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines the extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 

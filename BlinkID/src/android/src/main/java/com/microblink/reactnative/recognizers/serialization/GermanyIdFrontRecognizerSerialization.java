@@ -34,6 +34,9 @@ public final class GermanyIdFrontRecognizerSerialization implements RecognizerSe
         if (jsonRecognizer.hasKey("extractSurname")) {
             recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -51,12 +54,13 @@ public final class GermanyIdFrontRecognizerSerialization implements RecognizerSe
         com.microblink.entities.recognizers.blinkid.germany.GermanyIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
+        jsonResult.putString("canNumber", result.getCanNumber());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());

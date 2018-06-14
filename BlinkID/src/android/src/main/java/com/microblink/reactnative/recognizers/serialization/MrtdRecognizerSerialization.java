@@ -22,8 +22,8 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
-        if (jsonRecognizer.hasKey("returnMRZImage")) {
-            recognizer.setReturnMRZImage(jsonRecognizer.getBoolean("returnMRZImage"));
+        if (jsonRecognizer.hasKey("returnMrzImage")) {
+            recognizer.setReturnMrzImage(jsonRecognizer.getBoolean("returnMrzImage"));
         }
         if (jsonRecognizer.hasKey("saveImageDPI")) {
             recognizer.setSaveImageDPI(jsonRecognizer.getInt("saveImageDPI"));

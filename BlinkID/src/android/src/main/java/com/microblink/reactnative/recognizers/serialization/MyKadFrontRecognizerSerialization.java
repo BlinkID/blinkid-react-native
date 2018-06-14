@@ -33,7 +33,7 @@ public final class MyKadFrontRecognizerSerialization implements RecognizerSerial
         jsonResult.putString("armyNumber", result.getArmyNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("nRICNumber", result.getNRICNumber());
+        jsonResult.putString("nricNumber", result.getNricNumber());
         jsonResult.putString("ownerAddress", result.getOwnerAddress());
         jsonResult.putString("ownerAddressCity", result.getOwnerAddressCity());
         jsonResult.putString("ownerAddressState", result.getOwnerAddressState());

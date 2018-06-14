@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -19,17 +20,12 @@ export class MyKadBackRecognizerResult extends RecognizerResult {
         /** 
          * date of birth of MyKad owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
-        
-        /** 
-         * document classifier of MyKad. 
-         */
-        this.documentClassifier = nativeResult.documentClassifier;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * extended NRIC (National Registration Identity Card Number) of MyKad. 
          */
-        this.extendedNRIC = nativeResult.extendedNRIC;
+        this.extendedNric = nativeResult.extendedNric;
         
         /** 
          *  image of the full document 
@@ -39,7 +35,7 @@ export class MyKadBackRecognizerResult extends RecognizerResult {
         /** 
          * NRIC (National Registration Identity Card Number) of MyKad. 
          */
-        this.nRIC = nativeResult.nRIC;
+        this.nric = nativeResult.nric;
         
         /** 
          * sex of MyKad owner. 
@@ -55,8 +51,7 @@ export class MyKadBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading back side of Malaysian MyKad.
-
+ * Recognizer for reading back side of Malaysian MyKad.
  */
 export class MyKadBackRecognizer extends Recognizer {
     constructor() {
@@ -68,7 +63,7 @@ export class MyKadBackRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
@@ -81,6 +76,11 @@ export class MyKadBackRecognizer extends Recognizer {
          * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new MyKadBackRecognizerResult(nativeResult); }
     }

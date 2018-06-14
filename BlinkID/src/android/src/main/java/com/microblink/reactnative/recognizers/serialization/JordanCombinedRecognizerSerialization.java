@@ -39,7 +39,6 @@ public final class JordanCombinedRecognizerSerialization implements RecognizerSe
         com.microblink.entities.recognizers.blinkid.jordan.JordanCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.jordan.JordanCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
@@ -50,8 +49,9 @@ public final class JordanCombinedRecognizerSerialization implements RecognizerSe
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("name", result.getName());
-        jsonResult.putString("natianalNumber", result.getNatianalNumber());
+        jsonResult.putString("nationalNumber", result.getNationalNumber());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putString("sex", result.getSex());

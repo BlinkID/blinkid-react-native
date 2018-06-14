@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -17,9 +18,19 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
+         * the date of birth of the Serbian ID holder. 
          */
-        this.MRZVerified = nativeResult.MRZVerified;
+        this.dateOfBirth = nativeResult.dateOfBirth;
+        
+        /** 
+         * the document date of expiry of the Serbian ID. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the document date of issue of the Serbian ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          * Defines digital signature of recognition results. 
@@ -35,21 +46,6 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the date of birth of the Serbian ID holder. 
-         */
-        this.documentDateOfBirth = nativeResult.documentDateOfBirth;
-        
-        /** 
-         * the document date of expiry of the Serbian ID. 
-         */
-        this.documentDateOfExpiry = nativeResult.documentDateOfExpiry;
-        
-        /** 
-         * the document date of issue of the Serbian ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          *  face image from the document 
@@ -84,12 +80,17 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
         /** 
          * personal identification number of the Serbian ID holder. 
          */
-        this.jMBG = nativeResult.jMBG;
+        this.jmbg = nativeResult.jmbg;
         
         /** 
          * last name of the Serbian ID holder. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
          * nationality of the Serbian ID holder. 

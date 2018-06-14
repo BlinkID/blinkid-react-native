@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -22,19 +23,9 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
-        
-        /** 
          * the CNP of Romanian ID owner. 
          */
-        this.cNP = nativeResult.cNP;
+        this.cnp = nativeResult.cnp;
         
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
@@ -57,11 +48,6 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
@@ -77,19 +63,14 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
+         * the identity card series of Romanian ID. 
+         */
+        this.idSeries = nativeResult.idSeries;
+        
+        /** 
          * the identity card number of Romanian ID. 
          */
         this.identityCardNumber = nativeResult.identityCardNumber;
-        
-        /** 
-         * the identity card series of Romanian ID. 
-         */
-        this.identityCardSeries = nativeResult.identityCardSeries;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * issuing authority the Romanian ID. 

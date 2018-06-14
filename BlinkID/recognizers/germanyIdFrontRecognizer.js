@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -17,6 +18,11 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
+         * the CAN number of German ID. 
+         */
+        this.canNumber = nativeResult.canNumber;
+        
+        /** 
          * the date of birth of German ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
@@ -25,6 +31,11 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
          * the date of expiry of German ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the document number of German ID. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          *  face image from the document 
@@ -40,11 +51,6 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
-        
-        /** 
-         * the identity card number of German ID. 
-         */
-        this.identityCardNumber = nativeResult.identityCardNumber;
         
         /** 
          * the last name of the German ID owner. 
@@ -116,6 +122,11 @@ export class GermanyIdFrontRecognizer extends Recognizer {
          * {true} if the surname is being extracted, {false} otherwise. 
          */
         this.extractSurname = true;
+        
+        /** 
+         * Defines the extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 

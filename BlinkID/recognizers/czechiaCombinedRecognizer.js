@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -17,11 +18,6 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
-        
-        /** 
          * the address of the Czech ID owner. 
          */
         this.address = nativeResult.address;
@@ -30,6 +26,16 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
          * the date of birth of Czech ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
+        
+        /** 
+         * the document date of expiry of the Czech ID. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the document date of issue of the Czech ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          * Defines digital signature of recognition results. 
@@ -45,16 +51,6 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of expiry of the Czech ID. 
-         */
-        this.documentDateOfExpiry = nativeResult.documentDateOfExpiry;
-        
-        /** 
-         * the document date of issue of the Czech ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          *  face image from the document 
@@ -92,6 +88,11 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * nationality of the Czech ID owner. 
          */
         this.nationality = nativeResult.nationality;
@@ -100,6 +101,11 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
          * personal identification number of the Czech ID holder. 
          */
         this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
+        
+        /** 
+         * the place of birth of the Czech ID owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
          *  {true} if recognizer has finished scanning first side and is now scanning back side, 

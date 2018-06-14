@@ -33,17 +33,16 @@ public final class CroatiaCombinedRecognizerSerialization implements RecognizerS
         com.microblink.entities.recognizers.blinkid.croatia.CroatiaCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.croatia.CroatiaCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("citizenship", result.getCitizenship());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
+        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", result.getDigitalSignatureVersion());
         jsonResult.putBoolean("documentBilingual", result.isDocumentBilingual());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
-        jsonResult.putMap("documentDateOfIssue", SerializationUtils.serializeDate(result.getDocumentDateOfIssue()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
@@ -51,6 +50,8 @@ public final class CroatiaCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
+        jsonResult.putBoolean("nonResident", result.isNonResident());
         jsonResult.putString("personalIdentificationNumber", result.getPersonalIdentificationNumber());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putString("sex", result.getSex());

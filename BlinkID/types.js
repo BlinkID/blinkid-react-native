@@ -175,3 +175,22 @@ export const DocumentFaceDetectorType = Object.freeze(
         PassportsAndVisas : 3
     }
 );
+
+/**
+ * Extension factors relative to corresponding dimension of the full image. For example,
+ * upFactor and downFactor define extensions relative to image height, e.g.
+ * when upFactor is 0.5, upper image boundary will be extended for half of image's full
+ * height.
+ */
+export class ImageExtensionFactors {
+    constructor() {
+        /** image extension factor relative to full image height in UP direction. */
+        this.upFactor = 0.0;
+        /** image extension factor relative to full image height in RIGHT direction. */
+        this.rightFactor = 0.0;
+        /** image extension factor relative to full image height in DOWN direction. */
+        this.downFactor = 0.0;
+        /** image extension factor relative to full image height in LEFT direction. */
+        this.leftFactor = 0.0;
+    }
+};

@@ -43,14 +43,14 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractPlaceOfBirth")) {
             recognizer.setExtractPlaceOfBirth(jsonRecognizer.getBoolean("extractPlaceOfBirth"));
         }
-        if (jsonRecognizer.hasKey("extractRT")) {
-            recognizer.setExtractRT(jsonRecognizer.getBoolean("extractRT"));
-        }
-        if (jsonRecognizer.hasKey("extractRW")) {
-            recognizer.setExtractRW(jsonRecognizer.getBoolean("extractRW"));
-        }
         if (jsonRecognizer.hasKey("extractReligion")) {
             recognizer.setExtractReligion(jsonRecognizer.getBoolean("extractReligion"));
+        }
+        if (jsonRecognizer.hasKey("extractRt")) {
+            recognizer.setExtractRt(jsonRecognizer.getBoolean("extractRt"));
+        }
+        if (jsonRecognizer.hasKey("extractRw")) {
+            recognizer.setExtractRw(jsonRecognizer.getBoolean("extractRw"));
         }
         if (jsonRecognizer.hasKey("extractValidUntil")) {
             recognizer.setExtractValidUntil(jsonRecognizer.getBoolean("extractValidUntil"));
@@ -91,9 +91,9 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         jsonResult.putString("occupation", result.getOccupation());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
         jsonResult.putString("province", result.getProvince());
-        jsonResult.putString("rT", result.getRT());
-        jsonResult.putString("rW", result.getRW());
         jsonResult.putString("religion", result.getReligion());
+        jsonResult.putString("rt", result.getRt());
+        jsonResult.putString("rw", result.getRw());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         jsonResult.putMap("validUntil", SerializationUtils.serializeDate(result.getValidUntil()));

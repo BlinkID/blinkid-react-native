@@ -7,17 +7,18 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
- * Result object for IKadRecognizer.
+ * Result object for IkadRecognizer.
  */
-export class IKadRecognizerResult extends RecognizerResult {
+export class IkadRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * address of the Malaysian iKad owner. 
+         * personal address of the Malaysian iKad owner. 
          */
         this.address = nativeResult.address;
         
@@ -42,14 +43,19 @@ export class IKadRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
+         * faculty address of the Malaysian iKad owner. 
+         */
+        this.facultyAddress = nativeResult.facultyAddress;
+        
+        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the full name of the Malaysian iKad owner. 
+         * the name of the Malaysian iKad owner. 
          */
-        this.fullName = nativeResult.fullName;
+        this.name = nativeResult.name;
         
         /** 
          * the nationality of the Malaysian iKad owner. 
@@ -78,9 +84,9 @@ export class IKadRecognizerResult extends RecognizerResult {
  *  Recognizer for reading Malaysian iKad.
 
  */
-export class IKadRecognizer extends Recognizer {
+export class IkadRecognizer extends Recognizer {
     constructor() {
-        super('IKadRecognizer');
+        super('IkadRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -101,6 +107,11 @@ export class IKadRecognizer extends Recognizer {
          * true if expiry date is being extracted 
          */
         this.extractExpiryDate = true;
+        
+        /** 
+         * true if faculty address is being extracted 
+         */
+        this.extractFacultyAddress = true;
         
         /** 
          * true if nationality is being extracted 
@@ -137,6 +148,6 @@ export class IKadRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new IKadRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new IkadRecognizerResult(nativeResult); }
     }
 }

@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -24,7 +25,7 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * Malaysian DL class. 
          */
-        this.dLClass = nativeResult.dLClass;
+        this.dlClass = nativeResult.dlClass;
         
         /** 
          *  face image from the document 

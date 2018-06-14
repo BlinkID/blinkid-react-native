@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -34,7 +35,7 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
         /** 
          * the document date of issue of the Singapore ID 
          */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue;
         
         /** 
          *  image of the full document 

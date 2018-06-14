@@ -28,6 +28,9 @@ public final class GermanyIdBackRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractHeight")) {
             recognizer.setExtractHeight(jsonRecognizer.getBoolean("extractHeight"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
@@ -44,19 +47,15 @@ public final class GermanyIdBackRecognizerSerialization implements RecognizerSer
         jsonResult.putString("addressHouseNumber", result.getAddressHouseNumber());
         jsonResult.putString("addressStreet", result.getAddressStreet());
         jsonResult.putString("addressZipCode", result.getAddressZipCode());
-        jsonResult.putString("alienNumber", result.getAlienNumber());
-        jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putString("authority", result.getAuthority());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentCode", result.getDocumentCode());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
-        jsonResult.putInt("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
         jsonResult.putString("eyeColour", result.getEyeColour());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putInt("height", result.getHeight());
-        jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
         jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
         jsonResult.putString("mrzText", result.getMrzText());

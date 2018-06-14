@@ -13,6 +13,9 @@ public final class GermanyCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -33,14 +36,14 @@ public final class GermanyCombinedRecognizerSerialization implements RecognizerS
         com.microblink.entities.recognizers.blinkid.germany.GermanyCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putString("address", result.getAddress());
+        jsonResult.putString("canNumber", result.getCanNumber());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", result.getDigitalSignatureVersion());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
-        jsonResult.putMap("documentDateOfExpiry", SerializationUtils.serializeDate(result.getDocumentDateOfExpiry()));
-        jsonResult.putMap("documentDateOfIssue", SerializationUtils.serializeDate(result.getDocumentDateOfIssue()));
         jsonResult.putString("eyeColor", result.getEyeColor());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
@@ -50,6 +53,7 @@ public final class GermanyCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());

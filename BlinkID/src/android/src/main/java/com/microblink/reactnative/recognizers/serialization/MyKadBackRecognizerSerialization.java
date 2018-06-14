@@ -22,6 +22,9 @@ public final class MyKadBackRecognizerSerialization implements RecognizerSeriali
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
         }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
+        }
         return recognizer;
     }
 
@@ -31,10 +34,9 @@ public final class MyKadBackRecognizerSerialization implements RecognizerSeriali
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
-        jsonResult.putString("documentClassifier", result.getDocumentClassifier());
-        jsonResult.putString("extendedNRIC", result.getExtendedNRIC());
+        jsonResult.putString("extendedNric", result.getExtendedNric());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("nRIC", result.getNRIC());
+        jsonResult.putString("nric", result.getNric());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;

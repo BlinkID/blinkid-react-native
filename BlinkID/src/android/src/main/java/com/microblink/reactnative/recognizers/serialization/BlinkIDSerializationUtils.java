@@ -1,8 +1,10 @@
 package com.microblink.reactnative.recognizers.serialization;
 
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
+import com.microblink.entities.settings.image.ImageExtensionFactors;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -26,6 +28,17 @@ public abstract class BlinkIDSerializationUtils {
         jsonMrz.putBoolean("mrzParsed", mrzResult.isMrzParsed());
         jsonMrz.putBoolean("mrzVerified", mrzResult.isMrzVerified());
         return jsonMrz;
+    }
 
+    public static ImageExtensionFactors deserializeExtensionFactors(ReadableMap jsonExtensionFactors) {
+        if (jsonExtensionFactors == null) {
+            return new ImageExtensionFactors(0.f, 0.f, 0.f, 0.f);
+        } else {
+            float up = (float)jsonExtensionFactors.getDouble("upFactor");
+            float right = (float)jsonExtensionFactors.getDouble("rightFactor");
+            float down = (float)jsonExtensionFactors.getDouble("downFactor");
+            float left = (float)jsonExtensionFactors.getDouble("leftFactor");
+            return new ImageExtensionFactors(up, down, left, right);
+        }
     }
 }

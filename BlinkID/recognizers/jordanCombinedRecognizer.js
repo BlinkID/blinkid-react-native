@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,11 +16,6 @@ import {
 export class JordanCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * the date of birth of Jordan ID owner. 
@@ -72,6 +68,11 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.issuer = nativeResult.issuer;
         
         /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
          * the name of the Jordan ID owner. 
          */
         this.name = nativeResult.name;
@@ -79,7 +80,7 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         /** 
          * the national number of Jordan ID owner. 
          */
-        this.natianalNumber = nativeResult.natianalNumber;
+        this.nationalNumber = nativeResult.nationalNumber;
         
         /** 
          * nationality of the Jordan ID owner. 

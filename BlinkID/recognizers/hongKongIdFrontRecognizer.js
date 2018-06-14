@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,6 +16,16 @@ import {
 export class HongKongIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * owner commercial code if written on ID 
+         */
+        this.commercialCode = nativeResult.commercialCode;
+        
+        /** 
+         * owner's date of birth if it is successfully converted to {Date} from date format: <code>DDMMYYYY</code>. 
+         */
+        this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
          * ID date of issue it is successfully converted to {Date} from date format: <code>DDMMYYYY</code>. 
@@ -37,24 +48,14 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * owner's date of birth if it is successfully converted to {Date} from date format: <code>DDMMYYYY</code>. 
-         */
-        this.ownerBirthDate = nativeResult.ownerBirthDate;
-        
-        /** 
-         * owner commercial code if written on ID 
-         */
-        this.ownerCommercialCode = nativeResult.ownerCommercialCode;
-        
-        /** 
          * owner full name. 
          */
-        this.ownerFullName = nativeResult.ownerFullName;
+        this.fullName = nativeResult.fullName;
         
         /** 
          * owner sex (M for male, F for female). 
          */
-        this.ownerSex = nativeResult.ownerSex;
+        this.sex = nativeResult.sex;
         
     }
 }

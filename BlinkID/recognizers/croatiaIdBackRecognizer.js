@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -22,16 +23,6 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * Defines alien number.<code>null</code> or empty string if not available. 
-         */
-        this.alienNumber = nativeResult.alienNumber;
-        
-        /** 
-         * Defines application receipt number.<code>null</code> or empty string if not available. 
-         */
-        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
-        
-        /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth;
@@ -42,19 +33,19 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.dateOfExpiry = nativeResult.dateOfExpiry;
         
         /** 
-         * Defines document code. Document code contains two characters. For MRTD the first character shall 
-         */
-        this.documentCode = nativeResult.documentCode;
-        
-        /** 
          * true if date of expiry of the Croatian ID is permanent else false 
          */
-        this.documentDateOfExpiryPermanent = nativeResult.documentDateOfExpiryPermanent;
+        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
         /** 
          * the document date of issue of the Croatian ID 
          */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue;
+        
+        /** 
+         * Defines document code. Document code contains two characters. For MRTD the first character shall 
+         */
+        this.documentCode = nativeResult.documentCode;
         
         /** 
          * Defines document number. Document number contains up to 9 characters. 
@@ -62,19 +53,9 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Defines the MRTD document type of recognized document. 
-         */
-        this.documentType = nativeResult.documentType;
-        
-        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
-        
-        /** 
-         * Defines immigrant case number.<code>null</code> or empty string if not available. 
-         */
-        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 

@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -34,7 +35,7 @@ export class MyTenteraRecognizerResult extends RecognizerResult {
         /** 
          * NRIC number (National Registration Identity Card Number) 
          */
-        this.nRICNumber = nativeResult.nRICNumber;
+        this.nricNumber = nativeResult.nricNumber;
         
         /** 
          * full owner address. 

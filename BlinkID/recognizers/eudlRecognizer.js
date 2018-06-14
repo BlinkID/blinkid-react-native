@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -22,14 +23,9 @@ export class EudlRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * the date of birth of Driver's Licence owner 
+         * birth date and birth place of Driver's Licence owner 
          */
-        this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
-        
-        /** 
-         * the place of birth of Driver's Licence owner 
-         */
-        this.birthPlace = nativeResult.birthPlace;
+        this.birthData = nativeResult.birthData;
         
         /** 
          * the country where the driver's license has been issued. 

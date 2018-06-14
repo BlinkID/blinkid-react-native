@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -64,7 +65,7 @@ export class MrtdRecognizer extends Recognizer {
         /** 
          * Defines whether MRZ image will be available in result. 
          */
-        this.returnMRZImage = false;
+        this.returnMrzImage = false;
         
         /** 
          * Desired DPI for MRZ and full document images (if saving of those is enabled) 

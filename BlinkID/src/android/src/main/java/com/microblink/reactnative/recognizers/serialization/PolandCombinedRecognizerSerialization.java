@@ -48,7 +48,6 @@ public final class PolandCombinedRecognizerSerialization implements RecognizerSe
         com.microblink.entities.recognizers.blinkid.poland.PolandCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.poland.PolandCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putBoolean("MRZVerified", result.isMRZVerified());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
@@ -61,6 +60,7 @@ public final class PolandCombinedRecognizerSerialization implements RecognizerSe
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
         jsonResult.putString("givenNames", result.getGivenNames());
         jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("parentsGivenNames", result.getParentsGivenNames());
         jsonResult.putString("personalNumber", result.getPersonalNumber());

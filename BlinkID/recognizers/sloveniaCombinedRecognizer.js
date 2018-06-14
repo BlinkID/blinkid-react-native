@@ -7,6 +7,7 @@ import {
     MrzResult, 
     EudlCountry, 
     DocumentFaceDetectorType,
+    ImageExtensionFactors,
 } from '../types'
 
 /**
@@ -15,11 +16,6 @@ import {
 export class SloveniaCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.MRZVerified = nativeResult.MRZVerified;
         
         /** 
          * the address of the Slovenian ID owner. 
@@ -37,6 +33,16 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth;
         
         /** 
+         * the document date of expiry of the Slovenian ID. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        
+        /** 
+         * the document date of issue of the Slovenian ID. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue;
+        
+        /** 
          * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
@@ -50,16 +56,6 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
          * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * the document date of expiry of the Slovenian ID. 
-         */
-        this.documentDateOfExpiry = nativeResult.documentDateOfExpiry;
-        
-        /** 
-         * the document date of issue of the Slovenian ID. 
-         */
-        this.documentDateOfIssue = nativeResult.documentDateOfIssue;
         
         /** 
          *  face image from the document 
@@ -95,6 +91,11 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
          * the last name of the Slovenian ID owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * true if all check digits inside MRZ are correct, false otherwise. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
          * personal identification number of the Slovenian ID holder. 
