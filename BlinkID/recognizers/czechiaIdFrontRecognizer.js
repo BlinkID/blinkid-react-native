@@ -20,17 +20,17 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Czech ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the date of expiry of Czech ID 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * the date of issue of Czech ID 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          *  face image from the document 

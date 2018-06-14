@@ -20,7 +20,7 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Polish ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          *  face image from the document 

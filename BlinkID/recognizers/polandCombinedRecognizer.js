@@ -20,12 +20,12 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Polish ID owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the document date of expiry of the Polish ID. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * Defines digital signature of recognition results. 

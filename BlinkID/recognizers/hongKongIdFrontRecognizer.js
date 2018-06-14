@@ -25,12 +25,12 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * owner's date of birth if it is successfully converted to {Date} from date format: <code>DDMMYYYY</code>. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * ID date of issue it is successfully converted to {Date} from date format: <code>DDMMYYYY</code>. 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * the Hong Kong document number. 

@@ -20,7 +20,7 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Swiss ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          *  face image from the document 

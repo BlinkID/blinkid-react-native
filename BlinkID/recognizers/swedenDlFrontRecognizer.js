@@ -20,17 +20,17 @@ export class SwedenDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * date of birth of Sweden DL owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * date of expiry of Sweden DL. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * date of issue of Sweden DL. 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          *  face image from the document 

@@ -20,12 +20,12 @@ export class SloveniaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Slovenian ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the date of expiry of Slovenian ID owner 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          *  face image from the document 

@@ -35,7 +35,7 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
         /** 
          * the document date of issue of the Singapore ID 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          *  image of the full document 

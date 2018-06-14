@@ -25,12 +25,12 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * true if date of expiry of the Croatian ID is permanent else false 
@@ -40,7 +40,7 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         /** 
          * the document date of issue of the Croatian ID 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Defines document code. Document code contains two characters. For MRTD the first character shall 

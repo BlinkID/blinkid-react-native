@@ -25,17 +25,17 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * the date of issue of Swiss ID card. 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Defines document code. Document code contains two characters. For MRTD the first character shall 
@@ -85,7 +85,7 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
         /** 
          * the date of expiry of Swiss ID card. 
          */
-        this.nonMrzDateOfExpiry = nativeResult.nonMrzDateOfExpiry;
+        this.nonMrzDateOfExpiry = nativeResult.nonMrzDateOfExpiry != null ? new Date(nativeResult.nonMrzDateOfExpiry) : null;
         
         /** 
          * the sex of the Swiss ID card owner. 

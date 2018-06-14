@@ -30,12 +30,12 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * Defines document code. Document code contains two characters. For MRTD the first character shall 
@@ -155,12 +155,12 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the valid from date of Romanian ID. 
          */
-        this.validFrom = nativeResult.validFrom;
+        this.validFrom = nativeResult.validFrom != null ? new Date(nativeResult.validFrom) : null;
         
         /** 
          * the valid until date of Romanian ID. 
          */
-        this.validUntil = nativeResult.validUntil;
+        this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
     }
 }

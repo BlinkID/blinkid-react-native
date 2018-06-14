@@ -65,7 +65,7 @@ export class MyTenteraRecognizerResult extends RecognizerResult {
         /** 
          * owner's date of birth if it is successfully converted to {Date} from date format: <code>YYMMDD</code>. 
          */
-        this.ownerBirthDate = nativeResult.ownerBirthDate;
+        this.ownerBirthDate = nativeResult.ownerBirthDate != null ? new Date(nativeResult.ownerBirthDate) : null;
         
         /** 
          * owner full name 

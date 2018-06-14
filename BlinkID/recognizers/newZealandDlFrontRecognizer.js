@@ -30,7 +30,7 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * date of birth on New Zealand drivers license. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * true if DONOR is on New Zealand drivers license else returns false. 
@@ -40,7 +40,7 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * expiry date on New Zealand drivers license. 
          */
-        this.expiryDate = nativeResult.expiryDate;
+        this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
          *  face image from the document 
@@ -60,7 +60,7 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * issue date on New Zealand drivers license. 
          */
-        this.issueDate = nativeResult.issueDate;
+        this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
          * license number on New Zealand drivers license. 

@@ -40,7 +40,7 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * date of birth of Indonesian ID owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * district of Indonesian ID owner. 
@@ -125,7 +125,7 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * valid until of Indonesian ID. 
          */
-        this.validUntil = nativeResult.validUntil;
+        this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
         /** 
          * {true} if date of expiry of the Indonesian ID is permanent, {false} otherwise. 

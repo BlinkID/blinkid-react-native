@@ -40,12 +40,12 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Singapore ID owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the document date of issue of the Singapore ID. 
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Defines digital signature of recognition results. 

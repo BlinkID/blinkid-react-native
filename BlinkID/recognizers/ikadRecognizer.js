@@ -25,7 +25,7 @@ export class IkadRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Malaysian iKad owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * employer of the Malaysian iKad owner. 
@@ -35,7 +35,7 @@ export class IkadRecognizerResult extends RecognizerResult {
         /** 
          * the expiry date of the Malaysian iKad 
          */
-        this.expiryDate = nativeResult.expiryDate;
+        this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
          *  face image from the document 

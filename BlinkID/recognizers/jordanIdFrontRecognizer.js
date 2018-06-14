@@ -20,7 +20,7 @@ export class JordanIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * date of birth of Jordan ID owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          *  face image from the document 

@@ -25,12 +25,12 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Croatian ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the document date of expiry of the Croatian ID 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * true if date of expiry of the Croatian ID is permanent else false 

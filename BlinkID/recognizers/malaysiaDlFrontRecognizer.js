@@ -70,12 +70,12 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * Malaysian DL valid from. 
          */
-        this.validFrom = nativeResult.validFrom;
+        this.validFrom = nativeResult.validFrom != null ? new Date(nativeResult.validFrom) : null;
         
         /** 
          * Malaysian DL valid until. 
          */
-        this.validUntil = nativeResult.validUntil;
+        this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
         /** 
          * extracted ZIP code from the owner address. 

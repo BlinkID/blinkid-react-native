@@ -35,7 +35,7 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the issuing date of the Serbian ID. 
          */
-        this.issuingDate = nativeResult.issuingDate;
+        this.issuingDate = nativeResult.issuingDate != null ? new Date(nativeResult.issuingDate) : null;
         
         /** 
          *  signature image from the document 
@@ -45,7 +45,7 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the valid until of the Serbian ID. 
          */
-        this.validUntil = nativeResult.validUntil;
+        this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
     }
 }

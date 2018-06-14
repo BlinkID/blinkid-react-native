@@ -25,7 +25,7 @@ export class AustraliaDlBackRecognizerResult extends RecognizerResult {
         /** 
          * the date of expiry of Australian DL. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          *  image of the full document 

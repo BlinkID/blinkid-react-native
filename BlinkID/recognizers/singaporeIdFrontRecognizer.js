@@ -30,7 +30,7 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the date of birth of Singapore ID owner 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          *  face image from the document 

@@ -25,7 +25,7 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
         /** 
          * owner date of birth 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * the Colombian ID document number number. 
