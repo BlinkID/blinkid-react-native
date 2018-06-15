@@ -95,6 +95,7 @@ export * from './overlays/barcodeOverlays'
 export * from './overlays/blinkidOverlays'
 
 // export recognizers that can be used and their results
+export * from './recognizers/successFrameGrabberRecognizer'
 export * from './recognizers/australiaDlBackRecognizer'
 export * from './recognizers/australiaDlFrontRecognizer'
 export * from './recognizers/austriaCombinedRecognizer'
