@@ -32,19 +32,20 @@ var renderIf = function(condition, content) {
 
 export default class BlinkIDReactNativeApp extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-          showImageDocument: false,
-          resultImageDocument: '',
-          showImageFace: false,
-          resultImageFace: '',
-          showSuccessFrame: false,
-          successFrame: '',
-          results: '',
-          licenseKeyErrorMessage: ''
-      };
+        this.state = {
+            showImageDocument: false,
+            resultImageDocument: '',
+            showImageFace: false,
+            resultImageFace: '',
+            showSuccessFrame: false,
+            successFrame: '',
+            results: '',
+            licenseKeyErrorMessage: ''
+        };
     }
+
     async scan() {
         try {
             // to scan EU driver's licenses, use EudlRecognizer
@@ -114,136 +115,136 @@ export default class BlinkIDReactNativeApp extends Component {
     }
 
     handleResult(result) {
-      let fieldDelim = ";\n";
-      
-      var localState = {
-          showImageDocument: false,
-          resultImageDocument: '',
-          showImageFace: false,
-          resultImageFace: '',
-          results: '',
-          showSuccessFrame: false,
-          successFrame: ''
-      };
-      
-      if (result instanceof BlinkIDReactNative.UsdlRecognizerResult) {
-          // handle USDL parsing result
-          let fields = result.fields
-          let USDLKeys = BlinkIDReactNative.UsdlKeys;
-          localState.results += /** Personal information */
-              "USDL version: " + fields[USDLKeys.StandardVersionNumber] + fieldDelim +
-              "Family name: " + fields[USDLKeys.CustomerFamilyName] + fieldDelim +
-              "First name: " + fields[USDLKeys.CustomerFirstName] + fieldDelim +
-              "Date of birth: " + fields[USDLKeys.DateOfBirth] + fieldDelim +
-              "Sex: " + fields[USDLKeys.Sex] + fieldDelim +
-              "Eye color: " + fields[USDLKeys.EyeColor] + fieldDelim +
-              "Height: " + fields[USDLKeys.Height] + fieldDelim +
-              "Street: " + fields[USDLKeys.AddressStreet] + fieldDelim +
-              "City: " + fields[USDLKeys.AddressCity] + fieldDelim +
-              "Jurisdiction: " + fields[USDLKeys.AddressJurisdictionCode] + fieldDelim +
-              "Postal code: " + fields[USDLKeys.AddressPostalCode] + fieldDelim +
-                /** License information */
-                "Issue date: " + fields[USDLKeys.DocumentIssueDate] + fieldDelim +
-                "Expiration date: " + fields[USDLKeys.DocumentExpirationDate] + fieldDelim +
-                "Issuer ID: " + fields[USDLKeys.IssuerIdentificationNumber] + fieldDelim +
-                "Jurisdiction version: " + fields[USDLKeys.JurisdictionVersionNumber] + fieldDelim +
-                "Vehicle class: " + fields[USDLKeys.JurisdictionVehicleClass] + fieldDelim +
-                "Restrictions: " + fields[USDLKeys.JurisdictionRestrictionCodes] + fieldDelim +
-                "Endorsments: " + fields[USDLKeys.JurisdictionEndorsementCodes] + fieldDelim +
-                "Customer ID: " + fields[USDLKeys.CustomerIdNumber] + fieldDelim;
-      } else if (result instanceof BlinkIDReactNative.MrtdRecognizerResult) {
-          let mrtdResult = result;
-          localState.results +=
-              "First name: " + mrtdResult.mrzResult.secondaryId + fieldDelim +
-              "Last name: " + mrtdResult.mrzResult.primaryId + fieldDelim +
-              "Nationality: " + mrtdResult.mrzResult.nationality + fieldDelim +
-              "Gender: " + mrtdResult.mrzResult.gender + fieldDelim +
-              "Date of birth: " +
-                  mrtdResult.mrzResult.dateOfBirth.day + "." +
-                  mrtdResult.mrzResult.dateOfBirth.month + "." +
-                  mrtdResult.mrzResult.dateOfBirth.year + ".";
-          
+        let fieldDelim = ";\n";
+        
+        var localState = {
+            showImageDocument: false,
+            resultImageDocument: '',
+            showImageFace: false,
+            resultImageFace: '',
+            results: '',
+            showSuccessFrame: false,
+            successFrame: ''
+        };
+        
+        if (result instanceof BlinkIDReactNative.UsdlRecognizerResult) {
+            // handle USDL parsing result
+            let fields = result.fields
+            let USDLKeys = BlinkIDReactNative.UsdlKeys;
+            localState.results += /** Personal information */
+                "USDL version: " + fields[USDLKeys.StandardVersionNumber] + fieldDelim +
+                "Family name: " + fields[USDLKeys.CustomerFamilyName] + fieldDelim +
+                "First name: " + fields[USDLKeys.CustomerFirstName] + fieldDelim +
+                "Date of birth: " + fields[USDLKeys.DateOfBirth] + fieldDelim +
+                "Sex: " + fields[USDLKeys.Sex] + fieldDelim +
+                "Eye color: " + fields[USDLKeys.EyeColor] + fieldDelim +
+                "Height: " + fields[USDLKeys.Height] + fieldDelim +
+                "Street: " + fields[USDLKeys.AddressStreet] + fieldDelim +
+                "City: " + fields[USDLKeys.AddressCity] + fieldDelim +
+                "Jurisdiction: " + fields[USDLKeys.AddressJurisdictionCode] + fieldDelim +
+                "Postal code: " + fields[USDLKeys.AddressPostalCode] + fieldDelim +
+                  /** License information */
+                  "Issue date: " + fields[USDLKeys.DocumentIssueDate] + fieldDelim +
+                  "Expiration date: " + fields[USDLKeys.DocumentExpirationDate] + fieldDelim +
+                  "Issuer ID: " + fields[USDLKeys.IssuerIdentificationNumber] + fieldDelim +
+                  "Jurisdiction version: " + fields[USDLKeys.JurisdictionVersionNumber] + fieldDelim +
+                  "Vehicle class: " + fields[USDLKeys.JurisdictionVehicleClass] + fieldDelim +
+                  "Restrictions: " + fields[USDLKeys.JurisdictionRestrictionCodes] + fieldDelim +
+                  "Endorsments: " + fields[USDLKeys.JurisdictionEndorsementCodes] + fieldDelim +
+                  "Customer ID: " + fields[USDLKeys.CustomerIdNumber] + fieldDelim;
+        } else if (result instanceof BlinkIDReactNative.MrtdRecognizerResult) {
+            let mrtdResult = result;
+            localState.results +=
+                "First name: " + mrtdResult.mrzResult.secondaryId + fieldDelim +
+                "Last name: " + mrtdResult.mrzResult.primaryId + fieldDelim +
+                "Nationality: " + mrtdResult.mrzResult.nationality + fieldDelim +
+                "Gender: " + mrtdResult.mrzResult.gender + fieldDelim +
+                "Date of birth: " +
+                    mrtdResult.mrzResult.dateOfBirth.day + "." +
+                    mrtdResult.mrzResult.dateOfBirth.month + "." +
+                    mrtdResult.mrzResult.dateOfBirth.year + ".";
+            
+              // Document image is returned as Base64 encoded JPEG
+              if (mrtdResult.fullDocumentImage) {
+                  localState.showImageDocument = true;
+                  localState.resultImageDocument = 'data:image/jpg;base64,' + mrtdResult.fullDocumentImage;
+              }
+        } else if (result instanceof BlinkIDReactNative.EudlRecognizerResult) {
+            localState.results +=
+                "First name: " + result.firstName + fieldDelim +
+                "Last name: " + result.lastName + fieldDelim +
+                "Address: " + result.address + fieldDelim +
+                "Personal number: " + result.personalNumber + fieldDelim +
+                "Driver number: " + result.driverNumber + fieldDelim;
+            
             // Document image is returned as Base64 encoded JPEG
-            if (mrtdResult.fullDocumentImage) {
+            if (result.fullDocumentImage) {
                 localState.showImageDocument = true;
-                localState.resultImageDocument = 'data:image/jpg;base64,' + mrtdResult.fullDocumentImage;
+                localState.resultImageDocument = 'data:image/jpg;base64,' + result.fullDocumentImage;
             }
-      } else if (result instanceof BlinkIDReactNative.EudlRecognizerResult) {
-          localState.results +=
-              "First name: " + result.firstName + fieldDelim +
-              "Last name: " + result.lastName + fieldDelim +
-              "Address: " + result.address + fieldDelim +
-              "Personal number: " + result.personalNumber + fieldDelim +
-              "Driver number: " + result.driverNumber + fieldDelim;
-          
-          // Document image is returned as Base64 encoded JPEG
-          if (result.fullDocumentImage) {
-              localState.showImageDocument = true;
-              localState.resultImageDocument = 'data:image/jpg;base64,' + result.fullDocumentImage;
-          }
-      
-          // Face image is returned as Base64 encoded JPEG
-          if (result.faceImage) {
-              localState.showImageFace = true;
-              localState.resultImageFace = 'data:image/jpg;base64,' + result.faceImage;
-          }
-      } else if (result instanceof BlinkIDReactNative.SuccessFrameGrabberRecognizerResult) {
-          // first handle slave result, and then add success frame image
-          localState = handleResult(result.slaveRecognizerResult);
-
-            // success frame is returned as Base64 encoded JPEG
-          if (result.successFrame) {
-              localState.showSuccessFrame = true;
-              localState.successFrame = 'data:image/jpg;base64,' + result.successFrame;
-          }
-      }
-      return localState;
+        
+            // Face image is returned as Base64 encoded JPEG
+            if (result.faceImage) {
+                localState.showImageFace = true;
+                localState.resultImageFace = 'data:image/jpg;base64,' + result.faceImage;
+            }
+        } else if (result instanceof BlinkIDReactNative.SuccessFrameGrabberRecognizerResult) {
+            // first handle slave result, and then add success frame image
+            localState = this.handleResult(result.slaveRecognizerResult);
+  
+              // success frame is returned as Base64 encoded JPEG
+            if (result.successFrame) {
+                localState.showSuccessFrame = true;
+                localState.successFrame = 'data:image/jpg;base64,' + result.successFrame;
+            }
+        }
+        return localState;
     }
 
-  render() {
-    let displayImageDocument = this.state.resultImageDocument;
-    let displayImageFace = this.state.resultImageFace;
-    let displaySuccessFrame = this.state.successFrame;
-    let displayFields = this.state.results;
-    return (
-      <View style={styles.container}>
-        <Text style={styles.label}>MicroBlink Ltd</Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this.scan.bind(this)}
-            title="Scan"
-            color="#87c540"
-          />
-        </View>
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          scrollEventThrottle={200}y> 
-          {renderIf(this.state.showImageDocument,
-              <View style={styles.imageContainer}>
-              <Image
-                resizeMode='contain'
-                source={{uri: displayImageDocument, scale: 3}} style={styles.imageResult}/>
-              </View>
-          )}
-          {renderIf(this.state.showImageFace,
-              <View style={styles.imageContainer}>
-              <Image
-                resizeMode='contain'
-                source={{uri: displayImageFace, scale: 3}} style={styles.imageResult}/>
-              </View>
-          )}
-          {renderIf(this.state.showSuccessFrame,
-              <View style={styles.imageContainer}>
+    render() {
+        let displayImageDocument = this.state.resultImageDocument;
+        let displayImageFace = this.state.resultImageFace;
+        let displaySuccessFrame = this.state.successFrame;
+        let displayFields = this.state.results;
+        return (
+        <View style={styles.container}>
+            <Text style={styles.label}>MicroBlink Ltd</Text>
+            <View style={styles.buttonContainer}>
+            <Button
+                onPress={this.scan.bind(this)}
+                title="Scan"
+                color="#87c540"
+            />
+            </View>
+            <ScrollView
+            automaticallyAdjustContentInsets={false}
+            scrollEventThrottle={200}y> 
+            {renderIf(this.state.showImageDocument,
+                <View style={styles.imageContainer}>
                 <Image
-                  resizeMode='contain'
-                  source={{uri: displaySuccessFrame, scale: 3}} style={styles.imageResult}/>
-              </View>
-          )}
-          <Text style={styles.results}>{displayFields}</Text>
-        </ScrollView>
-      </View>
-    );
-  }
+                    resizeMode='contain'
+                    source={{uri: displayImageDocument, scale: 3}} style={styles.imageResult}/>
+                </View>
+            )}
+            {renderIf(this.state.showImageFace,
+                <View style={styles.imageContainer}>
+                <Image
+                    resizeMode='contain'
+                    source={{uri: displayImageFace, scale: 3}} style={styles.imageResult}/>
+                </View>
+            )}
+            {renderIf(this.state.showSuccessFrame,
+                <View style={styles.imageContainer}>
+                    <Image
+                    resizeMode='contain'
+                    source={{uri: displaySuccessFrame, scale: 3}} style={styles.imageResult}/>
+                </View>
+            )}
+            <Text style={styles.results}>{displayFields}</Text>
+            </ScrollView>
+        </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
