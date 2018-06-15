@@ -59,7 +59,6 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.JMBG forKey:@"JMBG"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
@@ -72,6 +71,7 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
     [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
+    [jsonResult setValue:self.result.jmbg forKey:@"jmbg"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];

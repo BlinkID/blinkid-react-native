@@ -23,6 +23,42 @@
         }
     }
     {
+        id extractDateOfBirth = [jsonRecognizer valueForKey:@"extractDateOfBirth"];
+        if (extractDateOfBirth != nil) {
+            recognizer.extractDateOfBirth = [(NSNumber *)extractDateOfBirth boolValue];
+        }
+    }
+    {
+        id extractFamilyName = [jsonRecognizer valueForKey:@"extractFamilyName"];
+        if (extractFamilyName != nil) {
+            recognizer.extractFamilyName = [(NSNumber *)extractFamilyName boolValue];
+        }
+    }
+    {
+        id extractGivenNames = [jsonRecognizer valueForKey:@"extractGivenNames"];
+        if (extractGivenNames != nil) {
+            recognizer.extractGivenNames = [(NSNumber *)extractGivenNames boolValue];
+        }
+    }
+    {
+        id extractParentsGivenNames = [jsonRecognizer valueForKey:@"extractParentsGivenNames"];
+        if (extractParentsGivenNames != nil) {
+            recognizer.extractParentsGivenNames = [(NSNumber *)extractParentsGivenNames boolValue];
+        }
+    }
+    {
+        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
+        if (extractSex != nil) {
+            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        }
+    }
+    {
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -61,16 +97,16 @@
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.familyName forKey:@"familyName"];
-    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
+    [jsonResult setValue:self.result.givenNames forKey:@"givenNames"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:self.result.parentsName forKey:@"parentsName"];
+    [jsonResult setValue:self.result.parentsGivenNames forKey:@"parentsGivenNames"];
     [jsonResult setValue:self.result.personalNumber forKey:@"personalNumber"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }

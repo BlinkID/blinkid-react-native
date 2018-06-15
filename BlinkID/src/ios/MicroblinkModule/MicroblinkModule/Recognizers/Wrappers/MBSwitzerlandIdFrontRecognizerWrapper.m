@@ -23,15 +23,15 @@
         }
     }
     {
-        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
-        if (extractFirstName != nil) {
-            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        id extracGivenName = [jsonRecognizer valueForKey:@"extracGivenName"];
+        if (extracGivenName != nil) {
+            recognizer.extracGivenName = [(NSNumber *)extracGivenName boolValue];
         }
     }
     {
-        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
-        if (extractLastName != nil) {
-            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
         }
     }
     {
@@ -67,10 +67,10 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:self.result.givenName forKey:@"givenName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
+    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }

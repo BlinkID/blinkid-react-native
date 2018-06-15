@@ -17,9 +17,9 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBPdf417Recognizer *recognizer = [[MBPdf417Recognizer alloc] init];
     {
-        id allowNullQuietZone = [jsonRecognizer valueForKey:@"allowNullQuietZone"];
-        if (allowNullQuietZone != nil) {
-            recognizer.allowNullQuietZone = [(NSNumber *)allowNullQuietZone boolValue];
+        id nullQuietZoneAllowed = [jsonRecognizer valueForKey:@"nullQuietZoneAllowed"];
+        if (nullQuietZoneAllowed != nil) {
+            recognizer.nullQuietZoneAllowed = [(NSNumber *)nullQuietZoneAllowed boolValue];
         }
     }
     {

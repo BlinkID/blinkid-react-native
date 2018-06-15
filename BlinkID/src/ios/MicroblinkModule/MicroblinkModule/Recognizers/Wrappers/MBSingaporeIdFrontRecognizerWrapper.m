@@ -65,10 +65,10 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
     [jsonResult setValue:self.result.countryOfBirth forKey:@"countryOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.race forKey:@"race"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];

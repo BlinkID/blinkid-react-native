@@ -17,15 +17,15 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBBarcodeRecognizer *recognizer = [[MBBarcodeRecognizer alloc] init];
     {
-        id allowNullQuietZone = [jsonRecognizer valueForKey:@"allowNullQuietZone"];
-        if (allowNullQuietZone != nil) {
-            recognizer.allowNullQuietZone = [(NSNumber *)allowNullQuietZone boolValue];
-        }
-    }
-    {
         id autoScaleDetection = [jsonRecognizer valueForKey:@"autoScaleDetection"];
         if (autoScaleDetection != nil) {
             recognizer.autoScaleDetection = [(NSNumber *)autoScaleDetection boolValue];
+        }
+    }
+    {
+        id nullQuietZoneAllowed = [jsonRecognizer valueForKey:@"nullQuietZoneAllowed"];
+        if (nullQuietZoneAllowed != nil) {
+            recognizer.nullQuietZoneAllowed = [(NSNumber *)nullQuietZoneAllowed boolValue];
         }
     }
     {
@@ -35,9 +35,9 @@
         }
     }
     {
-        id scanAztec = [jsonRecognizer valueForKey:@"scanAztec"];
-        if (scanAztec != nil) {
-            recognizer.scanAztec = [(NSNumber *)scanAztec boolValue];
+        id scanAztecCode = [jsonRecognizer valueForKey:@"scanAztecCode"];
+        if (scanAztecCode != nil) {
+            recognizer.scanAztecCode = [(NSNumber *)scanAztecCode boolValue];
         }
     }
     {
@@ -59,21 +59,15 @@
         }
     }
     {
-        id scanEAN13 = [jsonRecognizer valueForKey:@"scanEAN13"];
-        if (scanEAN13 != nil) {
-            recognizer.scanEAN13 = [(NSNumber *)scanEAN13 boolValue];
+        id scanEan13 = [jsonRecognizer valueForKey:@"scanEan13"];
+        if (scanEan13 != nil) {
+            recognizer.scanEan13 = [(NSNumber *)scanEan13 boolValue];
         }
     }
     {
-        id scanEAN8 = [jsonRecognizer valueForKey:@"scanEAN8"];
-        if (scanEAN8 != nil) {
-            recognizer.scanEAN8 = [(NSNumber *)scanEAN8 boolValue];
-        }
-    }
-    {
-        id scanITF = [jsonRecognizer valueForKey:@"scanITF"];
-        if (scanITF != nil) {
-            recognizer.scanITF = [(NSNumber *)scanITF boolValue];
+        id scanEan8 = [jsonRecognizer valueForKey:@"scanEan8"];
+        if (scanEan8 != nil) {
+            recognizer.scanEan8 = [(NSNumber *)scanEan8 boolValue];
         }
     }
     {
@@ -83,27 +77,21 @@
         }
     }
     {
+        id scanItf = [jsonRecognizer valueForKey:@"scanItf"];
+        if (scanItf != nil) {
+            recognizer.scanItf = [(NSNumber *)scanItf boolValue];
+        }
+    }
+    {
         id scanPdf417 = [jsonRecognizer valueForKey:@"scanPdf417"];
         if (scanPdf417 != nil) {
             recognizer.scanPdf417 = [(NSNumber *)scanPdf417 boolValue];
         }
     }
     {
-        id scanQR = [jsonRecognizer valueForKey:@"scanQR"];
-        if (scanQR != nil) {
-            recognizer.scanQR = [(NSNumber *)scanQR boolValue];
-        }
-    }
-    {
-        id scanUPCA = [jsonRecognizer valueForKey:@"scanUPCA"];
-        if (scanUPCA != nil) {
-            recognizer.scanUPCA = [(NSNumber *)scanUPCA boolValue];
-        }
-    }
-    {
-        id scanUPCE = [jsonRecognizer valueForKey:@"scanUPCE"];
-        if (scanUPCE != nil) {
-            recognizer.scanUPCE = [(NSNumber *)scanUPCE boolValue];
+        id scanQrCode = [jsonRecognizer valueForKey:@"scanQrCode"];
+        if (scanQrCode != nil) {
+            recognizer.scanQrCode = [(NSNumber *)scanQrCode boolValue];
         }
     }
     {
@@ -113,9 +101,21 @@
         }
     }
     {
-        id useSlowerThoroughScan = [jsonRecognizer valueForKey:@"useSlowerThoroughScan"];
-        if (useSlowerThoroughScan != nil) {
-            recognizer.useSlowerThoroughScan = [(NSNumber *)useSlowerThoroughScan boolValue];
+        id scanUpca = [jsonRecognizer valueForKey:@"scanUpca"];
+        if (scanUpca != nil) {
+            recognizer.scanUpca = [(NSNumber *)scanUpca boolValue];
+        }
+    }
+    {
+        id scanUpce = [jsonRecognizer valueForKey:@"scanUpce"];
+        if (scanUpce != nil) {
+            recognizer.scanUpce = [(NSNumber *)scanUpce boolValue];
+        }
+    }
+    {
+        id slowerThoroughScan = [jsonRecognizer valueForKey:@"slowerThoroughScan"];
+        if (slowerThoroughScan != nil) {
+            recognizer.slowerThoroughScan = [(NSNumber *)slowerThoroughScan boolValue];
         }
     }
 

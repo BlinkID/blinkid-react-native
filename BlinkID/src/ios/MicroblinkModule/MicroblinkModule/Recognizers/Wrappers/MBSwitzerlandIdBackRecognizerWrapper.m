@@ -79,7 +79,6 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentCode forKey:@"documentCode"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
@@ -89,12 +88,13 @@
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
+    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.nonMrzDateOfExpiry] forKey:@"nonMrzDateOfExpiry"];
+    [jsonResult setValue:self.result.nonMrzSex forKey:@"nonMrzSex"];
     [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
     [jsonResult setValue:self.result.opt2 forKey:@"opt2"];
     [jsonResult setValue:self.result.placeOfOrigin forKey:@"placeOfOrigin"];
     [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
     [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
 
     return jsonResult;

@@ -1,6 +1,7 @@
 #import "MBRecognizerSerializers.h"
 
 #import "MBRecognizerWrapper.h"
+#import "MBSuccessFrameGrabberRecognizerWrapper.h"
 #import "MBAustraliaDlBackRecognizerWrapper.h"
 #import "MBAustraliaDlFrontRecognizerWrapper.h"
 #import "MBAustriaCombinedRecognizerWrapper.h"
@@ -25,11 +26,13 @@
 #import "MBGermanyOldIdRecognizerWrapper.h"
 #import "MBGermanyPassportRecognizerWrapper.h"
 #import "MBHongKongIdFrontRecognizerWrapper.h"
+#import "MBIkadRecognizerWrapper.h"
 #import "MBIndonesiaIdFrontRecognizerWrapper.h"
 #import "MBJordanCombinedRecognizerWrapper.h"
 #import "MBJordanIdBackRecognizerWrapper.h"
 #import "MBJordanIdFrontRecognizerWrapper.h"
 #import "MBMalaysiaDlFrontRecognizerWrapper.h"
+#import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBMyKadBackRecognizerWrapper.h"
 #import "MBMyKadFrontRecognizerWrapper.h"
@@ -59,7 +62,6 @@
 #import "MBUnitedArabEmiratesIdBackRecognizerWrapper.h"
 #import "MBUnitedArabEmiratesIdFrontRecognizerWrapper.h"
 #import "MBVinRecognizerWrapper.h"
-#import "MBiKadRecognizerWrapper.h"
 #import "MBUsdlRecognizerWrapper.h"
 
 
@@ -79,6 +81,7 @@
     self = [super init];
     if (self) {
         _recognizerSerializers = [[NSMutableDictionary alloc] init];
+        [self registerCreator:[[MBSuccessFrameGrabberRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustraliaDlBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustraliaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaCombinedRecognizerCreator alloc] init]];
@@ -103,11 +106,13 @@
         [self registerCreator:[[MBGermanyOldIdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBHongKongIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBIkadRecognizerCreator alloc] init]];
         [self registerCreator:[[MBIndonesiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMalaysiaDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMyKadBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMyKadFrontRecognizerCreator alloc] init]];
@@ -137,7 +142,6 @@
         [self registerCreator:[[MBUnitedArabEmiratesIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUnitedArabEmiratesIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBVinRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBiKadRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlRecognizerCreator alloc] init]];
         
     }
@@ -154,6 +158,11 @@
     return sharedInstance;
 }
 
+-(id<MBRecognizerCreator>) recognizerCreatorForJson:(NSDictionary *)recognizerJson {
+    NSString* recognizerType = [recognizerJson objectForKey:@"recognizerType"];
+    return [self.recognizerSerializers objectForKey:recognizerType];
+}
+
 -(MBRecognizerCollection *) deserializeRecognizerCollection:(NSDictionary *)jsonRecognizerCollection {
     NSArray *recognizerArray = [jsonRecognizerCollection valueForKey:@"recognizerArray"];
     NSUInteger numRecognizers = recognizerArray.count;
@@ -161,8 +170,7 @@
     NSMutableArray<MBRecognizer*> *recognizers = [[NSMutableArray alloc] initWithCapacity:numRecognizers];
     for (NSUInteger i = 0; i < numRecognizers; ++i) {
         NSDictionary* recognizerJson = [recognizerArray objectAtIndex:i];
-        NSString* recognizerType = [recognizerJson objectForKey:@"recognizerType"];
-        [recognizers addObject:[[self.recognizerSerializers objectForKey:recognizerType] createRecognizer:recognizerArray[i]]];
+        [recognizers addObject:[[self recognizerCreatorForJson:recognizerJson] createRecognizer:recognizerArray[i]]];
     }
 
     MBRecognizerCollection* recognizerCollection = [[MBRecognizerCollection alloc] initWithRecognizers:recognizers];

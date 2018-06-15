@@ -23,6 +23,66 @@
         }
     }
     {
+        id extractDateOfBirth = [jsonRecognizer valueForKey:@"extractDateOfBirth"];
+        if (extractDateOfBirth != nil) {
+            recognizer.extractDateOfBirth = [(NSNumber *)extractDateOfBirth boolValue];
+        }
+    }
+    {
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
+        }
+    }
+    {
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
+        id extractDocumentNumber = [jsonRecognizer valueForKey:@"extractDocumentNumber"];
+        if (extractDocumentNumber != nil) {
+            recognizer.extractDocumentNumber = [(NSNumber *)extractDocumentNumber boolValue];
+        }
+    }
+    {
+        id extractIssuedBy = [jsonRecognizer valueForKey:@"extractIssuedBy"];
+        if (extractIssuedBy != nil) {
+            recognizer.extractIssuedBy = [(NSNumber *)extractIssuedBy boolValue];
+        }
+    }
+    {
+        id extractNationality = [jsonRecognizer valueForKey:@"extractNationality"];
+        if (extractNationality != nil) {
+            recognizer.extractNationality = [(NSNumber *)extractNationality boolValue];
+        }
+    }
+    {
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        }
+    }
+    {
+        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
+        if (extractSex != nil) {
+            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        }
+    }
+    {
+        id extractSpecialRemarks = [jsonRecognizer valueForKey:@"extractSpecialRemarks"];
+        if (extractSpecialRemarks != nil) {
+            recognizer.extractSpecialRemarks = [(NSNumber *)extractSpecialRemarks boolValue];
+        }
+    }
+    {
+        id extractSurnameAtBirth = [jsonRecognizer valueForKey:@"extractSurnameAtBirth"];
+        if (extractSurnameAtBirth != nil) {
+            recognizer.extractSurnameAtBirth = [(NSNumber *)extractSurnameAtBirth boolValue];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -66,11 +126,11 @@
     [jsonResult setValue:[self.result.digitalSignature base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"digitalSignature"];
     [jsonResult setValue:self.result.digitalSignatureVersion forKey:@"digitalSignatureVersion"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.documentDataMatch] forKey:@"documentDataMatch"];
+    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
-    [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];

@@ -1,21 +1,21 @@
-#import "MBiKadRecognizerWrapper.h"
+#import "MBIkadRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBiKadRecognizerCreator
+@implementation MBIkadRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"iKadRecognizer";
+        _jsonName = @"IkadRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBiKadRecognizer *recognizer = [[MBiKadRecognizer alloc] init];
+    MBIkadRecognizer *recognizer = [[MBIkadRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -88,10 +88,10 @@
 
 @end
 
-@interface MBiKadRecognizer (JsonSerialization)
+@interface MBIkadRecognizer (JsonSerialization)
 @end
 
-@implementation MBiKadRecognizer (JsonSerialization)
+@implementation MBIkadRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];

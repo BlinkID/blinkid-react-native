@@ -56,11 +56,11 @@
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentCode forKey:@"documentCode"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.isDocumentDateOfExpiryPermanent] forKey:@"isDocumentDateOfExpiryPermanent"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];

@@ -55,6 +55,7 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
+    [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
     [jsonResult setValue:self.result.countryOfBirth forKey:@"countryOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
@@ -64,7 +65,6 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
-    [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.race forKey:@"race"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];

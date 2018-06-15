@@ -1,9 +1,4 @@
-//
-//  MBRecognizerSerializers.h
-//  BlinkIdDevDemo
-//
-//  Created by DoDo on 04/06/2018.
-//
+#import "MBRecognizerWrapper.h"
 
 #import <MicroBlink/MicroBlink.h>
 
@@ -14,5 +9,6 @@
 +(instancetype) sharedInstance;
 
 -(MBRecognizerCollection *) deserializeRecognizerCollection:(NSDictionary *)jsonRecognizerCollection;
+-(id<MBRecognizerCreator>) recognizerCreatorForJson:(NSDictionary *)recognizerJson;
 
 @end

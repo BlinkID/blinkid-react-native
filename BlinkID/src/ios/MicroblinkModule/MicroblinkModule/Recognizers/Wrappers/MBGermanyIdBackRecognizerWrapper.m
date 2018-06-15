@@ -65,9 +65,11 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.ZIPCode forKey:@"ZIPCode"];
+    [jsonResult setValue:self.result.addressCity forKey:@"addressCity"];
+    [jsonResult setValue:self.result.addressHouseNumber forKey:@"addressHouseNumber"];
+    [jsonResult setValue:self.result.addressStreet forKey:@"addressStreet"];
+    [jsonResult setValue:self.result.addressZipCode forKey:@"addressZipCode"];
     [jsonResult setValue:self.result.authority forKey:@"authority"];
-    [jsonResult setValue:self.result.city forKey:@"city"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
@@ -77,7 +79,6 @@
     [jsonResult setValue:self.result.fullAddress forKey:@"fullAddress"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.height forKey:@"height"];
-    [jsonResult setValue:self.result.houseNumber forKey:@"houseNumber"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
@@ -86,7 +87,6 @@
     [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
     [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
-    [jsonResult setValue:self.result.street forKey:@"street"];
 
     return jsonResult;
 }

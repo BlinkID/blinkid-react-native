@@ -63,6 +63,7 @@
     [jsonResult setValue:self.result.citizenship forKey:@"citizenship"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[self.result.digitalSignature base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"digitalSignature"];
     [jsonResult setValue:self.result.digitalSignatureVersion forKey:@"digitalSignatureVersion"];
@@ -73,11 +74,10 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
     [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.isDocumentDateOfExpiryPermanent] forKey:@"isDocumentDateOfExpiryPermanent"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.nonResident] forKey:@"nonResident"];
-    [jsonResult setValue:self.result.oib forKey:@"oib"];
+    [jsonResult setValue:self.result.personalIdentificationNumber forKey:@"personalIdentificationNumber"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];

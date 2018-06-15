@@ -8,6 +8,6 @@
 #import "MBRecognizerWrapper.h"
 #import <MicroBlink/MicroBlink.h>
 
-@interface MBIkadRecognizerCreator : NSObject<MBRecognizerCreator>
+@interface MBMrtdCombinedRecognizerCreator : NSObject<MBRecognizerCreator>
 
 @end

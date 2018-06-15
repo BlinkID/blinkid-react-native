@@ -90,11 +90,11 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.city forKey:@"city"];
+    [jsonResult setValue:self.result.dlClass forKey:@"dlClass"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.fullAddress forKey:@"fullAddress"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.identityNumber forKey:@"identityNumber"];
-    [jsonResult setValue:self.result.licenseClass forKey:@"licenseClass"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.state forKey:@"state"];

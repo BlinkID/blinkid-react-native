@@ -23,12 +23,6 @@
         }
     }
     {
-        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
-        if (fullDocumentImageDpi != nil) {
-            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi boolValue];
-        }
-    }
-    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
@@ -53,11 +47,11 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.extendedNricNumber forKey:@"extendedNricNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:self.result.extendedNric forKey:@"extendedNric"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.nricNumber forKey:@"nricNumber"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.ownerBirthDate] forKey:@"ownerBirthDate"];
-    [jsonResult setValue:self.result.ownerSex forKey:@"ownerSex"];
+    [jsonResult setValue:self.result.nric forKey:@"nric"];
+    [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;

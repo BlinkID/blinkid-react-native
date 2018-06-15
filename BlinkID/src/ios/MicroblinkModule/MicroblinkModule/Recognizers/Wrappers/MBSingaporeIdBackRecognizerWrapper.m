@@ -55,9 +55,9 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
+    [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
 
     return jsonResult;
 }

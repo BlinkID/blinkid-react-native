@@ -136,23 +136,25 @@
     [jsonResult setValue:self.result.citizenship forKey:@"citizenship"];
     [jsonResult setValue:self.result.city forKey:@"city"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:self.result.district forKey:@"district"];
+    [jsonResult setValue:self.result.documentClassifier forKey:@"documentClassifier"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.isDocumentDateOfExpiryPermanent] forKey:@"isDocumentDateOfExpiryPermanent"];
     [jsonResult setValue:self.result.kelDesa forKey:@"kelDesa"];
     [jsonResult setValue:self.result.marriageStatus forKey:@"marriageStatus"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.occupation forKey:@"occupation"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:self.result.province forKey:@"province"];
+    [jsonResult setValue:self.result.rawValidUntil forKey:@"rawValidUntil"];
     [jsonResult setValue:self.result.religion forKey:@"religion"];
     [jsonResult setValue:self.result.rt forKey:@"rt"];
     [jsonResult setValue:self.result.rw forKey:@"rw"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
+    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validUntil] forKey:@"validUntil"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.validUntilPermanent] forKey:@"validUntilPermanent"];
 
     return jsonResult;
 }

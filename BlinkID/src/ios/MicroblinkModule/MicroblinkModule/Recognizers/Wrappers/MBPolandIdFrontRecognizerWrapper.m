@@ -35,27 +35,27 @@
         }
     }
     {
-        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
-        if (extractFirstName != nil) {
-            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        id extractGivenNames = [jsonRecognizer valueForKey:@"extractGivenNames"];
+        if (extractGivenNames != nil) {
+            recognizer.extractGivenNames = [(NSNumber *)extractGivenNames boolValue];
         }
     }
     {
-        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
-        if (extractLastName != nil) {
-            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
-        }
-    }
-    {
-        id extractParentsName = [jsonRecognizer valueForKey:@"extractParentsName"];
-        if (extractParentsName != nil) {
-            recognizer.extractParentsName = [(NSNumber *)extractParentsName boolValue];
+        id extractParentsGivenNames = [jsonRecognizer valueForKey:@"extractParentsGivenNames"];
+        if (extractParentsGivenNames != nil) {
+            recognizer.extractParentsGivenNames = [(NSNumber *)extractParentsGivenNames boolValue];
         }
     }
     {
         id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
         if (extractSex != nil) {
             recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        }
+    }
+    {
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
         }
     }
     {
@@ -86,11 +86,11 @@
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.familyName forKey:@"familyName"];
-    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
-    [jsonResult setValue:self.result.parentsName forKey:@"parentsName"];
+    [jsonResult setValue:self.result.givenNames forKey:@"givenNames"];
+    [jsonResult setValue:self.result.parentsGivenNames forKey:@"parentsGivenNames"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }
