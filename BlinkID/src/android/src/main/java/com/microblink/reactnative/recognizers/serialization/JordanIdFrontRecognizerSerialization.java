@@ -43,7 +43,7 @@ public final class JordanIdFrontRecognizerSerialization implements RecognizerSer
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("name", result.getName());
-        jsonResult.putString("natianalNumber", result.getNatianalNumber());
+        jsonResult.putString("nationalNumber", result.getNationalNumber());
         jsonResult.putString("sex", result.getSex());
         return jsonResult;
     }

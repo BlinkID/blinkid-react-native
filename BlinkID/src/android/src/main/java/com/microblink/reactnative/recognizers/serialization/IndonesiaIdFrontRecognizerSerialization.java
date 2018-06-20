@@ -55,9 +55,6 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractValidUntil")) {
             recognizer.setExtractValidUntil(jsonRecognizer.getBoolean("extractValidUntil"));
         }
-        if (jsonRecognizer.hasKey("extractValidUntilPermanent")) {
-            recognizer.setExtractValidUntilPermanent(jsonRecognizer.getBoolean("extractValidUntilPermanent"));
-        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }

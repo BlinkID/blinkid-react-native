@@ -18,11 +18,6 @@ export class CzechiaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * the address of the card holder. 
-         */
-        this.address = nativeResult.address;
-        
-        /** 
          * the authority of Czech ID. 
          */
         this.authority = nativeResult.authority;
@@ -86,6 +81,11 @@ export class CzechiaIdBackRecognizerResult extends RecognizerResult {
          * Defines second optional data.<code>null</code> or empty string if not available. 
          */
         this.opt2 = nativeResult.opt2;
+        
+        /** 
+         * the permanent stay address of the card holder. 
+         */
+        this.permanentStay = nativeResult.permanentStay;
         
         /** 
          * personal number of the card holder. 

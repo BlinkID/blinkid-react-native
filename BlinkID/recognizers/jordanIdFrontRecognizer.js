@@ -40,7 +40,7 @@ export class JordanIdFrontRecognizerResult extends RecognizerResult {
         /** 
          * the national number of Jordan ID card owner. 
          */
-        this.natianalNumber = nativeResult.natianalNumber;
+        this.nationalNumber = nativeResult.nationalNumber;
         
         /** 
          * sex of Jordan ID owner. 

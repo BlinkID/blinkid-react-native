@@ -101,7 +101,7 @@ export class MalaysiaDlFrontRecognizer extends Recognizer {
         /** 
          * true if DL class is being extracted 
          */
-        this.extractDLClass = true;
+        this.extractDlClass = true;
         
         /** 
          * true if full address of Malaysian DL owner is being extracted 

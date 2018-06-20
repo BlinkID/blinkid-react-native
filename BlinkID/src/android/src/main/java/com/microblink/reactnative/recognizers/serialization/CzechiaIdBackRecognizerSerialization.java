@@ -33,7 +33,6 @@ public final class CzechiaIdBackRecognizerSerialization implements RecognizerSer
         com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.czechia.CzechiaIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("address", result.getAddress());
         jsonResult.putString("authority", result.getAuthority());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
@@ -47,6 +46,7 @@ public final class CzechiaIdBackRecognizerSerialization implements RecognizerSer
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("opt1", result.getOpt1());
         jsonResult.putString("opt2", result.getOpt2());
+        jsonResult.putString("permanentStay", result.getPermanentStay());
         jsonResult.putString("personalNumber", result.getPersonalNumber());
         jsonResult.putString("primaryId", result.getPrimaryId());
         jsonResult.putString("secondaryId", result.getSecondaryId());

@@ -219,11 +219,6 @@ export class IndonesiaIdFrontRecognizer extends Recognizer {
         this.extractValidUntil = true;
         
         /** 
-         * true if valid until permanent of Indonesian ID owner is being extracted 
-         */
-        this.extractValidUntilPermanent = true;
-        
-        /** 
          * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;

@@ -49,8 +49,8 @@ public final class BarcodeRecognizerSerialization implements RecognizerSerializa
         if (jsonRecognizer.hasKey("scanPdf417")) {
             recognizer.setScanPdf417(jsonRecognizer.getBoolean("scanPdf417"));
         }
-        if (jsonRecognizer.hasKey("scanQRCode")) {
-            recognizer.setScanQRCode(jsonRecognizer.getBoolean("scanQRCode"));
+        if (jsonRecognizer.hasKey("scanQrCode")) {
+            recognizer.setScanQrCode(jsonRecognizer.getBoolean("scanQrCode"));
         }
         if (jsonRecognizer.hasKey("scanUncertain")) {
             recognizer.setScanUncertain(jsonRecognizer.getBoolean("scanUncertain"));

@@ -13,8 +13,8 @@ public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractDLClass")) {
-            recognizer.setExtractDLClass(jsonRecognizer.getBoolean("extractDLClass"));
+        if (jsonRecognizer.hasKey("extractDlClass")) {
+            recognizer.setExtractDlClass(jsonRecognizer.getBoolean("extractDlClass"));
         }
         if (jsonRecognizer.hasKey("extractFullAddress")) {
             recognizer.setExtractFullAddress(jsonRecognizer.getBoolean("extractFullAddress"));

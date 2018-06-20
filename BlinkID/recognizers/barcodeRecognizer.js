@@ -115,7 +115,7 @@ export class BarcodeRecognizer extends Recognizer {
         /** 
          * Should QR code be scanned. 
          */
-        this.scanQRCode = false;
+        this.scanQrCode = false;
         
         /** 
          * Enable decoding of non-standard PDF417 barcodes, but without 

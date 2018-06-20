@@ -23,6 +23,11 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
+         * the card number of Romanian ID. 
+         */
+        this.cardNumber = nativeResult.cardNumber;
+        
+        /** 
          * the CNP of Romanian ID owner. 
          */
         this.cnp = nativeResult.cnp;
@@ -66,11 +71,6 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
          * the identity card series of Romanian ID. 
          */
         this.idSeries = nativeResult.idSeries;
-        
-        /** 
-         * the identity card number of Romanian ID. 
-         */
-        this.identityCardNumber = nativeResult.identityCardNumber;
         
         /** 
          * issuing authority the Romanian ID. 
