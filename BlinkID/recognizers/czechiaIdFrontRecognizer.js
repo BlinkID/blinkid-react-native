@@ -77,7 +77,7 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan front side of czech national ID cards.
-
+ * 
  */
 export class CzechiaIdFrontRecognizer extends Recognizer {
     constructor() {

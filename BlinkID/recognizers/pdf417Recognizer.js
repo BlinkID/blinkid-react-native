@@ -48,19 +48,19 @@ export class Pdf417Recognizer extends Recognizer {
         super('Pdf417Recognizer');
         
         /** 
-         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
-         */
-        this.inverseScanning = false;
-        
-        /** 
          * Allow scanning PDF417 barcodes which don't have quiet zone 
          */
         this.nullQuietZoneAllowed = false;
         
         /** 
+         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
+         */
+        this.scanInverse = false;
+        
+        /** 
          * Enable decoding of non-standard PDF417 barcodes, but without 
          */
-        this.uncertainDecoding = true;
+        this.scanUncertain = true;
         
         this.createResultFromNative = function (nativeResult) { return new Pdf417RecognizerResult(nativeResult); }
     }

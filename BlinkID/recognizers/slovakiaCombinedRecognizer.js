@@ -137,7 +137,7 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Slovak ID.
-
+ * 
  */
 export class SlovakiaCombinedRecognizer extends Recognizer {
     constructor() {

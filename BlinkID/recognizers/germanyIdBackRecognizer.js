@@ -142,7 +142,7 @@ export class GermanyIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan the back side of German national ID cards.
-
+ * 
  */
 export class GermanyIdBackRecognizer extends Recognizer {
     constructor() {

@@ -1,5 +1,4 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
-import * as Types from '../types'
 
 /**
  * Result object for UsdlRecognizer.

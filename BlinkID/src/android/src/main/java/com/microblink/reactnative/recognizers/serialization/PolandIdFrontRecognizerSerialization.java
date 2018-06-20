@@ -19,17 +19,17 @@ public final class PolandIdFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractFamilyName")) {
             recognizer.setExtractFamilyName(jsonRecognizer.getBoolean("extractFamilyName"));
         }
-        if (jsonRecognizer.hasKey("extractFirstName")) {
-            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
+        if (jsonRecognizer.hasKey("extractGivenNames")) {
+            recognizer.setExtractGivenNames(jsonRecognizer.getBoolean("extractGivenNames"));
         }
-        if (jsonRecognizer.hasKey("extractLastName")) {
-            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
-        }
-        if (jsonRecognizer.hasKey("extractParentsName")) {
-            recognizer.setExtractParentsName(jsonRecognizer.getBoolean("extractParentsName"));
+        if (jsonRecognizer.hasKey("extractParentsGivenNames")) {
+            recognizer.setExtractParentsGivenNames(jsonRecognizer.getBoolean("extractParentsGivenNames"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("extractSurname")) {
+            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));

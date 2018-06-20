@@ -102,7 +102,7 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Singaporean ID.
-
+ * 
  */
 export class SingaporeCombinedRecognizer extends Recognizer {
     constructor() {

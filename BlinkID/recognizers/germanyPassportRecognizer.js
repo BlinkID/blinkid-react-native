@@ -132,7 +132,7 @@ export class GermanyPassportRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which scans German passports.
-
+ * 
  */
 export class GermanyPassportRecognizer extends Recognizer {
     constructor() {

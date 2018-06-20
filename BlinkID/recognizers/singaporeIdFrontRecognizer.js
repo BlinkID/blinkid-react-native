@@ -62,7 +62,7 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for front side of Singapore ID.
-
+ * 
  */
 export class SingaporeIdFrontRecognizer extends Recognizer {
     constructor() {

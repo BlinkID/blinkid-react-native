@@ -112,7 +112,7 @@ export class GermanyOldIdRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan old German ID cards.
-
+ * 
  */
 export class GermanyOldIdRecognizer extends Recognizer {
     constructor() {

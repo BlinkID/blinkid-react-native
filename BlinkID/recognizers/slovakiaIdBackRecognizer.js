@@ -117,7 +117,7 @@ export class SlovakiaIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for back side of Slovak ID.
-
+ * 
  */
 export class SlovakiaIdBackRecognizer extends Recognizer {
     constructor() {

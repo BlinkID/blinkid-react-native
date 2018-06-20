@@ -82,11 +82,16 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading front side of New Zealand driver's licence.
-
+ * 
  */
 export class NewZealandDlFrontRecognizer extends Recognizer {
     constructor() {
         super('NewZealandDlFrontRecognizer');
+        
+        /** 
+         * Defines whether glare detector is enabled. 
+         */
+        this.detectGlare = true;
         
         /** 
          * true if address of New Zealand DL owner is being extracted 

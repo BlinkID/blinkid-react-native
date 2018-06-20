@@ -77,7 +77,7 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan the front side of German national ID cards.
-
+ * 
  */
 export class GermanyIdFrontRecognizer extends Recognizer {
     constructor() {

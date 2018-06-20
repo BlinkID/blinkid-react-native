@@ -10,6 +10,9 @@ public final class NewZealandDlFrontRecognizerSerialization implements Recognize
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.newzealand.NewZealandDlFrontRecognizer();
+        if (jsonRecognizer.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        }
         if (jsonRecognizer.hasKey("extractAddress")) {
             recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
         }

@@ -42,7 +42,7 @@ export class EgyptIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Egypt ID Front document.
-
+ * 
  */
 export class EgyptIdFrontRecognizer extends Recognizer {
     constructor() {

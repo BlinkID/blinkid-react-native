@@ -167,7 +167,7 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for front side of Romanian ID.
-
+ * 
  */
 export class RomaniaIdFrontRecognizer extends Recognizer {
     constructor() {

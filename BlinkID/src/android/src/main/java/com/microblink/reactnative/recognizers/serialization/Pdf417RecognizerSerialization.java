@@ -10,14 +10,14 @@ public final class Pdf417RecognizerSerialization implements RecognizerSerializat
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.pdf417.Pdf417Recognizer();
-        if (jsonRecognizer.hasKey("inverseScanning")) {
-            recognizer.setInverseScanning(jsonRecognizer.getBoolean("inverseScanning"));
-        }
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
         }
-        if (jsonRecognizer.hasKey("uncertainDecoding")) {
-            recognizer.setUncertainDecoding(jsonRecognizer.getBoolean("uncertainDecoding"));
+        if (jsonRecognizer.hasKey("scanInverse")) {
+            recognizer.setScanInverse(jsonRecognizer.getBoolean("scanInverse"));
+        }
+        if (jsonRecognizer.hasKey("scanUncertain")) {
+            recognizer.setScanUncertain(jsonRecognizer.getBoolean("scanUncertain"));
         }
         return recognizer;
     }

@@ -52,7 +52,7 @@ export class JordanIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading front side of Jordan ID.
-
+ * 
  */
 export class JordanIdFrontRecognizer extends Recognizer {
     constructor() {

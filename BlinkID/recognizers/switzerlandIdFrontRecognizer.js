@@ -28,31 +28,31 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the first name of the Swiss ID owner. 
-         */
-        this.firstName = nativeResult.firstName;
-        
-        /** 
          *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the last name of the Swiss ID owner. 
+         * the given name of the Swiss ID owner. 
          */
-        this.lastName = nativeResult.lastName;
+        this.givenName = nativeResult.givenName;
         
         /** 
          *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * the surname of the Swiss ID owner. 
+         */
+        this.surname = nativeResult.surname;
+        
     }
 }
 
 /**
  *  Recognizer which can scan the front side of Swiss national ID cards.
-
+ * 
  */
 export class SwitzerlandIdFrontRecognizer extends Recognizer {
     constructor() {
@@ -64,14 +64,14 @@ export class SwitzerlandIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * true if first name of Swiss ID owner is being extracted 
+         * true if given name of Swiss ID owner is being extracted 
          */
-        this.extractFirstName = true;
+        this.extractGivenName = true;
         
         /** 
-         * true if last name of Swiss ID owner is being extracted 
+         * true if surname of Swiss ID owner is being extracted 
          */
-        this.extractLastName = true;
+        this.extractSurname = true;
         
         /** 
          * Defines whether face image will be available in result. 

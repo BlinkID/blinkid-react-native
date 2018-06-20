@@ -137,7 +137,7 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading front side of indonesian ID document.
-
+ * 
  */
 export class IndonesiaIdFrontRecognizer extends Recognizer {
     constructor() {

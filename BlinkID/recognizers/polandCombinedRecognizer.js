@@ -117,7 +117,7 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Polish ID.
-
+ * 
  */
 export class PolandCombinedRecognizer extends Recognizer {
     constructor() {
@@ -139,24 +139,24 @@ export class PolandCombinedRecognizer extends Recognizer {
         this.extractFamilyName = true;
         
         /** 
-         * true if first name is being extracted from ID 
+         * true if given names is being extracted from ID 
          */
-        this.extractFirstName = true;
+        this.extractGivenNames = true;
         
         /** 
-         * true if last name is being extracted from ID 
+         * true if parents' given names is being extracted from ID 
          */
-        this.extractLastName = true;
-        
-        /** 
-         * true if parents' names is being extracted from ID 
-         */
-        this.extractParentsName = true;
+        this.extractParentsGivenNames = true;
         
         /** 
          * true if sex is being extracted from ID 
          */
         this.extractSex = true;
+        
+        /** 
+         * true if surname is being extracted from ID 
+         */
+        this.extractSurname = true;
         
         /** 
          * Defines whether face image will be available in result. 

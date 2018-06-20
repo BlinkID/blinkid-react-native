@@ -25,17 +25,17 @@ public final class SwitzerlandPassportRecognizerSerialization implements Recogni
         if (jsonRecognizer.hasKey("extractDateOfIssue")) {
             recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
         }
+        if (jsonRecognizer.hasKey("extractGivenName")) {
+            recognizer.setExtractGivenName(jsonRecognizer.getBoolean("extractGivenName"));
+        }
         if (jsonRecognizer.hasKey("extractHeight")) {
             recognizer.setExtractHeight(jsonRecognizer.getBoolean("extractHeight"));
-        }
-        if (jsonRecognizer.hasKey("extractName")) {
-            recognizer.setExtractName(jsonRecognizer.getBoolean("extractName"));
         }
         if (jsonRecognizer.hasKey("extractPassportNumber")) {
             recognizer.setExtractPassportNumber(jsonRecognizer.getBoolean("extractPassportNumber"));
         }
-        if (jsonRecognizer.hasKey("extractPlaceOfOrigin")) {
-            recognizer.setExtractPlaceOfOrigin(jsonRecognizer.getBoolean("extractPlaceOfOrigin"));
+        if (jsonRecognizer.hasKey("extractPlaceOfBirth")) {
+            recognizer.setExtractPlaceOfBirth(jsonRecognizer.getBoolean("extractPlaceOfBirth"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));

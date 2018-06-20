@@ -43,6 +43,7 @@ public final class AustriaIdBackRecognizerSerialization implements RecognizerSer
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfIssuance", SerializationUtils.serializeDate(result.getDateOfIssuance()));
+        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("eyeColour", result.getEyeColour());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putInt("height", result.getHeight());

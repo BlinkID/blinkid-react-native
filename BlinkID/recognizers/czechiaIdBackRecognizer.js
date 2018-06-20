@@ -112,7 +112,7 @@ export class CzechiaIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for back side of Czech ID.
-
+ * 
  */
 export class CzechiaIdBackRecognizer extends Recognizer {
     constructor() {

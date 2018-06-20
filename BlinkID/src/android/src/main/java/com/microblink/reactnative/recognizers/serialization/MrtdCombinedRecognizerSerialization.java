@@ -30,6 +30,8 @@ public final class MrtdCombinedRecognizerSerialization implements RecognizerSeri
         com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
+        jsonResult.putString("alienNumber", result.getAlienNumber());
+        jsonResult.putString("applicationReceiptNumber", result.getApplicationReceiptNumber());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
@@ -37,9 +39,11 @@ public final class MrtdCombinedRecognizerSerialization implements RecognizerSeri
         jsonResult.putString("documentCode", result.getDocumentCode());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
+        jsonResult.putInt("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
+        jsonResult.putString("immigrantCaseNumber", result.getImmigrantCaseNumber());
         jsonResult.putString("issuer", result.getIssuer());
         jsonResult.putString("mrzImage", SerializationUtils.encodeImageBase64(result.getMrzImage()));
         jsonResult.putBoolean("mrzParsed", result.isMrzParsed());

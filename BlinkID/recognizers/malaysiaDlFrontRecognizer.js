@@ -87,7 +87,7 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Malaysian driving license document.
-
+ * 
  */
 export class MalaysiaDlFrontRecognizer extends Recognizer {
     constructor() {

@@ -102,7 +102,7 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Jordan ID.
-
+ * 
  */
 export class JordanCombinedRecognizer extends Recognizer {
     constructor() {

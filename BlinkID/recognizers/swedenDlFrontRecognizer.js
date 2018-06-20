@@ -82,7 +82,7 @@ export class SwedenDlFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer settings for reading front side of Sweden DL
-
+ * 
  */
 export class SwedenDlFrontRecognizer extends Recognizer {
     constructor() {

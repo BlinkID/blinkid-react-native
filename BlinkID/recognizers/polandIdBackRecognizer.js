@@ -97,7 +97,7 @@ export class PolandIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for the back side of Polish ID.
-
+ * 
  */
 export class PolandIdBackRecognizer extends Recognizer {
     constructor() {

@@ -52,7 +52,7 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for front side of Serbian ID.
-
+ * 
  */
 export class SerbiaIdFrontRecognizer extends Recognizer {
     constructor() {

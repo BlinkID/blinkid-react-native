@@ -62,7 +62,7 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Hong Kong ID front document.
-
+ * 
  */
 export class HongKongIdFrontRecognizer extends Recognizer {
     constructor() {

@@ -87,7 +87,7 @@ export class MyTenteraRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Malaysian MyTentera document.
-
+ * 
  */
 export class MyTenteraRecognizer extends Recognizer {
     constructor() {

@@ -97,7 +97,7 @@ export class SerbiaIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for back side of Serbian ID.
-
+ * 
  */
 export class SerbiaIdBackRecognizer extends Recognizer {
     constructor() {

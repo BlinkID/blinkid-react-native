@@ -112,7 +112,7 @@ export class SloveniaIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for the back side of Slovenian ID.
-
+ * 
  */
 export class SloveniaIdBackRecognizer extends Recognizer {
     constructor() {

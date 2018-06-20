@@ -13,6 +13,9 @@ public final class GermanyCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
+        if (jsonRecognizer.hasKey("extractAddress")) {
+            recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }

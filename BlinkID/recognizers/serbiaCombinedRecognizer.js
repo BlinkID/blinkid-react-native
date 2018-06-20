@@ -117,7 +117,7 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Serbian ID.
-
+ * 
  */
 export class SerbiaCombinedRecognizer extends Recognizer {
     constructor() {

@@ -137,7 +137,7 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of German ID.
-
+ * 
  */
 export class GermanyCombinedRecognizer extends Recognizer {
     constructor() {
@@ -147,6 +147,11 @@ export class GermanyCombinedRecognizer extends Recognizer {
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * true if address is being extracted from ID 
+         */
+        this.extractAddress = true;
         
         /** 
          * Defines the extension factors for full document image. 

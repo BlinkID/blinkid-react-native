@@ -18,6 +18,16 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
+         * alien number. Returns <code>null</code> or empty string if not available. 
+         */
+        this.alienNumber = nativeResult.alienNumber;
+        
+        /** 
+         * application receipt number. Returns <code>null</code> or empty string if not available. 
+         */
+        this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
+        
+        /** 
          * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
@@ -53,6 +63,11 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
+         * the MRTD document type of recognized document. 
+         */
+        this.documentType = nativeResult.documentType;
+        
+        /** 
          *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
@@ -66,6 +81,11 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
          *  front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
+        
+        /** 
+         * immigrant case number. Returns <code>null</code> or empty string if not available. 
+         */
+        this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
          * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
@@ -132,8 +152,8 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of face from front side of documents and MRZ from back side of
- Machine Readable Travel Document.
-
+ *  Machine Readable Travel Document.
+ * 
  */
 export class MrtdCombinedRecognizer extends Recognizer {
     constructor() {

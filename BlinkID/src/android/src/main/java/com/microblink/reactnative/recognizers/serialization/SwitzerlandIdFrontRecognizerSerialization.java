@@ -13,11 +13,11 @@ public final class SwitzerlandIdFrontRecognizerSerialization implements Recogniz
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractFirstName")) {
-            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
+        if (jsonRecognizer.hasKey("extractGivenName")) {
+            recognizer.setExtractGivenName(jsonRecognizer.getBoolean("extractGivenName"));
         }
-        if (jsonRecognizer.hasKey("extractLastName")) {
-            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
+        if (jsonRecognizer.hasKey("extractSurname")) {
+            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -38,10 +38,10 @@ public final class SwitzerlandIdFrontRecognizerSerialization implements Recogniz
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
-        jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("givenName", result.getGivenName());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
+        jsonResult.putString("surname", result.getSurname());
         return jsonResult;
     }
 

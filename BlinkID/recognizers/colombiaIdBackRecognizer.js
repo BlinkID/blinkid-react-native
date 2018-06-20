@@ -57,7 +57,7 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Colombia ID Back document.
-
+ * 
  */
 export class ColombiaIdBackRecognizer extends Recognizer {
     constructor() {

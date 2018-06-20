@@ -47,7 +47,7 @@ export class AustraliaDlBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan back side of austrian driver's license.
-
+ * 
  */
 export class AustraliaDlBackRecognizer extends Recognizer {
     constructor() {

@@ -83,9 +83,9 @@ public enum RecognizerSerializers {
         registerMapping(new SwitzerlandPassportRecognizerSerialization());
         registerMapping(new UnitedArabEmiratesIdBackRecognizerSerialization());
         registerMapping(new UnitedArabEmiratesIdFrontRecognizerSerialization());
-        registerMapping(new UsdlCombinedRecognizerSerialization());
         registerMapping(new VinRecognizerSerialization());
         registerMapping(new UsdlRecognizerSerialization());
+        registerMapping(new UsdlCombinedRecognizerSerialization());
         
     }
 

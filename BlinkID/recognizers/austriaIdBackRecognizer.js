@@ -23,6 +23,11 @@ export class AustriaIdBackRecognizerResult extends RecognizerResult {
         this.dateOfIssuance = nativeResult.dateOfIssuance != null ? new Date(nativeResult.dateOfIssuance) : null;
         
         /** 
+         * the document number of Austrian ID. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
+        
+        /** 
          * the eye colour of the card holder. 
          */
         this.eyeColour = nativeResult.eyeColour;

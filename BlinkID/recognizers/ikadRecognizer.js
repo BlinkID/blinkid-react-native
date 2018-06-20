@@ -82,7 +82,7 @@ export class IkadRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading Malaysian iKad.
-
+ * 
  */
 export class IkadRecognizer extends Recognizer {
     constructor() {

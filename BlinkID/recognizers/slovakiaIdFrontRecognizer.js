@@ -87,7 +87,7 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan front side of slovak national ID cards.
-
+ * 
  */
 export class SlovakiaIdFrontRecognizer extends Recognizer {
     constructor() {

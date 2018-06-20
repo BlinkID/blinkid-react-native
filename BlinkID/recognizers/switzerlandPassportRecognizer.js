@@ -152,7 +152,7 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which scans Swiss passports.
-
+ * 
  */
 export class SwitzerlandPassportRecognizer extends Recognizer {
     constructor() {
@@ -184,14 +184,14 @@ export class SwitzerlandPassportRecognizer extends Recognizer {
         this.extractDateOfIssue = true;
         
         /** 
+         * {true} if given name is being extracted, {false} otherwise. 
+         */
+        this.extractGivenName = true;
+        
+        /** 
          * {true} if the height is being extracted, {false} otherwise. 
          */
         this.extractHeight = true;
-        
-        /** 
-         * {true} if name is being extracted, {false} otherwise. 
-         */
-        this.extractName = true;
         
         /** 
          * {true} if the authority is being extracted, {false} otherwise. 
@@ -199,9 +199,9 @@ export class SwitzerlandPassportRecognizer extends Recognizer {
         this.extractPassportNumber = true;
         
         /** 
-         * {true} if the place of origin is being extracted, {false} otherwise. 
+         * {true} if the place of birth is being extracted, {false} otherwise. 
          */
-        this.extractPlaceOfOrigin = true;
+        this.extractPlaceOfBirth = true;
         
         /** 
          * {true} if the sex is being extracted, {false} otherwise. 

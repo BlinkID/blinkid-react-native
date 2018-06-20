@@ -47,7 +47,7 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for back side of Singapore ID.
-
+ * 
  */
 export class SingaporeIdBackRecognizer extends Recognizer {
     constructor() {

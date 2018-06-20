@@ -97,7 +97,7 @@ export class JordanIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for the back side of Jordan ID.
-
+ * 
  */
 export class JordanIdBackRecognizer extends Recognizer {
     constructor() {

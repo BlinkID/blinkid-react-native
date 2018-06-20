@@ -127,7 +127,7 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for combined reading of both front and back side of Czech ID.
-
+ * 
  */
 export class CzechiaCombinedRecognizer extends Recognizer {
     constructor() {

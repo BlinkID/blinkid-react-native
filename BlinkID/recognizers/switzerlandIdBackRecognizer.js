@@ -127,7 +127,7 @@ export class SwitzerlandIdBackRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which scans back side of Swiss ID card.
-
+ * 
  */
 export class SwitzerlandIdBackRecognizer extends Recognizer {
     constructor() {

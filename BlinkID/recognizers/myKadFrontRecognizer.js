@@ -87,7 +87,7 @@ export class MyKadFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer for reading front side of Malaysian MyKad.
-
+ * 
  */
 export class MyKadFrontRecognizer extends Recognizer {
     constructor() {

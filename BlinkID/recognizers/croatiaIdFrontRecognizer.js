@@ -82,7 +82,7 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
 
 /**
  *  Recognizer which can scan front side of croatian national ID cards.
-
+ * 
  */
 export class CroatiaIdFrontRecognizer extends Recognizer {
     constructor() {
