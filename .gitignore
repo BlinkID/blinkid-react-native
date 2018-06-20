@@ -6,5 +6,8 @@ build/
 *.pbxuser
 !default.pbxuser
 
+xcuserdata
+xcshareddata
+
 #Demo App
 /BlinkIDReactNative
