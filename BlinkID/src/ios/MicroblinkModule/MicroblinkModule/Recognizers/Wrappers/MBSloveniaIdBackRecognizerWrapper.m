@@ -62,7 +62,9 @@
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
     [jsonResult setValue:self.result.opt2 forKey:@"opt2"];

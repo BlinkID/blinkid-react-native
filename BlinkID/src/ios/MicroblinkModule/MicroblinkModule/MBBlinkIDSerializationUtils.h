@@ -11,6 +11,7 @@
 
 @interface MBBlinkIDSerializationUtils : NSObject
 
-+(NSDictionary *) serializeMrzResult:(MBMrzResult *)mrzResult;
++(NSDictionary * _Nonnull) serializeMrzResult:(MBMrzResult * _Nonnull)mrzResult;
++(MBImageExtensionFactors) deserializeMBImageExtensionFactors:(NSDictionary * _Nullable)jsonExtensionFactors;
 
 @end

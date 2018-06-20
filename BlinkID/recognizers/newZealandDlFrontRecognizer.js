@@ -18,62 +18,62 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * address on New Zealand drivers license. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * card version on New Zealand drivers license. 
+         * The card version of the New Zealand Driver License. 
          */
         this.cardVersion = nativeResult.cardVersion;
         
         /** 
-         * date of birth on New Zealand drivers license. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * true if DONOR is on New Zealand drivers license else returns false. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.donorIndicator = nativeResult.donorIndicator;
         
         /** 
-         * expiry date on New Zealand drivers license. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
-         *  face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * first names on New Zealand drivers license. 
+         * The first name of the New Zealand Driver License owner. 
          */
         this.firstNames = nativeResult.firstNames;
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * issue date on New Zealand drivers license. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
-         * license number on New Zealand drivers license. 
+         * The license number of the New Zealand Driver License. 
          */
         this.licenseNumber = nativeResult.licenseNumber;
         
         /** 
-         *  signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * surname on New Zealand drivers license. 
+         * The last name of the New Zealand Driver License owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -81,65 +81,88 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading front side of New Zealand driver's licence.
+ * Class for configuring New Zealand DL Front Recognizer.
  * 
+ * New Zealand DL Front recognizer is used for scanning front side of New Zealand DL.
  */
 export class NewZealandDlFrontRecognizer extends Recognizer {
     constructor() {
         super('NewZealandDlFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * true if address of New Zealand DL owner is being extracted 
+         * Defines if owner's address should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractAddress = true;
         
         /** 
-         * true if date of birth on New Zealand DL is being extracted 
+         * Defines if owner's date of birth should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * true if donor indicator of New Zealand DL owner is being extracted 
+         * Defines if owner's donor indicator should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractDonorIndicator = true;
         
         /** 
-         * true if expiry date on New Zealand DL is being extracted 
+         * Defines if card's expiry date should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractExpiryDate = true;
         
         /** 
-         * true if first names of New Zealand DL owner is being extracted 
+         * Defines if owner's first name should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractFirstNames = true;
         
         /** 
-         * true if issue date on New Zealand DL is being extracted 
+         * Defines if card's issue date should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractIssueDate = true;
         
         /** 
-         * true if surname of New Zealand DL owner is being extracted 
+         * Defines if owner's last name should be extracted from New Zealand Driver License
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         

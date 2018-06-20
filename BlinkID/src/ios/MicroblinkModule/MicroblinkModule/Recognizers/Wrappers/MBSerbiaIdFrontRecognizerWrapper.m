@@ -29,9 +29,9 @@
         }
     }
     {
-        id extractValidUntilDate = [jsonRecognizer valueForKey:@"extractValidUntilDate"];
-        if (extractValidUntilDate != nil) {
-            recognizer.extractValidUntilDate = [(NSNumber *)extractValidUntilDate boolValue];
+        id extractValidUntil = [jsonRecognizer valueForKey:@"extractValidUntil"];
+        if (extractValidUntil != nil) {
+            recognizer.extractValidUntil = [(NSNumber *)extractValidUntil boolValue];
         }
     }
     {

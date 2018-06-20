@@ -17,6 +17,12 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBIndonesiaIdFrontRecognizer *recognizer = [[MBIndonesiaIdFrontRecognizer alloc] init];
     {
+        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
+        if (detectGlare != nil) {
+            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
+        }
+    }
+    {
         id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
         if (extractAddress != nil) {
             recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
@@ -65,21 +71,15 @@
         }
     }
     {
+        id extractOccupation = [jsonRecognizer valueForKey:@"extractOccupation"];
+        if (extractOccupation != nil) {
+            recognizer.extractOccupation = [(NSNumber *)extractOccupation boolValue];
+        }
+    }
+    {
         id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
         if (extractPlaceOfBirth != nil) {
             recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
-        }
-    }
-    {
-        id extractRT = [jsonRecognizer valueForKey:@"extractRT"];
-        if (extractRT != nil) {
-            recognizer.extractRT = [(NSNumber *)extractRT boolValue];
-        }
-    }
-    {
-        id extractRW = [jsonRecognizer valueForKey:@"extractRW"];
-        if (extractRW != nil) {
-            recognizer.extractRW = [(NSNumber *)extractRW boolValue];
         }
     }
     {
@@ -89,15 +89,21 @@
         }
     }
     {
-        id extractValidUntil = [jsonRecognizer valueForKey:@"extractValidUntil"];
-        if (extractValidUntil != nil) {
-            recognizer.extractValidUntil = [(NSNumber *)extractValidUntil boolValue];
+        id extractRt = [jsonRecognizer valueForKey:@"extractRt"];
+        if (extractRt != nil) {
+            recognizer.extractRt = [(NSNumber *)extractRt boolValue];
         }
     }
     {
-        id extractWork = [jsonRecognizer valueForKey:@"extractWork"];
-        if (extractWork != nil) {
-            recognizer.extractWork = [(NSNumber *)extractWork boolValue];
+        id extractRw = [jsonRecognizer valueForKey:@"extractRw"];
+        if (extractRw != nil) {
+            recognizer.extractRw = [(NSNumber *)extractRw boolValue];
+        }
+    }
+    {
+        id extractValidUntil = [jsonRecognizer valueForKey:@"extractValidUntil"];
+        if (extractValidUntil != nil) {
+            recognizer.extractValidUntil = [(NSNumber *)extractValidUntil boolValue];
         }
     }
     {
@@ -142,12 +148,11 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.kelDesa forKey:@"kelDesa"];
-    [jsonResult setValue:self.result.marriageStatus forKey:@"marriageStatus"];
+    [jsonResult setValue:self.result.maritalStatus forKey:@"maritalStatus"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.occupation forKey:@"occupation"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:self.result.province forKey:@"province"];
-    [jsonResult setValue:self.result.rawValidUntil forKey:@"rawValidUntil"];
     [jsonResult setValue:self.result.religion forKey:@"religion"];
     [jsonResult setValue:self.result.rt forKey:@"rt"];
     [jsonResult setValue:self.result.rw forKey:@"rw"];

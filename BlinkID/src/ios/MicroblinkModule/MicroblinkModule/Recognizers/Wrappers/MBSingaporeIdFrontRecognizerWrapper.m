@@ -47,6 +47,12 @@
         }
     }
     {
+        id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
+        if (returnFaceImage != nil) {
+            recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
+        }
+    }
+    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
@@ -68,6 +74,7 @@
     [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
     [jsonResult setValue:self.result.countryOfBirth forKey:@"countryOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.race forKey:@"race"];

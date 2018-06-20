@@ -47,9 +47,9 @@
         }
     }
     {
-        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
-        if (extractFirstName != nil) {
-            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        id extractFirstNames = [jsonRecognizer valueForKey:@"extractFirstNames"];
+        if (extractFirstNames != nil) {
+            recognizer.extractFirstNames = [(NSNumber *)extractFirstNames boolValue];
         }
     }
     {

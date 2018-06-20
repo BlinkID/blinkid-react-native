@@ -23,6 +23,12 @@
         }
     }
     {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
@@ -32,6 +38,12 @@
         id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
         if (returnSignatureImage != nil) {
             recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
+        }
+    }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
         }
     }
 

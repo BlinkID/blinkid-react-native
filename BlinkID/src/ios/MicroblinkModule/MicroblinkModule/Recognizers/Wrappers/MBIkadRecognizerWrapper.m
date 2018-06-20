@@ -41,6 +41,12 @@
         }
     }
     {
+        id extractFacultyAddress = [jsonRecognizer valueForKey:@"extractFacultyAddress"];
+        if (extractFacultyAddress != nil) {
+            recognizer.extractFacultyAddress = [(NSNumber *)extractFacultyAddress boolValue];
+        }
+    }
+    {
         id extractNationality = [jsonRecognizer valueForKey:@"extractNationality"];
         if (extractNationality != nil) {
             recognizer.extractNationality = [(NSNumber *)extractNationality boolValue];
@@ -67,7 +73,7 @@
     {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
-            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi boolValue];
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -100,6 +106,7 @@
     [jsonResult setValue:self.result.employer forKey:@"employer"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.expiryDate] forKey:@"expiryDate"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
+    [jsonResult setValue:self.result.facultyAddress forKey:@"facultyAddress"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];

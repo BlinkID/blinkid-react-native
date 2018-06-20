@@ -23,6 +23,12 @@
         }
     }
     {
+        id manateeLicenseKey = [jsonRecognizer valueForKey:@"manateeLicenseKey"];
+        if (manateeLicenseKey != nil) {
+            recognizer.manateeLicenseKey = (NSString *)manateeLicenseKey;
+        }
+    }
+    {
         id nullQuietZoneAllowed = [jsonRecognizer valueForKey:@"nullQuietZoneAllowed"];
         if (nullQuietZoneAllowed != nil) {
             recognizer.nullQuietZoneAllowed = [(NSNumber *)nullQuietZoneAllowed boolValue];

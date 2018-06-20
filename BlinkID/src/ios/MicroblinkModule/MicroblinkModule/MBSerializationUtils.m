@@ -37,4 +37,20 @@
     }
 }
 
++(NSDictionary *)serializeCGPoint:(CGPoint) point {
+    return @{
+        @"x" : [NSNumber numberWithFloat:point.x],
+        @"y" : [NSNumber numberWithFloat:point.y]
+    };
+}
+
++(NSDictionary *) serializeMBQuadrangle:(MBQuadrangle *) quad {
+    return @{
+        @"upperLeft" : [MBSerializationUtils serializeCGPoint:quad.upperLeft],
+        @"upperRight" : [MBSerializationUtils serializeCGPoint:quad.upperRight],
+        @"lowerLeft" : [MBSerializationUtils serializeCGPoint:quad.lowerLeft],
+        @"lowerRight" : [MBSerializationUtils serializeCGPoint:quad.lowerRight]
+    };
+}
+
 @end

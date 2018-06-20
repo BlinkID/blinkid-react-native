@@ -1,25 +1,31 @@
-#import "MBSingaporeCombinedRecognizerWrapper.h"
+#import "MBUsdlCombinedRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBSingaporeCombinedRecognizerCreator
+@implementation MBUsdlCombinedRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"SingaporeCombinedRecognizer";
+        _jsonName = @"UsdlCombinedRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBSingaporeCombinedRecognizer *recognizer = [[MBSingaporeCombinedRecognizer alloc] init];
+    MBUsdlCombinedRecognizer *recognizer = [[MBUsdlCombinedRecognizer alloc] init];
     {
-        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
-        if (detectGlare != nil) {
-            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -46,31 +52,35 @@
 
 @end
 
-@interface MBSingaporeCombinedRecognizer (JsonSerialization)
+@interface MBUsdlCombinedRecognizer (JsonSerialization)
 @end
 
-@implementation MBSingaporeCombinedRecognizer (JsonSerialization)
+@implementation MBUsdlCombinedRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
-    [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
-    [jsonResult setValue:self.result.countryOfBirth forKey:@"countryOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[self.result.digitalSignature base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"digitalSignature"];
     [jsonResult setValue:[NSNumber numberWithUnsignedInteger:self.result.digitalSignatureVersion] forKey:@"digitalSignatureVersion"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.documentDataMatch] forKey:@"documentDataMatch"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
-    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
-    [jsonResult setValue:self.result.name forKey:@"name"];
-    [jsonResult setValue:self.result.race forKey:@"race"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
+
+    [jsonResult setValue:[self.result optionalElements] forKey:@"optionalElements"];
+    [jsonResult setValue:[[self.result data] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"rawData"];
+    [jsonResult setValue:[[NSString alloc] initWithData:[self.result data] encoding:NSUTF8StringEncoding] forKey:@"rawStringData"];
+    [jsonResult setValue:[NSNumber numberWithBool:[self.result isUncertain]] forKey:@"uncertain"];
+    [jsonResult setValue:[self serializeFields] forKey:@"fields"];
 
     return jsonResult;
+}
+
+-(NSArray<NSString *> *) serializeFields {
+    NSMutableArray<NSString *> *fieldsArr = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i <= SecurityVersion; ++i) {
+        [fieldsArr addObject:[self.result getField:(MBUsdlKeys)i]];
+    }
+    return fieldsArr;
 }
 
 @end

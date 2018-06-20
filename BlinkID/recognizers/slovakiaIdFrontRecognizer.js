@@ -18,67 +18,67 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * the date of birth of Slovak ID owner 
+         * The date of birth of the Slovakian ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * the date of expiry of Slovak ID 
+         * The date of expiry of the Slovakian ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * the date of issue of Slovak ID 
+         * The date of issue of the Slovakian ID. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * the identity card number of Slovak ID. 
+         * The document number of the Slovakian ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         *  face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the first name of the Slovak ID owner. 
+         * The first name of the Slovakian ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the issuer of the Slovak ID. 
+         * The issuing authority of the ID. 
          */
         this.issuedBy = nativeResult.issuedBy;
         
         /** 
-         * the last name of the Slovak ID owner. 
+         * The last name of the Slovakian ID owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * the nationality of the Slovak ID owner. 
+         * The nationality of the Slovakian ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * the personal number of the Slovak ID owner. 
+         * The personal number of the Slovakian ID owner. 
          */
         this.personalNumber = nativeResult.personalNumber;
         
         /** 
-         * sex of the Slovak ID owner. 
+         * The sex of the Slovakian ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         *  signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -86,65 +86,88 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan front side of slovak national ID cards.
+ * Class for configuring Slovak ID Front Recognizer.
  * 
+ * Slovak ID Front recognizer is used for scanning front side of Slovak ID.
  */
 export class SlovakiaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SlovakiaIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * true if date of birth is being extracted from ID 
+         * Defines if owner's date of birth should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * true if date of expiry is being extracted from ID 
+         * Defines if ID's date of expiry should be extracted
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * true if date of issue is being extracted from ID 
+         * Defines if ID's date of issue should be extracted
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * true if document number is being extracted from ID 
+         * Defines if issuing document number should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractDocumentNumber = true;
         
         /** 
-         * true if issuer is being extracted from ID 
+         * Defines if issuing authority should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractIssuedBy = true;
         
         /** 
-         * true if nationality is being extracted from ID 
+         * Defines if owner's nationality should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractNationality = true;
         
         /** 
-         * true if sex is being extracted from ID 
+         * Defines if owner's sex should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         

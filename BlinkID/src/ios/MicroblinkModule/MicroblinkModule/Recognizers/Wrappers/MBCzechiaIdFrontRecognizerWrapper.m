@@ -41,21 +41,27 @@
         }
     }
     {
-        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
-        if (extractFirstName != nil) {
-            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        id extractGivenNames = [jsonRecognizer valueForKey:@"extractGivenNames"];
+        if (extractGivenNames != nil) {
+            recognizer.extractGivenNames = [(NSNumber *)extractGivenNames boolValue];
         }
     }
     {
-        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
-        if (extractLastName != nil) {
-            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
         id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
         if (extractSex != nil) {
             recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        }
+    }
+    {
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
         }
     }
     {

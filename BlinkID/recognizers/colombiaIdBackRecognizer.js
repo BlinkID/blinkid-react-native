@@ -18,37 +18,37 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * owner blood type 
+         * The blood group of the Colombian ID owner. 
          */
         this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
-         * owner date of birth 
+         * The date of birth of the Colombian ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * the Colombian ID document number number. 
+         * The document number of the Colombian ID card. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * owner fingerprint 
+         * The fingerprint of the Colombian ID owner. 
          */
         this.fingerprint = nativeResult.fingerprint;
         
         /** 
-         * owner first name 
+         * The first name of the Colombian ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * owner first name 
+         * The last name of the Colombian ID owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * owner sex 
+         * The sex of the Colombian ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -56,20 +56,30 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading Colombia ID Back document.
+ * Class for configuring Colombia ID Back Recognizer.
  * 
+ * Colombia ID Back recognizer is used for scanning back side of Colombia ID.
  */
 export class ColombiaIdBackRecognizer extends Recognizer {
     constructor() {
         super('ColombiaIdBackRecognizer');
         
         /** 
-         * true if null quiet zone is allowed 
+         * Set this to true to scan barcodes which don't have quiet zone (white area) around it
+         * 
+         * Use only if necessary because it slows down the recognition process
+         * 
+         *  
          */
         this.nullQuietZoneAllowed = true;
         
         /** 
-         * true if should scan uncertain results 
+         * Set this to true to scan even barcode not compliant with standards
+         * For example, malformed PDF417 barcodes which were incorrectly encoded
+         * 
+         * Use only if necessary because it slows down the recognition process
+         * 
+         *  
          */
         this.scanUncertain = true;
         

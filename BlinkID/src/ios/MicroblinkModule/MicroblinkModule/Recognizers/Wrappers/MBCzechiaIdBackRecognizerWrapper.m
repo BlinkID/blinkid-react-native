@@ -23,15 +23,15 @@
         }
     }
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
-        }
-    }
-    {
         id extractAuthority = [jsonRecognizer valueForKey:@"extractAuthority"];
         if (extractAuthority != nil) {
             recognizer.extractAuthority = [(NSNumber *)extractAuthority boolValue];
+        }
+    }
+    {
+        id extractPermanentStay = [jsonRecognizer valueForKey:@"extractPermanentStay"];
+        if (extractPermanentStay != nil) {
+            recognizer.extractPermanentStay = [(NSNumber *)extractPermanentStay boolValue];
         }
     }
     {
@@ -59,7 +59,6 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:self.result.authority forKey:@"authority"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
@@ -67,10 +66,13 @@
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
     [jsonResult setValue:self.result.opt2 forKey:@"opt2"];
+    [jsonResult setValue:self.result.permanentStay forKey:@"permanentStay"];
     [jsonResult setValue:self.result.personalNumber forKey:@"personalNumber"];
     [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
     [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];

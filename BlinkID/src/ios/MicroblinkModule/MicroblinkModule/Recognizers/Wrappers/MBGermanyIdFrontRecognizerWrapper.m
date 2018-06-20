@@ -23,21 +23,27 @@
         }
     }
     {
+        id extractCanNumber = [jsonRecognizer valueForKey:@"extractCanNumber"];
+        if (extractCanNumber != nil) {
+            recognizer.extractCanNumber = [(NSNumber *)extractCanNumber boolValue];
+        }
+    }
+    {
         id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
         if (extractDateOfExpiry != nil) {
             recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
         }
     }
     {
-        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
-        if (extractFirstName != nil) {
-            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        id extractDocumentNumber = [jsonRecognizer valueForKey:@"extractDocumentNumber"];
+        if (extractDocumentNumber != nil) {
+            recognizer.extractDocumentNumber = [(NSNumber *)extractDocumentNumber boolValue];
         }
     }
     {
-        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
-        if (extractLastName != nil) {
-            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
+        id extractGivenNames = [jsonRecognizer valueForKey:@"extractGivenNames"];
+        if (extractGivenNames != nil) {
+            recognizer.extractGivenNames = [(NSNumber *)extractGivenNames boolValue];
         }
     }
     {
@@ -50,6 +56,18 @@
         id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
         if (extractPlaceOfBirth != nil) {
             recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        }
+    }
+    {
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -83,6 +101,7 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:self.result.canNumber forKey:@"canNumber"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];

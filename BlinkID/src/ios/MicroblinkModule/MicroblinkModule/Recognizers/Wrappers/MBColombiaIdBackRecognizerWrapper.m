@@ -17,9 +17,9 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBColombiaIdBackRecognizer *recognizer = [[MBColombiaIdBackRecognizer alloc] init];
     {
-        id allowNullQuietZone = [jsonRecognizer valueForKey:@"allowNullQuietZone"];
-        if (allowNullQuietZone != nil) {
-            recognizer.allowNullQuietZone = [(NSNumber *)allowNullQuietZone boolValue];
+        id nullQuietZoneAllowed = [jsonRecognizer valueForKey:@"nullQuietZoneAllowed"];
+        if (nullQuietZoneAllowed != nil) {
+            recognizer.nullQuietZoneAllowed = [(NSNumber *)nullQuietZoneAllowed boolValue];
         }
     }
     {

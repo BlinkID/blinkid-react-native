@@ -47,15 +47,15 @@
         }
     }
     {
-        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
-        if (extractPlaceOfBirth != nil) {
-            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        id extractNonMRZSex = [jsonRecognizer valueForKey:@"extractNonMRZSex"];
+        if (extractNonMRZSex != nil) {
+            recognizer.extractNonMRZSex = [(NSNumber *)extractNonMRZSex boolValue];
         }
     }
     {
-        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
-        if (extractSex != nil) {
-            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
@@ -109,7 +109,9 @@
     [jsonResult setValue:self.result.issuedBy forKey:@"issuedBy"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.nonMRZNationality forKey:@"nonMRZNationality"];
     [jsonResult setValue:self.result.nonMRZSex forKey:@"nonMRZSex"];
@@ -118,8 +120,6 @@
     [jsonResult setValue:self.result.parentNames forKey:@"parentNames"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
-    [jsonResult setValue:self.result.rawValidFrom forKey:@"rawValidFrom"];
-    [jsonResult setValue:self.result.rawValidUntil forKey:@"rawValidUntil"];
     [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validFrom] forKey:@"validFrom"];

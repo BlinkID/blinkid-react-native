@@ -18,27 +18,27 @@ export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult 
         super(nativeResult.resultState);
         
         /** 
-         *  face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * the idNumber of the United Arab Emirates ID owner. 
+         * The id Number of the front side of United Arab Emirates ID owner. 
          */
         this.idNumber = nativeResult.idNumber;
         
         /** 
-         * the name of the United Arab Emirates ID owner. 
+         * The name of the front side of United Arab Emirates ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * the nationality of the United Arab Emirates ID owner. 
+         * The nationality of the front side of United Arab Emirates ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
@@ -46,44 +46,62 @@ export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult 
 }
 
 /**
- * Recognizer which can scan front side of United Arab Emirates national ID cards.
+ * Class for configuring United Arab Emirates ID Front Recognizer.
+ * 
+ * United Arab Emirates ID Front recognizer is used for scanning front side of United Arab Emirates ID.
  */
 export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
     constructor() {
         super('UnitedArabEmiratesIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if name of United Arab Emirates ID owner should be extracted 
+         * Defines if owner's name should be extracted from front side of United Arab Emirates ID
+         * 
+         *  
          */
         this.extractName = true;
         
         /** 
-         * Defines if nationality of United Arab Emirates ID owner should be extracted 
+         * Defines if owner's nationality should be extracted from front side of United Arab Emirates ID
+         * 
+         *  
          */
         this.extractNationality = true;
         
         /** 
-         * the DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

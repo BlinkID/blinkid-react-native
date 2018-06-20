@@ -23,15 +23,15 @@
         }
     }
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
+        id extractDlClass = [jsonRecognizer valueForKey:@"extractDlClass"];
+        if (extractDlClass != nil) {
+            recognizer.extractDlClass = [(NSNumber *)extractDlClass boolValue];
         }
     }
     {
-        id extractClass = [jsonRecognizer valueForKey:@"extractClass"];
-        if (extractClass != nil) {
-            recognizer.extractClass = [(NSNumber *)extractClass boolValue];
+        id extractFullAddress = [jsonRecognizer valueForKey:@"extractFullAddress"];
+        if (extractFullAddress != nil) {
+            recognizer.extractFullAddress = [(NSNumber *)extractFullAddress boolValue];
         }
     }
     {
@@ -61,7 +61,7 @@
     {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
-            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi boolValue];
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {

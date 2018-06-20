@@ -35,15 +35,21 @@
         }
     }
     {
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
         id extractFullName = [jsonRecognizer valueForKey:@"extractFullName"];
         if (extractFullName != nil) {
             recognizer.extractFullName = [(NSNumber *)extractFullName boolValue];
         }
     }
     {
-        id extractIssueDate = [jsonRecognizer valueForKey:@"extractIssueDate"];
-        if (extractIssueDate != nil) {
-            recognizer.extractIssueDate = [(NSNumber *)extractIssueDate boolValue];
+        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
+        if (extractSex != nil) {
+            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
         }
     }
     {

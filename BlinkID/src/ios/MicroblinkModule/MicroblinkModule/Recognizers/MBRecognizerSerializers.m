@@ -56,6 +56,7 @@
 #import "MBSloveniaCombinedRecognizerWrapper.h"
 #import "MBSloveniaIdBackRecognizerWrapper.h"
 #import "MBSloveniaIdFrontRecognizerWrapper.h"
+#import "MBSwedenDlFrontRecognizerWrapper.h"
 #import "MBSwitzerlandIdBackRecognizerWrapper.h"
 #import "MBSwitzerlandIdFrontRecognizerWrapper.h"
 #import "MBSwitzerlandPassportRecognizerWrapper.h"
@@ -63,6 +64,7 @@
 #import "MBUnitedArabEmiratesIdFrontRecognizerWrapper.h"
 #import "MBVinRecognizerWrapper.h"
 #import "MBUsdlRecognizerWrapper.h"
+#import "MBUsdlCombinedRecognizerWrapper.h"
 
 
 @interface MBRecognizerSerializers ()
@@ -136,6 +138,7 @@
         [self registerCreator:[[MBSloveniaCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSloveniaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSloveniaIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBSwedenDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandPassportRecognizerCreator alloc] init]];
@@ -143,6 +146,7 @@
         [self registerCreator:[[MBUnitedArabEmiratesIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBVinRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBUsdlCombinedRecognizerCreator alloc] init]];
         
     }
     return self;

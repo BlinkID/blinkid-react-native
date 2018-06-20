@@ -29,6 +29,12 @@
         }
     }
     {
+        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
+        if (detectGlare != nil) {
+            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
+        }
+    }
+    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];

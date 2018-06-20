@@ -1,21 +1,21 @@
-#import "MBGermanyPassportRecognizerWrapper.h"
+#import "MBSwedenDlFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBGermanyPassportRecognizerCreator
+@implementation MBSwedenDlFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"GermanyPassportRecognizer";
+        _jsonName = @"SwedenDlFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBGermanyPassportRecognizer *recognizer = [[MBGermanyPassportRecognizer alloc] init];
+    MBSwedenDlFrontRecognizer *recognizer = [[MBSwedenDlFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -23,9 +23,15 @@
         }
     }
     {
-        id extractAuthority = [jsonRecognizer valueForKey:@"extractAuthority"];
-        if (extractAuthority != nil) {
-            recognizer.extractAuthority = [(NSNumber *)extractAuthority boolValue];
+        id extractDateOfBirth = [jsonRecognizer valueForKey:@"extractDateOfBirth"];
+        if (extractDateOfBirth != nil) {
+            recognizer.extractDateOfBirth = [(NSNumber *)extractDateOfBirth boolValue];
+        }
+    }
+    {
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
         }
     }
     {
@@ -35,21 +41,27 @@
         }
     }
     {
+        id extractIssuingAgency = [jsonRecognizer valueForKey:@"extractIssuingAgency"];
+        if (extractIssuingAgency != nil) {
+            recognizer.extractIssuingAgency = [(NSNumber *)extractIssuingAgency boolValue];
+        }
+    }
+    {
+        id extractLicenceCategories = [jsonRecognizer valueForKey:@"extractLicenceCategories"];
+        if (extractLicenceCategories != nil) {
+            recognizer.extractLicenceCategories = [(NSNumber *)extractLicenceCategories boolValue];
+        }
+    }
+    {
         id extractName = [jsonRecognizer valueForKey:@"extractName"];
         if (extractName != nil) {
             recognizer.extractName = [(NSNumber *)extractName boolValue];
         }
     }
     {
-        id extractNationality = [jsonRecognizer valueForKey:@"extractNationality"];
-        if (extractNationality != nil) {
-            recognizer.extractNationality = [(NSNumber *)extractNationality boolValue];
-        }
-    }
-    {
-        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
-        if (extractPlaceOfBirth != nil) {
-            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        id extractReferenceNumber = [jsonRecognizer valueForKey:@"extractReferenceNumber"];
+        if (extractReferenceNumber != nil) {
+            recognizer.extractReferenceNumber = [(NSNumber *)extractReferenceNumber boolValue];
         }
     }
     {
@@ -59,9 +71,9 @@
         }
     }
     {
-        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
-        if (fullDocumentImageExtensionFactors != nil) {
-            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -88,33 +100,23 @@
 
 @end
 
-@interface MBGermanyPassportRecognizer (JsonSerialization)
+@interface MBSwedenDlFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBGermanyPassportRecognizer (JsonSerialization)
+@implementation MBSwedenDlFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.authority forKey:@"authority"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
-    [jsonResult setValue:self.result.documentCode forKey:@"documentCode"];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.issuer forKey:@"issuer"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
-    [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
+    [jsonResult setValue:self.result.issuingAgency forKey:@"issuingAgency"];
+    [jsonResult setValue:self.result.licenceCategories forKey:@"licenceCategories"];
+    [jsonResult setValue:self.result.licenceNumber forKey:@"licenceNumber"];
     [jsonResult setValue:self.result.name forKey:@"name"];
-    [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
-    [jsonResult setValue:self.result.opt2 forKey:@"opt2"];
-    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
-    [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
-    [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.referenceNumber forKey:@"referenceNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
     [jsonResult setValue:self.result.surname forKey:@"surname"];
 

@@ -10,8 +10,10 @@
 
 @interface MBSerializationUtils : NSObject
 
-+(NSDictionary *) serializeNSDate:(NSDate*) value;
-+(NSDictionary *) serializeMBDateResult:(MBDateResult *) value;
-+(NSString *) encodeMBImage:(MBImage * _Nullable) image;
++(NSDictionary * _Nonnull) serializeNSDate:(NSDate * _Nullable) value;
++(NSDictionary * _Nonnull) serializeMBDateResult:(MBDateResult * _Nonnull) value;
++(NSString * _Nullable) encodeMBImage:(MBImage * _Nullable) image;
++(NSDictionary * _Nonnull)serializeCGPoint:(CGPoint) point;
++(NSDictionary * _Nonnull) serializeMBQuadrangle:(MBQuadrangle * _Nonnull) quad;
 
 @end

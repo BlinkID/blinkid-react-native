@@ -25,7 +25,7 @@
     {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
-            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi boolValue];
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {

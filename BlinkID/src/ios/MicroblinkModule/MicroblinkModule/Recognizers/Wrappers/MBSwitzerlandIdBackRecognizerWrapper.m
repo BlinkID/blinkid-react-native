@@ -23,6 +23,12 @@
         }
     }
     {
+        id extractAuthority = [jsonRecognizer valueForKey:@"extractAuthority"];
+        if (extractAuthority != nil) {
+            recognizer.extractAuthority = [(NSNumber *)extractAuthority boolValue];
+        }
+    }
+    {
         id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
         if (extractDateOfExpiry != nil) {
             recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
@@ -38,12 +44,6 @@
         id extractHeight = [jsonRecognizer valueForKey:@"extractHeight"];
         if (extractHeight != nil) {
             recognizer.extractHeight = [(NSNumber *)extractHeight boolValue];
-        }
-    }
-    {
-        id extractIssuingAuthority = [jsonRecognizer valueForKey:@"extractIssuingAuthority"];
-        if (extractIssuingAuthority != nil) {
-            recognizer.extractIssuingAuthority = [(NSNumber *)extractIssuingAuthority boolValue];
         }
     }
     {
@@ -77,6 +77,7 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:self.result.authority forKey:@"authority"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
@@ -85,8 +86,9 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.height forKey:@"height"];
     [jsonResult setValue:self.result.issuer forKey:@"issuer"];
-    [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
     [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.nonMrzDateOfExpiry] forKey:@"nonMrzDateOfExpiry"];
     [jsonResult setValue:self.result.nonMrzSex forKey:@"nonMrzSex"];
