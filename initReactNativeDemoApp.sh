@@ -11,7 +11,7 @@ react-native init --version="0.55.4" BlinkIDReactNative
 # enter into demo project folder
 pushd BlinkIDReactNative
 
-if false; then
+if true; then
   # download npm package
   echo "Downloading blinkid-react-native module"
   npm i --save blinkid-react-native
@@ -52,14 +52,14 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 2.17.3'
+  pod 'PPBlinkID', '~> 4.0.0'
 end
 EOF
 
 # install pod
 pod install
 
-if true; then
+if false; then
   # replace pod with custom dev version of BlinkID framework
   pushd Pods/PPBlinkID
   rm -rf MicroBlink.bundle
