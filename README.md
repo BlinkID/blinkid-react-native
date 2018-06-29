@@ -82,7 +82,7 @@ pod init
 platform :ios, '9.0'
 
 target 'TargetName' do
-  pod 'PPBlinkID', '~> 4.0.0'
+  pod 'blinkid-react-native', path: '../node_modules/blinkid-react-native'
 end
 ```
 
