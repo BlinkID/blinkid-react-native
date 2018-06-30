@@ -28,6 +28,67 @@ cd <path_to_your_project>
 npm i --save blinkid-react-native
 ```
 
+## Linking
+
+### iOS
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
+
+- If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
+
+```shell
+brew install git-lfs
+git lfs install
+```
+
+- **Be sure to restart your console after installing Git LFS**
+
+Go to NameOfYourProject/ios folder and create Podfile
+
+```shell
+pod init
+```
+
+#### If you use react-native link for linking
+
+Link module with your project: 
+
+```shell
+react-native link blinkid-react-native
+```
+
+##### Podfile
+
+```ruby
+platform :ios, '9.0'
+
+target 'TargetName' do
+  pod 'PPBlinkID', '~> 4.0.0'
+end
+```
+
+#### If you don't use react-native link
+
+##### Podfile
+
+```ruby
+platform :ios, '9.0'
+
+target 'TargetName' do
+  pod 'blinkid-react-native', path: '../node_modules/blinkid-react-native'
+end
+```
+
+After setting Your `Podfile`, run in terminal
+
+```shell
+pod install
+```
+
+**To run iOS application, open NameOfYourProject.xcworkspace, set Your team for every Target in General settings and add Privacy - Camera Usage Description key to Your info.plist file and press run**
+
+### Android
+
 Link module with your project: 
 
 ```shell
@@ -56,43 +117,6 @@ This repository contains **initReactNativeDemoApp.sh** script that will create R
 ```shell
 ./initReactNativeDemoApp.sh
 ```
-
-## iOS Installation and Settings
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
-
-- If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
-
-```shell
-brew install git-lfs
-git lfs install
-```
-
-- **Be sure to restart your console after installing Git LFS**
-
-Go to NameOfYourProject/ios folder and create Podfile
-
-```shell
-pod init
-```
-
-### Podfile
-
-```ruby
-platform :ios, '9.0'
-
-target 'TargetName' do
-  pod 'blinkid-react-native', path: '../node_modules/blinkid-react-native'
-end
-```
-
-After setting Your Podfile, run in terminal
-
-```shell
-pod install
-```
-
-**To run iOS application, open NameOfYourProject.xcworkspace, set Your team for every Target in General settings and add Privacy - Camera Usage Description key to Your info.plist file and press run**
 
 ## Usage
 
