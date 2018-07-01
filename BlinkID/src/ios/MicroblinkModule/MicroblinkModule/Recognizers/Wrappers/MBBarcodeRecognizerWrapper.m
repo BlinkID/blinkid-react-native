@@ -132,7 +132,7 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.barcodeType + 1)] forKey:@"barcodeType"];
-    [jsonResult setValue:[self.result.rawData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"rawData"];
+    [jsonResult setValue:[self.result.rawData base64EncodedStringWithOptions:0] forKey:@"rawData"];
     [jsonResult setValue:self.result.stringData forKey:@"stringData"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.uncertain] forKey:@"uncertain"];
 

@@ -44,7 +44,7 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
 
     [jsonResult setValue:[self.result optionalElements] forKey:@"optionalElements"];
-    [jsonResult setValue:[[self.result data] base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed] forKey:@"rawData"];
+    [jsonResult setValue:[[self.result data] base64EncodedStringWithOptions:0] forKey:@"rawData"];
     [jsonResult setValue:[[NSString alloc] initWithData:[self.result data] encoding:NSUTF8StringEncoding] forKey:@"rawStringData"];
     [jsonResult setValue:[NSNumber numberWithBool:[self.result isUncertain]] forKey:@"uncertain"];
     [jsonResult setValue:[self serializeFields] forKey:@"fields"];

@@ -31,7 +31,7 @@
 
     if (image != nil) {
         NSData *imageData = UIImageJPEGRepresentation(image.image, COMPRESSED_IMAGE_QUALITY / 100.f);
-        return [imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+        return [imageData base64EncodedStringWithOptions:0];
     } else {
         return nil;
     }
