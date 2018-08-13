@@ -11,19 +11,24 @@ import {
 } from '../types'
 
 /**
- * Result object for AustriaIdFrontRecognizer.
+ * Result object for MoroccoIdFrontRecognizer.
  */
-export class AustriaIdFrontRecognizerResult extends RecognizerResult {
+export class MoroccoIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Austrian ID owner 
+         * The date of birth of the Moroccan ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document number of Austrian ID 
+         * The date of expiry of the Moroccan ID 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
+        
+        /** 
+         * The document number of the Moroccan ID 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -38,12 +43,17 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given name of the Austrian ID owner 
+         * The name of the Moroccan ID owner 
          */
-        this.givenName = nativeResult.givenName;
+        this.name = nativeResult.name;
         
         /** 
-         * The sex of the Austrian ID owner 
+         * The place of birth of the Moroccan ID owner 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The sex of the Moroccan ID owner 
          */
         this.sex = nativeResult.sex;
         
@@ -53,7 +63,7 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The surname of the Austrian ID owner. 
+         * The surname of the Moroccan ID owner 
          */
         this.surname = nativeResult.surname;
         
@@ -61,11 +71,11 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front side of Austrian national ID cards.
+ * Recognizer which can scan front side of Moroccan national ID cards.
  */
-export class AustriaIdFrontRecognizer extends Recognizer {
+export class MoroccoIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('AustriaIdFrontRecognizer');
+        super('MoroccoIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -73,22 +83,32 @@ export class AustriaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Austrian ID owner should be extracted 
+         * Defines if date of birth of the Moroccan ID owner should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if given name of Austrian ID owner should be extracted 
+         * Defines if date of expiry of the Moroccan ID should be extracted 
          */
-        this.extractGivenName = true;
+        this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if sex of Austrian ID owner should be extracted 
+         * Defines if name of the Moroccan ID owner should be extracted 
+         */
+        this.extractName = true;
+        
+        /** 
+         * Defines if place of birth of the Moroccan ID owner should be extracted 
+         */
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines if sex of the Moroccan ID owner should be extracted 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Austrian ID owner should be extracted 
+         * Defines if surname of the Moroccan ID owner should be extracted 
          */
         this.extractSurname = true;
         
@@ -122,6 +142,6 @@ export class AustriaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new AustriaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MoroccoIdFrontRecognizerResult(nativeResult); }
     }
 }

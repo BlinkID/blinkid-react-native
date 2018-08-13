@@ -11,41 +11,31 @@ import {
 } from '../types'
 
 /**
- * Result object for NewZealandDlFrontRecognizer.
+ * Result object for SwitzerlandDlFrontRecognizer.
  */
-export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
+export class SwitzerlandDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the New Zealand DL owner 
-         */
-        this.address = nativeResult.address;
-        
-        /** 
-         * The card version of the New Zealand DL 
-         */
-        this.cardVersion = nativeResult.cardVersion;
-        
-        /** 
-         * The date of birth of the New Zealand DL owner 
+         * The date of birth 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of the New Zealand DL 
+         * The date of expiry 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of the New Zealand DL 
+         * The date of issue 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Donor indicator of the New Zealand DL owner. It's true if "DONOR" is printed on document, otherwise it's false 
+         * The expiry date permanent 
          */
-        this.donorIndicator = nativeResult.donorIndicator;
+        this.expiryDatePermanent = nativeResult.expiryDatePermanent;
         
         /** 
          *  face image from the document 
@@ -53,9 +43,9 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first names of the New Zealand DL owner 
+         * The first name 
          */
-        this.firstNames = nativeResult.firstNames;
+        this.firstName = nativeResult.firstName;
         
         /** 
          *  image of the full document 
@@ -63,9 +53,24 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The license number of the New Zealand DL 
+         * The issuing authority 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * The last name 
+         */
+        this.lastName = nativeResult.lastName;
+        
+        /** 
+         * The license number 
          */
         this.licenseNumber = nativeResult.licenseNumber;
+        
+        /** 
+         * The place of birth 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
          *  signature image from the document 
@@ -73,19 +78,19 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The surname of the New Zealand DL owner 
+         * The vehicle categories 
          */
-        this.surname = nativeResult.surname;
+        this.vehicleCategories = nativeResult.vehicleCategories;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of New Zealand DL cards.
+ * The Switzerland DL Front Recognizer is used for scanning front side of the Switzerland DL.
  */
-export class NewZealandDlFrontRecognizer extends Recognizer {
+export class SwitzerlandDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('NewZealandDlFrontRecognizer');
+        super('SwitzerlandDlFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -93,39 +98,44 @@ export class NewZealandDlFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if address of New Zealand DL owner should be extracted 
-         */
-        this.extractAddress = true;
-        
-        /** 
-         * Defines if date of birth of New Zealand DL owner should be extracted 
+         * Defines whether date of birth should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of New Zealand DL should be extracted 
+         * Defines whether date of expiry should be extracted 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of New Zealand DL should be extracted 
+         * Defines whether date of issue should be extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if donor indicator of New Zealand DL owner should be extracted 
+         * Defines whether first name should be extracted 
          */
-        this.extractDonorIndicator = true;
+        this.extractFirstName = true;
         
         /** 
-         * Defines if first names of New Zealand DL owner should be extracted 
+         * Defines whether issuing authority should be extracted 
          */
-        this.extractFirstNames = true;
+        this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if surname of New Zealand DL owner should be extracted 
+         * Defines whether last name should be extracted 
          */
-        this.extractSurname = true;
+        this.extractLastName = true;
+        
+        /** 
+         * Defines whether place of birth should be extracted 
+         */
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines whether vehicle categories should be extracted 
+         */
+        this.extractVehicleCategories = true;
         
         /** 
          * the DPI (Dots Per Inch) for face image that should be returned. 
@@ -157,6 +167,6 @@ export class NewZealandDlFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new NewZealandDlFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SwitzerlandDlFrontRecognizerResult(nativeResult); }
     }
 }

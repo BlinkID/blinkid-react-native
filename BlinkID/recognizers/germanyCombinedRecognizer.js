@@ -18,122 +18,117 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the German ID owner. 
+         * the address of the German ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The CAN number of German ID. 
+         * the CAN number of German ID. 
          */
         this.canNumber = nativeResult.canNumber;
         
         /** 
-         * The date of birth of German ID owner 
+         * the date of birth of German ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of German ID owner 
+         * the document date of expiry of the German ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of German ID owner 
+         * the document date of issue of the German ID. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The eye color of German ID owner. 
+         * the issuing authority of German ID. 
          */
         this.eyeColor = nativeResult.eyeColor;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the German ID owner. 
+         * the first name of the German ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         *  back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         *  front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The height of German ID owner. 
+         * the issuing authority of German ID. 
          */
         this.height = nativeResult.height;
         
         /** 
-         * The identity card number of German ID. 
+         * the identity card number of German ID. 
          */
         this.identityCardNumber = nativeResult.identityCardNumber;
         
         /** 
-         * The issuing authority of German ID. 
+         * the issuing authority of German ID. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The last name of the German ID owner. 
+         * the last name of the German ID owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * true if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * The nationality of the German ID owner. 
+         * nationality of the German ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The place of birth of the German ID owner. 
+         * the issuing authority of German ID. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         *  {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * The sex of the German ID owner. 
+         * sex of the German ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -141,61 +136,45 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * German ID Combined Recognizer.
+ *  Recognizer for combined reading of both front and back side of German ID.
  * 
- * German ID Combined recognizer is used for scanning both front and back side of German ID.
  */
 export class GermanyCombinedRecognizer extends Recognizer {
     constructor() {
         super('GermanyCombinedRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from German ID
-         * 
-         *  
+         * true if address is being extracted from ID 
          */
         this.extractAddress = true;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * Defines the extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

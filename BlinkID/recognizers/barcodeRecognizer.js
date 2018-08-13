@@ -18,25 +18,22 @@ export class BarcodeRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Type of the barcode scanned
-         * 
-         *  @return Type of the barcode 
+         * The format of the scanned barcode. 
          */
         this.barcodeType = nativeResult.barcodeType;
         
         /** 
-         * Byte array with result of the scan 
+         * The raw bytes contained inside barcode. 
          */
         this.rawData = nativeResult.rawData;
         
         /** 
-         * Retrieves string content of scanned data 
+         * String representation of data inside barcode. 
          */
         this.stringData = nativeResult.stringData;
         
         /** 
-         * Flag indicating uncertain scanning data
-         * E.g obtained from damaged barcode. 
+         * True if returned result is uncertain, i.e. if scanned barcode was incomplete (i.e. 
          */
         this.uncertain = nativeResult.uncertain;
         
@@ -44,150 +41,94 @@ export class BarcodeRecognizerResult extends RecognizerResult {
 }
 
 /**
- * BarcodeRecognizer is used for scanning most of 1D barcode formats, and 2D format
- * such as Aztec, DataMatrix and QR code
+ * Recognizer that can perform recognition of any supported barcode type.
  */
 export class BarcodeRecognizer extends Recognizer {
     constructor() {
         super('BarcodeRecognizer');
         
         /** 
-         * Allow enabling the autodetection of image scale when scanning barcodes.
-         * If set to true, prior reading barcode, image scale will be
-         * corrected. This enabled correct reading of barcodes on high
-         * resolution images but slows down the recognition process.
-         * 
-         * falseTE: This setting is applied only for Code39 and Code128 barcode scanning.
-         * 
-         *  
+         * Allow enabling the autodetection of image scale when scanning barcodes. 
          */
         this.autoScaleDetection = true;
         
         /** 
-         * Set manatee license key and unlock the aztec scanning feature.
-         * 
-         *  
-         */
-        this.manateeLicenseKey = '';
-        
-        /** 
-         * Set this to true to scan barcodes which don't have quiet zone (white area) around it
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Allow scanning PDF417 barcodes which don't have quiet zone 
          */
         this.nullQuietZoneAllowed = false;
         
         /** 
-         * Enable reading code39 barcode contents as extended data. For more information about code39
-         * extended data (a.k.a. full ASCII mode), see https://en.wikipedia.org/wiki/Code_39#Full_ASCII_Code_39
-         * 
-         *  
+         * Enable reading code39 barcode contents as extended data. For more information about code39 
          */
         this.readCode39AsExtendedData = false;
         
         /** 
-         * Set this to true to scan Aztec 2D barcodes
-         * 
-         *  
+         * Should Aztec 2D barcode be scanned. 
          */
         this.scanAztecCode = false;
         
         /** 
-         * Set this to true to scan Code 128 1D barcodes
-         * 
-         *  
+         * Should Code128 barcode be scanned. 
          */
         this.scanCode128 = false;
         
         /** 
-         * Set this to true to scan Code 39 1D barcodes
-         * 
-         *  
+         * Should Code39 barcode be scanned. 
          */
         this.scanCode39 = false;
         
         /** 
-         * Set this to true to scan DataMatrix 2D barcodes
-         * 
-         *  
+         * Should DataMatrix 2D barcode be scanned. 
          */
         this.scanDataMatrix = false;
         
         /** 
-         * Set this to true to scan EAN 13 barcodes
-         * 
-         *  
+         * Should EAN13 barcode be scanned. 
          */
         this.scanEan13 = false;
         
         /** 
-         * Set this to true to scan EAN8 barcodes
-         * 
-         *  
+         * Should EAN8 barcode be scanned. 
          */
         this.scanEan8 = false;
         
         /** 
-         * Set this to true to allow scanning barcodes with inverted intensities
-         * (i.e. white barcodes on black background)
-         * 
-         * falseTE: this options doubles the frame processing time
-         * 
-         *  
+         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
          */
         this.scanInverse = false;
         
         /** 
-         * Set this to true to scan ITF barcodes
-         * 
-         *  
+         * Should ITF barcode be scanned. 
          */
         this.scanItf = false;
         
         /** 
-         * Set this to true to scan Pdf417 barcodes
-         * 
-         *  
+         * Should PDF417 2D barcode be scanned. 
          */
         this.scanPdf417 = false;
         
         /** 
-         * Set this to true to scan QR barcodes
-         * 
-         *  
+         * Should QR code be scanned. 
          */
         this.scanQrCode = false;
         
         /** 
-         * Set this to true to scan even barcode not compliant with standards
-         * For example, malformed PDF417 barcodes which were incorrectly encoded
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Enable decoding of non-standard PDF417 barcodes, but without 
          */
         this.scanUncertain = true;
         
         /** 
-         * Set this to true to scan UPCA barcodes
-         * 
-         *  
+         * Should UPCA barcode be scanned. 
          */
         this.scanUpca = false;
         
         /** 
-         * Set this to true to scan UPCE barcodes
-         * 
-         *  
+         * Should UPCE barcode be scanned. 
          */
         this.scanUpce = false;
         
         /** 
-         * Set this to true to allow slower, but better image processing.
-         * 
-         *  
+         * Enable slower, but more thorough scanning, thus giving higher possibility of successful scan. 
          */
         this.slowerThoroughScan = true;
         

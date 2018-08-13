@@ -18,47 +18,47 @@ export class AustriaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The Date Of Issuance of Austrian ID. 
+         * The date of issuance of the ID 
          */
         this.dateOfIssuance = nativeResult.dateOfIssuance != null ? new Date(nativeResult.dateOfIssuance) : null;
         
         /** 
-         * The Document Number of Austrian ID. 
+         * The document number of Austrian ID 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The Eye Colour of Austrian ID owner. 
+         * The eye colour of the card holder. 
          */
         this.eyeColour = nativeResult.eyeColour;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The Height of Austrian ID owner. 
+         * The height of the cardholder in centimeters 
          */
         this.height = nativeResult.height;
         
         /** 
-         * The Issuing Authority of Austrian ID. 
+         * The issuing authority of Austrian ID 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The mrz on the back side of Austrian ID. 
+         * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The Place Of Birth of Austrian ID owner. 
+         * The place of birth of the card holder 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The Principal Residence of Austrian ID owner. 
+         * The principal residence at issuance of the card holder. 
          */
         this.principalResidence = nativeResult.principalResidence;
         
@@ -66,68 +66,49 @@ export class AustriaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Austrian ID Back Recognizer.
- * 
- * Austrian ID Back recognizer is used for scanning back side of Austrian ID.
+ * Recognizer which can scan back side of Austrian national ID cards.
  */
 export class AustriaIdBackRecognizer extends Recognizer {
     constructor() {
         super('AustriaIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of issuance should be extracted from back side of Austrian ID
-         * 
-         *  
+         * Defines if date of issuance should be extracted 
          */
         this.extractDateOfIssuance = true;
         
         /** 
-         * Defines if owner's height should be extracted from back side of Austrian ID
-         * 
-         *  
+         * Defines if height of Austrian ID owner should be extracted 
          */
         this.extractHeight = true;
         
         /** 
-         * Defines if issuing authority should be extracted from back side of Austrian ID
-         * 
-         *  
+         * Defines if issuing authority should be extracted 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if owner's place of birth should be extracted from back side of Austrian ID
-         * 
-         *  
+         * Defines if place of birth of Austrian ID owner should be extracted 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if owner's principal residence should be extracted from back side of Austrian ID
-         * 
-         *  
+         * Defines if principal residence of Austrian ID owner should be extracted 
          */
         this.extractPrincipalResidence = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

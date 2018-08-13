@@ -41,6 +41,38 @@ export class Quadrilateral {
 }
 
 /**
+ * Represents the type of scanned barcode
+ */
+export const BarcodeType = Object.freeze(
+    {
+        /** No barcode was scanned */
+        None: 1,
+        /** QR code was scanned */
+        QRCode: 2,
+        /** Data Matrix 2D barcode was scanned */
+        DataMatrix: 3,
+        /** UPC E barcode was scanned */
+        UPCE: 4,
+        /** UPC A barcode was scanned */
+        UPCA: 5,
+        /** EAN 8 barcode was scanned */
+        EAN8: 6,
+        /** EAN 13 barcode was scanned */
+        EAN13: 7,
+        /** Code 128 barcode was scanned */
+        Code128: 8,
+        /** Code 39 barcode was scanned */
+        Code39: 9,
+        /** ITF barcode was scanned */
+        ITF: 10,
+        /** Aztec 2D barcode was scanned */
+        Aztec: 11,
+        /** PDF417 2D barcode was scanned */
+        PDF417: 12
+    }
+);
+
+/**
  * Possible types of Machine Readable Travel Documents (MRTDs).
  */
 export const MrtdDocumentType = Object.freeze(
@@ -76,7 +108,7 @@ export class MrzResult {
         /**
          * Three-letter or two-letter code which indicate the issuing State. Three-letter codes are based
          * on Aplha-3 codes for entities specified in ISO 3166-1, with extensions for certain States. Two-letter
-         * codes are based on Aplha-2 codes for entities specified in ISO 3166-1, with extensions for certain States.
+         * codes are based on Alpha-2 codes for entities specified in ISO 3166-1, with extensions for certain States.
          */
         this.issuer = nativeMRZResult.issuer;
         /** Holder's date of birth */

@@ -18,67 +18,67 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The City of the Malaysian DL owner. 
+         * extracted city from the owner address. 
          */
         this.city = nativeResult.city;
         
         /** 
-         * The Class of the Malaysian DL. 
+         * Malaysian DL class. 
          */
         this.dlClass = nativeResult.dlClass;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The Full Address of the Malaysian DL owner. 
+         * full owner address. 
          */
         this.fullAddress = nativeResult.fullAddress;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The Identity Number of the Malaysian DL owner. 
+         * the Malaysian DL identity number. 
          */
         this.identityNumber = nativeResult.identityNumber;
         
         /** 
-         * The Name of the Malaysian DL owner. 
+         * name of Malaysian DL owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The Nationality of the Malaysian DL owner. 
+         * nationality of Malaysian DL owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The State of the Malaysian DL owner. 
+         * extracted state from the owner address. 
          */
         this.state = nativeResult.state;
         
         /** 
-         * The Street of the Malaysian DL owner. 
+         * extracted street from the owner address. 
          */
         this.street = nativeResult.street;
         
         /** 
-         * The Valid From date of the Malaysian DL owner. 
+         * Malaysian DL valid from. 
          */
         this.validFrom = nativeResult.validFrom != null ? new Date(nativeResult.validFrom) : null;
         
         /** 
-         * The Valid Until date of the Malaysian DL owner. 
+         * Malaysian DL valid until. 
          */
         this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
         /** 
-         * The Zip Code of the Malaysian DL owner. 
+         * extracted ZIP code from the owner address. 
          */
         this.zipCode = nativeResult.zipCode;
         
@@ -86,82 +86,60 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Malaysian DL Front Recognizer.
+ *  Recognizer for reading Malaysian driving license document.
  * 
- * Malaysian DL Front recognizer is used for scanning front side of Malaysian DL.
  */
 export class MalaysiaDlFrontRecognizer extends Recognizer {
     constructor() {
         super('MalaysiaDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's license class should be extracted from Malaysian DL
-         * 
-         *  
+         * true if DL class is being extracted 
          */
         this.extractDlClass = true;
         
         /** 
-         * Defines if owner's full address should be extracted from Malaysian DL
-         * 
-         *  
+         * true if full address of Malaysian DL owner is being extracted 
          */
         this.extractFullAddress = true;
         
         /** 
-         * Defines if owner's name should be extracted from Malaysian DL
-         * 
-         *  
+         * true if name of Malaysian DL owner is being extracted 
          */
         this.extractName = true;
         
         /** 
-         * Defines if owner's nationality should be extracted from Malaysian DL
-         * 
-         *  
+         * true if nationality of Malaysian DL owner is being extracted 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if owner's valid from should be extracted from Malaysian DL
-         * 
-         *  
+         * true if valid from is being extracted 
          */
         this.extractValidFrom = true;
         
         /** 
-         * Defines if owner's valid until should be extracted from Malaysian DL
-         * 
-         *  
+         * true if valid until is being extracted 
          */
         this.extractValidUntil = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

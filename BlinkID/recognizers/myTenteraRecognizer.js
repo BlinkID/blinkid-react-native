@@ -18,69 +18,67 @@ export class MyTenteraRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Owner army number 
+         * the Malaysian tentra number. 
          */
         this.armyNumber = nativeResult.armyNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * NRIC number (National Registration Identity Card Number)
-         * 
-         *  @see https://en.wikipedia.org/wiki/Malaysian_identity_card#Structure_of_the_National_Registration_Identity_Card_Number_.28NRIC.29 
+         * NRIC number (National Registration Identity Card Number) 
          */
         this.nricNumber = nativeResult.nricNumber;
         
         /** 
-         * Owner address 
+         * full owner address. 
          */
         this.ownerAddress = nativeResult.ownerAddress;
         
         /** 
-         * Owner address city. Determined from owner address. 
+         * extracted city from the owner address. 
          */
         this.ownerAddressCity = nativeResult.ownerAddressCity;
         
         /** 
-         * Owner address state. Determined from owner address. 
+         * extracted state from the owner address. 
          */
         this.ownerAddressState = nativeResult.ownerAddressState;
         
         /** 
-         * Owner street. Determined from owner address. 
+         * extracted street from the owner address. 
          */
         this.ownerAddressStreet = nativeResult.ownerAddressStreet;
         
         /** 
-         * Owner address Zip code. Determined from owner address. 
+         * extracted ZIP code from the owner address. 
          */
         this.ownerAddressZipCode = nativeResult.ownerAddressZipCode;
         
         /** 
-         * Owner birth date converted in NSDate object 
+         * owner's date of birth if it is successfully converted to {Date} from date format: <code>YYMMDD</code>. 
          */
         this.ownerBirthDate = nativeResult.ownerBirthDate != null ? new Date(nativeResult.ownerBirthDate) : null;
         
         /** 
-         * Owner full name 
+         * owner full name 
          */
         this.ownerFullName = nativeResult.ownerFullName;
         
         /** 
-         * Owner religion if written on MyKad 
+         * owner religion if written on MyTentera 
          */
         this.ownerReligion = nativeResult.ownerReligion;
         
         /** 
-         * Owner sex (M for male, F for female) 
+         * owner sex (M for male, F for female) 
          */
         this.ownerSex = nativeResult.ownerSex;
         
@@ -88,54 +86,40 @@ export class MyTenteraRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring My Tentera Recognizer.
+ *  Recognizer for reading Malaysian MyTentera document.
  * 
- * My Tentera recognizer is used for scanning My Tentera.
  */
 export class MyTenteraRecognizer extends Recognizer {
     constructor() {
         super('MyTenteraRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if full name and address should be extracted from MyTentera
-         * 
-         *  
+         * true if full address of Malaysian MyTentera owner is being extracted 
          */
         this.extractFullNameAndAddress = true;
         
         /** 
-         * Defines if religion should be extracted from MyTentera
-         * 
-         *  
+         * true if religion of Malaysian MyTentera owner is being extracted 
          */
         this.extractReligion = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

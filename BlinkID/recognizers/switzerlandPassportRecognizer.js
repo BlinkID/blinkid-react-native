@@ -18,160 +18,132 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Issuing authority of the Passport 
+         * the authority of Swiss passport. 
          */
         this.authority = nativeResult.authority;
         
         /** 
-         * Holder's date of birth. 
+         * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Date of expiry of the document. 
+         * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Date of issue in NSDate object 
+         * the date of issue of Swiss passport. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * The document code. Document code contains two characters. For MRTD the first character
-         * shall be A, C or I. The second character shall be discretion of the issuing State or organization
-         * except that V shall not be used, and C shall not be used after A except in the crew member
-         * certificate. On machine-readable passports (MRP) first character shall be P to designate an MRP.
-         * One additional letter may be used, at the discretion of the issuing State or organization,
-         * to designate a particular MRP. If the second character position is not used for this purpose, it
-         * shall be filled by the filter character <. 
+         * Defines document code. Document code contains two characters. For MRTD the first character shall 
          */
         this.documentCode = nativeResult.documentCode;
         
         /** 
-         * Unique number of the document. Document number contains up to 9 characters.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines document number. Document number contains up to 9 characters. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The name of the Swiss Passport owner. 
+         * the given name of the Swiss passport owner. 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * The height of the Swiss Passport owner 
+         * the height of the Swiss passport owner. 
          */
         this.height = nativeResult.height;
         
         /** 
-         * Three-letter code which indicate the issuing State.
-         * Three-letter codes are based on Alpha-3 codes for entities specified in
-         * ISO 3166-1, with extensions for certain States. 
+         * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * Boolean value which denotes that MRTD result is successfully parsed. When the result is parsed, all
-         * properties below are present.
-         * 
-         * If in the PPMrtdRecognizerSettings you specified allowUnparsedResults = true, then it can happen that
-         * MRTDRecognizerResult is not parsed. When this happens, this property will be equal to true.
-         * 
-         * In that case, you can use rawOcrResult property to obtain the raw result of the OCR process, so you can
-         * implement MRTD parsing in your application.
-         * 
-         *  @return true if MRTD Recognizer result was successfully parsed and all the fields are extracted. false otherwise. 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
          */
         this.mrzParsed = nativeResult.mrzParsed;
         
         /** 
-         * The entire Machine Readable Zone text from ID. This text is usually used for parsing
-         * other elements. 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
          */
         this.mrzText = nativeResult.mrzText;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the holder represented by a three-letter code. Three-letter codes are based
-         * on Alpha-3 codes for entities specified in ISO 3166-1, with extensions for certain States. 
+         * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * Date of birth, as written on the passport 
+         * the date of birth of Swiss passport. 
          */
         this.nonMrzDateOfBirth = nativeResult.nonMrzDateOfBirth != null ? new Date(nativeResult.nonMrzDateOfBirth) : null;
         
         /** 
-         * Date of expiry, as written on the passport 
+         * the date of expiry of Swiss passport. 
          */
         this.nonMrzDateOfExpiry = nativeResult.nonMrzDateOfExpiry != null ? new Date(nativeResult.nonMrzDateOfExpiry) : null;
         
         /** 
-         * The sex of the Swiss Passport owner 
+         * the sex of the Swiss passport owner. 
          */
         this.nonMrzSex = nativeResult.nonMrzSex;
         
         /** 
-         * First optional data. Returns nil or empty string if not available.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines first optional data.<code>null</code> or empty string if not available. 
          */
         this.opt1 = nativeResult.opt1;
         
         /** 
-         * Second optional data. Returns nil or empty string if not available.
-         * Element does not exist on Passports and Visas. To see which document was scanned use documentType property. 
+         * Defines second optional data.<code>null</code> or empty string if not available. 
          */
         this.opt2 = nativeResult.opt2;
         
         /** 
-         * Number of the Passport 
+         * the passport number of Swiss passport. 
          */
         this.passportNumber = nativeResult.passportNumber;
         
         /** 
-         * The place of birth of the Swiss Passport owner 
+         * the place of birth of the Swiss passport owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * Returns the primary indentifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return primary id of a card holder. 
+         * Defines the primary indentifier. If there is more than one component, they are separated with space. 
          */
         this.primaryId = nativeResult.primaryId;
         
         /** 
-         * Returns the secondary identifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return secondary id of a card holder 
+         * Defines the secondary identifier. If there is more than one component, they are separated with space. 
          */
         this.secondaryId = nativeResult.secondaryId;
         
         /** 
-         * Sex of the card holder. Sex is specified by use of the single initial, capital
-         * letter F for female, M for male or < for unspecified. 
+         * Defines sex of the card holder. Sex is specified by use of the single initial, 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The surname of the Swiss Passport owner. 
+         * the surname of the Swiss passport owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -179,102 +151,75 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Swiss Passport Recognizer.
+ *  Recognizer which scans Swiss passports.
  * 
- * Swiss Passport recognizer is used for scanning Swiss Passport.
  */
 export class SwitzerlandPassportRecognizer extends Recognizer {
     constructor() {
         super('SwitzerlandPassportRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if authority should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the authority is being extracted, {false} otherwise. 
          */
         this.extractAuthority = true;
         
         /** 
-         * Defines if date of birth should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the date of birth is being extracted, {false} otherwise. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the date of expiry is being extracted, {false} otherwise. 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the date of issue is being extracted, {false} otherwise. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if owner's name should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if given name is being extracted, {false} otherwise. 
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if height should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the height is being extracted, {false} otherwise. 
          */
         this.extractHeight = true;
         
         /** 
-         * Defines if passport number should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the authority is being extracted, {false} otherwise. 
          */
         this.extractPassportNumber = true;
         
         /** 
-         * Defines if owner's place of birth should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the place of birth is being extracted, {false} otherwise. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if sex should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if the sex is being extracted, {false} otherwise. 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if owner's surname should be extracted from Swiss Passport
-         * 
-         *  
+         * {true} if surname is being extracted, {false} otherwise. 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

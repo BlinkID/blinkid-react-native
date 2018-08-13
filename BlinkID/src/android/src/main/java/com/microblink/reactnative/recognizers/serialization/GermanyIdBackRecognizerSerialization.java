@@ -55,7 +55,7 @@ public final class GermanyIdBackRecognizerSerialization implements RecognizerSer
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("eyeColour", result.getEyeColour());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putInt("height", result.getHeight());
+        jsonResult.putString("height", result.getHeight());
         jsonResult.putString("issuer", result.getIssuer());
         jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
         jsonResult.putString("mrzText", result.getMrzText());

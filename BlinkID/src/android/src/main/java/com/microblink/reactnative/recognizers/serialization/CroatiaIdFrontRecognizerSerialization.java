@@ -22,8 +22,20 @@ public final class CroatiaIdFrontRecognizerSerialization implements RecognizerSe
         if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
             recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
         }
+        if (jsonRecognizer.hasKey("extractFirstName")) {
+            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
+        }
+        if (jsonRecognizer.hasKey("extractLastName")) {
+            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
+        }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -33,6 +45,9 @@ public final class CroatiaIdFrontRecognizerSerialization implements RecognizerSe
         }
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }
@@ -47,10 +62,10 @@ public final class CroatiaIdFrontRecognizerSerialization implements RecognizerSe
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putBoolean("documentBilingual", result.isDocumentBilingual());
+        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));

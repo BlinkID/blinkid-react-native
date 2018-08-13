@@ -18,42 +18,42 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The identity card number of the Singapore ID. 
+         * the card number of Singapore ID. 
          */
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * The country of birth of the Singapore ID owner. 
+         * country of birth of the Singapore ID owner 
          */
         this.countryOfBirth = nativeResult.countryOfBirth;
         
         /** 
-         * The date of birth of the Singapore ID owner. 
+         * the date of birth of Singapore ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The name of the Singapore ID owner. 
+         * name of the Singapore ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The race of the Singapore ID owner. 
+         * race of the Singapore ID owner. 
          */
         this.race = nativeResult.race;
         
         /** 
-         * The sex of the Singapore ID owner. 
+         * sex of the Singapore ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -61,60 +61,45 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore ID Front Recognizer.
+ *  Recognizer for front side of Singapore ID.
  * 
- * Singapore ID Front recognizer is used for scanning front side of Singapore ID.
  */
 export class SingaporeIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SingaporeIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         *  Defines if country of birth of Singapore ID owner should be extracted
-         * 
-         *   
+         * true if country of birth of Singapore ID owner is being extracted 
          */
         this.extractCountryOfBirth = true;
         
         /** 
-         *  Defines if date of birth of Singapore ID owner should be extracted
-         * 
-         *   
+         * true if date of birth of Singapore ID owner is being extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         *  Defines if race of Singapore ID owner should be extracted
-         * 
-         *   
+         * true if race of Singapore ID owner is being extracted 
          */
         this.extractRace = true;
         
         /** 
-         *  Defines if sex of Singapore ID owner should be extracted
-         * 
-         *   
+         * true if sex of Singapore ID owner is being extracted 
          */
         this.extractSex = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

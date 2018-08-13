@@ -18,32 +18,32 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Swiss ID owner. 
+         * the date of birth of Swiss ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The first name of the Swiss ID owner. 
+         * the given name of the Swiss ID owner. 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The last name of the Swiss ID owner. 
+         * the surname of the Swiss ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -51,53 +51,40 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Swiss ID Front Recognizer.
+ *  Recognizer which can scan the front side of Swiss national ID cards.
  * 
- * Swiss ID Front recognizer is used for scanning front side of Swiss ID.
  */
 export class SwitzerlandIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SwitzerlandIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's first name should be extracted from Swiss ID
-         * 
-         *  
+         * true if given name of Swiss ID owner is being extracted 
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if owner's last name should be extracted from Swiss ID
-         * 
-         *  
+         * true if surname of Swiss ID owner is being extracted 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         

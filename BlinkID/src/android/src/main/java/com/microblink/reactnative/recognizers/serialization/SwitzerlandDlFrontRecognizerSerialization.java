@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class AustriaPassportRecognizerSerialization implements RecognizerSerialization {
+public final class SwitzerlandDlFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandDlFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -22,29 +22,20 @@ public final class AustriaPassportRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractDateOfIssue")) {
             recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
         }
-        if (jsonRecognizer.hasKey("extractGivenName")) {
-            recognizer.setExtractGivenName(jsonRecognizer.getBoolean("extractGivenName"));
-        }
-        if (jsonRecognizer.hasKey("extractHeight")) {
-            recognizer.setExtractHeight(jsonRecognizer.getBoolean("extractHeight"));
+        if (jsonRecognizer.hasKey("extractFirstName")) {
+            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
         }
         if (jsonRecognizer.hasKey("extractIssuingAuthority")) {
             recognizer.setExtractIssuingAuthority(jsonRecognizer.getBoolean("extractIssuingAuthority"));
         }
-        if (jsonRecognizer.hasKey("extractNationality")) {
-            recognizer.setExtractNationality(jsonRecognizer.getBoolean("extractNationality"));
-        }
-        if (jsonRecognizer.hasKey("extractPassportNumber")) {
-            recognizer.setExtractPassportNumber(jsonRecognizer.getBoolean("extractPassportNumber"));
+        if (jsonRecognizer.hasKey("extractLastName")) {
+            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
         if (jsonRecognizer.hasKey("extractPlaceOfBirth")) {
             recognizer.setExtractPlaceOfBirth(jsonRecognizer.getBoolean("extractPlaceOfBirth"));
         }
-        if (jsonRecognizer.hasKey("extractSex")) {
-            recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
-        }
-        if (jsonRecognizer.hasKey("extractSurname")) {
-            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
+        if (jsonRecognizer.hasKey("extractVehicleCategories")) {
+            recognizer.setExtractVehicleCategories(jsonRecognizer.getBoolean("extractVehicleCategories"));
         }
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
@@ -69,34 +60,32 @@ public final class AustriaPassportRecognizerSerialization implements RecognizerS
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandDlFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
+        jsonResult.putBoolean("expiryDatePermanent", result.isExpiryDatePermanent());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("givenName", result.getGivenName());
-        jsonResult.putString("height", result.getHeight());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
-        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
-        jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putString("passportNumber", result.getPassportNumber());
+        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("licenseNumber", result.getLicenseNumber());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
-        jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
-        jsonResult.putString("surname", result.getSurname());
+        jsonResult.putString("vehicleCategories", result.getVehicleCategories());
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "AustriaPassportRecognizer";
+        return "SwitzerlandDlFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.austria.AustriaPassportRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandDlFrontRecognizer.class;
     }
 }

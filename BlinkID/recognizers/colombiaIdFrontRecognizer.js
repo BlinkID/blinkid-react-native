@@ -18,32 +18,32 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The document number of the Colombian ID card. 
+         * the Colombian ID document number number. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Colombian ID owner. 
+         * owner first name 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of the Colombian ID owner. 
+         * owner last name 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -51,77 +51,54 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Colombia ID Front Recognizer.
- * 
- * Colombia ID Front recognizer is used for scanning front side of Colombia ID.
+ * Recognizer which can scan front side of Colombian national ID cards.
  */
 export class ColombiaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('ColombiaIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's first name should be extracted from Colombian ID
-         * 
-         *  
+         * Defines if first name of ID owner should be extracted 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if owner's last name should be extracted from Colombian ID
-         * 
-         *  
+         * Defines if last name of ID owner should be extracted 
          */
         this.extractLastName = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

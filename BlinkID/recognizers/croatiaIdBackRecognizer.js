@@ -18,125 +18,97 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Croatian ID owner. 
+         * the address of the Croatian ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * Holder's date of birth. 
+         * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Date of expiry of the document. 
+         * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Check if date of expiry is permanent on the Croatian ID. 
+         * true if date of expiry of the Croatian ID is permanent else false 
          */
         this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
         /** 
-         * The document date of issue of the Croatian ID. 
+         * the document date of issue of the Croatian ID 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * The document code. Document code contains two characters. For MRTD the first character
-         * shall be A, C or I. The second character shall be discretion of the issuing State or organization
-         * except that V shall not be used, and C shall not be used after A except in the crew member
-         * certificate. On machine-readable passports (MRP) first character shall be P to designate an MRP.
-         * One additional letter may be used, at the discretion of the issuing State or organization,
-         * to designate a particular MRP. If the second character position is not used for this purpose, it
-         * shall be filled by the filter character <. 
+         * Defines document code. Document code contains two characters. For MRTD the first character shall 
          */
         this.documentCode = nativeResult.documentCode;
         
         /** 
-         * Unique number of the document. Document number contains up to 9 characters.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines document number. Document number contains up to 9 characters. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Three-letter code which indicate the issuing State.
-         * Three-letter codes are based on Alpha-3 codes for entities specified in
-         * ISO 3166-1, with extensions for certain States. 
+         * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * The issuing authority of Croatian ID. 
+         * the issuing authority of Croatian ID. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * Boolean value which denotes that MRTD result is successfully parsed. When the result is parsed, all
-         * properties below are present.
-         * 
-         * If in the PPMrtdRecognizerSettings you specified allowUnparsedResults = true, then it can happen that
-         * MRTDRecognizerResult is not parsed. When this happens, this property will be equal to true.
-         * 
-         * In that case, you can use rawOcrResult property to obtain the raw result of the OCR process, so you can
-         * implement MRTD parsing in your application.
-         * 
-         *  @return true if MRTD Recognizer result was successfully parsed and all the fields are extracted. false otherwise. 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
          */
         this.mrzParsed = nativeResult.mrzParsed;
         
         /** 
-         * The entire Machine Readable Zone text from ID. This text is usually used for parsing
-         * other elements. 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
          */
         this.mrzText = nativeResult.mrzText;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the holder represented by a three-letter code. Three-letter codes are based
-         * on Alpha-3 codes for entities specified in ISO 3166-1, with extensions for certain States. 
+         * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * First optional data. Returns nil or empty string if not available.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines first optional data.<code>null</code> or empty string if not available. 
          */
         this.opt1 = nativeResult.opt1;
         
         /** 
-         * Second optional data. Returns nil or empty string if not available.
-         * Element does not exist on Passports and Visas. To see which document was scanned use documentType property. 
+         * Defines second optional data.<code>null</code> or empty string if not available. 
          */
         this.opt2 = nativeResult.opt2;
         
         /** 
-         * Returns the primary indentifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return primary id of a card holder. 
+         * Defines the primary indentifier. If there is more than one component, they are separated with space. 
          */
         this.primaryId = nativeResult.primaryId;
         
         /** 
-         * Returns the secondary identifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return secondary id of a card holder 
+         * Defines the secondary identifier. If there is more than one component, they are separated with space. 
          */
         this.secondaryId = nativeResult.secondaryId;
         
         /** 
-         * Sex of the card holder. Sex is specified by use of the single initial, capital
-         * letter F for female, M for male or < for unspecified. 
+         * Defines sex of the card holder. Sex is specified by use of the single initial, 
          */
         this.sex = nativeResult.sex;
         
@@ -144,40 +116,30 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Croatian ID Back Recognizer.
+ *  Recognizer for back side of Croatian ID.
  * 
- * Croatian ID Back recognizer is used for scanning back side of Croatian ID. It always extracts
- * MRZ zone and address of ID holder while extracting other elements is optional.
  */
 export class CroatiaIdBackRecognizer extends Recognizer {
     constructor() {
         super('CroatiaIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of issue of Croatian ID should be extracted
-         * 
-         *  
+         * true if date of issue is being extracted from Croatian ID 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if issuing authority of Croatian ID should be extracted
-         * 
-         *  
+         * true if issuing authority is being extracted from Croatian ID 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
