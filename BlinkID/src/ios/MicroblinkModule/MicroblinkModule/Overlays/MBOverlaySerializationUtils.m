@@ -17,6 +17,17 @@
             overlaySettings.cameraSettings.cameraType = PPCameraTypeFront;
         }
     }
+    {
+        id language = [jsonOverlaySettings objectForKey:@"language"];
+        if (language != nil && language != NSNull.null) {
+            id country = [jsonOverlaySettings objectForKey:@"country"];
+            if (country && country != NSNull.null) {
+                overlaySettings.language = [[(NSString *)language stringByAppendingString:@"-" ] stringByAppendingString:(NSString *)country];
+            } else {
+                overlaySettings.language = (NSString *)language;
+            }
+        }
+    }
     if ([overlaySettings isKindOfClass:[MBBaseOverlaySettings class]]) {
         MBBaseOverlaySettings *baseOverlaySettings = (MBBaseOverlaySettings*)overlaySettings;
         {

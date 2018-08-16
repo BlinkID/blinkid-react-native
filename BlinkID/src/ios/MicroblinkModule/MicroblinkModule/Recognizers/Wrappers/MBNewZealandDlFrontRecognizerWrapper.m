@@ -35,15 +35,21 @@
         }
     }
     {
-        id extractDonorIndicator = [jsonRecognizer valueForKey:@"extractDonorIndicator"];
-        if (extractDonorIndicator != nil) {
-            recognizer.extractDonorIndicator = [(NSNumber *)extractDonorIndicator boolValue];
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
         }
     }
     {
-        id extractExpiryDate = [jsonRecognizer valueForKey:@"extractExpiryDate"];
-        if (extractExpiryDate != nil) {
-            recognizer.extractExpiryDate = [(NSNumber *)extractExpiryDate boolValue];
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
+        id extractDonorIndicator = [jsonRecognizer valueForKey:@"extractDonorIndicator"];
+        if (extractDonorIndicator != nil) {
+            recognizer.extractDonorIndicator = [(NSNumber *)extractDonorIndicator boolValue];
         }
     }
     {
@@ -53,15 +59,21 @@
         }
     }
     {
-        id extractIssueDate = [jsonRecognizer valueForKey:@"extractIssueDate"];
-        if (extractIssueDate != nil) {
-            recognizer.extractIssueDate = [(NSNumber *)extractIssueDate boolValue];
-        }
-    }
-    {
         id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
         if (extractSurname != nil) {
             recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
+        }
+    }
+    {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -82,6 +94,12 @@
             recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
         }
     }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
@@ -97,13 +115,13 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:self.result.cardVersion forKey:@"cardVersion"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.donorIndicator] forKey:@"donorIndicator"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.expiryDate] forKey:@"expiryDate"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstNames forKey:@"firstNames"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.issueDate] forKey:@"issueDate"];
     [jsonResult setValue:self.result.licenseNumber forKey:@"licenseNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
     [jsonResult setValue:self.result.surname forKey:@"surname"];

@@ -52,7 +52,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.0.1'
+  pod 'PPBlinkID', '~> 4.1.0'
 end
 EOF
 

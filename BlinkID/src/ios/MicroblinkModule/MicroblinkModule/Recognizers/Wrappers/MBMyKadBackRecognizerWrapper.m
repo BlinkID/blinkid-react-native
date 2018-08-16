@@ -23,6 +23,12 @@
         }
     }
     {
+        id extractOldNric = [jsonRecognizer valueForKey:@"extractOldNric"];
+        if (extractOldNric != nil) {
+            recognizer.extractOldNric = [(NSNumber *)extractOldNric boolValue];
+        }
+    }
+    {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
@@ -63,6 +69,7 @@
     [jsonResult setValue:self.result.extendedNric forKey:@"extendedNric"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.nric forKey:@"nric"];
+    [jsonResult setValue:self.result.oldNric forKey:@"oldNric"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 

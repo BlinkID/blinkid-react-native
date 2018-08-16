@@ -32,6 +32,8 @@
 #import "MBJordanIdBackRecognizerWrapper.h"
 #import "MBJordanIdFrontRecognizerWrapper.h"
 #import "MBMalaysiaDlFrontRecognizerWrapper.h"
+#import "MBMoroccoIdBackRecognizerWrapper.h"
+#import "MBMoroccoIdFrontRecognizerWrapper.h"
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBMyKadBackRecognizerWrapper.h"
@@ -47,7 +49,9 @@
 #import "MBSerbiaIdBackRecognizerWrapper.h"
 #import "MBSerbiaIdFrontRecognizerWrapper.h"
 #import "MBSimNumberRecognizerWrapper.h"
+#import "MBSingaporeChangiEmployeeIdRecognizerWrapper.h"
 #import "MBSingaporeCombinedRecognizerWrapper.h"
+#import "MBSingaporeDlFrontRecognizerWrapper.h"
 #import "MBSingaporeIdBackRecognizerWrapper.h"
 #import "MBSingaporeIdFrontRecognizerWrapper.h"
 #import "MBSlovakiaCombinedRecognizerWrapper.h"
@@ -57,6 +61,7 @@
 #import "MBSloveniaIdBackRecognizerWrapper.h"
 #import "MBSloveniaIdFrontRecognizerWrapper.h"
 #import "MBSwedenDlFrontRecognizerWrapper.h"
+#import "MBSwitzerlandDlFrontRecognizerWrapper.h"
 #import "MBSwitzerlandIdBackRecognizerWrapper.h"
 #import "MBSwitzerlandIdFrontRecognizerWrapper.h"
 #import "MBSwitzerlandPassportRecognizerWrapper.h"
@@ -114,6 +119,8 @@
         [self registerCreator:[[MBJordanIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMalaysiaDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBMoroccoIdBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBMoroccoIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMyKadBackRecognizerCreator alloc] init]];
@@ -129,7 +136,9 @@
         [self registerCreator:[[MBSerbiaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSerbiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSimNumberRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBSingaporeChangiEmployeeIdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSingaporeCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBSingaporeDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSingaporeIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSingaporeIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSlovakiaCombinedRecognizerCreator alloc] init]];
@@ -139,6 +148,7 @@
         [self registerCreator:[[MBSloveniaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSloveniaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwedenDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBSwitzerlandDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSwitzerlandPassportRecognizerCreator alloc] init]];
