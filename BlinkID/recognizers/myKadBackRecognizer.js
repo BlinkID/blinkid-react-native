@@ -38,6 +38,11 @@ export class MyKadBackRecognizerResult extends RecognizerResult {
         this.nric = nativeResult.nric;
         
         /** 
+         * The old NRIC of the MyKad owner. 
+         */
+        this.oldNric = nativeResult.oldNric;
+        
+        /** 
          * The Sex of the MyKad owner. 
          */
         this.sex = nativeResult.sex;
@@ -65,6 +70,13 @@ export class MyKadBackRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if old NRIC should be extracted from back side of the MyKad
+         * 
+         *  
+         */
+        this.extractOldNric = true;
         
         /** 
          * Property for setting DPI for full document images

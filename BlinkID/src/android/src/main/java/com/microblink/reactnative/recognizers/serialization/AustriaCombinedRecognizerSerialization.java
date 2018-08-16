@@ -93,7 +93,7 @@ public final class AustriaCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
         jsonResult.putString("givenName", result.getGivenName());
-        jsonResult.putInt("height", result.getHeight());
+        jsonResult.putString("height", result.getHeight());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putBoolean("mrtdVerified", result.isMrtdVerified());
         jsonResult.putString("nationality", result.getNationality());

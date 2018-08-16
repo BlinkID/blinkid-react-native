@@ -11,39 +11,24 @@ import {
 } from '../types'
 
 /**
- * Result object for CroatiaIdFrontRecognizer.
+ * Result object for MoroccoIdFrontRecognizer.
  */
-export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
+export class MoroccoIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The citizenship of the Croatian ID owner. 
-         */
-        this.citizenship = nativeResult.citizenship;
-        
-        /** 
-         * The date of birth of Croatian ID owner 
+         * The date of birth of the Morocco ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Croatian ID 
+         * The date of expiry of the Morocco ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Check if date of expiry is permanent on the Croatian ID. 
-         */
-        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
-        
-        /** 
-         * true if the document is bilingual 
-         */
-        this.documentBilingual = nativeResult.documentBilingual;
-        
-        /** 
-         * The document number of the Croatian ID. 
+         * The document number of the Morocco ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -53,22 +38,22 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Croatian ID owner. 
-         */
-        this.firstName = nativeResult.firstName;
-        
-        /** 
          * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of the Croatian ID owner. 
+         * The name of the Morocco ID owner. 
          */
-        this.lastName = nativeResult.lastName;
+        this.name = nativeResult.name;
         
         /** 
-         * The sex of the Croatian ID owner. 
+         * The place of birth of the Morocco ID owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The sex of the Morocco ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -77,18 +62,22 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * The surname of the Morocco ID owner. 
+         */
+        this.surname = nativeResult.surname;
+        
     }
 }
 
 /**
- * Croatian ID Front Recognizer.
+ * Class for configuring Morocco ID Front Recognizer.
  * 
- * Croatian ID Front recognizer is used for scanning front side of Croatian ID. It always extracts
- * identity card number, first and last name of ID holder while extracting other elements is optional.
+ * Morocco ID Front recognizer is used for scanning front side of the Morocco ID.
  */
-export class CroatiaIdFrontRecognizer extends Recognizer {
+export class MoroccoIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('CroatiaIdFrontRecognizer');
+        super('MoroccoIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -98,46 +87,46 @@ export class CroatiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if citizenship of Croatian ID owner should be extracted
-         * 
-         *  
-         */
-        this.extractCitizenship = true;
-        
-        /** 
-         * Defines if date of birth of Croatian ID owner should be extracted
+         * Defines if owner's date of birth should be extracted from front side of the Morocco ID
          * 
          *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Croatian ID
+         * Defines if date of expiry should be extracted from front side of the Morocco ID
          * 
          *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         *  Defines if first name of Croatian ID owner should be extracted
+         * Defines if owner's name should be extracted from front side of the Morocco ID
          * 
-         *   
+         *  
          */
-        this.extractFirstName = true;
+        this.extractName = true;
         
         /** 
-         *  Defines if last name of Croatian ID owner should be extracted
+         * Defines if owner's place of birth should be extracted from front side of the Morocco ID
          * 
-         *   
+         *  
          */
-        this.extractLastName = true;
+        this.extractPlaceOfBirth = true;
         
         /** 
-         *  Defines if sex of Croatian ID owner should be extracted
+         * Defines if owner's sex should be extracted from front side of the Morocco ID
          * 
-         *   
+         *  
          */
         this.extractSex = true;
+        
+        /** 
+         * Defines if owner's surname should be extracted from front side of the Morocco ID
+         * 
+         *  
+         */
+        this.extractSurname = true;
         
         /** 
          * Property for setting DPI for face images
@@ -184,6 +173,6 @@ export class CroatiaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new CroatiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MoroccoIdFrontRecognizerResult(nativeResult); }
     }
 }

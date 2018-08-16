@@ -46,7 +46,7 @@ public final class AustriaIdBackRecognizerSerialization implements RecognizerSer
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("eyeColour", result.getEyeColour());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putInt("height", result.getHeight());
+        jsonResult.putString("height", result.getHeight());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());

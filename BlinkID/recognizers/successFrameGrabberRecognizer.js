@@ -1,5 +1,8 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
 
+/**
+ * Result object for SuccessFrameGrabberRecognizer.
+ */
 export class SuccessFrameGrabberRecognizerResult extends RecognizerResult {
     constructor(nativeResult, slaveRecognizerResult) {
         super(nativeResult.resultState);
@@ -12,6 +15,10 @@ export class SuccessFrameGrabberRecognizerResult extends RecognizerResult {
     }
 }
 
+/**
+ * SuccessFrameGrabberRecognizer can wrap any other recognizer and obtain camera
+ * frame on which the other recognizer finished recognition.
+ */
 export class SuccessFrameGrabberRecognizer extends Recognizer {
     constructor(slaveRecognizer) {
         super('SuccessFrameGrabberRecognizer');

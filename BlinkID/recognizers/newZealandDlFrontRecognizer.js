@@ -35,12 +35,17 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         /** 
          * The last name of the New Zealand Driver License owner. 
          */
-        this.donorIndicator = nativeResult.donorIndicator;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * The last name of the New Zealand Driver License owner. 
          */
-        this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
+        
+        /** 
+         * The last name of the New Zealand Driver License owner. 
+         */
+        this.donorIndicator = nativeResult.donorIndicator;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -56,11 +61,6 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
          * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
-        
-        /** 
-         * The last name of the New Zealand Driver License owner. 
-         */
-        this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
          * The license number of the New Zealand Driver License. 
@@ -111,18 +111,25 @@ export class NewZealandDlFrontRecognizer extends Recognizer {
         this.extractDateOfBirth = true;
         
         /** 
+         * Defines if card's expiry date should be extracted from New Zealand Driver License
+         * 
+         *  
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * Defines if card's issue date should be extracted from New Zealand Driver License
+         * 
+         *  
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
          * Defines if owner's donor indicator should be extracted from New Zealand Driver License
          * 
          *  
          */
         this.extractDonorIndicator = true;
-        
-        /** 
-         * Defines if card's expiry date should be extracted from New Zealand Driver License
-         * 
-         *  
-         */
-        this.extractExpiryDate = true;
         
         /** 
          * Defines if owner's first name should be extracted from New Zealand Driver License
@@ -132,18 +139,27 @@ export class NewZealandDlFrontRecognizer extends Recognizer {
         this.extractFirstNames = true;
         
         /** 
-         * Defines if card's issue date should be extracted from New Zealand Driver License
-         * 
-         *  
-         */
-        this.extractIssueDate = true;
-        
-        /** 
          * Defines if owner's last name should be extracted from New Zealand Driver License
          * 
          *  
          */
         this.extractSurname = true;
+        
+        /** 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Sets whether face image from ID card should be extracted
@@ -165,6 +181,14 @@ export class NewZealandDlFrontRecognizer extends Recognizer {
          *  
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new NewZealandDlFrontRecognizerResult(nativeResult); }
     }

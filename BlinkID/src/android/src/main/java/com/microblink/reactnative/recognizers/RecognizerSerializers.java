@@ -53,6 +53,8 @@ public enum RecognizerSerializers {
         registerMapping(new JordanIdBackRecognizerSerialization());
         registerMapping(new JordanIdFrontRecognizerSerialization());
         registerMapping(new MalaysiaDlFrontRecognizerSerialization());
+        registerMapping(new MoroccoIdBackRecognizerSerialization());
+        registerMapping(new MoroccoIdFrontRecognizerSerialization());
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
         registerMapping(new MyKadBackRecognizerSerialization());
@@ -68,7 +70,9 @@ public enum RecognizerSerializers {
         registerMapping(new SerbiaIdBackRecognizerSerialization());
         registerMapping(new SerbiaIdFrontRecognizerSerialization());
         registerMapping(new SimNumberRecognizerSerialization());
+        registerMapping(new SingaporeChangiEmployeeIdRecognizerSerialization());
         registerMapping(new SingaporeCombinedRecognizerSerialization());
+        registerMapping(new SingaporeDlFrontRecognizerSerialization());
         registerMapping(new SingaporeIdBackRecognizerSerialization());
         registerMapping(new SingaporeIdFrontRecognizerSerialization());
         registerMapping(new SlovakiaCombinedRecognizerSerialization());
@@ -78,6 +82,7 @@ public enum RecognizerSerializers {
         registerMapping(new SloveniaIdBackRecognizerSerialization());
         registerMapping(new SloveniaIdFrontRecognizerSerialization());
         registerMapping(new SwedenDlFrontRecognizerSerialization());
+        registerMapping(new SwitzerlandDlFrontRecognizerSerialization());
         registerMapping(new SwitzerlandIdBackRecognizerSerialization());
         registerMapping(new SwitzerlandIdFrontRecognizerSerialization());
         registerMapping(new SwitzerlandPassportRecognizerSerialization());

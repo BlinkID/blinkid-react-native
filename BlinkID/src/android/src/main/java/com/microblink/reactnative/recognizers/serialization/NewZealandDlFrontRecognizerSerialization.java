@@ -19,20 +19,26 @@ public final class NewZealandDlFrontRecognizerSerialization implements Recognize
         if (jsonRecognizer.hasKey("extractDateOfBirth")) {
             recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
         }
+        if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
+            recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
+        }
+        if (jsonRecognizer.hasKey("extractDateOfIssue")) {
+            recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
+        }
         if (jsonRecognizer.hasKey("extractDonorIndicator")) {
             recognizer.setExtractDonorIndicator(jsonRecognizer.getBoolean("extractDonorIndicator"));
-        }
-        if (jsonRecognizer.hasKey("extractExpiryDate")) {
-            recognizer.setExtractExpiryDate(jsonRecognizer.getBoolean("extractExpiryDate"));
         }
         if (jsonRecognizer.hasKey("extractFirstNames")) {
             recognizer.setExtractFirstNames(jsonRecognizer.getBoolean("extractFirstNames"));
         }
-        if (jsonRecognizer.hasKey("extractIssueDate")) {
-            recognizer.setExtractIssueDate(jsonRecognizer.getBoolean("extractIssueDate"));
-        }
         if (jsonRecognizer.hasKey("extractSurname")) {
             recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -42,6 +48,9 @@ public final class NewZealandDlFrontRecognizerSerialization implements Recognize
         }
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }
@@ -54,12 +63,12 @@ public final class NewZealandDlFrontRecognizerSerialization implements Recognize
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("cardVersion", result.getCardVersion());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
-        jsonResult.putBoolean("donorIndicator", result.getDonorIndicator());
-        jsonResult.putMap("expiryDate", SerializationUtils.serializeDate(result.getExpiryDate()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
+        jsonResult.putBoolean("donorIndicator", result.isDonorIndicator());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstNames", result.getFirstNames());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putMap("issueDate", SerializationUtils.serializeDate(result.getIssueDate()));
         jsonResult.putString("licenseNumber", result.getLicenseNumber());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         jsonResult.putString("surname", result.getSurname());

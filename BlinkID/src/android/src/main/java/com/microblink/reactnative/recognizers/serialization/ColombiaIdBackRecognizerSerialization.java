@@ -10,8 +10,17 @@ public final class ColombiaIdBackRecognizerSerialization implements RecognizerSe
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.colombia.ColombiaIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.colombia.ColombiaIdBackRecognizer();
+        if (jsonRecognizer.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
+        }
+        if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
+            recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
         if (jsonRecognizer.hasKey("scanUncertain")) {
             recognizer.setScanUncertain(jsonRecognizer.getBoolean("scanUncertain"));
@@ -24,11 +33,12 @@ public final class ColombiaIdBackRecognizerSerialization implements RecognizerSe
         com.microblink.entities.recognizers.blinkid.colombia.ColombiaIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.colombia.ColombiaIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
+        jsonResult.putMap("birthDate", SerializationUtils.serializeDate(result.getBirthDate()));
         jsonResult.putString("bloodGroup", result.getBloodGroup());
-        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("fingerprint", SerializationUtils.encodeByteArrayToBase64(result.getFingerprint()));
         jsonResult.putString("firstName", result.getFirstName());
+        jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("sex", result.getSex());
         return jsonResult;

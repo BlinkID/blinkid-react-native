@@ -64,13 +64,6 @@ export class BarcodeRecognizer extends Recognizer {
         this.autoScaleDetection = true;
         
         /** 
-         * Set manatee license key and unlock the aztec scanning feature.
-         * 
-         *  
-         */
-        this.manateeLicenseKey = '';
-        
-        /** 
          * Set this to true to scan barcodes which don't have quiet zone (white area) around it
          * 
          * Use only if necessary because it slows down the recognition process

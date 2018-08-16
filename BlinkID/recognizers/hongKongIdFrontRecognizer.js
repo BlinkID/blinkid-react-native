@@ -53,6 +53,11 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
         this.fullName = nativeResult.fullName;
         
         /** 
+         * The residential status of the Hong Kong ID. 
+         */
+        this.residentialStatus = nativeResult.residentialStatus;
+        
+        /** 
          * The sex of the Hong Kong ID owner. 
          */
         this.sex = nativeResult.sex;
@@ -105,11 +110,34 @@ export class HongKongIdFrontRecognizer extends Recognizer {
         this.extractFullName = true;
         
         /** 
+         * Defines if card's residential status should be extracted from Hong Kong ID
+         * 
+         *  
+         */
+        this.extractResidentialStatus = true;
+        
+        /** 
          * Defines if owner's sex should be extracted from Hong Kong ID
          * 
          *  
          */
         this.extractSex = true;
+        
+        /** 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
         
         /** 
          * Sets whether face image from ID card should be extracted

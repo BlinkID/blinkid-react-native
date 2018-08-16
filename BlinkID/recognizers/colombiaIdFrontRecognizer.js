@@ -18,7 +18,7 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The document number of the Colombian ID card. 
+         * The document Number of the Colombia Id. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -28,7 +28,7 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Colombian ID owner. 
+         * The first Name of the Colombia Id owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -38,7 +38,7 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of the Colombian ID owner. 
+         * The last Name of the Colombia Id owner. 
          */
         this.lastName = nativeResult.lastName;
         
@@ -51,9 +51,9 @@ export class ColombiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Colombia ID Front Recognizer.
+ * Class for configuring Colombia Id Front Recognizer.
  * 
- * Colombia ID Front recognizer is used for scanning front side of Colombia ID.
+ * Colombia Id Front recognizer is used for scanning front side of the Colombia Id.
  */
 export class ColombiaIdFrontRecognizer extends Recognizer {
     constructor() {
@@ -67,14 +67,14 @@ export class ColombiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's first name should be extracted from Colombian ID
+         * Defines if owner's first name should be extracted from front side of the Colombia Id
          * 
          *  
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if owner's last name should be extracted from Colombian ID
+         * Defines if owner's last name should be extracted from front side of the Colombia Id
          * 
          *  
          */

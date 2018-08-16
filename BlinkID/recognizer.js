@@ -17,9 +17,9 @@ export const RecognizerResultState = Object.freeze(
     {
         /** Recognizer result is empty */
         empty : 1,
-        /** Recognizer result contains some values, but is incomplete or it contains all values, but some are not uncertain */
+        /** Recognizer result contains some values, but is incomplete or it contains all values, but some are uncertain */
         uncertain : 2,
-        /** Recognizer resul contains all required values */
+        /** Recognizer result contains all required values */
         valid : 3
     }
 );

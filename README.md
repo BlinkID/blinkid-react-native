@@ -63,7 +63,7 @@ react-native link blinkid-react-native
 platform :ios, '9.0'
 
 target 'TargetName' do
-  pod 'PPBlinkID', '~> 4.0.1'
+  pod 'PPBlinkID', '~> 4.1.0'
 end
 ```
 

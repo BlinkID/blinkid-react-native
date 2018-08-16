@@ -11,41 +11,31 @@ import {
 } from '../types'
 
 /**
- * Result object for CroatiaIdFrontRecognizer.
+ * Result object for SwitzerlandDlFrontRecognizer.
  */
-export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
+export class SwitzerlandDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The citizenship of the Croatian ID owner. 
-         */
-        this.citizenship = nativeResult.citizenship;
-        
-        /** 
-         * The date of birth of Croatian ID owner 
+         * The date of birth of the Switzerland DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Croatian ID 
+         * The date of rxpiry of the Switzerland DL. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Check if date of expiry is permanent on the Croatian ID. 
+         * The date of issue of the Switzerland DL. 
          */
-        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * true if the document is bilingual 
+         * If true, then this Switzerland DL will never expire. 
          */
-        this.documentBilingual = nativeResult.documentBilingual;
-        
-        /** 
-         * The document number of the Croatian ID. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
+        this.expiryDatePermanent = nativeResult.expiryDatePermanent;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -53,7 +43,7 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Croatian ID owner. 
+         * The first name of the Switzerland DL owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -63,32 +53,46 @@ export class CroatiaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of the Croatian ID owner. 
+         * The issuing authority of the Switzerland DL. 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * The last name of the Switzerland DL owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The sex of the Croatian ID owner. 
+         * The license number of the Switzerland DL. 
          */
-        this.sex = nativeResult.sex;
+        this.licenseNumber = nativeResult.licenseNumber;
+        
+        /** 
+         * The place of birth of the Switzerland DL owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
          * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * The vehicle categories of the Switzerland DL. 
+         */
+        this.vehicleCategories = nativeResult.vehicleCategories;
+        
     }
 }
 
 /**
- * Croatian ID Front Recognizer.
+ * Class for configuring Switzerland DL Front Recognizer.
  * 
- * Croatian ID Front recognizer is used for scanning front side of Croatian ID. It always extracts
- * identity card number, first and last name of ID holder while extracting other elements is optional.
+ * Switzerland DL Front recognizer is used for scanning front side of the Switzerland DL.
  */
-export class CroatiaIdFrontRecognizer extends Recognizer {
+export class SwitzerlandDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('CroatiaIdFrontRecognizer');
+        super('SwitzerlandDlFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -98,46 +102,60 @@ export class CroatiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if citizenship of Croatian ID owner should be extracted
-         * 
-         *  
-         */
-        this.extractCitizenship = true;
-        
-        /** 
-         * Defines if date of birth of Croatian ID owner should be extracted
+         * Defines if owner's date of birth should be extracted from front side of the Switzerland DL
          * 
          *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Croatian ID
+         * Defines if date of expiry should be extracted from front side of the Switzerland DL
          * 
          *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         *  Defines if first name of Croatian ID owner should be extracted
+         * Defines if date of issue should be extracted from front side of the Switzerland DL
          * 
-         *   
+         *  
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if owner's first name should be extracted from front side of the Switzerland DL
+         * 
+         *  
          */
         this.extractFirstName = true;
         
         /** 
-         *  Defines if last name of Croatian ID owner should be extracted
+         * Defines if issuing authority should be extracted from front side of the Switzerland DL
          * 
-         *   
+         *  
+         */
+        this.extractIssuingAuthority = true;
+        
+        /** 
+         * Defines if owner's last name should be extracted from front side of the Switzerland DL
+         * 
+         *  
          */
         this.extractLastName = true;
         
         /** 
-         *  Defines if sex of Croatian ID owner should be extracted
+         * Defines if owner's place of birth should be extracted from front side of the Switzerland DL
          * 
-         *   
+         *  
          */
-        this.extractSex = true;
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines if vehicle categories should be extracted from front side of the Switzerland DL
+         * 
+         *  
+         */
+        this.extractVehicleCategories = true;
         
         /** 
          * Property for setting DPI for face images
@@ -184,6 +202,6 @@ export class CroatiaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new CroatiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new SwitzerlandDlFrontRecognizerResult(nativeResult); }
     }
 }

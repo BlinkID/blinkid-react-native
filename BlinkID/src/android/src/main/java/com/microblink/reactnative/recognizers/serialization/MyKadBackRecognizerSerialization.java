@@ -13,6 +13,9 @@ public final class MyKadBackRecognizerSerialization implements RecognizerSeriali
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
+        if (jsonRecognizer.hasKey("extractOldNric")) {
+            recognizer.setExtractOldNric(jsonRecognizer.getBoolean("extractOldNric"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
@@ -37,6 +40,7 @@ public final class MyKadBackRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("extendedNric", result.getExtendedNric());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("nric", result.getNric());
+        jsonResult.putString("oldNric", result.getOldNric());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;

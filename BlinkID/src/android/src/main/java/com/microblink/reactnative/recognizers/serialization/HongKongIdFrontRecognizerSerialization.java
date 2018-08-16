@@ -25,8 +25,17 @@ public final class HongKongIdFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractFullName")) {
             recognizer.setExtractFullName(jsonRecognizer.getBoolean("extractFullName"));
         }
+        if (jsonRecognizer.hasKey("extractResidentialStatus")) {
+            recognizer.setExtractResidentialStatus(jsonRecognizer.getBoolean("extractResidentialStatus"));
+        }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -49,6 +58,7 @@ public final class HongKongIdFrontRecognizerSerialization implements RecognizerS
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("fullName", result.getFullName());
+        jsonResult.putString("residentialStatus", result.getResidentialStatus());
         jsonResult.putString("sex", result.getSex());
         return jsonResult;
     }

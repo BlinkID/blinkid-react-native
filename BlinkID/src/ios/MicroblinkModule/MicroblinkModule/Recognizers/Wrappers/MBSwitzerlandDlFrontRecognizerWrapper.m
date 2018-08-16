@@ -1,31 +1,25 @@
-#import "MBCroatiaIdFrontRecognizerWrapper.h"
+#import "MBSwitzerlandDlFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBCroatiaIdFrontRecognizerCreator
+@implementation MBSwitzerlandDlFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"CroatiaIdFrontRecognizer";
+        _jsonName = @"SwitzerlandDlFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBCroatiaIdFrontRecognizer *recognizer = [[MBCroatiaIdFrontRecognizer alloc] init];
+    MBSwitzerlandDlFrontRecognizer *recognizer = [[MBSwitzerlandDlFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
-        }
-    }
-    {
-        id extractCitizenship = [jsonRecognizer valueForKey:@"extractCitizenship"];
-        if (extractCitizenship != nil) {
-            recognizer.extractCitizenship = [(NSNumber *)extractCitizenship boolValue];
         }
     }
     {
@@ -41,9 +35,21 @@
         }
     }
     {
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
         id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
         if (extractFirstName != nil) {
             recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        }
+    }
+    {
+        id extractIssuingAuthority = [jsonRecognizer valueForKey:@"extractIssuingAuthority"];
+        if (extractIssuingAuthority != nil) {
+            recognizer.extractIssuingAuthority = [(NSNumber *)extractIssuingAuthority boolValue];
         }
     }
     {
@@ -53,9 +59,15 @@
         }
     }
     {
-        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
-        if (extractSex != nil) {
-            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        }
+    }
+    {
+        id extractVehicleCategories = [jsonRecognizer valueForKey:@"extractVehicleCategories"];
+        if (extractVehicleCategories != nil) {
+            recognizer.extractVehicleCategories = [(NSNumber *)extractVehicleCategories boolValue];
         }
     }
     {
@@ -100,25 +112,26 @@
 
 @end
 
-@interface MBCroatiaIdFrontRecognizer (JsonSerialization)
+@interface MBSwitzerlandDlFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBCroatiaIdFrontRecognizer (JsonSerialization)
+@implementation MBSwitzerlandDlFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.citizenship forKey:@"citizenship"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.documentBilingual] forKey:@"documentBilingual"];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.expiryDatePermanent] forKey:@"expiryDatePermanent"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
+    [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.licenseNumber forKey:@"licenseNumber"];
+    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
+    [jsonResult setValue:self.result.vehicleCategories forKey:@"vehicleCategories"];
 
     return jsonResult;
 }

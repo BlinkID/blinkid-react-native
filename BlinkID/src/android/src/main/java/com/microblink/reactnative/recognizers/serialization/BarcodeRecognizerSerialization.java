@@ -13,9 +13,6 @@ public final class BarcodeRecognizerSerialization implements RecognizerSerializa
         if (jsonRecognizer.hasKey("autoScaleDetection")) {
             recognizer.setAutoScaleDetection(jsonRecognizer.getBoolean("autoScaleDetection"));
         }
-        if (jsonRecognizer.hasKey("manateeLicenseKey")) {
-            recognizer.setManateeLicenseKey(jsonRecognizer.getString("manateeLicenseKey"));
-        }
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
         }

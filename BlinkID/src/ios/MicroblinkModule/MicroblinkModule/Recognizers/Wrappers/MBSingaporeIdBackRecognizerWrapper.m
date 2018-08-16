@@ -23,15 +23,33 @@
         }
     }
     {
-        id extractBloodGroup = [jsonRecognizer valueForKey:@"extractBloodGroup"];
-        if (extractBloodGroup != nil) {
-            recognizer.extractBloodGroup = [(NSNumber *)extractBloodGroup boolValue];
+        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
+        if (extractAddress != nil) {
+            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
+        }
+    }
+    {
+        id extractAddressChangeDate = [jsonRecognizer valueForKey:@"extractAddressChangeDate"];
+        if (extractAddressChangeDate != nil) {
+            recognizer.extractAddressChangeDate = [(NSNumber *)extractAddressChangeDate boolValue];
+        }
+    }
+    {
+        id extractBloodType = [jsonRecognizer valueForKey:@"extractBloodType"];
+        if (extractBloodType != nil) {
+            recognizer.extractBloodType = [(NSNumber *)extractBloodType boolValue];
         }
     }
     {
         id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
         if (extractDateOfIssue != nil) {
             recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -54,9 +72,10 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.addressChangeDate] forKey:@"addressChangeDate"];
+    [jsonResult setValue:self.result.bloodType forKey:@"bloodType"];
     [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
 
     return jsonResult;
