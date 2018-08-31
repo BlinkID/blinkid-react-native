@@ -18,42 +18,42 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The birth Date of the Colombia Id owner. 
+         * owner’s date of birth 
          */
         this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
         
         /** 
-         * The blood Group of the Colombia Id owner. 
+         * owner’s blood group 
          */
         this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
-         * The document Number Colombia Id owner. 
+         * the Colombian ID document number number. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The fingerprint of the Colombian ID owner. 
+         * owner’s encoded fingerprint 
          */
         this.fingerprint = nativeResult.fingerprint;
         
         /** 
-         * The first Name of the Colombia Id owner. 
+         * owner’s first name 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last Name of the Colombia Id owner. 
+         * owner’s last name 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The sex of the Colombia Id owner. 
+         * owner’s sex 
          */
         this.sex = nativeResult.sex;
         
@@ -61,52 +61,34 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Colombia Id Back Recognizer.
- * 
- * Colombia Id Back recognizer is used for scanning back side of the Colombia Id.
+ * Recognizer which can scan back side of Colombian national ID cards.
  */
 export class ColombiaIdBackRecognizer extends Recognizer {
     constructor() {
         super('ColombiaIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Set this to true to scan barcodes which don't have quiet zone (white area) around it
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Allow scanning PDF417 barcodes which don't have quiet zone 
          */
         this.nullQuietZoneAllowed = true;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Set this to true to scan even barcode not compliant with standards
-         * For example, malformed PDF417 barcodes which were incorrectly encoded
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Enable decoding of non-standard PDF417 barcodes, but without 
          */
         this.scanUncertain = true;
         

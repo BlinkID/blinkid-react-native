@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableNativeMap;
 import com.facebook.react.bridge.WritableArray;
 import com.microblink.MicroblinkSDK;
 import com.microblink.entities.recognizers.RecognizerBundle;
@@ -27,7 +28,13 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     // promise reject message codes
     private static final String ERROR_ACTIVITY_DOES_NOT_EXIST = "ERROR_ACTIVITY_DOES_NOT_EXIST";
+    private static final String ERROR_LICENSE_KEY_NOT_SET = "ERROR_LICENSE_KEY_NOT_SET";
     private static final String STATUS_SCAN_CANCELED = "STATUS_SCAN_CANCELED";
+
+    private static final String PARAM_LICENSE_KEY = "licenseKey";
+    private static final String PARAM_LICENSEE = "licensee";
+    private static final String PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING = "showTimeLimitedLicenseKeyWarning";
+
 
     /**
      * Request code for scan activity
@@ -52,7 +59,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void scanWithCamera(ReadableMap jsonOverlaySettings, ReadableMap jsonRecognizerCollection, String licenseKey, Promise promise) {
+    public void scanWithCamera(ReadableMap jsonOverlaySettings, ReadableMap jsonRecognizerCollection, ReadableMap license, Promise promise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(ERROR_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
@@ -61,7 +68,20 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
         // Store the promise to resolve/reject when scanning is done
         mScanPromise = promise;
-        setLicense(licenseKey);
+        if (!license.hasKey(PARAM_LICENSE_KEY)) {
+            promise.reject(ERROR_LICENSE_KEY_NOT_SET, "License key is not set");
+            return;
+        }
+        String licenseKey = license.getString(PARAM_LICENSE_KEY);
+        String licensee = null;
+        if (license.hasKey(PARAM_LICENSEE)) {
+            licensee = license.getString(PARAM_LICENSEE);
+        }
+        Boolean showTimeLimitedLicenseKeyWarning = null;
+        if (license.hasKey(PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING)) {
+            showTimeLimitedLicenseKeyWarning = license.getBoolean(PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING);
+        }
+        setLicense(licenseKey, licensee, showTimeLimitedLicenseKeyWarning);
 
         mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
         UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(jsonOverlaySettings, mRecognizerBundle);
@@ -76,8 +96,15 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
     }
 
-    private void setLicense( String licenseKey ) {
-        MicroblinkSDK.setLicenseKey(licenseKey, this.getCurrentActivity());
+    private void setLicense( String licenseKey, String licensee, Boolean showTimeLimitedLicenseKeyWarning ) {
+        if (showTimeLimitedLicenseKeyWarning != null) {
+            MicroblinkSDK.setShowTimeLimitedLicenseWarning(showTimeLimitedLicenseKeyWarning);
+        }
+        if (licensee != null) {
+            MicroblinkSDK.setLicenseKey(licenseKey, licensee, this.getCurrentActivity());
+        } else {
+            MicroblinkSDK.setLicenseKey(licenseKey, this.getCurrentActivity());
+        }
         MicroblinkSDK.setIntentDataTransferMode(IntentDataTransferMode.PERSISTED_OPTIMISED);
     }
 

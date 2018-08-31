@@ -18,117 +18,117 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Indonesian ID owner. 
+         * address of Indonesian ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The blood type of the Indonesian ID owner. 
+         * blood type of Indonesian ID owner. 
          */
         this.bloodType = nativeResult.bloodType;
         
         /** 
-         * The occupation of the Indonesian ID owner. 
+         * citizenship of Indonesian ID owner. 
          */
         this.citizenship = nativeResult.citizenship;
         
         /** 
-         * The city of the Indonesian ID owner. 
+         * the city of Indonesian ID. 
          */
         this.city = nativeResult.city;
         
         /** 
-         * The date of birth of Indonesian ID owner 
+         * date of birth of Indonesian ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The district of the Indonesian ID owner. 
+         * district of Indonesian ID owner. 
          */
         this.district = nativeResult.district;
         
         /** 
-         * The document classifier of Indonesian ID 
+         * document classifier of Indonesian ID. 
          */
         this.documentClassifier = nativeResult.documentClassifier;
         
         /** 
-         * The document number of the Indonesian ID owner. 
+         * the document number of Indonesian ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The kel desa of the Indonesian ID owner. 
+         * Kel/ Desa of Indonesian ID owner. 
          */
         this.kelDesa = nativeResult.kelDesa;
         
         /** 
-         * The marital status of the Indonesian ID owner. 
+         * marital status of Indonesian ID owner. 
          */
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
-         * The name of the Indonesian ID owner. 
+         * the name of Indonesian ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The occupation of the Indonesian ID owner. 
+         * occupation of Indonesian ID owner. 
          */
         this.occupation = nativeResult.occupation;
         
         /** 
-         * The place of birth of the Indonesian ID owner. 
+         * place of birth of Indonesian ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The province of the Indonesian ID owner. 
+         * the province of Indonesian ID. 
          */
         this.province = nativeResult.province;
         
         /** 
-         * The religion of the Indonesian ID owner. 
+         * religion of Indonesian ID owner. 
          */
         this.religion = nativeResult.religion;
         
         /** 
-         * The rt of the Indonesian ID owner. 
+         * RT of Indonesian ID. 
          */
         this.rt = nativeResult.rt;
         
         /** 
-         * The rw of the Indonesian ID owner. 
+         * RW of Indonesian ID. 
          */
         this.rw = nativeResult.rw;
         
         /** 
-         * The sex of the Indonesian ID owner. 
+         * sex of Indonesian ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The document date of expiry of the Indonesian ID 
+         * valid until of Indonesian ID. 
          */
         this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
         /** 
-         * Check if date of expiry is permanent on the Indonesian ID. 
+         * {true} if date of expiry of the Indonesian ID is permanent, {false} otherwise. 
          */
         this.validUntilPermanent = nativeResult.validUntilPermanent;
         
@@ -136,137 +136,100 @@ export class IndonesiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Indonesian ID Front Recognizer.
+ *  Recognizer for reading front side of indonesian ID document.
  * 
- * Indonesian ID Front recognizer is used for scanning front side of Indonesian ID.
  */
 export class IndonesiaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('IndonesiaIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address should be extracted from Indonesian ID
-         * 
-         *  
+         * true if address of Indonesian ID owner is being extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if blood type should be extracted from Indonesian ID
-         * 
-         *  
+         * true if blood type of Indonesian ID owner is being extracted 
          */
         this.extractBloodType = true;
         
         /** 
-         * Defines if citizenship should be extracted from Indonesian ID
-         * 
-         *  
+         * true if citizenship of Indonesian ID owner is being extracted 
          */
         this.extractCitizenship = true;
         
         /** 
-         *  Defines if city of Indonesian ID owner should be extracted
-         * 
-         *   
+         * true if city of Indonesian ID owner is being extracted 
          */
         this.extractCity = true;
         
         /** 
-         * Defines if district should be extracted from Indonesian ID
-         * 
-         *  
+         * true if district of Indonesian ID owner is being extracted 
          */
         this.extractDistrict = true;
         
         /** 
-         * Defines if keldesa should be extracted from Indonesian ID
-         * 
-         *  
+         * true if Kel/Desa of Indonesian ID owner is being extracted 
          */
         this.extractKelDesa = true;
         
         /** 
-         * Defines if marital status should be extracted from Indonesian ID
-         * 
-         *  
+         * true if marital status of Indonesian ID owner is being extracted 
          */
         this.extractMaritalStatus = true;
         
         /** 
-         * Defines if name of Indonesian ID owner should be extracted
-         * 
-         *  
+         * true if name of Indonesian ID owner is being extracted 
          */
         this.extractName = true;
         
         /** 
-         * Defines if occupation should be extracted from Indonesian ID
-         * 
-         *  
+         * true if occupation of Indonesian ID owner is being extracted 
          */
         this.extractOccupation = true;
         
         /** 
-         * Defines if place of birth of Indonesian ID owner should be extracted
-         * 
-         *  
+         * true if place of birth of Indonesian ID owner is being extracted 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if religion should be extracted from Indonesian ID
-         * 
-         *  
+         * true if religion of Indonesian ID owner is being extracted 
          */
         this.extractReligion = true;
         
         /** 
-         * Defines if rt should be extracted from Indonesian ID
-         * 
-         *  
+         * true if RT of Indonesian ID owner is being extracted 
          */
         this.extractRt = true;
         
         /** 
-         * Defines if rw should be extracted from Indonesian ID
-         * 
-         *  
+         * true if RW of Indonesian ID owner is being extracted 
          */
         this.extractRw = true;
         
         /** 
-         * Defines if valid until should be extracted from Indonesian ID
-         * 
-         *  
+         * true if valid until of Indonesian ID owner is being extracted 
          */
         this.extractValidUntil = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         

@@ -18,69 +18,67 @@ export class MyKadFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Owner army number on MyTentera documents 
+         * owner army number if written on MyTentera 
          */
         this.armyNumber = nativeResult.armyNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * NRIC number (National Registration Identity Card Number)
-         * 
-         *  @see https://en.wikipedia.org/wiki/Malaysian_identity_card#Structure_of_the_National_Registration_Identity_Card_Number_.28NRIC.29 
+         * NRIC number (National Registration Identity Card Number) 
          */
         this.nricNumber = nativeResult.nricNumber;
         
         /** 
-         * Owner address 
+         * full owner address. 
          */
         this.ownerAddress = nativeResult.ownerAddress;
         
         /** 
-         * Owner address city. Determined from owner address. 
+         * extracted city from the owner address. 
          */
         this.ownerAddressCity = nativeResult.ownerAddressCity;
         
         /** 
-         * Owner address state. Determined from owner address. 
+         * extracted state from the owner address. 
          */
         this.ownerAddressState = nativeResult.ownerAddressState;
         
         /** 
-         * Owner street. Determined from owner address. 
+         * extracted street from the owner address. 
          */
         this.ownerAddressStreet = nativeResult.ownerAddressStreet;
         
         /** 
-         * Owner address Zip code. Determined from owner address. 
+         * extracted ZIP code from the owner address. 
          */
         this.ownerAddressZipCode = nativeResult.ownerAddressZipCode;
         
         /** 
-         * Owner birth date converted in NSDate object 
+         * owner's date of birth if it is successfully converted to {Date} from date format: <code>YYMMDD</code>. 
          */
         this.ownerBirthDate = nativeResult.ownerBirthDate != null ? new Date(nativeResult.ownerBirthDate) : null;
         
         /** 
-         * Owner full name 
+         * owner full name 
          */
         this.ownerFullName = nativeResult.ownerFullName;
         
         /** 
-         * Owner religion if written on MyKad 
+         * owner religion if written on MyKad 
          */
         this.ownerReligion = nativeResult.ownerReligion;
         
         /** 
-         * Owner sex (M for male, F for female) 
+         * owner sex (M for male, F for female) 
          */
         this.ownerSex = nativeResult.ownerSex;
         
@@ -88,40 +86,30 @@ export class MyKadFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring My Kad Front Recognizer.
+ *  Recognizer for reading front side of Malaysian MyKad.
  * 
- * My Kad Front recognizer is used for scanning front side of My Kad.
  */
 export class MyKadFrontRecognizer extends Recognizer {
     constructor() {
         super('MyKadFrontRecognizer');
         
         /** 
-         * Defines if army number should be extracted from MyTentera documents with MyKadRecognizer
-         * 
-         *  
+         * true if army number of Malaysian MyTentera owner is being extracted 
          */
         this.extractArmyNumber = false;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

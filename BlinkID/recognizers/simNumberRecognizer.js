@@ -18,7 +18,7 @@ export class SimNumberRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Returns the recognized SIM number from barcode or empty string if recognition failed. 
+         * Recognized SIM number from barcode or empty string if recognition failed. 
          */
         this.simNumber = nativeResult.simNumber;
         

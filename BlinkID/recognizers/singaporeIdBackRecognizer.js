@@ -18,32 +18,32 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's address 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The address Change Date of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's address change date, present if the address is on a sticker 
          */
         this.addressChangeDate = nativeResult.addressChangeDate != null ? new Date(nativeResult.addressChangeDate) : null;
         
         /** 
-         * The blood Type of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's blood type 
          */
         this.bloodType = nativeResult.bloodType;
         
         /** 
-         * The card Number of the back side of the Singapore Id owner. 
+         * The Singapore ID card number 
          */
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * The date Of Issue of the back side of the Singapore Id owner. 
+         * The Singapore ID's date of issue 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -51,61 +51,44 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore Id Back Recognizer.
- * 
- * Singapore Id Back recognizer is used for scanning back side of the Singapore Id.
+ * Recognizer used for scanning the back side of Singapore IDs
  */
 export class SingaporeIdBackRecognizer extends Recognizer {
     constructor() {
         super('SingaporeIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's address should be extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if owner's address change date should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's address change date on sticker should be extracted 
          */
         this.extractAddressChangeDate = false;
         
         /** 
-         * Defines if owner's blood type should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's blood type should be extracted 
          */
         this.extractBloodType = true;
         
         /** 
-         * Defines if owner's date of issue should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID's date of issue should be extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         

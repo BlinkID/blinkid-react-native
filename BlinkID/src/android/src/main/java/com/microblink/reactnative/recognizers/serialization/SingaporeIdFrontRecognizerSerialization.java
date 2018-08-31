@@ -19,11 +19,20 @@ public final class SingaporeIdFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractDateOfBirth")) {
             recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
         }
+        if (jsonRecognizer.hasKey("extractName")) {
+            recognizer.setExtractName(jsonRecognizer.getBoolean("extractName"));
+        }
         if (jsonRecognizer.hasKey("extractRace")) {
             recognizer.setExtractRace(jsonRecognizer.getBoolean("extractRace"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -39,11 +48,11 @@ public final class SingaporeIdFrontRecognizerSerialization implements Recognizer
         com.microblink.entities.recognizers.blinkid.singapore.SingaporeIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.singapore.SingaporeIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("cardNumber", result.getCardNumber());
         jsonResult.putString("countryOfBirth", result.getCountryOfBirth());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
+        jsonResult.putString("identityCardNumber", result.getIdentityCardNumber());
         jsonResult.putString("name", result.getName());
         jsonResult.putString("race", result.getRace());
         jsonResult.putString("sex", result.getSex());

@@ -18,42 +18,42 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Austrian Id owner. 
+         * The date of birth of Austrian ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document number of the Austrian Id. 
+         * The document number of Austrian ID 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         *  image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The first name of the Austrian Id owner. 
+         * The given name of the Austrian ID owner 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * The sex of the Austrian Id owner. 
+         * The sex of the Austrian ID owner 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         *  signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The last name of the Austrian Id owner. 
+         * The surname of the Austrian ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -61,91 +61,64 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Austrian ID Front Recognizer.
- * 
- * Aus ID Front recognizer is used for scanning front side of Austrian Id.
+ * Recognizer which can scan front side of Austrian national ID cards.
  */
 export class AustriaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('AustriaIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth should be extracted from Austrian ID
-         * 
-         *  
+         * Defines if date of birth of Austrian ID owner should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if given name of Austrian Id owner should be extracted
-         * 
-         *  
+         * Defines if given name of Austrian ID owner should be extracted 
          */
         this.extractGivenName = true;
         
         /** 
-         *  Defines if sex of Austrian Id owner should be extracted
-         * 
-         *   
+         * Defines if sex of Austrian ID owner should be extracted 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Austrian Id owner should be extracted
-         * 
-         *  
+         * Defines if surname of Austrian ID owner should be extracted 
          */
         this.extractSurname = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * the DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

@@ -18,87 +18,82 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The Date Of Birth of the Jordan ID owner. 
+         * the date of birth of Jordan ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The Date of expiry of the Jordan ID. 
+         * the document date of expiry of the Jordan ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The Document Number of the Jordan ID. 
+         * the document number of Jordan ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         *  face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         *  back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         *  front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The issuer of the Jordan ID. 
+         * the issuer of Jordan ID. 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * true if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * The Name of the Jordan ID owner. 
+         * the name of the Jordan ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The Document Number of the Jordan ID. 
+         * the national number of Jordan ID owner. 
          */
         this.nationalNumber = nativeResult.nationalNumber;
         
         /** 
-         * The nationality of the Jordan ID owner. 
+         * nationality of the Jordan ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         *  {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * The Sex of the Jordan ID owner. 
+         * sex of the Jordan ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -106,60 +101,45 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Jordan ID Combined Recognizer.
+ *  Recognizer for combined reading of both front and back side of Jordan ID.
  * 
- * Jordan ID Combined recognizer is used for scanning both front and back side of Jordan ID.
  */
 export class JordanCombinedRecognizer extends Recognizer {
     constructor() {
         super('JordanCombinedRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's date of birth should be extracted from Jordan ID
-         * 
-         *  
+         * true if date of birth of Jordan owner is being extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if owner's name should be extracted from Jordan ID
-         * 
-         *  
+         * true if name of Jordan ID owner is being extracted 
          */
         this.extractName = true;
         
         /** 
-         * Defines if owner's sex should be extracted from Jordan ID
-         * 
-         *  
+         * true if sex of Jordan owner is being extracted 
          */
         this.extractSex = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in result. 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         
