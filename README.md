@@ -11,14 +11,14 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.55.4](https://github.com/facebook/react-native/releases/tag/v0.55.4)
+BlinkID React Native was built and tested with [React Native v0.56.0](https://github.com/facebook/react-native/releases/tag/v0.56.0)
 
 ## Installation
 
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.55.4" NameOfYourProject
+react-native init --version="0.56.0" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
@@ -63,7 +63,7 @@ react-native link blinkid-react-native
 platform :ios, '9.0'
 
 target 'TargetName' do
-  pod 'PPBlinkID', '~> 4.1.0'
+  pod 'PPBlinkID', '~> 4.2.0'
 end
 ```
 

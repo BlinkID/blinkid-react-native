@@ -78,6 +78,9 @@ public abstract class SerializationUtils {
     }
 
     public static String encodeByteArrayToBase64(byte[] arr) {
+        if (arr == null) {
+            return null;
+        }
         return Base64.encodeToString(arr, Base64.NO_WRAP);
     }
 

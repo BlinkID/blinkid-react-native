@@ -11,21 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for SingaporeIdFrontRecognizer.
+ * Result object for KuwaitIdFrontRecognizer.
  */
-export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
+export class KuwaitIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The country/place of birth of the Singaporean ID card owner. 
+         * The birth Date of the front side of the Kuroom wait Id owner. 
          */
-        this.countryOfBirth = nativeResult.countryOfBirth;
+        this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
         
         /** 
-         * The date of birth of the Singaporean ID card owner. 
+         * The civil Id Number of the front side of the Kuwait Id owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        this.civilIdNumber = nativeResult.civilIdNumber;
+        
+        /** 
+         * The expiry Date of the front side of the Kuwait Id owner. 
+         */
+        this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -38,22 +43,17 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The identity card number of the Singaporean ID card. 
-         */
-        this.identityCardNumber = nativeResult.identityCardNumber;
-        
-        /** 
-         * The name of the Singaporean ID card owner. 
+         * The name of the front side of the Kuwait Id owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The race of the Singaporean ID card owner. 
+         * The nationality of the front side of the Kuwait Id owner. 
          */
-        this.race = nativeResult.race;
+        this.nationality = nativeResult.nationality;
         
         /** 
-         * The sex of the Singaporean ID card owner. 
+         * The sex of the front side of the Kuwait Id owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -61,13 +61,11 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore ID Front Recognizer.
- * 
- * Singapore ID Front recognizer is used for scanning front side of Singapore ID.
+ * Recognizer which can scan front side of Kuwait national ID cards.
  */
-export class SingaporeIdFrontRecognizer extends Recognizer {
+export class KuwaitIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('SingaporeIdFrontRecognizer');
+        super('KuwaitIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -77,37 +75,30 @@ export class SingaporeIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         *  Defines if country/place of birth of Singaporean ID card owner should be extracted
+         * Defines if date of birth of Kuwait ID owner should be extracted.
          * 
-         *   
+         *  
          */
-        this.extractCountryOfBirth = true;
+        this.extractBirthDate = true;
         
         /** 
-         *  Defines if date of birth of Singaporean ID card owner should be extracted
+         * Defines if name of Kuwait ID owner should be extracted.
          * 
-         *   
-         */
-        this.extractDateOfBirth = true;
-        
-        /** 
-         *  Defines if name of Singaporean ID card owner should be extracted
-         * 
-         *   
+         *  
          */
         this.extractName = true;
         
         /** 
-         *  Defines if race of Singaporean ID card owner should be extracted
+         * Defines if nationality of Kuwait ID owner should be extracted.
          * 
-         *   
+         *  
          */
-        this.extractRace = true;
+        this.extractNationality = true;
         
         /** 
-         *  Defines if sex of Singaporean ID card owner should be extracted
+         * Defines if sex of Kuwait ID owner should be extracted.
          * 
-         *   
+         *  
          */
         this.extractSex = true;
         
@@ -141,6 +132,6 @@ export class SingaporeIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SingaporeIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new KuwaitIdFrontRecognizerResult(nativeResult); }
     }
 }

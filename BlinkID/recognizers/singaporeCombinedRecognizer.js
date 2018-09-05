@@ -18,32 +18,32 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The name of the Singapore ID owner. 
+         * The address of the back side of the Singapore Id owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The blood group of the Singapore ID owner. 
+         * The address Change Date of the back side of the Singapore Id owner. 
          */
-        this.bloodGroup = nativeResult.bloodGroup;
+        this.addressChangeDate = nativeResult.addressChangeDate != null ? new Date(nativeResult.addressChangeDate) : null;
         
         /** 
-         * The identity card number of Singapore ID. 
+         * The blood Type of the back side of the Singapore Id owner. 
          */
-        this.cardNumber = nativeResult.cardNumber;
+        this.bloodType = nativeResult.bloodType;
         
         /** 
-         * The country of birth of the Singapore ID owner. 
+         * The country/place of birth of the Singaporean ID card owner. 
          */
         this.countryOfBirth = nativeResult.countryOfBirth;
         
         /** 
-         * The date of birth of Singapore ID owner 
+         * The date of birth of the Singaporean ID card owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of issue of Singapore ID owner 
+         * The date Of Issue of the back side of the Singapore Id owner. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
@@ -81,12 +81,17 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The first name of the Singapore ID owner. 
+         * The identity card number of the Singaporean ID card. 
+         */
+        this.identityCardNumber = nativeResult.identityCardNumber;
+        
+        /** 
+         * The name of the Singaporean ID card owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The race of the Singapore ID owner. 
+         * The race of the Singaporean ID card owner. 
          */
         this.race = nativeResult.race;
         
@@ -97,7 +102,7 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * The sex of the Singapore ID owner. 
+         * The sex of the Singaporean ID card owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -119,6 +124,69 @@ export class SingaporeCombinedRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if owner's address should be extracted from back side of the Singapore Id
+         * 
+         *  
+         */
+        this.extractAddress = true;
+        
+        /** 
+         * Defines if owner's address change date should be extracted from back side of the Singapore Id
+         * 
+         *  
+         */
+        this.extractAddressChangeDate = false;
+        
+        /** 
+         * Defines if owner's blood type should be extracted from back side of the Singapore Id
+         * 
+         *  
+         */
+        this.extractBloodType = true;
+        
+        /** 
+         *  Defines if country/place of birth of Singaporean ID card owner should be extracted
+         * 
+         *   
+         */
+        this.extractCountryOfBirth = true;
+        
+        /** 
+         *  Defines if date of birth of Singaporean ID card owner should be extracted
+         * 
+         *   
+         */
+        this.extractDateOfBirth = true;
+        
+        /** 
+         * Defines if owner's date of issue should be extracted from back side of the Singapore Id
+         * 
+         *  
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         *  Defines if name of Singaporean ID card owner should be extracted
+         * 
+         *   
+         */
+        this.extractName = true;
+        
+        /** 
+         *  Defines if race of Singaporean ID card owner should be extracted
+         * 
+         *   
+         */
+        this.extractRace = true;
+        
+        /** 
+         *  Defines if sex of Singaporean ID card owner should be extracted
+         * 
+         *   
+         */
+        this.extractSex = true;
         
         /** 
          * Sets whether face image from ID card should be extracted

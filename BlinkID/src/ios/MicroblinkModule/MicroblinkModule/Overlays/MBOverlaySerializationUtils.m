@@ -14,7 +14,7 @@
     {
         id useFrontCamera = [jsonOverlaySettings objectForKey:@"useFrontCamera"];
         if (useFrontCamera != nil && [(NSNumber*)useFrontCamera boolValue]) {
-            overlaySettings.cameraSettings.cameraType = PPCameraTypeFront;
+            overlaySettings.cameraSettings.cameraType = MBCameraTypeFront;
         }
     }
     {

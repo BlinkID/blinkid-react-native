@@ -11,21 +11,16 @@ import {
 } from '../types'
 
 /**
- * Result object for SingaporeIdFrontRecognizer.
+ * Result object for CyprusIdFrontRecognizer.
  */
-export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
+export class CyprusIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The country/place of birth of the Singaporean ID card owner. 
+         * The document Number of the front side of the Cyprus Id owner. 
          */
-        this.countryOfBirth = nativeResult.countryOfBirth;
-        
-        /** 
-         * The date of birth of the Singaporean ID card owner. 
-         */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -38,36 +33,29 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The identity card number of the Singaporean ID card. 
+         * The id Number of the front side of the Cyprus Id owner. 
          */
-        this.identityCardNumber = nativeResult.identityCardNumber;
+        this.idNumber = nativeResult.idNumber;
         
         /** 
-         * The name of the Singaporean ID card owner. 
+         * The name of the front side of the Cyprus Id owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The race of the Singaporean ID card owner. 
+         * The surname of the front side of the Cyprus Id owner. 
          */
-        this.race = nativeResult.race;
-        
-        /** 
-         * The sex of the Singaporean ID card owner. 
-         */
-        this.sex = nativeResult.sex;
+        this.surname = nativeResult.surname;
         
     }
 }
 
 /**
- * Class for configuring Singapore ID Front Recognizer.
- * 
- * Singapore ID Front recognizer is used for scanning front side of Singapore ID.
+ * Recognizer which can scan front side of Cyprus national ID cards.
  */
-export class SingaporeIdFrontRecognizer extends Recognizer {
+export class CyprusIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('SingaporeIdFrontRecognizer');
+        super('CyprusIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -77,39 +65,25 @@ export class SingaporeIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         *  Defines if country/place of birth of Singaporean ID card owner should be extracted
+         * Defines if document number of Cyprus ID card should be extracted.
          * 
-         *   
+         *  
          */
-        this.extractCountryOfBirth = true;
+        this.extractDocumentNumber = true;
         
         /** 
-         *  Defines if date of birth of Singaporean ID card owner should be extracted
+         * Defines if name of Cyprus ID card owner should be extracted.
          * 
-         *   
-         */
-        this.extractDateOfBirth = true;
-        
-        /** 
-         *  Defines if name of Singaporean ID card owner should be extracted
-         * 
-         *   
+         *  
          */
         this.extractName = true;
         
         /** 
-         *  Defines if race of Singaporean ID card owner should be extracted
+         * Defines if surname of Cyprus ID card owner should be extracted.
          * 
-         *   
+         *  
          */
-        this.extractRace = true;
-        
-        /** 
-         *  Defines if sex of Singaporean ID card owner should be extracted
-         * 
-         *   
-         */
-        this.extractSex = true;
+        this.extractSurname = true;
         
         /** 
          * Property for setting DPI for face images
@@ -141,6 +115,6 @@ export class SingaporeIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SingaporeIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CyprusIdFrontRecognizerResult(nativeResult); }
     }
 }

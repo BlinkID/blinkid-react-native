@@ -15,16 +15,36 @@ const BlinkIDNative = Platform.select({
  * function 'scan' which takes the following parameters:
  * 1. Object overlaySettings: instance of OverlaySettings, contains settings for desired camera overlay
  * 2. RecognizerCollection recognizerCollection: object containing recognizers to use for scanning
- * 3. String licenseKey: BlinkID license key bount to application ID for Android or iOS. To obtain
+ * 3. String license: BlinkID base64 license key bound to application ID for Android or iOS. To obtain
  *                       valid license key, please visit http://microblink.com/login or
  *                       contact us at http://help.microblink.com
+ *
+ *    OR
+ *
+ *    Object license: containing:
+ *               - mandatory parameter 'licenseKey': base64 license key bound to application ID
+ *                       for Android or iOS. To obtain valid license key, please visit
+ *                       http://microblink.com/login or contact us at http://help.microblink.com
+ *               - optioanl parameter 'licensee' when license for multiple apps is used
+ *               - optional flag 'showTimeLimitedLicenseKeyWarning' which indicates
+ *                  whether warning for time limited license key will be shown
+ *        in format
+ *  {
+ *      licenseKey: '<base64iOSLicense or base64AndroidLicense>',
+ *      licensee: String,
+ *      showTimeLimitedLicenseKeyWarning: Boolean
+ *  }
  */
 class BlinkIDWrapper {
-      async scanWithCamera(overlaySettings, recognizerCollection, licenseKey) {
+      async scanWithCamera(overlaySettings, recognizerCollection, license) {
             try {
                   var bla = NativeModules;
                   console.log(bla);
-                  const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseKey);
+                  var licenseObject = license;
+                  if (typeof license === 'string' || license instanceof String) {
+                      licenseObject = { licenseKey: license };
+                  }
+                  const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseObject);
                   if (nativeResults.length != recognizerCollection.recognizerArray.length) {
                         console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
                         return [];
@@ -108,6 +128,8 @@ export * from './recognizers/colombiaIdFrontRecognizer'
 export * from './recognizers/croatiaCombinedRecognizer'
 export * from './recognizers/croatiaIdBackRecognizer'
 export * from './recognizers/croatiaIdFrontRecognizer'
+export * from './recognizers/cyprusIdBackRecognizer'
+export * from './recognizers/cyprusIdFrontRecognizer'
 export * from './recognizers/czechiaCombinedRecognizer'
 export * from './recognizers/czechiaIdBackRecognizer'
 export * from './recognizers/czechiaIdFrontRecognizer'
@@ -125,6 +147,8 @@ export * from './recognizers/indonesiaIdFrontRecognizer'
 export * from './recognizers/jordanCombinedRecognizer'
 export * from './recognizers/jordanIdBackRecognizer'
 export * from './recognizers/jordanIdFrontRecognizer'
+export * from './recognizers/kuwaitIdBackRecognizer'
+export * from './recognizers/kuwaitIdFrontRecognizer'
 export * from './recognizers/malaysiaDlFrontRecognizer'
 export * from './recognizers/moroccoIdBackRecognizer'
 export * from './recognizers/moroccoIdFrontRecognizer'
@@ -134,6 +158,9 @@ export * from './recognizers/myKadBackRecognizer'
 export * from './recognizers/myKadFrontRecognizer'
 export * from './recognizers/myTenteraRecognizer'
 export * from './recognizers/newZealandDlFrontRecognizer'
+export * from './recognizers/paymentCardBackRecognizer'
+export * from './recognizers/paymentCardCombinedRecognizer'
+export * from './recognizers/paymentCardFrontRecognizer'
 export * from './recognizers/pdf417Recognizer'
 export * from './recognizers/polandCombinedRecognizer'
 export * from './recognizers/polandIdBackRecognizer'
@@ -154,11 +181,13 @@ export * from './recognizers/slovakiaIdFrontRecognizer'
 export * from './recognizers/sloveniaCombinedRecognizer'
 export * from './recognizers/sloveniaIdBackRecognizer'
 export * from './recognizers/sloveniaIdFrontRecognizer'
+export * from './recognizers/spainDlFrontRecognizer'
 export * from './recognizers/swedenDlFrontRecognizer'
 export * from './recognizers/switzerlandDlFrontRecognizer'
 export * from './recognizers/switzerlandIdBackRecognizer'
 export * from './recognizers/switzerlandIdFrontRecognizer'
 export * from './recognizers/switzerlandPassportRecognizer'
+export * from './recognizers/unitedArabEmiratesDlFrontRecognizer'
 export * from './recognizers/unitedArabEmiratesIdBackRecognizer'
 export * from './recognizers/unitedArabEmiratesIdFrontRecognizer'
 export * from './recognizers/vinRecognizer'
