@@ -18,22 +18,22 @@ export class DocumentFaceRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * the location of document detection in coordinate system of full input frame. 
+         * Quadrangle represeting corner points of the document within the input image. 
          */
         this.documentLocation = nativeResult.documentLocation != null ? new Quadrilateral(nativeResult.documentLocation) : null;
         
         /** 
-         *  face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * the location of face detection in coordinate system of cropped full document image. 
+         * Quadrangle represeting corner points of the face image within the input image. 
          */
         this.faceLocation = nativeResult.faceLocation != null ? new Quadrilateral(nativeResult.faceLocation) : null;
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -41,34 +41,48 @@ export class DocumentFaceRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer for detecting holder's photo on documents containing image.
+ * Class for configuring Document Face Recognizer Recognizer.
+ * 
+ * Document Face Recognizer recognizer is used for scanning documents containing face images.
  */
 export class DocumentFaceRecognizer extends Recognizer {
     constructor() {
         super('DocumentFaceRecognizer');
         
         /** 
-         * currently used detector type. 
+         * Type of docment this recognizer will scan.
+         * 
+         *  
          */
         this.detectorType = DocumentFaceDetectorType.TD1;
         
         /** 
-         * the DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

@@ -42,13 +42,23 @@ RCT_EXPORT_MODULE(BlinkIDIos);
     return self;
 }
 
-RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySettings recognizerCollection:(NSDictionary *)jsonRecognizerCollection licenseKey:(NSString *)licenseKey resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySettings recognizerCollection:(NSDictionary *)jsonRecognizerCollection license:(NSDictionary *)jsonLicense resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
 
     self.promiseResolve = resolve;
     self.promiseReject = reject;
 
-    // set license key
-    [[MBMicroblinkSDK sharedInstance] setLicenseKey:licenseKey];
+    if ([jsonLicense objectForKey:@"showTimeLimitedLicenseKeyWarning"] != nil) {
+        BOOL showTimeLimitedLicenseKeyWarning = [[jsonLicense objectForKey:@"showTimeLimitedLicenseKeyWarning"] boolValue];
+        [MBMicroblinkSDK sharedInstance].showLicenseKeyTimeLimitedWarning = showTimeLimitedLicenseKeyWarning;
+    }
+    NSString* iosLicense = [jsonLicense objectForKey:@"licenseKey"];
+    if ([jsonLicense objectForKey:@"licensee"] != nil) {
+        NSString *licensee = [jsonLicense objectForKey:@"licensee"];
+        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense andLicensee:licensee];
+    }
+    else {
+        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense];
+    }
 
     self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
 

@@ -18,17 +18,17 @@ export class CyprusIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Cyprus ID card owner. 
+         * The date Of Birth of the back side of the Cyprus Id owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The sex of the Cyprus ID card owner. 
+         * The sex of the back side of the Cyprus Id owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -43,22 +43,31 @@ export class CyprusIdBackRecognizer extends Recognizer {
         super('CyprusIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if sex of Cyprus ID card owner should be extracted. 
+         * Defines if sex of Cyprus ID card owner should be extracted.
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

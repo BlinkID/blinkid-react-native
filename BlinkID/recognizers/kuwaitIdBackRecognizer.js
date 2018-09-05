@@ -18,17 +18,17 @@ export class KuwaitIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         *  image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * The data extracted from the machine readable zone 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The serial number of Kuwait ID. 
+         * The serial number of Kuwait ID 
          */
         this.serialNo = nativeResult.serialNo;
         
@@ -43,22 +43,31 @@ export class KuwaitIdBackRecognizer extends Recognizer {
         super('KuwaitIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if serial number of Kuwait ID should be extracted. 
+         * Defines if serial number of Kuwait ID should be extracted
+         * 
+         *  
          */
         this.extractSerialNo = true;
         
         /** 
-         * the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether full document image will be available in result. 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
