@@ -52,7 +52,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.1.0'
+  pod 'PPBlinkID', '~> 4.2.0'
 end
 EOF
 
@@ -65,8 +65,8 @@ if false; then
   rm -rf MicroBlink.bundle
   rm -rf MicroBlink.framework
 
-  cp -r /Users/dodo/Desktop/MicroBlink.bundle ./
-  cp -r /Users/dodo/Desktop/MicroBlink.framework ./
+  cp -r /Users/juraskrlec/Downloads/blinkid-ios/MicroBlink.bundle ./
+  cp -r /Users/juraskrlec/Downloads/blinkid-ios/MicroBlink.framework ./
   popd
 fi
 
