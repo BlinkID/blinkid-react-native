@@ -118,6 +118,17 @@ This repository contains **initReactNativeDemoApp.sh** script that will create R
 ./initReactNativeDemoApp.sh
 ```
 
+## Video tutorial
+
+Step by step guide how to start blinkid-reactnative demo app. A tutorial flows from cloning repository via git clone to successfully deployed demo application on Android and iOS device with real-time screen mirroring. Application demo contains the simple use of USDL recognizer with Ontario drivers license card.
+
+<p align="center" >
+  <a href="https://vimeo.com/278694990" target="_blank">
+    <img src="https://i.vimeocdn.com/video/725592267_1280x720.jpg" alt="Video tutorial" />
+  </a>
+  <a href="https://vimeo.com/278694990" target="_blank">Watch on Vimeo</a>
+</p>
+
 ## Usage
 
 To use the module you call it in your index.android.js or index.ios.js file like in the [example app](demoApp/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
