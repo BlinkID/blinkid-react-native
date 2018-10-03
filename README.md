@@ -123,10 +123,22 @@ This repository contains **initReactNativeDemoApp.sh** script that will create R
 Step by step guide how to start blinkid-reactnative demo app. A tutorial flows from cloning repository via git clone to successfully deployed demo application on Android and iOS device with real-time screen mirroring. Application demo contains the simple use of USDL recognizer with Ontario drivers license card.
 
 <p align="center" >
-  <a href="https://vimeo.com/289850200" target="_blank">
+  <a href="https://vimeo.com/293090827" target="_blank">
     <img src="https://i.vimeocdn.com/video/725592267_1280x720.jpg" alt="Video tutorial" />
   </a>
-  <a href="https://vimeo.com/289850200" target="_blank">Watch on Vimeo</a>
+  <a href="https://vimeo.com/293090827" target="_blank">Watch on Vimeo</a>
+</p>
+
+  ### Using documentVerificationOverlay and CombinedRecognizer
+
+This video tutorial describes how to use documentVerificationOverlay with UsdlCombinedRecognizer.
+DocumentVerificationOverlay is overlay for RecognizerRunnerFragment best suited for combined recognizers because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver’s licenses, etc
+
+<p align="center" >
+  <a href="https://vimeo.com/289673374" target="_blank">
+    <img src="https://i.vimeocdn.com/video/729644410_1280x720.jpg" alt="Video tutorial" />
+  </a>
+  <a href="https://vimeo.com/289673374" target="_blank">Watch on Vimeo</a>
 </p>
 
 ## Usage
