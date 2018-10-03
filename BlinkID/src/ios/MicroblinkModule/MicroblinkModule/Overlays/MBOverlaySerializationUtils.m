@@ -37,6 +37,47 @@
             }
         }
     }
+
+    if ([overlaySettings isKindOfClass:[MBDocumentOverlaySettings class]]) {
+        MBDocumentOverlaySettings *docOverlaySettings = (MBDocumentOverlaySettings*)overlaySettings;
+        {
+            id tooltipText = [jsonOverlaySettings objectForKey:@"tooltipText"];
+            if (tooltipText != nil && tooltipText != NSNull.null) {
+                docOverlaySettings.tooltipText = (NSString *)tooltipText;
+            }
+        }
+    }
+
+    if ([overlaySettings isKindOfClass:[MBDocumentVerificationOverlaySettings class]]) {
+        MBDocumentVerificationOverlaySettings *docVerOverlaySettings = (MBDocumentVerificationOverlaySettings*)overlaySettings;
+        {
+            id firstSideInstructions = [jsonOverlaySettings objectForKey:@"firstSideInstructions"];
+            if (firstSideInstructions != nil && firstSideInstructions != NSNull.null) {
+                docVerOverlaySettings.firstSideInstructions = (NSString *)firstSideInstructions;
+            }
+        }
+
+        {
+            id secondSideInstructions = [jsonOverlaySettings objectForKey:@"secondSideInstructions"];
+            if (secondSideInstructions != nil && secondSideInstructions != NSNull.null) {
+                docVerOverlaySettings.secondSideInstructions = (NSString *)secondSideInstructions;
+            }
+        }
+
+        {
+            id firstSideSplashMessage = [jsonOverlaySettings objectForKey:@"firstSideSplashMessage"];
+            if (firstSideSplashMessage != nil && firstSideSplashMessage != NSNull.null) {
+                docVerOverlaySettings.firstSideSplashMessage = (NSString *)firstSideSplashMessage;
+            }
+        }
+
+        {
+            id secondSideSplashMessage = [jsonOverlaySettings objectForKey:@"secondSideSplashMessage"];
+            if (secondSideSplashMessage != nil && secondSideSplashMessage != NSNull.null) {
+                docVerOverlaySettings.secondSideSplashMessage = (NSString *)secondSideSplashMessage;
+            }
+        }
+    }
 }
 
 @end
