@@ -18,47 +18,47 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Address of the Australian DL owner. 
+         * The address of the Australian DL owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of Australian DL owner. 
+         * The date of birth of Australian DL owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of Australian DL. 
+         * The document date of expiry of the Australian DL 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The licence number of Australian DL. 
+         * The licence number of the Australian DL owner. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The licence type of the Australian DL. 
+         * The licence type of Australian DL. 
          */
         this.licenceType = nativeResult.licenceType;
         
         /** 
-         * The full name of the Australian ID owner. 
+         * The first name of the Australian DL owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -66,45 +66,61 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan front side of austrian driver's license.
+ * Class for configuring Australia DL Front Recognizer.
  * 
+ * Australia DL Front recognizer is used for scanning front side of Australia DL.
  */
 export class AustraliaDlFrontRecognizer extends Recognizer {
     constructor() {
         super('AustraliaDlFrontRecognizer');
         
         /** 
-         * True if address of Australian DL owner is being extracted 
+         *  Defines if sex of Australian DL owner should be extracted
+         * 
+         *   
          */
         this.extractAddress = true;
         
         /** 
-         * True if date of birth of Australian DL owner is being extracted 
+         * Defines if date of birth of Australian DL owner should be extracted
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if date of expiry of Australian DL is being extracted 
+         * Defines if date of expiry should be extracted from Australian DL
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         

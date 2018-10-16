@@ -18,7 +18,7 @@ export class VinRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Scanned VIN (Vehicle Identification Number). 
+         * Returns the recognized VIN or empty string if recognition failed. 
          */
         this.vin = nativeResult.vin;
         
@@ -26,7 +26,7 @@ export class VinRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer that can scan VIN (Vehicle Identification Number) barcode.
+ * Recognizer that can perform recognition of VINs (Vehicle Identification Number).
  */
 export class VinRecognizer extends Recognizer {
     constructor() {

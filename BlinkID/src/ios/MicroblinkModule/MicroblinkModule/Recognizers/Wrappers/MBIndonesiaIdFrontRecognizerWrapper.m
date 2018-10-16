@@ -47,6 +47,12 @@
         }
     }
     {
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
+        }
+    }
+    {
         id extractDistrict = [jsonRecognizer valueForKey:@"extractDistrict"];
         if (extractDistrict != nil) {
             recognizer.extractDistrict = [(NSNumber *)extractDistrict boolValue];
@@ -101,9 +107,21 @@
         }
     }
     {
-        id extractValidUntil = [jsonRecognizer valueForKey:@"extractValidUntil"];
-        if (extractValidUntil != nil) {
-            recognizer.extractValidUntil = [(NSNumber *)extractValidUntil boolValue];
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -124,6 +142,12 @@
             recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
         }
     }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
@@ -141,9 +165,10 @@
     [jsonResult setValue:self.result.bloodType forKey:@"bloodType"];
     [jsonResult setValue:self.result.citizenship forKey:@"citizenship"];
     [jsonResult setValue:self.result.city forKey:@"city"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
     [jsonResult setValue:self.result.district forKey:@"district"];
-    [jsonResult setValue:self.result.documentClassifier forKey:@"documentClassifier"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
@@ -158,8 +183,6 @@
     [jsonResult setValue:self.result.rw forKey:@"rw"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validUntil] forKey:@"validUntil"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.validUntilPermanent] forKey:@"validUntilPermanent"];
 
     return jsonResult;
 }

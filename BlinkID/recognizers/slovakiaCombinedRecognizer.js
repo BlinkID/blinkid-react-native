@@ -23,32 +23,35 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of Slovak ID owner. 
+         * The date of birth of Slovak ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Slovak ID. 
+         * The date of expiry of Slovak ID owner 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document date of issue of the Slovak ID. 
+         * The date of issue of Slovak ID owner 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Defines digital signature of recognition results. 
+         * Digital signature of the recognition result. Available only if enabled with signResult property. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Defines digital signature version. 
+         * Version of the digital signature. Available only if enabled with signResult property. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Defines {true} if data from scanned parts/sides of the document match, 
+         * Returns true if data from scanned parts/sides of the document match,
+         * false otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return false. Result will
+         * be true only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
@@ -58,7 +61,7 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -68,12 +71,12 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Back side image of the document 
+         * back side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * Front side image of the document 
+         * front side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -88,47 +91,49 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * true if all check digits inside MRZ are correct, false otherwise.
+         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the Slovak ID owner. 
+         * The nationality of the Slovak ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * Personal identification number of the Slovak ID holder. 
+         * The PIN of the Slovak ID owner. 
          */
         this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
         
         /** 
-         * Place of birth of the Slovak ID holder. 
+         * The place of birth of the Slovak ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * {true} if recognizer has finished scanning first side and is now scanning back side, 
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side. 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Slovak ID owner. 
+         * The sex of the Slovak ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * Special remarks of the Slovak ID holder. 
+         * The special remarks of Slovak ID. 
          */
         this.specialRemarks = nativeResult.specialRemarks;
         
         /** 
-         * Surname at birth of the Slovak ID holder. 
+         * The surname at birth of Slovak ID. 
          */
         this.surnameAtBirth = nativeResult.surnameAtBirth;
         
@@ -136,85 +141,116 @@ export class SlovakiaCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Slovak ID.
+ * Slovak ID Combined Recognizer.
  * 
+ * Slovak ID Combined recognizer is used for scanning both front and back side of Slovak ID.
  */
 export class SlovakiaCombinedRecognizer extends Recognizer {
     constructor() {
         super('SlovakiaCombinedRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth is being extracted from ID 
+         * Defines if owner's date of birth should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if date of expiry is being extracted from ID 
+         * Defines if ID's date of expiry should be extracted
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * True if date of issue is being extracted from ID 
+         * Defines if ID's date of issue should be extracted
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * True if document number is being extracted from ID 
+         * Defines if issuing document number should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractDocumentNumber = true;
         
         /** 
-         * True if issuer is being extracted from ID 
+         * Defines if issuing authority should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractIssuedBy = true;
         
         /** 
-         * True if nationality is being extracted from ID 
+         * Defines if owner's nationality should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractNationality = true;
         
         /** 
-         * True if place of birth is being extracted from ID 
+         * Defines if owner's place of birth should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * True if sex is being extracted from ID 
+         * Defines if owner's sex should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * True if special remarks are being extracted from ID 
+         * Defines if owner's special remarks should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractSpecialRemarks = true;
         
         /** 
-         * True if surname at birth is being extracted from ID 
+         * Defines if owner's surname at birth should be extracted from Slovakian ID
+         * 
+         *  
          */
         this.extractSurnameAtBirth = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Defines whether or not recognition result should be signed. 
+         * Whether or not recognition result should be signed.
+         * 
+         *  
          */
         this.signResult = false;
         

@@ -35,6 +35,18 @@
         }
     }
     {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        }
+    }
+    {
+        id numStableDetectionsThreshold = [jsonRecognizer valueForKey:@"numStableDetectionsThreshold"];
+        if (numStableDetectionsThreshold != nil) {
+            recognizer.numStableDetectionsThreshold = [(NSNumber *)numStableDetectionsThreshold unsignedIntegerValue];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];

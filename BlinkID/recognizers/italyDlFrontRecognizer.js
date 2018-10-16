@@ -18,67 +18,67 @@ export class ItalyDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Italian DL owner. 
+         * The address of the front side of the Italy Dl owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of the Italian DL owner. 
+         * The date Of Birth of the front side of the Italy Dl owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of the Italian DL card. 
+         * The date Of Expiry of the front side of the Italy Dl owner. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of the Italian DL card. 
+         * The date Of Issue of the front side of the Italy Dl owner. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given name of the Italian DL owner. 
+         * The given Name of the front side of the Italy Dl owner. 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * The issuing authority of the Italian DL card. 
+         * The issuing Authority of the front side of the Italy Dl owner. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The licence categories of the Italian DL owner. 
+         * The licence Categories of the front side of the Italy Dl owner. 
          */
         this.licenceCategories = nativeResult.licenceCategories;
         
         /** 
-         * The licence number of the Italian DL owner. 
+         * The licence Number of the front side of the Italy Dl owner. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The place of birth of the Italian DL owner. 
+         * The place Of Birth of the front side of the Italy Dl owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The surname of the Italian DL owner. 
+         * The surname of the front side of the Italy Dl owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -93,87 +93,125 @@ export class ItalyDlFrontRecognizer extends Recognizer {
         super('ItalyDlFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Italian DL owner should be extracted. 
+         * Defines if address of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if date of birth of Italian DL owner should be extracted. 
+         * Defines if date of birth of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of Italian DL card should be extracted. 
+         * Defines if date of expiry of Italian DL card should be extracted.
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Italian DL card should be extracted. 
+         * Defines if date of issue of Italian DL card should be extracted.
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if given name of Italian DL owner should be extracted. 
+         * Defines if given name of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if issuing authority of Italian DL card should be extracted. 
+         * Defines if issuing authority of Italian DL card should be extracted.
+         * 
+         *  
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if licence categories of Italian DL owner should be extracted. 
+         * Defines if licence categories of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractLicenceCategories = true;
         
         /** 
-         * Defines if place of birth of Italian DL owner should be extracted. 
+         * Defines if place of birth of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if surname of Italian DL owner should be extracted. 
+         * Defines if surname of Italian DL owner should be extracted.
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         
         /** 
-         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.signatureImageDpi = 250;
         

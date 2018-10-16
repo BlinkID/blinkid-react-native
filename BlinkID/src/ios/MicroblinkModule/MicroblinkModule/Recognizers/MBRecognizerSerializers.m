@@ -5,10 +5,12 @@
 #import "MBAustraliaDlBackRecognizerWrapper.h"
 #import "MBAustraliaDlFrontRecognizerWrapper.h"
 #import "MBAustriaCombinedRecognizerWrapper.h"
+#import "MBAustriaDlFrontRecognizerWrapper.h"
 #import "MBAustriaIdBackRecognizerWrapper.h"
 #import "MBAustriaIdFrontRecognizerWrapper.h"
 #import "MBAustriaPassportRecognizerWrapper.h"
 #import "MBBarcodeRecognizerWrapper.h"
+#import "MBColombiaDlFrontRecognizerWrapper.h"
 #import "MBColombiaIdBackRecognizerWrapper.h"
 #import "MBColombiaIdFrontRecognizerWrapper.h"
 #import "MBCroatiaCombinedRecognizerWrapper.h"
@@ -21,6 +23,9 @@
 #import "MBCzechiaIdFrontRecognizerWrapper.h"
 #import "MBDocumentFaceRecognizerWrapper.h"
 #import "MBEgyptIdFrontRecognizerWrapper.h"
+#import "MBElitePaymentCardBackRecognizerWrapper.h"
+#import "MBElitePaymentCardCombinedRecognizerWrapper.h"
+#import "MBElitePaymentCardFrontRecognizerWrapper.h"
 #import "MBEudlRecognizerWrapper.h"
 #import "MBGermanyCombinedRecognizerWrapper.h"
 #import "MBGermanyIdBackRecognizerWrapper.h"
@@ -30,6 +35,8 @@
 #import "MBHongKongIdFrontRecognizerWrapper.h"
 #import "MBIkadRecognizerWrapper.h"
 #import "MBIndonesiaIdFrontRecognizerWrapper.h"
+#import "MBIrelandDlFrontRecognizerWrapper.h"
+#import "MBItalyDlFrontRecognizerWrapper.h"
 #import "MBJordanCombinedRecognizerWrapper.h"
 #import "MBJordanIdBackRecognizerWrapper.h"
 #import "MBJordanIdFrontRecognizerWrapper.h"
@@ -101,10 +108,12 @@
         [self registerCreator:[[MBAustraliaDlBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustraliaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBAustriaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBColombiaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBCroatiaCombinedRecognizerCreator alloc] init]];
@@ -117,6 +126,9 @@
         [self registerCreator:[[MBCzechiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBDocumentFaceRecognizerCreator alloc] init]];
         [self registerCreator:[[MBEgyptIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBElitePaymentCardBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBElitePaymentCardCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBElitePaymentCardFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBEudlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyIdBackRecognizerCreator alloc] init]];
@@ -126,6 +138,8 @@
         [self registerCreator:[[MBHongKongIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBIkadRecognizerCreator alloc] init]];
         [self registerCreator:[[MBIndonesiaIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBIrelandDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBItalyDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBJordanIdFrontRecognizerCreator alloc] init]];

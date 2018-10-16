@@ -23,15 +23,15 @@
         }
     }
     {
-        id extractDlClass = [jsonRecognizer valueForKey:@"extractDlClass"];
-        if (extractDlClass != nil) {
-            recognizer.extractDlClass = [(NSNumber *)extractDlClass boolValue];
+        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
+        if (extractAddress != nil) {
+            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
         }
     }
     {
-        id extractFullAddress = [jsonRecognizer valueForKey:@"extractFullAddress"];
-        if (extractFullAddress != nil) {
-            recognizer.extractFullAddress = [(NSNumber *)extractFullAddress boolValue];
+        id extractClass = [jsonRecognizer valueForKey:@"extractClass"];
+        if (extractClass != nil) {
+            recognizer.extractClass = [(NSNumber *)extractClass boolValue];
         }
     }
     {
@@ -59,9 +59,21 @@
         }
     }
     {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -97,11 +109,11 @@
     [jsonResult setValue:self.result.identityNumber forKey:@"identityNumber"];
     [jsonResult setValue:self.result.name forKey:@"name"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:self.result.state forKey:@"state"];
+    [jsonResult setValue:self.result.ownerState forKey:@"ownerState"];
     [jsonResult setValue:self.result.street forKey:@"street"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validFrom] forKey:@"validFrom"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validUntil] forKey:@"validUntil"];
-    [jsonResult setValue:self.result.zipCode forKey:@"zipCode"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.validFrom] forKey:@"validFrom"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.validUntil] forKey:@"validUntil"];
+    [jsonResult setValue:self.result.zipcode forKey:@"zipcode"];
 
     return jsonResult;
 }

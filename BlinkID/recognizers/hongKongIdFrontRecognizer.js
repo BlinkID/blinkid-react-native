@@ -18,47 +18,47 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The commercial code of Hong Kong ID owner 
+         * The commerical Code of the Hong Kong ID. 
          */
         this.commercialCode = nativeResult.commercialCode;
         
         /** 
-         * The date of birth of Hong Kong ID owner 
+         * The date of birth of the Hong Kong ID ownder. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of issue of Hong Kong ID 
+         * The issue date of the Hong Kong ID owner. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * The document number of Hong Kong ID 
+         * The document number of the Hong Kong card. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The full name of Hong Kong ID owner 
+         * The full name of the Hong Kong ID owner. 
          */
         this.fullName = nativeResult.fullName;
         
         /** 
-         * The residential status of Hong Kong ID owner 
+         * The residential status of the Hong Kong ID. 
          */
         this.residentialStatus = nativeResult.residentialStatus;
         
         /** 
-         * The sex of Hong Kong ID owner 
+         * The sex of the Hong Kong ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -66,69 +66,98 @@ export class HongKongIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front side of Hong Kong national ID cards.
+ * Class for configuring Hong Kong ID Front Recognizer.
+ * 
+ * Hong Kong ID Front recognizer is used for scanning front side of Hong Kong ID.
  */
 export class HongKongIdFrontRecognizer extends Recognizer {
     constructor() {
         super('HongKongIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if commercial code of Hong Kong ID owner should be extracted 
+         * Defines if commercial code should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractCommercialCode = true;
         
         /** 
-         * Defines if date of birth of Hong Kong ID owner should be extracted 
+         * Defines if owner's date of birth should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of issue of Hong Kong ID should be extracted 
+         * Defines if card's date of issue should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if full name of Hong Kong ID owner should be extracted 
+         * Defines if owner's full name should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractFullName = true;
         
         /** 
-         * Defines if residential status of Hong Kong ID owner should be extracted 
+         * Defines if card's residential status should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractResidentialStatus = true;
         
         /** 
-         * Defines if sex of Hong Kong ID owner should be extracted 
+         * Defines if owner's sex should be extracted from Hong Kong ID
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

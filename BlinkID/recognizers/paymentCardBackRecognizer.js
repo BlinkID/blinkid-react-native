@@ -23,7 +23,7 @@ export class PaymentCardBackRecognizerResult extends RecognizerResult {
         this.cvv = nativeResult.cvv;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -36,34 +36,46 @@ export class PaymentCardBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer used for scanning the back side of credit/debit cards
+ * Recognizer used for scanning the back side of credit/debit cards.
  */
 export class PaymentCardBackRecognizer extends Recognizer {
     constructor() {
         super('PaymentCardBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Should extract the card's inventory number 
+         * Should extract the card's inventory number
+         * 
+         *  
          */
         this.extractInventoryNumber = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

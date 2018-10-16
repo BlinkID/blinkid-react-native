@@ -18,77 +18,77 @@ export class AustriaPassportRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Austrian passport owner 
+         * The date Of Birth of the Austrian Passport owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of Austrian passport 
+         * The date Of Expiry of the Austrian Passport. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of Austrian passport 
+         * The date Of Issue of the Austrian Passport. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given name of the Austrian passport owner 
+         * The given Name of the Austrian Passport owner. 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * The height of the passport owner in centimeters 
+         * The height of the Austrian Passport owner. 
          */
         this.height = nativeResult.height;
         
         /** 
-         * The issuing authority of the Austrian passport 
+         * The issuing Authority of the Austrian Passport. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * The mrz of the back side of Austria Passport. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The nationality of the Austrian passport owner 
+         * The nationality of the Austrian Passport owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The passport number of the Austrian passport 
+         * The passport Number of the Austrian Passport. 
          */
         this.passportNumber = nativeResult.passportNumber;
         
         /** 
-         * The place of birth of the Austrian passport owner 
+         * The place Of Birth of the Austrian Passport owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The sex of the Austrian passport owner 
+         * The sex of the Austrian Passport owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The surname of the Austrian passport owner. 
+         * The surname of the Austrian Passport owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -96,104 +96,148 @@ export class AustriaPassportRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan Austrian passport.
+ * Class for configuring Austrian Passport Recognizer.
+ * 
+ * Austrian Passport recognizer is used for scanning Austrian Passport.
  */
 export class AustriaPassportRecognizer extends Recognizer {
     constructor() {
         super('AustriaPassportRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Austrian passport owner should be extracted 
+         * Defines if owner's date of birth should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of Austrian passport should be extracted 
+         * Defines if date of expiry should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Austrian passport should be extracted 
+         * Defines if date of issue should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if given name of Austrian passport owner should be extracted 
+         * Defines if owner's given name should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if height of Austrian passport owner should be extracted 
+         * Defines if owner's height should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractHeight = true;
         
         /** 
-         * Defines if issuing authority of Austrian passport should be extracted 
+         * Defines if issuing authority should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if nationality of the Austrian passport owner should be extracted 
+         * Defines if owner's nationality should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractNationality = false;
         
         /** 
-         * Defines if passport number of Austrian passport should be extracted 
+         * Defines if passport number should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractPassportNumber = true;
         
         /** 
-         * Defines if place of birth of Austrian passport owner should be extracted 
+         * Defines if owner's place of birth should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if sex of Austrian passport owner should be extracted 
+         * Defines if owner's sex should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Austrian passport owner should be extracted 
+         * Defines if owner's surname should be extracted from Austrian Passport
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         
         /** 
-         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.signatureImageDpi = 250;
         

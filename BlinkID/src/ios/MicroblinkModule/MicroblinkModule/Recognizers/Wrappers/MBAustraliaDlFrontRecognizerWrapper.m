@@ -35,12 +35,6 @@
         }
     }
     {
-        id extractLicenceNumber = [jsonRecognizer valueForKey:@"extractLicenceNumber"];
-        if (extractLicenceNumber != nil) {
-            recognizer.extractLicenceNumber = [(NSNumber *)extractLicenceNumber boolValue];
-        }
-    }
-    {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];

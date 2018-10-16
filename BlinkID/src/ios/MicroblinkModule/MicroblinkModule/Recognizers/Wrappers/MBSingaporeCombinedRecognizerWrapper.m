@@ -35,9 +35,9 @@
         }
     }
     {
-        id extractBloodType = [jsonRecognizer valueForKey:@"extractBloodType"];
-        if (extractBloodType != nil) {
-            recognizer.extractBloodType = [(NSNumber *)extractBloodType boolValue];
+        id extractBloodGroup = [jsonRecognizer valueForKey:@"extractBloodGroup"];
+        if (extractBloodGroup != nil) {
+            recognizer.extractBloodGroup = [(NSNumber *)extractBloodGroup boolValue];
         }
     }
     {
@@ -77,6 +77,24 @@
         }
     }
     {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -109,7 +127,7 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.addressChangeDate] forKey:@"addressChangeDate"];
-    [jsonResult setValue:self.result.bloodType forKey:@"bloodType"];
+    [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
     [jsonResult setValue:self.result.countryOfBirth forKey:@"countryOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];

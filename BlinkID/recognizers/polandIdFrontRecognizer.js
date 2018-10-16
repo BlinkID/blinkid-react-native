@@ -23,7 +23,7 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -33,27 +33,27 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         this.familyName = nativeResult.familyName;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given names of the Polish ID owner. 
+         * The first name of the Polish ID owner. 
          */
         this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The parents' given names of the Polish ID owner. 
+         * The parents name of Polish ID owner. 
          */
         this.parentsGivenNames = nativeResult.parentsGivenNames;
         
         /** 
-         * Sex of the Polish ID owner. 
+         * The sex of the Polish ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The surname of the Polish ID owner. 
+         * The last name of the Polish ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -61,55 +61,74 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan front side of Polish national ID cards.
+ * Class for configuring Polish ID Front Recognizer.
  * 
+ * Polish ID Front recognizer is used for scanning front side of Polish ID.
  */
 export class PolandIdFrontRecognizer extends Recognizer {
     constructor() {
         super('PolandIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth is being extracted from ID 
+         * Defines if date of expiry should be extracted from Polish ID
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if family name is being extracted from ID 
+         * Defines if date of expiry should be extracted from Polish ID
+         * 
+         *  
          */
         this.extractFamilyName = true;
         
         /** 
-         * True if given names is being extracted from ID 
+         * Defines if date of birth of Polish ID owner should be extracted
+         * 
+         *  
          */
         this.extractGivenNames = true;
         
         /** 
-         * True if parents' given names is being extracted from ID 
+         * Defines if date of expiry should be extracted from Polish ID
+         * 
+         *  
          */
         this.extractParentsGivenNames = true;
         
         /** 
-         * True if sex is being extracted from ID 
+         *  Defines if sex of Polish ID owner should be extracted
+         * 
+         *   
          */
         this.extractSex = true;
         
         /** 
-         * True if surname is being extracted from ID 
+         * Defines if citizenship of Polish ID owner should be extracted
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
