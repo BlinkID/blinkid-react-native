@@ -23,12 +23,12 @@ export class PaymentCardFrontRecognizerResult extends RecognizerResult {
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Information about the payment card owner (name, company, etc.). 
+         * Information about the payment card owner (name, company, etc.) 
          */
         this.owner = nativeResult.owner;
         
@@ -41,45 +41,39 @@ export class PaymentCardFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer used for scanning the front side of credit/debit cards.
+ * Recognizer used for scanning the front side of credit/debit cards
  */
 export class PaymentCardFrontRecognizer extends Recognizer {
     constructor() {
         super('PaymentCardFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Should extract the card owner information
-         * 
-         *  
+         * Should extract the card owner information 
          */
         this.extractOwner = true;
         
         /** 
-         * Should extract the payment card's month of expiry
-         * 
-         *  
+         * Should extract the payment card's month of expiry 
          */
         this.extractValidThru = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

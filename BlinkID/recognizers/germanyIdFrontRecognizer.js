@@ -18,7 +18,7 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The CAN number of the German ID 
+         * The CAN number of German ID. 
          */
         this.canNumber = nativeResult.canNumber;
         
@@ -28,17 +28,17 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the German ID 
+         * The date of expiry of German ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document number of the German ID 
+         * The document number of German ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -48,7 +48,7 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -58,17 +58,17 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The nationality of the German ID owner. 
+         * Nationality of the German ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The place of birth of the German ID 
+         * The place of birth of German ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -76,96 +76,70 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring German ID Front Recognizer.
+ *  Recognizer which can scan the front side of German national ID cards.
  * 
- * German ID Front recognizer is used for scanning front side of German ID.
  */
 export class GermanyIdFrontRecognizer extends Recognizer {
     constructor() {
         super('GermanyIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if CAN number should be extracted from German ID
-         * 
-         *  
+         * {true} if the can number is being extracted, {false} otherwise. 
          */
         this.extractCanNumber = true;
         
         /** 
-         * Defines if date of expiry should be extracted from German ID
-         * 
-         *  
+         * {true} if the date of expiry is being extracted, {false} otherwise. 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if document number should be extracted from German ID
-         * 
-         *  
+         * {true} if the document number is being extracted, {false} otherwise. 
          */
         this.extractDocumentNumber = true;
         
         /** 
-         * Defines if owner's first names should be extracted from German ID
-         * 
-         *  
+         * {true} if the given names is being extracted, {false} otherwise. 
          */
         this.extractGivenNames = true;
         
         /** 
-         * Defines if owner's nationality should be extracted from German ID
-         * 
-         *  
+         * {true} if the nationality is being extracted, {false} otherwise. 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if owner's place of birth should be extracted from German ID
-         * 
-         *  
+         * {true} if the place of birth is being extracted, {false} otherwise. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if owner's surname should be extracted from German ID
-         * 
-         *  
+         * {true} if the surname is being extracted, {false} otherwise. 
          */
         this.extractSurname = true;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * Defines the extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         

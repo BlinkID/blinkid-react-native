@@ -18,32 +18,32 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the back side of the Singapore Id owner. 
+         * The address of Singapore ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The address Change Date of the back side of the Singapore Id owner. 
+         * The address change date, present if the address is on a sticker, of Singapore ID owner. 
          */
         this.addressChangeDate = nativeResult.addressChangeDate != null ? new Date(nativeResult.addressChangeDate) : null;
         
         /** 
-         * The blood Type of the back side of the Singapore Id owner. 
+         * The blood group of Singapore ID owner. 
          */
-        this.bloodType = nativeResult.bloodType;
+        this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
-         * The card Number of the back side of the Singapore Id owner. 
+         * The card number of Singapore ID. 
          */
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * The date Of Issue of the back side of the Singapore Id owner. 
+         * The date of issue of Singapore ID. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -51,61 +51,49 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore Id Back Recognizer.
- * 
- * Singapore Id Back recognizer is used for scanning back side of the Singapore Id.
+ * Recognizer which can scan back side of Singapore national ID cards.
  */
 export class SingaporeIdBackRecognizer extends Recognizer {
     constructor() {
         super('SingaporeIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if address of Singapore ID owner should be extracted. 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if owner's address change date should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if adress change date, present on sticker, of Singapore ID owner should be extracted. 
          */
-        this.extractAddressChangeDate = false;
+        this.extractAddressChangeDate = true;
         
         /** 
-         * Defines if owner's blood type should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if blood group of Singapore ID owner should be extracted. 
          */
-        this.extractBloodType = true;
+        this.extractBloodGroup = true;
         
         /** 
-         * Defines if owner's date of issue should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if date of issue of Singapore ID should be extracted. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

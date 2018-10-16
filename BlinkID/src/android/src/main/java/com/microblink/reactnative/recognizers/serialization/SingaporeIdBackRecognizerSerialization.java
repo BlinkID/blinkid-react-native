@@ -19,14 +19,17 @@ public final class SingaporeIdBackRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractAddressChangeDate")) {
             recognizer.setExtractAddressChangeDate(jsonRecognizer.getBoolean("extractAddressChangeDate"));
         }
-        if (jsonRecognizer.hasKey("extractBloodType")) {
-            recognizer.setExtractBloodType(jsonRecognizer.getBoolean("extractBloodType"));
+        if (jsonRecognizer.hasKey("extractBloodGroup")) {
+            recognizer.setExtractBloodGroup(jsonRecognizer.getBoolean("extractBloodGroup"));
         }
         if (jsonRecognizer.hasKey("extractDateOfIssue")) {
             recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
         }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
@@ -41,7 +44,7 @@ public final class SingaporeIdBackRecognizerSerialization implements RecognizerS
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
         jsonResult.putMap("addressChangeDate", SerializationUtils.serializeDate(result.getAddressChangeDate()));
-        jsonResult.putString("bloodType", result.getBloodType());
+        jsonResult.putString("bloodGroup", result.getBloodGroup());
         jsonResult.putString("cardNumber", result.getCardNumber());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));

@@ -19,8 +19,8 @@ public final class SingaporeCombinedRecognizerSerialization implements Recognize
         if (jsonRecognizer.hasKey("extractAddressChangeDate")) {
             recognizer.setExtractAddressChangeDate(jsonRecognizer.getBoolean("extractAddressChangeDate"));
         }
-        if (jsonRecognizer.hasKey("extractBloodType")) {
-            recognizer.setExtractBloodType(jsonRecognizer.getBoolean("extractBloodType"));
+        if (jsonRecognizer.hasKey("extractBloodGroup")) {
+            recognizer.setExtractBloodGroup(jsonRecognizer.getBoolean("extractBloodGroup"));
         }
         if (jsonRecognizer.hasKey("extractCountryOfBirth")) {
             recognizer.setExtractCountryOfBirth(jsonRecognizer.getBoolean("extractCountryOfBirth"));
@@ -46,6 +46,9 @@ public final class SingaporeCombinedRecognizerSerialization implements Recognize
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -65,12 +68,12 @@ public final class SingaporeCombinedRecognizerSerialization implements Recognize
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
         jsonResult.putMap("addressChangeDate", SerializationUtils.serializeDate(result.getAddressChangeDate()));
-        jsonResult.putString("bloodType", result.getBloodType());
+        jsonResult.putString("bloodGroup", result.getBloodGroup());
         jsonResult.putString("countryOfBirth", result.getCountryOfBirth());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
-        jsonResult.putInt("digitalSignatureVersion", result.getDigitalSignatureVersion());
+        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));

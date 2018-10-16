@@ -25,6 +25,9 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractCity")) {
             recognizer.setExtractCity(jsonRecognizer.getBoolean("extractCity"));
         }
+        if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
+            recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
+        }
         if (jsonRecognizer.hasKey("extractDistrict")) {
             recognizer.setExtractDistrict(jsonRecognizer.getBoolean("extractDistrict"));
         }
@@ -52,8 +55,14 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractRw")) {
             recognizer.setExtractRw(jsonRecognizer.getBoolean("extractRw"));
         }
-        if (jsonRecognizer.hasKey("extractValidUntil")) {
-            recognizer.setExtractValidUntil(jsonRecognizer.getBoolean("extractValidUntil"));
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -63,6 +72,9 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         }
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }
@@ -77,8 +89,9 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         jsonResult.putString("citizenship", result.getCitizenship());
         jsonResult.putString("city", result.getCity());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putString("district", result.getDistrict());
-        jsonResult.putString("documentClassifier", result.getDocumentClassifier());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
@@ -93,8 +106,6 @@ public final class IndonesiaIdFrontRecognizerSerialization implements Recognizer
         jsonResult.putString("rw", result.getRw());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
-        jsonResult.putMap("validUntil", SerializationUtils.serializeDate(result.getValidUntil()));
-        jsonResult.putBoolean("validUntilPermanent", result.getValidUntilPermanent());
         return jsonResult;
     }
 

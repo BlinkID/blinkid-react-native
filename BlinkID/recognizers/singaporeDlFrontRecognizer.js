@@ -18,37 +18,37 @@ export class SingaporeDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The birth Date of the Singapore DL owner. 
+         * The birth date of Singapore driver's owner. 
          */
         this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issue date of the Singapore DL. 
+         * The issue date of Singapore driver's licence. 
          */
         this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
-         * The licence Number of the Singapore DL. 
+         * The licence number of Singapore driver's licence. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The name of the Singapore DL owner. 
+         * The (full) name of Singapore driver's licence owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The valid till of the Singapore DL. 
+         * The valid till date of Singapore driver's licence. 
          */
         this.validTill = nativeResult.validTill != null ? new Date(nativeResult.validTill) : null;
         
@@ -56,76 +56,59 @@ export class SingaporeDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore Dl Front Recognizer.
- * 
- * Singapore Dl Front recognizer is used for scanning front side of the Singapore Driver's license..
+ * The Singapore Dl Front Recognizer is used for scanning front side of the Singapore Dl.
  */
 export class SingaporeDlFrontRecognizer extends Recognizer {
     constructor() {
         super('SingaporeDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's birth date should be extracted from front side of the Singapore DL
-         * 
-         *  
+         * Defines if birth date of Singapore driver's license owner should be extracted. 
          */
         this.extractBirthDate = true;
         
         /** 
-         * Defines if the issue date should be extracted from front side of the Singapore DL
-         * 
-         *  
+         * Defines if issue date of Singapore driver's license should be extracted. 
          */
         this.extractIssueDate = true;
         
         /** 
-         * Defines if owner's name should be extracted from front side of the Singapore DL
-         * 
-         *  
+         * Defines if name of Singapore driver's license owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         * Defines if valid till should be extracted from front side of the Singapore DL
-         * 
-         *  
+         * Defines if valid till date of Singapore driver's license should be extracted. 
          */
         this.extractValidTill = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

@@ -13,11 +13,11 @@ public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractDlClass")) {
-            recognizer.setExtractDlClass(jsonRecognizer.getBoolean("extractDlClass"));
+        if (jsonRecognizer.hasKey("extractAddress")) {
+            recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
         }
-        if (jsonRecognizer.hasKey("extractFullAddress")) {
-            recognizer.setExtractFullAddress(jsonRecognizer.getBoolean("extractFullAddress"));
+        if (jsonRecognizer.hasKey("extractClass")) {
+            recognizer.setExtractClass(jsonRecognizer.getBoolean("extractClass"));
         }
         if (jsonRecognizer.hasKey("extractName")) {
             recognizer.setExtractName(jsonRecognizer.getBoolean("extractName"));
@@ -31,8 +31,14 @@ public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractValidUntil")) {
             recognizer.setExtractValidUntil(jsonRecognizer.getBoolean("extractValidUntil"));
         }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -56,11 +62,11 @@ public final class MalaysiaDlFrontRecognizerSerialization implements RecognizerS
         jsonResult.putString("identityNumber", result.getIdentityNumber());
         jsonResult.putString("name", result.getName());
         jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putString("state", result.getState());
+        jsonResult.putString("ownerState", result.getOwnerState());
         jsonResult.putString("street", result.getStreet());
         jsonResult.putMap("validFrom", SerializationUtils.serializeDate(result.getValidFrom()));
         jsonResult.putMap("validUntil", SerializationUtils.serializeDate(result.getValidUntil()));
-        jsonResult.putString("zipCode", result.getZipCode());
+        jsonResult.putString("zipcode", result.getZipcode());
         return jsonResult;
     }
 

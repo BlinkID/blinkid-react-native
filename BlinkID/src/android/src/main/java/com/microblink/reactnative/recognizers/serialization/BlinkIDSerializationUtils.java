@@ -4,7 +4,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
-import com.microblink.entities.settings.image.ImageExtensionFactors;
+import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {

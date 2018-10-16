@@ -19,9 +19,6 @@ public final class AustraliaDlFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
             recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
         }
-        if (jsonRecognizer.hasKey("extractLicenceNumber")) {
-            recognizer.setExtractLicenceNumber(jsonRecognizer.getBoolean("extractLicenceNumber"));
-        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }

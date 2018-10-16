@@ -18,52 +18,52 @@ export class UnitedArabEmiratesDlFrontRecognizerResult extends RecognizerResult 
         super(nativeResult.resultState);
         
         /** 
-         * The date Of Birth of the front side of the United Arab Emirates Dl owner. 
+         * The date of birth of UAE DL owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The expiry Date of the front side of the United Arab Emirates Dl owner. 
+         * The expiry date of UAE DL 
          */
         this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issue Date of the front side of the United Arab Emirates Dl owner. 
+         * The issue date of UAE DL 
          */
         this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
-         * The license Number of the front side of the United Arab Emirates Dl owner. 
+         * The license number of UAE DL 
          */
         this.licenseNumber = nativeResult.licenseNumber;
         
         /** 
-         * The licensing Authority of the front side of the United Arab Emirates Dl owner. 
+         * The licensing authority code of UAE DL 
          */
         this.licensingAuthority = nativeResult.licensingAuthority;
         
         /** 
-         * The name of the front side of the United Arab Emirates Dl owner. 
+         * The name of UAE DL owner 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The nationality of the front side of the United Arab Emirates Dl owner. 
+         * The nationality of UAE DL owner 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The place Of Issue of the front side of the United Arab Emirates Dl owner. 
+         * The place of issue of UAE DL 
          */
         this.placeOfIssue = nativeResult.placeOfIssue;
         
@@ -78,88 +78,67 @@ export class UnitedArabEmiratesDlFrontRecognizer extends Recognizer {
         super('UnitedArabEmiratesDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of UAE DL owner should be extracted
-         * 
-         *  
+         * Defines if date of birth of UAE DL owner should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if issue date of UAE DL should be extracted
-         * 
-         *  
+         * Defines if issue date of UAE DL should be extracted 
          */
         this.extractIssueDate = true;
         
         /** 
-         * Defines if license number of UAE DL should be extracted
-         * 
-         *  
+         * Defines if license number of UAE DL should be extracted 
          */
         this.extractLicenseNumber = true;
         
         /** 
-         * Defines if licensing authority code of UAE DL should be extracted
-         * 
-         *  
+         * Defines if licensing authority code of UAE DL should be extracted 
          */
         this.extractLicensingAuthority = true;
         
         /** 
-         * Defines if name of UAE DL owner should be extracted
-         * 
-         *  
+         * Defines if name of UAE DL owner should be extracted 
          */
         this.extractName = true;
         
         /** 
-         * Defines if nationality of UAE DL owner should be extracted
-         * 
-         *  
+         * Defines if nationality of UAE DL owner should be extracted 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if place of issue of UAE DL should be extracted
-         * 
-         *  
+         * Defines if place of issue of UAE DL should be extracted 
          */
         this.extractPlaceOfIssue = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

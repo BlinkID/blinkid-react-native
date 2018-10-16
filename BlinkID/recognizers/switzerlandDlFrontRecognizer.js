@@ -18,67 +18,67 @@ export class SwitzerlandDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Switzerland DL owner. 
+         * The date of birth 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of rxpiry of the Switzerland DL. 
+         * The date of expiry 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of the Switzerland DL. 
+         * The date of issue 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * If true, then this Switzerland DL will never expire. 
+         * The expiry date permanent 
          */
         this.expiryDatePermanent = nativeResult.expiryDatePermanent;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Switzerland DL owner. 
+         * The first name 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuing authority of the Switzerland DL. 
+         * The issuing authority 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The last name of the Switzerland DL owner. 
+         * The last name 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The license number of the Switzerland DL. 
+         * The license number 
          */
         this.licenseNumber = nativeResult.licenseNumber;
         
         /** 
-         * The place of birth of the Switzerland DL owner. 
+         * The place of birth 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The vehicle categories of the Switzerland DL. 
+         * The vehicle categories 
          */
         this.vehicleCategories = nativeResult.vehicleCategories;
         
@@ -86,119 +86,89 @@ export class SwitzerlandDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Switzerland DL Front Recognizer.
- * 
- * Switzerland DL Front recognizer is used for scanning front side of the Switzerland DL.
+ * The Switzerland DL Front Recognizer is used for scanning front side of the Switzerland DL.
  */
 export class SwitzerlandDlFrontRecognizer extends Recognizer {
     constructor() {
         super('SwitzerlandDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's date of birth should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether date of birth should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether date of expiry should be extracted 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether date of issue should be extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if owner's first name should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether first name should be extracted 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether issuing authority should be extracted 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if owner's last name should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether last name should be extracted 
          */
         this.extractLastName = true;
         
         /** 
-         * Defines if owner's place of birth should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether place of birth should be extracted 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if vehicle categories should be extracted from front side of the Switzerland DL
-         * 
-         *  
+         * Defines whether vehicle categories should be extracted 
          */
         this.extractVehicleCategories = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

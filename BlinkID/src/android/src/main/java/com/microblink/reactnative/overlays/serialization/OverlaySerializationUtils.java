@@ -25,8 +25,5 @@ public abstract class OverlaySerializationUtils {
                 }
             }
         }
-        if (uiSettings instanceof BaseScanUISettings) {
-            ((BaseScanUISettings) uiSettings).setSplashScreenLayoutResourceID(R.layout.mb_layout_camera_splash);
-        }
     }
 }

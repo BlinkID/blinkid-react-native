@@ -18,19 +18,19 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's address 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The address Change Date of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's address change date, present if the address is on a sticker 
          */
         this.addressChangeDate = nativeResult.addressChangeDate != null ? new Date(nativeResult.addressChangeDate) : null;
         
         /** 
-         * The blood Type of the back side of the Singapore Id owner. 
+         * The Singapore ID owner's blood group 
          */
-        this.bloodType = nativeResult.bloodType;
+        this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
          * The country/place of birth of the Singaporean ID card owner. 
@@ -43,40 +43,37 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date Of Issue of the back side of the Singapore Id owner. 
+         * The Singapore ID's date of issue 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -96,8 +93,7 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         this.race = nativeResult.race;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -110,102 +106,89 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Singapore ID Combined Recognizer.
- * 
- * Singapore ID Combined recognizer is used for scanning both front and back side of Singapore ID.
+ * Recognizer for combined reading of both front and back side of Singapore ID.
  */
 export class SingaporeCombinedRecognizer extends Recognizer {
     constructor() {
         super('SingaporeCombinedRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's address should be extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if owner's address change date should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's address change date on sticker should be extracted 
          */
         this.extractAddressChangeDate = false;
         
         /** 
-         * Defines if owner's blood type should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID owner's blood group should be extracted 
          */
-        this.extractBloodType = true;
+        this.extractBloodGroup = true;
         
         /** 
-         *  Defines if country/place of birth of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if country of birth of Singaporean ID card owner should be extracted. 
          */
         this.extractCountryOfBirth = true;
         
         /** 
-         *  Defines if date of birth of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if date of birth of Singaporean ID card owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if owner's date of issue should be extracted from back side of the Singapore Id
-         * 
-         *  
+         * Defines if Singapore ID's date of issue should be extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         *  Defines if name of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if name of Singaporean ID card owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         *  Defines if race of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if race of Singaporean ID card owner should be extracted. 
          */
         this.extractRace = true;
         
         /** 
-         *  Defines if sex of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if sex of Singaporean ID card owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

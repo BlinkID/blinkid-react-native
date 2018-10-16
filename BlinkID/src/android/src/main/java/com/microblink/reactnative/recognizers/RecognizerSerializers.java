@@ -26,10 +26,12 @@ public enum RecognizerSerializers {
         registerMapping(new AustraliaDlBackRecognizerSerialization());
         registerMapping(new AustraliaDlFrontRecognizerSerialization());
         registerMapping(new AustriaCombinedRecognizerSerialization());
+        registerMapping(new AustriaDlFrontRecognizerSerialization());
         registerMapping(new AustriaIdBackRecognizerSerialization());
         registerMapping(new AustriaIdFrontRecognizerSerialization());
         registerMapping(new AustriaPassportRecognizerSerialization());
         registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new ColombiaDlFrontRecognizerSerialization());
         registerMapping(new ColombiaIdBackRecognizerSerialization());
         registerMapping(new ColombiaIdFrontRecognizerSerialization());
         registerMapping(new CroatiaCombinedRecognizerSerialization());
@@ -42,6 +44,9 @@ public enum RecognizerSerializers {
         registerMapping(new CzechiaIdFrontRecognizerSerialization());
         registerMapping(new DocumentFaceRecognizerSerialization());
         registerMapping(new EgyptIdFrontRecognizerSerialization());
+        registerMapping(new ElitePaymentCardBackRecognizerSerialization());
+        registerMapping(new ElitePaymentCardCombinedRecognizerSerialization());
+        registerMapping(new ElitePaymentCardFrontRecognizerSerialization());
         registerMapping(new EudlRecognizerSerialization());
         registerMapping(new GermanyCombinedRecognizerSerialization());
         registerMapping(new GermanyIdBackRecognizerSerialization());
@@ -51,6 +56,8 @@ public enum RecognizerSerializers {
         registerMapping(new HongKongIdFrontRecognizerSerialization());
         registerMapping(new IkadRecognizerSerialization());
         registerMapping(new IndonesiaIdFrontRecognizerSerialization());
+        registerMapping(new IrelandDlFrontRecognizerSerialization());
+        registerMapping(new ItalyDlFrontRecognizerSerialization());
         registerMapping(new JordanCombinedRecognizerSerialization());
         registerMapping(new JordanIdBackRecognizerSerialization());
         registerMapping(new JordanIdFrontRecognizerSerialization());
