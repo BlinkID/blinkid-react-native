@@ -33,7 +33,7 @@ react-native link blinkid-react-native
 pushd android
 
 # patch the build.gradle
-perl -i~ -pe "s/maven \{/maven \{ url 'http:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
+perl -i~ -pe "s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
 
 popd
 
