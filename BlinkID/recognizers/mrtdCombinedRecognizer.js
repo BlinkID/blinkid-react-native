@@ -195,6 +195,31 @@ export class MrtdCombinedRecognizer extends Recognizer {
         super('MrtdCombinedRecognizer');
         
         /** 
+         * Whether returning of unparsed results is allowed
+         * 
+         *  
+         */
+        this.allowUnparsedResults = false;
+        
+        /** 
+         * Whether returning of unverified results is allowed
+         * Unverified result is result that is parsed, but check digits are incorrect.
+         * 
+         *  
+         */
+        this.allowUnverifiedResults = false;
+        
+        /** 
+         * Defines how many times the same document should be detected before the detector
+         * returns this document as a result of the deteciton
+         * 
+         * Higher number means more reliable detection, but slower processing
+         * 
+         *  
+         */
+        this.numStableDetectionsThreshold = 6;
+        
+        /** 
          * Sets whether face image from ID card should be extracted
          * 
          *  

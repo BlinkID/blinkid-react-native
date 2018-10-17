@@ -30,7 +30,7 @@ export class SingaporeIdBackRecognizerResult extends RecognizerResult {
         /** 
          * The blood Type of the back side of the Singapore Id owner. 
          */
-        this.bloodType = nativeResult.bloodType;
+        this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
          * The card Number of the back side of the Singapore Id owner. 
@@ -85,7 +85,7 @@ export class SingaporeIdBackRecognizer extends Recognizer {
          * 
          *  
          */
-        this.extractBloodType = true;
+        this.extractBloodGroup = true;
         
         /** 
          * Defines if owner's date of issue should be extracted from back side of the Singapore Id
@@ -101,6 +101,14 @@ export class SingaporeIdBackRecognizer extends Recognizer {
          *  
          */
         this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether full document image of ID card should be extracted.

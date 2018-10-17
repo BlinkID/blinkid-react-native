@@ -17,6 +17,24 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBMrtdCombinedRecognizer *recognizer = [[MBMrtdCombinedRecognizer alloc] init];
     {
+        id allowUnparsedResults = [jsonRecognizer valueForKey:@"allowUnparsedResults"];
+        if (allowUnparsedResults != nil) {
+            recognizer.allowUnparsedResults = [(NSNumber *)allowUnparsedResults boolValue];
+        }
+    }
+    {
+        id allowUnverifiedResults = [jsonRecognizer valueForKey:@"allowUnverifiedResults"];
+        if (allowUnverifiedResults != nil) {
+            recognizer.allowUnverifiedResults = [(NSNumber *)allowUnverifiedResults boolValue];
+        }
+    }
+    {
+        id numStableDetectionsThreshold = [jsonRecognizer valueForKey:@"numStableDetectionsThreshold"];
+        if (numStableDetectionsThreshold != nil) {
+            recognizer.numStableDetectionsThreshold = [(NSNumber *)numStableDetectionsThreshold unsignedIntegerValue];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];

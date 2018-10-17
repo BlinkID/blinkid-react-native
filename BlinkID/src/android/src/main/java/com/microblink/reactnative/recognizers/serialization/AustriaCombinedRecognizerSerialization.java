@@ -58,6 +58,9 @@ public final class AustriaCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -85,7 +88,7 @@ public final class AustriaCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssuance", SerializationUtils.serializeDate(result.getDateOfIssuance()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
-        jsonResult.putInt("digitalSignatureVersion", result.getDigitalSignatureVersion());
+        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
         jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("eyeColour", result.getEyeColour());

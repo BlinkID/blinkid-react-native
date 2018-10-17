@@ -125,6 +125,14 @@ export class AustriaIdBackRecognizer extends Recognizer {
         this.fullDocumentImageDpi = 250;
         
         /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
          * Sets whether full document image of ID card should be extracted.
          * 
          *  

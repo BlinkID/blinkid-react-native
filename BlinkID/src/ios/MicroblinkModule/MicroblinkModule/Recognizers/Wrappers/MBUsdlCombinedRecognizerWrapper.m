@@ -46,6 +46,12 @@
             recognizer.signResult = [(NSNumber *)signResult boolValue];
         }
     }
+    {
+        id numStableDetectionsThreshold = [jsonRecognizer valueForKey:@"numStableDetectionsThreshold"];
+        if (numStableDetectionsThreshold != nil) {
+            recognizer.numStableDetectionsThreshold = [(NSNumber *)numStableDetectionsThreshold unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }

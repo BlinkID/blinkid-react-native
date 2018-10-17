@@ -85,6 +85,14 @@ export class ColombiaIdBackRecognizer extends Recognizer {
         this.fullDocumentImageDpi = 250;
         
         /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
          * Set this to true to scan barcodes which don't have quiet zone (white area) around it
          * 
          * Use only if necessary because it slows down the recognition process

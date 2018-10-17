@@ -156,6 +156,14 @@ export class CroatiaIdFrontRecognizer extends Recognizer {
         this.fullDocumentImageDpi = 250;
         
         /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
          * Sets whether face image from ID card should be extracted
          * 
          *  

@@ -96,13 +96,6 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if citizenship of Australian DL owner should be extracted
-         * 
-         *  
-         */
-        this.extractLicenceNumber = true;
-        
-        /** 
          * Property for setting DPI for full document images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 

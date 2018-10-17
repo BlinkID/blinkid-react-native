@@ -30,7 +30,7 @@ export class SingaporeCombinedRecognizerResult extends RecognizerResult {
         /** 
          * The blood Type of the back side of the Singapore Id owner. 
          */
-        this.bloodType = nativeResult.bloodType;
+        this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
          * The country/place of birth of the Singaporean ID card owner. 
@@ -144,7 +144,7 @@ export class SingaporeCombinedRecognizer extends Recognizer {
          * 
          *  
          */
-        this.extractBloodType = true;
+        this.extractBloodGroup = true;
         
         /** 
          *  Defines if country/place of birth of Singaporean ID card owner should be extracted
@@ -187,6 +187,30 @@ export class SingaporeCombinedRecognizer extends Recognizer {
          *   
          */
         this.extractSex = true;
+        
+        /** 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether face image from ID card should be extracted

@@ -73,6 +73,24 @@ export class DocumentFaceRecognizer extends Recognizer {
         this.fullDocumentImageDpi = 250;
         
         /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines how many times the same document should be detected before the detector
+         * returns this document as a result of the deteciton
+         * 
+         * Higher number means more reliable detection, but slower processing
+         * 
+         *  
+         */
+        this.numStableDetectionsThreshold = 6;
+        
+        /** 
          * Sets whether face image from ID card should be extracted
          * 
          *  

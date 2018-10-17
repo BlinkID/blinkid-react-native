@@ -35,9 +35,9 @@
         }
     }
     {
-        id extractBloodType = [jsonRecognizer valueForKey:@"extractBloodType"];
-        if (extractBloodType != nil) {
-            recognizer.extractBloodType = [(NSNumber *)extractBloodType boolValue];
+        id extractBloodGroup = [jsonRecognizer valueForKey:@"extractBloodGroup"];
+        if (extractBloodGroup != nil) {
+            recognizer.extractBloodGroup = [(NSNumber *)extractBloodGroup boolValue];
         }
     }
     {
@@ -50,6 +50,12 @@
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -73,7 +79,7 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.addressChangeDate] forKey:@"addressChangeDate"];
-    [jsonResult setValue:self.result.bloodType forKey:@"bloodType"];
+    [jsonResult setValue:self.result.bloodGroup forKey:@"bloodGroup"];
     [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
