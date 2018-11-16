@@ -18,62 +18,62 @@ export class AustriaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date Of Birth of the front side of the Austria Dl owner. 
+         * The date of birth of the Austrian DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date Of Expiry of the front side of the Austria Dl owner. 
+         * The date of expiry of the Austrian DL. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date Of Issue of the front side of the Austria Dl owner. 
+         * The date of issue of the Austrian DL. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first Name of the front side of the Austria Dl owner. 
+         * The first name of the Austrian DL owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuing Authority of the front side of the Austria Dl owner. 
+         * The issuing authority of the Austrian DL. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The licence Number of the front side of the Austria Dl owner. 
+         * The licence number of the Austrian DL. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The name of the front side of the Austria Dl owner. 
+         * The name of the Austrian DL owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The place Of Birth of the front side of the Austria Dl owner. 
+         * The place of birth of the Austrian DL owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The vehicle Categories of the front side of the Austria Dl owner. 
+         * The vehicle categories of the Austrian DL. 
          */
         this.vehicleCategories = nativeResult.vehicleCategories;
         
@@ -88,118 +88,82 @@ export class AustriaDlFrontRecognizer extends Recognizer {
         super('AustriaDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Austrian DL owner should be extracted.
-         * 
-         *  
+         * Defines if date of birth of Austrian DL owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of Austrian DL should be extracted.
-         * 
-         *  
+         * Defines if date of expiry of Austrian DL should be extracted. 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Austrian DL should be extracted.
-         * 
-         *  
+         * Defines if date of issue of Austrian DL should be extracted. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if first name of Austrian DL owner should be extracted.
-         * 
-         *  
+         * Defines if first name of Austrian DL owner should be extracted. 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority of Austrian DL should be extracted.
-         * 
-         *  
+         * Defines if issuing authority of Austrian DL should be extracted. 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if name of Austrian DL owner should be extracted.
-         * 
-         *  
+         * Defines if name of Austrian DL owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         * Defines if place of birth of Austrian DL owner should be extracted.
-         * 
-         *  
+         * Defines if place of birth of Austrian DL owner should be extracted. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if vehicle categories of Austrian DL should be extracted.
-         * 
-         *  
+         * Defines if vehicle categories of Austrian DL should be extracted. 
          */
         this.extractVehicleCategories = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

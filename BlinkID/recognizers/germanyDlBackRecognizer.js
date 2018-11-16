@@ -11,46 +11,41 @@ import {
 } from '../types'
 
 /**
- * Result object for KuwaitIdBackRecognizer.
+ * Result object for GermanyDlBackRecognizer.
  */
-export class KuwaitIdBackRecognizerResult extends RecognizerResult {
+export class GermanyDlBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The date of issue for B category of German DL card. 
+         */
+        this.dateOfIssueB10 = nativeResult.dateOfIssueB10 != null ? new Date(nativeResult.dateOfIssueB10) : null;
+        
+        /** 
+         * The date of issue for B category of German DL card is not specified. 
+         */
+        this.dateOfIssueB10NotSpecified = nativeResult.dateOfIssueB10NotSpecified;
         
         /** 
          * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
-        /** 
-         * The data extracted from the machine readable zone. 
-         */
-        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
-        
-        /** 
-         * The serial number of Kuwait ID. 
-         */
-        this.serialNo = nativeResult.serialNo;
-        
     }
 }
 
 /**
- * Recognizer which can scan back side of Kuwait national ID cards.
+ * Recognizer which can scan back side of German DL cards.
  */
-export class KuwaitIdBackRecognizer extends Recognizer {
+export class GermanyDlBackRecognizer extends Recognizer {
     constructor() {
-        super('KuwaitIdBackRecognizer');
+        super('GermanyDlBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
-        
-        /** 
-         * Defines if serial number of Kuwait ID should be extracted. 
-         */
-        this.extractSerialNo = true;
         
         /** 
          * The DPI (Dots Per Inch) for full document image that should be returned. 
@@ -67,6 +62,6 @@ export class KuwaitIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new KuwaitIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new GermanyDlBackRecognizerResult(nativeResult); }
     }
 }

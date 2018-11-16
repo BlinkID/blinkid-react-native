@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MyTenteraRecognizerSerialization implements RecognizerSerialization {
+public final class MalaysiaMyTenteraFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MyTenteraRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.malaysia.MyTenteraRecognizer();
+        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaMyTenteraFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaMyTenteraFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -19,8 +19,14 @@ public final class MyTenteraRecognizerSerialization implements RecognizerSeriali
         if (jsonRecognizer.hasKey("extractReligion")) {
             recognizer.setExtractReligion(jsonRecognizer.getBoolean("extractReligion"));
         }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -33,32 +39,32 @@ public final class MyTenteraRecognizerSerialization implements RecognizerSeriali
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MyTenteraRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.malaysia.MyTenteraRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaMyTenteraFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaMyTenteraFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("armyNumber", result.getArmyNumber());
+        jsonResult.putMap("birthDate", SerializationUtils.serializeDate(result.getBirthDate()));
+        jsonResult.putString("city", result.getCity());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("fullAddress", result.getFullAddress());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("nricNumber", result.getNricNumber());
-        jsonResult.putString("ownerAddress", result.getOwnerAddress());
-        jsonResult.putString("ownerAddressCity", result.getOwnerAddressCity());
-        jsonResult.putString("ownerAddressState", result.getOwnerAddressState());
-        jsonResult.putString("ownerAddressStreet", result.getOwnerAddressStreet());
-        jsonResult.putString("ownerAddressZipCode", result.getOwnerAddressZipCode());
-        jsonResult.putMap("ownerBirthDate", SerializationUtils.serializeDate(result.getOwnerBirthDate()));
-        jsonResult.putString("ownerFullName", result.getOwnerFullName());
-        jsonResult.putString("ownerReligion", result.getOwnerReligion());
-        jsonResult.putString("ownerSex", result.getOwnerSex());
+        jsonResult.putString("fullName", result.getFullName());
+        jsonResult.putString("nric", result.getNric());
+        jsonResult.putString("ownerState", result.getOwnerState());
+        jsonResult.putString("religion", result.getReligion());
+        jsonResult.putString("sex", result.getSex());
+        jsonResult.putString("street", result.getStreet());
+        jsonResult.putString("zipcode", result.getZipcode());
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "MyTenteraRecognizer";
+        return "MalaysiaMyTenteraFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.malaysia.MyTenteraRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.malaysia.MalaysiaMyTenteraFrontRecognizer.class;
     }
 }

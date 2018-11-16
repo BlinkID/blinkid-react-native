@@ -18,167 +18,132 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Alien number. Returns nil or empty string if not available.
-         * Exists only on US Green Cards. To see which document was scanned use documentType property. 
+         * Alien number. Returns <code>null</code> or empty string if not available. 
          */
         this.alienNumber = nativeResult.alienNumber;
         
         /** 
-         * Application receipt number. Returns nil or empty string if not available.
-         * Exists only on US Green Cards. To see which document was scanned use documentType property. 
+         * Application receipt number. Returns <code>null</code> or empty string if not available. 
          */
         this.applicationReceiptNumber = nativeResult.applicationReceiptNumber;
         
         /** 
-         * Holder's date of birth. 
+         * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Date of expiry of the document. 
+         * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * The document code. Document code contains two characters. For MRTD the first character
-         * shall be A, C or I. The second character shall be discretion of the issuing State or organization
-         * except that V shall not be used, and C shall not be used after A except in the crew member
-         * certificate. On machine-readable passports (MRP) first character shall be P to designate an MRP.
-         * One additional letter may be used, at the discretion of the issuing State or organization,
-         * to designate a particular MRP. If the second character position is not used for this purpose, it
-         * shall be filled by the filter character <. 
+         * Defines document code. Document code contains two characters. For MRTD the first character shall 
          */
         this.documentCode = nativeResult.documentCode;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * Unique number of the document. Document number contains up to 9 characters.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines document number. Document number contains up to 9 characters. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Returns the MRTD document type of recognized document. 
+         * The MRTD document type of recognized document. 
          */
         this.documentType = nativeResult.documentType;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * Immigrant case number. Returns nil or empty string if not available.
-         * Exists only on US Green Cards. To see which document was scanned use documentType property. 
+         * Immigrant case number. Returns <code>null</code> or empty string if not available. 
          */
         this.immigrantCaseNumber = nativeResult.immigrantCaseNumber;
         
         /** 
-         * Three-letter code which indicate the issuing State.
-         * Three-letter codes are based on Alpha-3 codes for entities specified in
-         * ISO 3166-1, with extensions for certain States. 
+         * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * face image from the document if enabled with returnMrzImage property. 
+         * MRZ image from the document 
          */
         this.mrzImage = nativeResult.mrzImage;
         
         /** 
-         * Boolean value which denotes that MRTD result is successfully parsed. When the result is parsed, all
-         * properties below are present.
-         * 
-         * If in the PPMrtdRecognizerSettings you specified allowUnparsedResults = true, then it can happen that
-         * MRTDRecognizerResult is not parsed. When this happens, this property will be equal to true.
-         * 
-         * In that case, you can use rawOcrResult property to obtain the raw result of the OCR process, so you can
-         * implement MRTD parsing in your application.
-         * 
-         *  @return true if MRTD Recognizer result was successfully parsed and all the fields are extracted. false otherwise. 
+         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
          */
         this.mrzParsed = nativeResult.mrzParsed;
         
         /** 
-         * The entire Machine Readable Zone text from ID. This text is usually used for parsing
-         * other elements. 
+         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
          */
         this.mrzText = nativeResult.mrzText;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * Defines true if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the holder represented by a three-letter code. Three-letter codes are based
-         * on Alpha-3 codes for entities specified in ISO 3166-1, with extensions for certain States. 
+         * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * First optional data. Returns nil or empty string if not available.
-         * Element does not exist on US Green Card. To see which document was scanned use documentType property. 
+         * Defines first optional data.<code>null</code> or empty string if not available. 
          */
         this.opt1 = nativeResult.opt1;
         
         /** 
-         * Second optional data. Returns nil or empty string if not available.
-         * Element does not exist on Passports and Visas. To see which document was scanned use documentType property. 
+         * Defines second optional data.<code>null</code> or empty string if not available. 
          */
         this.opt2 = nativeResult.opt2;
         
         /** 
-         * Returns the primary indentifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return primary id of a card holder. 
+         * Defines the primary indentifier. If there is more than one component, they are separated with space. 
          */
         this.primaryId = nativeResult.primaryId;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Returns the secondary identifier. If there is more than one component, they are separated with space.
-         * 
-         *  @return secondary id of a card holder 
+         * Defines the secondary identifier. If there is more than one component, they are separated with space. 
          */
         this.secondaryId = nativeResult.secondaryId;
         
         /** 
-         * Sex of the card holder. Sex is specified by use of the single initial, capital
-         * letter F for female, M for male or < for unspecified. 
+         * Defines sex of the card holder. Sex is specified by use of the single initial, 
          */
         this.sex = nativeResult.sex;
         
@@ -186,64 +151,46 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * MRTD Combined recognizer
+ *  Recognizer for combined reading of face from front side of documents and MRZ from back side of
+ *  Machine Readable Travel Document.
  * 
- * MRTD Combined recognizer is used for scanning both front and back side of generic IDs.
  */
 export class MrtdCombinedRecognizer extends Recognizer {
     constructor() {
         super('MrtdCombinedRecognizer');
         
         /** 
-         * Whether returning of unparsed results is allowed
-         * 
-         *  
+         * Whether returning of unparsed MRZ results is allowed 
          */
         this.allowUnparsedResults = false;
         
         /** 
-         * Whether returning of unverified results is allowed
-         * Unverified result is result that is parsed, but check digits are incorrect.
-         * 
-         *  
+         * Whether returning of unverified MRZ results is allowed 
          */
         this.allowUnverifiedResults = false;
         
         /** 
-         * Defines how many times the same document should be detected before the detector
-         * returns this document as a result of the deteciton
-         * 
-         * Higher number means more reliable detection, but slower processing
-         * 
-         *  
+         * Minimum number of stable detections required for detection to be successful. 
          */
         this.numStableDetectionsThreshold = 6;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether MRZ image from ID card should be extracted
-         * 
-         *  
+         * Defines whether MRZ image will be available in result. 
          */
         this.returnMrzImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

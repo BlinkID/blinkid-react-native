@@ -18,32 +18,32 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Swiss ID owner. 
+         * The date of birth of Switzerland ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The first name of the Swiss ID owner. 
+         * The given name of Switzerland ID owner. 
          */
         this.givenName = nativeResult.givenName;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The last name of the Swiss ID owner. 
+         * The surname of Switzerland ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -51,55 +51,61 @@ export class SwitzerlandIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Swiss ID Front Recognizer.
- * 
- * Swiss ID Front recognizer is used for scanning front side of Swiss ID.
+ * Recognizer which can scan front side of Switzerland ID.
  */
 export class SwitzerlandIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SwitzerlandIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's first name should be extracted from Swiss ID
-         * 
-         *  
+         * Defines if given name of Switzerland ID owner should be extracted. 
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if owner's last name should be extracted from Swiss ID
-         * 
-         *  
+         * Defines if surname of Switzerland ID owner should be extracted. 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new SwitzerlandIdFrontRecognizerResult(nativeResult); }
     }

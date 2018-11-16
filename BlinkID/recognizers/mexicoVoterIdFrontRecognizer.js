@@ -11,21 +11,31 @@ import {
 } from '../types'
 
 /**
- * Result object for AustriaIdFrontRecognizer.
+ * Result object for MexicoVoterIdFrontRecognizer.
  */
-export class AustriaIdFrontRecognizerResult extends RecognizerResult {
+export class MexicoVoterIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Austrian ID owner 
+         * The address of Mexico Voter ID owner. 
+         */
+        this.address = nativeResult.address;
+        
+        /** 
+         * The CURP of Mexico Voter ID owner. 
+         */
+        this.curp = nativeResult.curp;
+        
+        /** 
+         * The date of birth of Mexico Voter ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document number of Austrian ID 
+         * The elector key of Mexico Voter ID owner. 
          */
-        this.documentNumber = nativeResult.documentNumber;
+        this.electorKey = nativeResult.electorKey;
         
         /** 
          * Face image from the document 
@@ -38,12 +48,12 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given name of the Austrian ID owner 
+         * The full name of Mexico Voter ID owner. 
          */
-        this.givenName = nativeResult.givenName;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * The sex of the Austrian ID owner 
+         * The sex of Mexico Voter ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -52,20 +62,15 @@ export class AustriaIdFrontRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
-        /** 
-         * The surname of the Austrian ID owner. 
-         */
-        this.surname = nativeResult.surname;
-        
     }
 }
 
 /**
- * Recognizer which can scan front side of Austrian national ID cards.
+ * Recognizer which can scan front side of Mexican voter id.
  */
-export class AustriaIdFrontRecognizer extends Recognizer {
+export class MexicoVoterIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('AustriaIdFrontRecognizer');
+        super('MexicoVoterIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -73,24 +78,19 @@ export class AustriaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Austrian ID owner should be extracted 
+         * Defines if address of Mexico Voter ID owner should be extracted. 
          */
-        this.extractDateOfBirth = true;
+        this.extractAddress = true;
         
         /** 
-         * Defines if given name of Austrian ID owner should be extracted 
+         * Defines if CURP of Mexico Voter ID owner should be extracted. 
          */
-        this.extractGivenName = true;
+        this.extractCurp = true;
         
         /** 
-         * Defines if sex of Austrian ID owner should be extracted 
+         * Defines if full name of Mexico Voter ID owner should be extracted. 
          */
-        this.extractSex = true;
-        
-        /** 
-         * Defines if surname of Austrian ID owner should be extracted 
-         */
-        this.extractSurname = true;
+        this.extractFullName = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -127,6 +127,6 @@ export class AustriaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new AustriaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MexicoVoterIdFrontRecognizerResult(nativeResult); }
     }
 }

@@ -18,17 +18,22 @@ export class CyprusIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date Of Birth of the back side of the Cyprus Id owner. 
+         * The date of birth of the Cyprus ID card owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * The expiry date of Cyprus ID card. 
+         */
+        this.expiresOn = nativeResult.expiresOn != null ? new Date(nativeResult.expiresOn) : null;
+        
+        /** 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The sex of the back side of the Cyprus Id owner. 
+         * The sex of the Cyprus ID card owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -43,39 +48,32 @@ export class CyprusIdBackRecognizer extends Recognizer {
         super('CyprusIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if sex of Cyprus ID card owner should be extracted.
-         * 
-         *  
+         * Defines if expires on date should be extractred. 
+         */
+        this.extractExpiresOn = true;
+        
+        /** 
+         * Defines if sex of Cyprus ID card owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

@@ -10,6 +10,15 @@ public final class PaymentCardCombinedRecognizerSerialization implements Recogni
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardCombinedRecognizer();
+        if (jsonRecognizer.hasKey("anonymizeCardNumber")) {
+            recognizer.setAnonymizeCardNumber(jsonRecognizer.getBoolean("anonymizeCardNumber"));
+        }
+        if (jsonRecognizer.hasKey("anonymizeCvv")) {
+            recognizer.setAnonymizeCvv(jsonRecognizer.getBoolean("anonymizeCvv"));
+        }
+        if (jsonRecognizer.hasKey("anonymizeOwner")) {
+            recognizer.setAnonymizeOwner(jsonRecognizer.getBoolean("anonymizeOwner"));
+        }
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }

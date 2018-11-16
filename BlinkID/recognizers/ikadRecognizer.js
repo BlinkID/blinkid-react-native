@@ -18,62 +18,62 @@ export class IkadRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the iKad owner 
+         * Personal address of the Malaysian iKad owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of iKad owner, parsed in NSDate object 
+         * The date of birth of Malaysian iKad owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The employer of the iKad owner 
+         * Employer of the Malaysian iKad owner. 
          */
         this.employer = nativeResult.employer;
         
         /** 
-         * The expiry date of the iKad, parsed in NSDate object 
+         * The expiry date of the Malaysian iKad 
          */
         this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The faculty address of the iKad owner 
+         * Faculty address of the Malaysian iKad owner. 
          */
         this.facultyAddress = nativeResult.facultyAddress;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The name of the iKad owner. 
+         * The name of the Malaysian iKad owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The nationality of the iKad owner. 
+         * The nationality of the Malaysian iKad owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The passport number of the iKad owner. 
+         * The passport number of Malaysian iKad. 
          */
         this.passportNumber = nativeResult.passportNumber;
         
         /** 
-         * The sector of the iKad owner 
+         * The sector of Malaysian iKad. 
          */
         this.sector = nativeResult.sector;
         
         /** 
-         * The sex of the iKad owner 
+         * Sex of the Malaysian iKad owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -81,96 +81,70 @@ export class IkadRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring iKad Recognizer.
+ *  Recognizer for reading Malaysian iKad.
  * 
- * iKad recognizer is used for scanning iKad.
  */
 export class IkadRecognizer extends Recognizer {
     constructor() {
         super('IkadRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from iKad
-         * 
-         *  
+         * True if address is being extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if owner's employer should be extracted from iKad
-         * 
-         *  
+         * True if employer is being extracted 
          */
         this.extractEmployer = true;
         
         /** 
-         * Defines if expiry date should be extracted from iKad
-         * 
-         *  
+         * True if expiry date is being extracted 
          */
         this.extractExpiryDate = true;
         
         /** 
-         * Defines if owner's faculty address should be extracted from iKad
-         * 
-         *  
+         * True if faculty address is being extracted 
          */
         this.extractFacultyAddress = true;
         
         /** 
-         * Defines if date of expiry should be extracted from iKad
-         * 
-         *  
+         * True if nationality is being extracted 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if owner's passport number should be extracted from iKad
-         * 
-         *  
+         * True if passport number is being extracted 
          */
         this.extractPassportNumber = true;
         
         /** 
-         * Defines if owner's sector should be extracted from iKad
-         * 
-         *  
+         * True if sector is being extracted 
          */
         this.extractSector = true;
         
         /** 
-         * Defines if owner's sex should be extracted from iKad
-         * 
-         *  
+         * True if sex is being extracted 
          */
         this.extractSex = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
