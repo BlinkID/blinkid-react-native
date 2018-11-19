@@ -33,42 +33,42 @@
     [MBOverlaySerializationUtils extractCommonOverlaySettings:jsonOverlaySettings overlaySettings:sett];
     
     {
-        id *firstSideSplashMessage = [jsonOverlaySettings valueForKey:@"firstSideSplashMessage"];
+        id firstSideSplashMessage = [jsonOverlaySettings valueForKey:@"firstSideSplashMessage"];
         if (firstSideSplashMessage != nil) {
             sett.firstSideSplashMessage = (NSString *)firstSideSplashMessage;
         }
     }
     
     {
-        id *secondSideSplashMessage = [jsonOverlaySettings valueForKey:@"secondSideSplashMessage"];
+        id secondSideSplashMessage = [jsonOverlaySettings valueForKey:@"secondSideSplashMessage"];
         if (secondSideSplashMessage != nil) {
             sett.secondSideSplashMessage = (NSString *)secondSideSplashMessage;
         }
     }
     
     {
-        id *scanningDoneSplashMessage = [jsonOverlaySettings valueForKey:@"scanningDoneSplashMessage"];
+        id scanningDoneSplashMessage = [jsonOverlaySettings valueForKey:@"scanningDoneSplashMessage"];
         if (scanningDoneSplashMessage != nil) {
             sett.scanningDoneSplashMessage = (NSString *)scanningDoneSplashMessage;
         }
     }
     
     {
-        id *firstSideInstructions = [jsonOverlaySettings valueForKey:@"firstSideInstructions"];
+        id firstSideInstructions = [jsonOverlaySettings valueForKey:@"firstSideInstructions"];
         if (firstSideInstructions != nil) {
             sett.firstSideInstructions = (NSString *)firstSideInstructions;
         }
     }
     
     {
-        id *secondSideInstructions = [jsonOverlaySettings valueForKey:@"secondSideInstructions"];
+        id secondSideInstructions = [jsonOverlaySettings valueForKey:@"secondSideInstructions"];
         if (secondSideInstructions != nil) {
             sett.secondSideInstructions = (NSString *)secondSideInstructions;
         }
     }
     
     {
-        id *glareMessage = [jsonOverlaySettings valueForKey:@"glareMessage"];
+        id glareMessage = [jsonOverlaySettings valueForKey:@"glareMessage"];
         if (glareMessage != nil) {
             sett.glareMessage = (NSString *)glareMessage;
         }
