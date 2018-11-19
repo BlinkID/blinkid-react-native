@@ -6,18 +6,12 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class ElitePaymentCardFrontRecognizerSerialization implements RecognizerSerialization {
+public final class GermanyDlBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardFrontRecognizer();
-        if (jsonRecognizer.hasKey("anonymizeOwner")) {
-            recognizer.setAnonymizeOwner(jsonRecognizer.getBoolean("anonymizeOwner"));
-        }
+        com.microblink.entities.recognizers.blinkid.germany.GermanyDlBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.germany.GermanyDlBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
-        }
-        if (jsonRecognizer.hasKey("extractOwner")) {
-            recognizer.setExtractOwner(jsonRecognizer.getBoolean("extractOwner"));
         }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
@@ -33,21 +27,22 @@ public final class ElitePaymentCardFrontRecognizerSerialization implements Recog
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.germany.GermanyDlBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyDlBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
+        jsonResult.putMap("dateOfIssueB10", SerializationUtils.serializeDate(result.getDateOfIssueB10()));
+        jsonResult.putBoolean("dateOfIssueB10NotSpecified", result.isDateOfIssueB10NotSpecified());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("owner", result.getOwner());
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "ElitePaymentCardFrontRecognizer";
+        return "GermanyDlBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.germany.GermanyDlBackRecognizer.class;
     }
 }

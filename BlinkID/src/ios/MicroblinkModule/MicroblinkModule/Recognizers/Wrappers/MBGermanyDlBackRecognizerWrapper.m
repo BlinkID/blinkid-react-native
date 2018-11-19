@@ -1,37 +1,25 @@
-#import "MBElitePaymentCardFrontRecognizerWrapper.h"
+#import "MBGermanyDlBackRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBElitePaymentCardFrontRecognizerCreator
+@implementation MBGermanyDlBackRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"ElitePaymentCardFrontRecognizer";
+        _jsonName = @"GermanyDlBackRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBElitePaymentCardFrontRecognizer *recognizer = [[MBElitePaymentCardFrontRecognizer alloc] init];
-    {
-        id anonymizeOwner = [jsonRecognizer valueForKey:@"anonymizeOwner"];
-        if (anonymizeOwner != nil) {
-            recognizer.anonymizeOwner = [(NSNumber *)anonymizeOwner boolValue];
-        }
-    }
+    MBGermanyDlBackRecognizer *recognizer = [[MBGermanyDlBackRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
-        }
-    }
-    {
-        id extractOwner = [jsonRecognizer valueForKey:@"extractOwner"];
-        if (extractOwner != nil) {
-            recognizer.extractOwner = [(NSNumber *)extractOwner boolValue];
         }
     }
     {
@@ -58,15 +46,16 @@
 
 @end
 
-@interface MBElitePaymentCardFrontRecognizer (JsonSerialization)
+@interface MBGermanyDlBackRecognizer (JsonSerialization)
 @end
 
-@implementation MBElitePaymentCardFrontRecognizer (JsonSerialization)
+@implementation MBGermanyDlBackRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssueB10] forKey:@"dateOfIssueB10"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfIssueB10NotSpecified] forKey:@"dateOfIssueB10NotSpecified"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.owner forKey:@"owner"];
 
     return jsonResult;
 }

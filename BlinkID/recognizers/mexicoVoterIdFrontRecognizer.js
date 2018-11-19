@@ -11,31 +11,31 @@ import {
 } from '../types'
 
 /**
- * Result object for GermanyIdFrontRecognizer.
+ * Result object for MexicoVoterIdFrontRecognizer.
  */
-export class GermanyIdFrontRecognizerResult extends RecognizerResult {
+export class MexicoVoterIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The CAN number of Germany ID. 
+         * The address of Mexico Voter ID owner. 
          */
-        this.canNumber = nativeResult.canNumber;
+        this.address = nativeResult.address;
         
         /** 
-         * The date of birth of Germany ID owner. 
+         * The CURP of Mexico Voter ID owner. 
+         */
+        this.curp = nativeResult.curp;
+        
+        /** 
+         * The date of birth of Mexico Voter ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of Germany ID. 
+         * The elector key of Mexico Voter ID owner. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * The document number of Germany ID. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
+        this.electorKey = nativeResult.electorKey;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -48,39 +48,29 @@ export class GermanyIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given names of Germany ID owner. 
+         * The full name of Mexico Voter ID owner. 
          */
-        this.givenNames = nativeResult.givenNames;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * The nationality of Germany ID owner. 
+         * The sex of Mexico Voter ID owner. 
          */
-        this.nationality = nativeResult.nationality;
-        
-        /** 
-         * The place of birth of Germany ID owner. 
-         */
-        this.placeOfBirth = nativeResult.placeOfBirth;
+        this.sex = nativeResult.sex;
         
         /** 
          * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
-        /** 
-         * The surname of Germany ID owner. 
-         */
-        this.surname = nativeResult.surname;
-        
     }
 }
 
 /**
- * Recognizer which can scan front side of Germany national ID cards.
+ * Recognizer which can scan front side of Mexican voter id.
  */
-export class GermanyIdFrontRecognizer extends Recognizer {
+export class MexicoVoterIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('GermanyIdFrontRecognizer');
+        super('MexicoVoterIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -90,53 +80,25 @@ export class GermanyIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if CAN number of Germany ID should be extracted.
+         * Defines if address of Mexico Voter ID owner should be extracted.
          * 
          *  
          */
-        this.extractCanNumber = true;
+        this.extractAddress = true;
         
         /** 
-         * Defines if date of expiry of Germany ID should be extracted.
+         * Defines if CURP of Mexico Voter ID owner should be extracted.
          * 
          *  
          */
-        this.extractDateOfExpiry = true;
+        this.extractCurp = true;
         
         /** 
-         * Defines if document number of Germany ID should be extracted.
+         * Defines if full name of Mexico Voter ID owner should be extracted.
          * 
          *  
          */
-        this.extractDocumentNumber = true;
-        
-        /** 
-         * Defines if given names of Germany ID owner should be extracted.
-         * 
-         *  
-         */
-        this.extractGivenNames = true;
-        
-        /** 
-         * Defines if nationality  of Germany ID owner should be extracted.
-         * 
-         *  
-         */
-        this.extractNationality = true;
-        
-        /** 
-         * Defines if place of birth of Germany ID owner should be extracted.
-         * 
-         *  
-         */
-        this.extractPlaceOfBirth = true;
-        
-        /** 
-         * Defines if surname of Germany ID owner should be extracted.
-         * 
-         *  
-         */
-        this.extractSurname = true;
+        this.extractFullName = true;
         
         /** 
          * Property for setting DPI for face images
@@ -191,6 +153,6 @@ export class GermanyIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new GermanyIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MexicoVoterIdFrontRecognizerResult(nativeResult); }
     }
 }

@@ -43,6 +43,13 @@ export class PaymentCardBackRecognizer extends Recognizer {
         super('PaymentCardBackRecognizer');
         
         /** 
+         * Should anonymize the CVV area (redact image pixels) on the document image result
+         * 
+         *  
+         */
+        this.anonymizeCvv = false;
+        
+        /** 
          * Defines if glare detection should be turned on/off.
          * 
          *  

@@ -38,6 +38,8 @@ const BlinkIDNative = Platform.select({
 class BlinkIDWrapper {
       async scanWithCamera(overlaySettings, recognizerCollection, license) {
             try {
+                  var bla = NativeModules;
+                  console.log(bla);
                   var licenseObject = license;
                   if (typeof license === 'string' || license instanceof String) {
                       licenseObject = { licenseKey: license };
@@ -140,6 +142,7 @@ export * from './recognizers/elitePaymentCardCombinedRecognizer'
 export * from './recognizers/elitePaymentCardFrontRecognizer'
 export * from './recognizers/eudlRecognizer'
 export * from './recognizers/germanyCombinedRecognizer'
+export * from './recognizers/germanyDlBackRecognizer'
 export * from './recognizers/germanyIdBackRecognizer'
 export * from './recognizers/germanyIdFrontRecognizer'
 export * from './recognizers/germanyOldIdRecognizer'
@@ -155,13 +158,14 @@ export * from './recognizers/jordanIdFrontRecognizer'
 export * from './recognizers/kuwaitIdBackRecognizer'
 export * from './recognizers/kuwaitIdFrontRecognizer'
 export * from './recognizers/malaysiaDlFrontRecognizer'
+export * from './recognizers/malaysiaMyTenteraFrontRecognizer'
+export * from './recognizers/mexicoVoterIdFrontRecognizer'
 export * from './recognizers/moroccoIdBackRecognizer'
 export * from './recognizers/moroccoIdFrontRecognizer'
 export * from './recognizers/mrtdCombinedRecognizer'
 export * from './recognizers/mrtdRecognizer'
 export * from './recognizers/myKadBackRecognizer'
 export * from './recognizers/myKadFrontRecognizer'
-export * from './recognizers/myTenteraRecognizer'
 export * from './recognizers/newZealandDlFrontRecognizer'
 export * from './recognizers/paymentCardBackRecognizer'
 export * from './recognizers/paymentCardCombinedRecognizer'

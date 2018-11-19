@@ -49,6 +49,7 @@ public enum RecognizerSerializers {
         registerMapping(new ElitePaymentCardFrontRecognizerSerialization());
         registerMapping(new EudlRecognizerSerialization());
         registerMapping(new GermanyCombinedRecognizerSerialization());
+        registerMapping(new GermanyDlBackRecognizerSerialization());
         registerMapping(new GermanyIdBackRecognizerSerialization());
         registerMapping(new GermanyIdFrontRecognizerSerialization());
         registerMapping(new GermanyOldIdRecognizerSerialization());
@@ -64,13 +65,14 @@ public enum RecognizerSerializers {
         registerMapping(new KuwaitIdBackRecognizerSerialization());
         registerMapping(new KuwaitIdFrontRecognizerSerialization());
         registerMapping(new MalaysiaDlFrontRecognizerSerialization());
+        registerMapping(new MalaysiaMyTenteraFrontRecognizerSerialization());
+        registerMapping(new MexicoVoterIdFrontRecognizerSerialization());
         registerMapping(new MoroccoIdBackRecognizerSerialization());
         registerMapping(new MoroccoIdFrontRecognizerSerialization());
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
         registerMapping(new MyKadBackRecognizerSerialization());
         registerMapping(new MyKadFrontRecognizerSerialization());
-        registerMapping(new MyTenteraRecognizerSerialization());
         registerMapping(new NewZealandDlFrontRecognizerSerialization());
         registerMapping(new PaymentCardBackRecognizerSerialization());
         registerMapping(new PaymentCardCombinedRecognizerSerialization());

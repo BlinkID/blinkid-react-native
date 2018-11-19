@@ -10,6 +10,9 @@ public final class PaymentCardBackRecognizerSerialization implements RecognizerS
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardBackRecognizer();
+        if (jsonRecognizer.hasKey("anonymizeCvv")) {
+            recognizer.setAnonymizeCvv(jsonRecognizer.getBoolean("anonymizeCvv"));
+        }
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }

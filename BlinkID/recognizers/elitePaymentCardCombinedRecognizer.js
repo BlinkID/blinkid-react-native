@@ -87,6 +87,27 @@ export class ElitePaymentCardCombinedRecognizer extends Recognizer {
         super('ElitePaymentCardCombinedRecognizer');
         
         /** 
+         * Should anonymize the card number area (redact image pixels) on the document image result
+         * 
+         *  
+         */
+        this.anonymizeCardNumber = false;
+        
+        /** 
+         * Should anonymize the CVV area (redact image pixels) on the document image result
+         * 
+         *  
+         */
+        this.anonymizeCvv = false;
+        
+        /** 
+         * Should anonymize the owner area (redact image pixels) on the document image result
+         * 
+         *  
+         */
+        this.anonymizeOwner = false;
+        
+        /** 
          * Defines if glare detection should be turned on/off.
          * 
          *  

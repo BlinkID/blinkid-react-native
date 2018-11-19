@@ -38,6 +38,13 @@ export class ElitePaymentCardFrontRecognizer extends Recognizer {
         super('ElitePaymentCardFrontRecognizer');
         
         /** 
+         * Should anonymize the owner area (redact image pixels) on the document image result
+         * 
+         *  
+         */
+        this.anonymizeOwner = false;
+        
+        /** 
          * Defines if glare detection should be turned on/off.
          * 
          *  

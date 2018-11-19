@@ -13,6 +13,9 @@ public final class CyprusIdBackRecognizerSerialization implements RecognizerSeri
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
+        if (jsonRecognizer.hasKey("extractExpiresOn")) {
+            recognizer.setExtractExpiresOn(jsonRecognizer.getBoolean("extractExpiresOn"));
+        }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
@@ -34,6 +37,7 @@ public final class CyprusIdBackRecognizerSerialization implements RecognizerSeri
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("expiresOn", SerializationUtils.serializeDate(result.getExpiresOn()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("sex", result.getSex());
         return jsonResult;

@@ -17,6 +17,18 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBPaymentCardFrontRecognizer *recognizer = [[MBPaymentCardFrontRecognizer alloc] init];
     {
+        id anonymizeCardNumber = [jsonRecognizer valueForKey:@"anonymizeCardNumber"];
+        if (anonymizeCardNumber != nil) {
+            recognizer.anonymizeCardNumber = [(NSNumber *)anonymizeCardNumber boolValue];
+        }
+    }
+    {
+        id anonymizeOwner = [jsonRecognizer valueForKey:@"anonymizeOwner"];
+        if (anonymizeOwner != nil) {
+            recognizer.anonymizeOwner = [(NSNumber *)anonymizeOwner boolValue];
+        }
+    }
+    {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
