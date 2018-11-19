@@ -18,17 +18,17 @@ export class SloveniaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Slovenian ID owner 
+         * The date of birth of the Slovenian ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of Slovenian ID owner 
+         * The date of expiry of the Slovenian ID owner. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -38,7 +38,7 @@ export class SloveniaIdFrontRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -48,17 +48,17 @@ export class SloveniaIdFrontRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * Nationality of the Slovenian ID owner. 
+         * The nationality of the Slovenian ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * Sex of the Slovenian ID owner. 
+         * The sex of the Slovenian ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -66,50 +66,67 @@ export class SloveniaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer which can scan the front side of Slovenian national ID cards.
+ * Class for configuring Slovenian ID Front Recognizer.
  * 
+ * Slovenian ID Front recognizer is used for scanning front side of Slovenian ID.
  */
 export class SloveniaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SloveniaIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth of Slovenian ID owner is being extracted 
+         *  Defines if date of birth of Slovenian ID owner should be extracted
+         * 
+         *   
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if date of expiry is being extracted from Slovenian ID 
+         *  Defines if date of expiry of Slovenian ID should be extracted
+         * 
+         *   
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * True if nationality of Slovenian ID owner is being extracted 
+         *  Defines if nationality of Slovenian ID owner should be extracted
+         * 
+         *   
          */
         this.extractNationality = true;
         
         /** 
-         * True if sex of Slovenian ID owner is being extracted 
+         *  Defines if sex of Slovenian ID owner should be extracted
+         * 
+         *   
          */
         this.extractSex = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         

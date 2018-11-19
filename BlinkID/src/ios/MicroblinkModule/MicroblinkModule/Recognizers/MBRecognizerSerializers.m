@@ -28,6 +28,7 @@
 #import "MBElitePaymentCardFrontRecognizerWrapper.h"
 #import "MBEudlRecognizerWrapper.h"
 #import "MBGermanyCombinedRecognizerWrapper.h"
+#import "MBGermanyDlBackRecognizerWrapper.h"
 #import "MBGermanyIdBackRecognizerWrapper.h"
 #import "MBGermanyIdFrontRecognizerWrapper.h"
 #import "MBGermanyOldIdRecognizerWrapper.h"
@@ -43,13 +44,14 @@
 #import "MBKuwaitIdBackRecognizerWrapper.h"
 #import "MBKuwaitIdFrontRecognizerWrapper.h"
 #import "MBMalaysiaDlFrontRecognizerWrapper.h"
+#import "MBMalaysiaMyTenteraFrontRecognizerWrapper.h"
+#import "MBMexicoVoterIdFrontRecognizerWrapper.h"
 #import "MBMoroccoIdBackRecognizerWrapper.h"
 #import "MBMoroccoIdFrontRecognizerWrapper.h"
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBMyKadBackRecognizerWrapper.h"
 #import "MBMyKadFrontRecognizerWrapper.h"
-#import "MBMyTenteraRecognizerWrapper.h"
 #import "MBNewZealandDlFrontRecognizerWrapper.h"
 #import "MBPaymentCardBackRecognizerWrapper.h"
 #import "MBPaymentCardCombinedRecognizerWrapper.h"
@@ -131,6 +133,7 @@
         [self registerCreator:[[MBElitePaymentCardFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBEudlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBGermanyDlBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyOldIdRecognizerCreator alloc] init]];
@@ -146,13 +149,14 @@
         [self registerCreator:[[MBKuwaitIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBKuwaitIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMalaysiaDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBMalaysiaMyTenteraFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBMexicoVoterIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMoroccoIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMoroccoIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMyKadBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMyKadFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMyTenteraRecognizerCreator alloc] init]];
         [self registerCreator:[[MBNewZealandDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPaymentCardBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPaymentCardCombinedRecognizerCreator alloc] init]];

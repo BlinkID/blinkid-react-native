@@ -18,62 +18,62 @@ export class EudlRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Driver's Licence owner. 
+         * The address of the EU Driver License owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * Birth date and birth place of Driver's Licence owner 
+         * The birth Data of the EU Driver License owner. 
          */
         this.birthData = nativeResult.birthData;
         
         /** 
-         * The country where the driver's license has been issued. 
+         * The country of the EU Driver License owner. 
          */
         this.country = nativeResult.country;
         
         /** 
-         * The driver number. 
+         * The driver Number of the EU Driver License owner. 
          */
         this.driverNumber = nativeResult.driverNumber;
         
         /** 
-         * The expiry date of the Driver's Licence 
+         * The expiry Date of the EU Driver License owner. 
          */
         this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Driver's Licence owner. 
+         * The first Name of the EU Driver License owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issue date of the Driver's Licence 
+         * The issue Date of the EU Driver License owner. 
          */
         this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
         
         /** 
-         * Document issuing authority. 
+         * The issuing Authority of the EU Driver License owner. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The last name of the Driver's Licence owner. 
+         * The last Name of the EU Driver License owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The personal number of the Driver's Licence owner. 
+         * The personal Number of the EU Driver License owner. 
          */
         this.personalNumber = nativeResult.personalNumber;
         
@@ -81,64 +81,91 @@ export class EudlRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer for scanning driver's licence of several european countries
+ * Class for configuring EU Driver License Recognizer.
+ * 
+ * EU Driver License recognizer is used for scanning EU Driver License.
  */
 export class EudlRecognizer extends Recognizer {
     constructor() {
         super('EudlRecognizer');
         
         /** 
-         * Currently used country. 
+         * Country of scanning Eudl. The default value of EudlCountryAny will scan all supported driver's licenses.
+         * 
+         *  
          */
         this.country = EudlCountry.Automatic;
         
         /** 
-         * Defines if address should be extracted from EU driver's license 
+         * Defines if owner's address should be extracted from EU Driver License
+         * 
+         *  
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if expiry date should be extracted from EU driver's license 
+         * Defines if owner's date of expiry should be extracted from EU Driver License
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if issue date should be extracted from EU driver's license 
+         * Defines if owner's date of issue should be extracted from EU Driver License
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if issuing authority should be extracted from EU driver's license 
+         * Defines if owner's issuing authority should be extracted from EU Driver License
+         * 
+         *  
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if personal number should be extracted from EU driver's license 
+         * Defines if owner's personal number should be extracted from EU Driver License
+         * 
+         *  
          */
         this.extractPersonalNumber = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

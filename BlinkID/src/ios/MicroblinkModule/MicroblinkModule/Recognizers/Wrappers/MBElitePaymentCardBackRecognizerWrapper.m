@@ -17,6 +17,18 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBElitePaymentCardBackRecognizer *recognizer = [[MBElitePaymentCardBackRecognizer alloc] init];
     {
+        id anonymizeCardNumber = [jsonRecognizer valueForKey:@"anonymizeCardNumber"];
+        if (anonymizeCardNumber != nil) {
+            recognizer.anonymizeCardNumber = [(NSNumber *)anonymizeCardNumber boolValue];
+        }
+    }
+    {
+        id anonymizeCvv = [jsonRecognizer valueForKey:@"anonymizeCvv"];
+        if (anonymizeCvv != nil) {
+            recognizer.anonymizeCvv = [(NSNumber *)anonymizeCvv boolValue];
+        }
+    }
+    {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];

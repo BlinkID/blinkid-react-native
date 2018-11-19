@@ -1,21 +1,21 @@
-#import "MBMyTenteraRecognizerWrapper.h"
+#import "MBMalaysiaMyTenteraFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBMyTenteraRecognizerCreator
+@implementation MBMalaysiaMyTenteraFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"MyTenteraRecognizer";
+        _jsonName = @"MalaysiaMyTenteraFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBMyTenteraRecognizer *recognizer = [[MBMyTenteraRecognizer alloc] init];
+    MBMalaysiaMyTenteraFrontRecognizer *recognizer = [[MBMalaysiaMyTenteraFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -35,9 +35,21 @@
         }
     }
     {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -58,26 +70,26 @@
 
 @end
 
-@interface MBMyTenteraRecognizer (JsonSerialization)
+@interface MBMalaysiaMyTenteraFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBMyTenteraRecognizer (JsonSerialization)
+@implementation MBMalaysiaMyTenteraFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.armyNumber forKey:@"armyNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.birthDate] forKey:@"birthDate"];
+    [jsonResult setValue:self.result.city forKey:@"city"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
+    [jsonResult setValue:self.result.fullAddress forKey:@"fullAddress"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.nricNumber forKey:@"nricNumber"];
-    [jsonResult setValue:self.result.ownerAddress forKey:@"ownerAddress"];
-    [jsonResult setValue:self.result.ownerAddressCity forKey:@"ownerAddressCity"];
-    [jsonResult setValue:self.result.ownerAddressState forKey:@"ownerAddressState"];
-    [jsonResult setValue:self.result.ownerAddressStreet forKey:@"ownerAddressStreet"];
-    [jsonResult setValue:self.result.ownerAddressZipCode forKey:@"ownerAddressZipCode"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.ownerBirthDate] forKey:@"ownerBirthDate"];
-    [jsonResult setValue:self.result.ownerFullName forKey:@"ownerFullName"];
-    [jsonResult setValue:self.result.ownerReligion forKey:@"ownerReligion"];
-    [jsonResult setValue:self.result.ownerSex forKey:@"ownerSex"];
+    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:self.result.nric forKey:@"nric"];
+    [jsonResult setValue:self.result.ownerState forKey:@"ownerState"];
+    [jsonResult setValue:self.result.religion forKey:@"religion"];
+    [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.street forKey:@"street"];
+    [jsonResult setValue:self.result.zipcode forKey:@"zipcode"];
 
     return jsonResult;
 }
