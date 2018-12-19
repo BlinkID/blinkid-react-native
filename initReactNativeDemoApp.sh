@@ -52,7 +52,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.4.0'
+  pod 'PPBlinkID', '~> 4.5.0'
 end
 EOF
 
@@ -60,6 +60,7 @@ EOF
 pod install
 
 if false; then
+  echo "Replace pod with custom dev version of BlinkID framework"
   # replace pod with custom dev version of BlinkID framework
   pushd Pods/PPBlinkID
   rm -rf MicroBlink.bundle
