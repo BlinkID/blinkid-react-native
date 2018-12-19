@@ -42,7 +42,32 @@ RCT_EXPORT_MODULE(BlinkIDIos);
     return self;
 }
 
++ (BOOL)requiresMainQueueSetup {
+    return YES;
+}
+
+/**
+ Method  sanitizes the dictionary replaces all occurances of NSNull with nil
+
+ @param dictionary JSON objects
+ @return new dictionary with NSNull values replaced with nil
+ */
+- (NSDictionary *)sanitizeDictionary:(NSDictionary *)dictionary {
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
+    for (NSString* key in dictionary.allKeys) {
+        if (mutableDictionary[key] == [NSNull null]) {
+            mutableDictionary[key] = nil;
+        }
+    }
+    return mutableDictionary;
+}
+
 RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySettings recognizerCollection:(NSDictionary *)jsonRecognizerCollection license:(NSDictionary *)jsonLicense resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+
+    // Sanitize the dictionaries
+    jsonOverlaySettings = [self sanitizeDictionary:jsonOverlaySettings];
+    jsonRecognizerCollection = [self sanitizeDictionary:jsonRecognizerCollection];
+    jsonLicense = [self sanitizeDictionary:jsonLicense];
 
     self.promiseResolve = resolve;
     self.promiseReject = reject;
@@ -62,14 +87,13 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
 
     self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
 
-    MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
-
-    UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
-
-    self.scanningViewController = recognizerRunnerViewController;
-
-    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     dispatch_sync(dispatch_get_main_queue(), ^{
+        MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
+        
+        UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
+        self.scanningViewController = recognizerRunnerViewController;
+
+        UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [rootViewController presentViewController:self.scanningViewController animated:YES completion:nil];
     });
 }

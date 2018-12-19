@@ -33,7 +33,7 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.documentForNonResident = nativeResult.documentForNonResident;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -43,7 +43,7 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.issuedBy = nativeResult.issuedBy;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * The data extracted from the machine readable zone 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -56,44 +56,63 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan back side of Croatian national ID cards.
+ * Croatian ID Back Recognizer.
+ * 
+ * Croatian ID Back recognizer is used for scanning back side of Croatian ID. It always extracts
+ * MRZ zone and address of ID holder while extracting other elements is optional.
  */
 export class CroatiaIdBackRecognizer extends Recognizer {
     constructor() {
         super('CroatiaIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of issue of Croatian ID should be extracted 
+         * Defines if date of issue of Croatian ID should be extracted
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if issuer of Croatian ID should be extracted 
+         * Defines if issuer of Croatian ID should be extracted
+         * 
+         *  
          */
         this.extractIssuedBy = true;
         
         /** 
-         * Defines if residence of Croatian ID owner should be extracted 
+         * Defines if residence of Croatian ID owner should be extracted
+         * 
+         *  
          */
         this.extractResidence = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

@@ -1,21 +1,21 @@
-#import "MBMyKadBackRecognizerWrapper.h"
+#import "MBCyprusOldIdBackRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBMyKadBackRecognizerCreator
+@implementation MBCyprusOldIdBackRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"MyKadBackRecognizer";
+        _jsonName = @"CyprusOldIdBackRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBMyKadBackRecognizer *recognizer = [[MBMyKadBackRecognizer alloc] init];
+    MBCyprusOldIdBackRecognizer *recognizer = [[MBCyprusOldIdBackRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -23,9 +23,15 @@
         }
     }
     {
-        id extractOldNric = [jsonRecognizer valueForKey:@"extractOldNric"];
-        if (extractOldNric != nil) {
-            recognizer.extractOldNric = [(NSNumber *)extractOldNric boolValue];
+        id extractExpiresOn = [jsonRecognizer valueForKey:@"extractExpiresOn"];
+        if (extractExpiresOn != nil) {
+            recognizer.extractExpiresOn = [(NSNumber *)extractExpiresOn boolValue];
+        }
+    }
+    {
+        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
+        if (extractSex != nil) {
+            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
         }
     }
     {
@@ -46,38 +52,23 @@
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
         }
     }
-    {
-        id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
-        if (returnSignatureImage != nil) {
-            recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
-        }
-    }
-    {
-        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
-        if (signatureImageDpi != nil) {
-            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
-        }
-    }
 
     return recognizer;
 }
 
 @end
 
-@interface MBMyKadBackRecognizer (JsonSerialization)
+@interface MBCyprusOldIdBackRecognizer (JsonSerialization)
 @end
 
-@implementation MBMyKadBackRecognizer (JsonSerialization)
+@implementation MBCyprusOldIdBackRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:self.result.extendedNric forKey:@"extendedNric"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.expiresOn] forKey:@"expiresOn"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.nric forKey:@"nric"];
-    [jsonResult setValue:self.result.oldNric forKey:@"oldNric"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
-    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;
 }

@@ -18,17 +18,17 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The document number of Serbian ID. 
+         * The document number of Serbian ID owner 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -38,12 +38,12 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
         this.issuingDate = nativeResult.issuingDate != null ? new Date(nativeResult.issuingDate) : null;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The valid until of the Serbian ID. 
+         * The valid until date of the Serbian ID. 
          */
         this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
@@ -51,40 +51,53 @@ export class SerbiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for front side of Serbian ID.
+ * Class for configuring Serbian ID Front Recognizer.
  * 
+ * Serbian ID Front recognizer is used for scanning front side of Serbian ID.
  */
 export class SerbiaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SerbiaIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if issuing date of Serbian ID is being extracted 
+         *  Defines if issuing date of Serbian ID should be extracted
+         * 
+         *   
          */
         this.extractIssuingDate = true;
         
         /** 
-         * True if valid until is being extracted from Serbian ID 
+         *  Defines if valid until date of Serbian ID should be extracted
+         * 
+         *   
          */
         this.extractValidUntil = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         

@@ -18,52 +18,55 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Serbian ID holder. 
+         * The date of birth of Serbian ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Serbian ID. 
+         * The date of expiry of Serbian ID owner 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document date of issue of the Serbian ID. 
+         * The date of issue of Serbian ID owner 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Defines digital signature of recognition results. 
+         * Digital signature of the recognition result. Available only if enabled with signResult property. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Defines digital signature version. 
+         * Version of the digital signature. Available only if enabled with signResult property. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Defines {true} if data from scanned parts/sides of the document match, 
+         * Returns true if data from scanned parts/sides of the document match,
+         * false otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return false. Result will
+         * be true only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * First name of the Serbian ID holder. 
+         * The first name of the Serbian ID owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Back side image of the document 
+         * back side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * Front side image of the document 
+         * front side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -73,42 +76,44 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
         this.identityCardNumber = nativeResult.identityCardNumber;
         
         /** 
-         * Issuer of the Serbian ID holder. 
+         * The issuer of Serbian ID. 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * Personal identification number of the Serbian ID holder. 
+         * The JG of Serbian ID owner. 
          */
         this.jmbg = nativeResult.jmbg;
         
         /** 
-         * Last name of the Serbian ID holder. 
+         * The last name of the Serbian ID owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * true if all check digits inside MRZ are correct, false otherwise.
+         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the Serbian ID holder. 
+         * The nationality of the Serbian ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * {true} if recognizer has finished scanning first side and is now scanning back side, 
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side. 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Serbian ID holder. 
+         * The sex of the Serbian ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -116,35 +121,46 @@ export class SerbiaCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Serbian ID.
+ * Serbian ID Combined Recognizer.
  * 
+ * Serbian ID Combined recognizer is used for scanning both front and back side of Serbian ID.
  */
 export class SerbiaCombinedRecognizer extends Recognizer {
     constructor() {
         super('SerbiaCombinedRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Defines whether or not recognition result should be signed. 
+         * Whether or not recognition result should be signed.
+         * 
+         *  
          */
         this.signResult = false;
         

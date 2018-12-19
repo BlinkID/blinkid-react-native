@@ -18,22 +18,22 @@ export class EgyptIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The Egypt ID document number. 
+         * The document number of the Egypt ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The Egypt ID card owner national number. 
+         * The National Number of the Egypt ID owner. 
          */
         this.nationalNumber = nativeResult.nationalNumber;
         
@@ -41,30 +41,39 @@ export class EgyptIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading Egypt ID Front document.
+ * Class for configuring Egypt ID Front Recognizer.
  * 
+ * Egypt ID Front recognizer is used for scanning front side of Egypt ID.
  */
 export class EgyptIdFrontRecognizer extends Recognizer {
     constructor() {
         super('EgyptIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if national number of Egypt ID Front owner is being extracted 
+         * Defines if owner's national number should be extracted from Egypt ID
+         * 
+         *  
          */
         this.extractNationalNumber = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

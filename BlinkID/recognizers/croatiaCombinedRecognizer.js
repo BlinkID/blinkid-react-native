@@ -23,22 +23,22 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * Citizenship of the Croatian ID owner. 
+         * The citizenship of the Croatian ID owner. 
          */
         this.citizenship = nativeResult.citizenship;
         
         /** 
-         * The date of birth of Croatian ID owner. 
+         * The date of birth of Croatian ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Croatian ID. 
+         * The document date of expiry of the Croatian ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * True if document expiry is permanent 
+         * Check if date of expiry is permanent on the Croatian ID. 
          */
         this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
@@ -48,27 +48,30 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Defines digital signature of recognition results. 
+         * Digital signature of the recognition result. Available only if enabled with signResult property. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Defines digital signature version. 
+         * Version of the digital signature. Available only if enabled with signResult property. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * True if scanned document is bilingual 
+         * true if the document is bilingual 
          */
         this.documentBilingual = nativeResult.documentBilingual;
         
         /** 
-         * Defines {true} if data from scanned parts/sides of the document match, 
+         * Returns true if data from scanned parts/sides of the document match,
+         * false otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return false. Result will
+         * be true only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -78,12 +81,12 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Back side image of the document 
+         * back side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * Front side image of the document 
+         * front side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -103,32 +106,34 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * true if all check digits inside MRZ are correct, false otherwise.
+         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * True if document owner is non resident. 
+         * true if the person is non Croatian resident 
          */
         this.nonResident = nativeResult.nonResident;
         
         /** 
-         * Personal identification number of the Croatian ID holder. 
+         * The OIB (PIN) of the Croatian ID owner. 
          */
         this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
         
         /** 
-         * {true} if recognizer has finished scanning first side and is now scanning back side, 
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side. 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Croatian ID owner. 
+         * The sex of the Croatian ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -136,35 +141,46 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Croatian ID.
+ * Croatian ID Combined Recognizer.
  * 
+ * Croatian ID Combined recognizer is used for scanning both front and back side of Croatian ID.
  */
 export class CroatiaCombinedRecognizer extends Recognizer {
     constructor() {
         super('CroatiaCombinedRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Defines whether or not recognition result should be signed. 
+         * Whether or not recognition result should be signed.
+         * 
+         *  
          */
         this.signResult = false;
         

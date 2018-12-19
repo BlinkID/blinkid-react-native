@@ -23,24 +23,6 @@
         }
     }
     {
-        id extractDocumentNumber = [jsonRecognizer valueForKey:@"extractDocumentNumber"];
-        if (extractDocumentNumber != nil) {
-            recognizer.extractDocumentNumber = [(NSNumber *)extractDocumentNumber boolValue];
-        }
-    }
-    {
-        id extractName = [jsonRecognizer valueForKey:@"extractName"];
-        if (extractName != nil) {
-            recognizer.extractName = [(NSNumber *)extractName boolValue];
-        }
-    }
-    {
-        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
-        if (extractSurname != nil) {
-            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
-        }
-    }
-    {
         id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
         if (faceImageDpi != nil) {
             recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
@@ -70,6 +52,18 @@
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
         }
     }
+    {
+        id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
+        if (returnSignatureImage != nil) {
+            recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
+        }
+    }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
@@ -83,12 +77,10 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.idNumber forKey:@"idNumber"];
-    [jsonResult setValue:self.result.name forKey:@"name"];
-    [jsonResult setValue:self.result.surname forKey:@"surname"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;
 }
