@@ -18,17 +18,17 @@ export class KuwaitIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The data extracted from the machine readable zone 
+         * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The serial number of Kuwait ID 
+         * The serial number of Kuwait ID. 
          */
         this.serialNo = nativeResult.serialNo;
         
@@ -43,39 +43,27 @@ export class KuwaitIdBackRecognizer extends Recognizer {
         super('KuwaitIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if serial number of Kuwait ID should be extracted
-         * 
-         *  
+         * Defines if serial number of Kuwait ID should be extracted. 
          */
         this.extractSerialNo = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

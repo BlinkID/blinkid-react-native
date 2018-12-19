@@ -18,22 +18,22 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Czech ID owner. 
+         * The date of birth of Czech ID owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of the Czech ID owner. 
+         * The date of expiry of Czech ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of the Czech ID owner. 
+         * The date of issue of Czech ID 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -43,12 +43,12 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The ID card number of the Czech ID. 
+         * The identity card number of Czech ID. 
          */
         this.identityCardNumber = nativeResult.identityCardNumber;
         
@@ -58,17 +58,17 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The place of birth of the Czech ID owner. 
+         * The place of birth of Czech ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The sex of the Czech ID owner. 
+         * Sex of the Czech ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -76,88 +76,65 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Cz ID Front Recognizer.
+ *  Recognizer which can scan front side of czech national ID cards.
  * 
- * Cz ID Front recognizer is used for scanning front side of Cz ID.
  */
 export class CzechiaIdFrontRecognizer extends Recognizer {
     constructor() {
         super('CzechiaIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Czech ID
-         * 
-         *  
+         * {true} if the date of birth is being extracted, {false} otherwise. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Czech ID
-         * 
-         *  
+         * {true} if the date of expiry is being extracted, {false} otherwise. 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue should be extracted from Czech ID
-         * 
-         *  
+         * {true} if the date of issue is being extracted, {false} otherwise. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if given names of Czech ID owner should be extracted
-         * 
-         *  
+         * {true} if the given names is being extracted, {false} otherwise. 
          */
         this.extractGivenNames = true;
         
         /** 
-         * Defines if place of birth should be extracted from Czech ID
-         * 
-         *  
+         * {true} if the place of birth is being extracted, {false} otherwise. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         *  Defines if sex of Czech ID owner should be extracted
-         * 
-         *   
+         * {true} if the sex is being extracted, {false} otherwise. 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Czech ID owner should be extracted
-         * 
-         *  
+         * {true} if the surname is being extracted, {false} otherwise. 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         

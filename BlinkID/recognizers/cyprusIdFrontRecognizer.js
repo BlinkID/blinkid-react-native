@@ -18,34 +18,24 @@ export class CyprusIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The document Number of the front side of the Cyprus Id owner. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
-        
-        /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The id Number of the front side of the Cyprus Id owner. 
+         * The ID number of Cyprus ID card. 
          */
         this.idNumber = nativeResult.idNumber;
         
         /** 
-         * The name of the front side of the Cyprus Id owner. 
+         * Signature image from the document 
          */
-        this.name = nativeResult.name;
-        
-        /** 
-         * The surname of the front side of the Cyprus Id owner. 
-         */
-        this.surname = nativeResult.surname;
+        this.signatureImage = nativeResult.signatureImage;
         
     }
 }
@@ -58,70 +48,44 @@ export class CyprusIdFrontRecognizer extends Recognizer {
         super('CyprusIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if document number of Cyprus ID card should be extracted.
-         * 
-         *  
-         */
-        this.extractDocumentNumber = true;
-        
-        /** 
-         * Defines if name of Cyprus ID card owner should be extracted.
-         * 
-         *  
-         */
-        this.extractName = true;
-        
-        /** 
-         * Defines if surname of Cyprus ID card owner should be extracted.
-         * 
-         *  
-         */
-        this.extractSurname = true;
-        
-        /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
+        
+        /** 
+         * Defines whether signature image will be available in result. 
+         */
+        this.returnSignatureImage = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new CyprusIdFrontRecognizerResult(nativeResult); }
     }

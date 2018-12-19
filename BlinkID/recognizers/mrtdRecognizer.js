@@ -18,17 +18,17 @@ export class MrtdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Image of the Machine Readable Zone or nil if not available. 
+         * MRZ image from the document 
          */
         this.mrzImage = nativeResult.mrzImage;
         
         /** 
-         * Returns the Data extracted from the machine readable zone. 
+         * The Data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -36,55 +36,51 @@ export class MrtdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer that can recognizer Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
+ * Recognizer that can recognize Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
  */
 export class MrtdRecognizer extends Recognizer {
     constructor() {
         super('MrtdRecognizer');
         
         /** 
-         * Whether returning of unparsed results is allowed
-         * 
-         *  
+         * Whether returning of unparsed results is allowed 
          */
         this.allowUnparsedResults = false;
         
         /** 
-         * Whether returning of unverified results is allowed
-         * Unverified result is result that is parsed, but check digits are incorrect.
-         * 
-         *  
+         * Whether returning of unverified results is allowed 
          */
         this.allowUnverifiedResults = false;
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * The DPI (Dots Per Inch) for MRZ image that should be returned. 
+         */
+        this.mrzImageDpi = 250;
+        
+        /** 
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether cropped image of the Machine Readable Zone should be available in result.
-         * Note - enabling this feature will degrade performance
-         * 
-         *  
+         * Defines whether MRZ image will be available in result. 
          */
         this.returnMrzImage = false;
-        
-        /** 
-         * Desired DPI for MRZ and full document images (if saving of those is enabled)
-         * 
-         *  
-         */
-        this.saveImageDPI = 250;
         
         this.createResultFromNative = function (nativeResult) { return new MrtdRecognizerResult(nativeResult); }
     }

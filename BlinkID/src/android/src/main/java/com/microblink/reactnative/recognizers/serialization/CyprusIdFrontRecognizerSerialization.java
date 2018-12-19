@@ -13,15 +13,6 @@ public final class CyprusIdFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractDocumentNumber")) {
-            recognizer.setExtractDocumentNumber(jsonRecognizer.getBoolean("extractDocumentNumber"));
-        }
-        if (jsonRecognizer.hasKey("extractName")) {
-            recognizer.setExtractName(jsonRecognizer.getBoolean("extractName"));
-        }
-        if (jsonRecognizer.hasKey("extractSurname")) {
-            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
-        }
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
         }
@@ -37,6 +28,12 @@ public final class CyprusIdFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonRecognizer.hasKey("returnSignatureImage")) {
+            recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
+        }
         return recognizer;
     }
 
@@ -45,12 +42,10 @@ public final class CyprusIdFrontRecognizerSerialization implements RecognizerSer
         com.microblink.entities.recognizers.blinkid.cyprus.CyprusIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.cyprus.CyprusIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("idNumber", result.getIdNumber());
-        jsonResult.putString("name", result.getName());
-        jsonResult.putString("surname", result.getSurname());
+        jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;
     }
 

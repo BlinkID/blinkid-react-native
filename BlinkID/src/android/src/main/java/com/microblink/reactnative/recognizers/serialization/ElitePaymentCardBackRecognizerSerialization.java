@@ -19,9 +19,6 @@ public final class ElitePaymentCardBackRecognizerSerialization implements Recogn
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractCvv")) {
-            recognizer.setExtractCvv(jsonRecognizer.getBoolean("extractCvv"));
-        }
         if (jsonRecognizer.hasKey("extractInventoryNumber")) {
             recognizer.setExtractInventoryNumber(jsonRecognizer.getBoolean("extractInventoryNumber"));
         }

@@ -18,12 +18,12 @@ export class ElitePaymentCardFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The owner of the front side of the Elite Payment Card owner. 
+         * Information about the payment card owner (name, company, etc.). 
          */
         this.owner = nativeResult.owner;
         
@@ -38,46 +38,32 @@ export class ElitePaymentCardFrontRecognizer extends Recognizer {
         super('ElitePaymentCardFrontRecognizer');
         
         /** 
-         * Should anonymize the owner area (redact image pixels) on the document image result
-         * 
-         *  
+         * Should anonymize the owner area (redact image pixels) on the document image result 
          */
         this.anonymizeOwner = false;
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Should extract the card owner information
-         * 
-         *  
+         * Should extract the card owner information 
          */
         this.extractOwner = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
