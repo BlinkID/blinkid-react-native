@@ -23,7 +23,7 @@ export class MrtdRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Image of the Machine Readable Zone or nil if not available. 
+         * face image from the document if enabled with returnMrzImage property. 
          */
         this.mrzImage = nativeResult.mrzImage;
         
@@ -65,6 +65,30 @@ export class MrtdRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Property for setting DPI for mrz images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.mrzImageDpi = 250;
+        
+        /** 
          * Sets whether full document image of ID card should be extracted.
          * 
          *  
@@ -72,19 +96,11 @@ export class MrtdRecognizer extends Recognizer {
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether cropped image of the Machine Readable Zone should be available in result.
-         * Note - enabling this feature will degrade performance
+         * Sets whether MRZ image from ID card should be extracted
          * 
          *  
          */
         this.returnMrzImage = false;
-        
-        /** 
-         * Desired DPI for MRZ and full document images (if saving of those is enabled)
-         * 
-         *  
-         */
-        this.saveImageDPI = 250;
         
         this.createResultFromNative = function (nativeResult) { return new MrtdRecognizerResult(nativeResult); }
     }

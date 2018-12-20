@@ -31,6 +31,7 @@ public enum RecognizerSerializers {
         registerMapping(new AustriaIdFrontRecognizerSerialization());
         registerMapping(new AustriaPassportRecognizerSerialization());
         registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new BruneiIdFrontRecognizerSerialization());
         registerMapping(new ColombiaDlFrontRecognizerSerialization());
         registerMapping(new ColombiaIdBackRecognizerSerialization());
         registerMapping(new ColombiaIdFrontRecognizerSerialization());
@@ -39,6 +40,8 @@ public enum RecognizerSerializers {
         registerMapping(new CroatiaIdFrontRecognizerSerialization());
         registerMapping(new CyprusIdBackRecognizerSerialization());
         registerMapping(new CyprusIdFrontRecognizerSerialization());
+        registerMapping(new CyprusOldIdBackRecognizerSerialization());
+        registerMapping(new CyprusOldIdFrontRecognizerSerialization());
         registerMapping(new CzechiaCombinedRecognizerSerialization());
         registerMapping(new CzechiaIdBackRecognizerSerialization());
         registerMapping(new CzechiaIdFrontRecognizerSerialization());
@@ -55,7 +58,6 @@ public enum RecognizerSerializers {
         registerMapping(new GermanyOldIdRecognizerSerialization());
         registerMapping(new GermanyPassportRecognizerSerialization());
         registerMapping(new HongKongIdFrontRecognizerSerialization());
-        registerMapping(new IkadRecognizerSerialization());
         registerMapping(new IndonesiaIdFrontRecognizerSerialization());
         registerMapping(new IrelandDlFrontRecognizerSerialization());
         registerMapping(new ItalyDlFrontRecognizerSerialization());
@@ -65,14 +67,17 @@ public enum RecognizerSerializers {
         registerMapping(new KuwaitIdBackRecognizerSerialization());
         registerMapping(new KuwaitIdFrontRecognizerSerialization());
         registerMapping(new MalaysiaDlFrontRecognizerSerialization());
+        registerMapping(new MalaysiaIkadFrontRecognizerSerialization());
+        registerMapping(new MalaysiaMyKadBackRecognizerSerialization());
+        registerMapping(new MalaysiaMyKadFrontRecognizerSerialization());
+        registerMapping(new MalaysiaMyKasFrontRecognizerSerialization());
+        registerMapping(new MalaysiaMyPrFrontRecognizerSerialization());
         registerMapping(new MalaysiaMyTenteraFrontRecognizerSerialization());
         registerMapping(new MexicoVoterIdFrontRecognizerSerialization());
         registerMapping(new MoroccoIdBackRecognizerSerialization());
         registerMapping(new MoroccoIdFrontRecognizerSerialization());
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
-        registerMapping(new MyKadBackRecognizerSerialization());
-        registerMapping(new MyKadFrontRecognizerSerialization());
         registerMapping(new NewZealandDlFrontRecognizerSerialization());
         registerMapping(new PaymentCardBackRecognizerSerialization());
         registerMapping(new PaymentCardCombinedRecognizerSerialization());

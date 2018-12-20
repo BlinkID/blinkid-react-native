@@ -41,12 +41,6 @@
         }
     }
     {
-        id extractCvv = [jsonRecognizer valueForKey:@"extractCvv"];
-        if (extractCvv != nil) {
-            recognizer.extractCvv = [(NSNumber *)extractCvv boolValue];
-        }
-    }
-    {
         id extractInventoryNumber = [jsonRecognizer valueForKey:@"extractInventoryNumber"];
         if (extractInventoryNumber != nil) {
             recognizer.extractInventoryNumber = [(NSNumber *)extractInventoryNumber boolValue];

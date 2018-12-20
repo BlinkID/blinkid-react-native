@@ -11,11 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for CyprusIdFrontRecognizer.
+ * Result object for BruneiIdFrontRecognizer.
  */
-export class CyprusIdFrontRecognizerResult extends RecognizerResult {
+export class BruneiIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The date of birth of Brunei ID owner. 
+         */
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The document number of Brunei ID. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -28,24 +38,29 @@ export class CyprusIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The ID number of Cyprus ID card. 
+         * The full name of Brunei ID owner. 
          */
-        this.idNumber = nativeResult.idNumber;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * The place of birth of Brunei ID owner. 
          */
-        this.signatureImage = nativeResult.signatureImage;
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The sex of Brunei ID owner. 
+         */
+        this.sex = nativeResult.sex;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of Cyprus national ID cards.
+ * Recognizer which can scan front side of yellow version of Brunei ID.
  */
-export class CyprusIdFrontRecognizer extends Recognizer {
+export class BruneiIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('CyprusIdFrontRecognizer');
+        super('BruneiIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -53,6 +68,34 @@ export class CyprusIdFrontRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if date of birth of Brunei ID owner should be extracted.
+         * 
+         *  
+         */
+        this.extractDateOfBirth = true;
+        
+        /** 
+         * Defines if full name of Brunei ID owner should be extracted.
+         * 
+         *  
+         */
+        this.extractFullName = true;
+        
+        /** 
+         * Defines if place of birth of Brunei ID owner should be extracted.
+         * 
+         *  
+         */
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines if sex of Brunei ID owner should be extracted.
+         * 
+         *  
+         */
+        this.extractSex = true;
         
         /** 
          * Property for setting DPI for face images
@@ -92,21 +135,6 @@ export class CyprusIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
-         */
-        this.returnSignatureImage = false;
-        
-        /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
-         */
-        this.signatureImageDpi = 250;
-        
-        this.createResultFromNative = function (nativeResult) { return new CyprusIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiIdFrontRecognizerResult(nativeResult); }
     }
 }

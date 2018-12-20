@@ -11,11 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for CyprusIdBackRecognizer.
+ * Result object for CyprusOldIdBackRecognizer.
  */
-export class CyprusIdBackRecognizerResult extends RecognizerResult {
+export class CyprusOldIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The date of birth of the old Cyprus ID card owner. 
+         */
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The expiry date of old Cyprus ID card. 
+         */
+        this.expiresOn = nativeResult.expiresOn != null ? new Date(nativeResult.expiresOn) : null;
         
         /** 
          * full document image if enabled with returnFullDocumentImage property. 
@@ -23,19 +33,19 @@ export class CyprusIdBackRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * The sex of the old Cyprus ID card owner. 
          */
-        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        this.sex = nativeResult.sex;
         
     }
 }
 
 /**
- * Recognizer which can scan back side of Cyprus ID cards.
+ * Recognizer which can scan back side of old Cyprus national ID cards.
  */
-export class CyprusIdBackRecognizer extends Recognizer {
+export class CyprusOldIdBackRecognizer extends Recognizer {
     constructor() {
-        super('CyprusIdBackRecognizer');
+        super('CyprusOldIdBackRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -43,6 +53,20 @@ export class CyprusIdBackRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if the expiry date of old Cryprus ID card should be extracted.
+         * 
+         *  
+         */
+        this.extractExpiresOn = true;
+        
+        /** 
+         * Defines if the sex of old Cyprus ID card owner should be extracted.
+         * 
+         *  
+         */
+        this.extractSex = true;
         
         /** 
          * Property for setting DPI for full document images
@@ -67,6 +91,6 @@ export class CyprusIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new CyprusIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CyprusOldIdBackRecognizerResult(nativeResult); }
     }
 }

@@ -11,11 +11,16 @@ import {
 } from '../types'
 
 /**
- * Result object for CyprusIdFrontRecognizer.
+ * Result object for CyprusOldIdFrontRecognizer.
  */
-export class CyprusIdFrontRecognizerResult extends RecognizerResult {
+export class CyprusOldIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The document number of old Cyprus ID card. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -28,24 +33,29 @@ export class CyprusIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The ID number of Cyprus ID card. 
+         * The ID number of the old Cyprus ID card. 
          */
         this.idNumber = nativeResult.idNumber;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * The name of old Cyprus ID card owner. 
          */
-        this.signatureImage = nativeResult.signatureImage;
+        this.name = nativeResult.name;
+        
+        /** 
+         * The surname of old Cyprus ID card owner. 
+         */
+        this.surname = nativeResult.surname;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of Cyprus national ID cards.
+ * Recognizer which can scan front side of old Cyprus national ID cards.
  */
-export class CyprusIdFrontRecognizer extends Recognizer {
+export class CyprusOldIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('CyprusIdFrontRecognizer');
+        super('CyprusOldIdFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -53,6 +63,27 @@ export class CyprusIdFrontRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if document number of old Cyprus ID card should be extracted.
+         * 
+         *  
+         */
+        this.extractDocumentNumber = true;
+        
+        /** 
+         * Defines if name of old Cyprus ID card owner should be extracted.
+         * 
+         *  
+         */
+        this.extractName = true;
+        
+        /** 
+         * Defines if surname of old Cyprus ID card owner should be extracted.
+         * 
+         *  
+         */
+        this.extractSurname = true;
         
         /** 
          * Property for setting DPI for face images
@@ -92,21 +123,6 @@ export class CyprusIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
-         */
-        this.returnSignatureImage = false;
-        
-        /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
-         */
-        this.signatureImageDpi = 250;
-        
-        this.createResultFromNative = function (nativeResult) { return new CyprusIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new CyprusOldIdFrontRecognizerResult(nativeResult); }
     }
 }

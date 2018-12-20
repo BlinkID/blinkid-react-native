@@ -6,7 +6,7 @@ blink_id_plugin_path=`pwd`/BlinkID
 rm -rf BlinkIDReactNative
 
 # create a sample application
-react-native init --version="0.56.0" BlinkIDReactNative
+react-native init --version="0.57.8" BlinkIDReactNative
 
 # enter into demo project folder
 pushd BlinkIDReactNative
@@ -20,9 +20,13 @@ if true; then
 else
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
-  pushd node_modules
-    ln -s $blink_id_plugin_path blinkid-react-native
-  popd
+  # from RN 0.57 symlink does not work any more
+  npm pack $blink_id_plugin_path
+  npm i --save blinkid-react-native-4.5.0.tgz
+  npm install
+  #pushd node_modules
+    #ln -s $blink_id_plugin_path blinkid-react-native
+  #popd
 fi
 
 # link package with project
@@ -52,7 +56,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.4.0'
+  pod 'PPBlinkID', '~> 4.5.0'
 end
 EOF
 
@@ -60,6 +64,7 @@ EOF
 pod install
 
 if false; then
+  echo "Replace pod with custom dev version of BlinkID framework"
   # replace pod with custom dev version of BlinkID framework
   pushd Pods/PPBlinkID
   rm -rf MicroBlink.bundle

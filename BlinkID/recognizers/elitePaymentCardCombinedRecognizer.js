@@ -115,13 +115,6 @@ export class ElitePaymentCardCombinedRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Should extract the card's security code/value
-         * 
-         *  
-         */
-        this.extractCvv = true;
-        
-        /** 
          * Should extract the card's inventory number
          * 
          *  

@@ -65,9 +65,9 @@
         }
     }
     {
-        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
-        if (extractPlaceOfBirth != nil) {
-            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
+        id extractPlaceOfOrigin = [jsonRecognizer valueForKey:@"extractPlaceOfOrigin"];
+        if (extractPlaceOfOrigin != nil) {
+            recognizer.extractPlaceOfOrigin = [(NSNumber *)extractPlaceOfOrigin boolValue];
         }
     }
     {
@@ -80,6 +80,24 @@
         id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
         if (extractSurname != nil) {
             recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
+        }
+    }
+    {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -108,29 +126,16 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.authority forKey:@"authority"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
-    [jsonResult setValue:self.result.documentCode forKey:@"documentCode"];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.givenName forKey:@"givenName"];
     [jsonResult setValue:self.result.height forKey:@"height"];
-    [jsonResult setValue:self.result.issuer forKey:@"issuer"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
-    [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
-    [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.nonMrzDateOfBirth] forKey:@"nonMrzDateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.nonMrzDateOfExpiry] forKey:@"nonMrzDateOfExpiry"];
-    [jsonResult setValue:self.result.nonMrzSex forKey:@"nonMrzSex"];
-    [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
-    [jsonResult setValue:self.result.opt2 forKey:@"opt2"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
     [jsonResult setValue:self.result.passportNumber forKey:@"passportNumber"];
-    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
-    [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
-    [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
+    [jsonResult setValue:self.result.placeOfOrigin forKey:@"placeOfOrigin"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:self.result.surname forKey:@"surname"];
 

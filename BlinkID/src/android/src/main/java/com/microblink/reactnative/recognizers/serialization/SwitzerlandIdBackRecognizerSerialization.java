@@ -31,6 +31,12 @@ public final class SwitzerlandIdBackRecognizerSerialization implements Recognize
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
@@ -43,25 +49,12 @@ public final class SwitzerlandIdBackRecognizerSerialization implements Recognize
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("authority", result.getAuthority());
-        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
-        jsonResult.putString("documentCode", result.getDocumentCode());
-        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("height", result.getHeight());
-        jsonResult.putString("issuer", result.getIssuer());
-        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
-        jsonResult.putString("mrzText", result.getMrzText());
-        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
-        jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putMap("nonMrzDateOfExpiry", SerializationUtils.serializeDate(result.getNonMrzDateOfExpiry()));
-        jsonResult.putString("nonMrzSex", result.getNonMrzSex());
-        jsonResult.putString("opt1", result.getOpt1());
-        jsonResult.putString("opt2", result.getOpt2());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("placeOfOrigin", result.getPlaceOfOrigin());
-        jsonResult.putString("primaryId", result.getPrimaryId());
-        jsonResult.putString("secondaryId", result.getSecondaryId());
         jsonResult.putString("sex", result.getSex());
         return jsonResult;
     }

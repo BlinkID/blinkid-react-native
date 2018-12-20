@@ -13,12 +13,6 @@ public final class CyprusIdBackRecognizerSerialization implements RecognizerSeri
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractExpiresOn")) {
-            recognizer.setExtractExpiresOn(jsonRecognizer.getBoolean("extractExpiresOn"));
-        }
-        if (jsonRecognizer.hasKey("extractSex")) {
-            recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
-        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
@@ -36,10 +30,8 @@ public final class CyprusIdBackRecognizerSerialization implements RecognizerSeri
         com.microblink.entities.recognizers.blinkid.cyprus.CyprusIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.cyprus.CyprusIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
-        jsonResult.putMap("expiresOn", SerializationUtils.serializeDate(result.getExpiresOn()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("sex", result.getSex());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         return jsonResult;
     }
 

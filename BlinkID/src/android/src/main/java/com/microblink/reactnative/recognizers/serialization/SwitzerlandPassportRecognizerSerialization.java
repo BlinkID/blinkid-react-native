@@ -34,14 +34,23 @@ public final class SwitzerlandPassportRecognizerSerialization implements Recogni
         if (jsonRecognizer.hasKey("extractPassportNumber")) {
             recognizer.setExtractPassportNumber(jsonRecognizer.getBoolean("extractPassportNumber"));
         }
-        if (jsonRecognizer.hasKey("extractPlaceOfBirth")) {
-            recognizer.setExtractPlaceOfBirth(jsonRecognizer.getBoolean("extractPlaceOfBirth"));
+        if (jsonRecognizer.hasKey("extractPlaceOfOrigin")) {
+            recognizer.setExtractPlaceOfOrigin(jsonRecognizer.getBoolean("extractPlaceOfOrigin"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
         if (jsonRecognizer.hasKey("extractSurname")) {
             recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -61,26 +70,13 @@ public final class SwitzerlandPassportRecognizerSerialization implements Recogni
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
-        jsonResult.putString("documentCode", result.getDocumentCode());
-        jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("givenName", result.getGivenName());
         jsonResult.putString("height", result.getHeight());
-        jsonResult.putString("issuer", result.getIssuer());
-        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
-        jsonResult.putString("mrzText", result.getMrzText());
-        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
-        jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putMap("nonMrzDateOfBirth", SerializationUtils.serializeDate(result.getNonMrzDateOfBirth()));
-        jsonResult.putMap("nonMrzDateOfExpiry", SerializationUtils.serializeDate(result.getNonMrzDateOfExpiry()));
-        jsonResult.putString("nonMrzSex", result.getNonMrzSex());
-        jsonResult.putString("opt1", result.getOpt1());
-        jsonResult.putString("opt2", result.getOpt2());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("passportNumber", result.getPassportNumber());
-        jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
-        jsonResult.putString("primaryId", result.getPrimaryId());
-        jsonResult.putString("secondaryId", result.getSecondaryId());
+        jsonResult.putString("placeOfOrigin", result.getPlaceOfOrigin());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("surname", result.getSurname());
         return jsonResult;

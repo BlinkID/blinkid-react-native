@@ -6,15 +6,18 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class MyKadBackRecognizerSerialization implements RecognizerSerialization {
+public final class CyprusOldIdBackRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MyKadBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.malaysia.MyKadBackRecognizer();
+        com.microblink.entities.recognizers.blinkid.cyprus.CyprusOldIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.cyprus.CyprusOldIdBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractOldNric")) {
-            recognizer.setExtractOldNric(jsonRecognizer.getBoolean("extractOldNric"));
+        if (jsonRecognizer.hasKey("extractExpiresOn")) {
+            recognizer.setExtractExpiresOn(jsonRecognizer.getBoolean("extractExpiresOn"));
+        }
+        if (jsonRecognizer.hasKey("extractSex")) {
+            recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
@@ -25,37 +28,28 @@ public final class MyKadBackRecognizerSerialization implements RecognizerSeriali
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
-        if (jsonRecognizer.hasKey("returnSignatureImage")) {
-            recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
-        }
-        if (jsonRecognizer.hasKey("signatureImageDpi")) {
-            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
-        }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.malaysia.MyKadBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.malaysia.MyKadBackRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.cyprus.CyprusOldIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.cyprus.CyprusOldIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
-        jsonResult.putString("extendedNric", result.getExtendedNric());
+        jsonResult.putMap("expiresOn", SerializationUtils.serializeDate(result.getExpiresOn()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("nric", result.getNric());
-        jsonResult.putString("oldNric", result.getOldNric());
         jsonResult.putString("sex", result.getSex());
-        jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "MyKadBackRecognizer";
+        return "CyprusOldIdBackRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.malaysia.MyKadBackRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.cyprus.CyprusOldIdBackRecognizer.class;
     }
 }

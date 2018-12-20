@@ -35,6 +35,24 @@
         }
     }
     {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        }
+    }
+    {
+        id mrzImageDpi = [jsonRecognizer valueForKey:@"mrzImageDpi"];
+        if (mrzImageDpi != nil) {
+            recognizer.mrzImageDpi = [(NSNumber *)mrzImageDpi unsignedIntegerValue];
+        }
+    }
+    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
@@ -44,12 +62,6 @@
         id returnMrzImage = [jsonRecognizer valueForKey:@"returnMrzImage"];
         if (returnMrzImage != nil) {
             recognizer.returnMrzImage = [(NSNumber *)returnMrzImage boolValue];
-        }
-    }
-    {
-        id saveImageDPI = [jsonRecognizer valueForKey:@"saveImageDPI"];
-        if (saveImageDPI != nil) {
-            recognizer.saveImageDPI = [(NSNumber *)saveImageDPI unsignedIntegerValue];
         }
     }
 

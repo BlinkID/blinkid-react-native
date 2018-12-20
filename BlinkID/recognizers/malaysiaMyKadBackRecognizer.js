@@ -11,9 +11,9 @@ import {
 } from '../types'
 
 /**
- * Result object for MyKadBackRecognizer.
+ * Result object for MalaysiaMyKadBackRecognizer.
  */
-export class MyKadBackRecognizerResult extends RecognizerResult {
+export class MalaysiaMyKadBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -60,9 +60,9 @@ export class MyKadBackRecognizerResult extends RecognizerResult {
  * 
  * MyKadBack recognizer is used for scanning back side of MyKad.
  */
-export class MyKadBackRecognizer extends Recognizer {
+export class MalaysiaMyKadBackRecognizer extends Recognizer {
     constructor() {
-        super('MyKadBackRecognizer');
+        super('MalaysiaMyKadBackRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -116,6 +116,6 @@ export class MyKadBackRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new MyKadBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new MalaysiaMyKadBackRecognizerResult(nativeResult); }
     }
 }
