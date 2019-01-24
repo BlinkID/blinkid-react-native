@@ -18,27 +18,27 @@ export class AustraliaDlBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Australian DL owner. 
+         * The address of the Australia DL owner 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The document date of expiry of the Australian DL 
-         */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of the Australian DL owner. 
+         * The last name of the Australia DL owner 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The licence number of the Australian DL owner. 
+         * The date of expiry of the Australia DL 
+         */
+        this.licenceExpiry = nativeResult.licenceExpiry != null ? new Date(nativeResult.licenceExpiry) : null;
+        
+        /** 
+         * The licence number of the Australia DL 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
@@ -46,47 +46,49 @@ export class AustraliaDlBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Australia DL Back Recognizer.
- * 
- * Australia DL Back recognizer is used for scanning back side of Australia DL.
+ * Recognizer which can scan the back side of Australian driver's licences
  */
 export class AustraliaDlBackRecognizer extends Recognizer {
     constructor() {
         super('AustraliaDlBackRecognizer');
         
         /** 
-         *  Defines if sex of Australian DL owner should be extracted
-         * 
-         *   
+         * Defines whether glare detector is enabled. 
+         */
+        this.detectGlare = true;
+        
+        /** 
+         * Defines if address of the Australia DL owner should be extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Australian DL
-         * 
-         *  
-         */
-        this.extractDateOfExpiry = true;
-        
-        /** 
-         *  Defines if last name of Australian DL owner should be extracted
-         * 
-         *   
+         * Defines if last name of the Australia DL owner should be extracted 
          */
         this.extractLastName = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * Defines if the licence number of the Australia DL should be extracted 
+         */
+        this.extractLicenceNumber = true;
+        
+        /** 
+         * Defines if date of expiry of the Australia DL should be extracted 
+         */
+        this.extractLicenseExpiry = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

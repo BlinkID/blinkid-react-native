@@ -11,16 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for SingaporeDlFrontRecognizer.
+ * Result object for BruneiResidencePermitFrontRecognizer.
  */
-export class SingaporeDlFrontRecognizerResult extends RecognizerResult {
+export class BruneiResidencePermitFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The birth date of Singapore driver's owner. 
+         * The date of birth of Brunei residence permit owner. 
          */
-        this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The document number of Brunei residence permit. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * Face image from the document 
@@ -33,34 +38,29 @@ export class SingaporeDlFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issue date of Singapore driver's licence. 
+         * The full name of Brunei residence permit owner. 
          */
-        this.issueDate = nativeResult.issueDate != null ? new Date(nativeResult.issueDate) : null;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * The licence number of Singapore driver's licence. 
+         * The place of birth of Brunei residence permit owner. 
          */
-        this.licenceNumber = nativeResult.licenceNumber;
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The (full) name of Singapore driver's licence owner. 
+         * The sex of Brunei residence permit owner. 
          */
-        this.name = nativeResult.name;
-        
-        /** 
-         * The valid till date of Singapore driver's licence. 
-         */
-        this.validTill = nativeResult.validTill != null ? new Date(nativeResult.validTill) : null;
+        this.sex = nativeResult.sex;
         
     }
 }
 
 /**
- * The Singapore Dl Front Recognizer is used for scanning front side of the Singapore Dl.
+ * Recognizer which can scan front side of Brunei residence permits.
  */
-export class SingaporeDlFrontRecognizer extends Recognizer {
+export class BruneiResidencePermitFrontRecognizer extends Recognizer {
     constructor() {
-        super('SingaporeDlFrontRecognizer');
+        super('BruneiResidencePermitFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -68,24 +68,24 @@ export class SingaporeDlFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if birth date of Singapore driver's license owner should be extracted. 
+         * Defines if date of birth of Brunei residence permit owner should be extracted. 
          */
-        this.extractBirthDate = true;
+        this.extractDateOfBirth = true;
         
         /** 
-         * Defines if issue date of Singapore driver's license should be extracted. 
+         * Defines if full name of Brunei residence permit owner should be extracted. 
          */
-        this.extractIssueDate = true;
+        this.extractFullName = true;
         
         /** 
-         * Defines if name of Singapore driver's license owner should be extracted. 
+         * Defines if place of birth of Brunei residence permit owner should be extracted. 
          */
-        this.extractName = true;
+        this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if valid till date of Singapore driver's license should be extracted. 
+         * Defines if sex of Brunei residence permit owner should be extracted. 
          */
-        this.extractValidTill = true;
+        this.extractSex = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -112,6 +112,6 @@ export class SingaporeDlFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SingaporeDlFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiResidencePermitFrontRecognizerResult(nativeResult); }
     }
 }

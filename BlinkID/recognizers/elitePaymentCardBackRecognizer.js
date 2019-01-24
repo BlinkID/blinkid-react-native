@@ -18,27 +18,27 @@ export class ElitePaymentCardBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The card Number of the back side of the Elite Payment Card owner. 
+         * The payment card number. 
          */
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * The cvv of the back side of the Elite Payment Card owner. 
+         * Payment card's security code/value. 
          */
         this.cvv = nativeResult.cvv;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The inventory Number of the back side of the Elite Payment Card owner. 
+         * Payment card's inventory number. 
          */
         this.inventoryNumber = nativeResult.inventoryNumber;
         
         /** 
-         * The valid Thru of the back side of the Elite Payment Card owner. 
+         * The payment card's last month of validity. 
          */
         this.validThru = nativeResult.validThru != null ? new Date(nativeResult.validThru) : null;
         
@@ -53,60 +53,42 @@ export class ElitePaymentCardBackRecognizer extends Recognizer {
         super('ElitePaymentCardBackRecognizer');
         
         /** 
-         * Should anonymize the card number area (redact image pixels) on the document image result
-         * 
-         *  
+         * Should anonymize the card number area (redact image pixels) on the document image result 
          */
         this.anonymizeCardNumber = false;
         
         /** 
-         * Should anonymize the CVV area (redact image pixels) on the document image result
-         * 
-         *  
+         * Should anonymize the CVV area (redact image pixels) on the document image result 
          */
         this.anonymizeCvv = false;
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Should extract the card's inventory number
-         * 
-         *  
+         * Should extract the card's inventory number 
          */
         this.extractInventoryNumber = true;
         
         /** 
-         * Should extract the payment card's month of expiry
-         * 
-         *  
+         * Should extract the payment card's month of expiry 
          */
         this.extractValidThru = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

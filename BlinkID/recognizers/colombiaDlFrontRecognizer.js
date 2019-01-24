@@ -18,42 +18,42 @@ export class ColombiaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date Of Birth of the front side of the Colombia Dl owner. 
+         * The date of birth of the Colombia Dl card owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date Of Issue of the front side of the Colombia Dl owner. 
+         * The date of issue of the Colombia Dl card. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * The driver Restrictions of the front side of the Colombia Dl owner. 
+         * The driver restrictions of the Colombia Dl card owner. 
          */
         this.driverRestrictions = nativeResult.driverRestrictions;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuing Agency of the front side of the Colombia Dl owner. 
+         * The issuing agency of the Colombia Dl card. 
          */
         this.issuingAgency = nativeResult.issuingAgency;
         
         /** 
-         * The licence Number of the front side of the Colombia Dl owner. 
+         * The licence number of the Colombia Dl card. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The name of the front side of the Colombia Dl owner. 
+         * The name of the Colombia Dl card owner. 
          */
         this.name = nativeResult.name;
         
@@ -68,75 +68,52 @@ export class ColombiaDlFrontRecognizer extends Recognizer {
         super('ColombiaDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if the date of birth of the Colombia Dl owner should be extracted.
-         * 
-         *  
+         * Defines if the date of birth of the Colombia Dl owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if the driver restrictions of the Colombia Dl owner should be extracted.
-         * 
-         *  
+         * Defines if the driver restrictions of the Colombia Dl owner should be extracted. 
          */
         this.extractDriverRestrictions = true;
         
         /** 
-         * Defines if the issuing agency of the Colombia Dl card should be extracted.
-         * 
-         *  
+         * Defines if the issuing agency of the Colombia Dl card should be extracted. 
          */
         this.extractIssuingAgency = true;
         
         /** 
-         * Defines if the name of the Colombia Dl owner should be extracted.
-         * 
-         *  
+         * Defines if the name of the Colombia Dl owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

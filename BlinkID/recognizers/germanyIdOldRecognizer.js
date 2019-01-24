@@ -11,9 +11,9 @@ import {
 } from '../types'
 
 /**
- * Result object for UnitedArabEmiratesIdFrontRecognizer.
+ * Result object for GermanyIdOldRecognizer.
  */
-export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult {
+export class GermanyIdOldRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -28,29 +28,29 @@ export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult 
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The idNumber of the United Arab Emirates ID owner. 
+         * The data extracted from the machine readable zone. 
          */
-        this.idNumber = nativeResult.idNumber;
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The name of the United Arab Emirates ID owner. 
+         * The place of birth of old German ID owner. 
          */
-        this.name = nativeResult.name;
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The nationality of the United Arab Emirates ID owner. 
+         * Signature image from the document 
          */
-        this.nationality = nativeResult.nationality;
+        this.signatureImage = nativeResult.signatureImage;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of United Arab Emirates national ID cards.
+ * Recognizer which can scan old German ID.
  */
-export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
+export class GermanyIdOldRecognizer extends Recognizer {
     constructor() {
-        super('UnitedArabEmiratesIdFrontRecognizer');
+        super('GermanyIdOldRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -58,14 +58,9 @@ export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if name of United Arab Emirates ID owner should be extracted 
+         * Defines if place of birth of old German ID owner should be extracted. 
          */
-        this.extractName = true;
-        
-        /** 
-         * Defines if nationality of United Arab Emirates ID owner should be extracted 
-         */
-        this.extractNationality = true;
+        this.extractPlaceOfBirth = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -92,6 +87,16 @@ export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIdFrontRecognizerResult(nativeResult); }
+        /** 
+         * Defines whether signature image will be available in result. 
+         */
+        this.returnSignatureImage = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new GermanyIdOldRecognizerResult(nativeResult); }
     }
 }

@@ -6,30 +6,15 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class GermanyPassportRecognizerSerialization implements RecognizerSerialization {
+public final class GermanyIdOldRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer();
+        com.microblink.entities.recognizers.blinkid.germany.GermanyIdOldRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.germany.GermanyIdOldRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractAuthority")) {
-            recognizer.setExtractAuthority(jsonRecognizer.getBoolean("extractAuthority"));
-        }
-        if (jsonRecognizer.hasKey("extractDateOfIssue")) {
-            recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
-        }
-        if (jsonRecognizer.hasKey("extractGivenName")) {
-            recognizer.setExtractGivenName(jsonRecognizer.getBoolean("extractGivenName"));
-        }
-        if (jsonRecognizer.hasKey("extractNationality")) {
-            recognizer.setExtractNationality(jsonRecognizer.getBoolean("extractNationality"));
-        }
         if (jsonRecognizer.hasKey("extractPlaceOfBirth")) {
             recognizer.setExtractPlaceOfBirth(jsonRecognizer.getBoolean("extractPlaceOfBirth"));
-        }
-        if (jsonRecognizer.hasKey("extractSurname")) {
-            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
         }
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
@@ -57,29 +42,24 @@ public final class GermanyPassportRecognizerSerialization implements RecognizerS
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.germany.GermanyIdOldRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyIdOldRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("authority", result.getAuthority());
-        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("givenName", result.getGivenName());
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
-        jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
-        jsonResult.putString("surname", result.getSurname());
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "GermanyPassportRecognizer";
+        return "GermanyIdOldRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.germany.GermanyPassportRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.germany.GermanyIdOldRecognizer.class;
     }
 }

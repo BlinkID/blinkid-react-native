@@ -19,14 +19,17 @@ public final class GermanyIdBackRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractAuthority")) {
             recognizer.setExtractAuthority(jsonRecognizer.getBoolean("extractAuthority"));
         }
+        if (jsonRecognizer.hasKey("extractColourOfEyes")) {
+            recognizer.setExtractColourOfEyes(jsonRecognizer.getBoolean("extractColourOfEyes"));
+        }
         if (jsonRecognizer.hasKey("extractDateOfIssue")) {
             recognizer.setExtractDateOfIssue(jsonRecognizer.getBoolean("extractDateOfIssue"));
         }
-        if (jsonRecognizer.hasKey("extractEyeColour")) {
-            recognizer.setExtractEyeColour(jsonRecognizer.getBoolean("extractEyeColour"));
-        }
         if (jsonRecognizer.hasKey("extractHeight")) {
             recognizer.setExtractHeight(jsonRecognizer.getBoolean("extractHeight"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
@@ -42,30 +45,17 @@ public final class GermanyIdBackRecognizerSerialization implements RecognizerSer
         com.microblink.entities.recognizers.blinkid.germany.GermanyIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.germany.GermanyIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putString("address", result.getAddress());
         jsonResult.putString("addressCity", result.getAddressCity());
         jsonResult.putString("addressHouseNumber", result.getAddressHouseNumber());
         jsonResult.putString("addressStreet", result.getAddressStreet());
         jsonResult.putString("addressZipCode", result.getAddressZipCode());
         jsonResult.putString("authority", result.getAuthority());
-        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
-        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putString("colourOfEyes", result.getColourOfEyes());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
-        jsonResult.putString("documentCode", result.getDocumentCode());
-        jsonResult.putString("documentNumber", result.getDocumentNumber());
-        jsonResult.putString("eyeColour", result.getEyeColour());
+        jsonResult.putString("fullAddress", result.getFullAddress());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("height", result.getHeight());
-        jsonResult.putString("issuer", result.getIssuer());
-        jsonResult.putBoolean("mrzParsed", result.isMrzParsed());
-        jsonResult.putString("mrzText", result.getMrzText());
-        jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
-        jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putString("opt1", result.getOpt1());
-        jsonResult.putString("opt2", result.getOpt2());
-        jsonResult.putString("primaryId", result.getPrimaryId());
-        jsonResult.putString("secondaryId", result.getSecondaryId());
-        jsonResult.putString("sex", result.getSex());
+        jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         return jsonResult;
     }
 

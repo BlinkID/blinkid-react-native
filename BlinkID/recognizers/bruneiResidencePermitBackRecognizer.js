@@ -11,11 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for KuwaitIdBackRecognizer.
+ * Result object for BruneiResidencePermitBackRecognizer.
  */
-export class KuwaitIdBackRecognizerResult extends RecognizerResult {
+export class BruneiResidencePermitBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The address of Brunei Residence Permit card owner. 
+         */
+        this.address = nativeResult.address;
+        
+        /** 
+         * The date of issue of Brunei Residence Permit card. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Image of the full document 
@@ -28,19 +38,19 @@ export class KuwaitIdBackRecognizerResult extends RecognizerResult {
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The serial number of Kuwait ID. 
+         * The race of Brunei Residence Permit card owner. 
          */
-        this.serialNo = nativeResult.serialNo;
+        this.race = nativeResult.race;
         
     }
 }
 
 /**
- * Recognizer which can scan back side of Kuwait national ID cards.
+ * Recognizer which can scan back side of Brunei national Residence Permit cards.
  */
-export class KuwaitIdBackRecognizer extends Recognizer {
+export class BruneiResidencePermitBackRecognizer extends Recognizer {
     constructor() {
-        super('KuwaitIdBackRecognizer');
+        super('BruneiResidencePermitBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -48,9 +58,19 @@ export class KuwaitIdBackRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if serial number of Kuwait ID should be extracted. 
+         * Defines if address of Brunei Residence Permit card owner should be extracted. 
          */
-        this.extractSerialNo = true;
+        this.extractAddress = true;
+        
+        /** 
+         * Defines if date of issue of Brunei Residence Permit card should be extracted. 
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if the race of Brunei Residence Permit card owner should be extracted. 
+         */
+        this.extractRace = true;
         
         /** 
          * The DPI (Dots Per Inch) for full document image that should be returned. 
@@ -67,6 +87,6 @@ export class KuwaitIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new KuwaitIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiResidencePermitBackRecognizerResult(nativeResult); }
     }
 }

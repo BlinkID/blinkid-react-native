@@ -11,16 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for SpainDlFrontRecognizer.
+ * Result object for GermanyDlFrontRecognizer.
  */
-export class SpainDlFrontRecognizerResult extends RecognizerResult {
+export class GermanyDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Spain DL owner 
+         * The date of birth of Germany DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The date of expiry of Germany DL. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
+        
+        /** 
+         * The date of issue of Germany DL. 
+         */
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Face image from the document 
@@ -28,7 +38,7 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Spain DL owner 
+         * The first name of the Germany DL owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -38,22 +48,27 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuing authority of the Spain DL 
+         * The issuing authority of the Germany DL. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The licence categories of the Spain DL 
+         * The last name of the Germany DL owner. 
+         */
+        this.lastName = nativeResult.lastName;
+        
+        /** 
+         * The licence categories of the Germany DL. 
          */
         this.licenceCategories = nativeResult.licenceCategories;
         
         /** 
-         * The licence number of the Spain DL 
+         * The licence number of the Germany DL. 
          */
-        this.number = nativeResult.number;
+        this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The date of birth of Spain DL owner 
+         * The place of birth of Germany DL owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
@@ -62,30 +77,15 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
-        /** 
-         * The surname of the Spain DL owner. 
-         */
-        this.surname = nativeResult.surname;
-        
-        /** 
-         * The date of issue of Spain DL 
-         */
-        this.validFrom = nativeResult.validFrom != null ? new Date(nativeResult.validFrom) : null;
-        
-        /** 
-         * The date of expiry of Spain DL 
-         */
-        this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
-        
     }
 }
 
 /**
- * Recognizer which can scan front side of Spain national DL cards
+ * Recognizer which can scan front side of Germany national DL cards
  */
-export class SpainDlFrontRecognizer extends Recognizer {
+export class GermanyDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('SpainDlFrontRecognizer');
+        super('GermanyDlFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -93,44 +93,44 @@ export class SpainDlFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Spain DL owner should be extracted 
+         * Defines if date of birth of Germany DL owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if first name of Spain DL owner should be extracted 
+         * Defines if date of expiry of Germany DL should be extracted. 
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * Defines if date of issue of Germany DL should be extracted. 
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if first name of Germany DL owner should be extracted. 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority of Spain DL should be extracted 
+         * Defines if issuing authority of Germany DL should be extracted. 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if licence categories of Spain DL should be extracted 
+         * Defines if last name of Germany DL owner should be extracted. 
+         */
+        this.extractLastName = true;
+        
+        /** 
+         * Defines if licence categories of Germany DL should be extracted. 
          */
         this.extractLicenceCategories = true;
         
         /** 
-         * Defines if place of birth of Spain DL owner should be extracted 
+         * Defines if place of birth of Germany DL owner should be extracted. 
          */
         this.extractPlaceOfBirth = true;
-        
-        /** 
-         * Defines if surname of Spain DL owner should be extracted 
-         */
-        this.extractSurname = true;
-        
-        /** 
-         * Defines if date of issue of Spain DL should be extracted 
-         */
-        this.extractValidFrom = true;
-        
-        /** 
-         * Defines if date of expiry of Spain DL should be extracted 
-         */
-        this.extractValidUntil = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -167,6 +167,6 @@ export class SpainDlFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new SpainDlFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new GermanyDlFrontRecognizerResult(nativeResult); }
     }
 }

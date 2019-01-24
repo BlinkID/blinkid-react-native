@@ -25,14 +25,29 @@ public final class SlovakiaIdFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractDocumentNumber")) {
             recognizer.setExtractDocumentNumber(jsonRecognizer.getBoolean("extractDocumentNumber"));
         }
+        if (jsonRecognizer.hasKey("extractFirstName")) {
+            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
+        }
         if (jsonRecognizer.hasKey("extractIssuedBy")) {
             recognizer.setExtractIssuedBy(jsonRecognizer.getBoolean("extractIssuedBy"));
+        }
+        if (jsonRecognizer.hasKey("extractLastName")) {
+            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
         if (jsonRecognizer.hasKey("extractNationality")) {
             recognizer.setExtractNationality(jsonRecognizer.getBoolean("extractNationality"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -42,6 +57,9 @@ public final class SlovakiaIdFrontRecognizerSerialization implements RecognizerS
         }
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }

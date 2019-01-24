@@ -11,21 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for CyprusOldIdBackRecognizer.
+ * Result object for BruneiIdBackRecognizer.
  */
-export class CyprusOldIdBackRecognizerResult extends RecognizerResult {
+export class BruneiIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the old Cyprus ID card owner. 
+         * The address of Brunei ID owner. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        this.address = nativeResult.address;
         
         /** 
-         * The expiry date of old Cyprus ID card. 
+         * The date of issue of Brunei ID. 
          */
-        this.expiresOn = nativeResult.expiresOn != null ? new Date(nativeResult.expiresOn) : null;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
          * Image of the full document 
@@ -33,19 +33,24 @@ export class CyprusOldIdBackRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The sex of the old Cyprus ID card owner. 
+         * The data extracted from the machine readable zone. 
          */
-        this.sex = nativeResult.sex;
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        
+        /** 
+         * The race of Brunei ID owner. 
+         */
+        this.race = nativeResult.race;
         
     }
 }
 
 /**
- * Recognizer which can scan back side of old Cyprus national ID cards.
+ * Recognizer which can scan back side of Brunei national ID cards.
  */
-export class CyprusOldIdBackRecognizer extends Recognizer {
+export class BruneiIdBackRecognizer extends Recognizer {
     constructor() {
-        super('CyprusOldIdBackRecognizer');
+        super('BruneiIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -53,14 +58,19 @@ export class CyprusOldIdBackRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if the expiry date of old Cryprus ID card should be extracted. 
+         * Defines if address of Brunei ID owner should be extracted. 
          */
-        this.extractExpiresOn = true;
+        this.extractAddress = true;
         
         /** 
-         * Defines if the sex of old Cyprus ID card owner should be extracted. 
+         * Defines if date of issue of Brunei ID should be extracted. 
          */
-        this.extractSex = true;
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if the race of Brunei ID owner should be extracted. 
+         */
+        this.extractRace = true;
         
         /** 
          * The DPI (Dots Per Inch) for full document image that should be returned. 
@@ -77,6 +87,6 @@ export class CyprusOldIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new CyprusOldIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiIdBackRecognizerResult(nativeResult); }
     }
 }
