@@ -18,27 +18,27 @@ export class MalaysiaMyKadBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Date of birth of MyKad owner. 
+         * The Date Of Birth of the MyKad owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Extended NRIC (National Registration Identity Card Number) of MyKad. 
+         * The Extended NRIC of the MyKad owner. 
          */
         this.extendedNric = nativeResult.extendedNric;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * NRIC (National Registration Identity Card Number) of MyKad. 
+         * The NRIC of the MyKad owner. 
          */
         this.nric = nativeResult.nric;
         
         /** 
-         * Old NRIC (National Registration Identity Card Number) of MyKad. 
+         * The old NRIC of the MyKad owner. 
          */
         this.oldNric = nativeResult.oldNric;
         
@@ -46,34 +46,48 @@ export class MalaysiaMyKadBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer for reading back side of Malaysian MyKad.
+ * Class for configuring Kad Back Recognizer.
+ * 
+ * MyKadBack recognizer is used for scanning back side of MyKad.
  */
 export class MalaysiaMyKadBackRecognizer extends Recognizer {
     constructor() {
         super('MalaysiaMyKadBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if old NRIC (National Registration Identity Card Number) of MyKad 
+         * Defines if old NRIC should be extracted from back side of the MyKad
+         * 
+         *  
          */
         this.extractOldNric = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

@@ -28,7 +28,7 @@ export class BruneiIdBackRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -53,37 +53,53 @@ export class BruneiIdBackRecognizer extends Recognizer {
         super('BruneiIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Brunei ID owner should be extracted. 
+         * Defines if address of Brunei ID owner should be extracted.
+         * 
+         *  
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if date of issue of Brunei ID should be extracted. 
+         * Defines if date of issue of Brunei ID should be extracted.
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if the race of Brunei ID owner should be extracted. 
+         * Defines if the race of Brunei ID owner should be extracted.
+         * 
+         *  
          */
         this.extractRace = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

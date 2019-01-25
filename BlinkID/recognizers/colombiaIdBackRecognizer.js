@@ -18,42 +18,42 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The birth date of Colombia ID owner. 
+         * The birth Date of the Colombia Id owner. 
          */
         this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
         
         /** 
-         * The blood group of Colombia ID owner. 
+         * The blood Group of the Colombia Id owner. 
          */
         this.bloodGroup = nativeResult.bloodGroup;
         
         /** 
-         * The document number of Colombia ID. 
+         * The document Number Colombia Id owner. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The encoded fingerprint of Colombia ID owner. 
+         * The fingerprint of the Colombian ID owner. 
          */
         this.fingerprint = nativeResult.fingerprint;
         
         /** 
-         * The first name of Colombia ID owner. 
+         * The first Name of the Colombia Id owner. 
          */
         this.firstName = nativeResult.firstName;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The last name of Colombia ID owner. 
+         * The last Name of the Colombia Id owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The sex of Colombia ID owner. 
+         * The sex of the Colombia Id owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -61,39 +61,60 @@ export class ColombiaIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan back side of Colombian national ID cards.
+ * Class for configuring Colombia Id Back Recognizer.
+ * 
+ * Colombia Id Back recognizer is used for scanning back side of the Colombia Id.
  */
 export class ColombiaIdBackRecognizer extends Recognizer {
     constructor() {
         super('ColombiaIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Allow scanning PDF417 barcodes which don't have quiet zone 
+         * Set this to true to scan barcodes which don't have quiet zone (white area) around it
+         * 
+         * Use only if necessary because it slows down the recognition process
+         * 
+         *  
          */
         this.nullQuietZoneAllowed = true;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Enable decoding of non-standard PDF417 barcodes, but without 
+         * Set this to true to scan even barcode not compliant with standards
+         * For example, malformed PDF417 barcodes which were incorrectly encoded
+         * 
+         * Use only if necessary because it slows down the recognition process
+         * 
+         *  
          */
         this.scanUncertain = true;
         
