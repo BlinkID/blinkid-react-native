@@ -18,32 +18,27 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Croatian ID owner. 
-         */
-        this.address = nativeResult.address;
-        
-        /** 
          * The citizenship of the Croatian ID owner. 
          */
         this.citizenship = nativeResult.citizenship;
         
         /** 
-         * The date of birth of Croatian ID owner 
+         * The date of birth of the Croatian ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Croatian ID 
+         * The date of expiry of the Croatian ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Check if date of expiry is permanent on the Croatian ID. 
+         * Determines if date of expiry of the Croatian ID is permanent. 
          */
         this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
         /** 
-         * The document date of issue of the Croatian ID. 
+         * The date of issue of Croatian ID. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
@@ -58,7 +53,7 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * true if the document is bilingual 
+         * Determines if Croatian ID is bilingual. 
          */
         this.documentBilingual = nativeResult.documentBilingual;
         
@@ -69,6 +64,16 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
          * be true only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
+        
+        /** 
+         * Determines if Croatian ID is issued for non resident. 
+         */
+        this.documentForNonResident = nativeResult.documentForNonResident;
+        
+        /** 
+         * The document number of the Croatian ID. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -91,14 +96,9 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The identity card number of Croatian ID. 
+         * The issuer of Croatian ID. 
          */
-        this.identityCardNumber = nativeResult.identityCardNumber;
-        
-        /** 
-         * The issuing authority of Croatian ID. 
-         */
-        this.issuingAuthority = nativeResult.issuingAuthority;
+        this.issuedBy = nativeResult.issuedBy;
         
         /** 
          * The last name of the Croatian ID owner. 
@@ -106,20 +106,19 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * Determines if all check digits inside MRZ are correct. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * true if the person is non Croatian resident 
+         * The OIB of Croatian ID owner. 
          */
-        this.nonResident = nativeResult.nonResident;
+        this.oib = nativeResult.oib;
         
         /** 
-         * The OIB (PIN) of the Croatian ID owner. 
+         * The residence of Croatian ID owner. 
          */
-        this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
+        this.residence = nativeResult.residence;
         
         /** 
          * Returns true if recognizer has finished scanning first side and is now scanning back side,
@@ -141,9 +140,7 @@ export class CroatiaCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Croatian ID Combined Recognizer.
- * 
- * Croatian ID Combined recognizer is used for scanning both front and back side of Croatian ID.
+ * Recognizer which can front and back side of Croatian national ID cards.
  */
 export class CroatiaCombinedRecognizer extends Recognizer {
     constructor() {
@@ -155,6 +152,93 @@ export class CroatiaCombinedRecognizer extends Recognizer {
          *  
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if citizenship of Croatian ID owner should be extracted
+         * 
+         *  
+         */
+        this.extractCitizenship = true;
+        
+        /** 
+         * Defines if date of birth of Croatian ID owner should be extracted
+         * 
+         *  
+         */
+        this.extractDateOfBirth = true;
+        
+        /** 
+         * Defines if date of expiry of Croatian ID document should be extracted
+         * 
+         *  
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * Defines if date of issue of Croatian ID should be extracted.
+         * 
+         *  
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if first name of Croatian ID owner should be extracted
+         * 
+         *  
+         */
+        this.extractFirstName = true;
+        
+        /** 
+         * Defines if issuer of Croatian ID should be extracted.
+         * 
+         *  
+         */
+        this.extractIssuedBy = true;
+        
+        /** 
+         * Defines if last name of Croatian ID owner should be extracted
+         * 
+         *  
+         */
+        this.extractLastName = true;
+        
+        /** 
+         * Defines if residence of Croatian ID owner should be extracted.
+         * 
+         *  
+         */
+        this.extractResidence = true;
+        
+        /** 
+         * Defines if sex of Croatian ID owner should be extracted
+         * 
+         *  
+         */
+        this.extractSex = true;
+        
+        /** 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether face image from ID card should be extracted
@@ -183,6 +267,14 @@ export class CroatiaCombinedRecognizer extends Recognizer {
          *  
          */
         this.signResult = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new CroatiaCombinedRecognizerResult(nativeResult); }
     }

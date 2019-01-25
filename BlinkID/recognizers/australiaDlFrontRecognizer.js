@@ -18,19 +18,14 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Australian DL owner. 
+         * The address of the Australian DL owner 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of Australian DL owner 
+         * The date of birth of the Australian DL owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
-        
-        /** 
-         * The document date of expiry of the Australian DL 
-         */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -43,19 +38,24 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The licence number of the Australian DL owner. 
+         * The full name of the Australian DL owner 
+         */
+        this.fullName = nativeResult.fullName;
+        
+        /** 
+         * The date of expiry of the Australian DL 
+         */
+        this.licenceExpiry = nativeResult.licenceExpiry != null ? new Date(nativeResult.licenceExpiry) : null;
+        
+        /** 
+         * The licence number of the Australian DL 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The licence type of Australian DL. 
+         * The licence type of the Australian DL 
          */
         this.licenceType = nativeResult.licenceType;
-        
-        /** 
-         * The first name of the Australian DL owner. 
-         */
-        this.name = nativeResult.name;
         
         /** 
          * image of the signature if enabled with returnSignatureImage property. 
@@ -66,18 +66,23 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Australia DL Front Recognizer.
- * 
- * Australia DL Front recognizer is used for scanning front side of Australia DL.
+ * Recognizer which can scan the front side of Australian driver's licences.
  */
 export class AustraliaDlFrontRecognizer extends Recognizer {
     constructor() {
         super('AustraliaDlFrontRecognizer');
         
         /** 
-         *  Defines if sex of Australian DL owner should be extracted
+         * Defines if glare detection should be turned on/off.
          * 
-         *   
+         *  
+         */
+        this.detectGlare = true;
+        
+        /** 
+         * Defines if address of Australian DL owner should be extracted
+         * 
+         *  
          */
         this.extractAddress = true;
         
@@ -89,11 +94,26 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Australian DL
+         * Defines if full name of Australian DL owner should be extracted
          * 
          *  
          */
-        this.extractDateOfExpiry = true;
+        this.extractFullName = true;
+        
+        /** 
+         * Defines if date of expiry of Australian DL should be extracted
+         * 
+         *  
+         */
+        this.extractLicenseExpiry = true;
+        
+        /** 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
         
         /** 
          * Property for setting DPI for full document images
@@ -102,6 +122,14 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
          *  
          */
         this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether face image from ID card should be extracted
@@ -123,6 +151,14 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
          *  
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new AustraliaDlFrontRecognizerResult(nativeResult); }
     }

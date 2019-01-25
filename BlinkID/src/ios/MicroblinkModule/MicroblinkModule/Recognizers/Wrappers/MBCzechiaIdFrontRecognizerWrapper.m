@@ -65,6 +65,24 @@
         }
     }
     {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -82,6 +100,12 @@
             recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
         }
     }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
@@ -95,17 +119,17 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.identityCardNumber forKey:@"identityCardNumber"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:self.result.givenNames forKey:@"givenNames"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
+    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }

@@ -11,31 +11,11 @@ import {
 } from '../types'
 
 /**
- * Result object for CzechiaIdFrontRecognizer.
+ * Result object for GermanyIdOldRecognizer.
  */
-export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
+export class GermanyIdOldRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * The date of birth of Czech ID owner. 
-         */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
-        
-        /** 
-         * The date of expiry of Czech ID. 
-         */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * The date of issue of Czech ID. 
-         */
-        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
-        
-        /** 
-         * The document number of Czech ID. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -48,39 +28,29 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given names of Czech ID owner. 
+         * The data extracted from the machine readable zone. 
          */
-        this.givenNames = nativeResult.givenNames;
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The place of birth of Czech ID owner. 
+         * The place of birth of old German ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
-        
-        /** 
-         * The sex of Czech ID owner. 
-         */
-        this.sex = nativeResult.sex;
         
         /** 
          * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
-        /** 
-         * The surname of Czech ID owner. 
-         */
-        this.surname = nativeResult.surname;
-        
     }
 }
 
 /**
- * Recognizer which can scan the front side of Czech IDs.
+ * Recognizer which can scan old German ID.
  */
-export class CzechiaIdFrontRecognizer extends Recognizer {
+export class GermanyIdOldRecognizer extends Recognizer {
     constructor() {
-        super('CzechiaIdFrontRecognizer');
+        super('GermanyIdOldRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -90,53 +60,11 @@ export class CzechiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if Czech ID owner's date of birth should be extracted
-         * 
-         *  
-         */
-        this.extractDateOfBirth = true;
-        
-        /** 
-         * Defines if Czech ID's date of expiry should be extracted
-         * 
-         *  
-         */
-        this.extractDateOfExpiry = true;
-        
-        /** 
-         * Defines if Czech ID's date of issue should be extracted
-         * 
-         *  
-         */
-        this.extractDateOfIssue = true;
-        
-        /** 
-         * Defines if Czech ID owner's given names should be extracted
-         * 
-         *  
-         */
-        this.extractGivenNames = true;
-        
-        /** 
-         * Defines if Czech ID owner's place of birth should be extracted
+         * Defines if place of birth of old German ID owner should be extracted.
          * 
          *  
          */
         this.extractPlaceOfBirth = true;
-        
-        /** 
-         * Defines if Czech ID owner's sex should be extracted
-         * 
-         *  
-         */
-        this.extractSex = true;
-        
-        /** 
-         * Defines if Czech ID owner's surname should be extracted
-         * 
-         *  
-         */
-        this.extractSurname = true;
         
         /** 
          * Property for setting DPI for face images
@@ -191,6 +119,6 @@ export class CzechiaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new CzechiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new GermanyIdOldRecognizerResult(nativeResult); }
     }
 }

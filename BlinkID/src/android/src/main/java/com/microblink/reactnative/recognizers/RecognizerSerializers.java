@@ -31,7 +31,10 @@ public enum RecognizerSerializers {
         registerMapping(new AustriaIdFrontRecognizerSerialization());
         registerMapping(new AustriaPassportRecognizerSerialization());
         registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new BruneiIdBackRecognizerSerialization());
         registerMapping(new BruneiIdFrontRecognizerSerialization());
+        registerMapping(new BruneiResidencePermitBackRecognizerSerialization());
+        registerMapping(new BruneiResidencePermitFrontRecognizerSerialization());
         registerMapping(new ColombiaDlFrontRecognizerSerialization());
         registerMapping(new ColombiaIdBackRecognizerSerialization());
         registerMapping(new ColombiaIdFrontRecognizerSerialization());
@@ -53,9 +56,10 @@ public enum RecognizerSerializers {
         registerMapping(new EudlRecognizerSerialization());
         registerMapping(new GermanyCombinedRecognizerSerialization());
         registerMapping(new GermanyDlBackRecognizerSerialization());
+        registerMapping(new GermanyDlFrontRecognizerSerialization());
         registerMapping(new GermanyIdBackRecognizerSerialization());
         registerMapping(new GermanyIdFrontRecognizerSerialization());
-        registerMapping(new GermanyOldIdRecognizerSerialization());
+        registerMapping(new GermanyIdOldRecognizerSerialization());
         registerMapping(new GermanyPassportRecognizerSerialization());
         registerMapping(new HongKongIdFrontRecognizerSerialization());
         registerMapping(new IndonesiaIdFrontRecognizerSerialization());

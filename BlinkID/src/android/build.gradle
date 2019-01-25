@@ -20,6 +20,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url 'http://maven.microblink.com' }
+    mavenLocal()
     maven {
         url 'https://maven.google.com/'
         name 'Google'
@@ -30,7 +31,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:27.1.1"
     compile 'com.facebook.react:react-native:+'
-    compile('com.microblink:blinkid:4.5.0@aar') {
+    compile('com.microblink:blinkid:4.6.0@aar') {
         transitive = false
     }
 }

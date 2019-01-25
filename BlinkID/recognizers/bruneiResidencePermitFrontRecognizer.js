@@ -11,29 +11,19 @@ import {
 } from '../types'
 
 /**
- * Result object for CzechiaIdFrontRecognizer.
+ * Result object for BruneiResidencePermitFrontRecognizer.
  */
-export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
+export class BruneiResidencePermitFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Czech ID owner. 
+         * The date of birth of Brunei residence permit owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of Czech ID. 
-         */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * The date of issue of Czech ID. 
-         */
-        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
-        
-        /** 
-         * The document number of Czech ID. 
+         * The document number of Brunei residence permit. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -48,39 +38,29 @@ export class CzechiaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The given names of Czech ID owner. 
+         * The full name of Brunei residence permit owner. 
          */
-        this.givenNames = nativeResult.givenNames;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * The place of birth of Czech ID owner. 
+         * The place of birth of Brunei residence permit owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The sex of Czech ID owner. 
+         * The sex of Brunei residence permit owner. 
          */
         this.sex = nativeResult.sex;
-        
-        /** 
-         * image of the signature if enabled with returnSignatureImage property. 
-         */
-        this.signatureImage = nativeResult.signatureImage;
-        
-        /** 
-         * The surname of Czech ID owner. 
-         */
-        this.surname = nativeResult.surname;
         
     }
 }
 
 /**
- * Recognizer which can scan the front side of Czech IDs.
+ * Recognizer which can scan front side of Brunei residence permits.
  */
-export class CzechiaIdFrontRecognizer extends Recognizer {
+export class BruneiResidencePermitFrontRecognizer extends Recognizer {
     constructor() {
-        super('CzechiaIdFrontRecognizer');
+        super('BruneiResidencePermitFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -90,53 +70,32 @@ export class CzechiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if Czech ID owner's date of birth should be extracted
+         * Defines if date of birth of Brunei residence permit owner should be extracted.
          * 
          *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if Czech ID's date of expiry should be extracted
+         * Defines if full name of Brunei residence permit owner should be extracted.
          * 
          *  
          */
-        this.extractDateOfExpiry = true;
+        this.extractFullName = true;
         
         /** 
-         * Defines if Czech ID's date of issue should be extracted
-         * 
-         *  
-         */
-        this.extractDateOfIssue = true;
-        
-        /** 
-         * Defines if Czech ID owner's given names should be extracted
-         * 
-         *  
-         */
-        this.extractGivenNames = true;
-        
-        /** 
-         * Defines if Czech ID owner's place of birth should be extracted
+         * Defines if place of birth of Brunei residence permit owner should be extracted.
          * 
          *  
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if Czech ID owner's sex should be extracted
+         * Defines if sex of Brunei residence permit owner should be extracted.
          * 
          *  
          */
         this.extractSex = true;
-        
-        /** 
-         * Defines if Czech ID owner's surname should be extracted
-         * 
-         *  
-         */
-        this.extractSurname = true;
         
         /** 
          * Property for setting DPI for face images
@@ -176,21 +135,6 @@ export class CzechiaIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
-         */
-        this.returnSignatureImage = false;
-        
-        /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
-         */
-        this.signatureImageDpi = 250;
-        
-        this.createResultFromNative = function (nativeResult) { return new CzechiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiResidencePermitFrontRecognizerResult(nativeResult); }
     }
 }

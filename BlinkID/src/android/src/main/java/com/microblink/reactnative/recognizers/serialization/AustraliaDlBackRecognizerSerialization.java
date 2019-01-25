@@ -10,17 +10,26 @@ public final class AustraliaDlBackRecognizerSerialization implements RecognizerS
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.australia.AustraliaDlBackRecognizer();
+        if (jsonRecognizer.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        }
         if (jsonRecognizer.hasKey("extractAddress")) {
             recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
-        }
-        if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
-            recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
         }
         if (jsonRecognizer.hasKey("extractLastName")) {
             recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
+        if (jsonRecognizer.hasKey("extractLicenceNumber")) {
+            recognizer.setExtractLicenceNumber(jsonRecognizer.getBoolean("extractLicenceNumber"));
+        }
+        if (jsonRecognizer.hasKey("extractLicenseExpiry")) {
+            recognizer.setExtractLicenseExpiry(jsonRecognizer.getBoolean("extractLicenseExpiry"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
@@ -34,9 +43,9 @@ public final class AustraliaDlBackRecognizerSerialization implements RecognizerS
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
-        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putMap("licenceExpiry", SerializationUtils.serializeDate(result.getLicenceExpiry()));
         jsonResult.putString("licenceNumber", result.getLicenceNumber());
         return jsonResult;
     }

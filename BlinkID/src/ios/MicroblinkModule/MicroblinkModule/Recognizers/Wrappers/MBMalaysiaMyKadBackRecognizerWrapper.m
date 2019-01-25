@@ -46,18 +46,6 @@
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
         }
     }
-    {
-        id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
-        if (returnSignatureImage != nil) {
-            recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
-        }
-    }
-    {
-        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
-        if (signatureImageDpi != nil) {
-            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
-        }
-    }
 
     return recognizer;
 }
@@ -76,8 +64,6 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.nric forKey:@"nric"];
     [jsonResult setValue:self.result.oldNric forKey:@"oldNric"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
-    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;
 }

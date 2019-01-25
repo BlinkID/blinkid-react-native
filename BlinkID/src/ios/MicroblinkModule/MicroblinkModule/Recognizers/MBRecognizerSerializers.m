@@ -10,7 +10,10 @@
 #import "MBAustriaIdFrontRecognizerWrapper.h"
 #import "MBAustriaPassportRecognizerWrapper.h"
 #import "MBBarcodeRecognizerWrapper.h"
+#import "MBBruneiIdBackRecognizerWrapper.h"
 #import "MBBruneiIdFrontRecognizerWrapper.h"
+#import "MBBruneiResidencePermitBackRecognizerWrapper.h"
+#import "MBBruneiResidencePermitFrontRecognizerWrapper.h"
 #import "MBColombiaDlFrontRecognizerWrapper.h"
 #import "MBColombiaIdBackRecognizerWrapper.h"
 #import "MBColombiaIdFrontRecognizerWrapper.h"
@@ -32,9 +35,10 @@
 #import "MBEudlRecognizerWrapper.h"
 #import "MBGermanyCombinedRecognizerWrapper.h"
 #import "MBGermanyDlBackRecognizerWrapper.h"
+#import "MBGermanyDlFrontRecognizerWrapper.h"
 #import "MBGermanyIdBackRecognizerWrapper.h"
 #import "MBGermanyIdFrontRecognizerWrapper.h"
-#import "MBGermanyOldIdRecognizerWrapper.h"
+#import "MBGermanyIdOldRecognizerWrapper.h"
 #import "MBGermanyPassportRecognizerWrapper.h"
 #import "MBHongKongIdFrontRecognizerWrapper.h"
 #import "MBIndonesiaIdFrontRecognizerWrapper.h"
@@ -120,7 +124,10 @@
         [self registerCreator:[[MBAustriaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiResidencePermitBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiResidencePermitFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdFrontRecognizerCreator alloc] init]];
@@ -142,9 +149,10 @@
         [self registerCreator:[[MBEudlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyDlBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBGermanyDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyOldIdRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBGermanyIdOldRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBHongKongIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBIndonesiaIdFrontRecognizerCreator alloc] init]];

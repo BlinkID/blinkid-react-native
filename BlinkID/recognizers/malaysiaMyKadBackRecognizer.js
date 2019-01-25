@@ -42,16 +42,6 @@ export class MalaysiaMyKadBackRecognizerResult extends RecognizerResult {
          */
         this.oldNric = nativeResult.oldNric;
         
-        /** 
-         * The Sex of the MyKad owner. 
-         */
-        this.sex = nativeResult.sex;
-        
-        /** 
-         * image of the signature if enabled with returnSignatureImage property. 
-         */
-        this.signatureImage = nativeResult.signatureImage;
-        
     }
 }
 
@@ -100,21 +90,6 @@ export class MalaysiaMyKadBackRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
-        
-        /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
-         */
-        this.returnSignatureImage = false;
-        
-        /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
-         */
-        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new MalaysiaMyKadBackRecognizerResult(nativeResult); }
     }

@@ -1,31 +1,25 @@
-#import "MBAustraliaDlFrontRecognizerWrapper.h"
+#import "MBGermanyDlFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBAustraliaDlFrontRecognizerCreator
+@implementation MBGermanyDlFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"AustraliaDlFrontRecognizer";
+        _jsonName = @"GermanyDlFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBAustraliaDlFrontRecognizer *recognizer = [[MBAustraliaDlFrontRecognizer alloc] init];
+    MBGermanyDlFrontRecognizer *recognizer = [[MBGermanyDlFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
-        }
-    }
-    {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
         }
     }
     {
@@ -35,15 +29,45 @@
         }
     }
     {
-        id extractFullName = [jsonRecognizer valueForKey:@"extractFullName"];
-        if (extractFullName != nil) {
-            recognizer.extractFullName = [(NSNumber *)extractFullName boolValue];
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
         }
     }
     {
-        id extractLicenseExpiry = [jsonRecognizer valueForKey:@"extractLicenseExpiry"];
-        if (extractLicenseExpiry != nil) {
-            recognizer.extractLicenseExpiry = [(NSNumber *)extractLicenseExpiry boolValue];
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
+        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
+        if (extractFirstName != nil) {
+            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        }
+    }
+    {
+        id extractIssuingAuthority = [jsonRecognizer valueForKey:@"extractIssuingAuthority"];
+        if (extractIssuingAuthority != nil) {
+            recognizer.extractIssuingAuthority = [(NSNumber *)extractIssuingAuthority boolValue];
+        }
+    }
+    {
+        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
+        if (extractLastName != nil) {
+            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
+        }
+    }
+    {
+        id extractLicenceCategories = [jsonRecognizer valueForKey:@"extractLicenceCategories"];
+        if (extractLicenceCategories != nil) {
+            recognizer.extractLicenceCategories = [(NSNumber *)extractLicenceCategories boolValue];
+        }
+    }
+    {
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
@@ -94,21 +118,24 @@
 
 @end
 
-@interface MBAustraliaDlFrontRecognizer (JsonSerialization)
+@interface MBGermanyDlFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBAustraliaDlFrontRecognizer (JsonSerialization)
+@implementation MBGermanyDlFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
+    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.licenceExpiry] forKey:@"licenceExpiry"];
+    [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
+    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:self.result.licenceCategories forKey:@"licenceCategories"];
     [jsonResult setValue:self.result.licenceNumber forKey:@"licenceNumber"];
-    [jsonResult setValue:self.result.licenceType forKey:@"licenceType"];
+    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;

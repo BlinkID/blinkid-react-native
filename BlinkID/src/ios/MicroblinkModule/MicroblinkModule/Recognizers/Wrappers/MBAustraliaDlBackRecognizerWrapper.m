@@ -17,15 +17,15 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBAustraliaDlBackRecognizer *recognizer = [[MBAustraliaDlBackRecognizer alloc] init];
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
+        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
+        if (detectGlare != nil) {
+            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
         }
     }
     {
-        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
-        if (extractDateOfExpiry != nil) {
-            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
+        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
+        if (extractAddress != nil) {
+            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
         }
     }
     {
@@ -35,9 +35,27 @@
         }
     }
     {
+        id extractLicenceNumber = [jsonRecognizer valueForKey:@"extractLicenceNumber"];
+        if (extractLicenceNumber != nil) {
+            recognizer.extractLicenceNumber = [(NSNumber *)extractLicenceNumber boolValue];
+        }
+    }
+    {
+        id extractLicenseExpiry = [jsonRecognizer valueForKey:@"extractLicenseExpiry"];
+        if (extractLicenseExpiry != nil) {
+            recognizer.extractLicenseExpiry = [(NSNumber *)extractLicenseExpiry boolValue];
+        }
+    }
+    {
         id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
         if (fullDocumentImageDpi != nil) {
             recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -60,9 +78,9 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.licenceExpiry] forKey:@"licenceExpiry"];
     [jsonResult setValue:self.result.licenceNumber forKey:@"licenceNumber"];
 
     return jsonResult;

@@ -1,21 +1,21 @@
-#import "MBAustraliaDlFrontRecognizerWrapper.h"
+#import "MBGermanyIdOldRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBAustraliaDlFrontRecognizerCreator
+@implementation MBGermanyIdOldRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"AustraliaDlFrontRecognizer";
+        _jsonName = @"GermanyIdOldRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBAustraliaDlFrontRecognizer *recognizer = [[MBAustraliaDlFrontRecognizer alloc] init];
+    MBGermanyIdOldRecognizer *recognizer = [[MBGermanyIdOldRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -23,27 +23,9 @@
         }
     }
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
-        }
-    }
-    {
-        id extractDateOfBirth = [jsonRecognizer valueForKey:@"extractDateOfBirth"];
-        if (extractDateOfBirth != nil) {
-            recognizer.extractDateOfBirth = [(NSNumber *)extractDateOfBirth boolValue];
-        }
-    }
-    {
-        id extractFullName = [jsonRecognizer valueForKey:@"extractFullName"];
-        if (extractFullName != nil) {
-            recognizer.extractFullName = [(NSNumber *)extractFullName boolValue];
-        }
-    }
-    {
-        id extractLicenseExpiry = [jsonRecognizer valueForKey:@"extractLicenseExpiry"];
-        if (extractLicenseExpiry != nil) {
-            recognizer.extractLicenseExpiry = [(NSNumber *)extractLicenseExpiry boolValue];
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
@@ -94,21 +76,17 @@
 
 @end
 
-@interface MBAustraliaDlFrontRecognizer (JsonSerialization)
+@interface MBGermanyIdOldRecognizer (JsonSerialization)
 @end
 
-@implementation MBAustraliaDlFrontRecognizer (JsonSerialization)
+@implementation MBGermanyIdOldRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.licenceExpiry] forKey:@"licenceExpiry"];
-    [jsonResult setValue:self.result.licenceNumber forKey:@"licenceNumber"];
-    [jsonResult setValue:self.result.licenceType forKey:@"licenceType"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
+    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;

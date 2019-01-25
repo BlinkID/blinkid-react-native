@@ -47,9 +47,21 @@
         }
     }
     {
+        id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
+        if (extractFirstName != nil) {
+            recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
+        }
+    }
+    {
         id extractIssuedBy = [jsonRecognizer valueForKey:@"extractIssuedBy"];
         if (extractIssuedBy != nil) {
             recognizer.extractIssuedBy = [(NSNumber *)extractIssuedBy boolValue];
+        }
+    }
+    {
+        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
+        if (extractLastName != nil) {
+            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
         }
     }
     {
@@ -62,6 +74,24 @@
         id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
         if (extractSex != nil) {
             recognizer.extractSex = [(NSNumber *)extractSex boolValue];
+        }
+    }
+    {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -82,6 +112,12 @@
             recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
         }
     }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
@@ -95,9 +131,9 @@
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];

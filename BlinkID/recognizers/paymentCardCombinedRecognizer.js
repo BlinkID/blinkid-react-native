@@ -126,7 +126,7 @@ export class PaymentCardCombinedRecognizer extends Recognizer {
          * 
          *  
          */
-        this.extractOwner = true;
+        this.extractOwner = false;
         
         /** 
          * Should extract the payment card's month of expiry

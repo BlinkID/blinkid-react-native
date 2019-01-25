@@ -11,31 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for SlovakiaIdFrontRecognizer.
+ * Result object for GermanyDlFrontRecognizer.
  */
-export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
+export class GermanyDlFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of the Slovak ID owner. 
+         * The date of birth of Germany DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The date of expiry of the Slovak ID card. 
+         * The date of expiry of Germany DL. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of the Slovak ID card. 
+         * The date of issue of Germany DL. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
-        
-        /** 
-         * The document number of the Slovak ID card. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -43,7 +38,7 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the Slovak ID owner. 
+         * The first name of the Germany DL owner. 
          */
         this.firstName = nativeResult.firstName;
         
@@ -53,29 +48,29 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuing authority of the Slovak ID card. 
+         * The issuing authority of the Germany DL. 
          */
-        this.issuedBy = nativeResult.issuedBy;
+        this.issuingAuthority = nativeResult.issuingAuthority;
         
         /** 
-         * The last name of the Slovak ID owner. 
+         * The last name of the Germany DL owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The nationality of the Slovak ID owner. 
+         * The licence categories of the Germany DL. 
          */
-        this.nationality = nativeResult.nationality;
+        this.licenceCategories = nativeResult.licenceCategories;
         
         /** 
-         * The personal number of the Slovak ID owner. 
+         * The licence number of the Germany DL. 
          */
-        this.personalNumber = nativeResult.personalNumber;
+        this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * The sex of the Slovak ID owner. 
+         * The place of birth of Germany DL owner. 
          */
-        this.sex = nativeResult.sex;
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
          * image of the signature if enabled with returnSignatureImage property. 
@@ -86,11 +81,11 @@ export class SlovakiaIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front side of Slovak national ID cards.
+ * Recognizer which can scan front side of Germany national DL cards
  */
-export class SlovakiaIdFrontRecognizer extends Recognizer {
+export class GermanyDlFrontRecognizer extends Recognizer {
     constructor() {
-        super('SlovakiaIdFrontRecognizer');
+        super('GermanyDlFrontRecognizer');
         
         /** 
          * Defines if glare detection should be turned on/off.
@@ -100,67 +95,60 @@ export class SlovakiaIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Slovak ID owner should be extracted.
+         * Defines if date of birth of Germany DL owner should be extracted.
          * 
          *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of Slovak ID should be extracted.
+         * Defines if date of expiry of Germany DL should be extracted.
          * 
          *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Slovak ID should be extracted.
+         * Defines if date of issue of Germany DL should be extracted.
          * 
          *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if document number of Slovak ID should be extracted.
-         * 
-         *  
-         */
-        this.extractDocumentNumber = true;
-        
-        /** 
-         * Defines if first name of Slovak ID owner should be extracted.
+         * Defines if first name of Germany DL owner should be extracted.
          * 
          *  
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority of Slovak ID should be extracted.
+         * Defines if issuing authority of Germany DL should be extracted.
          * 
          *  
          */
-        this.extractIssuedBy = true;
+        this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if last name of Slovak ID owner should be extracted.
+         * Defines if last name of Germany DL owner should be extracted.
          * 
          *  
          */
         this.extractLastName = true;
         
         /** 
-         * Defines if nationality of Slovak ID owner should be extracted.
+         * Defines if licence categories of Germany DL should be extracted.
          * 
          *  
          */
-        this.extractNationality = true;
+        this.extractLicenceCategories = true;
         
         /** 
-         * Defines if sex of Slovak ID owner should be extracted.
+         * Defines if place of birth of Germany DL owner should be extracted.
          * 
          *  
          */
-        this.extractSex = true;
+        this.extractPlaceOfBirth = true;
         
         /** 
          * Property for setting DPI for face images
@@ -215,6 +203,6 @@ export class SlovakiaIdFrontRecognizer extends Recognizer {
          */
         this.signatureImageDpi = 250;
         
-        this.createResultFromNative = function (nativeResult) { return new SlovakiaIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new GermanyDlFrontRecognizerResult(nativeResult); }
     }
 }
