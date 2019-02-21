@@ -18,32 +18,32 @@ export class SingaporeChangiEmployeeIdRecognizerResult extends RecognizerResult 
         super(nativeResult.resultState);
         
         /** 
-         * TThe company name of the Singapore Changi employee ID owner. 
+         * The company name of the Singapore Changi employee ID owner 
          */
         this.companyName = nativeResult.companyName;
         
         /** 
-         * The date of expiry of Singapore Changi employee ID. 
+         * The date of expiry of Singapore Changi employee ID 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document number of the Singapore Changi employee ID. 
+         * The document number of the Singapore Changi employee ID 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The name of the Singapore Changi employee ID owner. 
+         * The name of the Singapore Changi employee ID owner 
          */
         this.name = nativeResult.name;
         
@@ -51,77 +51,54 @@ export class SingaporeChangiEmployeeIdRecognizerResult extends RecognizerResult 
 }
 
 /**
- * Class for configuring Singapore Changi Employee Id Recognizer.
- * 
- * Singapore Changi Employee Id recognizer is used for scanning front side of the Singapore Driver's license..
+ * Recognizer which can scan front side of Singapore Changi employee ID cards.
  */
 export class SingaporeChangiEmployeeIdRecognizer extends Recognizer {
     constructor() {
         super('SingaporeChangiEmployeeIdRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if company name should be extracted from the Singapore Changi Employee Id
-         * 
-         *  
+         * Defines if company name of the Singapore Changi employee ID owner should be extracted 
          */
         this.extractCompanyName = true;
         
         /** 
-         * Defines if birth of expiry should be extracted from the Singapore Changi Employee Id
-         * 
-         *  
+         * Defines if date of expiry of the Singapore Changi employee ID should be extracted 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if owner's name should be extracted from the Singapore Changi Employee Id
-         * 
-         *  
+         * Defines if name of the Singapore Changi employee ID owner should be extracted 
          */
         this.extractName = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

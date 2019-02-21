@@ -18,67 +18,67 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The city of the front side of the Malaysia Dl owner. 
+         * The city of Malaysia DL owner 
          */
         this.city = nativeResult.city;
         
         /** 
-         * The dl Class of the front side of the Malaysia Dl owner. 
+         * The vehicle classes of Malaysia DL 
          */
         this.dlClass = nativeResult.dlClass;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The full Address of the front side of the Malaysia Dl owner. 
+         * The address of Malaysia DL owner 
          */
         this.fullAddress = nativeResult.fullAddress;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The identity Number of the front side of the Malaysia Dl owner. 
+         * The identity number of Malaysia DL owner 
          */
         this.identityNumber = nativeResult.identityNumber;
         
         /** 
-         * The name of the front side of the Malaysia Dl owner. 
+         * The name of Malaysia DL owner 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The nationality of the front side of the Malaysia Dl owner. 
+         * The nationality of Malaysia DL owner 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The owner State of the front side of the Malaysia Dl owner. 
+         * The state of Malaysia DL owner 
          */
         this.ownerState = nativeResult.ownerState;
         
         /** 
-         * The street of the front side of the Malaysia Dl owner. 
+         * The street of Malaysia DL owner 
          */
         this.street = nativeResult.street;
         
         /** 
-         * The valid From of the front side of the Malaysia Dl owner. 
+         * The date of issue of Malaysia DL 
          */
         this.validFrom = nativeResult.validFrom != null ? new Date(nativeResult.validFrom) : null;
         
         /** 
-         * The valid Until of the front side of the Malaysia Dl owner. 
+         * The date of expiry of Malaysia DL 
          */
         this.validUntil = nativeResult.validUntil != null ? new Date(nativeResult.validUntil) : null;
         
         /** 
-         * The zipcode of the front side of the Malaysia Dl owner. 
+         * The zipocde of Malaysia DL owner 
          */
         this.zipcode = nativeResult.zipcode;
         
@@ -86,96 +86,69 @@ export class MalaysiaDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front side of Malaysian DL cards.
+ * Recognizer which can scan front side of Malaysia DL cards.
  */
 export class MalaysiaDlFrontRecognizer extends Recognizer {
     constructor() {
         super('MalaysiaDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Malaysian DL owner should be extracted.
-         * 
-         *  
+         * Defines if address of Malaysia DL owner should be extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if vehicle classes of Malaysian DL should be extracted.
-         * 
-         *  
+         * Defines if vehicle classes of Malaysia DL should be extracted 
          */
         this.extractClass = true;
         
         /** 
-         * Defines if name of Malaysian DL owner should be extracted.
-         * 
-         *  
+         * Defines if name of Malaysia DL owner should be extracted 
          */
         this.extractName = true;
         
         /** 
-         * Defines if nationality of Malaysian DL owner should be extracted.
-         * 
-         *  
+         * Defines if nationality of Malaysia DL owner should be extracted 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if date of issue of Malaysian DL should be extracted.
-         * 
-         *  
+         * Defines if date of issue of Malaysia DL should be extracted 
          */
         this.extractValidFrom = true;
         
         /** 
-         * Defines if date of expiry of Malaysian DL should be extracted.
-         * 
-         *  
+         * Defines if date of expiry of Malaysia DL should be extracted 
          */
         this.extractValidUntil = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

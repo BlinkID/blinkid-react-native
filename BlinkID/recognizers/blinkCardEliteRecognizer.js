@@ -11,21 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for JordanCombinedRecognizer.
+ * Result object for BlinkCardEliteRecognizer.
  */
-export class JordanCombinedRecognizerResult extends RecognizerResult {
+export class BlinkCardEliteRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Jordan ID owner. 
+         * The payment card number. 
          */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         * The document date of expiry of the Jordan ID. 
+         * Payment card's security code/value. 
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
+        this.cvv = nativeResult.cvv;
         
         /** 
          * Defines digital signature of recognition results. 
@@ -43,16 +43,6 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The document number of Jordan ID. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
-        
-        /** 
-         * Face image from the document 
-         */
-        this.faceImage = nativeResult.faceImage;
-        
-        /** 
          * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
@@ -63,29 +53,14 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The issuer of Jordan ID. 
+         * Payment card's inventory number. 
          */
-        this.issuer = nativeResult.issuer;
+        this.inventoryNumber = nativeResult.inventoryNumber;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Information about the payment card owner (name, company, etc.) 
          */
-        this.mrzVerified = nativeResult.mrzVerified;
-        
-        /** 
-         * The name of the Jordan ID owner. 
-         */
-        this.name = nativeResult.name;
-        
-        /** 
-         * The national number of Jordan ID owner. 
-         */
-        this.nationalNumber = nativeResult.nationalNumber;
-        
-        /** 
-         * Nationality of the Jordan ID owner. 
-         */
-        this.nationality = nativeResult.nationality;
+        this.owner = nativeResult.owner;
         
         /** 
          * {true} if recognizer has finished scanning first side and is now scanning back side, 
@@ -93,20 +68,34 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Jordan ID owner. 
+         * The payment card's last month of validity. 
          */
-        this.sex = nativeResult.sex;
+        this.validThru = nativeResult.validThru != null ? new Date(nativeResult.validThru) : null;
         
     }
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Jordan ID.
- * 
+ * Recognizer used for scanning both sides of elite payment cards.
  */
-export class JordanCombinedRecognizer extends Recognizer {
+export class BlinkCardEliteRecognizer extends Recognizer {
     constructor() {
-        super('JordanCombinedRecognizer');
+        super('BlinkCardEliteRecognizer');
+        
+        /** 
+         * Should anonymize the card number area (redact image pixels) on the document image result 
+         */
+        this.anonymizeCardNumber = false;
+        
+        /** 
+         * Should anonymize the CVV area (redact image pixels) on the document image result 
+         */
+        this.anonymizeCvv = false;
+        
+        /** 
+         * Should anonymize the owner area (redact image pixels) on the document image result 
+         */
+        this.anonymizeOwner = false;
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -114,24 +103,29 @@ export class JordanCombinedRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * True if date of birth of Jordan owner is being extracted 
+         * Should extract the card's inventory number 
          */
-        this.extractDateOfBirth = true;
+        this.extractInventoryNumber = true;
         
         /** 
-         * True if name of Jordan ID owner is being extracted 
+         * Should extract the card owner information 
          */
-        this.extractName = true;
+        this.extractOwner = true;
         
         /** 
-         * True if sex of Jordan owner is being extracted 
+         * Should extract the payment card's month of expiry 
          */
-        this.extractSex = true;
+        this.extractValidThru = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
-        this.returnFaceImage = false;
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether full document image will be available in 
@@ -143,6 +137,6 @@ export class JordanCombinedRecognizer extends Recognizer {
          */
         this.signResult = false;
         
-        this.createResultFromNative = function (nativeResult) { return new JordanCombinedRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BlinkCardEliteRecognizerResult(nativeResult); }
     }
 }

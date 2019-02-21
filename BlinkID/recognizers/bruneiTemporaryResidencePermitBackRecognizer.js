@@ -11,26 +11,21 @@ import {
 } from '../types'
 
 /**
- * Result object for CroatiaIdBackRecognizer.
+ * Result object for BruneiTemporaryResidencePermitBackRecognizer.
  */
-export class CroatiaIdBackRecognizerResult extends RecognizerResult {
+export class BruneiTemporaryResidencePermitBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * Determines if date of expiry of Croatian ID is permanent 
+         * The address of Brunei temporary residence permit owner's employer. 
          */
-        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        this.address = nativeResult.address;
         
         /** 
-         * The date of issue of Croatian ID 
+         * The date of issue of Brunei temporary residence permit. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
-        
-        /** 
-         * Determines if Croatian ID is issued for non resident 
-         */
-        this.documentForNonResident = nativeResult.documentForNonResident;
         
         /** 
          * Image of the full document 
@@ -38,29 +33,24 @@ export class CroatiaIdBackRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The issuer of Croatian ID 
-         */
-        this.issuedBy = nativeResult.issuedBy;
-        
-        /** 
          * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * The residence of Croatian ID owner 
+         * The passport number of Brunei temporary residence permit owner. 
          */
-        this.residence = nativeResult.residence;
+        this.passportNumber = nativeResult.passportNumber;
         
     }
 }
 
 /**
- * Recognizer which can scan back side of Croatian national ID cards.
+ * Recognizer which can scan back side of Brunei temporary residence permit cards.
  */
-export class CroatiaIdBackRecognizer extends Recognizer {
+export class BruneiTemporaryResidencePermitBackRecognizer extends Recognizer {
     constructor() {
-        super('CroatiaIdBackRecognizer');
+        super('BruneiTemporaryResidencePermitBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -68,19 +58,19 @@ export class CroatiaIdBackRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if date of issue of Croatian ID should be extracted 
+         * Defines if address of Brunei temporary residence permit owner's employer should be extracted. 
+         */
+        this.extractAddress = true;
+        
+        /** 
+         * Defines if date of issue of Brunei temporary residence permit should be extracted. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if issuer of Croatian ID should be extracted 
+         * Defines if the passport number of Brunei temporary residence permit owner should be extracted. 
          */
-        this.extractIssuedBy = true;
-        
-        /** 
-         * Defines if residence of Croatian ID owner should be extracted 
-         */
-        this.extractResidence = true;
+        this.extractPassportNumber = true;
         
         /** 
          * The DPI (Dots Per Inch) for full document image that should be returned. 
@@ -97,6 +87,6 @@ export class CroatiaIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new CroatiaIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiTemporaryResidencePermitBackRecognizerResult(nativeResult); }
     }
 }

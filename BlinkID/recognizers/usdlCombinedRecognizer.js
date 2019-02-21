@@ -1,4 +1,7 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
+import {
+    ImageExtensionFactors
+} from '../types'
 
 /**
  * Result object for UsdlCombinedRecognizer.
@@ -96,6 +99,16 @@ export class UsdlCombinedRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
+
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Minimum number of stable detections required for detection to be successful. 
+         */
+        this.numStableDetectionsThreshold = 6;
         
         /** 
          * Whether or not recognition result should be signed.

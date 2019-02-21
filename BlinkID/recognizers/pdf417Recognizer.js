@@ -18,25 +18,22 @@ export class Pdf417RecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Type of the barcode scanned
-         * 
-         *  @return Type of the barcode 
+         * The format of the scanned barcode. 
          */
         this.barcodeType = nativeResult.barcodeType;
         
         /** 
-         * Byte array with result of the scan 
+         * The raw bytes contained inside barcode. 
          */
         this.rawData = nativeResult.rawData;
         
         /** 
-         * Retrieves string content of scanned data 
+         * String representation of data inside barcode. 
          */
         this.stringData = nativeResult.stringData;
         
         /** 
-         * Flag indicating uncertain scanning data
-         * E.g obtained from damaged barcode. 
+         * True if returned result is uncertain, i.e. if scanned barcode was incomplete (i.e. 
          */
         this.uncertain = nativeResult.uncertain;
         
@@ -51,31 +48,17 @@ export class Pdf417Recognizer extends Recognizer {
         super('Pdf417Recognizer');
         
         /** 
-         * Set this to true to scan barcodes which don't have quiet zone (white area) around it
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Allow scanning PDF417 barcodes which don't have quiet zone 
          */
         this.nullQuietZoneAllowed = false;
         
         /** 
-         * Set this to true to allow scanning barcodes with inverted intensities
-         * (i.e. white barcodes on black background)
-         * 
-         * falseTE: this options doubles the frame processing time
-         * 
-         *  
+         * Enables scanning of barcodes with inverse intensity values (e.g. white barcode on black background) 
          */
         this.scanInverse = false;
         
         /** 
-         * Set this to true to scan even barcode not compliant with standards
-         * For example, malformed PDF417 barcodes which were incorrectly encoded
-         * 
-         * Use only if necessary because it slows down the recognition process
-         * 
-         *  
+         * Enable decoding of non-standard PDF417 barcodes, but without 
          */
         this.scanUncertain = true;
         

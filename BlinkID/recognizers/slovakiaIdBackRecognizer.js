@@ -23,7 +23,7 @@ export class SlovakiaIdBackRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -58,60 +58,42 @@ export class SlovakiaIdBackRecognizer extends Recognizer {
         super('SlovakiaIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Slovak ID owner should be extracted.
-         * 
-         *  
+         * Defines if address of Slovak ID owner should be extracted. 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if place of birth of Slovak ID owner should be extracted.
-         * 
-         *  
+         * Defines if place of birth of Slovak ID owner should be extracted. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if special remarks of Slovak ID owner should be extracted.
-         * 
-         *  
+         * Defines if special remarks of Slovak ID owner should be extracted. 
          */
         this.extractSpecialRemarks = true;
         
         /** 
-         * Defines if surname at birth of Slovak ID owner should be extracted.
-         * 
-         *  
+         * Defines if surname at birth of Slovak ID owner should be extracted. 
          */
         this.extractSurnameAtBirth = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

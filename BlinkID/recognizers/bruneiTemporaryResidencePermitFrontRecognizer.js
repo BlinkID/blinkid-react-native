@@ -11,21 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for AustraliaDlFrontRecognizer.
+ * Result object for BruneiTemporaryResidencePermitFrontRecognizer.
  */
-export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
+export class BruneiTemporaryResidencePermitFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Australian DL owner 
+         * The address of Brunei Temporary Residence Permit owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The date of birth of the Australian DL owner 
+         * The date of birth of Brunei Temporary Residence Permit owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The document number of Brunei Temporary Residence Permit. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
         
         /** 
          * Face image from the document 
@@ -38,39 +43,29 @@ export class AustraliaDlFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The full name of the Australian DL owner 
+         * The full name of Brunei Temporary Residence Permit owner. 
          */
         this.fullName = nativeResult.fullName;
         
         /** 
-         * The date of expiry of the Australian DL 
+         * The place of birth of Brunei Temporary Residence Permit owner. 
          */
-        this.licenceExpiry = nativeResult.licenceExpiry != null ? new Date(nativeResult.licenceExpiry) : null;
+        this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * The licence number of the Australian DL 
+         * The sex of Brunei Temporary Residence Permit owner. 
          */
-        this.licenceNumber = nativeResult.licenceNumber;
-        
-        /** 
-         * The licence type of the Australian DL 
-         */
-        this.licenceType = nativeResult.licenceType;
-        
-        /** 
-         * Signature image from the document 
-         */
-        this.signatureImage = nativeResult.signatureImage;
+        this.sex = nativeResult.sex;
         
     }
 }
 
 /**
- * Recognizer which can scan the front side of Australian driver's licences.
+ * Recognizer which can scan front side of Brunei Temporary Residence Permit.
  */
-export class AustraliaDlFrontRecognizer extends Recognizer {
+export class BruneiTemporaryResidencePermitFrontRecognizer extends Recognizer {
     constructor() {
-        super('AustraliaDlFrontRecognizer');
+        super('BruneiTemporaryResidencePermitFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -78,24 +73,29 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Australian DL owner should be extracted 
+         * Defines if address of Brunei Temporary Residence Permit owner should be extracted. 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if date of birth of Australian DL owner should be extracted 
+         * Defines if date of birth of Brunei Temporary Residence Permit owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if full name of Australian DL owner should be extracted 
+         * Defines if full name of Brunei Temporary Residence Permit owner should be extracted. 
          */
         this.extractFullName = true;
         
         /** 
-         * Defines if date of expiry of Australian DL should be extracted 
+         * Defines if place of birth of Brunei Temporary Residence Permit owner should be extracted. 
          */
-        this.extractLicenseExpiry = true;
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines if sex of Brunei Temporary Residence Permit owner should be extracted. 
+         */
+        this.extractSex = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -122,16 +122,6 @@ export class AustraliaDlFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        /** 
-         * Defines whether signature image will be available in result. 
-         */
-        this.returnSignatureImage = false;
-        
-        /** 
-         * The DPI (Dots Per Inch) for signature image that should be returned. 
-         */
-        this.signatureImageDpi = 250;
-        
-        this.createResultFromNative = function (nativeResult) { return new AustraliaDlFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiTemporaryResidencePermitFrontRecognizerResult(nativeResult); }
     }
 }

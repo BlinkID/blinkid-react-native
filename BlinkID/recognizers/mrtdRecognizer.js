@@ -18,17 +18,12 @@ export class MrtdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * face image from the document if enabled with returnMrzImage property. 
-         */
-        this.mrzImage = nativeResult.mrzImage;
-        
-        /** 
-         * Returns the Data extracted from the machine readable zone. 
+         * The Data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -36,71 +31,46 @@ export class MrtdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer that can recognizer Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
+ * Recognizer that can recognize Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
  */
 export class MrtdRecognizer extends Recognizer {
     constructor() {
         super('MrtdRecognizer');
         
         /** 
-         * Whether returning of unparsed results is allowed
-         * 
-         *  
+         * Whether special characters are allowed. 
+         */
+        this.allowSpecialCharacters = false;
+        
+        /** 
+         * Whether returning of unparsed results is allowed. 
          */
         this.allowUnparsedResults = false;
         
         /** 
-         * Whether returning of unverified results is allowed
-         * Unverified result is result that is parsed, but check digits are incorrect.
-         * 
-         *  
+         * Whether returning of unverified results is allowed. 
          */
         this.allowUnverifiedResults = false;
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Property for setting DPI for mrz images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
-         */
-        this.mrzImageDpi = 250;
-        
-        /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
-        
-        /** 
-         * Sets whether MRZ image from ID card should be extracted
-         * 
-         *  
-         */
-        this.returnMrzImage = false;
         
         this.createResultFromNative = function (nativeResult) { return new MrtdRecognizerResult(nativeResult); }
     }

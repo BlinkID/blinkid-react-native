@@ -10,6 +10,9 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer();
+        if (jsonRecognizer.hasKey("allowSpecialCharacters")) {
+            recognizer.setAllowSpecialCharacters(jsonRecognizer.getBoolean("allowSpecialCharacters"));
+        }
         if (jsonRecognizer.hasKey("allowUnparsedResults")) {
             recognizer.setAllowUnparsedResults(jsonRecognizer.getBoolean("allowUnparsedResults"));
         }
@@ -25,14 +28,8 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
-        if (jsonRecognizer.hasKey("mrzImageDpi")) {
-            recognizer.setMrzImageDpi(jsonRecognizer.getInt("mrzImageDpi"));
-        }
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
-        }
-        if (jsonRecognizer.hasKey("returnMrzImage")) {
-            recognizer.setReturnMrzImage(jsonRecognizer.getBoolean("returnMrzImage"));
         }
         return recognizer;
     }
@@ -43,7 +40,6 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("mrzImage", SerializationUtils.encodeImageBase64(result.getMrzImage()));
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         return jsonResult;
     }

@@ -209,6 +209,68 @@ export const DocumentFaceDetectorType = Object.freeze(
 );
 
 /**
+ * Supported BlinkCard card issuer values.
+ */
+export const CardIssuer = Object.freeze(
+    {
+        /** Unidentified Card */
+        Other: 1,
+        /** The American Express Company Card */
+        AmericanExpress: 2,
+        /** The Bank of Montreal ABM Card */
+        BmoAbm: 3,
+        /** China T-Union Transportation Card */
+        ChinaTUnion: 4,
+        /** China UnionPay Card */
+        ChinaUnionPay: 5,
+        /** Canadian Imperial Bank of Commerce Advantage Debit Card */
+        CibcAdvantageDebit: 6,
+        /** CISS Card */
+        Ciss: 7,
+        /** Diners Club International Card */
+        DinersClubInternational: 8,
+        /** Diners Club United States & Canada Card */
+        DinersClubUsCanada: 9,
+        /** Discover Card */
+        DiscoverCard: 10,
+        /** HSBC Bank Canada Card */
+        Hsbc: 11,
+        /** RuPay Card */
+        RuPay: 12,
+        /** InterPayment Card */
+        InterPayment: 13,
+        /** InstaPayment Card */
+        InstaPayment: 14,
+        /** The JCB Company Card */
+        Jcb: 15,
+        /** Laser Debit Card (deprecated) */
+        Laser: 16,
+        /** Maestro Debit Card */
+        Maestro: 17,
+        /** Dankort Card */
+        Dankort: 18,
+        /** MIR Card */
+        Mir: 19,
+        /** MasterCard Inc. Card */
+        MasterCard: 20,
+        /** The Royal Bank of Canada Client Card */
+        RbcClient: 21,
+        /** ScotiaBank Scotia Card */
+        ScotiaBank: 22,
+        /** TD Canada Trust Access Card */
+        TdCtAccess: 23,
+        /** Troy Card */
+        Troy: 24,
+        /** Visa Inc. Card */
+        Visa: 25,
+        /** Universal Air Travel Plan Inc. Card */
+        Uatp: 26,
+        /** Interswitch Verve Card */
+        Verve: 27
+    }
+);
+
+/**
  * Extension factors relative to corresponding dimension of the full image. For example,
  * upFactor and downFactor define extensions relative to image height, e.g.
  * when upFactor is 0.5, upper image boundary will be extended for half of image's full

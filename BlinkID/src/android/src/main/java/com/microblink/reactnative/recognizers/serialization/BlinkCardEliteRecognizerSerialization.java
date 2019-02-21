@@ -6,10 +6,10 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class ElitePaymentCardCombinedRecognizerSerialization implements RecognizerSerialization {
+public final class BlinkCardEliteRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardCombinedRecognizer();
+        com.microblink.entities.recognizers.blinkcard.BlinkCardEliteRecognizer recognizer = new com.microblink.entities.recognizers.blinkcard.BlinkCardEliteRecognizer();
         if (jsonRecognizer.hasKey("anonymizeCardNumber")) {
             recognizer.setAnonymizeCardNumber(jsonRecognizer.getBoolean("anonymizeCardNumber"));
         }
@@ -48,7 +48,7 @@ public final class ElitePaymentCardCombinedRecognizerSerialization implements Re
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardCombinedRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkcard.BlinkCardEliteRecognizer.Result result = ((com.microblink.entities.recognizers.blinkcard.BlinkCardEliteRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("cardNumber", result.getCardNumber());
@@ -67,11 +67,11 @@ public final class ElitePaymentCardCombinedRecognizerSerialization implements Re
 
     @Override
     public String getJsonName() {
-        return "ElitePaymentCardCombinedRecognizer";
+        return "BlinkCardEliteRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.elitepaymentcard.ElitePaymentCardCombinedRecognizer.class;
+        return com.microblink.entities.recognizers.blinkcard.BlinkCardEliteRecognizer.class;
     }
 }

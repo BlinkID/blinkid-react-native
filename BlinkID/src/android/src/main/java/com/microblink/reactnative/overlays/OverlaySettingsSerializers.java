@@ -20,6 +20,7 @@ public enum OverlaySettingsSerializers {
         registerMapping(new BarcodeOverlaySettingsSerialization());
         registerMapping(new DocumentOverlaySettingsSerialization());
         registerMapping(new DocumentVerificationOverlaySettingsSerialization());
+        registerMapping(new BlinkCardOverlaySettingsSerialization());
     }
 
     public UISettings getOverlaySettings(ReadableMap jsonOverlaySettings, RecognizerBundle recognizerBundle) {
