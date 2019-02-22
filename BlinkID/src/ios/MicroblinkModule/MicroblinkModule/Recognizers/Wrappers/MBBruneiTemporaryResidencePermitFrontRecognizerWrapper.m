@@ -1,25 +1,31 @@
-#import "MBPolandIdFrontRecognizerWrapper.h"
+#import "MBBruneiTemporaryResidencePermitFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBPolandIdFrontRecognizerCreator
+@implementation MBBruneiTemporaryResidencePermitFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"PolandIdFrontRecognizer";
+        _jsonName = @"BruneiTemporaryResidencePermitFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBPolandIdFrontRecognizer *recognizer = [[MBPolandIdFrontRecognizer alloc] init];
+    MBBruneiTemporaryResidencePermitFrontRecognizer *recognizer = [[MBBruneiTemporaryResidencePermitFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
+        }
+    }
+    {
+        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
+        if (extractAddress != nil) {
+            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
         }
     }
     {
@@ -29,33 +35,21 @@
         }
     }
     {
-        id extractFamilyName = [jsonRecognizer valueForKey:@"extractFamilyName"];
-        if (extractFamilyName != nil) {
-            recognizer.extractFamilyName = [(NSNumber *)extractFamilyName boolValue];
+        id extractFullName = [jsonRecognizer valueForKey:@"extractFullName"];
+        if (extractFullName != nil) {
+            recognizer.extractFullName = [(NSNumber *)extractFullName boolValue];
         }
     }
     {
-        id extractGivenNames = [jsonRecognizer valueForKey:@"extractGivenNames"];
-        if (extractGivenNames != nil) {
-            recognizer.extractGivenNames = [(NSNumber *)extractGivenNames boolValue];
-        }
-    }
-    {
-        id extractParentsGivenNames = [jsonRecognizer valueForKey:@"extractParentsGivenNames"];
-        if (extractParentsGivenNames != nil) {
-            recognizer.extractParentsGivenNames = [(NSNumber *)extractParentsGivenNames boolValue];
+        id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
+        if (extractPlaceOfBirth != nil) {
+            recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
         id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
         if (extractSex != nil) {
             recognizer.extractSex = [(NSNumber *)extractSex boolValue];
-        }
-    }
-    {
-        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
-        if (extractSurname != nil) {
-            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
         }
     }
     {
@@ -94,21 +88,21 @@
 
 @end
 
-@interface MBPolandIdFrontRecognizer (JsonSerialization)
+@interface MBBruneiTemporaryResidencePermitFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBPolandIdFrontRecognizer (JsonSerialization)
+@implementation MBBruneiTemporaryResidencePermitFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:self.result.familyName forKey:@"familyName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.givenNames forKey:@"givenNames"];
-    [jsonResult setValue:self.result.parentsGivenNames forKey:@"parentsGivenNames"];
+    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
-    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }

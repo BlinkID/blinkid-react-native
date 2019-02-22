@@ -1,27 +1,21 @@
-#import "MBElitePaymentCardFrontRecognizerWrapper.h"
+#import "MBBruneiTemporaryResidencePermitBackRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBElitePaymentCardFrontRecognizerCreator
+@implementation MBBruneiTemporaryResidencePermitBackRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"ElitePaymentCardFrontRecognizer";
+        _jsonName = @"BruneiTemporaryResidencePermitBackRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBElitePaymentCardFrontRecognizer *recognizer = [[MBElitePaymentCardFrontRecognizer alloc] init];
-    {
-        id anonymizeOwner = [jsonRecognizer valueForKey:@"anonymizeOwner"];
-        if (anonymizeOwner != nil) {
-            recognizer.anonymizeOwner = [(NSNumber *)anonymizeOwner boolValue];
-        }
-    }
+    MBBruneiTemporaryResidencePermitBackRecognizer *recognizer = [[MBBruneiTemporaryResidencePermitBackRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -29,9 +23,21 @@
         }
     }
     {
-        id extractOwner = [jsonRecognizer valueForKey:@"extractOwner"];
-        if (extractOwner != nil) {
-            recognizer.extractOwner = [(NSNumber *)extractOwner boolValue];
+        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
+        if (extractAddress != nil) {
+            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
+        }
+    }
+    {
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
+        id extractPassportNumber = [jsonRecognizer valueForKey:@"extractPassportNumber"];
+        if (extractPassportNumber != nil) {
+            recognizer.extractPassportNumber = [(NSNumber *)extractPassportNumber boolValue];
         }
     }
     {
@@ -58,15 +64,18 @@
 
 @end
 
-@interface MBElitePaymentCardFrontRecognizer (JsonSerialization)
+@interface MBBruneiTemporaryResidencePermitBackRecognizer (JsonSerialization)
 @end
 
-@implementation MBElitePaymentCardFrontRecognizer (JsonSerialization)
+@implementation MBBruneiTemporaryResidencePermitBackRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
+    [jsonResult setValue:self.result.address forKey:@"address"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.owner forKey:@"owner"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
+    [jsonResult setValue:self.result.passportNumber forKey:@"passportNumber"];
 
     return jsonResult;
 }
