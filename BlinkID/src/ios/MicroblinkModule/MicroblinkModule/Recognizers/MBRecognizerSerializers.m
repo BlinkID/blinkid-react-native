@@ -10,10 +10,14 @@
 #import "MBAustriaIdFrontRecognizerWrapper.h"
 #import "MBAustriaPassportRecognizerWrapper.h"
 #import "MBBarcodeRecognizerWrapper.h"
+#import "MBBlinkCardEliteRecognizerWrapper.h"
+#import "MBBlinkCardRecognizerWrapper.h"
 #import "MBBruneiIdBackRecognizerWrapper.h"
 #import "MBBruneiIdFrontRecognizerWrapper.h"
 #import "MBBruneiResidencePermitBackRecognizerWrapper.h"
 #import "MBBruneiResidencePermitFrontRecognizerWrapper.h"
+#import "MBBruneiTemporaryResidencePermitBackRecognizerWrapper.h"
+#import "MBBruneiTemporaryResidencePermitFrontRecognizerWrapper.h"
 #import "MBColombiaDlFrontRecognizerWrapper.h"
 #import "MBColombiaIdBackRecognizerWrapper.h"
 #import "MBColombiaIdFrontRecognizerWrapper.h"
@@ -29,9 +33,6 @@
 #import "MBCzechiaIdFrontRecognizerWrapper.h"
 #import "MBDocumentFaceRecognizerWrapper.h"
 #import "MBEgyptIdFrontRecognizerWrapper.h"
-#import "MBElitePaymentCardBackRecognizerWrapper.h"
-#import "MBElitePaymentCardCombinedRecognizerWrapper.h"
-#import "MBElitePaymentCardFrontRecognizerWrapper.h"
 #import "MBEudlRecognizerWrapper.h"
 #import "MBGermanyCombinedRecognizerWrapper.h"
 #import "MBGermanyDlBackRecognizerWrapper.h"
@@ -62,9 +63,6 @@
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBNewZealandDlFrontRecognizerWrapper.h"
-#import "MBPaymentCardBackRecognizerWrapper.h"
-#import "MBPaymentCardCombinedRecognizerWrapper.h"
-#import "MBPaymentCardFrontRecognizerWrapper.h"
 #import "MBPdf417RecognizerWrapper.h"
 #import "MBPolandCombinedRecognizerWrapper.h"
 #import "MBPolandIdBackRecognizerWrapper.h"
@@ -124,10 +122,14 @@
         [self registerCreator:[[MBAustriaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkCardEliteRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkCardRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiResidencePermitBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiResidencePermitFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiTemporaryResidencePermitBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiTemporaryResidencePermitFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaDlFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBColombiaIdFrontRecognizerCreator alloc] init]];
@@ -143,9 +145,6 @@
         [self registerCreator:[[MBCzechiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBDocumentFaceRecognizerCreator alloc] init]];
         [self registerCreator:[[MBEgyptIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBElitePaymentCardBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBElitePaymentCardCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBElitePaymentCardFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBEudlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBGermanyDlBackRecognizerCreator alloc] init]];
@@ -176,9 +175,6 @@
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBNewZealandDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPaymentCardBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPaymentCardCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPaymentCardFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPdf417RecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandIdBackRecognizerCreator alloc] init]];

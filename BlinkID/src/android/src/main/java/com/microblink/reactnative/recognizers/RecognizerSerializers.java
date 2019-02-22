@@ -31,10 +31,14 @@ public enum RecognizerSerializers {
         registerMapping(new AustriaIdFrontRecognizerSerialization());
         registerMapping(new AustriaPassportRecognizerSerialization());
         registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new BlinkCardEliteRecognizerSerialization());
+        registerMapping(new BlinkCardRecognizerSerialization());
         registerMapping(new BruneiIdBackRecognizerSerialization());
         registerMapping(new BruneiIdFrontRecognizerSerialization());
         registerMapping(new BruneiResidencePermitBackRecognizerSerialization());
         registerMapping(new BruneiResidencePermitFrontRecognizerSerialization());
+        registerMapping(new BruneiTemporaryResidencePermitBackRecognizerSerialization());
+        registerMapping(new BruneiTemporaryResidencePermitFrontRecognizerSerialization());
         registerMapping(new ColombiaDlFrontRecognizerSerialization());
         registerMapping(new ColombiaIdBackRecognizerSerialization());
         registerMapping(new ColombiaIdFrontRecognizerSerialization());
@@ -50,9 +54,6 @@ public enum RecognizerSerializers {
         registerMapping(new CzechiaIdFrontRecognizerSerialization());
         registerMapping(new DocumentFaceRecognizerSerialization());
         registerMapping(new EgyptIdFrontRecognizerSerialization());
-        registerMapping(new ElitePaymentCardBackRecognizerSerialization());
-        registerMapping(new ElitePaymentCardCombinedRecognizerSerialization());
-        registerMapping(new ElitePaymentCardFrontRecognizerSerialization());
         registerMapping(new EudlRecognizerSerialization());
         registerMapping(new GermanyCombinedRecognizerSerialization());
         registerMapping(new GermanyDlBackRecognizerSerialization());
@@ -83,9 +84,6 @@ public enum RecognizerSerializers {
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
         registerMapping(new NewZealandDlFrontRecognizerSerialization());
-        registerMapping(new PaymentCardBackRecognizerSerialization());
-        registerMapping(new PaymentCardCombinedRecognizerSerialization());
-        registerMapping(new PaymentCardFrontRecognizerSerialization());
         registerMapping(new Pdf417RecognizerSerialization());
         registerMapping(new PolandCombinedRecognizerSerialization());
         registerMapping(new PolandIdBackRecognizerSerialization());

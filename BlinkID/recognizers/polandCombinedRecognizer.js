@@ -18,71 +18,67 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Polish ID owner 
+         * The date of birth of Polish ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Polish ID 
+         * The document date of expiry of the Polish ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The document number on Polish ID. 
+         * The document number of the Polish ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The family name of Polish ID owner. 
+         * The family name of the Polish ID owner. 
          */
         this.familyName = nativeResult.familyName;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The first name of the Polish ID owner. 
+         * The given names of the Polish ID owner. 
          */
         this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The issuer of Polish ID. 
+         * The issuer of the Polish ID. 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * true if all check digits inside MRZ are correct, false otherwise.
-         * More specifically, true if MRZ complies with ICAO Document 9303 standard, false otherwise. 
+         * True if all check digits inside MRZ are correct, false otherwise. 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
@@ -92,28 +88,27 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The parents name of Polish ID owner. 
+         * The parents' given names of the Polish ID owner. 
          */
         this.parentsGivenNames = nativeResult.parentsGivenNames;
         
         /** 
-         * The personal number of Polish ID. 
+         * Personal number of the Polish ID owner. 
          */
         this.personalNumber = nativeResult.personalNumber;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * The sex of the Polish ID owner. 
+         * Sex of the Polish ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The last name of the Polish ID owner. 
+         * The surname of the Polish ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -121,81 +116,60 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Polish ID Combined Recognizer.
+ *  Recognizer for combined reading of both front and back side of Polish ID.
  * 
- * Polish ID Combined recognizer is used for scanning both front and back side of Polish ID.
  */
 export class PolandCombinedRecognizer extends Recognizer {
     constructor() {
         super('PolandCombinedRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * True if date of birth is being extracted from ID 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * True if family name is being extracted from ID 
          */
         this.extractFamilyName = true;
         
         /** 
-         * Defines if date of birth of Polish ID owner should be extracted
-         * 
-         *  
+         * True if given names is being extracted from ID 
          */
         this.extractGivenNames = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * True if parents' given names is being extracted from ID 
          */
         this.extractParentsGivenNames = true;
         
         /** 
-         *  Defines if sex of Polish ID owner should be extracted
-         * 
-         *   
+         * True if sex is being extracted from ID 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if citizenship of Polish ID owner should be extracted
-         * 
-         *  
+         * True if surname is being extracted from ID 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

@@ -10,6 +10,7 @@
 #import "MBOverlayVCCreator.h"
 
 #import "MBBarcodeOverlaySettingsSerialization.h"
+#import "MBBlinkCardOverlaySettingsSerialization.h"
 #import "MBDocumentOverlaySettingsSerialization.h"
 #import "MBDocumentVerificationOverlaySettingsSerialization.h"
 
@@ -31,6 +32,7 @@
         _overlayCreators = [[NSMutableDictionary alloc] init];
 
         [self registerMapping:[[MBBarcodeOverlaySettingsSerialization alloc] init]];
+        [self registerMapping:[[MBBlinkCardOverlaySettingsSerialization alloc] init]];
         [self registerMapping:[[MBDocumentOverlaySettingsSerialization alloc] init]];
         [self registerMapping:[[MBDocumentVerificationOverlaySettingsSerialization alloc] init]];
     }

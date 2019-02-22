@@ -28,12 +28,12 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -61,91 +61,64 @@ export class SingaporeIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Singapore ID Front Recognizer.
- * 
- * Singapore ID Front recognizer is used for scanning front side of Singapore ID.
+ * Recognizer which can scan front side of Singaporean national ID card.
  */
 export class SingaporeIdFrontRecognizer extends Recognizer {
     constructor() {
         super('SingaporeIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         *  Defines if country/place of birth of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if country/place of birth of Singaporean ID card owner should be extracted. 
          */
         this.extractCountryOfBirth = true;
         
         /** 
-         *  Defines if date of birth of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if date of birth of Singaporean ID card owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         *  Defines if name of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if name of Singaporean ID card owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         *  Defines if race of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if race of Singaporean ID card owner should be extracted. 
          */
         this.extractRace = true;
         
         /** 
-         *  Defines if sex of Singaporean ID card owner should be extracted
-         * 
-         *   
+         * Defines if sex of Singaporean ID card owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

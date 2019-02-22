@@ -10,14 +10,14 @@ public final class MrtdCombinedRecognizerSerialization implements RecognizerSeri
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdCombinedRecognizer();
+        if (jsonRecognizer.hasKey("allowSpecialCharacters")) {
+            recognizer.setAllowSpecialCharacters(jsonRecognizer.getBoolean("allowSpecialCharacters"));
+        }
         if (jsonRecognizer.hasKey("allowUnparsedResults")) {
             recognizer.setAllowUnparsedResults(jsonRecognizer.getBoolean("allowUnparsedResults"));
         }
         if (jsonRecognizer.hasKey("allowUnverifiedResults")) {
             recognizer.setAllowUnverifiedResults(jsonRecognizer.getBoolean("allowUnverifiedResults"));
-        }
-        if (jsonRecognizer.hasKey("detectGlare")) {
-            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
         if (jsonRecognizer.hasKey("detectorType")) {
             recognizer.setDetectorType(com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonRecognizer.getInt("detectorType") - 1]);

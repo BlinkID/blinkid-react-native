@@ -1,21 +1,21 @@
-#import "MBElitePaymentCardCombinedRecognizerWrapper.h"
+#import "MBBlinkCardEliteRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBElitePaymentCardCombinedRecognizerCreator
+@implementation MBBlinkCardEliteRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"ElitePaymentCardCombinedRecognizer";
+        _jsonName = @"BlinkCardEliteRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBElitePaymentCardCombinedRecognizer *recognizer = [[MBElitePaymentCardCombinedRecognizer alloc] init];
+    MBBlinkCardEliteRecognizer *recognizer = [[MBBlinkCardEliteRecognizer alloc] init];
     {
         id anonymizeCardNumber = [jsonRecognizer valueForKey:@"anonymizeCardNumber"];
         if (anonymizeCardNumber != nil) {
@@ -88,10 +88,10 @@
 
 @end
 
-@interface MBElitePaymentCardCombinedRecognizer (JsonSerialization)
+@interface MBBlinkCardEliteRecognizer (JsonSerialization)
 @end
 
-@implementation MBElitePaymentCardCombinedRecognizer (JsonSerialization)
+@implementation MBBlinkCardEliteRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];

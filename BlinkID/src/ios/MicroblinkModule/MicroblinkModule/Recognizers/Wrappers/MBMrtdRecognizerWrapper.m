@@ -17,6 +17,12 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBMrtdRecognizer *recognizer = [[MBMrtdRecognizer alloc] init];
     {
+        id allowSpecialCharacters = [jsonRecognizer valueForKey:@"allowSpecialCharacters"];
+        if (allowSpecialCharacters != nil) {
+            recognizer.allowSpecialCharacters = [(NSNumber *)allowSpecialCharacters boolValue];
+        }
+    }
+    {
         id allowUnparsedResults = [jsonRecognizer valueForKey:@"allowUnparsedResults"];
         if (allowUnparsedResults != nil) {
             recognizer.allowUnparsedResults = [(NSNumber *)allowUnparsedResults boolValue];
@@ -47,21 +53,9 @@
         }
     }
     {
-        id mrzImageDpi = [jsonRecognizer valueForKey:@"mrzImageDpi"];
-        if (mrzImageDpi != nil) {
-            recognizer.mrzImageDpi = [(NSNumber *)mrzImageDpi unsignedIntegerValue];
-        }
-    }
-    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
-        }
-    }
-    {
-        id returnMrzImage = [jsonRecognizer valueForKey:@"returnMrzImage"];
-        if (returnMrzImage != nil) {
-            recognizer.returnMrzImage = [(NSNumber *)returnMrzImage boolValue];
         }
     }
 
@@ -78,7 +72,6 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.mrzImage] forKey:@"mrzImage"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
 
     return jsonResult;

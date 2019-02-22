@@ -34,9 +34,6 @@ public final class CroatiaCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("extractLastName")) {
             recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
-        if (jsonRecognizer.hasKey("extractPersonalIdentificationNumber")) {
-            recognizer.setExtractPersonalIdentificationNumber(jsonRecognizer.getBoolean("extractPersonalIdentificationNumber"));
-        }
         if (jsonRecognizer.hasKey("extractResidence")) {
             recognizer.setExtractResidence(jsonRecognizer.getBoolean("extractResidence"));
         }

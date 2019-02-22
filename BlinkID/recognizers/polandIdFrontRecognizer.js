@@ -18,42 +18,42 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Polish ID owner 
+         * The date of birth of the Poland ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The family name of Polish ID owner. 
+         * The family name of the Poland ID owner. 
          */
         this.familyName = nativeResult.familyName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The first name of the Polish ID owner. 
+         * The given names of the Poland ID owner. 
          */
         this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The parents name of Polish ID owner. 
+         * The parents given names of the Poland ID owner. 
          */
         this.parentsGivenNames = nativeResult.parentsGivenNames;
         
         /** 
-         * The sex of the Polish ID owner. 
+         * The sex of the Poland ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The last name of the Polish ID owner. 
+         * The surname of the Poland ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -61,74 +61,69 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring Polish ID Front Recognizer.
- * 
- * Polish ID Front recognizer is used for scanning front side of Polish ID.
+ * Recognizer which can scan front side of Poland ID cards.
  */
 export class PolandIdFrontRecognizer extends Recognizer {
     constructor() {
         super('PolandIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * Defines if date of birth of Poland ID owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * Defines if family name of Poland ID owner should be extracted. 
          */
-        this.extractFamilyName = true;
+        this.extractFamilyName = false;
         
         /** 
-         * Defines if date of birth of Polish ID owner should be extracted
-         * 
-         *  
+         * Defines if given names of Poland ID owner should be extracted. 
          */
         this.extractGivenNames = true;
         
         /** 
-         * Defines if date of expiry should be extracted from Polish ID
-         * 
-         *  
+         * Defines if parents given names of Poland ID owner should be extracted. 
          */
-        this.extractParentsGivenNames = true;
+        this.extractParentsGivenNames = false;
         
         /** 
-         *  Defines if sex of Polish ID owner should be extracted
-         * 
-         *   
+         * Defines if sex of Poland ID owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if citizenship of Polish ID owner should be extracted
-         * 
-         *  
+         * Defines if surname of Poland ID owner should be extracted. 
          */
         this.extractSurname = true;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

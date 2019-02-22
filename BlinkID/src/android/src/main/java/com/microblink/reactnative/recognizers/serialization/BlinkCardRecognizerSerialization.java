@@ -6,18 +6,27 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class PaymentCardFrontRecognizerSerialization implements RecognizerSerialization {
+public final class BlinkCardRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardFrontRecognizer();
+        com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer recognizer = new com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer();
         if (jsonRecognizer.hasKey("anonymizeCardNumber")) {
             recognizer.setAnonymizeCardNumber(jsonRecognizer.getBoolean("anonymizeCardNumber"));
+        }
+        if (jsonRecognizer.hasKey("anonymizeCvv")) {
+            recognizer.setAnonymizeCvv(jsonRecognizer.getBoolean("anonymizeCvv"));
         }
         if (jsonRecognizer.hasKey("anonymizeOwner")) {
             recognizer.setAnonymizeOwner(jsonRecognizer.getBoolean("anonymizeOwner"));
         }
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        }
+        if (jsonRecognizer.hasKey("extractCvv")) {
+            recognizer.setExtractCvv(jsonRecognizer.getBoolean("extractCvv"));
+        }
+        if (jsonRecognizer.hasKey("extractInventoryNumber")) {
+            recognizer.setExtractInventoryNumber(jsonRecognizer.getBoolean("extractInventoryNumber"));
         }
         if (jsonRecognizer.hasKey("extractOwner")) {
             recognizer.setExtractOwner(jsonRecognizer.getBoolean("extractOwner"));
@@ -34,28 +43,39 @@ public final class PaymentCardFrontRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonRecognizer.hasKey("signResult")) {
+            recognizer.setSignResult(jsonRecognizer.getBoolean("signResult"));
+        }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer.Result result = ((com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("cardNumber", result.getCardNumber());
-        jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
+        jsonResult.putString("cvv", result.getCvv());
+        jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
+        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
+        jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
+        jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
+        jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
+        jsonResult.putString("inventoryNumber", result.getInventoryNumber());
+        jsonResult.putInt("issuer", SerializationUtils.serializeEnum(result.getIssuer()));
         jsonResult.putString("owner", result.getOwner());
+        jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putMap("validThru", SerializationUtils.serializeDate(result.getValidThru()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "PaymentCardFrontRecognizer";
+        return "BlinkCardRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.paymentcard.PaymentCardFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer.class;
     }
 }

@@ -17,6 +17,12 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBMrtdCombinedRecognizer *recognizer = [[MBMrtdCombinedRecognizer alloc] init];
     {
+        id allowSpecialCharacters = [jsonRecognizer valueForKey:@"allowSpecialCharacters"];
+        if (allowSpecialCharacters != nil) {
+            recognizer.allowSpecialCharacters = [(NSNumber *)allowSpecialCharacters boolValue];
+        }
+    }
+    {
         id allowUnparsedResults = [jsonRecognizer valueForKey:@"allowUnparsedResults"];
         if (allowUnparsedResults != nil) {
             recognizer.allowUnparsedResults = [(NSNumber *)allowUnparsedResults boolValue];
@@ -26,12 +32,6 @@
         id allowUnverifiedResults = [jsonRecognizer valueForKey:@"allowUnverifiedResults"];
         if (allowUnverifiedResults != nil) {
             recognizer.allowUnverifiedResults = [(NSNumber *)allowUnverifiedResults boolValue];
-        }
-    }
-    {
-        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
-        if (detectGlare != nil) {
-            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
         }
     }
     {

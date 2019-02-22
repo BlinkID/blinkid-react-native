@@ -1,21 +1,21 @@
-#import "MBPaymentCardCombinedRecognizerWrapper.h"
+#import "MBBlinkCardRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBPaymentCardCombinedRecognizerCreator
+@implementation MBBlinkCardRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"PaymentCardCombinedRecognizer";
+        _jsonName = @"BlinkCardRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBPaymentCardCombinedRecognizer *recognizer = [[MBPaymentCardCombinedRecognizer alloc] init];
+    MBBlinkCardRecognizer *recognizer = [[MBBlinkCardRecognizer alloc] init];
     {
         id anonymizeCardNumber = [jsonRecognizer valueForKey:@"anonymizeCardNumber"];
         if (anonymizeCardNumber != nil) {
@@ -38,6 +38,12 @@
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
+        }
+    }
+    {
+        id extractCvv = [jsonRecognizer valueForKey:@"extractCvv"];
+        if (extractCvv != nil) {
+            recognizer.extractCvv = [(NSNumber *)extractCvv boolValue];
         }
     }
     {
@@ -88,10 +94,10 @@
 
 @end
 
-@interface MBPaymentCardCombinedRecognizer (JsonSerialization)
+@interface MBBlinkCardRecognizer (JsonSerialization)
 @end
 
-@implementation MBPaymentCardCombinedRecognizer (JsonSerialization)
+@implementation MBBlinkCardRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
@@ -103,6 +109,7 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
     [jsonResult setValue:self.result.inventoryNumber forKey:@"inventoryNumber"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.issuer + 1)] forKey:@"issuer"];
     [jsonResult setValue:self.result.owner forKey:@"owner"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.validThru] forKey:@"validThru"];
