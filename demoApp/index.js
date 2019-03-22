@@ -20,7 +20,7 @@ const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
     ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqVhyGJayjPu5tiWvA+XFwmf8ts96WYZ2+gs1xltqnV7zU4DVK8BdDXlf9fIkBdtYE5WIyWwguEeVScrrYdwi4PpH/JxlYqXpOGEFzj8tJw9h9WTzFUFcMsbzKaIu75r5KWpb5GJuApTP2MsMoSGYzWBnIzlJZ1i003TDIEEXD+hZAPjMOzJrNEY2Csj6BKdFzmNVIYaI1gym42Qcqc8s1hfEqpfEMnnPiMGK3PCDzAJD',
     // android license key for applicationID: com.blinkidreactnative
-    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF2lIz6T0frjdehexCviioyy97vAraaU/l2+AfPaulSmMixVH4WQ8qgk++BwxyTqZd3fjUykeWFkY+esOu+/Es0VwBWsJj7C/8i5FKqb5GL/QDpogTSpf/zfjcT94FSJw7GkG9/fZUnjBwyzLrQieCJozMLx8yDDsx1U2/l7sS8Pdj5LaZUyQY+MIVkOCRaktFo+L3jf5lpkRzIvTCtEA9x6ZNpuS5X2Jffdp1oVbxDOf2g=='
+    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuol25oyKRUaeMN2tXUUHsnmsYZFmU/Q4p3rKzxWcsyPbfyJOarHpp6DAV9+ZtOSJ3VPOp2DY0kN8cxu3JoD+ceI4wngSVkO0LNv9EcuHefI0C+hJ1v+g7FgF5MftcMGQhgt8W5Bvj+vsIWhtBKuVZgJJrbl1jC9/NvmXaua1RpQDZf81ycjJfZRFmSTnRQJexYdfEalCme3cjvxVs95WbROPBjAedixp5g35P7ohxQgBNj5A=='
 })
 
 var renderIf = function(condition, content) {
@@ -128,30 +128,28 @@ export default class BlinkIDReactNativeApp extends Component {
         };
         
         if (result instanceof BlinkIDReactNative.UsdlRecognizerResult) {
-            // handle USDL parsing result
-            let fields = result.fields
-            let USDLKeys = BlinkIDReactNative.UsdlKeys;
             localState.results += /** Personal information */
-                "USDL version: " + fields[USDLKeys.StandardVersionNumber] + fieldDelim +
-                "Family name: " + fields[USDLKeys.CustomerFamilyName] + fieldDelim +
-                "First name: " + fields[USDLKeys.CustomerFirstName] + fieldDelim +
-                "Date of birth: " + fields[USDLKeys.DateOfBirth] + fieldDelim +
-                "Sex: " + fields[USDLKeys.Sex] + fieldDelim +
-                "Eye color: " + fields[USDLKeys.EyeColor] + fieldDelim +
-                "Height: " + fields[USDLKeys.Height] + fieldDelim +
-                "Street: " + fields[USDLKeys.AddressStreet] + fieldDelim +
-                "City: " + fields[USDLKeys.AddressCity] + fieldDelim +
-                "Jurisdiction: " + fields[USDLKeys.AddressJurisdictionCode] + fieldDelim +
-                "Postal code: " + fields[USDLKeys.AddressPostalCode] + fieldDelim +
-                  /** License information */
-                  "Issue date: " + fields[USDLKeys.DocumentIssueDate] + fieldDelim +
-                  "Expiration date: " + fields[USDLKeys.DocumentExpirationDate] + fieldDelim +
-                  "Issuer ID: " + fields[USDLKeys.IssuerIdentificationNumber] + fieldDelim +
-                  "Jurisdiction version: " + fields[USDLKeys.JurisdictionVersionNumber] + fieldDelim +
-                  "Vehicle class: " + fields[USDLKeys.JurisdictionVehicleClass] + fieldDelim +
-                  "Restrictions: " + fields[USDLKeys.JurisdictionRestrictionCodes] + fieldDelim +
-                  "Endorsments: " + fields[USDLKeys.JurisdictionEndorsementCodes] + fieldDelim +
-                  "Customer ID: " + fields[USDLKeys.CustomerIdNumber] + fieldDelim;
+                "First name: " + result.firstName + fieldDelim +
+                "Last name: " + result.lastName + fieldDelim +
+                "Full name: " + result.fullName + fieldDelim +
+                "Address: " + result.address + fieldDelim +
+                "Document number: " + result.documentNumber + fieldDelim +
+                "Sex: " + result.sex + fieldDelim +
+                "Restrictions: " + result.restrictions + fieldDelim +
+                "Endorsments: " + result.endorsements + fieldDelim +
+                "Vehicle class: " + result.vehicleClass + fieldDelim +
+                "Date of birth: " +
+                    result.dateOfBirth.day + "." +
+                    result.dateOfBirth.month + "." +
+                    result.dateOfBirth.year + "." + fieldDelim + 
+                 "Date of issue: " +
+                    result.dateOfIssue.day + "." +
+                    result.dateOfIssue.month + "." +
+                    result.dateOfIssue.year + "." + fieldDelim +
+                 "Date of expiry: " +
+                    result.dateOfExpiry.day + "." +
+                    result.dateOfExpiry.month + "." +
+                    result.dateOfExpiry.year + "." + fieldDelim;
         } else if (result instanceof BlinkIDReactNative.MrtdRecognizerResult) {
             let mrtdResult = result;
             localState.results +=

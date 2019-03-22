@@ -9,7 +9,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 public final class SwedenDlFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.sweden.dl.SwedenDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.sweden.dl.SwedenDlFrontRecognizer();
+        com.microblink.entities.recognizers.blinkid.sweden.SwedenDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.sweden.SwedenDlFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
@@ -37,8 +37,14 @@ public final class SwedenDlFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractSurname")) {
             recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
         }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -49,12 +55,15 @@ public final class SwedenDlFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
         }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
+        }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.sweden.dl.SwedenDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.sweden.dl.SwedenDlFrontRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.sweden.SwedenDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.sweden.SwedenDlFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -79,6 +88,6 @@ public final class SwedenDlFrontRecognizerSerialization implements RecognizerSer
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.sweden.dl.SwedenDlFrontRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.sweden.SwedenDlFrontRecognizer.class;
     }
 }

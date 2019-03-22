@@ -11,16 +11,16 @@ import {
 } from '../types'
 
 /**
- * Result object for EgyptIdFrontRecognizer.
+ * Result object for BruneiMilitaryIdFrontRecognizer.
  */
-export class EgyptIdFrontRecognizerResult extends RecognizerResult {
+export class BruneiMilitaryIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The document number of Egypt ID. 
+         * The date of birth of Brunei Military ID owner. 
          */
-        this.documentNumber = nativeResult.documentNumber;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
          * Face image from the document 
@@ -33,19 +33,24 @@ export class EgyptIdFrontRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The national number of Egypt ID. 
+         * The full name of Brunei Military ID owner. 
          */
-        this.nationalNumber = nativeResult.nationalNumber;
+        this.fullName = nativeResult.fullName;
+        
+        /** 
+         * The military rank of Brunei Military ID owner. 
+         */
+        this.rank = nativeResult.rank;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of Egypt ID.
+ * Recognizer which can scan front side of Brunei Military ID card.
  */
-export class EgyptIdFrontRecognizer extends Recognizer {
+export class BruneiMilitaryIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('EgyptIdFrontRecognizer');
+        super('BruneiMilitaryIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -53,9 +58,14 @@ export class EgyptIdFrontRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if national number of Egypt ID should be extracted. 
+         * Defines if full name of Brunei Military ID owner should be extracted. 
          */
-        this.extractNationalNumber = true;
+        this.extractFullName = true;
+        
+        /** 
+         * Defines if military rank of Brunei Military ID owner should be extracted. 
+         */
+        this.extractRank = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -82,6 +92,6 @@ export class EgyptIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new EgyptIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BruneiMilitaryIdFrontRecognizerResult(nativeResult); }
     }
 }

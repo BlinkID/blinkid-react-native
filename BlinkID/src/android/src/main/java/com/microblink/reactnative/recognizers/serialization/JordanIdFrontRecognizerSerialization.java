@@ -22,8 +22,14 @@ public final class JordanIdFrontRecognizerSerialization implements RecognizerSer
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
         }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
         if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));

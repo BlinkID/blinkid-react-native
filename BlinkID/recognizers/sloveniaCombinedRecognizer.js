@@ -18,27 +18,27 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Slovenian ID owner. 
+         * The address of the Slovenia ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * Citizenship of the Slovenian ID owner. 
+         * The administrative unit of the Slovenia ID card. 
          */
-        this.citizenship = nativeResult.citizenship;
+        this.administrativeUnit = nativeResult.administrativeUnit;
         
         /** 
-         * The date of birth of Slovenian ID owner. 
+         * The date of birth of the Slovenia ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Slovenian ID. 
+         * The date of expiry of the Slovenia ID card. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document date of issue of the Slovenian ID. 
+         * The date of issue of the Slovenia ID card. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
@@ -58,14 +58,14 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
+         * The document number of the Slovenia ID card. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
+        
+        /** 
          * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
-        
-        /** 
-         * The first name of the Slovenian ID owner. 
-         */
-        this.firstName = nativeResult.firstName;
         
         /** 
          * Back side image of the document 
@@ -78,29 +78,24 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The identity card number of Slovenian ID. 
+         * The given names of the Slovenia ID owner. 
          */
-        this.identityCardNumber = nativeResult.identityCardNumber;
+        this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The issuing authority of Slovenian ID. 
-         */
-        this.issuingAuthority = nativeResult.issuingAuthority;
-        
-        /** 
-         * The last name of the Slovenian ID owner. 
-         */
-        this.lastName = nativeResult.lastName;
-        
-        /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Determines if all check digits inside MRZ are correct 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Personal identification number of the Slovenian ID holder. 
+         * The nationality of the Slovenia ID owner. 
          */
-        this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
+        this.nationality = nativeResult.nationality;
+        
+        /** 
+         * The pin of the Slovenia ID owner. 
+         */
+        this.pin = nativeResult.pin;
         
         /** 
          * {true} if recognizer has finished scanning first side and is now scanning back side, 
@@ -108,7 +103,7 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Slovenian ID owner. 
+         * The sex of the Slovenia ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -117,12 +112,16 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * The surname of the Slovenia ID owner. 
+         */
+        this.surname = nativeResult.surname;
+        
     }
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Slovenian ID.
- * 
+ * Recognizer which can scan front and back side of Slovenia national ID cards.
  */
 export class SloveniaCombinedRecognizer extends Recognizer {
     constructor() {
@@ -132,6 +131,61 @@ export class SloveniaCombinedRecognizer extends Recognizer {
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if address of Slovenian ID owner should be extracted. 
+         */
+        this.extractAddress = true;
+        
+        /** 
+         * Defines if issuing administrative unit of Slovenian ID should be extracted. 
+         */
+        this.extractAdministrativeUnit = true;
+        
+        /** 
+         * Defines if date of expiry of Slovenian ID card should be extracted. 
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * Defines if date of issue of Slovenian ID should be extracted. 
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if given names of Slovenian ID owner should be extracted. 
+         */
+        this.extractGivenNames = true;
+        
+        /** 
+         * Defines if nationality of Slovenian ID owner should be extracted. 
+         */
+        this.extractNationality = true;
+        
+        /** 
+         * Defines if sex of Slovenian ID owner should be extracted. 
+         */
+        this.extractSex = true;
+        
+        /** 
+         * Defines if surname of Slovenian ID owner should be extracted. 
+         */
+        this.extractSurname = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 
@@ -152,6 +206,11 @@ export class SloveniaCombinedRecognizer extends Recognizer {
          * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new SloveniaCombinedRecognizerResult(nativeResult); }
     }

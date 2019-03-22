@@ -18,12 +18,12 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Polish ID owner. 
+         * The date of birth of the Poland ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Polish ID. 
+         * The date of expiry of the Poland ID card. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
@@ -43,7 +43,7 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The document number of the Polish ID. 
+         * The document number of the Poland ID card. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -53,7 +53,7 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The family name of the Polish ID owner. 
+         * The family name of the Poland ID owner. 
          */
         this.familyName = nativeResult.familyName;
         
@@ -68,32 +68,32 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The given names of the Polish ID owner. 
+         * The given names of the Poland ID owner. 
          */
         this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The issuer of the Polish ID. 
+         * The issuing authority of the Poland ID card. 
          */
-        this.issuer = nativeResult.issuer;
+        this.issuedBy = nativeResult.issuedBy;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Determines if all check digits inside MRZ are correct 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * The nationality of the Polish ID owner. 
+         * The nationality of the Poland ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The parents' given names of the Polish ID owner. 
+         * The parents given names of the Poland ID owner. 
          */
         this.parentsGivenNames = nativeResult.parentsGivenNames;
         
         /** 
-         * Personal number of the Polish ID owner. 
+         * The personal number of the Poland ID owner. 
          */
         this.personalNumber = nativeResult.personalNumber;
         
@@ -103,12 +103,12 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Polish ID owner. 
+         * The sex of the Poland ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The surname of the Polish ID owner. 
+         * The surname of the Poland ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -116,8 +116,7 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Polish ID.
- * 
+ * Recognizer which can scan front and back side of Poland national ID cards.
  */
 export class PolandCombinedRecognizer extends Recognizer {
     constructor() {
@@ -129,34 +128,49 @@ export class PolandCombinedRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * True if date of birth is being extracted from ID 
+         * Defines if date of birth of Poland ID owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if family name is being extracted from ID 
+         * Defines if family name of Poland ID owner should be extracted. 
          */
-        this.extractFamilyName = true;
+        this.extractFamilyName = false;
         
         /** 
-         * True if given names is being extracted from ID 
+         * Defines if given names of Poland ID owner should be extracted. 
          */
         this.extractGivenNames = true;
         
         /** 
-         * True if parents' given names is being extracted from ID 
+         * Defines if parents given names of Poland ID owner should be extracted. 
          */
-        this.extractParentsGivenNames = true;
+        this.extractParentsGivenNames = false;
         
         /** 
-         * True if sex is being extracted from ID 
+         * Defines if sex of Poland ID owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * True if surname is being extracted from ID 
+         * Defines if surname of Poland ID owner should be extracted. 
          */
         this.extractSurname = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 

@@ -16,11 +16,23 @@ public final class JordanCombinedRecognizerSerialization implements RecognizerSe
         if (jsonRecognizer.hasKey("extractDateOfBirth")) {
             recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
         }
+        if (jsonRecognizer.hasKey("extractFullName")) {
+            recognizer.setExtractFullName(jsonRecognizer.getBoolean("extractFullName"));
+        }
         if (jsonRecognizer.hasKey("extractName")) {
             recognizer.setExtractName(jsonRecognizer.getBoolean("extractName"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -48,7 +60,7 @@ public final class JordanCombinedRecognizerSerialization implements RecognizerSe
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
-        jsonResult.putString("issuer", result.getIssuer());
+        jsonResult.putString("issuedBy", result.getIssuedBy());
         jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("name", result.getName());
         jsonResult.putString("nationalNumber", result.getNationalNumber());

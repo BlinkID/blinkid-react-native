@@ -11,24 +11,24 @@ import {
 } from '../types'
 
 /**
- * Result object for SloveniaIdBackRecognizer.
+ * Result object for BruneiMilitaryIdBackRecognizer.
  */
-export class SloveniaIdBackRecognizerResult extends RecognizerResult {
+export class BruneiMilitaryIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The address of Slovenian ID owner. 
+         * The army number of Brunei Military ID owner. 
          */
-        this.address = nativeResult.address;
+        this.armyNumber = nativeResult.armyNumber;
         
         /** 
-         * The issuing administrative unit of Slovenian ID. 
+         * The date of expiry of Brunei Military ID card. 
          */
-        this.administrativeUnit = nativeResult.administrativeUnit;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The date of issue of Slovenian ID. 
+         * The date of issue of Brunei Military ID card. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
@@ -38,19 +38,19 @@ export class SloveniaIdBackRecognizerResult extends RecognizerResult {
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * Signature image from the document 
          */
-        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        this.signatureImage = nativeResult.signatureImage;
         
     }
 }
 
 /**
- * Recognizer which can scan back side of Slovenia ID.
+ * Recognizer which can scan back side of Brunei Military ID card.
  */
-export class SloveniaIdBackRecognizer extends Recognizer {
+export class BruneiMilitaryIdBackRecognizer extends Recognizer {
     constructor() {
-        super('SloveniaIdBackRecognizer');
+        super('BruneiMilitaryIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
@@ -58,17 +58,12 @@ export class SloveniaIdBackRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Slovenian ID owner should be extracted. 
+         * Defines if date of expiry of Brunei Military ID card should be extracted. 
          */
-        this.extractAddress = true;
+        this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if issuing administrative unit of Slovenian ID should be extracted. 
-         */
-        this.extractAdministrativeUnit = true;
-        
-        /** 
-         * Defines if date of issue of Slovenian ID should be extracted. 
+         * Defines if date of issue of Brunei Military ID card should be extracted. 
          */
         this.extractDateOfIssue = true;
         
@@ -87,6 +82,16 @@ export class SloveniaIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new SloveniaIdBackRecognizerResult(nativeResult); }
+        /** 
+         * Defines whether signature image will be available in result. 
+         */
+        this.returnSignatureImage = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
+        
+        this.createResultFromNative = function (nativeResult) { return new BruneiMilitaryIdBackRecognizerResult(nativeResult); }
     }
 }

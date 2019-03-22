@@ -18,22 +18,22 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Czech ID owner. 
+         * The issuing authority of the Czechia ID card. 
          */
-        this.address = nativeResult.address;
+        this.authority = nativeResult.authority;
         
         /** 
-         * The date of birth of Czech ID owner. 
+         * The date of birth of the Czechia ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Czech ID. 
+         * The date of expiry of the Czechia ID card. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document date of issue of the Czech ID. 
+         * The date of issue of the Czechia ID card. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
@@ -53,14 +53,14 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
+         * The document number of the Czechia ID card. 
+         */
+        this.documentNumber = nativeResult.documentNumber;
+        
+        /** 
          * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
-        
-        /** 
-         * The first name of the Czech ID owner. 
-         */
-        this.firstName = nativeResult.firstName;
         
         /** 
          * Back side image of the document 
@@ -73,37 +73,32 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The identity card number of Czech ID. 
+         * The given names of the Czechia ID owner. 
          */
-        this.identityCardNumber = nativeResult.identityCardNumber;
+        this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The issuing authority of Czech ID. 
-         */
-        this.issuingAuthority = nativeResult.issuingAuthority;
-        
-        /** 
-         * The last name of the Czech ID owner. 
-         */
-        this.lastName = nativeResult.lastName;
-        
-        /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Determines if all check digits inside MRZ are correct 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * Nationality of the Czech ID owner. 
+         * The nationality of the Czechia ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * Personal identification number of the Czech ID holder. 
+         * The permanent stay address of the Czechia ID owner. 
          */
-        this.personalIdentificationNumber = nativeResult.personalIdentificationNumber;
+        this.permanentStay = nativeResult.permanentStay;
         
         /** 
-         * The place of birth of the Czech ID owner. 
+         * The personal number of the Czechia ID owner. 
+         */
+        this.personalNumber = nativeResult.personalNumber;
+        
+        /** 
+         * The place of birth of the Czechia ID owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
@@ -113,7 +108,7 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Czech ID owner. 
+         * The sex of the Czechia ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -122,12 +117,16 @@ export class CzechiaCombinedRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
+        /** 
+         * The surname of the Czechia ID owner. 
+         */
+        this.surname = nativeResult.surname;
+        
     }
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Czech ID.
- * 
+ * Recognizer which can scan front and back side of Czechia national ID cards.
  */
 export class CzechiaCombinedRecognizer extends Recognizer {
     constructor() {
@@ -137,6 +136,71 @@ export class CzechiaCombinedRecognizer extends Recognizer {
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if Czech ID's issuing authority should be extracted. 
+         */
+        this.extractAuthority = true;
+        
+        /** 
+         * Defines if Czech ID owner's date of birth should be extracted 
+         */
+        this.extractDateOfBirth = true;
+        
+        /** 
+         * Defines if Czech ID's date of expiry should be extracted 
+         */
+        this.extractDateOfExpiry = true;
+        
+        /** 
+         * Defines if Czech ID's date of issue should be extracted 
+         */
+        this.extractDateOfIssue = true;
+        
+        /** 
+         * Defines if Czech ID owner's given names should be extracted 
+         */
+        this.extractGivenNames = true;
+        
+        /** 
+         * Defines if Czech ID owner's permanent address should be extracted. 
+         */
+        this.extractPermanentStay = true;
+        
+        /** 
+         * Defines if Czech ID owner's personal number should be extracted. 
+         */
+        this.extractPersonalNumber = true;
+        
+        /** 
+         * Defines if Czech ID owner's place of birth should be extracted 
+         */
+        this.extractPlaceOfBirth = true;
+        
+        /** 
+         * Defines if Czech ID owner's sex should be extracted 
+         */
+        this.extractSex = true;
+        
+        /** 
+         * Defines if Czech ID owner's surname should be extracted 
+         */
+        this.extractSurname = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 
@@ -157,6 +221,11 @@ export class CzechiaCombinedRecognizer extends Recognizer {
          * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
+        
+        /** 
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new CzechiaCombinedRecognizerResult(nativeResult); }
     }

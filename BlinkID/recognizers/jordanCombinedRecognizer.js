@@ -18,12 +18,12 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Jordan ID owner. 
+         * The date of birth of the Jordan ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Jordan ID. 
+         * The date of expiry of the Jordan ID card. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
@@ -43,7 +43,7 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The document number of Jordan ID. 
+         * The document number of the Jordan ID card. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
@@ -63,12 +63,12 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The issuer of Jordan ID. 
+         * The issuing authority of the Jordan ID card. 
          */
-        this.issuer = nativeResult.issuer;
+        this.issuedBy = nativeResult.issuedBy;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Determines if all check digits inside MRZ are correct 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
@@ -78,12 +78,12 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.name = nativeResult.name;
         
         /** 
-         * The national number of Jordan ID owner. 
+         * The national number of the Jordan ID card. 
          */
         this.nationalNumber = nativeResult.nationalNumber;
         
         /** 
-         * Nationality of the Jordan ID owner. 
+         * The nationality of the Jordan ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
@@ -93,7 +93,7 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Jordan ID owner. 
+         * The sex of the Jordan ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -101,8 +101,7 @@ export class JordanCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Jordan ID.
- * 
+ * Recognizer which can scan front and back side of Jordan national ID cards.
  */
 export class JordanCombinedRecognizer extends Recognizer {
     constructor() {
@@ -114,19 +113,39 @@ export class JordanCombinedRecognizer extends Recognizer {
         this.detectGlare = true;
         
         /** 
-         * True if date of birth of Jordan owner is being extracted 
+         * Defines if date of birth of Jordan ID owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if name of Jordan ID owner is being extracted 
+         * Defines if full name of the Jordan ID owner should be extracted. 
+         */
+        this.extractFullName = true;
+        
+        /** 
+         * Defines if name of Jordan ID owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         * True if sex of Jordan owner is being extracted 
+         * Defines if sex of Jordan ID owner should be extracted. 
          */
         this.extractSex = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for face image that should be returned. 
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether face image will be available in result. 

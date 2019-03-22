@@ -18,86 +18,25 @@ export class JordanIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Defines holder's date of birth if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
-         */
-        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
-        
-        /** 
-         * Defines date of expiry if it is successfully converted to result from MRZ date format: <code>YYMMDD</code>. 
-         */
-        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * Defines document code. Document code contains two characters. For MRTD the first character shall 
-         */
-        this.documentCode = nativeResult.documentCode;
-        
-        /** 
-         * Defines document number. Document number contains up to 9 characters. 
-         */
-        this.documentNumber = nativeResult.documentNumber;
-        
-        /** 
          * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Defines three-letter or two-letter code which indicate the issuing State. Three-letter codes are based 
+         * The full name of the Jordan ID owner. 
          */
-        this.issuer = nativeResult.issuer;
+        this.fullName = nativeResult.fullName;
         
         /** 
-         * Defines true if Machine Readable Zone has been parsed, false otherwise. 
+         * The data extracted from the machine readable zone. 
          */
-        this.mrzParsed = nativeResult.mrzParsed;
-        
-        /** 
-         * Defines the entire Machine Readable Zone text from ID. This text is usually used for parsing 
-         */
-        this.mrzText = nativeResult.mrzText;
-        
-        /** 
-         * Defines true if all check digits inside MRZ are correct, false otherwise. 
-         */
-        this.mrzVerified = nativeResult.mrzVerified;
-        
-        /** 
-         * Defines nationality of the holder represented by a three-letter or two-letter code. Three-letter 
-         */
-        this.nationality = nativeResult.nationality;
-        
-        /** 
-         * Defines first optional data.<code>null</code> or empty string if not available. 
-         */
-        this.opt1 = nativeResult.opt1;
-        
-        /** 
-         * Defines second optional data.<code>null</code> or empty string if not available. 
-         */
-        this.opt2 = nativeResult.opt2;
-        
-        /** 
-         * Defines the primary indentifier. If there is more than one component, they are separated with space. 
-         */
-        this.primaryId = nativeResult.primaryId;
-        
-        /** 
-         * Defines the secondary identifier. If there is more than one component, they are separated with space. 
-         */
-        this.secondaryId = nativeResult.secondaryId;
-        
-        /** 
-         * Defines sex of the card holder. Sex is specified by use of the single initial, 
-         */
-        this.sex = nativeResult.sex;
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
     }
 }
 
 /**
- *  Recognizer for the back side of Jordan ID.
- * 
+ * Recognizer which can scan back side of Jordan ID cards.
  */
 export class JordanIdBackRecognizer extends Recognizer {
     constructor() {
@@ -107,6 +46,21 @@ export class JordanIdBackRecognizer extends Recognizer {
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
+        
+        /** 
+         * Defines if full name of the Jordan ID owner should be extracted. 
+         */
+        this.extractFullName = true;
+        
+        /** 
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * The extension factors for full document image. 
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Defines whether full document image will be available in 
