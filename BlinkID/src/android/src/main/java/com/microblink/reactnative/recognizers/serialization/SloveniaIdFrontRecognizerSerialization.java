@@ -13,17 +13,29 @@ public final class SloveniaIdFrontRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("extractDateOfBirth")) {
-            recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
-        }
         if (jsonRecognizer.hasKey("extractDateOfExpiry")) {
             recognizer.setExtractDateOfExpiry(jsonRecognizer.getBoolean("extractDateOfExpiry"));
+        }
+        if (jsonRecognizer.hasKey("extractGivenNames")) {
+            recognizer.setExtractGivenNames(jsonRecognizer.getBoolean("extractGivenNames"));
         }
         if (jsonRecognizer.hasKey("extractNationality")) {
             recognizer.setExtractNationality(jsonRecognizer.getBoolean("extractNationality"));
         }
         if (jsonRecognizer.hasKey("extractSex")) {
             recognizer.setExtractSex(jsonRecognizer.getBoolean("extractSex"));
+        }
+        if (jsonRecognizer.hasKey("extractSurname")) {
+            recognizer.setExtractSurname(jsonRecognizer.getBoolean("extractSurname"));
+        }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -33,6 +45,9 @@ public final class SloveniaIdFrontRecognizerSerialization implements RecognizerS
         }
         if (jsonRecognizer.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonRecognizer.getBoolean("returnSignatureImage"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }
@@ -45,12 +60,12 @@ public final class SloveniaIdFrontRecognizerSerialization implements RecognizerS
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
-        jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
-        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("givenNames", result.getGivenNames());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
+        jsonResult.putString("surname", result.getSurname());
         return jsonResult;
     }
 

@@ -29,6 +29,18 @@
         }
     }
     {
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
+        }
+    }
+    {
+        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
+        if (extractDateOfIssue != nil) {
+            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        }
+    }
+    {
         id extractFirstName = [jsonRecognizer valueForKey:@"extractFirstName"];
         if (extractFirstName != nil) {
             recognizer.extractFirstName = [(NSNumber *)extractFirstName boolValue];
@@ -41,33 +53,39 @@
         }
     }
     {
-        id extractLastName = [jsonRecognizer valueForKey:@"extractLastName"];
-        if (extractLastName != nil) {
-            recognizer.extractLastName = [(NSNumber *)extractLastName boolValue];
-        }
-    }
-    {
-        id extractNonMRZSex = [jsonRecognizer valueForKey:@"extractNonMRZSex"];
-        if (extractNonMRZSex != nil) {
-            recognizer.extractNonMRZSex = [(NSNumber *)extractNonMRZSex boolValue];
-        }
-    }
-    {
         id extractPlaceOfBirth = [jsonRecognizer valueForKey:@"extractPlaceOfBirth"];
         if (extractPlaceOfBirth != nil) {
             recognizer.extractPlaceOfBirth = [(NSNumber *)extractPlaceOfBirth boolValue];
         }
     }
     {
-        id extractValidFrom = [jsonRecognizer valueForKey:@"extractValidFrom"];
-        if (extractValidFrom != nil) {
-            recognizer.extractValidFrom = [(NSNumber *)extractValidFrom boolValue];
+        id extractSex = [jsonRecognizer valueForKey:@"extractSex"];
+        if (extractSex != nil) {
+            recognizer.extractSex = [(NSNumber *)extractSex boolValue];
         }
     }
     {
-        id extractValidUntil = [jsonRecognizer valueForKey:@"extractValidUntil"];
-        if (extractValidUntil != nil) {
-            recognizer.extractValidUntil = [(NSNumber *)extractValidUntil boolValue];
+        id extractSurname = [jsonRecognizer valueForKey:@"extractSurname"];
+        if (extractSurname != nil) {
+            recognizer.extractSurname = [(NSNumber *)extractSurname boolValue];
+        }
+    }
+    {
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageDpi = [jsonRecognizer valueForKey:@"fullDocumentImageDpi"];
+        if (fullDocumentImageDpi != nil) {
+            recognizer.fullDocumentImageDpi = [(NSNumber *)fullDocumentImageDpi unsignedIntegerValue];
+        }
+    }
+    {
+        id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
+        if (fullDocumentImageExtensionFactors != nil) {
+            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -96,34 +114,18 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:self.result.cardNumber forKey:@"cardNumber"];
-    [jsonResult setValue:self.result.cnp forKey:@"cnp"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:self.result.documentCode forKey:@"documentCode"];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.idSeries forKey:@"idSeries"];
     [jsonResult setValue:self.result.issuedBy forKey:@"issuedBy"];
-    [jsonResult setValue:self.result.issuer forKey:@"issuer"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzParsed] forKey:@"mrzParsed"];
-    [jsonResult setValue:self.result.mrzText forKey:@"mrzText"];
-    [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:self.result.nonMRZNationality forKey:@"nonMRZNationality"];
-    [jsonResult setValue:self.result.nonMRZSex forKey:@"nonMRZSex"];
-    [jsonResult setValue:self.result.opt1 forKey:@"opt1"];
-    [jsonResult setValue:self.result.opt2 forKey:@"opt2"];
-    [jsonResult setValue:self.result.parentNames forKey:@"parentNames"];
+    [jsonResult setValue:self.result.parentName forKey:@"parentName"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
-    [jsonResult setValue:self.result.primaryId forKey:@"primaryId"];
-    [jsonResult setValue:self.result.secondaryId forKey:@"secondaryId"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validFrom] forKey:@"validFrom"];
-    [jsonResult setValue:[MBSerializationUtils serializeNSDate:self.result.validUntil] forKey:@"validUntil"];
+    [jsonResult setValue:self.result.surname forKey:@"surname"];
 
     return jsonResult;
 }

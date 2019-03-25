@@ -13,6 +13,9 @@ public final class SlovakiaCombinedRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
+        if (jsonRecognizer.hasKey("extractAddress")) {
+            recognizer.setExtractAddress(jsonRecognizer.getBoolean("extractAddress"));
+        }
         if (jsonRecognizer.hasKey("extractDateOfBirth")) {
             recognizer.setExtractDateOfBirth(jsonRecognizer.getBoolean("extractDateOfBirth"));
         }
@@ -25,8 +28,14 @@ public final class SlovakiaCombinedRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractDocumentNumber")) {
             recognizer.setExtractDocumentNumber(jsonRecognizer.getBoolean("extractDocumentNumber"));
         }
+        if (jsonRecognizer.hasKey("extractFirstName")) {
+            recognizer.setExtractFirstName(jsonRecognizer.getBoolean("extractFirstName"));
+        }
         if (jsonRecognizer.hasKey("extractIssuedBy")) {
             recognizer.setExtractIssuedBy(jsonRecognizer.getBoolean("extractIssuedBy"));
+        }
+        if (jsonRecognizer.hasKey("extractLastName")) {
+            recognizer.setExtractLastName(jsonRecognizer.getBoolean("extractLastName"));
         }
         if (jsonRecognizer.hasKey("extractNationality")) {
             recognizer.setExtractNationality(jsonRecognizer.getBoolean("extractNationality"));
@@ -43,6 +52,15 @@ public final class SlovakiaCombinedRecognizerSerialization implements Recognizer
         if (jsonRecognizer.hasKey("extractSurnameAtBirth")) {
             recognizer.setExtractSurnameAtBirth(jsonRecognizer.getBoolean("extractSurnameAtBirth"));
         }
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -54,6 +72,9 @@ public final class SlovakiaCombinedRecognizerSerialization implements Recognizer
         }
         if (jsonRecognizer.hasKey("signResult")) {
             recognizer.setSignResult(jsonRecognizer.getBoolean("signResult"));
+        }
+        if (jsonRecognizer.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonRecognizer.getInt("signatureImageDpi"));
         }
         return recognizer;
     }
@@ -75,11 +96,11 @@ public final class SlovakiaCombinedRecognizerSerialization implements Recognizer
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));
-        jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
+        jsonResult.putString("issuedBy", result.getIssuedBy());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putBoolean("mrzVerified", result.isMrzVerified());
         jsonResult.putString("nationality", result.getNationality());
-        jsonResult.putString("personalIdentificationNumber", result.getPersonalIdentificationNumber());
+        jsonResult.putString("personalNumber", result.getPersonalNumber());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putString("sex", result.getSex());

@@ -18,42 +18,42 @@ export class MoroccoIdBackRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The address of the Moroccan ID owner 
+         * The address of the Morocco ID owner. 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The civil status number of the Moroccan ID owner 
+         * The civil status number of the Morocco ID owner. 
          */
         this.civilStatusNumber = nativeResult.civilStatusNumber;
         
         /** 
-         * The date of expiry of the Moroccan ID 
+         * The date of expiry of the Morocco ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The document number of the Moroccan ID 
+         * The document number of the Morocco ID. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The father's name of the Moroccan ID owner 
+         * The father's name of the Morocco ID owner. 
          */
         this.fathersName = nativeResult.fathersName;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The mother's name of the Moroccan ID owner 
+         * The mother's name of the Morocco ID owner. 
          */
         this.mothersName = nativeResult.mothersName;
         
         /** 
-         * The sex of the Moroccan ID owner 
+         * The sex of the Morocco ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -61,59 +61,83 @@ export class MoroccoIdBackRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan back side of Moroccan national ID cards.
+ * Class for configuring Morocco ID Back Recognizer.
+ * 
+ * Morocco ID Back recognizer is used for scanning Back side of the Morocco ID.
  */
 export class MoroccoIdBackRecognizer extends Recognizer {
     constructor() {
         super('MoroccoIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of the Moroccan ID owner should be extracted 
+         * Defines if owner's address should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if civil status number of the Moroccan ID owner should be extracted 
+         * Defines if owner's civil status number should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractCivilStatusNumber = true;
         
         /** 
-         * Defines if date of expiry of the Moroccan ID should be extracted 
+         * Defines if date of expiry should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if father's name of the Moroccan ID owner should be extracted 
+         * Defines if father's name should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractFathersName = true;
         
         /** 
-         * Defines if mother's name of the Moroccan ID owner should be extracted 
+         * Defines if mother's name should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractMothersName = true;
         
         /** 
-         * Defines if sex of the Moroccan ID owner should be extracted 
+         * Defines if owner's sex should be extracted from Back side of the Morocco ID
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

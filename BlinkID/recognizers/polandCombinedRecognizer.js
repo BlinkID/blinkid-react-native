@@ -18,97 +18,101 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The date of birth of Polish ID owner. 
+         * The date of birth of the Poland ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The document date of expiry of the Polish ID. 
+         * The date of expiry of the Poland ID card. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Defines digital signature of recognition results. 
+         * Digital signature of the recognition result. Available only if enabled with signResult property. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Defines digital signature version. 
+         * Version of the digital signature. Available only if enabled with signResult property. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Defines {true} if data from scanned parts/sides of the document match, 
+         * Returns true if data from scanned parts/sides of the document match,
+         * false otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return false. Result will
+         * be true only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * The document number of the Polish ID. 
+         * The document number of the Poland ID card. 
          */
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The family name of the Polish ID owner. 
+         * The family name of the Poland ID owner. 
          */
         this.familyName = nativeResult.familyName;
         
         /** 
-         * Back side image of the document 
+         * back side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * Front side image of the document 
+         * front side image of the document if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The given names of the Polish ID owner. 
+         * The given names of the Poland ID owner. 
          */
         this.givenNames = nativeResult.givenNames;
         
         /** 
-         * The issuer of the Polish ID. 
+         * The issuing authority of the Poland ID card. 
          */
-        this.issuer = nativeResult.issuer;
+        this.issuedBy = nativeResult.issuedBy;
         
         /** 
-         * True if all check digits inside MRZ are correct, false otherwise. 
+         * Determines if all check digits inside MRZ are correct 
          */
         this.mrzVerified = nativeResult.mrzVerified;
         
         /** 
-         * The nationality of the Polish ID owner. 
+         * The nationality of the Poland ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The parents' given names of the Polish ID owner. 
+         * The parents given names of the Poland ID owner. 
          */
         this.parentsGivenNames = nativeResult.parentsGivenNames;
         
         /** 
-         * Personal number of the Polish ID owner. 
+         * The personal number of the Poland ID owner. 
          */
         this.personalNumber = nativeResult.personalNumber;
         
         /** 
-         * {true} if recognizer has finished scanning first side and is now scanning back side, 
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side. 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
         /** 
-         * Sex of the Polish ID owner. 
+         * The sex of the Poland ID owner. 
          */
         this.sex = nativeResult.sex;
         
         /** 
-         * The surname of the Polish ID owner. 
+         * The surname of the Poland ID owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -116,60 +120,103 @@ export class PolandCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for combined reading of both front and back side of Polish ID.
- * 
+ * Recognizer which can scan front and back side of Poland national ID cards.
  */
 export class PolandCombinedRecognizer extends Recognizer {
     constructor() {
         super('PolandCombinedRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth is being extracted from ID 
+         * Defines if date of birth of Poland ID owner should be extracted.
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if family name is being extracted from ID 
+         * Defines if family name of Poland ID owner should be extracted.
+         * 
+         *  
          */
-        this.extractFamilyName = true;
+        this.extractFamilyName = false;
         
         /** 
-         * True if given names is being extracted from ID 
+         * Defines if given names of Poland ID owner should be extracted.
+         * 
+         *  
          */
         this.extractGivenNames = true;
         
         /** 
-         * True if parents' given names is being extracted from ID 
+         * Defines if parents given names of Poland ID owner should be extracted.
+         * 
+         *  
          */
-        this.extractParentsGivenNames = true;
+        this.extractParentsGivenNames = false;
         
         /** 
-         * True if sex is being extracted from ID 
+         * Defines if sex of Poland ID owner should be extracted.
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * True if surname is being extracted from ID 
+         * Defines if surname of Poland ID owner should be extracted.
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.fullDocumentImageDpi = 250;
+        
+        /** 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether or not recognition result should be signed. 
+         * Whether or not recognition result should be signed.
+         * 
+         *  
          */
         this.signResult = false;
         

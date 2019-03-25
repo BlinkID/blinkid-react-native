@@ -29,14 +29,14 @@
     // no settings deserialized at the moment
     MBBlinkCardOverlaySettings *sett = [[MBBlinkCardOverlaySettings alloc] init];
     self.delegate = delegate;
-    
+
     {
         id glareMessage = [jsonOverlaySettings valueForKey:@"glareMessage"];
         if (glareMessage != nil) {
             sett.glareStatusMessage = (NSString *)glareMessage;
         }
     }
-    
+
     return [[MBBlinkCardOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
 }
 

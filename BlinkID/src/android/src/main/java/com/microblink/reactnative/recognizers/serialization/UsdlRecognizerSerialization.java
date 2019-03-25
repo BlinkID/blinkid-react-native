@@ -33,6 +33,19 @@ public final class UsdlRecognizerSerialization implements RecognizerSerializatio
         jsonResult.putString("rawStringData", result.getRawStringData());
         jsonResult.putBoolean("uncertain", result.isUncertain());
         jsonResult.putArray("fields", serializeFields(result));
+        jsonResult.putString("firstName", result.getFirstName());
+        jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("fullName", result.getFullName());
+        jsonResult.putString("address", result.getAddress());
+        jsonResult.putString("documentNumber", result.getDocumentNumber());
+        jsonResult.putString("sex", result.getSex());
+        jsonResult.putString("restrictions", result.getRestrictions());
+        jsonResult.putString("endorsements", result.getEndorsements());
+        jsonResult.putString("vehicleClass", result.getVehicleClass());
+        jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
+        jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
+        jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+
         return jsonResult;
     }
 

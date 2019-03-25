@@ -18,62 +18,62 @@ export class SwedenDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Date of birth of Sweden DL owner. 
+         * The date of birth of Sweden DL owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Date of expiry of Sweden DL. 
+         * The date of expiry of Sweden DL. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * Date of issue of Sweden DL. 
+         * The date of issue of Sweden DL. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Issuing agency of Sweden DL card. 
+         * The issuing agency of Sweden DL. 
          */
         this.issuingAgency = nativeResult.issuingAgency;
         
         /** 
-         * Licence categories of Sweden DL. 
+         * The licence categories of Sweden DL. 
          */
         this.licenceCategories = nativeResult.licenceCategories;
         
         /** 
-         * The licence number of Sweden DL card owner. 
+         * The licence number of Sweden DL. 
          */
         this.licenceNumber = nativeResult.licenceNumber;
         
         /** 
-         * Name of Sweden DL owner. 
+         * The name of Sweden DL owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * Reference number of Sweden DL card. 
+         * The reference number of Sweden DL. 
          */
         this.referenceNumber = nativeResult.referenceNumber;
         
         /** 
-         * Signature image from the document 
+         * image of the signature if enabled with returnSignatureImage property. 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * Surname of Sweden DL owner. 
+         * The surname of Sweden DL owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -81,77 +81,127 @@ export class SwedenDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer settings for reading front side of Sweden DL
- * 
+ * Recognizer which can scan front side of Sweden DL.
  */
 export class SwedenDlFrontRecognizer extends Recognizer {
     constructor() {
         super('SwedenDlFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth of Sweden DL owner is being extracted 
+         * Defines if date of birth of Sweden DL owner should be extracted.
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if date of expiry of Sweden DL is being extracted 
+         * Defines if date of expiry of Sweden DL should be extracted.
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * True if date of issue of Sweden DL is being extracted 
+         * Defines if date of issue of Sweden DL should be extracted.
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * True if issuing agency of Sweden DL is being extracted 
+         * Defines if issuing agency of Sweden DL should be extracted.
+         * 
+         *  
          */
         this.extractIssuingAgency = true;
         
         /** 
-         * True if licence categories of Sweden DL is being extracted 
+         * Defines if licence categories of Sweden DL should be extracted.
+         * 
+         *  
          */
-        this.extractLicenceCategories = false;
+        this.extractLicenceCategories = true;
         
         /** 
-         * True if name of Sweden DL owner is being extracted 
+         * Defines if name of Sweden DL owner should be extracted.
+         * 
+         *  
          */
         this.extractName = true;
         
         /** 
-         * True if reference number of Sweden DL is being extracted 
+         * Defines if reference number of Sweden DL should be extracted.
+         * 
+         *  
          */
         this.extractReferenceNumber = true;
         
         /** 
-         * True if surname of Sweden DL owner is being extracted 
+         * Defines if surname of Sweden DL owner should be extracted.
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Defines whether signature image will be available in result. 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
          */
         this.returnSignatureImage = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         this.createResultFromNative = function (nativeResult) { return new SwedenDlFrontRecognizerResult(nativeResult); }
     }

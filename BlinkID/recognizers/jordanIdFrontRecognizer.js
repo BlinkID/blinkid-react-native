@@ -18,32 +18,32 @@ export class JordanIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Date of birth of Jordan ID owner. 
+         * The date of birth of the Jordan ID owner. 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Name of Jordan ID owner. 
+         * The name of the Jordan ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The national number of Jordan ID card owner. 
+         * The national number of the Jordan ID. 
          */
         this.nationalNumber = nativeResult.nationalNumber;
         
         /** 
-         * Sex of Jordan ID owner. 
+         * The sex of the Jordan ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -51,45 +51,75 @@ export class JordanIdFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- *  Recognizer for reading front side of Jordan ID.
- * 
+ * Recognizer which can scan front side of Jordan national ID cards.
  */
 export class JordanIdFrontRecognizer extends Recognizer {
     constructor() {
         super('JordanIdFrontRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * True if date of birth of Jordan owner is being extracted 
+         * Defines if date of birth of Jordan ID owner should be extracted.
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * True if name of Jordan ID owner is being extracted 
+         * Defines if name of Jordan ID owner should be extracted.
+         * 
+         *  
          */
         this.extractName = true;
         
         /** 
-         * True if sex of Jordan owner is being extracted 
+         * Defines if sex of Jordan ID owner should be extracted.
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * Defines the DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.faceImageDpi = 250;
+        
+        /** 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
+         */
+        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /** 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

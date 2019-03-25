@@ -1,6 +1,7 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
 import {
-    ImageExtensionFactors
+    ImageExtensionFactors,
+    Date
 } from '../types'
 
 /**
@@ -58,6 +59,42 @@ export class UsdlCombinedRecognizerResult extends RecognizerResult {
 
         /** Fields inside US Driver's licence. Available Keys are listed in UsdlKeys enum. */
         this.fields = nativeResult.fields;
+
+        /** The first name of the United States driver license owner. */
+        this.firstName = nativeResult.firstName;
+
+        /** The last name of the United States driver license owner. */
+        this.lastName = nativeResult.lastName;
+
+        /** The full name of the United States driver license owner. */
+        this.fullName = nativeResult.fullName;
+
+        /** The full address of the United States driver license owner. */
+        this.address = nativeResult.address;
+
+        /** The document number of the United States driver license. */
+        this.documentNumber = nativeResult.documentNumber;
+
+        /** The sex of the United States driver license owner. */
+        this.sex = nativeResult.sex;
+
+        /** The restrictions to driving privileges for the United States driver license owner. */
+        this.restrictions = nativeResult.restrictions;
+
+        /** The additional privileges granted to the United States driver license owner. */
+        this.endorsements = nativeResult.endorsements;
+
+        /** The type of vehicle the driver license owner has privilege to drive. */
+        this.vehicleClass = nativeResult.vehicleClass;
+
+        /** The date of birth of the United States driver license owner. */
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+
+        /** The date of issue of the United States driver license. */
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
+
+        /** The date of expiry of the United States driver license. */
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
     }
 }
 
