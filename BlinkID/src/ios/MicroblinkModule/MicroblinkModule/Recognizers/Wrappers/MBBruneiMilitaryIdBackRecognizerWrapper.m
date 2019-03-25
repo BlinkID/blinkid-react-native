@@ -1,21 +1,21 @@
-#import "MBSloveniaIdBackRecognizerWrapper.h"
+#import "MBBruneiMilitaryIdBackRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBSloveniaIdBackRecognizerCreator
+@implementation MBBruneiMilitaryIdBackRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"SloveniaIdBackRecognizer";
+        _jsonName = @"BruneiMilitaryIdBackRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBSloveniaIdBackRecognizer *recognizer = [[MBSloveniaIdBackRecognizer alloc] init];
+    MBBruneiMilitaryIdBackRecognizer *recognizer = [[MBBruneiMilitaryIdBackRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -23,15 +23,9 @@
         }
     }
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
-        }
-    }
-    {
-        id extractAdministrativeUnit = [jsonRecognizer valueForKey:@"extractAdministrativeUnit"];
-        if (extractAdministrativeUnit != nil) {
-            recognizer.extractAdministrativeUnit = [(NSNumber *)extractAdministrativeUnit boolValue];
+        id extractDateOfExpiry = [jsonRecognizer valueForKey:@"extractDateOfExpiry"];
+        if (extractDateOfExpiry != nil) {
+            recognizer.extractDateOfExpiry = [(NSNumber *)extractDateOfExpiry boolValue];
         }
     }
     {
@@ -58,24 +52,36 @@
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
         }
     }
+    {
+        id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
+        if (returnSignatureImage != nil) {
+            recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
+        }
+    }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
 
     return recognizer;
 }
 
 @end
 
-@interface MBSloveniaIdBackRecognizer (JsonSerialization)
+@interface MBBruneiMilitaryIdBackRecognizer (JsonSerialization)
 @end
 
-@implementation MBSloveniaIdBackRecognizer (JsonSerialization)
+@implementation MBBruneiMilitaryIdBackRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:self.result.administrativeUnit forKey:@"administrativeUnit"];
+    [jsonResult setValue:self.result.armyNumber forKey:@"armyNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
 
     return jsonResult;
 }

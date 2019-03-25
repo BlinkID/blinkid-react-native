@@ -77,6 +77,19 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
+    
+    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
+    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:self.result.address forKey:@"address"];
+    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
+    [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:self.result.restrictions forKey:@"restrictions"];
+    [jsonResult setValue:self.result.endorsements forKey:@"endorsements"];
+    [jsonResult setValue:self.result.vehicleClass forKey:@"vehicleClass"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
 
     [jsonResult setValue:[self.result optionalElements] forKey:@"optionalElements"];
     [jsonResult setValue:[[self.result data] base64EncodedStringWithOptions:0] forKey:@"rawData"];

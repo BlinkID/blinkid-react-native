@@ -1,21 +1,21 @@
-#import "MBSloveniaIdBackRecognizerWrapper.h"
+#import "MBBruneiMilitaryIdFrontRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBSloveniaIdBackRecognizerCreator
+@implementation MBBruneiMilitaryIdFrontRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"SloveniaIdBackRecognizer";
+        _jsonName = @"BruneiMilitaryIdFrontRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBSloveniaIdBackRecognizer *recognizer = [[MBSloveniaIdBackRecognizer alloc] init];
+    MBBruneiMilitaryIdFrontRecognizer *recognizer = [[MBBruneiMilitaryIdFrontRecognizer alloc] init];
     {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
@@ -23,21 +23,21 @@
         }
     }
     {
-        id extractAddress = [jsonRecognizer valueForKey:@"extractAddress"];
-        if (extractAddress != nil) {
-            recognizer.extractAddress = [(NSNumber *)extractAddress boolValue];
+        id extractFullName = [jsonRecognizer valueForKey:@"extractFullName"];
+        if (extractFullName != nil) {
+            recognizer.extractFullName = [(NSNumber *)extractFullName boolValue];
         }
     }
     {
-        id extractAdministrativeUnit = [jsonRecognizer valueForKey:@"extractAdministrativeUnit"];
-        if (extractAdministrativeUnit != nil) {
-            recognizer.extractAdministrativeUnit = [(NSNumber *)extractAdministrativeUnit boolValue];
+        id extractRank = [jsonRecognizer valueForKey:@"extractRank"];
+        if (extractRank != nil) {
+            recognizer.extractRank = [(NSNumber *)extractRank boolValue];
         }
     }
     {
-        id extractDateOfIssue = [jsonRecognizer valueForKey:@"extractDateOfIssue"];
-        if (extractDateOfIssue != nil) {
-            recognizer.extractDateOfIssue = [(NSNumber *)extractDateOfIssue boolValue];
+        id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
+        if (faceImageDpi != nil) {
+            recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
         }
     }
     {
@@ -53,6 +53,12 @@
         }
     }
     {
+        id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
+        if (returnFaceImage != nil) {
+            recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
+        }
+    }
+    {
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
@@ -64,18 +70,18 @@
 
 @end
 
-@interface MBSloveniaIdBackRecognizer (JsonSerialization)
+@interface MBBruneiMilitaryIdFrontRecognizer (JsonSerialization)
 @end
 
-@implementation MBSloveniaIdBackRecognizer (JsonSerialization)
+@implementation MBBruneiMilitaryIdFrontRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.address forKey:@"address"];
-    [jsonResult setValue:self.result.administrativeUnit forKey:@"administrativeUnit"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
+    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:self.result.rank forKey:@"rank"];
 
     return jsonResult;
 }

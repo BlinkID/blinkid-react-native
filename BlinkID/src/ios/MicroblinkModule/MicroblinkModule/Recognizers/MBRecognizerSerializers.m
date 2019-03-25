@@ -14,6 +14,8 @@
 #import "MBBlinkCardRecognizerWrapper.h"
 #import "MBBruneiIdBackRecognizerWrapper.h"
 #import "MBBruneiIdFrontRecognizerWrapper.h"
+#import "MBBruneiMilitaryIdBackRecognizerWrapper.h"
+#import "MBBruneiMilitaryIdFrontRecognizerWrapper.h"
 #import "MBBruneiResidencePermitBackRecognizerWrapper.h"
 #import "MBBruneiResidencePermitFrontRecognizerWrapper.h"
 #import "MBBruneiTemporaryResidencePermitBackRecognizerWrapper.h"
@@ -68,9 +70,6 @@
 #import "MBPolandIdBackRecognizerWrapper.h"
 #import "MBPolandIdFrontRecognizerWrapper.h"
 #import "MBRomaniaIdFrontRecognizerWrapper.h"
-#import "MBSerbiaCombinedRecognizerWrapper.h"
-#import "MBSerbiaIdBackRecognizerWrapper.h"
-#import "MBSerbiaIdFrontRecognizerWrapper.h"
 #import "MBSimNumberRecognizerWrapper.h"
 #import "MBSingaporeChangiEmployeeIdRecognizerWrapper.h"
 #import "MBSingaporeCombinedRecognizerWrapper.h"
@@ -126,6 +125,8 @@
         [self registerCreator:[[MBBlinkCardRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiMilitaryIdBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBruneiMilitaryIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiResidencePermitBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiResidencePermitFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiTemporaryResidencePermitBackRecognizerCreator alloc] init]];
@@ -180,9 +181,6 @@
         [self registerCreator:[[MBPolandIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBRomaniaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSerbiaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSerbiaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSerbiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSimNumberRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSingaporeChangiEmployeeIdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBSingaporeCombinedRecognizerCreator alloc] init]];
