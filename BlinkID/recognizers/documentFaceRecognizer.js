@@ -104,6 +104,13 @@ export class DocumentFaceRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
+        /** 
+         * Setting for control over FaceImageCropProcessor's tryBothOrientations option
+         * 
+         *  
+         */
+        this.tryBothOrientations = false;
+        
         this.createResultFromNative = function (nativeResult) { return new DocumentFaceRecognizerResult(nativeResult); }
     }
 }

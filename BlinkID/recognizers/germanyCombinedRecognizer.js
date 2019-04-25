@@ -116,6 +116,11 @@ export class GermanyCombinedRecognizerResult extends RecognizerResult {
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
+         * The full mrz string result. 
+         */
+        this.rawMrzString = nativeResult.rawMrzString;
+        
+        /** 
          * Returns true if recognizer has finished scanning first side and is now scanning back side,
          * false if it's still scanning first side. 
          */

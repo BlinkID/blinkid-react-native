@@ -180,6 +180,7 @@
     [jsonResult setValue:[NSNumber numberWithBool:self.result.mrzVerified] forKey:@"mrzVerified"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
+    [jsonResult setValue:self.result.rawMrzString forKey:@"rawMrzString"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
