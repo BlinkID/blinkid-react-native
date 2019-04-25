@@ -86,6 +86,7 @@ public enum RecognizerSerializers {
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
         registerMapping(new NewZealandDlFrontRecognizerSerialization());
+        registerMapping(new PassportRecognizerSerialization());
         registerMapping(new Pdf417RecognizerSerialization());
         registerMapping(new PolandCombinedRecognizerSerialization());
         registerMapping(new PolandIdBackRecognizerSerialization());
