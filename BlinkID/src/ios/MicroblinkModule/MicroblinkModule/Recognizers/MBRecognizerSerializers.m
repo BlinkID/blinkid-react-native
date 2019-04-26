@@ -65,6 +65,7 @@
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBNewZealandDlFrontRecognizerWrapper.h"
+#import "MBPassportRecognizerWrapper.h"
 #import "MBPdf417RecognizerWrapper.h"
 #import "MBPolandCombinedRecognizerWrapper.h"
 #import "MBPolandIdBackRecognizerWrapper.h"
@@ -176,6 +177,7 @@
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBNewZealandDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPdf417RecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandIdBackRecognizerCreator alloc] init]];
