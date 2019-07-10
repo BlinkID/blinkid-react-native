@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class BlinkCardRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer recognizer = new com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer();
         if (jsonRecognizer.hasKey("anonymizeCardNumber")) {
             recognizer.setAnonymizeCardNumber(jsonRecognizer.getBoolean("anonymizeCardNumber"));
@@ -50,7 +50,7 @@ public final class BlinkCardRecognizerSerialization implements RecognizerSeriali
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer.Result result = ((com.microblink.entities.recognizers.blinkcard.BlinkCardRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

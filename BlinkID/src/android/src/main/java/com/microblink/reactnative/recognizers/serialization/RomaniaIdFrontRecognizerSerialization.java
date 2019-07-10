@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class RomaniaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.romania.RomaniaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.romania.RomaniaIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -56,11 +56,12 @@ public final class RomaniaIdFrontRecognizerSerialization implements RecognizerSe
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.romania.RomaniaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.romania.RomaniaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("address", result.getAddress());
+        jsonResult.putString("cnpNumber", result.getCnpNumber());
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));

@@ -58,7 +58,7 @@ export class GermanyIdBackRecognizerResult extends RecognizerResult {
         this.fullAddress = nativeResult.fullAddress;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -83,67 +83,47 @@ export class GermanyIdBackRecognizer extends Recognizer {
         super('GermanyIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of German ID owner should be extracted.
-         * 
-         *  
+         * Defines if address of German ID owner should be extracted. 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if issuing authority of German ID should be extracted.
-         * 
-         *  
+         * Defines if issuing authority of German ID should be extracted. 
          */
         this.extractAuthority = true;
         
         /** 
-         * Defines if colour of eyes of German ID owner should be extracted.
-         * 
-         *  
+         * Defines if colour of eyes of German ID owner should be extracted. 
          */
         this.extractColourOfEyes = true;
         
         /** 
-         * Defines if date of issue of German ID should be extracted.
-         * 
-         *  
+         * Defines if date of issue of German ID should be extracted. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if height of German ID owner should be extracted.
-         * 
-         *  
+         * Defines if height of German ID owner should be extracted. 
          */
         this.extractHeight = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

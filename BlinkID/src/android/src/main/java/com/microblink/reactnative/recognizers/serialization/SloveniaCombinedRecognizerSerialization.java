@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class SloveniaCombinedRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.slovenia.SloveniaCombinedRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.slovenia.SloveniaCombinedRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -65,7 +65,7 @@ public final class SloveniaCombinedRecognizerSerialization implements Recognizer
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.slovenia.SloveniaCombinedRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.slovenia.SloveniaCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
@@ -73,6 +73,7 @@ public final class SloveniaCombinedRecognizerSerialization implements Recognizer
         jsonResult.putString("administrativeUnit", result.getAdministrativeUnit());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());

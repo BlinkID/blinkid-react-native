@@ -12,7 +12,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class UsdlCombinedRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         UsdlCombinedRecognizer recognizer = new UsdlCombinedRecognizer();
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
@@ -39,7 +39,7 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         UsdlCombinedRecognizer.Result result = ((UsdlCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

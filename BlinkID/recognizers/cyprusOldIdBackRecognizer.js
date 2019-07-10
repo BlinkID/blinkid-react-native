@@ -28,7 +28,7 @@ export class CyprusOldIdBackRecognizerResult extends RecognizerResult {
         this.expiresOn = nativeResult.expiresOn != null ? new Date(nativeResult.expiresOn) : null;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -48,46 +48,32 @@ export class CyprusOldIdBackRecognizer extends Recognizer {
         super('CyprusOldIdBackRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if the expiry date of old Cryprus ID card should be extracted.
-         * 
-         *  
+         * Defines if the expiry date of old Cryprus ID card should be extracted. 
          */
         this.extractExpiresOn = true;
         
         /** 
-         * Defines if the sex of old Cyprus ID card owner should be extracted.
-         * 
-         *  
+         * Defines if the sex of old Cyprus ID card owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

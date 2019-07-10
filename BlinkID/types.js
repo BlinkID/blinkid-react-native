@@ -288,3 +288,17 @@ export class ImageExtensionFactors {
         this.leftFactor = 0.0;
     }
 };
+
+/**
+ * Represents data extracted from the Driver's license.
+ */
+export class DriverLicenseDetailedInfo {
+    constructor(nativeDriverLicenseDetailedInfo) {
+        /**  Restrictions to driving privileges for the driver license owner. */
+        this.restrictions = nativeDriverLicenseDetailedInfo.restrictions;
+        /** Additional privileges granted to the driver license owner. */
+        this.endorsements = nativeDriverLicenseDetailedInfo.endorsements;
+        /** The type of vehicle the driver license owner has privilege to drive. */
+        this.vehicleClass = nativeDriverLicenseDetailedInfo.vehicleClass;
+    }
+}

@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class MrtdRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer();
         if (jsonRecognizer.hasKey("allowSpecialCharacters")) {
             recognizer.setAllowSpecialCharacters(jsonRecognizer.getBoolean("allowSpecialCharacters"));
@@ -35,7 +35,7 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
