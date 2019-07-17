@@ -46,4 +46,12 @@
     }
 }
 
++(NSDictionary *) serializeDriverLicenseDetailedInfo:(MBDriverLicenseDetailedInfo *)driverLicenseDetailedInfo {
+    return @{
+             @"restrictions" : driverLicenseDetailedInfo.restrictions,
+             @"endorsements" : driverLicenseDetailedInfo.endorsements,
+             @"vehicleClass" : driverLicenseDetailedInfo.vehicleClass,
+             };
+}
+
 @end

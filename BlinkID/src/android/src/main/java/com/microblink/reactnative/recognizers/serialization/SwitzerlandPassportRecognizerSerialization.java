@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class SwitzerlandPassportRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandPassportRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandPassportRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -62,7 +62,7 @@ public final class SwitzerlandPassportRecognizerSerialization implements Recogni
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandPassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.switzerland.SwitzerlandPassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

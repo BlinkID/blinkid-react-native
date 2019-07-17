@@ -5,6 +5,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
+import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -28,6 +29,14 @@ public abstract class BlinkIDSerializationUtils {
         jsonMrz.putBoolean("mrzParsed", mrzResult.isMrzParsed());
         jsonMrz.putBoolean("mrzVerified", mrzResult.isMrzVerified());
         return jsonMrz;
+    }
+
+    public static WritableMap serializeDriverLicenseDetailedInfo(DriverLicenseDetailedInfo dlDetailedInfo) {
+        WritableMap jsonDriverLicenseDetailedInfo = new WritableNativeMap();
+        jsonDriverLicenseDetailedInfo.putString("restrictions", dlDetailedInfo.getRestrictions());
+        jsonDriverLicenseDetailedInfo.putString("endorsements", dlDetailedInfo.getEndorsements());
+        jsonDriverLicenseDetailedInfo.putString("vehicleClass", dlDetailedInfo.getVehicleClass());
+        return jsonDriverLicenseDetailedInfo;
     }
 
     public static ImageExtensionFactors deserializeExtensionFactors(ReadableMap jsonExtensionFactors) {

@@ -23,6 +23,11 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
+         * The CNP number of Romania ID owner. 
+         */
+        this.cnpNumber = nativeResult.cnpNumber;
+        
+        /** 
          * The date of expiry of Romania ID. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;

@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class SloveniaIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -53,12 +53,13 @@ public final class SloveniaIdFrontRecognizerSerialization implements RecognizerS
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.slovenia.SloveniaIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("givenNames", result.getGivenNames());

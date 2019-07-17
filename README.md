@@ -18,7 +18,7 @@ BlinkID React Native was built and tested with [React Native v0.58.5](https://gi
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.58.5" NameOfYourProject
+react-native init --version="0.59.10" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
@@ -63,7 +63,7 @@ react-native link blinkid-react-native
 platform :ios, '9.0'
 
 target 'TargetName' do
-  pod 'PPBlinkID', '~> 4.9.1'
+  pod 'PPBlinkID', '~> 4.10.0'
 end
 ```
 

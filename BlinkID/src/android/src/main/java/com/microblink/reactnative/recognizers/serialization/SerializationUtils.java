@@ -1,7 +1,6 @@
 package com.microblink.reactnative.recognizers.serialization;
 
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.util.Base64;
 
 import com.facebook.react.bridge.WritableArray;
@@ -25,7 +24,7 @@ public abstract class SerializationUtils {
         jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
     }
 
-    public static WritableMap serializeDate(@Nullable Date date) {
+    public static WritableMap serializeDate(Date date) {
         if (date != null ) {
             WritableMap jsonDate = new WritableNativeMap();
             jsonDate.putInt("day", date.getDay());
@@ -37,7 +36,7 @@ public abstract class SerializationUtils {
         }
     }
 
-    public static WritableMap serializeDate(@Nullable DateResult dateResult) {
+    public static WritableMap serializeDate(DateResult dateResult) {
         if (dateResult == null) {
             return null;
         } else {

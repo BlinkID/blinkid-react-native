@@ -10,15 +10,15 @@ import com.microblink.reactnative.recognizers.RecognizerSerializers;
 
 public final class SuccessFrameGrabberRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         // first obtain slave recognizer
         ReadableMap jsonSlaveRecognizer = jsonRecognizer.getMap("slaveRecognizer");
-        Recognizer<?,?> slaveRecognizer = RecognizerSerializers.INSTANCE.getRecognizerSerialization(jsonSlaveRecognizer).createRecognizer(jsonSlaveRecognizer);
+        Recognizer<?> slaveRecognizer = RecognizerSerializers.INSTANCE.getRecognizerSerialization(jsonSlaveRecognizer).createRecognizer(jsonSlaveRecognizer);
         return new SuccessFrameGrabberRecognizer(slaveRecognizer);
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         SuccessFrameGrabberRecognizer sfgr = (SuccessFrameGrabberRecognizer) recognizer;
         WritableMap jsonSlaveResult = RecognizerSerializers.INSTANCE.getRecognizerSerialization(sfgr.getSlaveRecognizer()).serializeResult(sfgr.getSlaveRecognizer());
 

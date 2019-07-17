@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class EudlRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer();
         if (jsonRecognizer.hasKey("country")) {
             recognizer.setCountry(com.microblink.entities.recognizers.blinkid.eudl.EudlCountry.values()[jsonRecognizer.getInt("country") - 1]);
@@ -47,7 +47,7 @@ public final class EudlRecognizerSerialization implements RecognizerSerializatio
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.eudl.EudlRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

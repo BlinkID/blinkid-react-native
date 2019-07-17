@@ -8,13 +8,13 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class SimNumberRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkbarcode.simnumber.SimNumberRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.simnumber.SimNumberRecognizer();
         return recognizer;
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkbarcode.simnumber.SimNumberRecognizer.Result result = ((com.microblink.entities.recognizers.blinkbarcode.simnumber.SimNumberRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

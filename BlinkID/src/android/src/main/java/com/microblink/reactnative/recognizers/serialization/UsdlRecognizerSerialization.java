@@ -12,7 +12,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class UsdlRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer();
         if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
             recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
@@ -24,7 +24,7 @@ public final class UsdlRecognizerSerialization implements RecognizerSerializatio
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         UsdlRecognizer.Result result = ((UsdlRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

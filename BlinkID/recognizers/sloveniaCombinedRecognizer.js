@@ -38,6 +38,11 @@ export class SloveniaCombinedRecognizerResult extends RecognizerResult {
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
+         * Determines if date of expiry of Slovenian ID card is permanent. 
+         */
+        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        
+        /** 
          * The date of issue of the Slovenia ID card. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;

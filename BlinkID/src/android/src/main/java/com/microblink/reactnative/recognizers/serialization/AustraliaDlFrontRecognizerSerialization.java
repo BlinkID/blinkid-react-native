@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class AustraliaDlFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.australia.AustraliaDlFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.australia.AustraliaDlFrontRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -50,7 +50,7 @@ public final class AustraliaDlFrontRecognizerSerialization implements Recognizer
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.australia.AustraliaDlFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.australia.AustraliaDlFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

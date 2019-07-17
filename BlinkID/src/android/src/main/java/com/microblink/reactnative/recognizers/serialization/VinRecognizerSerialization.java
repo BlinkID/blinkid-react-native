@@ -8,13 +8,13 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class VinRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkbarcode.vin.VinRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.vin.VinRecognizer();
         return recognizer;
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkbarcode.vin.VinRecognizer.Result result = ((com.microblink.entities.recognizers.blinkbarcode.vin.VinRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

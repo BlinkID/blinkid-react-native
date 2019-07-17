@@ -13,6 +13,7 @@
 #import "MBBlinkCardOverlaySettingsSerialization.h"
 #import "MBDocumentOverlaySettingsSerialization.h"
 #import "MBDocumentVerificationOverlaySettingsSerialization.h"
+#import "MBBlinkIdOverlaySettingsSerialization.h"
 
 @interface MBOverlaySettingsSerializers ()
 
@@ -35,6 +36,7 @@
         [self registerMapping:[[MBBlinkCardOverlaySettingsSerialization alloc] init]];
         [self registerMapping:[[MBDocumentOverlaySettingsSerialization alloc] init]];
         [self registerMapping:[[MBDocumentVerificationOverlaySettingsSerialization alloc] init]];
+        [self registerMapping:[[MBBlinkIdOverlaySettingsSerialization alloc] init]];
     }
     return self;
 }

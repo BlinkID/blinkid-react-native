@@ -8,7 +8,7 @@ import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
 public final class SlovakiaIdBackRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?, ?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.slovakia.SlovakiaIdBackRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.slovakia.SlovakiaIdBackRecognizer();
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
@@ -38,7 +38,7 @@ public final class SlovakiaIdBackRecognizerSerialization implements RecognizerSe
     }
 
     @Override
-    public WritableMap serializeResult(Recognizer<?, ?> recognizer) {
+    public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.slovakia.SlovakiaIdBackRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.slovakia.SlovakiaIdBackRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);

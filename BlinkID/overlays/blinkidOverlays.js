@@ -11,6 +11,16 @@ export class DocumentOverlaySettings extends OverlaySettings {
 }
 
 /**
+ * Class for setting up BlinkId overlay.
+ * BlinkId overlay is best suited for recognizers that perform ID document scanning.
+ */
+export class BlinkIdOverlaySettings extends OverlaySettings {
+    constructor() {
+        super('BlinkIdOverlaySettings');
+    }
+}
+
+/**
  * Class for setting up document verification overlay.
  * Document verification overlay is best suited for combined recognizers - recognizer that perform scanning of both sides of ID documents.
  */
