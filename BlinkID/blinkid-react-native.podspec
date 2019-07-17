@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files  = "src/ios", "src/ios/**/*.{h,m}"
 
   s.dependency 'React'
-  s.dependency 'PPBlinkID', '~> 4.9.1'
+  s.dependency 'PPBlinkID', '~> 4.10.0'
 
   s.frameworks = 'UIKit'
 end

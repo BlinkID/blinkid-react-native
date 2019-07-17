@@ -3,10 +3,10 @@ module.exports = {
         platforms: {
             android: {
                 sourceDir: './src/android'
-            }//,
-            // ios: {
-            //     podspecPath: './blinkid-react-native.podspec'
-            // }
+            },
+            ios: {
+                podspecPath: './blinkid-react-native.podspec'
+            }
         }
     }
 };
