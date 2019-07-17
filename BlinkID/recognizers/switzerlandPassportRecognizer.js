@@ -38,12 +38,12 @@ export class SwitzerlandPassportRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Face image from the document 
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -93,82 +93,117 @@ export class SwitzerlandPassportRecognizer extends Recognizer {
         super('SwitzerlandPassportRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if issuing authority of Switzerland passport should be extracted. 
+         * Defines if issuing authority of Switzerland passport should be extracted.
+         * 
+         *  
          */
         this.extractAuthority = true;
         
         /** 
-         * Defines if date of birth of Switzerland passport owner should be extracted. 
+         * Defines if date of birth of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if date of expiry of Switzerland passport should be extracted. 
+         * Defines if date of expiry of Switzerland passport should be extracted.
+         * 
+         *  
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Switzerland passport should be extracted. 
+         * Defines if date of issue of Switzerland passport should be extracted.
+         * 
+         *  
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if given name of Switzerland passport owner should be extracted. 
+         * Defines if given name of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractGivenName = true;
         
         /** 
-         * Defines if height of Switzerland passport owner should be extracted. 
+         * Defines if height of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractHeight = true;
         
         /** 
-         * Defines if passport number of Switzerland passport should be extracted. 
+         * Defines if passport number of Switzerland passport should be extracted.
+         * 
+         *  
          */
         this.extractPassportNumber = true;
         
         /** 
-         * Defines if place of origin of Switzerland passport owner should be extracted. 
+         * Defines if place of origin of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractPlaceOfOrigin = true;
         
         /** 
-         * Defines if sex of Switzerland passport owner should be extracted. 
+         * Defines if sex of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Switzerland passport owner should be extracted. 
+         * Defines if surname of Switzerland passport owner should be extracted.
+         * 
+         *  
          */
         this.extractSurname = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether face image will be available in result. 
+         * Sets whether face image from ID card should be extracted
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

@@ -12,6 +12,8 @@
 #import "MBBarcodeRecognizerWrapper.h"
 #import "MBBlinkCardEliteRecognizerWrapper.h"
 #import "MBBlinkCardRecognizerWrapper.h"
+#import "MBBlinkIdCombinedRecognizerWrapper.h"
+#import "MBBlinkIdRecognizerWrapper.h"
 #import "MBBruneiIdBackRecognizerWrapper.h"
 #import "MBBruneiIdFrontRecognizerWrapper.h"
 #import "MBBruneiMilitaryIdBackRecognizerWrapper.h"
@@ -65,6 +67,7 @@
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBNewZealandDlFrontRecognizerWrapper.h"
+#import "MBNigeriaVoterIdBackRecognizerWrapper.h"
 #import "MBPassportRecognizerWrapper.h"
 #import "MBPdf417RecognizerWrapper.h"
 #import "MBPolandCombinedRecognizerWrapper.h"
@@ -124,6 +127,8 @@
         [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkCardEliteRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkCardRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkIdCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkIdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBruneiMilitaryIdBackRecognizerCreator alloc] init]];
@@ -177,6 +182,7 @@
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBNewZealandDlFrontRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBNigeriaVoterIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPdf417RecognizerCreator alloc] init]];
         [self registerCreator:[[MBPolandCombinedRecognizerCreator alloc] init]];
