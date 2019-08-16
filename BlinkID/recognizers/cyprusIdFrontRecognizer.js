@@ -18,12 +18,12 @@ export class CyprusIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -33,7 +33,7 @@ export class CyprusIdFrontRecognizerResult extends RecognizerResult {
         this.idNumber = nativeResult.idNumber;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
@@ -48,62 +48,42 @@ export class CyprusIdFrontRecognizer extends Recognizer {
         super('CyprusIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

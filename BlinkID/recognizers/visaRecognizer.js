@@ -11,9 +11,9 @@ import {
 } from '../types'
 
 /**
- * Result object for UnitedArabEmiratesIdFrontRecognizer.
+ * Result object for VisaRecognizer.
  */
-export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult {
+export class VisaRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -28,44 +28,24 @@ export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult 
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The idNumber of the United Arab Emirates ID owner. 
+         * The data extracted from the machine readable zone. 
          */
-        this.idNumber = nativeResult.idNumber;
-        
-        /** 
-         * The name of the United Arab Emirates ID owner. 
-         */
-        this.name = nativeResult.name;
-        
-        /** 
-         * The nationality of the United Arab Emirates ID owner. 
-         */
-        this.nationality = nativeResult.nationality;
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
     }
 }
 
 /**
- * Recognizer which can scan front side of United Arab Emirates national ID cards.
+ * Recognizer which can scan all visas with MRZ.
  */
-export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
+export class VisaRecognizer extends Recognizer {
     constructor() {
-        super('UnitedArabEmiratesIdFrontRecognizer');
+        super('VisaRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
-        
-        /** 
-         * Defines if name of United Arab Emirates ID owner should be extracted 
-         */
-        this.extractName = true;
-        
-        /** 
-         * Defines if nationality of United Arab Emirates ID owner should be extracted 
-         */
-        this.extractNationality = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -92,6 +72,6 @@ export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new VisaRecognizerResult(nativeResult); }
     }
 }

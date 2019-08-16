@@ -18,62 +18,62 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * The address of the New Zealand DL owner 
          */
         this.address = nativeResult.address;
         
         /** 
-         * The card version of the New Zealand Driver License. 
+         * The card version of the New Zealand DL 
          */
         this.cardVersion = nativeResult.cardVersion;
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * The date of birth of the New Zealand DL owner 
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * The date of expiry of the New Zealand DL 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * The date of issue of the New Zealand DL 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * Donor indicator of the New Zealand DL owner. It's true if "DONOR" is printed on document, otherwise it's false 
          */
         this.donorIndicator = nativeResult.donorIndicator;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * The first name of the New Zealand Driver License owner. 
+         * The first names of the New Zealand DL owner 
          */
         this.firstNames = nativeResult.firstNames;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The license number of the New Zealand Driver License. 
+         * The license number of the New Zealand DL 
          */
         this.licenseNumber = nativeResult.licenseNumber;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The last name of the New Zealand Driver License owner. 
+         * The surname of the New Zealand DL owner 
          */
         this.surname = nativeResult.surname;
         
@@ -81,120 +81,84 @@ export class NewZealandDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Class for configuring New Zealand DL Front Recognizer.
- * 
- * New Zealand DL Front recognizer is used for scanning front side of New Zealand DL.
+ * Recognizer which can scan front side of New Zealand DL cards.
  */
 export class NewZealandDlFrontRecognizer extends Recognizer {
     constructor() {
         super('NewZealandDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if owner's address should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if address of New Zealand DL owner should be extracted 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if owner's date of birth should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if date of birth of New Zealand DL owner should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if card's expiry date should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if date of expiry of New Zealand DL should be extracted 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if card's issue date should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if date of issue of New Zealand DL should be extracted 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if owner's donor indicator should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if donor indicator of New Zealand DL owner should be extracted 
          */
         this.extractDonorIndicator = true;
         
         /** 
-         * Defines if owner's first name should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if first names of New Zealand DL owner should be extracted 
          */
         this.extractFirstNames = true;
         
         /** 
-         * Defines if owner's last name should be extracted from New Zealand Driver License
-         * 
-         *  
+         * Defines if surname of New Zealand DL owner should be extracted 
          */
         this.extractSurname = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

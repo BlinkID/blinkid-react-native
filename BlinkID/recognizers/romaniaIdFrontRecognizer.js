@@ -38,7 +38,7 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -48,7 +48,7 @@ export class RomaniaIdFrontRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -98,103 +98,72 @@ export class RomaniaIdFrontRecognizer extends Recognizer {
         super('RomaniaIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if address of Romania ID owner should be extracted.
-         * 
-         *  
+         * Defines if address of Romania ID owner should be extracted. 
          */
         this.extractAddress = true;
         
         /** 
-         * Defines if date of expiry of Romania ID should be extracted.
-         * 
-         *  
+         * Defines if date of expiry of Romania ID should be extracted. 
          */
         this.extractDateOfExpiry = true;
         
         /** 
-         * Defines if date of issue of Romania ID should be extracted.
-         * 
-         *  
+         * Defines if date of issue of Romania ID should be extracted. 
          */
         this.extractDateOfIssue = true;
         
         /** 
-         * Defines if first name of Romania ID owner should be extracted.
-         * 
-         *  
+         * Defines if first name of Romania ID owner should be extracted. 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority of Romania ID should be extracted.
-         * 
-         *  
+         * Defines if issuing authority of Romania ID should be extracted. 
          */
         this.extractIssuedBy = true;
         
         /** 
-         * Defines if place of birth of Romania ID owner should be extracted.
-         * 
-         *  
+         * Defines if place of birth of Romania ID owner should be extracted. 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         * Defines if sex of Romania ID owner should be extracted.
-         * 
-         *  
+         * Defines if sex of Romania ID owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Romania ID owner should be extracted.
-         * 
-         *  
+         * Defines if surname of Romania ID owner should be extracted. 
          */
         this.extractSurname = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

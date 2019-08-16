@@ -6,12 +6,12 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 
-public final class DocumentFaceRecognizerSerialization implements RecognizerSerialization {
+public final class BelgiumIdFrontRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer();
-        if (jsonRecognizer.hasKey("detectorType")) {
-            recognizer.setDetectorType(com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonRecognizer.getInt("detectorType") - 1]);
+        com.microblink.entities.recognizers.blinkid.belgium.BelgiumIdFrontRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.belgium.BelgiumIdFrontRecognizer();
+        if (jsonRecognizer.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
@@ -21,9 +21,6 @@ public final class DocumentFaceRecognizerSerialization implements RecognizerSeri
         }
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
-        }
-        if (jsonRecognizer.hasKey("numStableDetectionsThreshold")) {
-            recognizer.setNumStableDetectionsThreshold(jsonRecognizer.getInt("numStableDetectionsThreshold"));
         }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
@@ -36,23 +33,22 @@ public final class DocumentFaceRecognizerSerialization implements RecognizerSeri
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer)recognizer).getResult();
+        com.microblink.entities.recognizers.blinkid.belgium.BelgiumIdFrontRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.belgium.BelgiumIdFrontRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonResultData(jsonResult, result);
-        jsonResult.putMap("documentLocation", SerializationUtils.serializeQuad(result.getDocumentLocation()));
+        jsonResult.putString("cardNumber", result.getCardNumber());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
-        jsonResult.putMap("faceLocation", SerializationUtils.serializeQuad(result.getFaceLocation()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         return jsonResult;
     }
 
     @Override
     public String getJsonName() {
-        return "DocumentFaceRecognizer";
+        return "BelgiumIdFrontRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.class;
+        return com.microblink.entities.recognizers.blinkid.belgium.BelgiumIdFrontRecognizer.class;
     }
 }

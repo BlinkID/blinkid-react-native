@@ -23,7 +23,7 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -33,7 +33,7 @@ export class PolandIdFrontRecognizerResult extends RecognizerResult {
         this.familyName = nativeResult.familyName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -68,89 +68,62 @@ export class PolandIdFrontRecognizer extends Recognizer {
         super('PolandIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if date of birth of Poland ID owner should be extracted. 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         * Defines if family name of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if family name of Poland ID owner should be extracted. 
          */
         this.extractFamilyName = false;
         
         /** 
-         * Defines if given names of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if given names of Poland ID owner should be extracted. 
          */
         this.extractGivenNames = true;
         
         /** 
-         * Defines if parents given names of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if parents given names of Poland ID owner should be extracted. 
          */
         this.extractParentsGivenNames = false;
         
         /** 
-         * Defines if sex of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if sex of Poland ID owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Defines if surname of Poland ID owner should be extracted.
-         * 
-         *  
+         * Defines if surname of Poland ID owner should be extracted. 
          */
         this.extractSurname = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

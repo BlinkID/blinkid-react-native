@@ -23,7 +23,7 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -33,7 +33,7 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -53,17 +53,17 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
         this.number = nativeResult.number;
         
         /** 
-         * The place of birth of Spain DL owner 
+         * The date of birth of Spain DL owner 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
-         * image of the signature if enabled with returnSignatureImage property. 
+         * Signature image from the document 
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /** 
-         * The surname of the Spain DL owner 
+         * The surname of the Spain DL owner. 
          */
         this.surname = nativeResult.surname;
         
@@ -81,8 +81,6 @@ export class SpainDlFrontRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Spain Driver's License Front Recognizer.
- * 
  * Recognizer which can scan front side of Spain national DL cards
  */
 export class SpainDlFrontRecognizer extends Recognizer {
@@ -90,118 +88,82 @@ export class SpainDlFrontRecognizer extends Recognizer {
         super('SpainDlFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         *  Defines if date of birth of Spain DL owner should be extracted
-         * 
-         *   
+         * Defines if date of birth of Spain DL owner should be extracted 
          */
         this.extractDateOfBirth = true;
         
         /** 
-         *  Defines if first name of Spain DL owner should be extracted
-         * 
-         *   
+         * Defines if first name of Spain DL owner should be extracted 
          */
         this.extractFirstName = true;
         
         /** 
-         * Defines if issuing authority of Spain DL should be extracted
-         * 
-         *  
+         * Defines if issuing authority of Spain DL should be extracted 
          */
         this.extractIssuingAuthority = true;
         
         /** 
-         * Defines if licence categories of Spain DL should be extracted
-         * 
-         *  
+         * Defines if licence categories of Spain DL should be extracted 
          */
         this.extractLicenceCategories = true;
         
         /** 
-         *  Defines if place of birth of Spain DL owner should be extracted
-         * 
-         *   
+         * Defines if place of birth of Spain DL owner should be extracted 
          */
         this.extractPlaceOfBirth = true;
         
         /** 
-         *  Defines if surname of Spain DL owner should be extracted
-         * 
-         *   
+         * Defines if surname of Spain DL owner should be extracted 
          */
         this.extractSurname = true;
         
         /** 
-         * Defines if date of issue of Spain DL should be extracted
-         * 
-         *  
+         * Defines if date of issue of Spain DL should be extracted 
          */
         this.extractValidFrom = true;
         
         /** 
-         * Defines if date of expiry of Spain DL should be extracted
-         * 
-         *  
+         * Defines if date of expiry of Spain DL should be extracted 
          */
         this.extractValidUntil = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Sets whether signature image from ID card should be extracted.
-         * 
-         *  
+         * Defines whether signature image will be available in result. 
          */
         this.returnSignatureImage = false;
         
         /** 
-         * Property for setting DPI for signature images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for signature image that should be returned. 
          */
         this.signatureImageDpi = 250;
         

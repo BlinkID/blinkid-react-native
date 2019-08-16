@@ -11,9 +11,9 @@ import {
 } from '../types'
 
 /**
- * Result object for KuwaitIdBackRecognizer.
+ * Result object for BelgiumIdBackRecognizer.
  */
-export class KuwaitIdBackRecognizerResult extends RecognizerResult {
+export class BelgiumIdBackRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -27,30 +27,20 @@ export class KuwaitIdBackRecognizerResult extends RecognizerResult {
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
-        /** 
-         * The serial number of Kuwait ID. 
-         */
-        this.serialNo = nativeResult.serialNo;
-        
     }
 }
 
 /**
- * Recognizer which can scan back side of Kuwait national ID cards.
+ * Recognizer which can scan back side of Belgium ID cards.
  */
-export class KuwaitIdBackRecognizer extends Recognizer {
+export class BelgiumIdBackRecognizer extends Recognizer {
     constructor() {
-        super('KuwaitIdBackRecognizer');
+        super('BelgiumIdBackRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
-        
-        /** 
-         * Defines if serial number of Kuwait ID should be extracted. 
-         */
-        this.extractSerialNo = true;
         
         /** 
          * The DPI (Dots Per Inch) for full document image that should be returned. 
@@ -67,6 +57,6 @@ export class KuwaitIdBackRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new KuwaitIdBackRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BelgiumIdBackRecognizerResult(nativeResult); }
     }
 }

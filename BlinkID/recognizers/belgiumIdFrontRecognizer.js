@@ -11,11 +11,16 @@ import {
 } from '../types'
 
 /**
- * Result object for UnitedArabEmiratesIdFrontRecognizer.
+ * Result object for BelgiumIdFrontRecognizer.
  */
-export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult {
+export class BelgiumIdFrontRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The card number of the Belgium ID card. 
+         */
+        this.cardNumber = nativeResult.cardNumber;
         
         /** 
          * Face image from the document 
@@ -27,45 +32,20 @@ export class UnitedArabEmiratesIdFrontRecognizerResult extends RecognizerResult 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
-        /** 
-         * The idNumber of the United Arab Emirates ID owner. 
-         */
-        this.idNumber = nativeResult.idNumber;
-        
-        /** 
-         * The name of the United Arab Emirates ID owner. 
-         */
-        this.name = nativeResult.name;
-        
-        /** 
-         * The nationality of the United Arab Emirates ID owner. 
-         */
-        this.nationality = nativeResult.nationality;
-        
     }
 }
 
 /**
- * Recognizer which can scan front side of United Arab Emirates national ID cards.
+ * Recognizer which can scan front side of Belgium national ID card.
  */
-export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
+export class BelgiumIdFrontRecognizer extends Recognizer {
     constructor() {
-        super('UnitedArabEmiratesIdFrontRecognizer');
+        super('BelgiumIdFrontRecognizer');
         
         /** 
          * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
-        
-        /** 
-         * Defines if name of United Arab Emirates ID owner should be extracted 
-         */
-        this.extractName = true;
-        
-        /** 
-         * Defines if nationality of United Arab Emirates ID owner should be extracted 
-         */
-        this.extractNationality = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -92,6 +72,6 @@ export class UnitedArabEmiratesIdFrontRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new UnitedArabEmiratesIdFrontRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BelgiumIdFrontRecognizerResult(nativeResult); }
     }
 }

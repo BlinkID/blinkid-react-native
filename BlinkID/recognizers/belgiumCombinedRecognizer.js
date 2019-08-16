@@ -11,11 +11,26 @@ import {
 } from '../types'
 
 /**
- * Result object for MrtdCombinedRecognizer.
+ * Result object for BelgiumCombinedRecognizer.
  */
-export class MrtdCombinedRecognizerResult extends RecognizerResult {
+export class BelgiumCombinedRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
+        
+        /** 
+         * The card number of the Belgium ID card. 
+         */
+        this.cardNumber = nativeResult.cardNumber;
+        
+        /** 
+         * The date of birth of the Belgium ID owner. 
+         */
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
+        
+        /** 
+         * The date of expiry of the Belgium ID card. 
+         */
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
          * Defines digital signature of recognition results. 
@@ -38,6 +53,11 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
+         * The first name of the Belgium ID owner. 
+         */
+        this.firstName = nativeResult.firstName;
+        
+        /** 
          * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
@@ -48,45 +68,49 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * The data extracted from the machine readable zone. 
+         * The issuing authority of the Belgium ID card. 
          */
-        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        this.issuedBy = nativeResult.issuedBy;
+        
+        /** 
+         * The last name of the Belgium ID owner. 
+         */
+        this.lastName = nativeResult.lastName;
+        
+        /** 
+         * Determines if all check digits inside MRZ are correct. 
+         */
+        this.mrzVerified = nativeResult.mrzVerified;
+        
+        /** 
+         * The nationality of the Belgium ID owner. 
+         */
+        this.nationality = nativeResult.nationality;
         
         /** 
          * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
+        /** 
+         * The sex of the Belgium ID owner. 
+         */
+        this.sex = nativeResult.sex;
+        
     }
 }
 
 /**
- * Recognizer for combined reading of face from front side of documents  and MRZ from back side of
- *  * Machine Readable Travel Document.
+ * Recognizer which can scan front and back side of Belgium national ID cards.
  */
-export class MrtdCombinedRecognizer extends Recognizer {
+export class BelgiumCombinedRecognizer extends Recognizer {
     constructor() {
-        super('MrtdCombinedRecognizer');
+        super('BelgiumCombinedRecognizer');
         
         /** 
-         * Whether special characters are allowed. 
+         * Defines whether glare detector is enabled. 
          */
-        this.allowSpecialCharacters = false;
-        
-        /** 
-         * Whether returning of unparsed results is allowed. 
-         */
-        this.allowUnparsedResults = false;
-        
-        /** 
-         * Whether returning of unverified results is allowed. 
-         */
-        this.allowUnverifiedResults = false;
-        
-        /** 
-         * Currently used detector type. 
-         */
-        this.detectorType = DocumentFaceDetectorType.TD1;
+        this.detectGlare = true;
         
         /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
@@ -104,11 +128,6 @@ export class MrtdCombinedRecognizer extends Recognizer {
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Minimum number of stable detections required for detection to be successful. 
-         */
-        this.numStableDetectionsThreshold = 6;
-        
-        /** 
          * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
@@ -123,6 +142,6 @@ export class MrtdCombinedRecognizer extends Recognizer {
          */
         this.signResult = false;
         
-        this.createResultFromNative = function (nativeResult) { return new MrtdCombinedRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BelgiumCombinedRecognizerResult(nativeResult); }
     }
 }

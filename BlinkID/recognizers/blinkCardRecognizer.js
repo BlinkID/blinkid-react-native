@@ -23,35 +23,32 @@ export class BlinkCardRecognizerResult extends RecognizerResult {
         this.cardNumber = nativeResult.cardNumber;
         
         /** 
-         *  Payment card's security code/value 
+         * Payment card's security code/value. 
          */
         this.cvv = nativeResult.cvv;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines {true} if data from scanned parts/sides of the document match, 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -61,18 +58,17 @@ export class BlinkCardRecognizerResult extends RecognizerResult {
         this.inventoryNumber = nativeResult.inventoryNumber;
         
         /** 
-         * Payment card's issuing networ 
+         * The payment card's issuing network. 
          */
         this.issuer = nativeResult.issuer;
         
         /** 
-         * Information about the payment card owner (name, company, etc.). 
+         * Information about the payment card owner (name, company, etc.) 
          */
         this.owner = nativeResult.owner;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -85,95 +81,69 @@ export class BlinkCardRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer used for scanning the front side of credit/debit cards.
+ * Recognizer used for scanning both sides of payment cards.
  */
 export class BlinkCardRecognizer extends Recognizer {
     constructor() {
         super('BlinkCardRecognizer');
         
         /** 
-         * Should anonymize the card number area (redact image pixels) on the document image result
-         * 
-         *  
+         * Should anonymize the card number area (redact image pixels) on the document image result 
          */
         this.anonymizeCardNumber = false;
         
         /** 
-         * Should anonymize the CVV on the document image result
-         * 
-         *  
+         * Should anonymize the CVV area (redact image pixels) on the document image result 
          */
         this.anonymizeCvv = false;
         
         /** 
-         * Should anonymize the owner area (redact image pixels) on the document image result
-         * 
-         *  
+         * Should anonymize the owner area (redact image pixels) on the document image result 
          */
         this.anonymizeOwner = false;
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Should extract CVV
-         * 
-         *  
+         * Should extract the card CVV 
          */
         this.extractCvv = true;
         
         /** 
-         * Should extract the card's inventory number
-         * 
-         *  
+         * Should extract the card's inventory number 
          */
         this.extractInventoryNumber = true;
         
         /** 
-         * Should extract the card owner information
-         * 
-         *  
+         * Should extract the card owner information 
          */
         this.extractOwner = false;
         
         /** 
-         * Should extract the payment card's month of expiry
-         * 
-         *  
+         * Should extract the payment card's month of expiry 
          */
         this.extractValidThru = true;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

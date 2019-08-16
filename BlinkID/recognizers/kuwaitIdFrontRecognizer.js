@@ -18,42 +18,42 @@ export class KuwaitIdFrontRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The birth Date of the front side of the Kuroom wait Id owner. 
+         * The birth date of the Kuwait ID owner. 
          */
         this.birthDate = nativeResult.birthDate != null ? new Date(nativeResult.birthDate) : null;
         
         /** 
-         * The civil Id Number of the front side of the Kuwait Id owner. 
+         * The civil ID number of the Kuwait ID owner. 
          */
         this.civilIdNumber = nativeResult.civilIdNumber;
         
         /** 
-         * The expiry Date of the front side of the Kuwait Id owner. 
+         * The expiry date of the Kuwait ID. 
          */
         this.expiryDate = nativeResult.expiryDate != null ? new Date(nativeResult.expiryDate) : null;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The name of the front side of the Kuwait Id owner. 
+         * The name of the Kuwait ID owner. 
          */
         this.name = nativeResult.name;
         
         /** 
-         * The nationality of the front side of the Kuwait Id owner. 
+         * The nationality of the Kuwait ID owner. 
          */
         this.nationality = nativeResult.nationality;
         
         /** 
-         * The sex of the front side of the Kuwait Id owner. 
+         * The sex of the Kuwait ID owner. 
          */
         this.sex = nativeResult.sex;
         
@@ -68,75 +68,52 @@ export class KuwaitIdFrontRecognizer extends Recognizer {
         super('KuwaitIdFrontRecognizer');
         
         /** 
-         * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         * Defines whether glare detector is enabled. 
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if date of birth of Kuwait ID owner should be extracted.
-         * 
-         *  
+         * Defines if date of birth of Kuwait ID owner should be extracted. 
          */
         this.extractBirthDate = true;
         
         /** 
-         * Defines if name of Kuwait ID owner should be extracted.
-         * 
-         *  
+         * Defines if name of Kuwait ID owner should be extracted. 
          */
         this.extractName = true;
         
         /** 
-         * Defines if nationality of Kuwait ID owner should be extracted.
-         * 
-         *  
+         * Defines if nationality of Kuwait ID owner should be extracted. 
          */
         this.extractNationality = true;
         
         /** 
-         * Defines if sex of Kuwait ID owner should be extracted.
-         * 
-         *  
+         * Defines if sex of Kuwait ID owner should be extracted. 
          */
         this.extractSex = true;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
