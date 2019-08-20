@@ -10,6 +10,9 @@
 #import "MBAustriaIdFrontRecognizerWrapper.h"
 #import "MBAustriaPassportRecognizerWrapper.h"
 #import "MBBarcodeRecognizerWrapper.h"
+#import "MBBelgiumCombinedRecognizerWrapper.h"
+#import "MBBelgiumIdBackRecognizerWrapper.h"
+#import "MBBelgiumIdFrontRecognizerWrapper.h"
 #import "MBBlinkCardEliteRecognizerWrapper.h"
 #import "MBBlinkCardRecognizerWrapper.h"
 #import "MBBlinkIdCombinedRecognizerWrapper.h"
@@ -96,6 +99,7 @@
 #import "MBUnitedArabEmiratesIdBackRecognizerWrapper.h"
 #import "MBUnitedArabEmiratesIdFrontRecognizerWrapper.h"
 #import "MBVinRecognizerWrapper.h"
+#import "MBVisaRecognizerWrapper.h"
 #import "MBUsdlRecognizerWrapper.h"
 #import "MBUsdlCombinedRecognizerWrapper.h"
 
@@ -125,6 +129,9 @@
         [self registerCreator:[[MBAustriaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBAustriaPassportRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBelgiumCombinedRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBelgiumIdBackRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBelgiumIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkCardEliteRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkCardRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkIdCombinedRecognizerCreator alloc] init]];
@@ -211,6 +218,7 @@
         [self registerCreator:[[MBUnitedArabEmiratesIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUnitedArabEmiratesIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBVinRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBVisaRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlCombinedRecognizerCreator alloc] init]];
         

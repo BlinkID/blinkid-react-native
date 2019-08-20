@@ -28,7 +28,7 @@ export class CyprusOldIdBackRecognizerResult extends RecognizerResult {
         this.expiresOn = nativeResult.expiresOn != null ? new Date(nativeResult.expiresOn) : null;
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -48,32 +48,46 @@ export class CyprusOldIdBackRecognizer extends Recognizer {
         super('CyprusOldIdBackRecognizer');
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * Defines if the expiry date of old Cryprus ID card should be extracted. 
+         * Defines if the expiry date of old Cryprus ID card should be extracted.
+         * 
+         *  
          */
         this.extractExpiresOn = true;
         
         /** 
-         * Defines if the sex of old Cyprus ID card owner should be extracted. 
+         * Defines if the sex of old Cyprus ID card owner should be extracted.
+         * 
+         *  
          */
         this.extractSex = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
