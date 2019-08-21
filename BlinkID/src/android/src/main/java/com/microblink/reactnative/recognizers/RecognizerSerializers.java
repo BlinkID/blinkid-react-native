@@ -31,6 +31,9 @@ public enum RecognizerSerializers {
         registerMapping(new AustriaIdFrontRecognizerSerialization());
         registerMapping(new AustriaPassportRecognizerSerialization());
         registerMapping(new BarcodeRecognizerSerialization());
+        registerMapping(new BelgiumCombinedRecognizerSerialization());
+        registerMapping(new BelgiumIdBackRecognizerSerialization());
+        registerMapping(new BelgiumIdFrontRecognizerSerialization());
         registerMapping(new BlinkCardEliteRecognizerSerialization());
         registerMapping(new BlinkCardRecognizerSerialization());
         registerMapping(new BlinkIdCombinedRecognizerSerialization());
@@ -117,6 +120,7 @@ public enum RecognizerSerializers {
         registerMapping(new UnitedArabEmiratesIdBackRecognizerSerialization());
         registerMapping(new UnitedArabEmiratesIdFrontRecognizerSerialization());
         registerMapping(new VinRecognizerSerialization());
+        registerMapping(new VisaRecognizerSerialization());
         registerMapping(new UsdlRecognizerSerialization());
         registerMapping(new UsdlCombinedRecognizerSerialization());
         

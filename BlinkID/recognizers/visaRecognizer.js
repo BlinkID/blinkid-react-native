@@ -11,16 +11,11 @@ import {
 } from '../types'
 
 /**
- * Result object for DocumentFaceRecognizer.
+ * Result object for VisaRecognizer.
  */
-export class DocumentFaceRecognizerResult extends RecognizerResult {
+export class VisaRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * Quadrangle represeting corner points of the document within the input image. 
-         */
-        this.documentLocation = nativeResult.documentLocation != null ? new Quadrilateral(nativeResult.documentLocation) : null;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -28,33 +23,31 @@ export class DocumentFaceRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * Quadrangle represeting corner points of the face image within the input image. 
-         */
-        this.faceLocation = nativeResult.faceLocation != null ? new Quadrilateral(nativeResult.faceLocation) : null;
-        
-        /** 
          * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
+        
+        /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
     }
 }
 
 /**
- * Class for configuring Document Face Recognizer Recognizer.
- * 
- * Document Face Recognizer recognizer is used for scanning documents containing face images.
+ * Recognizer which can scan all visas with MRZ.
  */
-export class DocumentFaceRecognizer extends Recognizer {
+export class VisaRecognizer extends Recognizer {
     constructor() {
-        super('DocumentFaceRecognizer');
+        super('VisaRecognizer');
         
         /** 
-         * Type of docment this recognizer will scan.
+         * Defines if glare detection should be turned on/off.
          * 
          *  
          */
-        this.detectorType = DocumentFaceDetectorType.TD1;
+        this.detectGlare = true;
         
         /** 
          * Property for setting DPI for face images
@@ -81,16 +74,6 @@ export class DocumentFaceRecognizer extends Recognizer {
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines how many times the same document should be detected before the detector
-         * returns this document as a result of the deteciton
-         * 
-         * Higher number means more reliable detection, but slower processing
-         * 
-         *  
-         */
-        this.numStableDetectionsThreshold = 6;
-        
-        /** 
          * Sets whether face image from ID card should be extracted
          * 
          *  
@@ -104,6 +87,6 @@ export class DocumentFaceRecognizer extends Recognizer {
          */
         this.returnFullDocumentImage = false;
         
-        this.createResultFromNative = function (nativeResult) { return new DocumentFaceRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new VisaRecognizerResult(nativeResult); }
     }
 }

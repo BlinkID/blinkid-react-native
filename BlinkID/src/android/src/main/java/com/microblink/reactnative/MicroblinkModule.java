@@ -84,7 +84,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         setLicense(licenseKey, licensee, showTimeLimitedLicenseKeyWarning);
 
         mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
-        UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(jsonOverlaySettings, mRecognizerBundle);
+        UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
         if (jsonOverlaySettings.hasKey("language")) {
             String language = jsonOverlaySettings.getString("language");
             if (language != null) {

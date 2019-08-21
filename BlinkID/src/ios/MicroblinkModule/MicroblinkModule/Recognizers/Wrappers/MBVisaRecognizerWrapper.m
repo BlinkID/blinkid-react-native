@@ -1,25 +1,25 @@
-#import "MBDocumentFaceRecognizerWrapper.h"
+#import "MBVisaRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 
-@implementation MBDocumentFaceRecognizerCreator
+@implementation MBVisaRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"DocumentFaceRecognizer";
+        _jsonName = @"VisaRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBDocumentFaceRecognizer *recognizer = [[MBDocumentFaceRecognizer alloc] init];
+    MBVisaRecognizer *recognizer = [[MBVisaRecognizer alloc] init];
     {
-        id detectorType = [jsonRecognizer valueForKey:@"detectorType"];
-        if (detectorType != nil) {
-            recognizer.detectorType = (MBDocumentFaceDetectorType)([(NSNumber *)detectorType unsignedIntegerValue] - 1);
+        id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
+        if (detectGlare != nil) {
+            recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];
         }
     }
     {
@@ -41,12 +41,6 @@
         }
     }
     {
-        id numStableDetectionsThreshold = [jsonRecognizer valueForKey:@"numStableDetectionsThreshold"];
-        if (numStableDetectionsThreshold != nil) {
-            recognizer.numStableDetectionsThreshold = [(NSNumber *)numStableDetectionsThreshold unsignedIntegerValue];
-        }
-    }
-    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -64,17 +58,16 @@
 
 @end
 
-@interface MBDocumentFaceRecognizer (JsonSerialization)
+@interface MBVisaRecognizer (JsonSerialization)
 @end
 
-@implementation MBDocumentFaceRecognizer (JsonSerialization)
+@implementation MBVisaRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:[MBSerializationUtils serializeMBQuadrangle:self.result.documentLocation] forKey:@"documentLocation"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBQuadrangle:self.result.faceLocation] forKey:@"faceLocation"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
 
     return jsonResult;
 }

@@ -22,7 +22,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm i --save blinkid-react-native-4.10.0.tgz
+  npm i --save blinkid-react-native-4.11.0.tgz
   npm install
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
@@ -56,7 +56,7 @@ cat > Podfile << EOF
 platform :ios, '8.0'
 
 target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.10.0'
+  pod 'PPBlinkID', '~> 4.11.0'
 end
 EOF
 
