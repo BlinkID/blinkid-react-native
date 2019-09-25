@@ -1,6 +1,6 @@
 {
   "name": "blinkid-react-native",
-  "version": "4.11.1",
+  "version": "4.11.2",
   "description": "A small and powerful ID card scanning library. Powered by Microblink (www.microblink.com).",
   "main": "index.js",
   "repository": {
