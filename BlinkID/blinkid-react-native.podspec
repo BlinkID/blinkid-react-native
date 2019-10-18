@@ -14,9 +14,10 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/BlinkID/blinkid-react-native.git", :tag => "v#{s.version}" }
   s.source_files  = "src/ios", "src/ios/**/*.{h,m}"
+  s.header_dir    = "blinkid-react-native"
 
   s.dependency 'React'
-  s.dependency 'PPBlinkID', '~> 4.11.0'
+  s.dependency 'PPBlinkID', '~> 5.0.0'
 
   s.frameworks = 'UIKit'
 end
