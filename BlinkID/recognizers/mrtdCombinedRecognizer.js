@@ -4,10 +4,11 @@ import {
     Point, 
     Quadrilateral,
     MrtdDocumentType, 
-    MrzResult, 
-    EudlCountry, 
+    MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
+    DataMatchResult,
+    
 } from '../types'
 
 /**
@@ -28,10 +29,10 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
+         * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return DataMatchResultFailed. Result will
+         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         

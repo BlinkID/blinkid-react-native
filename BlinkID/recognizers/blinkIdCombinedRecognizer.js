@@ -4,10 +4,11 @@ import {
     Point, 
     Quadrilateral,
     MrtdDocumentType, 
-    MrzResult, 
-    EudlCountry, 
+    MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
+    DataMatchResult,
+    
 } from '../types'
 
 /**
@@ -18,9 +19,24 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
+         * The additional address information of the document owner. 
+         */
+        this.additionalAddressInformation = nativeResult.additionalAddressInformation;
+        
+        /** 
+         * The additional name information of the document owner. 
+         */
+        this.additionalNameInformation = nativeResult.additionalNameInformation;
+        
+        /** 
          * The address of the document owner. 
          */
         this.address = nativeResult.address;
+        
+        /** 
+         * The driver license conditions. 
+         */
+        this.conditions = nativeResult.conditions;
         
         /** 
          * The date of birth of the document owner. 
@@ -38,20 +54,15 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * The additional number of the document. 
          */
-        this.digitalSignature = nativeResult.digitalSignature;
+        this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
-         */
-        this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
-        
-        /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
+         * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return DataMatchResultFailed. Result will
+         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
@@ -66,6 +77,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.driverLicenseDetailedInfo = nativeResult.driverLicenseDetailedInfo;
         
         /** 
+         * The employer of the document owner. 
+         */
+        this.employer = nativeResult.employer;
+        
+        /** 
          * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
@@ -76,9 +92,14 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * back side image of the document if enabled with returnFullDocumentImage property. 
          */
-        this.fullDocumentImage = nativeResult.fullDocumentImage;
+        this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
+        
+        /** 
+         * front side image of the document if enabled with returnFullDocumentImage property. 
+         */
+        this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
          * The full name of the document owner. 
@@ -86,9 +107,59 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.fullName = nativeResult.fullName;
         
         /** 
+         * The issuing authority of the document. 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
          * The last name of the document owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * The marital status of the document owner. 
+         */
+        this.maritalStatus = nativeResult.maritalStatus;
+        
+        /** 
+         * The data extracted from the machine readable zone 
+         */
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        
+        /** 
+         * The nationality of the documet owner. 
+         */
+        this.nationality = nativeResult.nationality;
+        
+        /** 
+         * The personal identification number. 
+         */
+        this.personalIdNumber = nativeResult.personalIdNumber;
+        
+        /** 
+         * The place of birth of the document owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The profession of the document owner. 
+         */
+        this.profession = nativeResult.profession;
+        
+        /** 
+         * The race of the document owner. 
+         */
+        this.race = nativeResult.race;
+        
+        /** 
+         * The religion of the document owner. 
+         */
+        this.religion = nativeResult.religion;
+        
+        /** 
+         * The residential stauts of the document owner. 
+         */
+        this.residentialStatus = nativeResult.residentialStatus;
         
         /** 
          * Returns true if recognizer has finished scanning first side and is now scanning back side,
@@ -148,13 +219,6 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
-        
-        /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
-         */
-        this.signResult = false;
         
         this.createResultFromNative = function (nativeResult) { return new BlinkIdCombinedRecognizerResult(nativeResult); }
     }

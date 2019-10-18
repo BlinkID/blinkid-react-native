@@ -2,103 +2,12 @@
 
 #import "MBRecognizerWrapper.h"
 #import "MBSuccessFrameGrabberRecognizerWrapper.h"
-#import "MBAustraliaDlBackRecognizerWrapper.h"
-#import "MBAustraliaDlFrontRecognizerWrapper.h"
-#import "MBAustriaCombinedRecognizerWrapper.h"
-#import "MBAustriaDlFrontRecognizerWrapper.h"
-#import "MBAustriaIdBackRecognizerWrapper.h"
-#import "MBAustriaIdFrontRecognizerWrapper.h"
-#import "MBAustriaPassportRecognizerWrapper.h"
-#import "MBBarcodeRecognizerWrapper.h"
-#import "MBBelgiumCombinedRecognizerWrapper.h"
-#import "MBBelgiumIdBackRecognizerWrapper.h"
-#import "MBBelgiumIdFrontRecognizerWrapper.h"
-#import "MBBlinkCardEliteRecognizerWrapper.h"
-#import "MBBlinkCardRecognizerWrapper.h"
 #import "MBBlinkIdCombinedRecognizerWrapper.h"
 #import "MBBlinkIdRecognizerWrapper.h"
-#import "MBBruneiIdBackRecognizerWrapper.h"
-#import "MBBruneiIdFrontRecognizerWrapper.h"
-#import "MBBruneiMilitaryIdBackRecognizerWrapper.h"
-#import "MBBruneiMilitaryIdFrontRecognizerWrapper.h"
-#import "MBBruneiResidencePermitBackRecognizerWrapper.h"
-#import "MBBruneiResidencePermitFrontRecognizerWrapper.h"
-#import "MBBruneiTemporaryResidencePermitBackRecognizerWrapper.h"
-#import "MBBruneiTemporaryResidencePermitFrontRecognizerWrapper.h"
-#import "MBColombiaDlFrontRecognizerWrapper.h"
-#import "MBColombiaIdBackRecognizerWrapper.h"
-#import "MBColombiaIdFrontRecognizerWrapper.h"
-#import "MBCroatiaCombinedRecognizerWrapper.h"
-#import "MBCroatiaIdBackRecognizerWrapper.h"
-#import "MBCroatiaIdFrontRecognizerWrapper.h"
-#import "MBCyprusIdBackRecognizerWrapper.h"
-#import "MBCyprusIdFrontRecognizerWrapper.h"
-#import "MBCyprusOldIdBackRecognizerWrapper.h"
-#import "MBCyprusOldIdFrontRecognizerWrapper.h"
-#import "MBCzechiaCombinedRecognizerWrapper.h"
-#import "MBCzechiaIdBackRecognizerWrapper.h"
-#import "MBCzechiaIdFrontRecognizerWrapper.h"
 #import "MBDocumentFaceRecognizerWrapper.h"
-#import "MBEgyptIdFrontRecognizerWrapper.h"
-#import "MBEudlRecognizerWrapper.h"
-#import "MBGermanyCombinedRecognizerWrapper.h"
-#import "MBGermanyDlBackRecognizerWrapper.h"
-#import "MBGermanyDlFrontRecognizerWrapper.h"
-#import "MBGermanyIdBackRecognizerWrapper.h"
-#import "MBGermanyIdFrontRecognizerWrapper.h"
-#import "MBGermanyIdOldRecognizerWrapper.h"
-#import "MBGermanyPassportRecognizerWrapper.h"
-#import "MBHongKongIdFrontRecognizerWrapper.h"
-#import "MBIndonesiaIdFrontRecognizerWrapper.h"
-#import "MBIrelandDlFrontRecognizerWrapper.h"
-#import "MBItalyDlFrontRecognizerWrapper.h"
-#import "MBJordanCombinedRecognizerWrapper.h"
-#import "MBJordanIdBackRecognizerWrapper.h"
-#import "MBJordanIdFrontRecognizerWrapper.h"
-#import "MBKuwaitIdBackRecognizerWrapper.h"
-#import "MBKuwaitIdFrontRecognizerWrapper.h"
-#import "MBMalaysiaDlFrontRecognizerWrapper.h"
-#import "MBMalaysiaIkadFrontRecognizerWrapper.h"
-#import "MBMalaysiaMyKadBackRecognizerWrapper.h"
-#import "MBMalaysiaMyKadFrontRecognizerWrapper.h"
-#import "MBMalaysiaMyKasFrontRecognizerWrapper.h"
-#import "MBMalaysiaMyPrFrontRecognizerWrapper.h"
-#import "MBMalaysiaMyTenteraFrontRecognizerWrapper.h"
-#import "MBMexicoVoterIdFrontRecognizerWrapper.h"
-#import "MBMoroccoIdBackRecognizerWrapper.h"
-#import "MBMoroccoIdFrontRecognizerWrapper.h"
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
-#import "MBNewZealandDlFrontRecognizerWrapper.h"
-#import "MBNigeriaVoterIdBackRecognizerWrapper.h"
 #import "MBPassportRecognizerWrapper.h"
-#import "MBPdf417RecognizerWrapper.h"
-#import "MBPolandCombinedRecognizerWrapper.h"
-#import "MBPolandIdBackRecognizerWrapper.h"
-#import "MBPolandIdFrontRecognizerWrapper.h"
-#import "MBRomaniaIdFrontRecognizerWrapper.h"
-#import "MBSimNumberRecognizerWrapper.h"
-#import "MBSingaporeChangiEmployeeIdRecognizerWrapper.h"
-#import "MBSingaporeCombinedRecognizerWrapper.h"
-#import "MBSingaporeDlFrontRecognizerWrapper.h"
-#import "MBSingaporeIdBackRecognizerWrapper.h"
-#import "MBSingaporeIdFrontRecognizerWrapper.h"
-#import "MBSlovakiaCombinedRecognizerWrapper.h"
-#import "MBSlovakiaIdBackRecognizerWrapper.h"
-#import "MBSlovakiaIdFrontRecognizerWrapper.h"
-#import "MBSloveniaCombinedRecognizerWrapper.h"
-#import "MBSloveniaIdBackRecognizerWrapper.h"
-#import "MBSloveniaIdFrontRecognizerWrapper.h"
-#import "MBSpainDlFrontRecognizerWrapper.h"
-#import "MBSwedenDlFrontRecognizerWrapper.h"
-#import "MBSwitzerlandDlFrontRecognizerWrapper.h"
-#import "MBSwitzerlandIdBackRecognizerWrapper.h"
-#import "MBSwitzerlandIdFrontRecognizerWrapper.h"
-#import "MBSwitzerlandPassportRecognizerWrapper.h"
-#import "MBUnitedArabEmiratesDlFrontRecognizerWrapper.h"
-#import "MBUnitedArabEmiratesIdBackRecognizerWrapper.h"
-#import "MBUnitedArabEmiratesIdFrontRecognizerWrapper.h"
-#import "MBVinRecognizerWrapper.h"
 #import "MBVisaRecognizerWrapper.h"
 #import "MBUsdlRecognizerWrapper.h"
 #import "MBUsdlCombinedRecognizerWrapper.h"
@@ -121,103 +30,12 @@
     if (self) {
         _recognizerSerializers = [[NSMutableDictionary alloc] init];
         [self registerCreator:[[MBSuccessFrameGrabberRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustraliaDlBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustraliaDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustriaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustriaDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustriaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustriaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBAustriaPassportRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBarcodeRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBelgiumCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBelgiumIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBelgiumIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBlinkCardEliteRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBlinkCardRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkIdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkIdRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiMilitaryIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiMilitaryIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiResidencePermitBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiResidencePermitFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiTemporaryResidencePermitBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBruneiTemporaryResidencePermitFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBColombiaDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBColombiaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBColombiaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCroatiaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCroatiaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCroatiaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCyprusIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCyprusIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCyprusOldIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCyprusOldIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCzechiaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCzechiaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBCzechiaIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBDocumentFaceRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBEgyptIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBEudlRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyDlBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyIdOldRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBGermanyPassportRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBHongKongIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBIndonesiaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBIrelandDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBItalyDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBJordanCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBJordanIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBJordanIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBKuwaitIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBKuwaitIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaIkadFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaMyKadBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaMyKadFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaMyKasFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaMyPrFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMalaysiaMyTenteraFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMexicoVoterIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMoroccoIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBMoroccoIdFrontRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBNewZealandDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBNigeriaVoterIdBackRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPassportRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPdf417RecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPolandCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPolandIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBPolandIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBRomaniaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSimNumberRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSingaporeChangiEmployeeIdRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSingaporeCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSingaporeDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSingaporeIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSingaporeIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSlovakiaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSlovakiaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSlovakiaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSloveniaCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSloveniaIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSloveniaIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSpainDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSwedenDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSwitzerlandDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSwitzerlandIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSwitzerlandIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBSwitzerlandPassportRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBUnitedArabEmiratesDlFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBUnitedArabEmiratesIdBackRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBUnitedArabEmiratesIdFrontRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBVinRecognizerCreator alloc] init]];
         [self registerCreator:[[MBVisaRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlCombinedRecognizerCreator alloc] init]];

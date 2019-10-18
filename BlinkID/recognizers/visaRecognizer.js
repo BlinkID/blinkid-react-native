@@ -4,10 +4,11 @@ import {
     Point, 
     Quadrilateral,
     MrtdDocumentType, 
-    MrzResult, 
-    EudlCountry, 
+    MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
+    DataMatchResult,
+    
 } from '../types'
 
 /**

@@ -41,38 +41,6 @@ export class Quadrilateral {
 }
 
 /**
- * Represents the type of scanned barcode
- */
-export const BarcodeType = Object.freeze(
-    {
-        /** No barcode was scanned */
-        None: 1,
-        /** QR code was scanned */
-        QRCode: 2,
-        /** Data Matrix 2D barcode was scanned */
-        DataMatrix: 3,
-        /** UPC E barcode was scanned */
-        UPCE: 4,
-        /** UPC A barcode was scanned */
-        UPCA: 5,
-        /** EAN 8 barcode was scanned */
-        EAN8: 6,
-        /** EAN 13 barcode was scanned */
-        EAN13: 7,
-        /** Code 128 barcode was scanned */
-        Code128: 8,
-        /** Code 39 barcode was scanned */
-        Code39: 9,
-        /** ITF barcode was scanned */
-        ITF: 10,
-        /** Aztec 2D barcode was scanned */
-        Aztec: 11,
-        /** PDF417 2D barcode was scanned */
-        PDF417: 12
-    }
-);
-
-/**
  * Possible types of Machine Readable Travel Documents (MRTDs).
  */
 export const MrtdDocumentType = Object.freeze(
@@ -180,22 +148,6 @@ export class MrzResult {
     }    
 }
 
-/**
- * Possible values for EUDL country field.
- */
-export const EudlCountry = Object.freeze(
-    {
-        /** UK Driver's license */
-        UK : 1,
-        /** German driver's license */
-        Germany : 2,
-        /** Austrian driver's license */
-        Austria : 3,
-        /** Performs country detection and uses scanning parameters for detected country */
-        Automatic : 4
-    }
-);
-
 /** Possible supported detectors for documents containing face image */
 export const DocumentFaceDetectorType = Object.freeze(
     {
@@ -205,68 +157,6 @@ export const DocumentFaceDetectorType = Object.freeze(
         TD2 : 2,
         /** Uses MRTD detector for detecting documents with MRZ */
         PassportsAndVisas : 3
-    }
-);
-
-/**
- * Supported BlinkCard card issuer values.
- */
-export const CardIssuer = Object.freeze(
-    {
-        /** Unidentified Card */
-        Other: 1,
-        /** The American Express Company Card */
-        AmericanExpress: 2,
-        /** The Bank of Montreal ABM Card */
-        BmoAbm: 3,
-        /** China T-Union Transportation Card */
-        ChinaTUnion: 4,
-        /** China UnionPay Card */
-        ChinaUnionPay: 5,
-        /** Canadian Imperial Bank of Commerce Advantage Debit Card */
-        CibcAdvantageDebit: 6,
-        /** CISS Card */
-        Ciss: 7,
-        /** Diners Club International Card */
-        DinersClubInternational: 8,
-        /** Diners Club United States & Canada Card */
-        DinersClubUsCanada: 9,
-        /** Discover Card */
-        DiscoverCard: 10,
-        /** HSBC Bank Canada Card */
-        Hsbc: 11,
-        /** RuPay Card */
-        RuPay: 12,
-        /** InterPayment Card */
-        InterPayment: 13,
-        /** InstaPayment Card */
-        InstaPayment: 14,
-        /** The JCB Company Card */
-        Jcb: 15,
-        /** Laser Debit Card (deprecated) */
-        Laser: 16,
-        /** Maestro Debit Card */
-        Maestro: 17,
-        /** Dankort Card */
-        Dankort: 18,
-        /** MIR Card */
-        Mir: 19,
-        /** MasterCard Inc. Card */
-        MasterCard: 20,
-        /** The Royal Bank of Canada Client Card */
-        RbcClient: 21,
-        /** ScotiaBank Scotia Card */
-        ScotiaBank: 22,
-        /** TD Canada Trust Access Card */
-        TdCtAccess: 23,
-        /** Troy Card */
-        Troy: 24,
-        /** Visa Inc. Card */
-        Visa: 25,
-        /** Universal Air Travel Plan Inc. Card */
-        Uatp: 26,
-        /** Interswitch Verve Card */
-        Verve: 27
     }
 );
 
@@ -288,17 +178,3 @@ export class ImageExtensionFactors {
         this.leftFactor = 0.0;
     }
 };
-
-/**
- * Represents data extracted from the Driver's license.
- */
-export class DriverLicenseDetailedInfo {
-    constructor(nativeDriverLicenseDetailedInfo) {
-        /**  Restrictions to driving privileges for the driver license owner. */
-        this.restrictions = nativeDriverLicenseDetailedInfo.restrictions;
-        /** Additional privileges granted to the driver license owner. */
-        this.endorsements = nativeDriverLicenseDetailedInfo.endorsements;
-        /** The type of vehicle the driver license owner has privilege to drive. */
-        this.vehicleClass = nativeDriverLicenseDetailedInfo.vehicleClass;
-    }
-}
