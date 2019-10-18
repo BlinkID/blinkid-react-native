@@ -18,7 +18,7 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/KTqDBxGDOMjNFCNbVXKJiEBz6a6ra2+Ot3Ylsc3a1hho5UJ2Ag9kOkSJV6zfHcWGRzvjlSGYQ1JNPD2vKb3mneGP2eqUj3xsgDDFgFnKROimUIc1D1mwkhbrgNTRp5FaE2BvJ1uncDHI0z1NGVXMtL5VMF1maHsF72KLzpwp913NQZc+zCzRQmxVvkNAEKm5gZ5KOfdL898h/X+4NcY76nU8WmO92TAMgbonnoY2Hu7phD/HANuHE=',
+    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITruR3GBdCT6r/cmaFI+NZgAUqVDHfyAwktjg12ChCnWOhOftJl+pLYeePQbA7whrJ5YweKxQBcor+NVH3T3PNgZDjlibGecAWKK/CMANH5t9UHbSDmqG6TnvZaH+En2fxXNaIrAyAu4GZquwN2itDRox8smHKOcTCzAH2AyWYSHf7jND8XHKnwogrOWg01hIno3l8zioeM+OY0feG3zwotirfBoObNFpVauI4QI8R7zZEedB+RfENS3XmLLQ=',
     // android license key for applicationID: com.blinkidreactnative
     android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuol2igTqMNWkkWe+DqRqlKYf/Vq6AyLLJlrc1AWymnKPrtdYu/b4Plglo5kfBDcUJRe/WAHl8DbBrgoX8bd1/KaAK23Z7oMFvZBvIHcW6HOFwmvssNTizfCjuxpTWF/l3Q6aippvQlU6lmZl9bSob9dJ3W2fIwcFOb9zXElPs+nrWvvDigW8AOQjZRvjQJtM7SC5OJcxcKqb1/4fia29uvC2gKOTZV7alEo0PDylNGP9iEMh4ehiTR'
 })
@@ -48,16 +48,6 @@ export default class BlinkIDReactNativeApp extends Component {
 
     async scan() {
         try {
-            // to scan EU driver's licenses, use EudlRecognizer
-            var eudlRecognizer = new BlinkIDReactNative.EudlRecognizer();
-            eudlRecognizer.returnFaceImage = true;
-            eudlRecognizer.returnFullDocumentImage = true;
-
-            // if you also want to obtain camera frame on which specific recognizer has
-            // finished its recognition, wrap it with SuccessFrameGrabberRecognizer and use
-            // the wrapper instead of original for building RecognizerCollection
-            var eudlSuccessFrameGrabber = new BlinkIDReactNative.SuccessFrameGrabberRecognizer(eudlRecognizer);
-
             // to scan US Driver's licenses, use UsdlRecognizer
             var usdlRecognizer = new BlinkIDReactNative.UsdlRecognizer();
 
@@ -72,7 +62,7 @@ export default class BlinkIDReactNativeApp extends Component {
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.DocumentOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([eudlSuccessFrameGrabber, usdlSuccessFrameGrabber, mrtdSuccessFrameGrabber]),
+                new BlinkIDReactNative.RecognizerCollection([usdlSuccessFrameGrabber, mrtdSuccessFrameGrabber]),
                 licenseKey
             );
 
@@ -167,25 +157,6 @@ export default class BlinkIDReactNativeApp extends Component {
                   localState.showImageDocument = true;
                   localState.resultImageDocument = 'data:image/jpg;base64,' + mrtdResult.fullDocumentImage;
               }
-        } else if (result instanceof BlinkIDReactNative.EudlRecognizerResult) {
-            localState.results +=
-                "First name: " + result.firstName + fieldDelim +
-                "Last name: " + result.lastName + fieldDelim +
-                "Address: " + result.address + fieldDelim +
-                "Personal number: " + result.personalNumber + fieldDelim +
-                "Driver number: " + result.driverNumber + fieldDelim;
-            
-            // Document image is returned as Base64 encoded JPEG
-            if (result.fullDocumentImage) {
-                localState.showImageDocument = true;
-                localState.resultImageDocument = 'data:image/jpg;base64,' + result.fullDocumentImage;
-            }
-        
-            // Face image is returned as Base64 encoded JPEG
-            if (result.faceImage) {
-                localState.showImageFace = true;
-                localState.resultImageFace = 'data:image/jpg;base64,' + result.faceImage;
-            }
         } else if (result instanceof BlinkIDReactNative.SuccessFrameGrabberRecognizerResult) {
             // first handle slave result, and then add success frame image
             localState = this.handleResult(result.slaveRecognizerResult);
