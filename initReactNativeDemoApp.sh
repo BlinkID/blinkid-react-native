@@ -6,7 +6,8 @@ blink_id_plugin_path=`pwd`/BlinkID
 rm -rf BlinkIDReactNative
 
 # create a sample application
-react-native init --version="0.59.10" BlinkIDReactNative
+# https://github.com/react-native-community/cli#using-npx-recommended
+npx react-native init --version="0.61.2" BlinkIDReactNative
 
 # enter into demo project folder
 pushd BlinkIDReactNative
@@ -22,16 +23,14 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm i --save blinkid-react-native-4.11.2.tgz
+  npm i --save blinkid-react-native-5.0.0.tgz
   npm install
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
 fi
 
-# link package with project
-echo "Linking blinkid-react-native module with project"
-react-native link blinkid-react-native
+# Auto-linking is done in 0.6 versions
 
 # enter into android project folder
 pushd android
@@ -43,22 +42,6 @@ popd
 
 # enter into ios project folder
 pushd ios
-
-# initialize Podfile
-echo "Initializing and installing Podfile"
-pod init
-
-# remove Podfile
-rm -f Podfile
-
-# replace Podfile with new Podfile
-cat > Podfile << EOF
-platform :ios, '8.0'
-
-target 'BlinkIDReactNative' do
-  pod 'PPBlinkID', '~> 4.11.0'
-end
-EOF
 
 # install pod
 pod install
