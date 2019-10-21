@@ -3,8 +3,7 @@ package com.microblink.reactnative.overlays.serialization;
 import com.facebook.react.bridge.ReadableMap;
 import com.microblink.hardware.camera.CameraType;
 import com.microblink.reactnative.R;
-import com.microblink.uisettings.BarcodeUISettings;
-import com.microblink.uisettings.BasicScanUISettings;
+import com.microblink.uisettings.CameraSettings;
 import com.microblink.uisettings.UISettings;
 import com.microblink.uisettings.options.BeepSoundUIOptions;
 
@@ -17,11 +16,12 @@ public abstract class OverlaySerializationUtils {
                 }
             }
         }
-        if (uiSettings instanceof BarcodeUISettings) {
-            if (jsonOverlaySettings.hasKey("useFrontCamera")
-                    && jsonOverlaySettings.getBoolean("useFrontCamera")) {
-                ((BasicScanUISettings) uiSettings).setCameraType(CameraType.CAMERA_FRONTFACE);
-            }
+        if (jsonOverlaySettings.hasKey("useFrontCamera")
+                && jsonOverlaySettings.getBoolean("useFrontCamera")) {
+            CameraSettings cameraSettings = new CameraSettings.Builder()
+                    .setType(CameraType.CAMERA_FRONTFACE)
+                    .build();
+            uiSettings.setCameraSettings(cameraSettings);
         }
     }
 }

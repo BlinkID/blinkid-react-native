@@ -16,21 +16,9 @@ android {
     }
 }
 
-repositories {
-    jcenter()
-    mavenCentral()
-    maven { url 'http://maven.microblink.com' }
-    mavenLocal()
-    maven {
-        url 'https://maven.google.com/'
-        name 'Google'
-    }
-}
-
 dependencies {
-    compile "com.android.support:appcompat-v7:28.0.0"
-    compile 'com.facebook.react:react-native:+'
-    compile('com.microblink:blinkid:4.11.1@aar') {
+    implementation 'com.facebook.react:react-native:+'
+    implementation('com.microblink:blinkid:5.0.0@aar') {
         transitive = true
     }
 }

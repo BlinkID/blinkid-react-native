@@ -19,7 +19,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The additional address information of the document owner. 
+         * The additional name information of the document owner. 
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -74,7 +74,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -84,7 +84,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -109,7 +109,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
-         * The data extracted from the machine readable zone 
+         * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -157,47 +157,34 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * The Blink ID Recognizer is used for scanning Blink ID.
+ * Generic BlinkID recognizer.
  */
 export class BlinkIdRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdRecognizer');
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
