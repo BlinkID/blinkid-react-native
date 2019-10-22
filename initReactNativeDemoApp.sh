@@ -35,8 +35,8 @@ fi
 # enter into android project folder
 pushd android
 
-# patch the build.gradle
-perl -i~ -pe "s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
+# patch the build.gradle to add "maven { url https://maven.microblink.com }"" repository
+perl -i~ -pe "BEGIN{$/ = undef;} s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
 
 popd
 
