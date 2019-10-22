@@ -111,7 +111,6 @@ export { RecognizerResultState } from './recognizer'
 export * from './types'
 
 // export overlays that can be used
-export * from './overlays/barcodeOverlays'
 export * from './overlays/blinkidOverlays'
 
 // export recognizers that can be used and their results
