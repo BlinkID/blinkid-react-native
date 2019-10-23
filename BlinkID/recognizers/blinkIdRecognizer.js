@@ -4,10 +4,11 @@ import {
     Point, 
     Quadrilateral,
     MrtdDocumentType, 
-    MrzResult, 
-    EudlCountry, 
+    MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
+    DataMatchResult,
+    
 } from '../types'
 
 /**
@@ -18,9 +19,24 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
+         * The additional name information of the document owner. 
+         */
+        this.additionalAddressInformation = nativeResult.additionalAddressInformation;
+        
+        /** 
+         * The additional name information of the document owner. 
+         */
+        this.additionalNameInformation = nativeResult.additionalNameInformation;
+        
+        /** 
          * The address of the document owner. 
          */
         this.address = nativeResult.address;
+        
+        /** 
+         * The driver license conditions. 
+         */
+        this.conditions = nativeResult.conditions;
         
         /** 
          * The date of birth of the document owner. 
@@ -38,6 +54,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
+         * The additional number of the document. 
+         */
+        this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
+        
+        /** 
          * The document number. 
          */
         this.documentNumber = nativeResult.documentNumber;
@@ -48,7 +69,12 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.driverLicenseDetailedInfo = nativeResult.driverLicenseDetailedInfo;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * The employer of the document owner. 
+         */
+        this.employer = nativeResult.employer;
+        
+        /** 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -58,7 +84,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Image of the full document 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -68,9 +94,59 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.fullName = nativeResult.fullName;
         
         /** 
+         * The issuing authority of the document. 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
          * The last name of the document owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * The marital status of the document owner. 
+         */
+        this.maritalStatus = nativeResult.maritalStatus;
+        
+        /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        
+        /** 
+         * The nationality of the documet owner. 
+         */
+        this.nationality = nativeResult.nationality;
+        
+        /** 
+         * The personal identification number. 
+         */
+        this.personalIdNumber = nativeResult.personalIdNumber;
+        
+        /** 
+         * The place of birth of the document owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The profession of the document owner. 
+         */
+        this.profession = nativeResult.profession;
+        
+        /** 
+         * The race of the document owner. 
+         */
+        this.race = nativeResult.race;
+        
+        /** 
+         * The religion of the document owner. 
+         */
+        this.religion = nativeResult.religion;
+        
+        /** 
+         * The residential stauts of the document owner. 
+         */
+        this.residentialStatus = nativeResult.residentialStatus;
         
         /** 
          * The sex of the document owner. 
@@ -81,47 +157,34 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * The Blink ID Recognizer is used for scanning Blink ID.
+ * Generic BlinkID recognizer.
  */
 export class BlinkIdRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdRecognizer');
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         

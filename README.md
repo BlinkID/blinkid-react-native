@@ -11,14 +11,14 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.59.10](https://github.com/facebook/react-native/releases/tag/v0.59.10)
+BlinkID React Native was built and tested with [React Native v0.61.2](https://github.com/facebook/react-native/releases/tag/v0.61.2)
 
 ## Installation
 
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.59.10" NameOfYourProject
+react-native init --version="0.61.2" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
@@ -32,6 +32,12 @@ npm i --save blinkid-react-native
 
 ### iOS
 
+Link module with your project: 
+
+```shell
+react-native link blinkid-react-native
+```
+
 [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
 
 - If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
@@ -43,47 +49,17 @@ git lfs install
 
 - **Be sure to restart your console after installing Git LFS**
 
-Go to NameOfYourProject/ios folder and create Podfile
+#### Installing pods
 
-```shell
-pod init
-```
+From [react-native 0.60](https://facebook.github.io/react-native/blog/2019/07/03/version-60#cocoapods-by-default) CocoaPods are now part of React Native's iOS project.
 
-#### If you use react-native link for linking
-
-Link module with your project: 
-
-```shell
-react-native link blinkid-react-native
-```
-
-##### Podfile
-
-```ruby
-platform :ios, '9.0'
-
-target 'TargetName' do
-  pod 'PPBlinkID', '~> 4.11.0'
-end
-```
-
-#### If you don't use react-native link
-
-##### Podfile
-
-```ruby
-platform :ios, '9.0'
-
-target 'TargetName' do
-  pod 'blinkid-react-native', path: '../node_modules/blinkid-react-native'
-end
-```
-
-After setting Your `Podfile`, run in terminal
+Go to `NameOfYourProject/ios` folder and install Pods
 
 ```shell
 pod install
 ```
+
+Our `blinkid-react-native` depends on latest `PPBlinkID` pod so it will be installed automatically.
 
 **To run iOS application, open NameOfYourProject.xcworkspace, set Your team for every Target in General settings and add Privacy - Camera Usage Description key to Your info.plist file and press run**
 
@@ -150,3 +126,14 @@ To use the module you call it in your index.android.js or index.ios.js file like
 **Can I create a custom UI overlay?**
 
 Yes you can, but you will have to implement it natively for android and ios, you can see native implementation guides [here(Android)](https://github.com/BlinkID/blinkid-android#recognizerRunnerView) and [here(ios)](https://github.com/BlinkID/blinkid-ios#recognizerRunnerViewController).
+
+## Known react-native problems:
+
+### Android build exception - missing `ReactSwipeRefreshLayout`
+
+**java.lang.NoClassDefFoundError: com.facebook.react.views.swiperefresh.ReactSwipeRefreshLayout**
+
+Add the following line to dependencies section in android/app/build.gradle:
+
+`implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'`
+

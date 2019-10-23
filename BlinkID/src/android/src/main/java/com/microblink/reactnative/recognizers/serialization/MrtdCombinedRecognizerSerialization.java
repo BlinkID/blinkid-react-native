@@ -53,7 +53,7 @@ public final class MrtdCombinedRecognizerSerialization implements RecognizerSeri
         SerializationUtils.addCommonResultData(jsonResult, result);
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
-        jsonResult.putBoolean("documentDataMatch", result.isDocumentDataMatch());
+        jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentBackImage", SerializationUtils.encodeImageBase64(result.getFullDocumentBackImage()));
         jsonResult.putString("fullDocumentFrontImage", SerializationUtils.encodeImageBase64(result.getFullDocumentFrontImage()));

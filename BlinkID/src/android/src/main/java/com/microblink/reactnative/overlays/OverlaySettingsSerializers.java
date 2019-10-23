@@ -19,10 +19,8 @@ public enum OverlaySettingsSerializers {
     }
 
     OverlaySettingsSerializers() {
-        registerMapping(new BarcodeOverlaySettingsSerialization());
         registerMapping(new DocumentOverlaySettingsSerialization());
         registerMapping(new DocumentVerificationOverlaySettingsSerialization());
-        registerMapping(new BlinkCardOverlaySettingsSerialization());
         registerMapping(new BlinkIdOverlaySettingsSerialization());
     }
 

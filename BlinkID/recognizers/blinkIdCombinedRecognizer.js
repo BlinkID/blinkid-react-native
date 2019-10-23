@@ -4,10 +4,11 @@ import {
     Point, 
     Quadrilateral,
     MrtdDocumentType, 
-    MrzResult, 
-    EudlCountry, 
+    MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
+    DataMatchResult,
+    
 } from '../types'
 
 /**
@@ -18,9 +19,24 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
+         * The additional name information of the document owner. 
+         */
+        this.additionalAddressInformation = nativeResult.additionalAddressInformation;
+        
+        /** 
+         * The additional name information of the document owner. 
+         */
+        this.additionalNameInformation = nativeResult.additionalNameInformation;
+        
+        /** 
          * The address of the document owner. 
          */
         this.address = nativeResult.address;
+        
+        /** 
+         * The driver license conditions. 
+         */
+        this.conditions = nativeResult.conditions;
         
         /** 
          * The date of birth of the document owner. 
@@ -38,20 +54,12 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * The additional number of the document. 
          */
-        this.digitalSignature = nativeResult.digitalSignature;
+        this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
-         */
-        this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
-        
-        /** 
-         * Returns true if data from scanned parts/sides of the document match,
-         * false otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return false. Result will
-         * be true only if scanned values for all fields that are compared are the same. 
+         * Defines result of the data matching algorithm for scanned parts/sides of the document. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
@@ -66,7 +74,12 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.driverLicenseDetailedInfo = nativeResult.driverLicenseDetailedInfo;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * The employer of the document owner. 
+         */
+        this.employer = nativeResult.employer;
+        
+        /** 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -76,9 +89,14 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
-        this.fullDocumentImage = nativeResult.fullDocumentImage;
+        this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
+        
+        /** 
+         * Front side image of the document 
+         */
+        this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
          * The full name of the document owner. 
@@ -86,13 +104,62 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.fullName = nativeResult.fullName;
         
         /** 
+         * The issuing authority of the document. 
+         */
+        this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
          * The last name of the document owner. 
          */
         this.lastName = nativeResult.lastName;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * The marital status of the document owner. 
+         */
+        this.maritalStatus = nativeResult.maritalStatus;
+        
+        /** 
+         * The data extracted from the machine readable zone. 
+         */
+        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
+        
+        /** 
+         * The nationality of the documet owner. 
+         */
+        this.nationality = nativeResult.nationality;
+        
+        /** 
+         * The personal identification number. 
+         */
+        this.personalIdNumber = nativeResult.personalIdNumber;
+        
+        /** 
+         * The place of birth of the document owner. 
+         */
+        this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The profession of the document owner. 
+         */
+        this.profession = nativeResult.profession;
+        
+        /** 
+         * The race of the document owner. 
+         */
+        this.race = nativeResult.race;
+        
+        /** 
+         * The religion of the document owner. 
+         */
+        this.religion = nativeResult.religion;
+        
+        /** 
+         * The residential stauts of the document owner. 
+         */
+        this.residentialStatus = nativeResult.residentialStatus;
+        
+        /** 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -105,56 +172,36 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front and back side of the United States driver license.
+ * A generic recognizer which can scan front and back side of the document.
  */
 export class BlinkIdCombinedRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdCombinedRecognizer');
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
-        
-        /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
-         */
-        this.signResult = false;
         
         this.createResultFromNative = function (nativeResult) { return new BlinkIdCombinedRecognizerResult(nativeResult); }
     }
