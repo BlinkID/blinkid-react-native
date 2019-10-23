@@ -11,14 +11,14 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.59.10](https://github.com/facebook/react-native/releases/tag/v0.59.10)
+BlinkID React Native was built and tested with [React Native v0.61.2](https://github.com/facebook/react-native/releases/tag/v0.61.2)
 
 ## Installation
 
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.59.10" NameOfYourProject
+react-native init --version="0.61.2" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
@@ -150,3 +150,14 @@ To use the module you call it in your index.android.js or index.ios.js file like
 **Can I create a custom UI overlay?**
 
 Yes you can, but you will have to implement it natively for android and ios, you can see native implementation guides [here(Android)](https://github.com/BlinkID/blinkid-android#recognizerRunnerView) and [here(ios)](https://github.com/BlinkID/blinkid-ios#recognizerRunnerViewController).
+
+## Known react-native problems:
+
+### Android build exception - missing `ReactSwipeRefreshLayout`
+
+**java.lang.NoClassDefFoundError: com.facebook.react.views.swiperefresh.ReactSwipeRefreshLayout**
+
+Add the following line to dependencies section in android/app/build.gradle:
+
+`implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'`
+
