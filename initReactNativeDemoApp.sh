@@ -15,16 +15,13 @@ pushd BlinkIDReactNative
 if true; then
   # download npm package
   echo "Downloading blinkid-react-native module"
-  npm i --save blinkid-react-native
-
-  npm install
+  npm install --save blinkid-react-native
 else
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm i --save blinkid-react-native-5.0.0.tgz
-  npm install
+  npm install --save blinkid-react-native-5.0.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
