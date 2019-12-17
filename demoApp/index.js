@@ -18,7 +18,7 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITruR3GBdCT6r/cmaFI+NZgAUqVDHfyAwktjg12ChCnWOhOftJl+pLYeePQbA7whrJ5YweKxQBcor+NVH3T3PNgZDjlibGecAWKK/CMANH5t9UHbSDmqG6TnvZaH+En2fxXNaIrAyAu4GZquwN2itDRox8smHKOcTCzAH2AyWYSHf7jND8XHKnwogrOWg01hIno3l8zioeM+OY0feG3zwotirfBoObNFpVauI4QI8R7zZEedB+RfENS3XmLLQ=',
+    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqpx0GBDsdFcAU1dI9T/O8QGQbKXro44fSAI13p1dXmp1lzbUPSsdtzhyWtgwe7SrwGL0/hmfoPwkGncgZbIBGumtmRVXfpXecM99O4Du5mEy3idv0sglgqJ8kbOiNpW+vFomSliJBaBRHKW5M+o5Lg4FPnFitkdO32qhz3fUhnozCm84QYgEGv/BXChZJ44RXg1RcRircg/kLPvhNmp2h1EJ/wpOJE4KU3dL2k2Wa545kAcmwEpm1hOQqw/9I+mo',
     // android license key for applicationID: com.blinkidreactnative
     android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF260SqNbRtO4gCl9dXUxagi5mZOoB/y0Jh0+elvVE6Mhd+ZP4XjS/YCFwlxnTlcZiYCDQtS43nGg5uQhWN6IPymUOvjGr5h67rFL1aobRFp4kOCp/TjHZ9H9SCfqDaS+LvvHjU0Xi8BFaThc+QqZJgXCgRCqKD4l7Atd6ETIzUeI+wY+d8HDf0FcWmJyJbyDREKj1RrY41do/qKkCbe2FtqOKPb8K332T1ba6R16CSctf5vwn1rTcs7LfnXp'
 })
@@ -56,15 +56,15 @@ export default class BlinkIDReactNativeApp extends Component {
 
             // var mrtdSuccessFrameGrabber = new BlinkIDReactNative.SuccessFrameGrabberRecognizer(mrtdRecognizer);
 
-            // BlinkIDRecognizer automatically classifies different document types and scans the data from
+            // BlinkIDCombinedRecognizer automatically classifies different document types and scans the data from
             // the supported document
-            var blinkIdRecognizer = new BlinkIDReactNative.BlinkIdRecognizer();
-            blinkIdRecognizer.returnFullDocumentImage = true;
-            blinkIdRecognizer.returnFaceImage = true;
+            var blinkIdCombinedRecognizer = new BlinkIDReactNative.BlinkIdCombinedRecognizer();
+            blinkIdCombinedRecognizer.returnFullDocumentImage = true;
+            blinkIdCombinedRecognizer.returnFaceImage = true;
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.BlinkIdOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([blinkIdRecognizer/*, mrtdSuccessFrameGrabber*/]),
+                new BlinkIDReactNative.RecognizerCollection([blinkIdCombinedRecognizer/*, mrtdSuccessFrameGrabber*/]),
                 licenseKey
             );
 
@@ -119,7 +119,7 @@ export default class BlinkIDReactNativeApp extends Component {
             successFrame: ''
         };
         
-        if (result instanceof BlinkIDReactNative.BlinkIdRecognizerResult) {
+        if (result instanceof BlinkIDReactNative.BlinkIdCombinedRecognizerResult) {
             let blinkIdResult = result;
             let resultString =
                 "First name: " + blinkIdResult.firstName + fieldDelim +
