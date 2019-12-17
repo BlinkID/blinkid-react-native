@@ -164,6 +164,11 @@ export class BlinkIdRecognizer extends Recognizer {
         super('BlinkIdRecognizer');
         
         /** 
+         * Defines whether blured frames filtering is allowed" 
+         */
+        this.allowBlurFilter = true;
+        
+        /** 
          * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;

@@ -145,6 +145,36 @@ export class MrzResult {
         this.mrzParsed = nativeMRZResult.mrzParsed;
         /** true if all check digits inside MRZ are correct, false otherwise. */
         this.mrzVerified = nativeMRZResult.mrzVerified;
+
+        /**
+        * Sanitized field opt1
+        */
+        this.sanitizedOpt1 = nativeMRZResult.sanitizedOpt1;
+
+        /**
+        * Sanitized field opt2
+        */
+        this.sanitizedOpt2 = nativeMRZResult.sanitizedOpt2;
+
+        /**
+        * Sanitized field nationality
+        */
+        this.sanitizedNationality = nativeMRZResult.sanitizedNationality;
+
+        /**
+        * Sanitized field issuer
+        */
+        this.sanitizedIssuer = nativeMRZResult.sanitizedIssuer;
+
+        /**
+        * Sanitized document code
+        */
+        this.sanitizedDocumentCode = nativeMRZResult.sanitizedDocumentCode;
+
+        /**
+        * Sanitized document number
+        */
+        this.sanitizedDocumentNumber = nativeMRZResult.sanitizedDocumentNumber;
     }    
 }
 
