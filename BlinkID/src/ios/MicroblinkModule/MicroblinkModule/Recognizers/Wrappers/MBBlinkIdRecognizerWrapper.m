@@ -17,6 +17,12 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBBlinkIdRecognizer *recognizer = [[MBBlinkIdRecognizer alloc] init];
     {
+        id allowBlurFilter = [jsonRecognizer valueForKey:@"allowBlurFilter"];
+        if (allowBlurFilter != nil) {
+            recognizer.allowBlurFilter = [(NSNumber *)allowBlurFilter boolValue];
+        }
+    }
+    {
         id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
         if (faceImageDpi != nil) {
             recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
