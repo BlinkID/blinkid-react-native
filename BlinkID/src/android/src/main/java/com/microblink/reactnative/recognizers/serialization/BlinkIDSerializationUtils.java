@@ -26,6 +26,12 @@ public abstract class BlinkIDSerializationUtils {
         jsonMrz.putString("applicationReceiptNumber", mrzResult.getApplicationReceiptNumber());
         jsonMrz.putString("immigrantCaseNumber", mrzResult.getImmigrantCaseNumber());
         jsonMrz.putString("mrzText", mrzResult.getMrzText());
+        jsonMrz.putString("sanitizedOpt1", mrzResult.getSanitizedOpt1());
+        jsonMrz.putString("sanitizedOpt2", mrzResult.getSanitizedOpt2());
+        jsonMrz.putString("sanitizedNationality", mrzResult.getSanitizedNationality());
+        jsonMrz.putString("sanitizedIssuer", mrzResult.getSanitizedIssuer());
+        jsonMrz.putString("sanitizedDocumentCode", mrzResult.getSanitizedDocumentCode());
+        jsonMrz.putString("sanitizedDocumentNumber", mrzResult.getSanitizedDocumentNumber());
         jsonMrz.putBoolean("mrzParsed", mrzResult.isMrzParsed());
         jsonMrz.putBoolean("mrzVerified", mrzResult.isMrzVerified());
         return jsonMrz;

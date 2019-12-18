@@ -13,8 +13,4 @@
         android:name="android.hardware.camera.autofocus"
         android:required="false"/>
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="25"/>
-
 </manifest>

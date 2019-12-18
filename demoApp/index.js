@@ -18,9 +18,9 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITruR3GBdCT6r/cmaFI+NZgAUqVDHfyAwktjg12ChCnWOhOftJl+pLYeePQbA7whrJ5YweKxQBcor+NVH3T3PNgZDjlibGecAWKK/CMANH5t9UHbSDmqG6TnvZaH+En2fxXNaIrAyAu4GZquwN2itDRox8smHKOcTCzAH2AyWYSHf7jND8XHKnwogrOWg01hIno3l8zioeM+OY0feG3zwotirfBoObNFpVauI4QI8R7zZEedB+RfENS3XmLLQ=',
+    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqpx0GBDsdFcAU1dI9T/O8QGQbKXro44fSAI13p1dXmp1lzbUPSsdtzhyWtgwe7SrwGL0/hmfoPwkGncgZbIBGumtmRVXfpXecM99O4Du5mEy3idv0sglgqJ8kbOiNpW+vFomSliJBaBRHKW5M+o5Lg4FPnFitkdO32qhz3fUhnozCm84QYgEGv/BXChZJ44RXg1RcRircg/kLPvhNmp2h1EJ/wpOJE4KU3dL2k2Wa545kAcmwEpm1hOQqw/9I+mo',
     // android license key for applicationID: com.blinkidreactnative
-    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF260SqNbRtO4gCl9dXUxagi5mZOoB/y0Jh0+elvVE6Mhd+ZP4XjS/YCFwlxnTlcZiYCDQtS43nGg5uQhWN6IPymUOvjGr5h67rFL1aobRFp4kOCp/TjHZ9H9SCfqDaS+LvvHjU0Xi8BFaThc+QqZJgXCgRCqKD4l7Atd6ETIzUeI+wY+d8HDf0FcWmJyJbyDREKj1RrY41do/qKkCbe2FtqOKPb8K332T1ba6R16CSctf5vwn1rTcs7LfnXp'
+    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF2osTqNctcgR2fajZKtn52xvKLz7ttngB4LGxM/mjl4DBMD88Hjd5sbw4yFp8KK0pOv8HCqmRGsELMRxFwCXeqMgAX3PJVNSY2d/GljJvBXveEEoCsgRUyFwCovDci0FAwDwhRc54ermAW9OadJKbFvMjBhjoW9IGnNwKMvQYrnzeCTpnS0ni39Phe/KfuxDK6QPrLbZd0d3lOopYpymQvqg9n22Gr/tPBkNDIZ1lghkd49CRfocfbmoBVcUt8+kKQ=='
 })
 
 var renderIf = function(condition, content) {
@@ -35,8 +35,10 @@ export default class BlinkIDReactNativeApp extends Component {
         super(props);
 
         this.state = {
-            showImageDocument: false,
-            resultImageDocument: '',
+            showFrontImageDocument: false,
+            resultFrontImageDocument: '',
+            showBackImageDocument: false,
+            resultBackImageDocument: '',
             showImageFace: false,
             resultImageFace: '',
             showSuccessFrame: false,
@@ -56,22 +58,24 @@ export default class BlinkIDReactNativeApp extends Component {
 
             // var mrtdSuccessFrameGrabber = new BlinkIDReactNative.SuccessFrameGrabberRecognizer(mrtdRecognizer);
 
-            // BlinkIDRecognizer automatically classifies different document types and scans the data from
+            // BlinkIDCombinedRecognizer automatically classifies different document types and scans the data from
             // the supported document
-            var blinkIdRecognizer = new BlinkIDReactNative.BlinkIdRecognizer();
-            blinkIdRecognizer.returnFullDocumentImage = true;
-            blinkIdRecognizer.returnFaceImage = true;
+            var blinkIdCombinedRecognizer = new BlinkIDReactNative.BlinkIdCombinedRecognizer();
+            blinkIdCombinedRecognizer.returnFullDocumentImage = true;
+            blinkIdCombinedRecognizer.returnFaceImage = true;
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.BlinkIdOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([blinkIdRecognizer/*, mrtdSuccessFrameGrabber*/]),
+                new BlinkIDReactNative.RecognizerCollection([blinkIdCombinedRecognizer/*, mrtdSuccessFrameGrabber*/]),
                 licenseKey
             );
 
             if (scanningResults) {
                 let newState = {
-                    showImageDocument: false,
-                    resultImageDocument: '',
+                    showFrontImageDocument: false,
+                    resultFrontImageDocument: '',
+                    showBackImageDocument: false,
+                    resultBackImageDocument: '',
                     showImageFace: false,
                     resultImageFace: '',
                     results: '',
@@ -81,9 +85,13 @@ export default class BlinkIDReactNativeApp extends Component {
 
                 for (let i = 0; i < scanningResults.length; ++i) {
                     let localState = this.handleResult(scanningResults[i]);
-                    newState.showImageDocument = newState.showImageDocument || localState.showImageDocument;
-                    if (localState.resultImageDocument) {
-                        newState.resultImageDocument = localState.resultImageDocument;
+                    newState.showFrontImageDocument = newState.showFrontImageDocument || localState.showFrontImageDocument;
+                    if (localState.showFrontImageDocument) {
+                        newState.resultFrontImageDocument = localState.resultFrontImageDocument;
+                    }
+                    newState.showBackImageDocument = newState.showBackImageDocument || localState.showBackImageDocument;
+                    if (localState.showBackImageDocument) {
+                        newState.resultBackImageDocument = localState.resultBackImageDocument;
                     }
                     newState.showImageFace = newState.showImageFace || localState.showImageFace;
                     if (localState.resultImageFace) {
@@ -101,7 +109,7 @@ export default class BlinkIDReactNativeApp extends Component {
             }
         } catch (error) {
             console.log(error);
-            this.setState({ showImageDocument: false, resultImageDocument: '', showImageFace: false, resultImageFace: '', results: 'Scanning has been cancelled', showSuccessFrame: false,
+            this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: 'Scanning has been cancelled', showSuccessFrame: false,
             successFrame: ''});
         }
     }
@@ -110,16 +118,17 @@ export default class BlinkIDReactNativeApp extends Component {
         let fieldDelim = ";\n";
         
         var localState = {
-            showImageDocument: false,
-            resultImageDocument: '',
-            showImageFace: false,
+            showFrontImageDocument: false,
+            resultFrontImageDocument: '',
+            showBackImageDocument: false,
+            resultBackImageDocument: '',
             resultImageFace: '',
             results: '',
             showSuccessFrame: false,
             successFrame: ''
         };
         
-        if (result instanceof BlinkIDReactNative.BlinkIdRecognizerResult) {
+        if (result instanceof BlinkIDReactNative.BlinkIdCombinedRecognizerResult) {
             let blinkIdResult = result;
             let resultString =
                 "First name: " + blinkIdResult.firstName + fieldDelim +
@@ -152,47 +161,26 @@ export default class BlinkIDReactNativeApp extends Component {
             localState.results += resultString;
 
             // Document image is returned as Base64 encoded JPEG
-            if (blinkIdResult.fullDocumentImage) {
-                localState.showImageDocument = true;
-                localState.resultImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentImage;
+            if (blinkIdResult.fullDocumentFrontImage) {
+                localState.showFrontImageDocument = true;
+                localState.resultFrontImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentFrontImage;
+            }
+            if (blinkIdResult.fullDocumentBackImage) {
+                localState.showBackImageDocument = true;
+                localState.resultBackImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentBackImage;
             }
             // Face image is returned as Base64 encoded JPEG
             if (blinkIdResult.faceImage) {
                 localState.showImageFace = true;
                 localState.resultImageFace = 'data:image/jpg;base64,' + blinkIdResult.faceImage;
             }
-        } else if (result instanceof BlinkIDReactNative.MrtdRecognizerResult) {
-            let mrtdResult = result;
-            localState.results +=
-                "First name: " + mrtdResult.mrzResult.secondaryId + fieldDelim +
-                "Last name: " + mrtdResult.mrzResult.primaryId + fieldDelim +
-                "Nationality: " + mrtdResult.mrzResult.nationality + fieldDelim +
-                "Gender: " + mrtdResult.mrzResult.gender + fieldDelim +
-                "Date of birth: " +
-                    mrtdResult.mrzResult.dateOfBirth.day + "." +
-                    mrtdResult.mrzResult.dateOfBirth.month + "." +
-                    mrtdResult.mrzResult.dateOfBirth.year + ".";
-            
-              // Document image is returned as Base64 encoded JPEG
-              if (mrtdResult.fullDocumentImage) {
-                  localState.showImageDocument = true;
-                  localState.resultImageDocument = 'data:image/jpg;base64,' + mrtdResult.fullDocumentImage;
-              }
-        } else if (result instanceof BlinkIDReactNative.SuccessFrameGrabberRecognizerResult) {
-            // first handle slave result, and then add success frame image
-            localState = this.handleResult(result.slaveRecognizerResult);
-  
-              // success frame is returned as Base64 encoded JPEG
-            if (result.successFrame) {
-                localState.showSuccessFrame = true;
-                localState.successFrame = 'data:image/jpg;base64,' + result.successFrame;
-            }
-        }
+        } 
         return localState;
     }
 
     render() {
-        let displayImageDocument = this.state.resultImageDocument;
+        let displayFrontImageDocument = this.state.resultFrontImageDocument;
+        let displayBackImageDocument = this.state.resultBackImageDocument;
         let displayImageFace = this.state.resultImageFace;
         let displaySuccessFrame = this.state.successFrame;
         let displayFields = this.state.results;
@@ -209,11 +197,18 @@ export default class BlinkIDReactNativeApp extends Component {
             <ScrollView
             automaticallyAdjustContentInsets={false}
             scrollEventThrottle={200}y> 
-            {renderIf(this.state.showImageDocument,
+            {renderIf(this.state.showFrontImageDocument,
                 <View style={styles.imageContainer}>
                 <Image
                     resizeMode='contain'
-                    source={{uri: displayImageDocument, scale: 3}} style={styles.imageResult}/>
+                    source={{uri: displayFrontImageDocument, scale: 3}} style={styles.imageResult}/>
+                </View>
+            )}
+            {renderIf(this.state.showBackImageDocument,
+                <View style={styles.imageContainer}>
+                <Image
+                    resizeMode='contain'
+                    source={{uri: displayBackImageDocument, scale: 3}} style={styles.imageResult}/>
                 </View>
             )}
             {renderIf(this.state.showImageFace,
