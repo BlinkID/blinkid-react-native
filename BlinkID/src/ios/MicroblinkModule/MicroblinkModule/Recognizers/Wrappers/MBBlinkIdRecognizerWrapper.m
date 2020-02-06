@@ -82,6 +82,7 @@
     [jsonResult setValue:self.result.fullName forKey:@"fullName"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
+    [jsonResult setValue:self.result.localizedName forKey:@"localizedName"];
     [jsonResult setValue:self.result.maritalStatus forKey:@"maritalStatus"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];

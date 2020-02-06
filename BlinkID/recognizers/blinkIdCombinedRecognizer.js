@@ -54,6 +54,16 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
+         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         */
+        this.digitalSignature = nativeResult.digitalSignature;
+        
+        /** 
+         * Version of the digital signature. Available only if enabled with signResult property. 
+         */
+        this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
+        
+        /** 
          * The additional number of the document. 
          */
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
@@ -115,6 +125,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The last name of the document owner. 
          */
         this.lastName = nativeResult.lastName;
+        
+        /** 
+         * The localized name of the document owner. 
+         */
+        this.localizedName = nativeResult.localizedName;
         
         /** 
          * The marital status of the document owner. 
@@ -184,13 +199,16 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         
         /** 
          * Defines whether blured frames filtering is allowed
+         * 
+         *  
          */
         this.allowBlurFilter = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
@@ -223,6 +241,13 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
+        
+        /** 
+         * Whether or not recognition result should be signed.
+         * 
+         *  
+         */
+        this.signResult = false;
         
         this.createResultFromNative = function (nativeResult) { return new BlinkIdCombinedRecognizerResult(nativeResult); }
     }

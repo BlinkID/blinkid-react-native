@@ -17,6 +17,12 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBPassportRecognizer *recognizer = [[MBPassportRecognizer alloc] init];
     {
+        id anonymizeNetherlandsMrz = [jsonRecognizer valueForKey:@"anonymizeNetherlandsMrz"];
+        if (anonymizeNetherlandsMrz != nil) {
+            recognizer.anonymizeNetherlandsMrz = [(NSNumber *)anonymizeNetherlandsMrz boolValue];
+        }
+    }
+    {
         id detectGlare = [jsonRecognizer valueForKey:@"detectGlare"];
         if (detectGlare != nil) {
             recognizer.detectGlare = [(NSNumber *)detectGlare boolValue];

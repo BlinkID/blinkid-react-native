@@ -10,6 +10,9 @@ public final class PassportRecognizerSerialization implements RecognizerSerializ
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
         com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer();
+        if (jsonRecognizer.hasKey("anonymizeNetherlandsMrz")) {
+            recognizer.setAnonymizeNetherlandsMrz(jsonRecognizer.getBoolean("anonymizeNetherlandsMrz"));
+        }
         if (jsonRecognizer.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
         }

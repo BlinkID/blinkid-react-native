@@ -44,6 +44,13 @@ export class PassportRecognizer extends Recognizer {
         super('PassportRecognizer');
         
         /** 
+         * Defines whether to anonymize Netherlands MRZ
+         * 
+         *  
+         */
+        this.anonymizeNetherlandsMrz = true;
+        
+        /** 
          * Defines if glare detection should be turned on/off.
          * 
          *  

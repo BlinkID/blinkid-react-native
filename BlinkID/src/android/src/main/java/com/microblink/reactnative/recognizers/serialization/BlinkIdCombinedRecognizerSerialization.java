@@ -28,6 +28,9 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonRecognizer.hasKey("signResult")) {
+            recognizer.setSignResult(jsonRecognizer.getBoolean("signResult"));
+        }
         return recognizer;
     }
 
@@ -43,6 +46,8 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
+        jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
+        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
         jsonResult.putString("documentAdditionalNumber", result.getDocumentAdditionalNumber());
         jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
@@ -55,6 +60,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("fullName", result.getFullName());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putString("lastName", result.getLastName());
+        jsonResult.putString("localizedName", result.getLocalizedName());
         jsonResult.putString("maritalStatus", result.getMaritalStatus());
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("nationality", result.getNationality());

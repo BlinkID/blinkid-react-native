@@ -104,6 +104,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
+         * The localized name of the document owner. 
+         */
+        this.localizedName = nativeResult.localizedName;
+        
+        /** 
          * The marital status of the document owner. 
          */
         this.maritalStatus = nativeResult.maritalStatus;
@@ -165,13 +170,16 @@ export class BlinkIdRecognizer extends Recognizer {
         
         /** 
          * Defines whether blured frames filtering is allowed
+         * 
+         *  
          */
         this.allowBlurFilter = true;
         
         /** 
-         * The DPI (Dots Per Inch) for face image that should be returned. 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
