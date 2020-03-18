@@ -61,6 +61,34 @@ export const MrtdDocumentType = Object.freeze(
 );
 
 /**
+ * Possible types of documents scanned with IdBarcodeRecognizer.
+ */
+export const IdBarcodeDocumentType = Object.freeze(
+    {
+        /** No document was scanned */
+        None: 1,
+        /** AAMVACompliant document was scanned */
+        AAMVACompliant: 2,
+        /** Argentina ID document was scanned */
+        ArgentinaID: 3,
+        /** Argentina driver license document was scanned */
+        ArgentinaDL: 4,
+        /** Colombia ID document was scanned */
+        ColombiaID: 5,
+        /** Colombia driver license document was scanned */
+        ColombiaDL: 6,
+        /** NigeriaVoter ID document was scanned */
+        NigeriaVoterID: 7,
+        /** Nigeria driver license document was scanned */
+        NigeriaDL: 8,
+        /** Panama ID document was scanned */
+        PanamaID: 9,
+        /** SouthAfrica ID document was scanned */
+        SouthAfricaID: 10
+    }
+);
+
+/**
  * Represents data extracted from MRZ (Machine Readable Zone) of Machine Readable Travel Document (MRTD).
  */
 export class MrzResult {

@@ -3,6 +3,7 @@ package com.microblink.reactnative.recognizers.serialization;
 import android.graphics.Bitmap;
 import android.util.Base64;
 
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
@@ -97,5 +98,12 @@ public abstract class SerializationUtils {
         jsonQuad.putMap("lowerLeft", serializePoint(quad.getLowerLeft()));
         jsonQuad.putMap("lowerRight", serializePoint(quad.getLowerRight()));
         return jsonQuad;
+    }
+
+    public static String getStringFromMap(ReadableMap map, String key) {
+        if (map.hasKey(key)) {
+            return map.getString(key);
+        }
+        return null;
     }
 }

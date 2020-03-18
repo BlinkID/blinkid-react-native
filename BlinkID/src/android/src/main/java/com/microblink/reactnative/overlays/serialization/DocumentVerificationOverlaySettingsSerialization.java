@@ -9,6 +9,8 @@ import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
 import com.microblink.uisettings.DocumentVerificationUISettings;
 import com.microblink.uisettings.UISettings;
 
+import static com.microblink.reactnative.recognizers.serialization.SerializationUtils.getStringFromMap;
+
 public final class DocumentVerificationOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override
     public UISettings createUISettings(Context context, ReadableMap jsonUISettings, RecognizerBundle recognizerBundle) {
@@ -40,13 +42,6 @@ public final class DocumentVerificationOverlaySettingsSerialization implements O
         }
         settings.setStrings(stringsBuilder.build());
         return settings;
-    }
-
-    private String getStringFromMap(ReadableMap map, String key) {
-        if (map.hasKey(key)) {
-            return map.getString(key);
-        }
-        return null;
     }
 
     @Override
