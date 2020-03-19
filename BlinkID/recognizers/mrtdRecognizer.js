@@ -19,12 +19,12 @@ export class MrtdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+         * full document image if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * Returns the Data extracted from the machine readable zone. 
+         * Returns the Data extracted from the machine readable zone.
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -40,53 +40,53 @@ export class MrtdRecognizer extends Recognizer {
         
         /** 
          * Whether special characters are allowed
-         * 
-         *  
+         *
+         *
          */
         this.allowSpecialCharacters = false;
         
         /** 
          * Whether returning of unparsed results is allowed
-         * 
-         *  
+         *
+         *
          */
         this.allowUnparsedResults = false;
         
         /** 
          * Whether returning of unverified results is allowed
          * Unverified result is result that is parsed, but check digits are incorrect.
-         * 
-         *  
+         *
+         *
          */
         this.allowUnverifiedResults = false;
         
         /** 
          * Defines if glare detection should be turned on/off.
-         * 
-         *  
+         *
+         *
          */
         this.detectGlare = true;
         
         /** 
          * Property for setting DPI for full document images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         *
+         *
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
          * Image extension factors for full document image.
-         * 
+         *
          * @see ImageExtensionFactors
-         *  
+         *
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         *
+         *
          */
         this.returnFullDocumentImage = false;
         

@@ -12,14 +12,14 @@ import {
 } from '../types'
 
 /**
- * Result object for BlinkIdRecognizer.
+ * Result object for IdBarcodeRecognizer.
  */
-export class BlinkIdRecognizerResult extends RecognizerResult {
+export class IdBarcodeRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
         /** 
-         * The additional address information of the document owner.
+         * THe additional address information of the document owner. 
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -34,9 +34,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * The driver license conditions. 
+         * Type of the barcode scanned
+         *
+         *  @return Type of the barcode
          */
-        this.conditions = nativeResult.conditions;
+        this.barcodeType = nativeResult.barcodeType;
         
         /** 
          * The date of birth of the document owner. 
@@ -47,11 +49,6 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * The date of expiry of the document. 
          */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
-        
-        /** 
-         * Determines if date of expiry is permanent. 
-         */
-        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
         
         /** 
          * The date of issue of the document. 
@@ -69,9 +66,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The driver license detailed info. 
+         * The document type deduced from the recognized barcode
+         *
+         *  @return Type of the document
          */
-        this.driverLicenseDetailedInfo = nativeResult.driverLicenseDetailedInfo;
+        this.documentType = nativeResult.documentType;
         
         /** 
          * The employer of the document owner. 
@@ -79,19 +78,9 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property.
-         */
-        this.faceImage = nativeResult.faceImage;
-        
-        /** 
          * The first name of the document owner. 
          */
         this.firstName = nativeResult.firstName;
-        
-        /** 
-         * full document image if enabled with returnFullDocumentImage property.
-         */
-        this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
          * The full name of the document owner. 
@@ -109,19 +98,9 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.lastName = nativeResult.lastName;
         
         /** 
-         * The localized name of the document owner. 
-         */
-        this.localizedName = nativeResult.localizedName;
-        
-        /** 
          * The marital status of the document owner. 
          */
         this.maritalStatus = nativeResult.maritalStatus;
-        
-        /** 
-         * The data extracted from the machine readable zone
-         */
-        this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
          * The nationality of the documet owner. 
@@ -149,6 +128,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.race = nativeResult.race;
         
         /** 
+         * Byte array with result of the scan
+         */
+        this.rawData = nativeResult.rawData;
+        
+        /** 
          * The religion of the document owner. 
          */
         this.religion = nativeResult.religion;
@@ -163,76 +147,27 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          */
         this.sex = nativeResult.sex;
         
+        /** 
+         * Retrieves string content of scanned data
+         */
+        this.stringData = nativeResult.stringData;
+        
+        /** 
+         * Flag indicating uncertain scanning data
+         * E.g obtained from damaged barcode.
+         */
+        this.uncertain = nativeResult.uncertain;
+        
     }
 }
 
 /**
- * The Blink ID Recognizer is used for scanning Blink ID.
+ * The ID Barcode Recognizer is used for scanning ID Barcode.
  */
-export class BlinkIdRecognizer extends Recognizer {
+export class IdBarcodeRecognizer extends Recognizer {
     constructor() {
-        super('BlinkIdRecognizer');
+        super('IdBarcodeRecognizer');
         
-        /** 
-         * Defines whether blured frames filtering is allowed
-         *
-         *
-         */
-        this.allowBlurFilter = true;
-        
-        /** 
-         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
-         *
-         *
-         */
-        this.allowUnparsedMrzResults = false;
-        
-        /** 
-         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
-         * Unverified MRZ is parsed, but check digits are incorrect
-         *
-         *
-         */
-        this.allowUnverifiedMrzResults = true;
-        
-        /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         *
-         *
-         */
-        this.faceImageDpi = 250;
-        
-        /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         *
-         *
-         */
-        this.fullDocumentImageDpi = 250;
-        
-        /** 
-         * Image extension factors for full document image.
-         *
-         * @see ImageExtensionFactors
-         *
-         */
-        this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
-        
-        /** 
-         * Sets whether face image from ID card should be extracted
-         *
-         *
-         */
-        this.returnFaceImage = false;
-        
-        /** 
-         * Sets whether full document image of ID card should be extracted.
-         *
-         *
-         */
-        this.returnFullDocumentImage = false;
-        
-        this.createResultFromNative = function (nativeResult) { return new BlinkIdRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new IdBarcodeRecognizerResult(nativeResult); }
     }
 }

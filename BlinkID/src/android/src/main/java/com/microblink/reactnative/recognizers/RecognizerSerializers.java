@@ -26,6 +26,7 @@ public enum RecognizerSerializers {
         registerMapping(new BlinkIdCombinedRecognizerSerialization());
         registerMapping(new BlinkIdRecognizerSerialization());
         registerMapping(new DocumentFaceRecognizerSerialization());
+        registerMapping(new IdBarcodeRecognizerSerialization());
         registerMapping(new MrtdCombinedRecognizerSerialization());
         registerMapping(new MrtdRecognizerSerialization());
         registerMapping(new PassportRecognizerSerialization());

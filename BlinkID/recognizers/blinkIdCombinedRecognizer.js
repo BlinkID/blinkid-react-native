@@ -19,7 +19,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The additional address information of the document owner. 
+         * The additional address information of the document owner.
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -49,17 +49,22 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /** 
+         * Determines if date of expiry is permanent. 
+         */
+        this.dateOfExpiryPermanent = nativeResult.dateOfExpiryPermanent;
+        
+        /** 
          * The date of issue of the document. 
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Digital signature of the recognition result. Available only if enabled with signResult property.
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Version of the digital signature. Available only if enabled with signResult property.
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
@@ -72,7 +77,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
          * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
          * of the document and values do not match, this method will return DataMatchResultFailed. Result will
-         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same. 
+         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same.
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
@@ -92,7 +97,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -102,12 +107,12 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * back side image of the document if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * front side image of the document if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -137,7 +142,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
-         * The data extracted from the machine readable zone 
+         * The data extracted from the machine readable zone
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -178,7 +183,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         
         /** 
          * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * false if it's still scanning first side.
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -199,53 +204,68 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         
         /** 
          * Defines whether blured frames filtering is allowed
-         * 
-         *  
+         *
+         *
          */
         this.allowBlurFilter = true;
         
         /** 
+         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
+         *
+         *
+         */
+        this.allowUnparsedMrzResults = false;
+        
+        /** 
+         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
+         * Unverified MRZ is parsed, but check digits are incorrect
+         *
+         *
+         */
+        this.allowUnverifiedMrzResults = true;
+        
+        /** 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         *
+         *
          */
         this.faceImageDpi = 250;
         
         /** 
          * Property for setting DPI for full document images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         *
+         *
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
          * Image extension factors for full document image.
-         * 
+         *
          * @see ImageExtensionFactors
-         *  
+         *
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
          * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         *
+         *
          */
         this.returnFaceImage = false;
         
         /** 
          * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         *
+         *
          */
         this.returnFullDocumentImage = false;
         
         /** 
          * Whether or not recognition result should be signed.
-         * 
-         *  
+         *
+         *
          */
         this.signResult = false;
         

@@ -13,6 +13,12 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         if (jsonRecognizer.hasKey("allowBlurFilter")) {
             recognizer.setAllowBlurFilter(jsonRecognizer.getBoolean("allowBlurFilter"));
         }
+        if (jsonRecognizer.hasKey("allowUnparsedMrzResults")) {
+            recognizer.setAllowUnparsedMrzResults(jsonRecognizer.getBoolean("allowUnparsedMrzResults"));
+        }
+        if (jsonRecognizer.hasKey("allowUnverifiedMrzResults")) {
+            recognizer.setAllowUnverifiedMrzResults(jsonRecognizer.getBoolean("allowUnverifiedMrzResults"));
+        }
         if (jsonRecognizer.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
         }
@@ -45,6 +51,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("conditions", result.getConditions());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
+        jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
