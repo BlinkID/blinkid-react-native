@@ -27,7 +27,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentAdditionalNumber", result.getDocumentAdditionalNumber());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
-        jsonResult.putMap("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
+        jsonResult.putInt("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
         jsonResult.putString("employer", result.getEmployer());
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullName", result.getFullName());
