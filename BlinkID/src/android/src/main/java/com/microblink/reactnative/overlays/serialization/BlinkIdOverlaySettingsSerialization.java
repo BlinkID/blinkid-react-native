@@ -28,7 +28,7 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
             settings.setShowNotSupportedDialog(showNotSupportedDialog);
         }
 
-        if (jsonUISettings.hasKey("backSideScanningTimeoutMiliseconds")) {
+        if (jsonUISettings.hasKey("backSideScanningTimeoutMilliseconds")) {
             settings.setBackSideScanningTimeoutMs(jsonUISettings.getInt("backSideScanningTimeoutMilliseconds"));
         }
 
