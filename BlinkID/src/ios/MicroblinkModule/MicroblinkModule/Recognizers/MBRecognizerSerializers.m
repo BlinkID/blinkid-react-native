@@ -5,6 +5,7 @@
 #import "MBBlinkIdCombinedRecognizerWrapper.h"
 #import "MBBlinkIdRecognizerWrapper.h"
 #import "MBDocumentFaceRecognizerWrapper.h"
+#import "MBIdBarcodeRecognizerWrapper.h"
 #import "MBMrtdCombinedRecognizerWrapper.h"
 #import "MBMrtdRecognizerWrapper.h"
 #import "MBPassportRecognizerWrapper.h"
@@ -33,6 +34,7 @@
         [self registerCreator:[[MBBlinkIdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBBlinkIdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBDocumentFaceRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBIdBarcodeRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPassportRecognizerCreator alloc] init]];
