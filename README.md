@@ -65,12 +65,6 @@ Our `blinkid-react-native` depends on latest `PPBlinkID` pod so it will be insta
 
 ### Android
 
-Link module with your project: 
-
-```shell
-react-native link blinkid-react-native
-```
-
 Add microblink maven repository to project level build.gradle:
 
 ```
