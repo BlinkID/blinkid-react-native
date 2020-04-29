@@ -281,7 +281,7 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          * 
          *  
          */
-        this.paddingEdge = 0.0f;
+        this.paddingEdge = 0.0;
         
         /** 
          * Sets whether face image from ID card should be extracted
