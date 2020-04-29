@@ -53,6 +53,12 @@
         }
     }
     {
+        id paddingEdge = [jsonRecognizer valueForKey:@"paddingEdge"];
+        if (paddingEdge != nil) {
+            recognizer.paddingEdge = [(NSNumber *)paddingEdge floatValue];
+        }
+    }
+    {
         id returnFaceImage = [jsonRecognizer valueForKey:@"returnFaceImage"];
         if (returnFaceImage != nil) {
             recognizer.returnFaceImage = [(NSNumber *)returnFaceImage boolValue];
@@ -68,6 +74,12 @@
         id signResult = [jsonRecognizer valueForKey:@"signResult"];
         if (signResult != nil) {
             recognizer.signResult = [(NSNumber *)signResult boolValue];
+        }
+    }
+    {
+        id skipUnsupportedBack = [jsonRecognizer valueForKey:@"skipUnsupportedBack"];
+        if (skipUnsupportedBack != nil) {
+            recognizer.skipUnsupportedBack = [(NSNumber *)skipUnsupportedBack boolValue];
         }
     }
 
@@ -86,6 +98,8 @@
     [jsonResult setValue:self.result.additionalAddressInformation forKey:@"additionalAddressInformation"];
     [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
     [jsonResult setValue:self.result.address forKey:@"address"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
     [jsonResult setValue:self.result.conditions forKey:@"conditions"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
@@ -94,7 +108,9 @@
     [jsonResult setValue:[self.result.digitalSignature base64EncodedStringWithOptions:0] forKey:@"digitalSignature"];
     [jsonResult setValue:[NSNumber numberWithUnsignedInteger:self.result.digitalSignatureVersion] forKey:@"digitalSignatureVersion"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentBackImageColorStatus + 1)] forKey:@"documentBackImageColorStatus"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentDataMatch + 1)] forKey:@"documentDataMatch"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentFrontImageColorStatus + 1)] forKey:@"documentFrontImageColorStatus"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
     [jsonResult setValue:self.result.employer forKey:@"employer"];

@@ -8,6 +8,10 @@ import {
     DocumentFaceDetectorType,
     ImageExtensionFactors,
     DataMatchResult,
+    Country,
+    Region,
+    Type,
+    DocumentImageColorStatus,
     
 } from '../types'
 
@@ -34,9 +38,16 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
+         * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown. 
+         */
+        this.age = nativeResult.age;
+        
+        /** 
          * Type of the barcode scanned
-         *
-         *  @return Type of the barcode
+         * 
+         *  @return Type of the barcode 
          */
         this.barcodeType = nativeResult.barcodeType;
         
@@ -67,8 +78,8 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         
         /** 
          * The document type deduced from the recognized barcode
-         *
-         *  @return Type of the document
+         * 
+         *  @return Type of the document 
          */
         this.documentType = nativeResult.documentType;
         
@@ -128,7 +139,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.race = nativeResult.race;
         
         /** 
-         * Byte array with result of the scan
+         * Byte array with result of the scan 
          */
         this.rawData = nativeResult.rawData;
         
@@ -148,13 +159,13 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /** 
-         * Retrieves string content of scanned data
+         * Retrieves string content of scanned data 
          */
         this.stringData = nativeResult.stringData;
         
         /** 
          * Flag indicating uncertain scanning data
-         * E.g obtained from damaged barcode.
+         * E.g obtained from damaged barcode. 
          */
         this.uncertain = nativeResult.uncertain;
         

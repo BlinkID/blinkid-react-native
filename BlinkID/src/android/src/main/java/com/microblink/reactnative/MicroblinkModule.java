@@ -11,6 +11,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableNativeMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableArray;
 import com.microblink.MicroblinkSDK;
 import com.microblink.entities.recognizers.RecognizerBundle;
@@ -35,12 +37,10 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     private static final String PARAM_LICENSEE = "licensee";
     private static final String PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING = "showTimeLimitedLicenseKeyWarning";
 
-
     /**
      * Request code for scan activity
      */
     private static final int REQUEST_CODE = 1337;
-
 
     private Promise mScanPromise;
     private RecognizerBundle mRecognizerBundle;
@@ -60,6 +60,22 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void scanWithCamera(ReadableMap jsonOverlaySettings, ReadableMap jsonRecognizerCollection, ReadableMap license, Promise promise) {
+        prepareScanning(license, promise);
+
+        mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
+        UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
+        if (jsonOverlaySettings.hasKey("language")) {
+            String language = jsonOverlaySettings.getString("language");
+            if (language != null) {
+                String country = jsonOverlaySettings.hasKey("country") ? jsonOverlaySettings.getString("country") : null;
+                LanguageUtils.setLanguageAndCountry(language, country, getCurrentActivity());
+            }
+        }
+
+        ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
+    }
+
+    private void prepareScanning(ReadableMap license, Promise promise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(ERROR_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
@@ -82,18 +98,6 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
             showTimeLimitedLicenseKeyWarning = license.getBoolean(PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING);
         }
         setLicense(licenseKey, licensee, showTimeLimitedLicenseKeyWarning);
-
-        mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
-        UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
-        if (jsonOverlaySettings.hasKey("language")) {
-            String language = jsonOverlaySettings.getString("language");
-            if (language != null) {
-                String country = jsonOverlaySettings.hasKey("country") ? jsonOverlaySettings.getString("country") : null;
-                LanguageUtils.setLanguageAndCountry(language, country, currentActivity);
-            }
-        }
-
-        ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
     }
 
     private void setLicense( String licenseKey, String licensee, Boolean showTimeLimitedLicenseKeyWarning ) {
@@ -119,6 +123,18 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     private final ActivityEventListener mScanActivityListener = new BaseActivityEventListener() {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+            if (mScanPromise != null && (requestCode == REQUEST_CODE)) {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (requestCode == REQUEST_CODE) {
+                        mRecognizerBundle.loadFromIntent(data);
+                        WritableArray resultList = RecognizerSerializers.INSTANCE.serializeRecognizerResults(mRecognizerBundle.getRecognizers());
+                        mScanPromise.resolve(resultList);
+                    }
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    rejectPromise(STATUS_SCAN_CANCELED, "Scanning has been canceled");
+                }
+                mScanPromise = null;
+            }
             if (requestCode == REQUEST_CODE) {
                 if (mScanPromise != null) {
                     if (resultCode == Activity.RESULT_OK) {

@@ -35,7 +35,8 @@
         @"sanitizedNationality" : mrzResult.sanitizedNationality,
         @"sanitizedIssuer" : mrzResult.sanitizedIssuer,
         @"sanitizedDocumentCode" : mrzResult.sanitizedDocumentCode,
-        @"sanitizedDocumentNumber" : mrzResult.sanitizedDocumentNumber
+        @"sanitizedDocumentNumber" : mrzResult.sanitizedDocumentNumber,
+        @"age" : [NSNumber numberWithInteger:mrzResult.age]
      };
 }
 
@@ -57,6 +58,14 @@
              @"restrictions" : driverLicenseDetailedInfo.restrictions,
              @"endorsements" : driverLicenseDetailedInfo.endorsements,
              @"vehicleClass" : driverLicenseDetailedInfo.vehicleClass,
+             };
+}
+
++(NSDictionary *) serializeClassInfo:(MBClassInfo *)classInfo {
+    return @{
+             @"country" : [NSNumber numberWithInteger:(classInfo.country + 1)],
+             @"region" : [NSNumber numberWithInteger:(classInfo.region + 1)],
+             @"type" : [NSNumber numberWithInteger:(classInfo.type + 1)],
              };
 }
 

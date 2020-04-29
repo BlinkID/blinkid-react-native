@@ -11,8 +11,8 @@ const BlinkIDNative = Platform.select({
 
 /**
  * This exposes the appropriate native BlinkID module module as a JS module, based on 
- * detected platvorm: Android or iOS. This has a
- * function 'scan' which takes the following parameters:
+ * detected platform: Android or iOS. This has functions:
+ * -> 'scanWithCamera' which takes the following parameters:
  * 1. Object overlaySettings: instance of OverlaySettings, contains settings for desired camera overlay
  * 2. RecognizerCollection recognizerCollection: object containing recognizers to use for scanning
  * 3. String license: BlinkID base64 license key bound to application ID for Android or iOS. To obtain

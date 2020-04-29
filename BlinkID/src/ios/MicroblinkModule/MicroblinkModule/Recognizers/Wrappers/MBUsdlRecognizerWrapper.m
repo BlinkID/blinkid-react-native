@@ -55,6 +55,7 @@
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
 
     [jsonResult setValue:[self.result optionalElements] forKey:@"optionalElements"];
     [jsonResult setValue:[[self.result data] base64EncodedStringWithOptions:0] forKey:@"rawData"];

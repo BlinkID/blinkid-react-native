@@ -8,6 +8,10 @@ import {
     DocumentFaceDetectorType,
     ImageExtensionFactors,
     DataMatchResult,
+    Country,
+    Region,
+    Type,
+    DocumentImageColorStatus,
     
 } from '../types'
 
@@ -19,7 +23,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The additional address information of the document owner.
+         * The additional address information of the document owner. 
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -32,6 +36,18 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * The address of the document owner. 
          */
         this.address = nativeResult.address;
+        
+        /** 
+         * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown. 
+         */
+        this.age = nativeResult.age;
+        
+        /** 
+         * The classification information. 
+         */
+        this.classInfo = nativeResult.classInfo;
         
         /** 
          * The driver license conditions. 
@@ -64,6 +80,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /** 
+         * Defines possible color statuses determined from scanned image. 
+         */
+        this.documentImageColorStatus = nativeResult.documentImageColorStatus;
+        
+        /** 
          * The document number. 
          */
         this.documentNumber = nativeResult.documentNumber;
@@ -79,7 +100,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property.
+         * face image from the document if enabled with returnFaceImage property. 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -89,7 +110,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * full document image if enabled with returnFullDocumentImage property.
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -119,7 +140,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
-         * The data extracted from the machine readable zone
+         * The data extracted from the machine readable zone 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -175,61 +196,70 @@ export class BlinkIdRecognizer extends Recognizer {
         
         /** 
          * Defines whether blured frames filtering is allowed
-         *
-         *
+         * 
+         *  
          */
         this.allowBlurFilter = true;
         
         /** 
          * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
-         *
-         *
+         * 
+         *  
          */
         this.allowUnparsedMrzResults = false;
         
         /** 
          * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
          * Unverified MRZ is parsed, but check digits are incorrect
-         *
-         *
+         * 
+         *  
          */
         this.allowUnverifiedMrzResults = true;
         
         /** 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         *
-         *
+         * 
+         *  
          */
         this.faceImageDpi = 250;
         
         /** 
          * Property for setting DPI for full document images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         *
-         *
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
          * Image extension factors for full document image.
-         *
+         * 
          * @see ImageExtensionFactors
-         *
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
+         * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case
+         * padding edge and image edge are the same.
+         * Recommended value is 0.02f.
+         * 
+         *  
+         */
+        this.paddingEdge = 0.0;
+        
+        /** 
          * Sets whether face image from ID card should be extracted
-         *
-         *
+         * 
+         *  
          */
         this.returnFaceImage = false;
         
         /** 
          * Sets whether full document image of ID card should be extracted.
-         *
-         *
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         

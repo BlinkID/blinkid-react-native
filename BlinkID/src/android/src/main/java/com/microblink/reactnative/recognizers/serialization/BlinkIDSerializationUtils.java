@@ -6,6 +6,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
 import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
+import com.microblink.entities.recognizers.blinkid.generic.classinfo.ClassInfo;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -56,4 +57,13 @@ public abstract class BlinkIDSerializationUtils {
             return new ImageExtensionFactors(up, down, left, right);
         }
     }
+
+    public static WritableMap serializeClassInfo(ClassInfo classInfo) {
+        WritableMap jsonClassInfo = new WritableNativeMap();
+        jsonClassInfo.putInt("country", SerializationUtils.serializeEnum(classInfo.getCountry()));
+        jsonClassInfo.putInt("region", SerializationUtils.serializeEnum(classInfo.getRegion()));
+        jsonClassInfo.putInt("type", SerializationUtils.serializeEnum(classInfo.getType()));
+        return jsonClassInfo;
+    }
+
 }
