@@ -32,6 +32,7 @@
     [jsonResult setValue:self.result.additionalAddressInformation forKey:@"additionalAddressInformation"];
     [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
     [jsonResult setValue:self.result.address forKey:@"address"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.barcodeType + 1)] forKey:@"barcodeType"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];

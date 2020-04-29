@@ -2,6 +2,7 @@
 #import "MBRecognizerSerializers.h"
 #import "MBOverlaySettingsSerializers.h"
 #import "MBRecognizerWrapper.h"
+#import "MBSerializationUtils.h"
 
 #import <Foundation/Foundation.h>
 #import "MBMicroblinkModule.h"
@@ -102,12 +103,19 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     if (state != MBRecognizerResultStateEmpty) {
         [overlayViewController.recognizerRunnerViewController pauseScanning];
         // recognizers within self.recognizerCollection now have their results filled
+
+        BOOL isDocumentCaptureRecognizer = NO;
+
         NSMutableArray *jsonResults = [[NSMutableArray alloc] initWithCapacity:self.recognizerCollection.recognizerList.count];
         for (NSUInteger i = 0; i < self.recognizerCollection.recognizerList.count; ++i) {
             [jsonResults addObject:[[self.recognizerCollection.recognizerList objectAtIndex:i] serializeResult]];
         }
 
-        self.promiseResolve(jsonResults);
+        if (!isDocumentCaptureRecognizer) {
+            self.promiseResolve(jsonResults);
+        }
+        else {
+        }
 
         // dismiss recognizer runner view controller
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -23,12 +23,12 @@ export class MrtdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Image of the full document 
+         * full document image if enabled with returnFullDocumentImage property. 
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
         /** 
-         * The Data extracted from the machine readable zone. 
+         * Returns the Data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -36,44 +36,61 @@ export class MrtdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer that can recognize Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
+ * Recognizer that can recognizer Machine Readable Zone (MRZ) of the Machine Readable Travel Document (MRTD)
  */
 export class MrtdRecognizer extends Recognizer {
     constructor() {
         super('MrtdRecognizer');
         
         /** 
-         * Whether special characters are allowed. 
+         * Whether special characters are allowed
+         * 
+         *  
          */
         this.allowSpecialCharacters = false;
         
         /** 
-         * Whether returning of unparsed results is allowed. 
+         * Whether returning of unparsed results is allowed
+         * 
+         *  
          */
         this.allowUnparsedResults = false;
         
         /** 
-         * Whether returning of unverified results is allowed. 
+         * Whether returning of unverified results is allowed
+         * Unverified result is result that is parsed, but check digits are incorrect.
+         * 
+         *  
          */
         this.allowUnverifiedResults = false;
         
         /** 
-         * Defines whether glare detector is enabled. 
+         * Defines if glare detection should be turned on/off.
+         * 
+         *  
          */
         this.detectGlare = true;
         
         /** 
-         * The DPI (Dots Per Inch) for full document image that should be returned. 
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * The extension factors for full document image. 
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         *  
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines whether full document image will be available in 
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         *  
          */
         this.returnFullDocumentImage = false;
         
