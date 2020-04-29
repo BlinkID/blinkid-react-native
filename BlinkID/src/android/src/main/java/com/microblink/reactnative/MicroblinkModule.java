@@ -123,7 +123,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     private final ActivityEventListener mScanActivityListener = new BaseActivityEventListener() {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-            if (mScanPromise != null && (requestCode == REQUEST_CODE || requestCode == DOCUMENT_CAPTURE_REQUEST_CODE)) {
+            if (mScanPromise != null && (requestCode == REQUEST_CODE)) {
                 if (resultCode == Activity.RESULT_OK) {
                     if (requestCode == REQUEST_CODE) {
                         mRecognizerBundle.loadFromIntent(data);
