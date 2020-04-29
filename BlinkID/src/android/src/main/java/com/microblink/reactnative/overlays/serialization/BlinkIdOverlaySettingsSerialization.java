@@ -78,6 +78,14 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
         if (retryButtonText != null) {
             overlasStringsBuilder.setRetryButtonText(retryButtonText);
         }
+        String scanBarcodeText = getStringFromMap(jsonUISettings, "scanBarcodeText");
+        if (scanBarcodeText != null) {
+            overlasStringsBuilder.setBackSideBarcodeInstructions(scanBarcodeText);
+        }
+        String errorDocumentTooCloseToEdge = getStringFromMap(jsonUISettings, "errorDocumentTooCloseToEdge");
+        if (errorDocumentTooCloseToEdge != null) {
+            overlasStringsBuilder.setErrorDocumentTooCloseToEdge(errorDocumentTooCloseToEdge);
+        }
 
         settings.setStrings(overlasStringsBuilder.build());
 

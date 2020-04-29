@@ -94,6 +94,18 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         */
         this.backSideScanningTimeoutMilliseconds = 17000;
 
+       /**
+        * Message that is shown while scanning the barcode.
+        * If null, default value will be used.
+       */
+       this.scanBarcodeText = null;
+
+        /**
+         * Instructions for the user to move the document from the edge.
+         * If null, default value will be used.
+        */
+        this.errorDocumentTooCloseToEdge = null;
+
     }
 }
 

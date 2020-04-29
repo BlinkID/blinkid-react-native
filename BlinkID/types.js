@@ -89,6 +89,218 @@ export const IdBarcodeDocumentType = Object.freeze(
 );
 
 /**
+ * Defines possible color statuses determined from scanned image scanned with BlinkID or BlinkID Combined Recognizer
+ */
+export const DocumentImageColorStatus = Object.freeze(
+    {
+        /** Determining image color status was not performed */ 
+        NotAvailable: 1,
+        /** Black-and-white image scanned */ 
+        BlackAndWhite: 2,
+        /** Color image scanned */ 
+        Color: 3
+    }
+);
+
+/**
+ * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ */
+export const Country = Object.freeze(
+    {
+        None: 1,
+        Albania: 2,
+        Algeria: 3,
+        Argentina: 4,
+        Australia: 5,
+        Austria: 6,
+        Azerbaijan: 7,
+        Bahrain: 8,
+        Bangladesh: 9,
+        Belgium: 10,
+        BosniaAndHerzegovina: 11,
+        Brunei: 12,
+        Bulgaria: 13,
+        Cambodia: 14,
+        Canada: 15,
+        Chile: 16,
+        Colombia: 17,
+        CostaRica: 18,
+        Croatia: 19,
+        Cyprus: 20,
+        Czechia: 21,
+        Denmark: 22,
+        DominicanRepublic: 23,
+        Egypt: 24,
+        Estonia: 25,
+        Finland: 26,
+        France: 27,
+        Georgia: 28,
+        Germany: 29,
+        Ghana: 30,
+        Greece: 31,
+        Guatemala: 32,
+        HongKong: 33,
+        Hungary: 34,
+        India: 35,
+        Indonesia: 36,
+        Ireland: 37,
+        Israel: 38,
+        Italy: 39,
+        Jordan: 40,
+        Kazakhstan: 41,
+        Kenya: 42,
+        Kosovo: 43,
+        Kuwait: 44,
+        Latvia: 45,
+        Lithuania: 46,
+        Malaysia: 47,
+        Maldives: 48,
+        Malta: 49,
+        Mauritius: 50,
+        Mexico: 51,
+        Morocco: 52,
+        Netherlands: 53,
+        NewZealand: 54,
+        Nigeria: 55,
+        Pakistan: 56,
+        Panama: 57,
+        Paraguay: 58,
+        Philippines: 59,
+        Poland: 60,
+        Portugal: 61,
+        PuertoRico: 62,
+        Qatar: 63,
+        Romania: 64,
+        Russia: 65,
+        SaudiArabia: 66,
+        Serbia: 67,
+        Singapore: 68,
+        Slovakia: 69,
+        Slovenia: 70,
+        SouthAfrica: 71,
+        Spain: 72,
+        Sweden: 73,
+        Switzerland: 74,
+        Taiwan: 75,
+        Thailand: 76,
+        Tunisia: 77,
+        Turkey: 78,
+        UAE: 79,
+        Uganda: 80,
+        UK: 81,
+        Ukraine: 82,
+        Usa: 83,
+        Vietnam: 84
+    }
+);
+
+/**
+ * Defines possible the document country's region from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ */
+export const Region = Object.freeze(
+    {
+        None: 1,
+        Alabama: 2,
+        Alaska: 3,
+        Alberta: 4,
+        Arizona: 5,
+        Arkansas: 6,
+        AustralianCapitalTerritory: 7,
+        BritishColumbia: 8,
+        California: 9,
+        Colorado: 10,
+        Connecticut: 11,
+        Delaware: 12,
+        DistrictOfColumbia: 13,
+        Florida: 14,
+        Georgia: 15,
+        Hawaii: 16,
+        Idaho: 17,
+        Illinois: 18,
+        Indiana: 19,
+        Iowa: 20,
+        Kansas: 21,
+        Kentucky: 22,
+        Louisiana: 23,
+        Maine: 24,
+        Manitoba: 25,
+        Maryland: 26,
+        Massachusetts: 27,
+        Michigan: 28,
+        Minnesota: 29,
+        Mississippi: 30,
+        Missouri: 31,
+        Montana: 32,
+        Nebraska: 33,
+        Nevada: 34,
+        NewBrunswick: 35,
+        NewHampshire: 36,
+        NewJersey: 37,
+        NewMexico: 38,
+        NewSouthWales: 39,
+        NewYork: 40,
+        NorthernTerritory: 41,
+        NorthCarolina: 42,
+        NorthDakota: 43,
+        NovaScotia: 44,
+        Ohio: 45,
+        Oklahoma: 46,
+        Ontario: 47,
+        Oregon: 48,
+        Pennsylvania: 49,
+        Quebec: 50,
+        Queensland: 51,
+        RhodeIsland: 52,
+        Saskatchewan: 53,
+        SouthAustralia: 54,
+        SouthCarolina: 55,
+        SouthDakota: 56,
+        Tasmania: 57,
+        Tennessee: 58,
+        Texas: 59,
+        Utah: 60,
+        Vermont: 61,
+        Victoria: 62,
+        Virginia: 63,
+        Washington: 64,
+        WesternAustralia: 65,
+        WestVirginia: 66,
+        Wisconsin: 67,
+        Wyoming: 68,
+        Yukon: 69
+    }
+);
+
+/**
+ * Defines possible the document type from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ */
+export const Type = Object.freeze(
+    {
+        None: 1,
+        ConsularId: 2,
+        Dl: 3,
+        DlPublicServicesCard: 4,
+        FinCard: 5,
+        EmploymentPass: 6,
+        GreenCard: 7,
+        Id: 8,
+        MultipurposeId: 9,
+        MyKad: 10,
+        MyKid: 11,
+        MyTentera: 12,
+        PanCard: 13,
+        ProfessionalId: 14,
+        PublicServicesCard: 15,
+        ResidencePermit: 16,
+        ResidentId: 17,
+        TemporaryResidencePermit: 18,
+        VoterId: 19,
+        WorkPermit: 20,
+        iKad: 21
+    }
+);
+
+/**
  * Represents data extracted from MRZ (Machine Readable Zone) of Machine Readable Travel Document (MRTD).
  */
 export class MrzResult {
@@ -203,6 +415,13 @@ export class MrzResult {
         * Sanitized document number
         */
         this.sanitizedDocumentNumber = nativeMRZResult.sanitizedDocumentNumber;
+
+        /**
+         * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown.
+        */
+        this.age = nativeMRZResult.age;
     }    
 }
 

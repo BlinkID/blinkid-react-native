@@ -61,6 +61,7 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
         jsonResult.putString("address", result.getAddress());
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putString("sex", result.getSex());
+        jsonResult.putInt("age", result.getAge());
         jsonResult.putString("restrictions", result.getRestrictions());
         jsonResult.putString("endorsements", result.getEndorsements());
         jsonResult.putString("vehicleClass", result.getVehicleClass());

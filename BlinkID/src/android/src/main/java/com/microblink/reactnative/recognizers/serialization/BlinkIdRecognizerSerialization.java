@@ -28,6 +28,9 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
+        if (jsonRecognizer.hasKey("paddingEdge")) {
+            recognizer.setPaddingEdge((float)jsonRecognizer.getDouble("paddingEdge"));
+        }
         if (jsonRecognizer.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
         }
@@ -45,12 +48,15 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         jsonResult.putString("additionalAddressInformation", result.getAdditionalAddressInformation());
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
         jsonResult.putString("address", result.getAddress());
+        jsonResult.putInt("age", result.getAge());
+        jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putString("conditions", result.getConditions());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentAdditionalNumber", result.getDocumentAdditionalNumber());
+        jsonResult.putInt("documentImageColorStatus", SerializationUtils.serializeEnum(result.getDocumentImageColorStatus()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putMap("driverLicenseDetailedInfo", BlinkIDSerializationUtils.serializeDriverLicenseDetailedInfo(result.getDriverLicenseDetailedInfo()));
         jsonResult.putString("employer", result.getEmployer());

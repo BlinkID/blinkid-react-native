@@ -95,6 +95,13 @@ export class UsdlCombinedRecognizerResult extends RecognizerResult {
 
         /** The date of expiry of the United States driver license. */
         this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
+
+        /**
+         * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown.
+        */
+        this.age = nativeResult.age;
     }
 }
 

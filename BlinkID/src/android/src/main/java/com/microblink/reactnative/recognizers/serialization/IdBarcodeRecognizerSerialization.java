@@ -21,6 +21,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("additionalAddressInformation", result.getAdditionalAddressInformation());
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
         jsonResult.putString("address", result.getAddress());
+        jsonResult.putInt("age", result.getAge());
         jsonResult.putInt("barcodeType", SerializationUtils.serializeEnum(result.getBarcodeType()));
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));

@@ -8,6 +8,10 @@ import {
     DocumentFaceDetectorType,
     ImageExtensionFactors,
     DataMatchResult,
+    Country,
+    Region,
+    Type,
+    DocumentImageColorStatus,
     
 } from '../types'
 
@@ -34,9 +38,12 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * Type of the barcode scanned
-         *
-         *  @return Type of the barcode
+         * The current age of the document owner in years. It is calculated difference 
+         */
+        this.age = nativeResult.age;
+        
+        /** 
+         * The format of the scanned barcode. 
          */
         this.barcodeType = nativeResult.barcodeType;
         
@@ -66,9 +73,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The document type deduced from the recognized barcode
-         *
-         *  @return Type of the document
+         * The document type deduced from the recognized barcode 
          */
         this.documentType = nativeResult.documentType;
         
@@ -128,7 +133,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.race = nativeResult.race;
         
         /** 
-         * Byte array with result of the scan
+         * The raw bytes contained inside barcode. 
          */
         this.rawData = nativeResult.rawData;
         
@@ -148,13 +153,12 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /** 
-         * Retrieves string content of scanned data
+         * String representation of data inside barcode. 
          */
         this.stringData = nativeResult.stringData;
         
         /** 
-         * Flag indicating uncertain scanning data
-         * E.g obtained from damaged barcode.
+         * True if returned result is uncertain, i.e. if scanned barcode was incomplete (i.e. 
          */
         this.uncertain = nativeResult.uncertain;
         
