@@ -5,31 +5,35 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class PassportRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer();
-        if (jsonRecognizer.hasKey("anonymizeNetherlandsMrz")) {
-            recognizer.setAnonymizeNetherlandsMrz(jsonRecognizer.getBoolean("anonymizeNetherlandsMrz"));
+        if (jsonMap.hasKey("anonymizeNetherlandsMrz")) {
+            recognizer.setAnonymizeNetherlandsMrz(jsonMap.getBoolean("anonymizeNetherlandsMrz"));
         }
-        if (jsonRecognizer.hasKey("detectGlare")) {
-            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        if (jsonMap.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonMap.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("faceImageDpi")) {
-            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        if (jsonMap.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
-            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        if (jsonMap.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonMap.getInt("fullDocumentImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
-            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        if (jsonMap.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonMap.getMap("fullDocumentImageExtensionFactors")));
         }
-        if (jsonRecognizer.hasKey("returnFaceImage")) {
-            recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
+        if (jsonMap.hasKey("returnFaceImage")) {
+            recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
         }
-        if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
-            recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
+        if (jsonMap.hasKey("returnFullDocumentImage")) {
+            recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
+        }
+        if (jsonMap.hasKey("signResult")) {
+            recognizer.setSignResult(jsonMap.getBoolean("signResult"));
         }
         return recognizer;
     }
@@ -38,7 +42,9 @@ public final class PassportRecognizerSerialization implements RecognizerSerializ
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
+        jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
+        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));

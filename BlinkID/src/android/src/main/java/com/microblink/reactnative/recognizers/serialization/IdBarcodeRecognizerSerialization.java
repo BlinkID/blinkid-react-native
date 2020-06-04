@@ -5,10 +5,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class IdBarcodeRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer();
         return recognizer;
     }
@@ -17,7 +18,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("additionalAddressInformation", result.getAdditionalAddressInformation());
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
         jsonResult.putString("address", result.getAddress());
@@ -30,6 +31,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putInt("documentType", SerializationUtils.serializeEnum(result.getDocumentType()));
         jsonResult.putString("employer", result.getEmployer());
+        jsonResult.putString("endorsements", result.getEndorsements());
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullName", result.getFullName());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
@@ -43,9 +45,11 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
         jsonResult.putString("religion", result.getReligion());
         jsonResult.putString("residentialStatus", result.getResidentialStatus());
+        jsonResult.putString("restrictions", result.getRestrictions());
         jsonResult.putString("sex", result.getSex());
         jsonResult.putString("stringData", result.getStringData());
         jsonResult.putBoolean("uncertain", result.isUncertain());
+        jsonResult.putString("vehicleClass", result.getVehicleClass());
         return jsonResult;
     }
 

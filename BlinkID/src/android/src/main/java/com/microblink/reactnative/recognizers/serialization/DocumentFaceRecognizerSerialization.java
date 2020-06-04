@@ -5,31 +5,32 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class DocumentFaceRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer();
-        if (jsonRecognizer.hasKey("detectorType")) {
-            recognizer.setDetectorType(com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonRecognizer.getInt("detectorType") - 1]);
+        if (jsonMap.hasKey("detectorType")) {
+            recognizer.setDetectorType(com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonMap.getInt("detectorType") - 1]);
         }
-        if (jsonRecognizer.hasKey("faceImageDpi")) {
-            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        if (jsonMap.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
-            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        if (jsonMap.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonMap.getInt("fullDocumentImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
-            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        if (jsonMap.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonMap.getMap("fullDocumentImageExtensionFactors")));
         }
-        if (jsonRecognizer.hasKey("numStableDetectionsThreshold")) {
-            recognizer.setNumStableDetectionsThreshold(jsonRecognizer.getInt("numStableDetectionsThreshold"));
+        if (jsonMap.hasKey("numStableDetectionsThreshold")) {
+            recognizer.setNumStableDetectionsThreshold(jsonMap.getInt("numStableDetectionsThreshold"));
         }
-        if (jsonRecognizer.hasKey("returnFaceImage")) {
-            recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
+        if (jsonMap.hasKey("returnFaceImage")) {
+            recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
         }
-        if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
-            recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
+        if (jsonMap.hasKey("returnFullDocumentImage")) {
+            recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
         }
         return recognizer;
     }
@@ -38,7 +39,7 @@ public final class DocumentFaceRecognizerSerialization implements RecognizerSeri
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putMap("documentLocation", SerializationUtils.serializeQuad(result.getDocumentLocation()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putMap("faceLocation", SerializationUtils.serializeQuad(result.getFaceLocation()));

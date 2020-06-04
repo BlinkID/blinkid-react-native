@@ -13,13 +13,8 @@ import java.util.HashMap;
 public enum RecognizerSerializers {
     INSTANCE;
 
-    private HashMap<String, RecognizerSerialization> mByJSONName = new HashMap<>();
-    private HashMap<Class<?>, RecognizerSerialization> mByClass = new HashMap<>();
-
-    private void registerMapping( RecognizerSerialization recognizerSerialization ) {
-        mByJSONName.put(recognizerSerialization.getJsonName(), recognizerSerialization);
-        mByClass.put(recognizerSerialization.getRecognizerClass(), recognizerSerialization);
-    }
+    private HashMap<String, RecognizerSerialization> recognizersByJSONName = new HashMap<>();
+    private HashMap<Class<?>, RecognizerSerialization> recognizersByClass = new HashMap<>();
 
     RecognizerSerializers() {
         registerMapping(new SuccessFrameGrabberRecognizerSerialization());
@@ -36,12 +31,18 @@ public enum RecognizerSerializers {
         
     }
 
+    private void registerMapping( RecognizerSerialization recognizerSerialization ) {
+        recognizersByJSONName.put(recognizerSerialization.getJsonName(), recognizerSerialization);
+        recognizersByClass.put(recognizerSerialization.getRecognizerClass(), recognizerSerialization);
+    }
+
+
     public RecognizerSerialization getRecognizerSerialization(ReadableMap jsonRecognizer) {
-        return mByJSONName.get(jsonRecognizer.getString("recognizerType"));
+        return recognizersByJSONName.get(jsonRecognizer.getString("recognizerType"));
     }
 
     public RecognizerSerialization getRecognizerSerialization(Recognizer<?> recognizer) {
-        return mByClass.get(recognizer.getClass());
+        return recognizersByClass.get(recognizer.getClass());
     }
 
     public RecognizerBundle deserializeRecognizerCollection(ReadableMap jsonRecognizerCollection) {
@@ -71,4 +72,5 @@ public enum RecognizerSerializers {
 
         return jsonArray;
     }
+
 }

@@ -7,6 +7,7 @@ import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.entities.recognizers.successframe.SuccessFrameGrabberRecognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
 import com.microblink.reactnative.recognizers.RecognizerSerializers;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class SuccessFrameGrabberRecognizerSerialization implements RecognizerSerialization {
     @Override
@@ -25,7 +26,7 @@ public final class SuccessFrameGrabberRecognizerSerialization implements Recogni
         SuccessFrameGrabberRecognizer.Result result = sfgr.getResult();
 
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putMap("slaveRecognizerResult", jsonSlaveResult);
         jsonResult.putString("successFrame", SerializationUtils.encodeImageBase64(result.getSuccessFrame()));
 

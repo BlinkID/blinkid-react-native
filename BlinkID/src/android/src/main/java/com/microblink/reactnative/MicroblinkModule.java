@@ -15,11 +15,12 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableArray;
 import com.microblink.MicroblinkSDK;
+import com.microblink.entities.parsers.config.fieldbyfield.FieldByFieldBundle;
 import com.microblink.entities.recognizers.RecognizerBundle;
 import com.microblink.intent.IntentDataTransferMode;
 import com.microblink.reactnative.overlays.OverlaySettingsSerializers;
-import com.microblink.reactnative.recognizers.RecognizerSerializers;
 import com.microblink.uisettings.ActivityRunner;
+import com.microblink.uisettings.FieldByFieldUISettings;
 import com.microblink.uisettings.UISettings;
 import com.microblink.locale.LanguageUtils;
 
@@ -44,7 +45,6 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     private Promise mScanPromise;
     private RecognizerBundle mRecognizerBundle;
-
 
     public MicroblinkModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -123,7 +123,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     private final ActivityEventListener mScanActivityListener = new BaseActivityEventListener() {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-            if (mScanPromise != null && (requestCode == REQUEST_CODE)) {
+            if (mScanPromise != null) {
                 if (resultCode == Activity.RESULT_OK) {
                     if (requestCode == REQUEST_CODE) {
                         mRecognizerBundle.loadFromIntent(data);
@@ -134,20 +134,6 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
                     rejectPromise(STATUS_SCAN_CANCELED, "Scanning has been canceled");
                 }
                 mScanPromise = null;
-            }
-            if (requestCode == REQUEST_CODE) {
-                if (mScanPromise != null) {
-                    if (resultCode == Activity.RESULT_OK) {
-                        mRecognizerBundle.loadFromIntent(data);
-
-                        WritableArray resultList = RecognizerSerializers.INSTANCE.serializeRecognizerResults(mRecognizerBundle.getRecognizers());
-
-                        mScanPromise.resolve(resultList);
-                    } else if (resultCode == Activity.RESULT_CANCELED) {
-                        rejectPromise(STATUS_SCAN_CANCELED, "Scanning has been canceled");
-                    }
-                    mScanPromise = null;
-                }
             }
         }
     };
