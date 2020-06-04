@@ -15,14 +15,14 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableArray;
 import com.microblink.MicroblinkSDK;
-import com.microblink.entities.parsers.config.fieldbyfield.FieldByFieldBundle;
 import com.microblink.entities.recognizers.RecognizerBundle;
 import com.microblink.intent.IntentDataTransferMode;
 import com.microblink.reactnative.overlays.OverlaySettingsSerializers;
 import com.microblink.uisettings.ActivityRunner;
-import com.microblink.uisettings.FieldByFieldUISettings;
+
 import com.microblink.uisettings.UISettings;
 import com.microblink.locale.LanguageUtils;
+import com.microblink.reactnative.recognizers.RecognizerSerializers;
 
 /**
  * React Native module for BlinkID.

@@ -6,6 +6,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
 import com.microblink.entities.recognizers.blinkid.generic.classinfo.ClassInfo;
+import com.microblink.reactnative.SerializationUtils;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {

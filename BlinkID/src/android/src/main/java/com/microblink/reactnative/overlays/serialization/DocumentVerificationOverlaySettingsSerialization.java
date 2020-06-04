@@ -9,7 +9,7 @@ import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
 import com.microblink.uisettings.DocumentVerificationUISettings;
 import com.microblink.uisettings.UISettings;
 
-import static com.microblink.reactnative.recognizers.serialization.SerializationUtils.getStringFromMap;
+import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
 
 public final class DocumentVerificationOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override

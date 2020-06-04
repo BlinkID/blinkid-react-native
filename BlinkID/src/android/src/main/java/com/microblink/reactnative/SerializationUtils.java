@@ -9,7 +9,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.entities.parsers.Parser;
+//import com.microblink.entities.parsers.Parser;
 import com.microblink.geometry.Point;
 import com.microblink.geometry.Quadrilateral;
 import com.microblink.image.Image;
@@ -27,9 +27,9 @@ public abstract class SerializationUtils {
         jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
     }
 
-    public static <T extends Parser.Result> void addCommonParserResultData(WritableMap jsonObject, T result) {
+    /*public static <T extends Parser.Result> void addCommonParserResultData(WritableMap jsonObject, T result) {
         jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
-    }
+    }*/
 
     public static WritableMap serializeDate(Date date) {
         if (date != null ) {
