@@ -12,6 +12,8 @@ import {
     Region,
     Type,
     DocumentImageColorStatus,
+    DocumentImageMoireStatus,
+    
     
 } from '../types'
 
@@ -89,6 +91,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
+         * The additional privileges granted to the driver license owner. 
+         */
+        this.endorsements = nativeResult.endorsements;
+        
+        /** 
          * The first name of the document owner. 
          */
         this.firstName = nativeResult.firstName;
@@ -154,6 +161,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.residentialStatus = nativeResult.residentialStatus;
         
         /** 
+         * The restrictions to driving privileges for the driver license owner. 
+         */
+        this.restrictions = nativeResult.restrictions;
+        
+        /** 
          * The sex of the document owner. 
          */
         this.sex = nativeResult.sex;
@@ -168,6 +180,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * E.g obtained from damaged barcode. 
          */
         this.uncertain = nativeResult.uncertain;
+        
+        /** 
+         * The type of vehicle the driver license owner has privilege to drive. 
+         */
+        this.vehicleClass = nativeResult.vehicleClass;
         
     }
 }

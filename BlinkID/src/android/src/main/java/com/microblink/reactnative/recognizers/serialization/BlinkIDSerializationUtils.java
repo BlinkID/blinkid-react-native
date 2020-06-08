@@ -4,9 +4,9 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
-import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
 import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
 import com.microblink.entities.recognizers.blinkid.generic.classinfo.ClassInfo;
+import com.microblink.reactnative.SerializationUtils;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -44,18 +44,6 @@ public abstract class BlinkIDSerializationUtils {
         jsonDriverLicenseDetailedInfo.putString("endorsements", dlDetailedInfo.getEndorsements());
         jsonDriverLicenseDetailedInfo.putString("vehicleClass", dlDetailedInfo.getVehicleClass());
         return jsonDriverLicenseDetailedInfo;
-    }
-
-    public static ImageExtensionFactors deserializeExtensionFactors(ReadableMap jsonExtensionFactors) {
-        if (jsonExtensionFactors == null) {
-            return new ImageExtensionFactors(0.f, 0.f, 0.f, 0.f);
-        } else {
-            float up = (float)jsonExtensionFactors.getDouble("upFactor");
-            float right = (float)jsonExtensionFactors.getDouble("rightFactor");
-            float down = (float)jsonExtensionFactors.getDouble("downFactor");
-            float left = (float)jsonExtensionFactors.getDouble("leftFactor");
-            return new ImageExtensionFactors(up, down, left, right);
-        }
     }
 
     public static WritableMap serializeClassInfo(ClassInfo classInfo) {

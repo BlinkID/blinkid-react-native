@@ -107,16 +107,13 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
         BOOL isDocumentCaptureRecognizer = NO;
 
         NSMutableArray *jsonResults = [[NSMutableArray alloc] initWithCapacity:self.recognizerCollection.recognizerList.count];
+        
         for (NSUInteger i = 0; i < self.recognizerCollection.recognizerList.count; ++i) {
             [jsonResults addObject:[[self.recognizerCollection.recognizerList objectAtIndex:i] serializeResult]];
-        }
 
         if (!isDocumentCaptureRecognizer) {
             self.promiseResolve(jsonResults);
         }
-        else {
-        }
-
         // dismiss recognizer runner view controller
         dispatch_async(dispatch_get_main_queue(), ^{
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
@@ -125,7 +122,8 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
             self.scanningViewController = nil;
             self.promiseResolve = nil;
             self.promiseReject = nil;
-        });
+            });
+        }
     }
 }
 

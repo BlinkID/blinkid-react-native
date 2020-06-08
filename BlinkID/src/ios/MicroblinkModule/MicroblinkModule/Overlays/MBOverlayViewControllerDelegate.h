@@ -14,7 +14,4 @@
 - (void)overlayViewControllerDidFinishScanning:(MBOverlayViewController *)overlayViewController state:(MBRecognizerResultState)state;
 - (void)overlayDidTapClose:(MBOverlayViewController *)overlayViewController;
 
-@optional
-- (void)overlayViewControllerDidFinishScanning:(MBOverlayViewController *)overlayViewController highResImage:(MBImage *)highResImage state:(MBRecognizerResultState)state;
-
 @end

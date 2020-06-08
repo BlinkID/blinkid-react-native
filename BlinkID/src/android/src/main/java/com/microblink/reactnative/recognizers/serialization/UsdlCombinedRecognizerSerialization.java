@@ -9,6 +9,7 @@ import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.entities.recognizers.blinkid.usdl.UsdlCombinedRecognizer;
 import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlKeys;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class UsdlCombinedRecognizerSerialization implements RecognizerSerialization {
     @Override
@@ -21,7 +22,7 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
             recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
         }
         if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
-            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+            recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
         }
         if (jsonRecognizer.hasKey("numStableDetectionsThreshold")) {
             recognizer.setNumStableDetectionsThreshold(jsonRecognizer.getInt("numStableDetectionsThreshold"));
@@ -42,7 +43,7 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         UsdlCombinedRecognizer.Result result = ((UsdlCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
         jsonResult.putInt("digitalSignatureVersion", (int) result.getDigitalSignatureVersion());
         jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));

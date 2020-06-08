@@ -12,6 +12,8 @@ import {
     Region,
     Type,
     DocumentImageColorStatus,
+    DocumentImageMoireStatus,
+    
     
 } from '../types'
 

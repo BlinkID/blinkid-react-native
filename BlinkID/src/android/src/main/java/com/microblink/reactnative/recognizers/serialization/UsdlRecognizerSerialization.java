@@ -9,6 +9,7 @@ import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlKeys;
 import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class UsdlRecognizerSerialization implements RecognizerSerialization {
     @Override
@@ -27,7 +28,7 @@ public final class UsdlRecognizerSerialization implements RecognizerSerializatio
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         UsdlRecognizer.Result result = ((UsdlRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putArray("optionalElements", SerializationUtils.serializeStringArray(result.getOptionalElements()));
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
         jsonResult.putString("rawStringData", result.getRawStringData());

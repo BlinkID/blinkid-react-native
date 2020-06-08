@@ -5,28 +5,29 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.reactnative.SerializationUtils;
 
 public final class VisaRecognizerSerialization implements RecognizerSerialization {
     @Override
-    public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
+    public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer();
-        if (jsonRecognizer.hasKey("detectGlare")) {
-            recognizer.setDetectGlare(jsonRecognizer.getBoolean("detectGlare"));
+        if (jsonMap.hasKey("detectGlare")) {
+            recognizer.setDetectGlare(jsonMap.getBoolean("detectGlare"));
         }
-        if (jsonRecognizer.hasKey("faceImageDpi")) {
-            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
+        if (jsonMap.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
-            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        if (jsonMap.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonMap.getInt("fullDocumentImageDpi"));
         }
-        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
-            recognizer.setFullDocumentImageExtensionFactors(BlinkIDSerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        if (jsonMap.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonMap.getMap("fullDocumentImageExtensionFactors")));
         }
-        if (jsonRecognizer.hasKey("returnFaceImage")) {
-            recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
+        if (jsonMap.hasKey("returnFaceImage")) {
+            recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
         }
-        if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
-            recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
+        if (jsonMap.hasKey("returnFullDocumentImage")) {
+            recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
         }
         return recognizer;
     }
@@ -35,7 +36,7 @@ public final class VisaRecognizerSerialization implements RecognizerSerializatio
     public WritableMap serializeResult(Recognizer<?> recognizer) {
         com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
-        SerializationUtils.addCommonResultData(jsonResult, result);
+        SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));

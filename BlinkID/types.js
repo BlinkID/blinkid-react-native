@@ -103,6 +103,22 @@ export const DocumentImageColorStatus = Object.freeze(
 );
 
 /**
+ * Defines possible states of Moire pattern detection.
+ */
+export const DocumentImageMoireStatus = Object.freeze(
+    {
+        /** Detection of Moire patterns was not performed. */
+        NotAvailable: 1,
+
+        /** Moire pattern not detected on input image. */
+        NotDetected: 2,
+
+        /** Moire pattern detected on input image. */
+        Detected: 3
+    }
+);
+
+/**
  * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
  */
 export const Country = Object.freeze(
@@ -190,7 +206,10 @@ export const Country = Object.freeze(
         UK: 81,
         Ukraine: 82,
         Usa: 83,
-        Vietnam: 84
+        Vietnam: 84,
+        Brazil: 85,
+        Norway: 86,
+        Oman: 87
     }
 );
 
@@ -296,7 +315,10 @@ export const Type = Object.freeze(
         TemporaryResidencePermit: 18,
         VoterId: 19,
         WorkPermit: 20,
-        iKad: 21
+        iKad: 21,
+        MilitaryId: 22,
+        MyKas: 23,
+        SocialSecurityCard: 24
     }
 );
 

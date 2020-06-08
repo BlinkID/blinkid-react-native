@@ -49,8 +49,4 @@
     return [[self.overlayCreators valueForKey:[jsonOverlaySettings valueForKey:@"overlaySettingsType"]] createOverlayViewController:jsonOverlaySettings recognizerCollection:recognizerCollection delegate:delegate];
 }
 
--(MBOverlayViewController *) createDocumentCaptureOverlayViewControllerWithCollection:(MBRecognizerCollection*)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate>)delegate {
-    return [[self.overlayCreators valueForKey:@"DocumentCaptureOverlaySettings"] createOverlayViewController:nil recognizerCollection:recognizerCollection delegate:delegate];
-}
-
 @end

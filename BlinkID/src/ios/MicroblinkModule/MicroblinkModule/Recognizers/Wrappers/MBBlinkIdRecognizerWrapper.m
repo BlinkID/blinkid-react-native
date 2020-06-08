@@ -1,6 +1,7 @@
 #import "MBBlinkIdRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
+#import "MBCommonSerializationUtils.h"
 
 @implementation MBBlinkIdRecognizerCreator
 
@@ -35,6 +36,12 @@
         }
     }
     {
+        id anonymizeImage = [jsonRecognizer valueForKey:@"anonymizeImage"];
+        if (anonymizeImage != nil) {
+            recognizer.anonymizeImage = [(NSNumber *)anonymizeImage boolValue];
+        }
+    }
+    {
         id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
         if (faceImageDpi != nil) {
             recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
@@ -49,7 +56,7 @@
     {
         id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
         if (fullDocumentImageExtensionFactors != nil) {
-            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+            recognizer.fullDocumentImageExtensionFactors = [MBCommonSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -68,6 +75,12 @@
         id returnFullDocumentImage = [jsonRecognizer valueForKey:@"returnFullDocumentImage"];
         if (returnFullDocumentImage != nil) {
             recognizer.returnFullDocumentImage = [(NSNumber *)returnFullDocumentImage boolValue];
+        }
+    }
+    {
+        id validateResultCharacters = [jsonRecognizer valueForKey:@"validateResultCharacters"];
+        if (validateResultCharacters != nil) {
+            recognizer.validateResultCharacters = [(NSNumber *)validateResultCharacters boolValue];
         }
     }
 
@@ -95,6 +108,7 @@
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentImageColorStatus + 1)] forKey:@"documentImageColorStatus"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentImageMoireStatus + 1)] forKey:@"documentImageMoireStatus"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
     [jsonResult setValue:self.result.employer forKey:@"employer"];

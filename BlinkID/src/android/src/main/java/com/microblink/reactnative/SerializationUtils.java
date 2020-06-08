@@ -1,4 +1,4 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.reactnative;
 
 import android.graphics.Bitmap;
 import android.util.Base64;
@@ -9,11 +9,13 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.Recognizer;
+//import com.microblink.entities.parsers.Parser;
 import com.microblink.geometry.Point;
 import com.microblink.geometry.Quadrilateral;
 import com.microblink.image.Image;
 import com.microblink.results.date.Date;
 import com.microblink.results.date.DateResult;
+import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -21,9 +23,13 @@ import java.io.IOException;
 public abstract class SerializationUtils {
     private static final int COMPRESSED_IMAGE_QUALITY = 90;
 
-    public static <T extends Recognizer.Result> void addCommonResultData(WritableMap jsonObject, T result) {
+    public static <T extends Recognizer.Result> void addCommonRecognizerResultData(WritableMap jsonObject, T result) {
         jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
     }
+
+    /*public static <T extends Parser.Result> void addCommonParserResultData(WritableMap jsonObject, T result) {
+        jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
+    }*/
 
     public static WritableMap serializeDate(Date date) {
         if (date != null ) {
@@ -98,6 +104,18 @@ public abstract class SerializationUtils {
         jsonQuad.putMap("lowerLeft", serializePoint(quad.getLowerLeft()));
         jsonQuad.putMap("lowerRight", serializePoint(quad.getLowerRight()));
         return jsonQuad;
+    }
+
+    public static ImageExtensionFactors deserializeExtensionFactors(ReadableMap jsonExtensionFactors) {
+        if (jsonExtensionFactors == null) {
+            return new ImageExtensionFactors(0.f, 0.f, 0.f, 0.f);
+        } else {
+            float up = (float)jsonExtensionFactors.getDouble("upFactor");
+            float right = (float)jsonExtensionFactors.getDouble("rightFactor");
+            float down = (float)jsonExtensionFactors.getDouble("downFactor");
+            float left = (float)jsonExtensionFactors.getDouble("leftFactor");
+            return new ImageExtensionFactors(up, down, left, right);
+        }
     }
 
     public static String getStringFromMap(ReadableMap map, String key) {

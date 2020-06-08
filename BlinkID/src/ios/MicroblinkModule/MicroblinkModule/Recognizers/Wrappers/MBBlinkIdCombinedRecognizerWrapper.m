@@ -1,6 +1,7 @@
 #import "MBBlinkIdCombinedRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
+#import "MBCommonSerializationUtils.h"
 
 @implementation MBBlinkIdCombinedRecognizerCreator
 
@@ -35,6 +36,12 @@
         }
     }
     {
+        id anonymizeImage = [jsonRecognizer valueForKey:@"anonymizeImage"];
+        if (anonymizeImage != nil) {
+            recognizer.anonymizeImage = [(NSNumber *)anonymizeImage boolValue];
+        }
+    }
+    {
         id faceImageDpi = [jsonRecognizer valueForKey:@"faceImageDpi"];
         if (faceImageDpi != nil) {
             recognizer.faceImageDpi = [(NSNumber *)faceImageDpi unsignedIntegerValue];
@@ -49,7 +56,7 @@
     {
         id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
         if (fullDocumentImageExtensionFactors != nil) {
-            recognizer.fullDocumentImageExtensionFactors = [MBBlinkIDSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+            recognizer.fullDocumentImageExtensionFactors = [MBCommonSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
         }
     }
     {
@@ -82,6 +89,12 @@
             recognizer.skipUnsupportedBack = [(NSNumber *)skipUnsupportedBack boolValue];
         }
     }
+    {
+        id validateResultCharacters = [jsonRecognizer valueForKey:@"validateResultCharacters"];
+        if (validateResultCharacters != nil) {
+            recognizer.validateResultCharacters = [(NSNumber *)validateResultCharacters boolValue];
+        }
+    }
 
     return recognizer;
 }
@@ -109,8 +122,10 @@
     [jsonResult setValue:[NSNumber numberWithUnsignedInteger:self.result.digitalSignatureVersion] forKey:@"digitalSignatureVersion"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentBackImageColorStatus + 1)] forKey:@"documentBackImageColorStatus"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentBackImageMoireStatus + 1)] forKey:@"documentBackImageMoireStatus"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentDataMatch + 1)] forKey:@"documentDataMatch"];
     [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentFrontImageColorStatus + 1)] forKey:@"documentFrontImageColorStatus"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentFrontImageMoireStatus + 1)] forKey:@"documentFrontImageMoireStatus"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
     [jsonResult setValue:self.result.employer forKey:@"employer"];

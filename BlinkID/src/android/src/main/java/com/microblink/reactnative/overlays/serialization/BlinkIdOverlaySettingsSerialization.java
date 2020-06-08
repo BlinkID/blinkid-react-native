@@ -9,7 +9,7 @@ import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
 import com.microblink.uisettings.BlinkIdUISettings;
 import com.microblink.uisettings.UISettings;
 
-import static com.microblink.reactnative.recognizers.serialization.SerializationUtils.getStringFromMap;
+import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
 
 public final class BlinkIdOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override
