@@ -12,6 +12,8 @@ import {
     Region,
     Type,
     DocumentImageColorStatus,
+    DocumentImageMoireStatus,
+    
     
 } from '../types'
 
@@ -83,6 +85,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * Defines possible color statuses determined from scanned image. 
          */
         this.documentImageColorStatus = nativeResult.documentImageColorStatus;
+        
+        /** 
+         * Defines possible moire statuses determined from scanned image. 
+         */
+        this.documentImageMoireStatus = nativeResult.documentImageMoireStatus;
         
         /** 
          * The document number. 
@@ -217,6 +224,14 @@ export class BlinkIdRecognizer extends Recognizer {
         this.allowUnverifiedMrzResults = true;
         
         /** 
+         * Defines whether sensitive data should be anonymized in full document image result.
+         * The setting only applies to certain documents
+         * 
+         *  
+         */
+        this.anonymizeImage = true;
+        
+        /** 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 
@@ -262,6 +277,14 @@ export class BlinkIdRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
+        
+        /** 
+         * Defines whether result characters validatation is performed.
+         * If a result member contains invalid character, the result state cannot be valid
+         * 
+         *  
+         */
+        this.validateResultCharacters = true;
         
         this.createResultFromNative = function (nativeResult) { return new BlinkIdRecognizerResult(nativeResult); }
     }

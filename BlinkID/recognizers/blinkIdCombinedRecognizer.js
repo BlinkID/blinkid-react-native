@@ -12,6 +12,8 @@ import {
     Region,
     Type,
     DocumentImageColorStatus,
+    DocumentImageMoireStatus,
+    
     
 } from '../types'
 
@@ -95,6 +97,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.documentBackImageColorStatus = nativeResult.documentBackImageColorStatus;
         
         /** 
+         * Defines possible moire statuses determined from scanned image. 
+         */
+        this.documentBackImageMoireStatus = nativeResult.documentBackImageMoireStatus;
+        
+        /** 
          * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
          * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
          * of the document and values do not match, this method will return DataMatchResultFailed. Result will
@@ -106,6 +113,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * Defines possible color statuses determined from scanned image. 
          */
         this.documentFrontImageColorStatus = nativeResult.documentFrontImageColorStatus;
+        
+        /** 
+         * Defines possible moire statuses determined from scanned image. 
+         */
+        this.documentFrontImageMoireStatus = nativeResult.documentFrontImageMoireStatus;
         
         /** 
          * The document number. 
@@ -251,6 +263,14 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         this.allowUnverifiedMrzResults = true;
         
         /** 
+         * Defines whether sensitive data should be anonymized in full document image result.
+         * The setting only applies to certain documents
+         * 
+         *  
+         */
+        this.anonymizeImage = true;
+        
+        /** 
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 
@@ -310,6 +330,14 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          *  
          */
         this.skipUnsupportedBack = false;
+        
+        /** 
+         * Defines whether result characters validatation is performed.
+         * If a result member contains invalid character, the result state cannot be valid
+         * 
+         *  
+         */
+        this.validateResultCharacters = true;
         
         this.createResultFromNative = function (nativeResult) { return new BlinkIdCombinedRecognizerResult(nativeResult); }
     }
