@@ -7,13 +7,13 @@ rm -rf BlinkIDReactNative
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init --version="0.61.5" BlinkIDReactNative
+npx react-native init --version="0.61.5" BlinkIDReactNative || exit 1
 
 # enter into demo project folder
 pushd BlinkIDReactNative
 
-IS_LOCAL_BUILD = false
-if !IS_LOCAL_BUILD; then
+IS_LOCAL_BUILD=false || exit 1
+if [ "$IS_LOCAL_BUILD" = false ]; then
   # download npm package
   echo "Downloading blinkid-react-native module"
   npm install --save blinkid-react-native
@@ -44,7 +44,7 @@ pushd ios
 # install pod
 pod install
 
-if IS_LOCAL_BUILD; then
+if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Replace pod with custom dev version of BlinkID framework"
   # replace pod with custom dev version of BlinkID framework
   pushd Pods/PPBlinkID
