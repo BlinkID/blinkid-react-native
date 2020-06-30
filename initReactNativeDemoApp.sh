@@ -7,13 +7,13 @@ rm -rf BlinkIDReactNative
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init --version="0.61.5" BlinkIDReactNative
+npx react-native init --version="0.61.5" BlinkIDReactNative || exit 1
 
 # enter into demo project folder
 pushd BlinkIDReactNative
 
-IS_LOCAL_BUILD = true
-if !IS_LOCAL_BUILD; then
+IS_LOCAL_BUILD=false || exit 1
+if [ "$IS_LOCAL_BUILD" = false ]; then
   # download npm package
   echo "Downloading blinkid-react-native module"
   npm install --save blinkid-react-native
@@ -22,7 +22,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.5.0.tgz
+  npm install --save blinkid-react-native-5.5.1.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -44,7 +44,7 @@ pushd ios
 # install pod
 pod install
 
-if IS_LOCAL_BUILD; then
+if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Replace pod with custom dev version of BlinkID framework"
   # replace pod with custom dev version of BlinkID framework
   pushd Pods/PPBlinkID
