@@ -12,7 +12,7 @@ npx react-native init --version="0.61.5" BlinkIDReactNative
 # enter into demo project folder
 pushd BlinkIDReactNative
 
-IS_LOCAL_BUILD = true
+IS_LOCAL_BUILD = false
 if !IS_LOCAL_BUILD; then
   # download npm package
   echo "Downloading blinkid-react-native module"
@@ -22,7 +22,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.5.0.tgz
+  npm install --save blinkid-react-native-5.5.1.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
