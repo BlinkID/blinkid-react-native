@@ -110,7 +110,7 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
         
         for (NSUInteger i = 0; i < self.recognizerCollection.recognizerList.count; ++i) {
             [jsonResults addObject:[[self.recognizerCollection.recognizerList objectAtIndex:i] serializeResult]];
-
+        }
         if (!isDocumentCaptureRecognizer) {
             self.promiseResolve(jsonResults);
         }
@@ -123,7 +123,6 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
             self.promiseResolve = nil;
             self.promiseReject = nil;
             });
-        }
     }
 }
 
