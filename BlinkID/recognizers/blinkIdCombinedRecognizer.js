@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'
@@ -25,7 +26,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * The additional address information of the document owner. 
+         * The additional name information of the document owner. 
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -40,14 +41,27 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * The current age of the document owner in years. It is calculated difference
-         * between now and date of birth. Now is current time on the device.
-         * @return current age of the document owner in years or -1 if date of birth is unknown. 
+         * The current age of the document owner in years. It is calculated difference 
          */
         this.age = nativeResult.age;
         
         /** 
-         * The classification information. 
+         * Image analysis result for the scanned document back side image 
+         */
+        this.backImageAnalysisResult = nativeResult.backImageAnalysisResult;
+        
+        /** 
+         * The data extracted from the back side visual inspection zone. 
+         */
+        this.backVizResult = nativeResult.backVizResult;
+        
+        /** 
+         * The data extracted from the barcode. 
+         */
+        this.barcodeResult = nativeResult.barcodeResult;
+        
+        /** 
+         * The document class information. 
          */
         this.classInfo = nativeResult.classInfo;
         
@@ -77,12 +91,12 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
@@ -92,32 +106,9 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /** 
-         * Defines possible color statuses determined from scanned image. 
-         */
-        this.documentBackImageColorStatus = nativeResult.documentBackImageColorStatus;
-        
-        /** 
-         * Defines possible moire statuses determined from scanned image. 
-         */
-        this.documentBackImageMoireStatus = nativeResult.documentBackImageMoireStatus;
-        
-        /** 
-         * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
-         * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return DataMatchResultFailed. Result will
-         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same. 
+         * Defines result of the data matching algorithm for scanned parts/sides of the document. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /** 
-         * Defines possible color statuses determined from scanned image. 
-         */
-        this.documentFrontImageColorStatus = nativeResult.documentFrontImageColorStatus;
-        
-        /** 
-         * Defines possible moire statuses determined from scanned image. 
-         */
-        this.documentFrontImageMoireStatus = nativeResult.documentFrontImageMoireStatus;
         
         /** 
          * The document number. 
@@ -135,7 +126,12 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.employer = nativeResult.employer;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Checks whether the document has expired or not by comparing the current 
+         */
+        this.expired = nativeResult.expired;
+        
+        /** 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -145,12 +141,22 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Image analysis result for the scanned document front side image 
+         */
+        this.frontImageAnalysisResult = nativeResult.frontImageAnalysisResult;
+        
+        /** 
+         * The data extracted from the front side visual inspection zone. 
+         */
+        this.frontVizResult = nativeResult.frontVizResult;
+        
+        /** 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -180,7 +186,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
-         * The data extracted from the machine readable zone 
+         * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -220,8 +226,7 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.residentialStatus = nativeResult.residentialStatus;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -234,108 +239,74 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Recognizer which can scan front and back side of the United States driver license.
+ * A generic recognizer which can scan front and back side of the document.
  */
 export class BlinkIdCombinedRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdCombinedRecognizer');
         
         /** 
-         * Defines whether blured frames filtering is allowed
-         * 
-         *  
+         * Defines whether blured frames filtering is allowed. 
          */
         this.allowBlurFilter = true;
         
         /** 
-         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
-         * 
-         *  
+         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed. 
          */
         this.allowUnparsedMrzResults = false;
         
         /** 
-         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
-         * Unverified MRZ is parsed, but check digits are incorrect
-         * 
-         *  
+         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed. 
          */
         this.allowUnverifiedMrzResults = true;
         
         /** 
-         * Defines whether sensitive data should be anonymized in full document image result.
-         * The setting only applies to certain documents
-         * 
-         *  
+         * Whether sensitive data should be removed from images, result fields or both. 
          */
-        this.anonymizeImage = true;
+        this.anonymizationMode = AnonymizationMode.FullResult;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case
-         * padding edge and image edge are the same.
-         * Recommended value is 0.02f.
-         * 
-         *  
+         * Padding is a minimum distance from the edge of the frame and it is defined 
          */
         this.paddingEdge = 0.0;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         
         /** 
-         * Skip back side capture and processing step when back side of the document is not supported
-         * 
-         *  
+         * Skip back side capture and processing step when back side of the document is not supported. 
          */
         this.skipUnsupportedBack = false;
         
         /** 
-         * Defines whether result characters validatation is performed.
-         * If a result member contains invalid character, the result state cannot be valid
-         * 
-         *  
+         * Whether result characters validatation is performed. 
          */
         this.validateResultCharacters = true;
         

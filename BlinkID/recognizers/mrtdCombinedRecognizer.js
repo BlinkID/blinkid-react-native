@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'
@@ -25,46 +26,42 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * Digital signature of the recognition result. Available only if enabled with signResult property. 
+         * Defines digital signature of recognition results. 
          */
         this.digitalSignature = nativeResult.digitalSignature;
         
         /** 
-         * Version of the digital signature. Available only if enabled with signResult property. 
+         * Defines digital signature version. 
          */
         this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /** 
-         * Returns DataMatchResultSuccess if data from scanned parts/sides of the document match,
-         * DataMatchResultFailed otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return DataMatchResultFailed. Result will
-         * be DataMatchResultSuccess only if scanned values for all fields that are compared are the same. 
+         * Defines result of the data matching algorithm for scanned parts/sides of the document. 
          */
         this.documentDataMatch = nativeResult.documentDataMatch;
         
         /** 
-         * face image from the document if enabled with returnFaceImage property. 
+         * Face image from the document 
          */
         this.faceImage = nativeResult.faceImage;
         
         /** 
-         * back side image of the document if enabled with returnFullDocumentImage property. 
+         * Back side image of the document 
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /** 
-         * front side image of the document if enabled with returnFullDocumentImage property. 
+         * Front side image of the document 
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /** 
-         * Returns the Data extracted from the machine readable zone. 
+         * The data extracted from the machine readable zone. 
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
         /** 
-         * Returns true if recognizer has finished scanning first side and is now scanning back side,
-         * false if it's still scanning first side. 
+         * {true} if recognizer has finished scanning first side and is now scanning back side, 
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -72,95 +69,65 @@ export class MrtdCombinedRecognizerResult extends RecognizerResult {
 }
 
 /**
- * MRTD Combined recognizer
- * 
- * MRTD Combined recognizer is used for scanning both front and back side of generic IDs.
+ * Recognizer for combined reading of face from front side of documents  and MRZ from back side of
+ *  * Machine Readable Travel Document.
  */
 export class MrtdCombinedRecognizer extends Recognizer {
     constructor() {
         super('MrtdCombinedRecognizer');
         
         /** 
-         * Whether special characters are allowed
-         * 
-         *  
+         * Whether special characters are allowed. 
          */
         this.allowSpecialCharacters = false;
         
         /** 
-         * Whether returning of unparsed results is allowed
-         * 
-         *  
+         * Whether returning of unparsed results is allowed. 
          */
         this.allowUnparsedResults = false;
         
         /** 
-         * Whether returning of unverified results is allowed
-         * Unverified result is result that is parsed, but check digits are incorrect.
-         * 
-         *  
+         * Whether returning of unverified results is allowed. 
          */
         this.allowUnverifiedResults = false;
         
         /** 
-         * Type of document this recognizer will scan.
-         * 
-         *  
+         * Currently used detector type. 
          */
         this.detectorType = DocumentFaceDetectorType.TD1;
         
         /** 
-         * Property for setting DPI for face images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for face image that should be returned. 
          */
         this.faceImageDpi = 250;
         
         /** 
-         * Property for setting DPI for full document images
-         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
-         * 
-         *  
+         * The DPI (Dots Per Inch) for full document image that should be returned. 
          */
         this.fullDocumentImageDpi = 250;
         
         /** 
-         * Image extension factors for full document image.
-         * 
-         * @see ImageExtensionFactors
-         *  
+         * The extension factors for full document image. 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /** 
-         * Defines how many times the same document should be detected before the detector
-         * returns this document as a result of the deteciton
-         * 
-         * Higher number means more reliable detection, but slower processing
-         * 
-         *  
+         * Minimum number of stable detections required for detection to be successful. 
          */
         this.numStableDetectionsThreshold = 6;
         
         /** 
-         * Sets whether face image from ID card should be extracted
-         * 
-         *  
+         * Defines whether face image will be available in result. 
          */
         this.returnFaceImage = false;
         
         /** 
-         * Sets whether full document image of ID card should be extracted.
-         * 
-         *  
+         * Defines whether full document image will be available in 
          */
         this.returnFullDocumentImage = false;
         
         /** 
-         * Whether or not recognition result should be signed.
-         * 
-         *  
+         * Defines whether or not recognition result should be signed. 
          */
         this.signResult = false;
         

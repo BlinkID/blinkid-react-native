@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'
@@ -25,11 +26,6 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /** 
-         * THe additional address information of the document owner. 
-         */
-        this.additionalAddressInformation = nativeResult.additionalAddressInformation;
-        
-        /** 
          * The additional name information of the document owner. 
          */
         this.additionalNameInformation = nativeResult.additionalNameInformation;
@@ -40,18 +36,19 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.address = nativeResult.address;
         
         /** 
-         * The current age of the document owner in years. It is calculated difference
-         * between now and date of birth. Now is current time on the device.
-         * @return current age of the document owner in years or -1 if date of birth is unknown. 
+         * The current age of the document owner in years. It is calculated difference 
          */
         this.age = nativeResult.age;
         
         /** 
-         * Type of the barcode scanned
-         * 
-         *  @return Type of the barcode 
+         * The format of the scanned barcode. 
          */
         this.barcodeType = nativeResult.barcodeType;
+        
+        /** 
+         * The city address portion of the document owner. 
+         */
+        this.city = nativeResult.city;
         
         /** 
          * The date of birth of the document owner. 
@@ -79,9 +76,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.documentNumber = nativeResult.documentNumber;
         
         /** 
-         * The document type deduced from the recognized barcode
-         * 
-         *  @return Type of the document 
+         * The document type deduced from the recognized barcode 
          */
         this.documentType = nativeResult.documentType;
         
@@ -94,6 +89,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * The additional privileges granted to the driver license owner. 
          */
         this.endorsements = nativeResult.endorsements;
+        
+        /** 
+         * Checks whether the document has expired or not by comparing the current 
+         */
+        this.expired = nativeResult.expired;
         
         /** 
          * The first name of the document owner. 
@@ -109,6 +109,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * The issuing authority of the document. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * The jurisdiction code address portion of the document owner. 
+         */
+        this.jurisdiction = nativeResult.jurisdiction;
         
         /** 
          * The last name of the document owner. 
@@ -136,6 +141,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
+         * The postal code address portion of the document owner. 
+         */
+        this.postalCode = nativeResult.postalCode;
+        
+        /** 
          * The profession of the document owner. 
          */
         this.profession = nativeResult.profession;
@@ -146,7 +156,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.race = nativeResult.race;
         
         /** 
-         * Byte array with result of the scan 
+         * The raw bytes contained inside barcode. 
          */
         this.rawData = nativeResult.rawData;
         
@@ -156,7 +166,7 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.religion = nativeResult.religion;
         
         /** 
-         * The residential stauts of the document owner. 
+         * The residential status of the document owner. 
          */
         this.residentialStatus = nativeResult.residentialStatus;
         
@@ -171,13 +181,17 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /** 
-         * Retrieves string content of scanned data 
+         * The street address portion of the document owner. 
+         */
+        this.street = nativeResult.street;
+        
+        /** 
+         * String representation of data inside barcode. 
          */
         this.stringData = nativeResult.stringData;
         
         /** 
-         * Flag indicating uncertain scanning data
-         * E.g obtained from damaged barcode. 
+         * True if returned result is uncertain, i.e. if scanned barcode was incomplete (i.e. 
          */
         this.uncertain = nativeResult.uncertain;
         
