@@ -11,7 +11,7 @@ This repository contains example wrapper for BlinkID native SDK for [Android](ht
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.61.5](https://github.com/facebook/react-native/releases/tag/v0.61.5)
+BlinkID React Native was built and tested with [React Native v0.62.2](https://github.com/facebook/react-native/releases/tag/v0.62.2)
 
 ## Installation
 
