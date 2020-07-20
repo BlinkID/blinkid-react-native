@@ -69,4 +69,80 @@
              };
 }
 
++(NSDictionary *) serializeVizResult:(MBVizResult *)vizResult {
+    return @{
+        @"firstName" : vizResult.firstName,
+        @"lastName" : vizResult.lastName,
+        @"fullName" : vizResult.fullName,
+        @"additionalNameInformation" : vizResult.additionalNameInformation,
+        @"localizedName" : vizResult.localizedName,
+        @"address" : vizResult.address,
+        @"additionalAddressInformation" : vizResult.additionalAddressInformation,
+        @"placeOfBirth" : vizResult.placeOfBirth,
+        @"nationality" : vizResult.nationality,
+        @"race" : vizResult.race,
+        @"religion" : vizResult.religion,
+        @"profession" : vizResult.profession,
+        @"maritalStatus" : vizResult.maritalStatus,
+        @"residentialStatus" : vizResult.residentialStatus,
+        @"employer" : vizResult.employer,
+        @"sex" : vizResult.sex,
+        @"dateOfBirth" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfBirth],
+        @"dateOfIssue" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfIssue],
+        @"dateOfExpiry" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfExpiry],
+        @"documentNumber" : vizResult.documentNumber,
+        @"personalIdNumber" : vizResult.personalIdNumber,
+        @"documentAdditionalNumber" : vizResult.documentAdditionalNumber,
+        @"additionalPersonalIdNumber" : vizResult.additionalPersonalIdNumber,
+        @"issuingAuthority" : vizResult.issuingAuthority,
+        @"driverLicenseDetailedInfo" : [MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:vizResult.driverLicenseDetailedInfo],
+        @"conditions" : vizResult.conditions,
+        @"empty" : [NSNumber numberWithBool:vizResult.empty]
+    };
+}
+
++(NSDictionary *) serializeBarcodeResult:(MBBarcodeResult *)barcodeResult {
+    return @{
+        @"rawData" : barcodeResult.rawData,
+        @"stringData" : barcodeResult.stringData,
+        @"uncertain" : [NSNumber numberWithBool:barcodeResult.uncertain],
+        @"barcodeType" : [NSNumber numberWithInteger:(barcodeResult.barcodeType + 1)],
+        @"firstName" : barcodeResult.firstName,
+        @"lastName" : barcodeResult.lastName,
+        @"fullName" : barcodeResult.fullName,
+        @"additionalNameInformation" : barcodeResult.additionalNameInformation,
+        @"address" : barcodeResult.address,
+        @"placeOfBirth" : barcodeResult.placeOfBirth,
+        @"nationality" : barcodeResult.nationality,
+        @"race" : barcodeResult.race,
+        @"religion" : barcodeResult.religion,
+        @"profession" : barcodeResult.profession,
+        @"maritalStatus" : barcodeResult.maritalStatus,
+        @"residentialStatus" : barcodeResult.residentialStatus,
+        @"employer" : barcodeResult.employer,
+        @"sex" : barcodeResult.sex,
+        @"dateOfBirth" : [MBSerializationUtils serializeMBDateResult:barcodeResult.dateOfBirth],
+        @"dateOfIssue" : [MBSerializationUtils serializeMBDateResult:barcodeResult.dateOfIssue],
+        @"dateOfExpiry" : [MBSerializationUtils serializeMBDateResult:barcodeResult.dateOfExpiry],
+        @"documentNumber" : barcodeResult.documentNumber,
+        @"personalIdNumber" : barcodeResult.personalIdNumber,
+        @"documentAdditionalNumber" : barcodeResult.documentAdditionalNumber,
+        @"issuingAuthority" : barcodeResult.issuingAuthority,
+        @"street" : barcodeResult.street,
+        @"postalCode" : barcodeResult.postalCode,
+        @"city" : barcodeResult.city,
+        @"jurisdiction" : barcodeResult.jurisdiction,
+        @"driverLicenseDetailedInfo" : [MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:barcodeResult.driverLicenseDetailedInfo],
+        @"empty" : [NSNumber numberWithBool:barcodeResult.empty]
+    };
+}
+
++(NSDictionary *) serializeImageAnalysisResult:(MBImageAnalysisResult *)imageAnalysisResult {
+    return @{
+             @"blurred" : [NSNumber numberWithBool:imageAnalysisResult.blurred],
+             @"documentImageColorStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageColorStatus + 1)],
+             @"documentImageMoireStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageMoireStatus + 1)]
+        };
+}
+
 @end

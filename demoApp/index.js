@@ -18,7 +18,7 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqwT0H5tPLx7wRiIwGSc9Lt91RnQLHKM37PetFf4rGfSe07tHMq+qU4mBhbkGOCyoEH1A1uRX6bbyG/KO0Tp0zhN/RCnn4dRY94iRFHjBg7F23Sobf8WBnlNwfvNOtJPrulp1kItbYE3BICrtORuyEfcmTbI6a0NK/amFVUf2DUL7YArskzfs9BBIvrud7ewGRblAS+yU+f9PnGiOX+XS8vi+4+yR9OOoqpUaz8enmeILRPOoLvK9/E/YAeWG',
+    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITrST0H0yEjD3fnbC9UNggUvwukTvoplRNvS2h/eA+2rTb/WO2SpNZ1wDjuufjQBrGm+nrluPgOSOTpUDCNa9r1fkwpUyQPLcSxYkjBQgNl81fdXffgSGW7358bVR5sPR0g/g/Uz2V1DL1CcXrbZHY4fznReE5hWKdOKsOzs/si2DdxivK6YmZ7X08xluR78FjjGBKU5hlzbcuZ99OoPT6nL7yjt1vOdBfXiNWplXq2ivP1NGKmcereCjC7A+s',
     // android license key for applicationID: com.blinkidreactnative
     android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF21MTKf52xDsdMUz7bLBDSAIERUi25lLR0tzz3bzu5bEohBssYJylMIIUDTF4tQdvQLuYW2hl4b0Rvt9+Z8XsdASzCrodmaCp8+NOhN6cehEcBL0dlLggHvcQEH9ACsJ0epdWLYAoGLsSPFH07c51IOv3HE0lR38ldbUivuYaPQCuulE+ua/B+Z+6S2TSBikbLlJCll1tNTTQQYINQCA5sqjax6LAueGcognajykBbVyOmzpADfvV17lM9N4tA=='
 })

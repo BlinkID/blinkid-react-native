@@ -36,9 +36,9 @@
         }
     }
     {
-        id anonymizeImage = [jsonRecognizer valueForKey:@"anonymizeImage"];
-        if (anonymizeImage != nil) {
-            recognizer.anonymizeImage = [(NSNumber *)anonymizeImage boolValue];
+        id anonymizationMode = [jsonRecognizer valueForKey:@"anonymizationMode"];
+        if (anonymizationMode != nil) {
+            recognizer.anonymizationMode = (MBAnonymizationMode)([(NSNumber *)anonymizationMode unsignedIntegerValue] - 1);
         }
     }
     {
@@ -100,6 +100,7 @@
     [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
     [jsonResult setValue:self.result.conditions forKey:@"conditions"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
@@ -107,15 +108,15 @@
     [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentImageColorStatus + 1)] forKey:@"documentImageColorStatus"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentImageMoireStatus + 1)] forKey:@"documentImageMoireStatus"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
     [jsonResult setValue:self.result.employer forKey:@"employer"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeImageAnalysisResult:self.result.imageAnalysisResult] forKey:@"imageAnalysisResult"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.localizedName forKey:@"localizedName"];
@@ -129,6 +130,7 @@
     [jsonResult setValue:self.result.religion forKey:@"religion"];
     [jsonResult setValue:self.result.residentialStatus forKey:@"residentialStatus"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.vizResult] forKey:@"vizResult"];
 
     return jsonResult;
 }

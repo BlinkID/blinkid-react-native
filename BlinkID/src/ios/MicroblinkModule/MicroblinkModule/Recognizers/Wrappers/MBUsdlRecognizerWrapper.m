@@ -29,6 +29,14 @@
             recognizer.scanUncertain = [(NSNumber*)uncertainDecoding boolValue];
         }
     }
+    
+    {
+        id enableCompactParser = [jsonRecognizer valueForKey:@"enableCompactParser"];
+        if (enableCompactParser != nil) {
+            recognizer.enableCompactParser = [(NSNumber*)enableCompactParser boolValue];
+        }
+    }
+    
 
     return recognizer;
 }
@@ -62,6 +70,11 @@
     [jsonResult setValue:[[NSString alloc] initWithData:[self.result data] encoding:NSUTF8StringEncoding] forKey:@"rawStringData"];
     [jsonResult setValue:[NSNumber numberWithBool:[self.result isUncertain]] forKey:@"uncertain"];
     [jsonResult setValue:[self serializeFields] forKey:@"fields"];
+    
+    [jsonResult setValue:self.result.street forKey:@"street"];
+    [jsonResult setValue:self.result.postalCode forKey:@"postalCode"];
+    [jsonResult setValue:self.result.city forKey:@"city"];
+    [jsonResult setValue:self.result.jurisdiction forKey:@"jurisdiction"];
 
     return jsonResult;
 }
