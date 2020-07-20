@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'
@@ -23,11 +24,6 @@ import {
 export class IdBarcodeRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-        
-        /** 
-         * THe additional address information of the document owner. 
-         */
-        this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
         /** 
          * The additional name information of the document owner. 
@@ -52,6 +48,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          *  @return Type of the barcode 
          */
         this.barcodeType = nativeResult.barcodeType;
+        
+        /** 
+         * The city address portion of the document owner. 
+         */
+        this.city = nativeResult.city;
         
         /** 
          * The date of birth of the document owner. 
@@ -96,6 +97,17 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.endorsements = nativeResult.endorsements;
         
         /** 
+         * Checks whether the document has expired or not by comparing the current
+         * time on the device with the date of expiry.
+         * 
+         * @return true if the document has expired, false in following cases:
+         * document does not expire (date of expiry is permanent)
+         * date of expiry has passed
+         * date of expiry is unknown and it is not permanent 
+         */
+        this.expired = nativeResult.expired;
+        
+        /** 
          * The first name of the document owner. 
          */
         this.firstName = nativeResult.firstName;
@@ -109,6 +121,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * The issuing authority of the document. 
          */
         this.issuingAuthority = nativeResult.issuingAuthority;
+        
+        /** 
+         * The jurisdiction code address portion of the document owner. 
+         */
+        this.jurisdiction = nativeResult.jurisdiction;
         
         /** 
          * The last name of the document owner. 
@@ -134,6 +151,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * The place of birth of the document owner. 
          */
         this.placeOfBirth = nativeResult.placeOfBirth;
+        
+        /** 
+         * The postal code address portion of the document owner. 
+         */
+        this.postalCode = nativeResult.postalCode;
         
         /** 
          * The profession of the document owner. 
@@ -169,6 +191,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
          * The sex of the document owner. 
          */
         this.sex = nativeResult.sex;
+        
+        /** 
+         * The street address portion of the document owner. 
+         */
+        this.street = nativeResult.street;
         
         /** 
          * Retrieves string content of scanned data 

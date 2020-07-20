@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'

@@ -119,6 +119,39 @@ export const DocumentImageMoireStatus = Object.freeze(
 );
 
 /**
+ * Define level of anonymization performed on recognizer result.
+ */
+export const AnonymizationMode = Object.freeze(
+    {
+        /** Anonymization will not be performed. */
+        None: 1,
+
+        /** FullDocumentImage is anonymized with black boxes covering sensitive data. */
+        ImageOnly: 2,
+
+        /** Result fields containing sensitive data are removed from result. */
+        ResultFieldsOnly: 3,
+
+        /** This mode is combination of ImageOnly and ResultFieldsOnly modes. */
+        FullResult: 4
+    }
+);
+
+/**
+ * Defines possible color and moire statuses determined from scanned image.
+ */
+export class ImageAnalysisResult {
+    constructor(nativeImageAnalysisResult) {
+        /**  Whether the image is blurred. */
+        this.blurred = nativeImageAnalysisResult.blurred;
+        /** he color status determined from scanned image. */
+        this.documentImageColorStatus = nativeImageAnalysisResult.documentImageColorStatus;
+        /** The Moire pattern detection status determined from the scanned image. */
+        this.documentImageMoireStatus = nativeImageAnalysisResult.documentImageMoireStatus;
+    }
+}
+
+/**
  * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
  */
 export const Country = Object.freeze(
@@ -209,7 +242,10 @@ export const Country = Object.freeze(
         Vietnam: 84,
         Brazil: 85,
         Norway: 86,
-        Oman: 87
+        Oman: 87,
+        Ecuador: 88,
+        ElSalvador: 89,
+        SriLanka: 90
     }
 );
 
@@ -318,9 +354,196 @@ export const Type = Object.freeze(
         iKad: 21,
         MilitaryId: 22,
         MyKas: 23,
-        SocialSecurityCard: 24
+        SocialSecurityCard: 24,
+        HealthInsuranceCard: 25
     }
 );
+
+/** Defines the data extracted from the barcode. */
+export class BarcodeResult {
+    constructor(nativeBarcodeResult) {
+
+        /** Type of the barcode scanned */
+        this.barcodeType = nativeBarcodeResult.barcodeType;
+        
+        /** Byte array with result of the scan */
+        this.rawData = nativeBarcodeResult.rawData;
+
+        /** Retrieves string content of scanned data */
+        this.stringData = nativeBarcodeResult.stringData;
+
+        /** Flag indicating uncertain scanning data */
+        this.uncertain = nativeBarcodeResult.uncertain;
+
+        /** The first name of the document owner. */
+        this.firstName = nativeBarcodeResult.firstName;
+
+        /** The last name of the document owner. */
+        this.lastName = nativeBarcodeResult.lastName;
+
+        /** The full name of the document owner. */
+        this.fullName = nativeBarcodeResult.fullName;
+
+        /** The additional name information of the document owner. */
+        this.additionalNameInformation = nativeBarcodeResult.additionalNameInformation;
+
+        /** The address of the document owner. */
+        this.address = nativeBarcodeResult.address;
+
+        /** The place of birth of the document owner. */
+        this.placeOfBirth = nativeBarcodeResult.placeOfBirth;
+
+        /** The nationality of the documet owner. */
+        this.nationality = nativeBarcodeResult.nationality;
+
+        /** The race of the document owner. */
+        this.race = nativeBarcodeResult.race;
+
+        /** The religion of the document owner. */
+        this.religion = nativeBarcodeResult.religion;
+
+        /** The profession of the document owner. */
+        this.profession = nativeBarcodeResult.profession;
+
+        /** The marital status of the document owner. */
+        this.maritalStatus = nativeBarcodeResult.maritalStatus;
+
+        /** The residential stauts of the document owner. */
+        this.residentialStatus = nativeBarcodeResult.residentialStatus;
+
+        /** The employer of the document owner. */
+        this.employer = nativeBarcodeResult.employer;
+
+        /** The sex of the document owner. */
+        this.sex = nativeBarcodeResult.sex;
+
+        /** The date of birth of the document owner. */
+        this.dateOfBirth = nativeBarcodeResult.dateOfBirth != null ? new Date(nativeBarcodeResult.dateOfBirth) : null;
+
+        /** The date of issue of the document. */
+        this.dateOfIssue = nativeBarcodeResult.dateOfIssue.Date != null ? new Date(nativeBarcodeResult.dateOfIssue) : null;
+
+        /** The date of expiry of the document. */
+        this.dateOfExpiry = nativeBarcodeResult.dateOfExpiry.Date != null ? new Date(nativeBarcodeResult.dateOfExpiry) : null;
+
+        /** The document number. */
+        this.documentNumber = nativeBarcodeResult.documentNumber;
+
+        /**  The personal identification number. */
+        this.personalIdNumber = nativeBarcodeResult.personalIdNumber;
+
+        /** The additional number of the document. */
+        this.documentAdditionalNumber = nativeBarcodeResult.documentAdditionalNumber;
+
+        /** The issuing authority of the document. */
+        this.issuingAuthority = nativeBarcodeResult.issuingAuthority;
+
+        /** The street address portion of the document owner. */
+        this.street = nativeBarcodeResult.street;
+
+        /** The postal code address portion of the document owner. */
+        this.postalCode = nativeBarcodeResult.postalCode;
+
+        /** The city address portion of the document owner. */
+        this.city = nativeBarcodeResult.city;
+
+        /** The jurisdiction code address portion of the document owner. */
+        this.jurisdiction = nativeBarcodeResult.jurisdiction;
+
+        /** The driver license detailed info. */
+        this.driverLicenseDetailedInfo = nativeBarcodeResult.driverLicenseDetailedInfo != null ? new DriverLicenseDetailedInfo(nativeBarcodeResult.driverLicenseDetailedInfo) : null;
+
+        /** Flag that indicates if barcode result is empty */
+        this.empty = nativeBarcodeResult.empty;
+    }
+}
+
+/** Defines the data extracted from the visual inspection zone */
+export class VizResult {
+    constructor(nativeVizResult) {
+
+        /** The first name of the document owner. */
+        this.firstName = nativeVizResult.firstName;
+
+        /** The last name of the document owner. */
+        this.lastName = nativeVizResult.lastName;
+
+        /** The full name of the document owner. */
+        this.fullName = nativeVizResult.fullName;
+
+        /** The additional name information of the document owner. */
+        this.additionalNameInformation = nativeVizResult.additionalNameInformation;
+
+        /** The localized name of the document owner. */
+        this.localizedName = nativeVizResult.localizedName;
+
+        /** The address of the document owner. */
+        this.address = nativeVizResult.address;
+
+        /** The additional address information of the document owner. */
+        this.additionalAddressInformation = nativeVizResult.additionalAddressInformation;
+
+        /** The place of birth of the document owner. */
+        this.placeOfBirth = nativeVizResult.placeOfBirth;
+
+        /** The nationality of the documet owner. */
+        this.nationality = nativeVizResult.nationality;
+
+        /** The race of the document owner. */
+        this.race = nativeVizResult.race;
+
+        /** The religion of the document owner. */
+        this.religion = nativeVizResult.religion;
+
+        /** The profession of the document owner. */
+        this.profession = nativeVizResult.profession;
+
+        /** The marital status of the document owner. */
+        this.maritalStatus = nativeVizResult.maritalStatus;
+
+        /** The residential stauts of the document owner. */
+        this.residentialStatus = nativeVizResult.residentialStatus;
+
+        /** The employer of the document owner. */
+        this.employer = nativeVizResult.employer;
+
+        /** The sex of the document owner. */
+        this.sex = nativeVizResult.sex;
+
+        /** The date of birth of the document owner. */
+        this.dateOfBirth = nativeVizResult.dateOfBirth.Date != null ? new Date(nativeVizResult.dateOfBirth) : null;
+
+        /** The date of issue of the document. */
+        this.dateOfIssue = nativeVizResult.dateOfIssue.Date != null ? new Date(nativeVizResult.dateOfIssue) : null;
+
+        /** The date of expiry of the document. */
+        this.dateOfExpiry = nativeVizResult.dateOfExpiry.Date != null ? new Date(nativeVizResult.dateOfExpiry) : null;
+
+        /** The document number. */
+        this.documentNumber = nativeVizResult.documentNumber;
+
+        /** The personal identification number. */
+        this.personalIdNumber = nativeVizResult.personalIdNumber;
+
+        /** The additional number of the document. */
+        this.documentAdditionalNumber = nativeVizResult.documentAdditionalNumber;
+
+        /** The additional personal identification number. */
+        this.additionalPersonalIdNumber = nativeVizResult.additionalPersonalIdNumber;
+
+        /** The issuing authority of the document. */
+        this.issuingAuthority = nativeVizResult.issuingAuthority;
+
+        /** The driver license detailed info. */
+        this.driverLicenseDetailedInfo = nativeVizResult.driverLicenseDetailedInfo != null ? new DriverLicenseDetailedInfo(nativeVizResult.driverLicenseDetailedInfo) : null;
+
+        /** The driver license conditions. */
+        this.conditions = nativeVizResult.conditions;
+
+        /** Flag that indicates if barcode result is empty */
+        this.empty = nativeVizResult.empty;
+    }
+}
 
 /**
  * Represents data extracted from MRZ (Machine Readable Zone) of Machine Readable Travel Document (MRTD).

@@ -20,8 +20,8 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         if (jsonMap.hasKey("allowUnverifiedMrzResults")) {
             recognizer.setAllowUnverifiedMrzResults(jsonMap.getBoolean("allowUnverifiedMrzResults"));
         }
-        if (jsonMap.hasKey("anonymizeImage")) {
-            recognizer.setAnonymizeImage(jsonMap.getBoolean("anonymizeImage"));
+        if (jsonMap.hasKey("anonymizationMode")) {
+            recognizer.setAnonymizationMode(com.microblink.entities.recognizers.blinkid.generic.AnonymizationMode.values()[jsonMap.getInt("anonymizationMode") - 1]);
         }
         if (jsonMap.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
@@ -56,6 +56,7 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
         jsonResult.putString("address", result.getAddress());
         jsonResult.putInt("age", result.getAge());
+        jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putString("conditions", result.getConditions());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
@@ -63,15 +64,15 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putString("documentAdditionalNumber", result.getDocumentAdditionalNumber());
-        jsonResult.putInt("documentImageColorStatus", SerializationUtils.serializeEnum(result.getDocumentImageColorStatus()));
-        jsonResult.putInt("documentImageMoireStatus", SerializationUtils.serializeEnum(result.getDocumentImageMoireStatus()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
         jsonResult.putMap("driverLicenseDetailedInfo", BlinkIDSerializationUtils.serializeDriverLicenseDetailedInfo(result.getDriverLicenseDetailedInfo()));
         jsonResult.putString("employer", result.getEmployer());
+        jsonResult.putBoolean("expired", result.isExpired());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putString("fullName", result.getFullName());
+        jsonResult.putMap("imageAnalysisResult", BlinkIDSerializationUtils.serializeImageAnalysisResult(result.getImageAnalysisResult()));
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("localizedName", result.getLocalizedName());
@@ -85,6 +86,7 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         jsonResult.putString("religion", result.getReligion());
         jsonResult.putString("residentialStatus", result.getResidentialStatus());
         jsonResult.putString("sex", result.getSex());
+        jsonResult.putMap("vizResult", BlinkIDSerializationUtils.serializeVizResult(result.getVizResult()));
         return jsonResult;
     }
 

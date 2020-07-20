@@ -67,6 +67,18 @@ export class UsdlRecognizerResult extends RecognizerResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown.
         */
        this.age = nativeResult.age;
+       
+        /** The street address portion of the United States driver license owner. */
+        this.street = nativeResult.street;
+
+        /** The postal code address portion of the United States driver license owner. */
+        this.postalCode = nativeResult.postalCode;
+
+        /** The city address portion of the United States driver license owner. */
+        this.city = nativeResult.city;
+
+        /** The jurisdiction code address portion of the United States driver license owner. */
+        this.jurisdiction = nativeResult.jurisdiction;
     }
 }
 
@@ -82,6 +94,9 @@ export class UsdlRecognizer extends Recognizer {
     
         /** Enable decoding of non-standard PDF417 barcodes, but without */
         this.uncertainDecoding = true;
+
+        /** Enables parsing of compact barcode encoding format */
+        this.enableCompactParser = false;
     
         this.createResultFromNative = function (nativeResult) { return new UsdlRecognizerResult(nativeResult); }
     }

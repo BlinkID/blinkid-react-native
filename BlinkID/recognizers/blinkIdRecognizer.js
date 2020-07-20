@@ -13,6 +13,7 @@ import {
     Type,
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
+    AnonymizationMode,
     
     
 } from '../types'
@@ -45,6 +46,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown. 
          */
         this.age = nativeResult.age;
+        
+        /** 
+         * Defines the data extracted from the barcode. 
+         */
+        this.barcodeResult = nativeResult.barcodeResult;
         
         /** 
          * The classification information. 
@@ -82,16 +88,6 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /** 
-         * Defines possible color statuses determined from scanned image. 
-         */
-        this.documentImageColorStatus = nativeResult.documentImageColorStatus;
-        
-        /** 
-         * Defines possible moire statuses determined from scanned image. 
-         */
-        this.documentImageMoireStatus = nativeResult.documentImageMoireStatus;
-        
-        /** 
          * The document number. 
          */
         this.documentNumber = nativeResult.documentNumber;
@@ -105,6 +101,17 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * The employer of the document owner. 
          */
         this.employer = nativeResult.employer;
+        
+        /** 
+         * Checks whether the document has expired or not by comparing the current
+         * time on the device with the date of expiry.
+         * 
+         * @return true if the document has expired, false in following cases:
+         * document does not expire (date of expiry is permanent)
+         * date of expiry has passed
+         * date of expiry is unknown and it is not permanent 
+         */
+        this.expired = nativeResult.expired;
         
         /** 
          * face image from the document if enabled with returnFaceImage property. 
@@ -125,6 +132,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * The full name of the document owner. 
          */
         this.fullName = nativeResult.fullName;
+        
+        /** 
+         * Defines possible color and moire statuses determined from scanned image. 
+         */
+        this.imageAnalysisResult = nativeResult.imageAnalysisResult;
         
         /** 
          * The issuing authority of the document. 
@@ -191,6 +203,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          */
         this.sex = nativeResult.sex;
         
+        /** 
+         * Defines the data extracted from the visual inspection zone 
+         */
+        this.vizResult = nativeResult.vizResult;
+        
     }
 }
 
@@ -224,12 +241,12 @@ export class BlinkIdRecognizer extends Recognizer {
         this.allowUnverifiedMrzResults = true;
         
         /** 
-         * Defines whether sensitive data should be anonymized in full document image result.
+         * Defines whether sensitive data should be removed from images, result fields or both.
          * The setting only applies to certain documents
          * 
          *  
          */
-        this.anonymizeImage = true;
+        this.anonymizationMode = AnonymizationMode.FullResult;
         
         /** 
          * Property for setting DPI for face images
