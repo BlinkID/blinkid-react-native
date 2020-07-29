@@ -123,6 +123,15 @@ Yes you can, but you will have to implement it natively for android and ios, you
 
 ## Known react-native problems:
 
+### iOS
+React native v0.62.2
+
+** [NSURLResponse allHeaderFields]: unrecognized selector sent to instance**
+
+Make sure to use the Flipper version 0.37.0 in your Podfile:
+
+`versions['Flipper'] ||= '~> 0.37.0'` 
+
 ### Android build exception - missing `ReactSwipeRefreshLayout`
 
 **java.lang.NoClassDefFoundError: com.facebook.react.views.swiperefresh.ReactSwipeRefreshLayout**

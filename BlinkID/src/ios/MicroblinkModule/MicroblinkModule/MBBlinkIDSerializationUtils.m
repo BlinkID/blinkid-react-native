@@ -103,7 +103,7 @@
 
 +(NSDictionary *) serializeBarcodeResult:(MBBarcodeResult *)barcodeResult {
     return @{
-        @"rawData" : barcodeResult.rawData,
+        @"rawData" : [barcodeResult.rawData base64EncodedStringWithOptions:0],
         @"stringData" : barcodeResult.stringData,
         @"uncertain" : [NSNumber numberWithBool:barcodeResult.uncertain],
         @"barcodeType" : [NSNumber numberWithInteger:(barcodeResult.barcodeType + 1)],
