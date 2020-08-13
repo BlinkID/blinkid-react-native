@@ -58,6 +58,7 @@
              @"restrictions" : driverLicenseDetailedInfo.restrictions,
              @"endorsements" : driverLicenseDetailedInfo.endorsements,
              @"vehicleClass" : driverLicenseDetailedInfo.vehicleClass,
+             @"conditions" : driverLicenseDetailedInfo.conditions
              };
 }
 
@@ -96,7 +97,6 @@
         @"additionalPersonalIdNumber" : vizResult.additionalPersonalIdNumber,
         @"issuingAuthority" : vizResult.issuingAuthority,
         @"driverLicenseDetailedInfo" : [MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:vizResult.driverLicenseDetailedInfo],
-        @"conditions" : vizResult.conditions,
         @"empty" : [NSNumber numberWithBool:vizResult.empty]
     };
 }
@@ -141,8 +141,25 @@
     return @{
              @"blurred" : [NSNumber numberWithBool:imageAnalysisResult.blurred],
              @"documentImageColorStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageColorStatus + 1)],
-             @"documentImageMoireStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageMoireStatus + 1)]
+             @"faceDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.faceDetectionStatus + 1)],
+             @"mrzDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.mrzDetectionStatus + 1)],
+             @"barcodeDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.barcodeDetectionStatus + 1)]
         };
+}
+
++(MBRecognitionModeFilter *) deserializeMBRecognitionModeFilter:(NSDictionary *)jsonRecognitionModeFilter {
+    if (jsonRecognitionModeFilter == nil) {
+        return [[MBRecognitionModeFilter alloc] init];
+    } else {
+        MBRecognitionModeFilter *recognitionModeFilter = [[MBRecognitionModeFilter alloc] init];
+        recognitionModeFilter.enableMrzId = [[jsonRecognitionModeFilter valueForKey:@"enableMrzId"] boolValue];
+        recognitionModeFilter.enableMrzVisa = [[jsonRecognitionModeFilter valueForKey:@"enableMrzVisa"] boolValue];
+        recognitionModeFilter.enableMrzPassport = [[jsonRecognitionModeFilter valueForKey:@"enableMrzPassport"] boolValue];
+        recognitionModeFilter.enablePhotoId = [[jsonRecognitionModeFilter valueForKey:@"enablePhotoId"] boolValue];
+        recognitionModeFilter.enableFullDocumentRecognition = [[jsonRecognitionModeFilter valueForKey:@"enableFullDocumentRecognition"] boolValue];
+
+        return recognitionModeFilter;
+    }
 }
 
 @end

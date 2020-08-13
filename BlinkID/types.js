@@ -9,7 +9,7 @@ export class Date {
         this.month = nativeDate.month;
         /** year */
         this.year = nativeDate.year;
-    }    
+    }
 }
 
 /**
@@ -56,7 +56,11 @@ export const MrtdDocumentType = Object.freeze(
         /** US Green Card */
         GreenCard : 5,
         /** Malaysian PASS type IMM13P */
-        MalaysianPassIMM13P : 6
+        MalaysianPassIMM13P : 6,
+		/** One liner ISO DL */
+        Dl: 7,
+        /** One liner ISO DL */
+        InternalTravelDocument: 8
     }
 );
 
@@ -93,11 +97,11 @@ export const IdBarcodeDocumentType = Object.freeze(
  */
 export const DocumentImageColorStatus = Object.freeze(
     {
-        /** Determining image color status was not performed */ 
+        /** Determining image color status was not performed */
         NotAvailable: 1,
-        /** Black-and-white image scanned */ 
+        /** Black-and-white image scanned */
         BlackAndWhite: 2,
-        /** Color image scanned */ 
+        /** Color image scanned */
         Color: 3
     }
 );
@@ -420,7 +424,7 @@ export class BarcodeResult {
 
         /** Type of the barcode scanned */
         this.barcodeType = nativeBarcodeResult.barcodeType;
-        
+
         /** Byte array with result of the scan */
         this.rawData = nativeBarcodeResult.rawData;
 
@@ -719,7 +723,7 @@ export class MrzResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown.
         */
         this.age = nativeMRZResult.age;
-    }    
+    }
 }
 
 /** Possible supported detectors for documents containing face image */
