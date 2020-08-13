@@ -16,6 +16,7 @@ import com.microblink.image.Image;
 import com.microblink.results.date.Date;
 import com.microblink.results.date.DateResult;
 import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
+import com.microblink.entities.recognizers.blinkid.generic.RecognitionModeFilter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -123,5 +124,18 @@ public abstract class SerializationUtils {
             return map.getString(key);
         }
         return null;
+    }
+
+    public static RecognitionModeFilter deserializeRecognitionModeFilter(ReadableMap json) {
+        if (json != null) {
+            boolean enableMrzId = (boolean)json.getBoolean("enableMrzId");
+            boolean enableMrzVisa = (boolean)json.getBoolean("enableMrzVisa");
+            boolean enableMrzPassport = (boolean)json.getBoolean("enableMrzPassport");
+            boolean enablePhotoId = (boolean)json.getBoolean("enablePhotoId");
+            boolean enableFullDocumentRecognition = (boolean)json.getBoolean("enableFullDocumentRecognition");
+            return new RecognitionModeFilter(enableMrzId, enableMrzVisa, enableMrzPassport, enablePhotoId, enableFullDocumentRecognition);
+        } else {
+            return new RecognitionModeFilter();
+        }
     }
 }

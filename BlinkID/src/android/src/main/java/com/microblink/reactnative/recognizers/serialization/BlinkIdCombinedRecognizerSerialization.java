@@ -35,6 +35,9 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         if (jsonMap.hasKey("paddingEdge")) {
             recognizer.setPaddingEdge((float)jsonMap.getDouble("paddingEdge"));
         }
+        if (jsonMap.hasKey("recognitionModeFilter")) {
+            recognizer.setRecognitionModeFilter(SerializationUtils.deserializeRecognitionModeFilter(jsonMap.getMap("recognitionModeFilter")));
+        }
         if (jsonMap.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
         }
@@ -66,7 +69,6 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putMap("backVizResult", BlinkIDSerializationUtils.serializeVizResult(result.getBackVizResult()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
-        jsonResult.putString("conditions", result.getConditions());
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
@@ -94,8 +96,10 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("personalIdNumber", result.getPersonalIdNumber());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());
+        jsonResult.putInt("processingStatus", SerializationUtils.serializeEnum(result.getProcessingStatus()));
         jsonResult.putString("profession", result.getProfession());
         jsonResult.putString("race", result.getRace());
+        jsonResult.putInt("recognitionMode", SerializationUtils.serializeEnum(result.getRecognitionMode()));
         jsonResult.putString("religion", result.getReligion());
         jsonResult.putString("residentialStatus", result.getResidentialStatus());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
