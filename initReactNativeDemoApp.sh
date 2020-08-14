@@ -12,7 +12,7 @@ npx react-native init --version="0.62.2" BlinkIDReactNative || exit 1
 # enter into demo project folder
 pushd BlinkIDReactNative
 
-IS_LOCAL_BUILD=true || exit 1
+IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = false ]; then
   # download npm package
   echo "Downloading blinkid-react-native module"
@@ -47,11 +47,11 @@ pod install
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Replace pod with custom dev version of BlinkID framework"
   # replace pod with custom dev version of BlinkID framework
-  #pushd Pods/PPBlinkID
-  #rm -rf Microblink.bundle
-  #rm -rf Microblink.framework
+  pushd Pods/PPBlinkID
+  rm -rf Microblink.bundle
+  rm -rf Microblink.framework
 
-  #cp -r ~/Downloads/blinkid-ios/Microblink.framework ./
+  cp -r ~/Downloads/blinkid-ios/Microblink.framework ./
   #popd
 fi
 
