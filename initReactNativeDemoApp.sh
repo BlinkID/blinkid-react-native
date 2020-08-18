@@ -13,7 +13,7 @@ npx react-native init --version="0.62.2" BlinkIDReactNative || exit 1
 pushd BlinkIDReactNative
 
 IS_LOCAL_BUILD=false || exit 1
-if [ "$IS_LOCAL_BUILD" = false ]; then
+if [ "$IS_LOCAL_BUILD" = true ]; then
   # download npm package
   echo "Downloading blinkid-react-native module"
   npm install --save blinkid-react-native
