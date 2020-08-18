@@ -46,6 +46,7 @@ public abstract class BlinkIDSerializationUtils {
         jsonDriverLicenseDetailedInfo.putString("restrictions", dlDetailedInfo.getRestrictions());
         jsonDriverLicenseDetailedInfo.putString("endorsements", dlDetailedInfo.getEndorsements());
         jsonDriverLicenseDetailedInfo.putString("vehicleClass", dlDetailedInfo.getVehicleClass());
+        jsonDriverLicenseDetailedInfo.putString("conditions", dlDetailedInfo.getConditions());
         return jsonDriverLicenseDetailedInfo;
     }
 
@@ -92,7 +93,6 @@ public abstract class BlinkIDSerializationUtils {
         jsonViz.putString("additionalPersonalIdNumber", vizResult.getAdditionalPersonalIdNumber());
         jsonViz.putString("issuingAuthority", vizResult.getIssuingAuthority());
         jsonViz.putMap("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(vizResult.getDriverLicenseDetailedInfo()));
-        jsonViz.putString("conditions", vizResult.getConditions());
         jsonViz.putBoolean("empty", vizResult.isEmpty());
         return jsonViz;
     }

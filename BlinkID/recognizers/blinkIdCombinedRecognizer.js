@@ -16,6 +16,7 @@ import {
     AnonymizationMode,
     
     
+    RecognitionModeFilter,
 } from '../types'
 
 /**
@@ -66,11 +67,6 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The classification information. 
          */
         this.classInfo = nativeResult.classInfo;
-        
-        /** 
-         * The driver license conditions. 
-         */
-        this.conditions = nativeResult.conditions;
         
         /** 
          * The date of birth of the document owner. 
@@ -217,6 +213,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /** 
+         * Defines status of the last recognition process. 
+         */
+        this.processingStatus = nativeResult.processingStatus;
+        
+        /** 
          * The profession of the document owner. 
          */
         this.profession = nativeResult.profession;
@@ -225,6 +226,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The race of the document owner. 
          */
         this.race = nativeResult.race;
+        
+        /** 
+         * Recognition mode used to scan current document. 
+         */
+        this.recognitionMode = nativeResult.recognitionMode;
         
         /** 
          * The religion of the document owner. 
@@ -319,6 +325,13 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          *  
          */
         this.paddingEdge = 0.0;
+        
+        /** 
+         * Enable or disable recognition of specific document groups supported by the current license.
+         * 
+         *  
+         */
+        this.recognitionModeFilter = new RecognitionModeFilter();
         
         /** 
          * Sets whether face image from ID card should be extracted

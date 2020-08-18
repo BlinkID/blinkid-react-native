@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.header_dir    = "blinkid-react-native"
 
   s.dependency 'React'
-  s.dependency 'PPBlinkID', '~> 5.6.0'
+  s.dependency 'PPBlinkID', '~> 5.7.0'
 
   s.frameworks = 'UIKit'
 end

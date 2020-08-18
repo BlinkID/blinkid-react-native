@@ -16,6 +16,7 @@ import {
     AnonymizationMode,
     
     
+    RecognitionModeFilter,
 } from '../types'
 
 /**

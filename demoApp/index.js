@@ -18,9 +18,9 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITrST0H0yEjD3fnbC9UNggUvwukTvoplRNvS2h/eA+2rTb/WO2SpNZ1wDjuufjQBrGm+nrluPgOSOTpUDCNa9r1fkwpUyQPLcSxYkjBQgNl81fdXffgSGW7358bVR5sPR0g/g/Uz2V1DL1CcXrbZHY4fznReE5hWKdOKsOzs/si2DdxivK6YmZ7X08xluR78FjjGBKU5hlzbcuZ99OoPT6nL7yjt1vOdBfXiNWplXq2ivP1NGKmcereCjC7A+s',
+    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqdz0Hw5VrGUGzgJ2tHeM9IxCzR0zl3+SIAzPW69yDvGXRrQlkT7ByFgTINRtu2FoNbYOrUCLxq37Y3npcDj4yaElrr8rM0b2q+FOnmD9gu4wCoMjKV5CJ14JJsmwP+naiIcVqmuv+tQ8hWgAKM8L616owzG1UYp+h2ZdTOMWSX/AkwDXguj8z5zx/iE10KE2iTrcU1Iu5AANV02VHUmeAHoOOTloMJJuBsBbwWFgS+pke73YmTfnmbUxCQ==',
     // android license key for applicationID: com.blinkidreactnative
-    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF21MTKf52xDsdMUz7bLBDSAIERUi25lLR0tzz3bzu5bEohBssYJylMIIUDTF4tQdvQLuYW2hl4b0Rvt9+Z8XsdASzCrodmaCp8+NOhN6cehEcBL0dlLggHvcQEH9ACsJ0epdWLYAoGLsSPFH07c51IOv3HE0lR38ldbUivuYaPQCuulE+ua/B+Z+6S2TSBikbLlJCll1tNTTQQYINQCA5sqjax6LAueGcognajykBbVyOmzpADfvV17lM9N4tA=='
+    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF2lsSqeObkzyko/0kah+gpMcK/G18fQtB1vAoiuyDojRyY6xOLlJYAFwGuepBKDJPqdsQh11RxKSLANRLDH0lWJzgo3EKRae9NXAoKPUJ0nqUy7uIP8eAVkFelNILVRy3pkWJjY5o/vRLn7sf2cNsdmt/ZvzUw1545pLHgT7LqOxSRg+81p0/koApvVMnJ+yI9QJgHNwa9AFNDOYEKCiow/J1dJjx+yGL1crnvfaOLv7ndLUisX496v+w9k='
 })
 
 var renderIf = function(condition, content) {
@@ -28,6 +28,22 @@ var renderIf = function(condition, content) {
         return content;
     } 
     return null;
+}
+
+function buildResult(result, key) {
+    if (result && result != -1) {
+        return key + ": " + result + "\n";
+    }
+    return ""
+}
+
+function buildDateResult(result, key) {
+    if (result) {
+        return key + ": " +
+            result.day + "." + result.month + "." + result.year + "."
+            + "\n";
+    }
+    return ""
 }
 
 export default class BlinkIDReactNativeApp extends Component {
@@ -51,7 +67,7 @@ export default class BlinkIDReactNativeApp extends Component {
     async scan() {
         try {
 
-            // to scan any machine readable travel document (passports, visa's and IDs with 
+            // to scan any machine readable travel document (passports, visas and IDs with
             // machine readable zone), use MrtdRecognizer
             // var mrtdRecognizer = new BlinkIDReactNative.MrtdRecognizer();
             // mrtdRecognizer.returnFullDocumentImage = true;
@@ -102,7 +118,7 @@ export default class BlinkIDReactNativeApp extends Component {
                     if (localState.successFrame) {
                         newState.successFrame = localState.successFrame;
                     }
-                  
+
                 }
                 newState.results += '\n';
                 this.setState(newState);
@@ -115,8 +131,6 @@ export default class BlinkIDReactNativeApp extends Component {
     }
 
     handleResult(result) {
-        let fieldDelim = ";\n";
-        
         var localState = {
             showFrontImageDocument: false,
             resultFrontImageDocument: '',
@@ -127,36 +141,48 @@ export default class BlinkIDReactNativeApp extends Component {
             showSuccessFrame: false,
             successFrame: ''
         };
-        
+
         if (result instanceof BlinkIDReactNative.BlinkIdCombinedRecognizerResult) {
             let blinkIdResult = result;
+
             let resultString =
-                "First name: " + blinkIdResult.firstName + fieldDelim +
-                "Last name: " + blinkIdResult.lastName + fieldDelim +
-                "Address: " + blinkIdResult.address + fieldDelim +
-                "Document number: " + blinkIdResult.documentNumber + fieldDelim +
-                "Sex: " + blinkIdResult.sex + fieldDelim;
-            if (blinkIdResult.dateOfBirth) {
+                buildResult(blinkIdResult.firstName, "First name") +
+                buildResult(blinkIdResult.lastName, "Last name") +
+                buildResult(blinkIdResult.fullName, "Full name") +
+                buildResult(blinkIdResult.localizedName, "Localized name") +
+                buildResult(blinkIdResult.additionalNameInformation, "Additional name info") +
+                buildResult(blinkIdResult.address, "Address") +
+                buildResult(blinkIdResult.additionalAddressInformation, "Additional address info") +
+                buildResult(blinkIdResult.documentNumber, "Document number") +
+                buildResult(blinkIdResult.documentAdditionalNumber, "Additional document number") +
+                buildResult(blinkIdResult.sex, "Sex") +
+                buildResult(blinkIdResult.issuingAuthority, "Issuing authority") +
+                buildResult(blinkIdResult.nationality, "Nationality") +
+                buildDateResult(blinkIdResult.dateOfBirth, "Date of birth") +
+                buildResult(blinkIdResult.age, "Age") +
+                buildDateResult(blinkIdResult.dateOfIssue, "Date of issue") +
+                buildDateResult(blinkIdResult.dateOfExpiry, "Date of expiry") +
+                buildResult(blinkIdResult.dateOfExpiryPermanent, "Date of expiry permanent") +
+                buildResult(blinkIdResult.expired, "Expired") +
+                buildResult(blinkIdResult.maritalStatus, "Martial status") +
+                buildResult(blinkIdResult.personalIdNumber, "Personal id number") +
+                buildResult(blinkIdResult.profession, "Profession") +
+                buildResult(blinkIdResult.race, "Race") +
+                buildResult(blinkIdResult.religion, "Religion") +
+                buildResult(blinkIdResult.residentialStatus, "Residential status") +
+                buildResult(blinkIdResult.processingStatus, "Processing status") +
+                buildResult(blinkIdResult.recognitionMode, "Recognition mode")
+                ;
+
+            let licenceInfo = blinkIdResult.driverLicenseDetailedInfo;
+            if (licenceInfo) {
                 resultString +=
-                    "Date of birth: " +
-                        blinkIdResult.dateOfBirth.day + "." +
-                        blinkIdResult.dateOfBirth.month + "." +
-                        blinkIdResult.dateOfBirth.year + "." + fieldDelim;
+                    buildResult(licenceInfo.restrictions, "Restrictions") +
+                    buildResult(licenceInfo.endorsements, "Endorsements") +
+                    buildResult(licenceInfo.vehicleClass, "Vehicle class") +
+                    buildResult(licenceInfo.conditions, "Conditions");
             }
-            if (blinkIdResult.dateOfIssue) {
-                resultString +=
-                    "Date of issue: " +
-                        blinkIdResult.dateOfIssue.day + "." +
-                        blinkIdResult.dateOfIssue.month + "." +
-                        blinkIdResult.dateOfIssue.year + "." + fieldDelim;
-            }
-            if (blinkIdResult.dateOfExpiry) {
-                resultString +=
-                    "Date of expiry: " +
-                        blinkIdResult.dateOfExpiry.day + "." +
-                        blinkIdResult.dateOfExpiry.month + "." +
-                        blinkIdResult.dateOfExpiry.year + "." + fieldDelim;
-            }
+
             // there are other fields to extract
             localState.results += resultString;
 
@@ -174,7 +200,7 @@ export default class BlinkIDReactNativeApp extends Component {
                 localState.showImageFace = true;
                 localState.resultImageFace = 'data:image/jpg;base64,' + blinkIdResult.faceImage;
             }
-        } 
+        }
         return localState;
     }
 
@@ -186,17 +212,18 @@ export default class BlinkIDReactNativeApp extends Component {
         let displayFields = this.state.results;
         return (
         <View style={styles.container}>
-            <Text style={styles.label}>MicroBlink Ltd</Text>
+            <Text style={styles.label}>BlinkID</Text>
             <View style={styles.buttonContainer}>
             <Button
                 onPress={this.scan.bind(this)}
                 title="Scan"
-                color="#87c540"
+                color="#48B2E8"
             />
             </View>
             <ScrollView
             automaticallyAdjustContentInsets={false}
-            scrollEventThrottle={200}y> 
+            scrollEventThrottle={200}y>
+            <Text style={styles.results}>{displayFields}</Text>
             {renderIf(this.state.showFrontImageDocument,
                 <View style={styles.imageContainer}>
                 <Image
@@ -225,7 +252,6 @@ export default class BlinkIDReactNativeApp extends Component {
                     source={{uri: displaySuccessFrame, scale: 3}} style={styles.imageResult}/>
                 </View>
             )}
-            <Text style={styles.results}>{displayFields}</Text>
             </ScrollView>
         </View>
         );
@@ -237,11 +263,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF'
   },
   label: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     marginTop: 50
   },
@@ -253,8 +279,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   results: {
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 16,
+    textAlign: 'left',
     margin: 10,
   },
   imageResult: {

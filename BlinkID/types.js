@@ -9,7 +9,7 @@ export class Date {
         this.month = nativeDate.month;
         /** year */
         this.year = nativeDate.year;
-    }    
+    }
 }
 
 /**
@@ -56,7 +56,11 @@ export const MrtdDocumentType = Object.freeze(
         /** US Green Card */
         GreenCard : 5,
         /** Malaysian PASS type IMM13P */
-        MalaysianPassIMM13P : 6
+        MalaysianPassIMM13P : 6,
+		/** One liner ISO DL */
+        Dl: 7,
+        /** One liner ISO DL */
+        InternalTravelDocument: 8
     }
 );
 
@@ -93,11 +97,11 @@ export const IdBarcodeDocumentType = Object.freeze(
  */
 export const DocumentImageColorStatus = Object.freeze(
     {
-        /** Determining image color status was not performed */ 
+        /** Determining image color status was not performed */
         NotAvailable: 1,
-        /** Black-and-white image scanned */ 
+        /** Black-and-white image scanned */
         BlackAndWhite: 2,
-        /** Color image scanned */ 
+        /** Color image scanned */
         Color: 3
     }
 );
@@ -138,6 +142,55 @@ export const AnonymizationMode = Object.freeze(
 );
 
 /**
+ * Detailed information about the recognition process.
+ */
+export const ProcessingStatus = Object.freeze(
+    {
+    /** Recognition was successful. */
+    Success: 1,
+
+    /** Detection of the document failed. */
+    DetectionFailed: 2,
+
+    /** Preprocessing of the input image has failed. */
+    ImagePreprocessingFailed: 3,
+
+    /** Recognizer has inconsistent results. */
+    StabilityTestFailed: 4,
+
+    /** Wrong side of the document has been scanned. */
+    ScanningWrongSide: 5,
+
+    /** Identification of the fields present on the document has failed. */
+    FieldIdentificationFailed: 6,
+
+    /** Mandatory field for the specific document is missing. */
+    MandatoryFieldMissing: 7,
+
+    /** Result contains invalid characters in some of the fields. */
+    InvalidCharactersFound: 8,
+
+    /** Failed to return a requested image. */
+    ImageReturnFailed: 9,
+
+    /** Reading or parsing of the barcode has failed. */
+    BarcodeRecognitionFailed: 10,
+
+    /** Parsing of the MRZ has failed. */
+    MrzParsingFailed: 11,
+
+    /** Document class has been filtered out. */
+    ClassFiltered: 12,
+
+    /** Document currently not supported by the recognizer. */
+    UnsupportedClass: 13,
+
+    /** License for the detected document is missing. */
+    UnsupportedByLicense: 14
+    }
+);
+
+/**
  * Defines possible color and moire statuses determined from scanned image.
  */
 export class ImageAnalysisResult {
@@ -148,6 +201,12 @@ export class ImageAnalysisResult {
         this.documentImageColorStatus = nativeImageAnalysisResult.documentImageColorStatus;
         /** The Moire pattern detection status determined from the scanned image. */
         this.documentImageMoireStatus = nativeImageAnalysisResult.documentImageMoireStatus;
+        /** Face detection status determined from the scanned image. */
+        this.faceDetectionStatus = nativeImageAnalysisResult.faceDetectionStatus;
+        /** Mrz detection status determined from the scanned image.  */
+        this.mrzDetectionStatus = nativeImageAnalysisResult.mrzDetectionStatus;
+        /** Barcode detection status determined from the scanned image. */
+        this.barcodeDetectionStatus = nativeImageAnalysisResult.barcodeDetectionStatus;
     }
 }
 
@@ -365,7 +424,7 @@ export class BarcodeResult {
 
         /** Type of the barcode scanned */
         this.barcodeType = nativeBarcodeResult.barcodeType;
-        
+
         /** Byte array with result of the scan */
         this.rawData = nativeBarcodeResult.rawData;
 
@@ -537,9 +596,6 @@ export class VizResult {
         /** The driver license detailed info. */
         this.driverLicenseDetailedInfo = nativeVizResult.driverLicenseDetailedInfo != null ? new DriverLicenseDetailedInfo(nativeVizResult.driverLicenseDetailedInfo) : null;
 
-        /** The driver license conditions. */
-        this.conditions = nativeVizResult.conditions;
-
         /** Flag that indicates if barcode result is empty */
         this.empty = nativeVizResult.empty;
     }
@@ -667,7 +723,7 @@ export class MrzResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown.
         */
         this.age = nativeMRZResult.age;
-    }    
+    }
 }
 
 /** Possible supported detectors for documents containing face image */
@@ -700,3 +756,22 @@ export class ImageExtensionFactors {
         this.leftFactor = 0.0;
     }
 };
+/**
+ * RecognitionModeFilter is used to enable/disable recognition of specific document groups.
+ * Setting is taken into account only if the right for that document is purchased.
+ */
+export class RecognitionModeFilter {
+    constructor() {
+        /** Enable scanning of MRZ IDs. Setting is taken into account only if the mrz_id right is purchased. */
+        this.enableMrzId = true;
+        /** Enable scanning of visa MRZ. Setting is taken into account only if the visa right is purchased. */
+        this.enableMrzVisa = true;
+        /** Enable scanning of Passport MRZ. Setting is taken into account only if the passport right is purchased. */
+        this.enableMrzPassport = true;
+        /** Enable scanning of Photo ID. Setting is taken into account only if the photo_id right is purchased. */
+        this.enablePhotoId = true;
+        /** Enable full document recognition. Setting is taken into account only if the document right to scan that document is purchased. */
+        this.enableFullDocumentRecognition = true;
+    }
+}
+

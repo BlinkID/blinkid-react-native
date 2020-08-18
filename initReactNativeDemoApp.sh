@@ -13,7 +13,7 @@ npx react-native init --version="0.62.2" BlinkIDReactNative || exit 1
 pushd BlinkIDReactNative
 
 IS_LOCAL_BUILD=false || exit 1
-if [ "$IS_LOCAL_BUILD" = false ]; then
+if [ "$IS_LOCAL_BUILD" = true ]; then
   # download npm package
   echo "Downloading blinkid-react-native module"
   npm install --save blinkid-react-native
@@ -22,7 +22,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.6.0.tgz
+  npm install --save blinkid-react-native-5.7.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -52,7 +52,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   rm -rf Microblink.framework
 
   cp -r ~/Downloads/blinkid-ios/Microblink.framework ./
-  popd
+  #popd
 fi
 
 # go to react native root project
