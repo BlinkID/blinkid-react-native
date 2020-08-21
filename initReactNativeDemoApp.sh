@@ -22,7 +22,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.7.0.tgz
+  npm install --save blinkid-react-native-5.7.1.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
