@@ -38,8 +38,6 @@ const BlinkIDNative = Platform.select({
 class BlinkIDWrapper {
       async scanWithCamera(overlaySettings, recognizerCollection, license) {
             try {
-                  var bla = NativeModules;
-                  console.log(bla);
                   var licenseObject = license;
                   if (typeof license === 'string' || license instanceof String) {
                       licenseObject = { licenseKey: license };
