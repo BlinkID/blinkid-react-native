@@ -67,12 +67,14 @@ rm -f index.ios.js
 # remove index.android.js
 rm -f index.android.js
 
-cp ../demoApp/index.js ./
+cp ../SampleFiles/index.js ./
 
 # use the same index.js file for Android and iOS
 cp index.js index.ios.js
 cp index.js index.android.js
 
-echo "Go to React Native project folder: cd BlinkIDReactNative"
+mv BlinkIDReactNative BlinkIDSampleApp
+
+echo "Go to React Native project folder: cd BlinkIDSampleApp"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: go to BlinkIDReactNative/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
+echo "To run on iOS: go to BlinkIDSampleApp/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
