@@ -18,7 +18,7 @@ BlinkID React Native was built and tested with [React Native v0.62.2](https://gi
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.61.5" NameOfYourProject
+react-native init --version="0.62.2" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
