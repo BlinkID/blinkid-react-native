@@ -17,10 +17,10 @@ import {
 } from 'react-native';
 
 const licenseKey = Platform.select({
-    // iOS license key for applicationID: org.reactjs.native.example.BlinkIDReactNative
-    ios: 'sRwAAAEtb3JnLnJlYWN0anMubmF0aXZlLmV4YW1wbGUuQmxpbmtJRFJlYWN0TmF0aXZlt67qu61k2vMma/ITqdz0Hw5VrGUGzgJ2tHeM9IxCzR0zl3+SIAzPW69yDvGXRrQlkT7ByFgTINRtu2FoNbYOrUCLxq37Y3npcDj4yaElrr8rM0b2q+FOnmD9gu4wCoMjKV5CJ14JJsmwP+naiIcVqmuv+tQ8hWgAKM8L616owzG1UYp+h2ZdTOMWSX/AkwDXguj8z5zx/iE10KE2iTrcU1Iu5AANV02VHUmeAHoOOTloMJJuBsBbwWFgS+pke73YmTfnmbUxCQ==',
-    // android license key for applicationID: com.blinkidreactnative
-    android: 'sRwAAAAWY29tLmJsaW5raWRyZWFjdG5hdGl2ZYouOuuUS2CbdVuoF2lsSqeObkzyko/0kah+gpMcK/G18fQtB1vAoiuyDojRyY6xOLlJYAFwGuepBKDJPqdsQh11RxKSLANRLDH0lWJzgo3EKRae9NXAoKPUJ0nqUy7uIP8eAVkFelNILVRy3pkWJjY5o/vRLn7sf2cNsdmt/ZvzUw1545pLHgT7LqOxSRg+81p0/koApvVMnJ+yI9QJgHNwa9AFNDOYEKCiow/J1dJjx+yGL1crnvfaOLv7ndLUisX496v+w9k='
+    // iOS license key for applicationID: com.microblink.sample
+    ios: 'sRwAAAEVY29tLm1pY3JvYmxpbmsuc2FtcGxl1BIcP+dpSuS/38LVOOaNNacdy5kvOjARlS+ZYUJequcG+Hqo27AnV1Dsb+chCYtaeZSdPijWBCYJ51tohlnyZoEVBy/6a1OH/bRSNy8cPbh6GEjWK5XsLOJGggpwhNMoId3hXJpEJisHYvwiArC5tvWBUZzgr5rmupFObXTd67RaHytuIBa1ENEiLqT9RRHho05ftVuEcfE0Qk/eKv1vbL+LyowK80VS2pZNoOCd/g8K7iHW5XhGdeCqu0C7izVQ+kROfheTZf8I',
+    // android license key for applicationID: com.microblink.sample
+    android: 'sRwAAAAVY29tLm1pY3JvYmxpbmsuc2FtcGxlU9kJdf5ZkGlTu9W3OPtHZuoNGKKjVJCtgeTniIreKYHlm+vSvgCWTIaeV3b/8PTI1MaUdu55ajYYbb1bNxTKMsPqTbYuXP3HyEjcZqoPC6g4fGVkCtqhecMtUG9FOSsPTWEXIrF8nHVYFmHZcMcasXB6h5u5YwXeIEh1IxrFkq3DFizEuuTWPsRs5iXdxPtTFUFR+1k2J64h88wGuTYLW696bYgSqBmH5p0v36roZC+U+VcKfmWm9Y5+mJvoHyi3fRn/DtK9lMkK'
 })
 
 var renderIf = function(condition, content) {

@@ -36,6 +36,13 @@ pushd android
 # patch the build.gradle to add "maven { url https://maven.microblink.com }"" repository
 perl -i~ -pe "BEGIN{$/ = undef;} s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
 
+# change package name
+mkdir -p app/src/main/java/com/microblink/sample
+mv app/src/main/java/com/sampleapp/* app/src/main/java/com/microblink/sample/
+rmdir app/src/main/java/com/sampleapp
+grep -rl com.sampleapp . | xargs sed -i '' s/com.sampleapp/com.microblink.sample/g
+./gradlew clean
+
 popd
 
 # enter into ios project folder
@@ -54,6 +61,9 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   cp -r ~/Downloads/blinkid-ios/Microblink.framework ./
   #popd
 fi
+
+# change bundle id
+sed -i '' s/\$\(PRODUCT_BUNDLE_IDENTIFIER\)/com.microblink.sample/g SampleApp/Info.plist
 
 # go to react native root project
 popd
