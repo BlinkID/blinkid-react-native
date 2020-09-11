@@ -46,7 +46,7 @@ function buildDateResult(result, key) {
     return ""
 }
 
-export default class BlinkIDReactNativeApp extends Component {
+export default class SampleApp extends Component {
     constructor(props) {
         super(props);
 
@@ -293,4 +293,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('BlinkIDReactNative', () => BlinkIDReactNativeApp);
+AppRegistry.registerComponent('SampleApp', () => SampleApp);

@@ -3,14 +3,14 @@
 blink_id_plugin_path=`pwd`/BlinkID
 
 # remove any existing code
-rm -rf BlinkIDReactNative
+rm -rf SampleApp
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init --version="0.62.2" BlinkIDReactNative || exit 1
+npx react-native init SampleApp --version="0.62.2" || exit 1
 
 # enter into demo project folder
-pushd BlinkIDReactNative
+pushd SampleApp
 
 IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
@@ -73,8 +73,6 @@ cp ../SampleFiles/index.js ./
 cp index.js index.ios.js
 cp index.js index.android.js
 
-mv BlinkIDReactNative BlinkIDSampleApp
-
-echo "Go to React Native project folder: cd BlinkIDSampleApp"
+echo "Go to React Native project folder: cd SampleApp"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: go to BlinkIDSampleApp/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
+echo "To run on iOS: go to SampleApp/ios and open SampleApp.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
