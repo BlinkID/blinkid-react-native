@@ -46,7 +46,7 @@ function buildDateResult(result, key) {
     return ""
 }
 
-export default class SampleApp extends Component {
+export default class Sample extends Component {
     constructor(props) {
         super(props);
 
@@ -293,4 +293,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('SampleApp', () => SampleApp);
+AppRegistry.registerComponent('Sample', () => Sample);
