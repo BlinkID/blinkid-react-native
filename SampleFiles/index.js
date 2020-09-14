@@ -20,7 +20,7 @@ const licenseKey = Platform.select({
     // iOS license key for applicationID: com.microblink.sample
     ios: 'sRwAAAEVY29tLm1pY3JvYmxpbmsuc2FtcGxl1BIcP+dpSuS/38LVOOaNNacdy5kvOjARlS+ZYUJequcG+Hqo27AnV1Dsb+chCYtaeZSdPijWBCYJ51tohlnyZoEVBy/6a1OH/bRSNy8cPbh6GEjWK5XsLOJGggpwhNMoId3hXJpEJisHYvwiArC5tvWBUZzgr5rmupFObXTd67RaHytuIBa1ENEiLqT9RRHho05ftVuEcfE0Qk/eKv1vbL+LyowK80VS2pZNoOCd/g8K7iHW5XhGdeCqu0C7izVQ+kROfheTZf8I',
     // android license key for applicationID: com.microblink.sample
-    android: 'sRwAAAAVY29tLm1pY3JvYmxpbmsuc2FtcGxlU9kJdf5ZkGlTu9W3OPtHZuoNGKKjVJCtgeTniIreKYHlm+vSvgCWTIaeV3b/8PTI1MaUdu55ajYYbb1bNxTKMsPqTbYuXP3HyEjcZqoPC6g4fGVkCtqhecMtUG9FOSsPTWEXIrF8nHVYFmHZcMcasXB6h5u5YwXeIEh1IxrFkq3DFizEuuTWPsRs5iXdxPtTFUFR+1k2J64h88wGuTYLW696bYgSqBmH5p0v36roZC+U+VcKfmWm9Y5+mJvoHyi3fRn/DtK9lMkK'
+    android: 'sRwAAAAVY29tLm1pY3JvYmxpbmsuc2FtcGxlU9kJdf5ZkGlTu9W3OMtlz473rOYXXInzJ8snv7nxCLN17zjcm+suA4KjMpE2dFZXWX8BduxrLbWtOYVI7H3P3lFjc30uqRa8ikxwUJM+6JuKs1dLFNQw80KBHE3OymtkC0tpOKtNbEZzzlpJSjZn8AfP2PofMEuJvM3tohOnYAtGIY6tNG4k4pMivgzZF4C6FfhlV/h5PJKcwxlYWUEIUUc5yzzsYyNApK/dvRHpdPHaup1XJML8nTQjvXTAkiuiIjMRdQ/9Uew='
 })
 
 var renderIf = function(condition, content) {

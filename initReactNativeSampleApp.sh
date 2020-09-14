@@ -37,9 +37,13 @@ pushd android
 perl -i~ -pe "BEGIN{$/ = undef;} s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
 
 # change package name
+# adb uninstall "com.microblink.sample" 
 mkdir -p app/src/main/java/com/microblink/sample
+mkdir -p app/src/debug/java/com/microblink/sample
 mv app/src/main/java/com/sampleapp/* app/src/main/java/com/microblink/sample/
+mv app/src/debug/java/com/sampleapp/* app/src/debug/java/com/microblink/sample/
 rmdir app/src/main/java/com/sampleapp
+rmdir app/src/debug/java/com/sampleapp
 grep -rl com.sampleapp . | xargs sed -i '' s/com.sampleapp/com.microblink.sample/g
 ./gradlew clean
 
