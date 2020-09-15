@@ -18,7 +18,7 @@ BlinkID React Native was built and tested with [React Native v0.62.2](https://gi
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.61.5" NameOfYourProject
+react-native init --version="0.62.2" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
@@ -81,16 +81,16 @@ allprojects {
 }
 ```
 
-## Demo
+## Sample
 
-This repository contains **initReactNativeDemoApp.sh** script that will create React Native project and download all of its dependencies. You can run this script with following command: 
+This repository contains **initReactNativeSampleApp.sh** script that will create React Native project and download all of its dependencies. You can run this script with following command: 
 ```shell
-./initReactNativeDemoApp.sh
+./initReactNativeSampleApp.sh
 ```
 
 ## Video tutorial
 
-Step by step guide how to start blinkid-reactnative demo app. A tutorial flows from cloning repository via git clone to successfully deployed demo application on Android and iOS device with real-time screen mirroring. Application demo contains the simple use of USDL recognizer with Ontario drivers license card.
+Step by step guide how to start blinkid-reactnative sample app. A tutorial flows from cloning repository via git clone to successfully deployed sample application on Android and iOS device with real-time screen mirroring. Application sample contains the simple use of USDL recognizer with Ontario drivers license card.
 
 <p align="center" >
   <a href="https://vimeo.com/289850200" target="_blank">
@@ -113,7 +113,7 @@ DocumentVerificationOverlay is overlay for RecognizerRunnerFragment best suited 
 
 ## Usage
 
-To use the module you call it in your index.android.js or index.ios.js file like in the [example app](demoApp/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
+To use the module you call it in your index.android.js or index.ios.js file like in the [sample app](SampleFiles/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
 
 ## FAQ
 

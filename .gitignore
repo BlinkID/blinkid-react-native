@@ -9,5 +9,7 @@ build/
 xcuserdata
 xcshareddata
 
-#Demo App
-/BlinkIDReactNative
+node_modules
+.idea
+
+/Sample
