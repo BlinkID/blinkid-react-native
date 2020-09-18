@@ -1,6 +1,10 @@
 # BlinkID SDK wrapper for React Native
 
-This repository contains example wrapper for BlinkID native SDK for [Android](https://github.com/BlinkID/blinkid-android) and [iOS](https://github.com/BlinkID/blinkid-ios). For 100% of features and maximum control, consider using native SDK.
+Best-in-class ID scanning software for cross-platform apps built with React Native.
+
+Below, you’ll find a quick guide on starting your own demo project as well as complete guidance on installing and linking BlinkID library with your iOS and Android apps ⬇️
+
+For a full access to all features and functionalities, please consider using our native SDKs (for [iOS](https://github.com/BlinkID/blinkid-ios) or [Android](https://github.com/BlinkID/blinkid-android))
 
 
 ### Licensing
