@@ -7,7 +7,7 @@ Below, you’ll find a quick guide on starting your own demo project as well as 
 For a full access to all features and functionalities, please consider using our native SDKs (for [iOS](https://github.com/BlinkID/blinkid-ios) or [Android](https://github.com/BlinkID/blinkid-android))
 
 
-### Licensing
+## Licensing
 
 - [Generate](https://microblink.com/login?url=/customer/generatedemolicence) a **free trial license key** to start using the SDK in your app (registration required)
 
