@@ -44,6 +44,12 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         if (jsonMap.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonMap.hasKey("returnSignatureImage")) {
+            recognizer.setReturnSignatureImage(jsonMap.getBoolean("returnSignatureImage"));
+        }
+        if (jsonMap.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonMap.getInt("signatureImageDpi"));
+        }
         if (jsonMap.hasKey("validateResultCharacters")) {
             recognizer.setValidateResultCharacters(jsonMap.getBoolean("validateResultCharacters"));
         }
@@ -90,6 +96,7 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         jsonResult.putString("religion", result.getReligion());
         jsonResult.putString("residentialStatus", result.getResidentialStatus());
         jsonResult.putString("sex", result.getSex());
+        jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         jsonResult.putMap("vizResult", BlinkIDSerializationUtils.serializeVizResult(result.getVizResult()));
         return jsonResult;
     }

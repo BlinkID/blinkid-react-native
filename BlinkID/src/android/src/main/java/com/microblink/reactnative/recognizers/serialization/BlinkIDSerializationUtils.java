@@ -106,6 +106,7 @@ public abstract class BlinkIDSerializationUtils {
         jsonBarcode.putString("firstName", barcodeResult.getFirstName());
         jsonBarcode.putString("lastName", barcodeResult.getLastName());
         jsonBarcode.putString("fullName", barcodeResult.getFullName());
+        jsonBarcode.putString("middleName", barcodeResult.getMiddleName());
         jsonBarcode.putString("additionalNameInformation", barcodeResult.getAdditionalNameInformation());
         jsonBarcode.putString("address", barcodeResult.getAddress());
         jsonBarcode.putString("placeOfBirth", barcodeResult.getPlaceOfBirth());
