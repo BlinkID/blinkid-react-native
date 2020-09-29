@@ -80,17 +80,17 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     NSString* iosLicense = [jsonLicense objectForKey:@"licenseKey"];
     if ([jsonLicense objectForKey:@"licensee"] != nil) {
         NSString *licensee = [jsonLicense objectForKey:@"licensee"];
-        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense andLicensee:licensee];
+        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense andLicensee:licensee errorCallback: nil];
     }
     else {
-        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense];
+        [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense errorCallback: nil];
     }
 
     self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
 
     dispatch_sync(dispatch_get_main_queue(), ^{
         MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
-        
+
         UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
         self.scanningViewController = recognizerRunnerViewController;
 
@@ -107,7 +107,7 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
         BOOL isDocumentCaptureRecognizer = NO;
 
         NSMutableArray *jsonResults = [[NSMutableArray alloc] initWithCapacity:self.recognizerCollection.recognizerList.count];
-        
+
         for (NSUInteger i = 0; i < self.recognizerCollection.recognizerList.count; ++i) {
             [jsonResults addObject:[[self.recognizerCollection.recognizerList objectAtIndex:i] serializeResult]];
 

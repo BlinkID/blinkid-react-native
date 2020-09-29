@@ -84,6 +84,18 @@
         }
     }
     {
+        id returnSignatureImage = [jsonRecognizer valueForKey:@"returnSignatureImage"];
+        if (returnSignatureImage != nil) {
+            recognizer.returnSignatureImage = [(NSNumber *)returnSignatureImage boolValue];
+        }
+    }
+    {
+        id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
+        if (signatureImageDpi != nil) {
+            recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi unsignedIntegerValue];
+        }
+    }
+    {
         id validateResultCharacters = [jsonRecognizer valueForKey:@"validateResultCharacters"];
         if (validateResultCharacters != nil) {
             recognizer.validateResultCharacters = [(NSNumber *)validateResultCharacters boolValue];
@@ -137,6 +149,7 @@
     [jsonResult setValue:self.result.religion forKey:@"religion"];
     [jsonResult setValue:self.result.residentialStatus forKey:@"residentialStatus"];
     [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.vizResult] forKey:@"vizResult"];
 
     return jsonResult;
