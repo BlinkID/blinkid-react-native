@@ -15,14 +15,14 @@ For a full access to all features and functionalities, please consider using our
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.62.2](https://github.com/facebook/react-native/releases/tag/v0.62.2)
+BlinkID React Native was built and tested with [React Native v0.63.2](https://github.com/facebook/react-native/releases/tag/v0.63.2)
 
 ## Installation
 
 First generate an empty project if needed:
 
 ```shell
-react-native init --version="0.62.2" NameOfYourProject
+react-native init --version="0.63.2" NameOfYourProject
 ```
 
 Add the **blinkid-react-native** module to your project:
