@@ -44,8 +44,14 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         if (jsonMap.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
         }
+        if (jsonMap.hasKey("returnSignatureImage")) {
+            recognizer.setReturnSignatureImage(jsonMap.getBoolean("returnSignatureImage"));
+        }
         if (jsonMap.hasKey("signResult")) {
             recognizer.setSignResult(jsonMap.getBoolean("signResult"));
+        }
+        if (jsonMap.hasKey("signatureImageDpi")) {
+            recognizer.setSignatureImageDpi(jsonMap.getInt("signatureImageDpi"));
         }
         if (jsonMap.hasKey("skipUnsupportedBack")) {
             recognizer.setSkipUnsupportedBack(jsonMap.getBoolean("skipUnsupportedBack"));
@@ -104,6 +110,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("residentialStatus", result.getResidentialStatus());
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putString("sex", result.getSex());
+        jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         return jsonResult;
     }
 

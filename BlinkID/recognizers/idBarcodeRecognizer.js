@@ -139,6 +139,11 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /** 
+         * The middle name of the document owner. 
+         */
+        this.middleName = nativeResult.middleName;
+        
+        /** 
          * The nationality of the documet owner. 
          */
         this.nationality = nativeResult.nationality;

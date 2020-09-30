@@ -210,6 +210,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /** 
+         * image of the signature if enabled with returnSignatureImage property. 
+         */
+        this.signatureImage = nativeResult.signatureImage;
+        
+        /** 
          * Defines the data extracted from the visual inspection zone 
          */
         this.vizResult = nativeResult.vizResult;
@@ -307,6 +312,21 @@ export class BlinkIdRecognizer extends Recognizer {
          *  
          */
         this.returnFullDocumentImage = false;
+        
+        /** 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
+         */
+        this.returnSignatureImage = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         /** 
          * Defines whether result characters validatation is performed.

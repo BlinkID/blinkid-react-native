@@ -39,6 +39,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("jurisdiction", result.getJurisdiction());
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("maritalStatus", result.getMaritalStatus());
+        jsonResult.putString("middleName", result.getMiddleName());
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("personalIdNumber", result.getPersonalIdNumber());
         jsonResult.putString("placeOfBirth", result.getPlaceOfBirth());

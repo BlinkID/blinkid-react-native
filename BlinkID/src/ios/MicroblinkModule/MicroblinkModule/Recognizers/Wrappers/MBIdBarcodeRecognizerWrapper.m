@@ -50,6 +50,7 @@
     [jsonResult setValue:self.result.jurisdiction forKey:@"jurisdiction"];
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.maritalStatus forKey:@"maritalStatus"];
+    [jsonResult setValue:self.result.middleName forKey:@"middleName"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.personalIdNumber forKey:@"personalIdNumber"];
     [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];

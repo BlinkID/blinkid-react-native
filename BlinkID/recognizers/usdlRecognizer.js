@@ -9,16 +9,16 @@ import {
 export class UsdlRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
-    
+
         /** Array of elements that are not part of AAMVA standard and are specific to each US state. */
         this.optionalElements = nativeResult.optionalElements;
-    
+
         /** The raw bytes contained inside 2D barcode. */
         this.rawData = nativeResult.rawData;
-    
+
         /** Raw string inside 2D barcode. */
         this.rawStringData = nativeResult.rawStringData;
-    
+
         /** True if returned result is uncertain, i.e. if scanned barcode was incomplete (i.e. */
         this.uncertain = nativeResult.uncertain;
 
@@ -28,11 +28,17 @@ export class UsdlRecognizerResult extends RecognizerResult {
         /** The first name of the United States driver license owner. */
         this.firstName = nativeResult.firstName;
 
+        /** The middle name of the United States driver license owner. */
+        this.middleName = nativeResult.middleName;
+
         /** The last name of the United States driver license owner. */
         this.lastName = nativeResult.lastName;
 
         /** The full name of the United States driver license owner. */
         this.fullName = nativeResult.fullName;
+
+        /** The name suffix of the United States driver license owner. */
+        this.nameSuffix = nativeResult.nameSuffix;
 
         /** The full address of the United States driver license owner. */
         this.address = nativeResult.address;
@@ -67,7 +73,7 @@ export class UsdlRecognizerResult extends RecognizerResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown.
         */
        this.age = nativeResult.age;
-       
+
         /** The street address portion of the United States driver license owner. */
         this.street = nativeResult.street;
 
@@ -88,16 +94,16 @@ export class UsdlRecognizerResult extends RecognizerResult {
 export class UsdlRecognizer extends Recognizer {
     constructor() {
         super('UsdlRecognizer');
-    
+
         /** Allow scanning PDF417 barcodes which don't have quiet zone */
         this.nullQuietZoneAllowed = true;
-    
+
         /** Enable decoding of non-standard PDF417 barcodes, but without */
         this.uncertainDecoding = true;
 
         /** Enables parsing of compact barcode encoding format */
         this.enableCompactParser = false;
-    
+
         this.createResultFromNative = function (nativeResult) { return new UsdlRecognizerResult(nativeResult); }
     }
 }

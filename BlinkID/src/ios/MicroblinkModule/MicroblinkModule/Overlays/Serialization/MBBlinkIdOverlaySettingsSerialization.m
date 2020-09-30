@@ -6,6 +6,7 @@
 //
 
 #import "MBBlinkIdOverlaySettingsSerialization.h"
+#import "MBOverlaySerializationUtils.h"
 
 @interface MBBlinkIdOverlaySettingsSerialization ()
 
@@ -29,6 +30,7 @@
     // no settings deserialized at the moment
     MBBlinkIdOverlaySettings *sett = [[MBBlinkIdOverlaySettings alloc] init];
     self.delegate = delegate;
+    [MBOverlaySerializationUtils extractCommonOverlaySettings:jsonOverlaySettings overlaySettings:sett];
 
     {
         id firstSideInstructionsText = [jsonOverlaySettings valueForKey:@"firstSideInstructionsText"];
@@ -36,35 +38,35 @@
             sett.firstSideInstructionsText = (NSString *)firstSideInstructionsText;
         }
     }
-    
+
     {
         id flipInstructions = [jsonOverlaySettings valueForKey:@"flipInstructions"];
         if (flipInstructions != nil) {
             sett.flipInstructions = (NSString *)flipInstructions;
         }
     }
-    
+
     {
         id errorMoveCloser = [jsonOverlaySettings valueForKey:@"errorMoveCloser"];
         if (errorMoveCloser != nil) {
             sett.errorMoveCloser = (NSString *)errorMoveCloser;
         }
     }
-    
+
     {
         id errorMoveFarther = [jsonOverlaySettings valueForKey:@"errorMoveFarther"];
         if (errorMoveFarther != nil) {
             sett.errorMoveFarther = (NSString *)errorMoveFarther;
         }
     }
-    
+
     {
         id sidesNotMatchingTitle = [jsonOverlaySettings valueForKey:@"sidesNotMatchingTitle"];
         if (sidesNotMatchingTitle != nil) {
             sett.sidesNotMatchingTitle = (NSString *)sidesNotMatchingTitle;
         }
     }
-    
+
     {
         id sidesNotMatchingMessage = [jsonOverlaySettings valueForKey:@"sidesNotMatchingMessage"];
         if (sidesNotMatchingMessage != nil) {
@@ -122,19 +124,26 @@
     }
 
     {
+        id showFlashlightWarning = [jsonOverlaySettings valueForKey:@"showFlashlightWarning"];
+        if (showFlashlightWarning != nil) {
+            sett.showFlashlightWarning = [showFlashlightWarning boolValue];
+        }
+    }
+
+    {
         id backSideScanningTimeoutMilliseconds = [jsonOverlaySettings valueForKey:@"backSideScanningTimeoutMilliseconds"];
         if (backSideScanningTimeoutMilliseconds != nil) {
             sett.backSideScanningTimeout = [backSideScanningTimeoutMilliseconds doubleValue] / 1000.0;
         }
     }
-    
+
     {
         id scanBarcodeText = [jsonOverlaySettings valueForKey:@"scanBarcodeText"];
         if (scanBarcodeText != nil) {
             sett.scanBarcodeText = (NSString *)scanBarcodeText;
         }
     }
-    
+
     {
         id errorDocumentTooCloseToEdge = [jsonOverlaySettings valueForKey:@"errorDocumentTooCloseToEdge"];
         if (errorDocumentTooCloseToEdge != nil) {

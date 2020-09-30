@@ -253,6 +253,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          */
         this.sex = nativeResult.sex;
         
+        /** 
+         * image of the signature if enabled with returnSignatureImage property. 
+         */
+        this.signatureImage = nativeResult.signatureImage;
+        
     }
 }
 
@@ -348,11 +353,26 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         this.returnFullDocumentImage = false;
         
         /** 
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         *  
+         */
+        this.returnSignatureImage = false;
+        
+        /** 
          * Whether or not recognition result should be signed.
          * 
          *  
          */
         this.signResult = false;
+        
+        /** 
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         *  
+         */
+        this.signatureImageDpi = 250;
         
         /** 
          * Skip back side capture and processing step when back side of the document is not supported

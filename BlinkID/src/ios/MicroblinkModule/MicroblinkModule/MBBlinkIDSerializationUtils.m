@@ -108,6 +108,7 @@
         @"uncertain" : [NSNumber numberWithBool:barcodeResult.uncertain],
         @"barcodeType" : [NSNumber numberWithInteger:(barcodeResult.barcodeType + 1)],
         @"firstName" : barcodeResult.firstName,
+        @"middleName" : barcodeResult.middleName,
         @"lastName" : barcodeResult.lastName,
         @"fullName" : barcodeResult.fullName,
         @"additionalNameInformation" : barcodeResult.additionalNameInformation,

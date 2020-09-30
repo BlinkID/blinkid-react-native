@@ -304,7 +304,9 @@ export const Country = Object.freeze(
         Oman: 87,
         Ecuador: 88,
         ElSalvador: 89,
-        SriLanka: 90
+        SriLanka: 90,
+        Peru: 91,
+        Uruguay: 92
     }
 );
 
@@ -381,7 +383,11 @@ export const Region = Object.freeze(
         WestVirginia: 66,
         Wisconsin: 67,
         Wyoming: 68,
-        Yukon: 69
+        Yukon: 69,
+        CiudadDeMexico: 70,
+        Jalisco: 71,
+        NewfoundlandAndLabrador: 72,
+        NuevoLeon: 73
     }
 );
 
@@ -394,13 +400,13 @@ export const Type = Object.freeze(
         ConsularId: 2,
         Dl: 3,
         DlPublicServicesCard: 4,
-        FinCard: 5,
-        EmploymentPass: 6,
-        GreenCard: 7,
-        Id: 8,
-        MultipurposeId: 9,
-        MyKad: 10,
-        MyKid: 11,
+        EmploymentPass: 5,
+        FinCard: 6,
+        Id: 7,
+        MultipurposeId: 8,
+        MyKad: 9,
+        MyKid: 10,
+        MyPr: 11,
         MyTentera: 12,
         PanCard: 13,
         ProfessionalId: 14,
@@ -414,7 +420,9 @@ export const Type = Object.freeze(
         MilitaryId: 22,
         MyKas: 23,
         SocialSecurityCard: 24,
-        HealthInsuranceCard: 25
+        HealthInsuranceCard: 25,
+        Passport: 26,
+        SPass: 27
     }
 );
 
@@ -436,6 +444,9 @@ export class BarcodeResult {
 
         /** The first name of the document owner. */
         this.firstName = nativeBarcodeResult.firstName;
+
+        /** The middle name of the document owner. */
+        this.middleName = nativeBarcodeResult.middleName;
 
         /** The last name of the document owner. */
         this.lastName = nativeBarcodeResult.lastName;
