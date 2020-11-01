@@ -80,7 +80,7 @@ allprojects {
     
     // ... other repositories your project needs
     
-    maven { url "http://maven.microblink.com" }
+    maven { url "https://maven.microblink.com" }
   }
 }
 ```
