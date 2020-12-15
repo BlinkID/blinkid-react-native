@@ -20,7 +20,8 @@ export const RecognizerResultState = Object.freeze(
         /** Recognizer result contains some values, but is incomplete or it contains all values, but some are uncertain */
         uncertain : 2,
         /** Recognizer result contains all required values */
-        valid : 3
+        valid : 3,
+        stageValid: 4
     }
 );
 
@@ -30,8 +31,8 @@ export const RecognizerResultState = Object.freeze(
  */
 export class RecognizerResult {
     constructor(resultState) {
-        /** 
-         * State of the result. It is always one of the values represented by RecognizerResultState enum 
+        /**
+         * State of the result. It is always one of the values represented by RecognizerResultState enum
          */
         this.resultState = resultState;
     }
