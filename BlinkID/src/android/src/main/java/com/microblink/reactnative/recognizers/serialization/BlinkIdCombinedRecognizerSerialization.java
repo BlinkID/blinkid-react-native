@@ -84,6 +84,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("documentAdditionalNumber", result.getDocumentAdditionalNumber());
         jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));
         jsonResult.putString("documentNumber", result.getDocumentNumber());
+        jsonResult.putString("documentOptionalAdditionalNumber", result.getDocumentOptionalAdditionalNumber());
         jsonResult.putMap("driverLicenseDetailedInfo", BlinkIDSerializationUtils.serializeDriverLicenseDetailedInfo(result.getDriverLicenseDetailedInfo()));
         jsonResult.putString("employer", result.getEmployer());
         jsonResult.putBoolean("expired", result.isExpired());

@@ -1,9 +1,9 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
 import {
-    Date, 
-    Point, 
+    Date,
+    Point,
     Quadrilateral,
-    MrtdDocumentType, 
+    MrtdDocumentType,
     MrzResult,
     DocumentFaceDetectorType,
     ImageExtensionFactors,
@@ -14,9 +14,8 @@ import {
     DocumentImageColorStatus,
     DocumentImageMoireStatus,
     AnonymizationMode,
-    
-    
     RecognitionModeFilter,
+    
 } from '../types'
 
 /**
@@ -26,18 +25,18 @@ export class VisaRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
-        /** 
-         * face image from the document if enabled with returnFaceImage property. 
+        /**
+         * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
         
-        /** 
-         * full document image if enabled with returnFullDocumentImage property. 
+        /**
+         * full document image if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
-        /** 
-         * The data extracted from the machine readable zone. 
+        /**
+         * The data extracted from the machine readable zone.
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -51,48 +50,48 @@ export class VisaRecognizer extends Recognizer {
     constructor() {
         super('VisaRecognizer');
         
-        /** 
+        /**
          * Defines if glare detection should be turned on/off.
          * 
-         *  
+         * 
          */
         this.detectGlare = true;
         
-        /** 
+        /**
          * Property for setting DPI for face images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 
-         *  
+         * 
          */
         this.faceImageDpi = 250;
         
-        /** 
+        /**
          * Property for setting DPI for full document images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 
-         *  
+         * 
          */
         this.fullDocumentImageDpi = 250;
         
-        /** 
+        /**
          * Image extension factors for full document image.
          * 
          * @see ImageExtensionFactors
-         *  
+         * 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
-        /** 
+        /**
          * Sets whether face image from ID card should be extracted
          * 
-         *  
+         * 
          */
         this.returnFaceImage = false;
         
-        /** 
+        /**
          * Sets whether full document image of ID card should be extracted.
          * 
-         *  
+         * 
          */
         this.returnFullDocumentImage = false;
         

@@ -10,7 +10,7 @@ const BlinkIDNative = Platform.select({
 })
 
 /**
- * This exposes the appropriate native BlinkID module module as a JS module, based on 
+ * This exposes the appropriate native BlinkID module module as a JS module, based on
  * detected platform: Android or iOS. This has functions:
  * -> 'scanWithCamera' which takes the following parameters:
  * 1. Object overlaySettings: instance of OverlaySettings, contains settings for desired camera overlay
@@ -52,12 +52,12 @@ class BlinkIDWrapper {
                               // native plugin must ensure types match
                               // recognizerCollection.recognizerArray[i].result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
 
-                              // unlike Cordova, ReactNative does not allow mutation of user-provided recognizers, so we need to 
+                              // unlike Cordova, ReactNative does not allow mutation of user-provided recognizers, so we need to
                               // return results and let user handle them manually.
                               let result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
                               if (result.resultState != RecognizerResultState.empty) {
                                     results.push(result);
-                              }      
+                              }
                         }
                         return results;
                   }
@@ -77,16 +77,16 @@ import { Recognizer } from './recognizer'
  */
 export class RecognizerCollection {
       /**
-       * 
+       *
        * @param recognizerArray Array of recognizer objects that will be used for recognition. Must not be empty!
        */
       constructor(recognizerArray) {
             /** Array of recognizer objects that will be used for recognition */
             this.recognizerArray = recognizerArray;
-            /** 
+            /**
              * Whether or not it is allowed for multiple recognizers to process the same image.
              * If not, then first recognizer that will be successful in processing the image will
-             * end the processing chain and other recognizers will not get the chance to process 
+             * end the processing chain and other recognizers will not get the chance to process
              * that image.
              */
             this.allowMultipleResults = false;
