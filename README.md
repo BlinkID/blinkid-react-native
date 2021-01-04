@@ -11,7 +11,14 @@ For a full access to all features and functionalities, please consider using our
 
 - [Generate](https://microblink.com/login?url=/customer/generatedemolicence) a **free trial license key** to start using the SDK in your app (registration required)
 
-- Get information about pricing and licensing of [BlinkID](https://microblink.com/blinkid)
+- For production licensing, please [contact sales](https://microblink.com/contact-us) to request a quote.
+
+**Keep in mind:** Versions 5.8.0 and above require an internet connection to work under our new License Management Program.
+
+We’re only asking you to do this so we can validate your trial license key. Scanning or data extraction of identity documents still happens offline, on the device itself. 
+
+Once the validation is complete, you can continue using the SDK in offline mode (or over a private network) until the next check.
+
 
 ## React Native Version
 
