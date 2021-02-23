@@ -36,7 +36,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     private static final String PARAM_LICENSE_KEY = "licenseKey";
     private static final String PARAM_LICENSEE = "licensee";
-    private static final String PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING = "showTimeLimitedLicenseKeyWarning";
+    private static final String PARAM_SHOW_TRIAL_LICENSE_WARNING = "showTrialLicenseKeyWarning";
 
     /**
      * Request code for scan activity
@@ -93,16 +93,16 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         if (license.hasKey(PARAM_LICENSEE)) {
             licensee = license.getString(PARAM_LICENSEE);
         }
-        Boolean showTimeLimitedLicenseKeyWarning = null;
-        if (license.hasKey(PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING)) {
-            showTimeLimitedLicenseKeyWarning = license.getBoolean(PARAM_SHOW_TIME_LIMITED_LICENSE_WARNING);
+        Boolean showTrialLicenseKeyWarning = null;
+        if (license.hasKey(PARAM_SHOW_TRIAL_LICENSE_WARNING)) {
+            showTrialLicenseKeyWarning = license.getBoolean(PARAM_SHOW_TRIAL_LICENSE_WARNING);
         }
-        setLicense(licenseKey, licensee, showTimeLimitedLicenseKeyWarning);
+        setLicense(licenseKey, licensee, showTrialLicenseKeyWarning);
     }
 
-    private void setLicense( String licenseKey, String licensee, Boolean showTimeLimitedLicenseKeyWarning ) {
-        if (showTimeLimitedLicenseKeyWarning != null) {
-            MicroblinkSDK.setShowTimeLimitedLicenseWarning(showTimeLimitedLicenseKeyWarning);
+    private void setLicense( String licenseKey, String licensee, Boolean showTrialLicenseKeyWarning ) {
+        if (showTrialLicenseKeyWarning != null) {
+            MicroblinkSDK.setShowTrialLicenseWarning(showTrialLicenseKeyWarning);
         }
         if (licensee != null) {
             MicroblinkSDK.setLicenseKey(licenseKey, licensee, this.getCurrentActivity());
