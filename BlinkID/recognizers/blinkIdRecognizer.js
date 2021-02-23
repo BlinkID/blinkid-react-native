@@ -26,7 +26,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /**
-         * The additional name information of the document owner.
+         * The additional address information of the document owner.
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -42,16 +42,18 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         
         /**
          * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown.
          */
         this.age = nativeResult.age;
         
         /**
-         * The data extracted from the barcode.
+         * Defines the data extracted from the barcode.
          */
         this.barcodeResult = nativeResult.barcodeResult;
         
         /**
-         * The document class information.
+         * The classification information.
          */
         this.classInfo = nativeResult.classInfo;
         
@@ -102,11 +104,17 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         
         /**
          * Checks whether the document has expired or not by comparing the current
+         * time on the device with the date of expiry.
+         * 
+         * @return true if the document has expired, false in following cases:
+         * document does not expire (date of expiry is permanent)
+         * date of expiry has passed
+         * date of expiry is unknown and it is not permanent
          */
         this.expired = nativeResult.expired;
         
         /**
-         * Face image from the document
+         * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
         
@@ -116,7 +124,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /**
-         * Image of the full document
+         * full document image if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentImage = nativeResult.fullDocumentImage;
         
@@ -126,7 +134,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.fullName = nativeResult.fullName;
         
         /**
-         * Image analysis result for the scanned document image
+         * Defines possible color and moire statuses determined from scanned image.
          */
         this.imageAnalysisResult = nativeResult.imageAnalysisResult;
         
@@ -151,7 +159,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /**
-         * The data extracted from the machine readable zone.
+         * The data extracted from the machine readable zone
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -171,7 +179,7 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /**
-         * Status of the last recognition process.
+         * Defines status of the last recognition process.
          */
         this.processingStatus = nativeResult.processingStatus;
         
@@ -206,12 +214,12 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /**
-         * Signature image from the document
+         * image of the signature if enabled with returnSignatureImage property.
          */
         this.signatureImage = nativeResult.signatureImage;
         
         /**
-         * The data extracted from the visual inspection zone.
+         * Defines the data extracted from the visual inspection zone
          */
         this.vizResult = nativeResult.vizResult;
         
@@ -219,84 +227,124 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
 }
 
 /**
- * Generic BlinkID recognizer.
+ * The Blink ID Recognizer is used for scanning Blink ID.
  */
 export class BlinkIdRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdRecognizer');
         
         /**
-         * Defines whether blured frames filtering is allowed"
+         * Defines whether blured frames filtering is allowed
+         * 
+         * 
          */
         this.allowBlurFilter = true;
         
         /**
-         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed.
+         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
+         * 
+         * 
          */
         this.allowUnparsedMrzResults = false;
         
         /**
-         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed.
+         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
+         * Unverified MRZ is parsed, but check digits are incorrect
+         * 
+         * 
          */
         this.allowUnverifiedMrzResults = true;
         
         /**
-         * Whether sensitive data should be removed from images, result fields or both.
+         * Defines whether sensitive data should be removed from images, result fields or both.
+         * The setting only applies to certain documents
+         * 
+         * 
          */
         this.anonymizationMode = AnonymizationMode.FullResult;
         
         /**
-         * The DPI (Dots Per Inch) for face image that should be returned.
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.faceImageDpi = 250;
         
         /**
-         * The DPI (Dots Per Inch) for full document image that should be returned.
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.fullDocumentImageDpi = 250;
         
         /**
-         * The extension factors for full document image.
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         * 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /**
-         * Padding is a minimum distance from the edge of the frame and it is defined
+         * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case
+         * padding edge and image edge are the same.
+         * Recommended value is 0.02f.
+         * 
+         * 
          */
         this.paddingEdge = 0.0;
         
         /**
-         * Currently set recognition mode filter.
+         * Enable or disable recognition of specific document groups supported by the current license.
+         * 
+         * 
          */
         this.recognitionModeFilter = new RecognitionModeFilter();
         
         /**
-         * Defines whether face image will be available in result.
+         * Sets whether face image from ID card should be extracted
+         * 
+         * 
          */
         this.returnFaceImage = false;
         
         /**
-         * Defines whether full document image will be available in
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         * 
          */
         this.returnFullDocumentImage = false;
         
         /**
-         * Defines whether signature image will be available in result.
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         * 
          */
         this.returnSignatureImage = false;
         
         /**
          * Configure the recognizer to only work on already cropped and dewarped images.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
          */
-        this.scanCroppedDocumentImage = true;
+        this.scanCroppedDocumentImage = false;
         
         /**
-         * The DPI (Dots Per Inch) for signature image that should be returned.
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.signatureImageDpi = 250;
         
         /**
-         * Whether result characters validatation is performed.
+         * Defines whether result characters validatation is performed.
+         * If a result member contains invalid character, the result state cannot be valid
+         * 
+         * 
          */
         this.validateResultCharacters = true;
         
