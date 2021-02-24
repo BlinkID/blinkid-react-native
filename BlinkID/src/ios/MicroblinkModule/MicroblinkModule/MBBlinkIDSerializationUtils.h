@@ -19,5 +19,7 @@
 +(NSDictionary * _Nonnull) serializeBarcodeResult:(MBBarcodeResult * _Nonnull)barcodeResult;
 +(NSDictionary * _Nonnull) serializeImageAnalysisResult:(MBImageAnalysisResult * _Nonnull)imageAnalysisResult;
 +(MBRecognitionModeFilter *) deserializeMBRecognitionModeFilter:(NSDictionary * _Nullable)jsonRecognitionModeFilter;
++(NSDictionary * _Nonnull) serializeBarcodeElements:(MBBarcodeElements * _Nonnull)extendedElements;
++(NSArray<NSString *> *) serializeBarcodeElementsValues:(MBBarcodeElements *)extendedElements;
 
 @end

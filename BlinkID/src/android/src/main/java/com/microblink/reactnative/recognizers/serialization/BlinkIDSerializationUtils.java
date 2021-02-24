@@ -1,6 +1,8 @@
 package com.microblink.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
@@ -10,6 +12,9 @@ import com.microblink.reactnative.SerializationUtils;
 import com.microblink.entities.recognizers.blinkid.generic.imageanalysis.ImageAnalysisResult;
 import com.microblink.entities.recognizers.blinkid.generic.viz.VizResult;
 import com.microblink.entities.recognizers.blinkid.generic.barcode.BarcodeResult;
+import com.microblink.entities.recognizers.blinkid.idbarcode.BarcodeElements;
+import com.microblink.entities.recognizers.blinkid.idbarcode.BarcodeElementKey;
+
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -55,6 +60,11 @@ public abstract class BlinkIDSerializationUtils {
         jsonClassInfo.putInt("country", SerializationUtils.serializeEnum(classInfo.getCountry()));
         jsonClassInfo.putInt("region", SerializationUtils.serializeEnum(classInfo.getRegion()));
         jsonClassInfo.putInt("type", SerializationUtils.serializeEnum(classInfo.getType()));
+        jsonClassInfo.putString("countryName", classInfo.getCountryName());
+        jsonClassInfo.putString("isoNumericCountryCode", classInfo.getIsoNumericCountryCode());
+        jsonClassInfo.putString("isoAlpha2CountryCode", classInfo.getIsoAlpha2CountryCode());
+        jsonClassInfo.putString("isoAlpha3CountryCode", classInfo.getIsoAlpha3CountryCode());
+        jsonClassInfo.putBoolean("empty", classInfo.isEmpty());
         return jsonClassInfo;
     }
 
@@ -130,8 +140,20 @@ public abstract class BlinkIDSerializationUtils {
         jsonBarcode.putString("city", barcodeResult.getCity());
         jsonBarcode.putString("jurisdiction", barcodeResult.getJurisdiction());
         jsonBarcode.putMap("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(barcodeResult.getDriverLicenseDetailedInfo()));
+        jsonBarcode.putMap("extendedElements", serializeBarcodeElements(barcodeResult.getExtendedElements()));
         jsonBarcode.putBoolean("empty", barcodeResult.isEmpty());
         return jsonBarcode;
+    }
+
+     public static WritableMap serializeBarcodeElements(BarcodeElements barcodeElements) {
+        WritableMap jsonBarcodeElements = new WritableNativeMap();
+        jsonBarcodeElements.putBoolean("empty", barcodeElements.isEmpty());
+        WritableArray valuesArr = new WritableNativeArray();
+        for (int i = 0; i < BarcodeElementKey.values().length; ++i) {
+            valuesArr.pushString(barcodeElements.getValue(BarcodeElementKey.values()[i]));
+        }
+        jsonBarcodeElements.putArray("values", valuesArr);
+        return jsonBarcodeElements;
     }
 
 }

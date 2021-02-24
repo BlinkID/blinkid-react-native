@@ -33,6 +33,7 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
         jsonResult.putString("employer", result.getEmployer());
         jsonResult.putString("endorsements", result.getEndorsements());
         jsonResult.putBoolean("expired", result.isExpired());
+        jsonResult.putMap("extendedElements", BlinkIDSerializationUtils.serializeBarcodeElements(result.getExtendedElements()));
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putString("fullName", result.getFullName());
         jsonResult.putString("issuingAuthority", result.getIssuingAuthority());

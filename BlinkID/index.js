@@ -26,13 +26,13 @@ const BlinkIDNative = Platform.select({
  *                       for Android or iOS. To obtain valid license key, please visit
  *                       http://microblink.com/login or contact us at http://help.microblink.com
  *               - optioanl parameter 'licensee' when license for multiple apps is used
- *               - optional flag 'showTimeLimitedLicenseKeyWarning' which indicates
- *                  whether warning for time limited license key will be shown
+ *               - optional flag 'showTrialLicenseKeyWarning' which indicates
+ *                  whether warning for trial license key will be shown
  *        in format
  *  {
  *      licenseKey: '<base64iOSLicense or base64AndroidLicense>',
  *      licensee: String,
- *      showTimeLimitedLicenseKeyWarning: Boolean
+ *      showTrialLicenseKeyWarning: Boolean
  *  }
  */
 class BlinkIDWrapper {

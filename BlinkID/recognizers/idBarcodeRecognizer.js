@@ -108,6 +108,13 @@ export class IdBarcodeRecognizerResult extends RecognizerResult {
         this.expired = nativeResult.expired;
         
         /**
+         * Document specific extended elements that contain all barcode fields in their original form.
+         * 
+         * Currently this is only filled for AAMVACompliant documents.
+         */
+        this.extendedElements = nativeResult.extendedElements;
+        
+        /**
          * The first name of the document owner.
          */
         this.firstName = nativeResult.firstName;

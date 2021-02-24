@@ -47,6 +47,9 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         if (jsonMap.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonMap.getBoolean("returnSignatureImage"));
         }
+        if (jsonMap.hasKey("scanCroppedDocumentImage")) {
+            recognizer.setScanCroppedDocumentImage(jsonMap.getBoolean("scanCroppedDocumentImage"));
+        }
         if (jsonMap.hasKey("signatureImageDpi")) {
             recognizer.setSignatureImageDpi(jsonMap.getInt("signatureImageDpi"));
         }

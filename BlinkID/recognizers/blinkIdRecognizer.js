@@ -325,6 +325,14 @@ export class BlinkIdRecognizer extends Recognizer {
         this.returnSignatureImage = false;
         
         /**
+         * Configure the recognizer to only work on already cropped and dewarped images.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
+         */
+        this.scanCroppedDocumentImage = false;
+        
+        /**
          * Property for setting DPI for signature images
          * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
          * 

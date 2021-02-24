@@ -44,6 +44,7 @@
     [jsonResult setValue:self.result.employer forKey:@"employer"];
     [jsonResult setValue:self.result.endorsements forKey:@"endorsements"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeElements:self.result.extendedElements] forKey:@"extendedElements"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:self.result.fullName forKey:@"fullName"];
     [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];

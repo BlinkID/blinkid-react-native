@@ -47,6 +47,9 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         if (jsonMap.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonMap.getBoolean("returnSignatureImage"));
         }
+        if (jsonMap.hasKey("scanCroppedDocumentImage")) {
+            recognizer.setScanCroppedDocumentImage(jsonMap.getBoolean("scanCroppedDocumentImage"));
+        }
         if (jsonMap.hasKey("signResult")) {
             recognizer.setSignResult(jsonMap.getBoolean("signResult"));
         }
