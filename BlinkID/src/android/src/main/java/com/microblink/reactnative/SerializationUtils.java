@@ -127,8 +127,9 @@ public abstract class SerializationUtils {
             boolean enableMrzVisa = (boolean)json.getBoolean("enableMrzVisa");
             boolean enableMrzPassport = (boolean)json.getBoolean("enableMrzPassport");
             boolean enablePhotoId = (boolean)json.getBoolean("enablePhotoId");
+            boolean enableBarcodeId = (boolean)json.getBoolean("enableBarcodeId");
             boolean enableFullDocumentRecognition = (boolean)json.getBoolean("enableFullDocumentRecognition");
-            return new RecognitionModeFilter(enableMrzId, enableMrzVisa, enableMrzPassport, enablePhotoId, enableFullDocumentRecognition);
+            return new RecognitionModeFilter(enableMrzId, enableMrzVisa, enableMrzPassport, enablePhotoId, enableBarcodeId, enableFullDocumentRecognition);
         } else {
             return new RecognitionModeFilter();
         }
