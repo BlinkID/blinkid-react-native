@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jura Skrlec. All rights reserved.
 //
 
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 #import <Foundation/Foundation.h>
 
 @interface MBOverlaySerializationUtils : NSObject

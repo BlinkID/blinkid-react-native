@@ -7,7 +7,7 @@
 
 #import "MBOverlayViewControllerDelegate.h"
 
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 
 #import <Foundation/Foundation.h>
 

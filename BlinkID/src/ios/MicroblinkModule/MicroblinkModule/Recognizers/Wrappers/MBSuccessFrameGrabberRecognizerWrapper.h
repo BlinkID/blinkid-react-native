@@ -7,7 +7,7 @@
 //
 
 #import "MBRecognizerWrapper.h"
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 
 @interface MBSuccessFrameGrabberRecognizerCreator : NSObject<MBRecognizerCreator>
 

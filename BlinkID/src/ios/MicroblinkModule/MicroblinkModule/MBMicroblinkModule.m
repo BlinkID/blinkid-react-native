@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 #import "MBMicroblinkModule.h"
 #import <React/RCTConvert.h>
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 
 typedef NS_ENUM(NSUInteger, PPImageType) {
     PPImageTypeFace,
