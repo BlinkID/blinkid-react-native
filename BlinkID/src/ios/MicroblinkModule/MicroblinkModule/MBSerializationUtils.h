@@ -5,7 +5,7 @@
 //  Created by DoDo on 01/06/2018.
 //
 
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 #import <Foundation/Foundation.h>
 
 @interface MBSerializationUtils : NSObject

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#import <MicroBlink/MicroBlink.h>
+#import <Microblink/Microblink.h>
 
 /** Object that knows how to create recognizer from JSON */
 @protocol MBRecognizerCreator
