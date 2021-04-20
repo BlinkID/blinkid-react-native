@@ -8,7 +8,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init $appName --version="0.63.2" || exit 1
+npx react-native init $appName --version="0.64.0" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
