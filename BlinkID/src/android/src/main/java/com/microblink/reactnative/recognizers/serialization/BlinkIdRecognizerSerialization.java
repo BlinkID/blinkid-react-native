@@ -36,7 +36,7 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
             recognizer.setPaddingEdge((float)jsonMap.getDouble("paddingEdge"));
         }
         if (jsonMap.hasKey("recognitionModeFilter")) {
-            recognizer.setRecognitionModeFilter(SerializationUtils.deserializeRecognitionModeFilter(jsonMap.getMap("recognitionModeFilter")));
+            recognizer.setRecognitionModeFilter(BlinkIDSerializationUtils.deserializeRecognitionModeFilter(jsonMap.getMap("recognitionModeFilter")));
         }
         if (jsonMap.hasKey("returnFaceImage")) {
             recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
