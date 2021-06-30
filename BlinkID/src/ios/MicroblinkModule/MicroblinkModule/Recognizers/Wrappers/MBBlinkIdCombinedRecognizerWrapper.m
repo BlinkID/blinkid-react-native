@@ -24,6 +24,12 @@
         }
     }
     {
+        id allowUncertainFrontSideScan = [jsonRecognizer valueForKey:@"allowUncertainFrontSideScan"];
+        if (allowUncertainFrontSideScan != nil) {
+            recognizer.allowUncertainFrontSideScan = [(NSNumber *)allowUncertainFrontSideScan boolValue];
+        }
+    }
+    {
         id allowUnparsedMrzResults = [jsonRecognizer valueForKey:@"allowUnparsedMrzResults"];
         if (allowUnparsedMrzResults != nil) {
             recognizer.allowUnparsedMrzResults = [(NSNumber *)allowUnparsedMrzResults boolValue];
@@ -57,6 +63,12 @@
         id fullDocumentImageExtensionFactors = [jsonRecognizer valueForKey:@"fullDocumentImageExtensionFactors"];
         if (fullDocumentImageExtensionFactors != nil) {
             recognizer.fullDocumentImageExtensionFactors = [MBCommonSerializationUtils deserializeMBImageExtensionFactors:(NSDictionary*)fullDocumentImageExtensionFactors];
+        }
+    }
+    {
+        id maxAllowedMismatchesPerField = [jsonRecognizer valueForKey:@"maxAllowedMismatchesPerField"];
+        if (maxAllowedMismatchesPerField != nil) {
+            recognizer.maxAllowedMismatchesPerField = [(NSNumber *)maxAllowedMismatchesPerField integerValue];
         }
     }
     {
@@ -137,6 +149,7 @@
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeImageAnalysisResult:self.result.backImageAnalysisResult] forKey:@"backImageAnalysisResult"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.backProcessingStatus + 1)] forKey:@"backProcessingStatus"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.backVizResult] forKey:@"backVizResult"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
@@ -156,6 +169,7 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeImageAnalysisResult:self.result.frontImageAnalysisResult] forKey:@"frontImageAnalysisResult"];
+    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.frontProcessingStatus + 1)] forKey:@"frontProcessingStatus"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.frontVizResult] forKey:@"frontVizResult"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentBackImage] forKey:@"fullDocumentBackImage"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentFrontImage] forKey:@"fullDocumentFrontImage"];
