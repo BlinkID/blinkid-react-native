@@ -13,7 +13,7 @@ npx react-native init $appName --version="0.64.0" || exit 1
 # enter into demo project folder
 pushd $appName || exit 1
 
-IS_LOCAL_BUILD=false || exit 1
+IS_LOCAL_BUILD=true || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
@@ -69,6 +69,11 @@ fi
 
 # change bundle id
 sed -i '' s/\$\(PRODUCT_BUNDLE_IDENTIFIER\)/com.microblink.sample/g $appName/Info.plist
+
+#Disable Flipper since it causes build problems
+sed -i '' 's/use_flipper!()/# use_flipper!()/' Podfile
+
+pod install
 
 # return from ios project folder
 popd
