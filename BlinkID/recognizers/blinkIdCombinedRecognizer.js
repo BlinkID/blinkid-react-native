@@ -6,8 +6,6 @@ import {
     MrtdDocumentType,
     MrzResult,
     DocumentFaceDetectorType,
-    ImageExtensionFactors,
-    DataMatchResult,
     Country,
     Region,
     Type,
@@ -16,6 +14,9 @@ import {
     AnonymizationMode,
     RecognitionModeFilter,
     
+    
+    ImageExtensionFactors,
+    DataMatchResult,
 } from '../types'
 
 /**
@@ -51,6 +52,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * Defines possible color and moire statuses determined from scanned back image.
          */
         this.backImageAnalysisResult = nativeResult.backImageAnalysisResult;
+        
+        /**
+         * Status of the last back side recognition process.
+         */
+        this.backProcessingStatus = nativeResult.backProcessingStatus;
         
         /**
          * Defines the data extracted from the back side visual inspection zone.
@@ -155,6 +161,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * Defines possible color and moire statuses determined from scanned front image.
          */
         this.frontImageAnalysisResult = nativeResult.frontImageAnalysisResult;
+        
+        /**
+         * Status of the last front side recognition process.
+         */
+        this.frontProcessingStatus = nativeResult.frontProcessingStatus;
         
         /**
          * Defines the data extracted from the front side visual inspection zone.
@@ -280,6 +291,14 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         this.allowBlurFilter = true;
         
         /**
+         * Proceed with scanning the back side even if the front side result is uncertain.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
+         */
+        this.allowUncertainFrontSideScan = false;
+        
+        /**
          * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
          * 
          * 
@@ -325,6 +344,13 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
          * 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /**
+         * Configure the number of characters per field that are allowed to be inconsistent in data match.
+         * 
+         * 
+         */
+        this.maxAllowedMismatchesPerField = 0;
         
         /**
          * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case

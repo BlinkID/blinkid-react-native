@@ -14,7 +14,7 @@ import com.microblink.entities.recognizers.blinkid.generic.viz.VizResult;
 import com.microblink.entities.recognizers.blinkid.generic.barcode.BarcodeResult;
 import com.microblink.entities.recognizers.blinkid.idbarcode.BarcodeElements;
 import com.microblink.entities.recognizers.blinkid.idbarcode.BarcodeElementKey;
-
+import com.microblink.entities.recognizers.blinkid.generic.RecognitionModeFilter;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -154,6 +154,20 @@ public abstract class BlinkIDSerializationUtils {
         }
         jsonBarcodeElements.putArray("values", valuesArr);
         return jsonBarcodeElements;
+    }
+
+     public static RecognitionModeFilter deserializeRecognitionModeFilter(ReadableMap json) {
+        if (json != null) {
+            boolean enableMrzId = (boolean)json.getBoolean("enableMrzId");
+            boolean enableMrzVisa = (boolean)json.getBoolean("enableMrzVisa");
+            boolean enableMrzPassport = (boolean)json.getBoolean("enableMrzPassport");
+            boolean enablePhotoId = (boolean)json.getBoolean("enablePhotoId");
+            boolean enableBarcodeId = (boolean)json.getBoolean("enableBarcodeId");
+            boolean enableFullDocumentRecognition = (boolean)json.getBoolean("enableFullDocumentRecognition");
+            return new RecognitionModeFilter(enableMrzId, enableMrzVisa, enableMrzPassport, enablePhotoId, enableBarcodeId, enableFullDocumentRecognition);
+        } else {
+            return new RecognitionModeFilter();
+        }
     }
 
 }

@@ -189,7 +189,10 @@ export const ProcessingStatus = Object.freeze(
     UnsupportedByLicense: 14,
 
     /** Front side recognition has completed successfully, and recognizer is waiting for the other side to be scanned. */
-    AwaitingOtherSide: 15
+    AwaitingOtherSide: 15,
+
+    /** Side not scanned. */
+    NotScanned: 16
     }
 );
 
@@ -589,7 +592,12 @@ export const Region = Object.freeze(
         Tabasco: 106,
         TamilNadu: 107,
         Yucatan: 108,
-        Zacatecas: 109
+        Zacatecas: 109,
+        Aguascalientes: 110,
+        BajaCaliforniaSur: 111,
+        Campeche: 112,
+        Colima: 113,
+        QuintanaRooBenitoJuarez: 114
     }
 );
 
@@ -644,7 +652,8 @@ export const Type = Object.freeze(
         ProofOfAgeCard: 44,
         RefugeeId: 45,
         TribalId: 46,
-        VeteranId: 47
+        VeteranId: 47,
+        CitizenshipCertificate: 48
     }
 );
 
@@ -1893,25 +1902,6 @@ export const DocumentFaceDetectorType = Object.freeze(
 );
 
 /**
- * Extension factors relative to corresponding dimension of the full image. For example,
- * upFactor and downFactor define extensions relative to image height, e.g.
- * when upFactor is 0.5, upper image boundary will be extended for half of image's full
- * height.
- */
-export class ImageExtensionFactors {
-    constructor() {
-        /** image extension factor relative to full image height in UP direction. */
-        this.upFactor = 0.0;
-        /** image extension factor relative to full image height in RIGHT direction. */
-        this.rightFactor = 0.0;
-        /** image extension factor relative to full image height in DOWN direction. */
-        this.downFactor = 0.0;
-        /** image extension factor relative to full image height in LEFT direction. */
-        this.leftFactor = 0.0;
-    }
-};
-
-/**
  * RecognitionModeFilter is used to enable/disable recognition of specific document groups.
  * Setting is taken into account only if the right for that document is purchased.
  */
@@ -1960,3 +1950,36 @@ export const RecognitionMode = Object.freeze(
     }
 );
 
+
+
+
+/**
+ * Extension factors relative to corresponding dimension of the full image. For example,
+ * upFactor and downFactor define extensions relative to image height, e.g.
+ * when upFactor is 0.5, upper image boundary will be extended for half of image's full
+ * height.
+ */
+export class ImageExtensionFactors {
+    constructor() {
+        /** image extension factor relative to full image height in UP direction. */
+        this.upFactor = 0.0;
+        /** image extension factor relative to full image height in RIGHT direction. */
+        this.rightFactor = 0.0;
+        /** image extension factor relative to full image height in DOWN direction. */
+        this.downFactor = 0.0;
+        /** image extension factor relative to full image height in LEFT direction. */
+        this.leftFactor = 0.0;
+    }
+};
+
+/** Result of the data matching algorithm for scanned parts/sides of the document. */
+export const DataMatchResult = Object.freeze(
+    {
+        /** Data matching has not been performed. */
+        NotPerformed : 1,
+        /** Data does not match. */
+        Failed : 2,
+        /** Data match. */
+        Success : 3
+    }
+);

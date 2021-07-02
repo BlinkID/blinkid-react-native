@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.11.0.tgz
+  npm install --save blinkid-react-native-5.12.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -69,6 +69,11 @@ fi
 
 # change bundle id
 sed -i '' s/\$\(PRODUCT_BUNDLE_IDENTIFIER\)/com.microblink.sample/g $appName/Info.plist
+
+#Disable Flipper since it causes build problems
+sed -i '' 's/use_flipper!()/# use_flipper!()/' Podfile
+
+pod install
 
 # return from ios project folder
 popd

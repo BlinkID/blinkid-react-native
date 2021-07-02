@@ -6,8 +6,6 @@ import {
     MrtdDocumentType,
     MrzResult,
     DocumentFaceDetectorType,
-    ImageExtensionFactors,
-    DataMatchResult,
     Country,
     Region,
     Type,
@@ -16,6 +14,9 @@ import {
     AnonymizationMode,
     RecognitionModeFilter,
     
+    
+    ImageExtensionFactors,
+    DataMatchResult,
 } from '../types'
 
 /**
