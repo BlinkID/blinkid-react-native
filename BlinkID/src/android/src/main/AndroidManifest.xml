@@ -13,4 +13,10 @@
         android:name="android.hardware.camera.autofocus"
         android:required="false"/>
 
+    <application>
+        <activity android:name="com.microblink.activity.DocumentScanActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.activity.DocumentVerificationActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.activity.BlinkIdActivity" android:noHistory="true" />
+    </application>
+
 </manifest>
