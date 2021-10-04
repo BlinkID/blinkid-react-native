@@ -60,7 +60,9 @@ export const MrtdDocumentType = Object.freeze(
         /** One liner ISO DL */
         Dl: 7,
         /** One liner ISO DL */
-        InternalTravelDocument: 8
+        InternalTravelDocument: 8,
+        /** Border Crossing Card */
+        BorderCrossingCard: 9
     }
 );
 
