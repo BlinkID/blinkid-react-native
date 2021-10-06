@@ -137,6 +137,7 @@
     [jsonResult setValue:self.result.employer forKey:@"employer"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
+    [jsonResult setValue:self.result.fathersName forKey:@"fathersName"];
     [jsonResult setValue:self.result.firstName forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
     [jsonResult setValue:self.result.fullName forKey:@"fullName"];
@@ -145,6 +146,7 @@
     [jsonResult setValue:self.result.lastName forKey:@"lastName"];
     [jsonResult setValue:self.result.localizedName forKey:@"localizedName"];
     [jsonResult setValue:self.result.maritalStatus forKey:@"maritalStatus"];
+    [jsonResult setValue:self.result.mothersName forKey:@"mothersName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
     [jsonResult setValue:self.result.nationality forKey:@"nationality"];
     [jsonResult setValue:self.result.personalIdNumber forKey:@"personalIdNumber"];

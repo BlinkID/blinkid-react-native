@@ -5,7 +5,7 @@
 #import "MBSerializationUtils.h"
 
 #import <Foundation/Foundation.h>
-#import "MBMicroblinkModule.h"
+#import "MBBlinkIDModule.h"
 #import <React/RCTConvert.h>
 #import <Microblink/Microblink.h>
 
@@ -15,23 +15,22 @@ typedef NS_ENUM(NSUInteger, PPImageType) {
     PPImageTypeSuccessful,
 };
 
+// NSError Domain
+static NSString* const MBErrorDomain = @"microblink.error";
+static NSString* const RESULT_CAPTURED_FULL_IMAGE = @"capturedFullImage";
+static NSString* const RESULT_DOCUMENT_CAPTURE_RECOGNIZER_RESULT = @"documentCaptureRecognizerResult";
+
 @interface MBMicroblinkModule () <MBOverlayViewControllerDelegate>
 
 @property (nonatomic, strong) MBRecognizerCollection *recognizerCollection;
 @property (nonatomic) id<MBRecognizerRunnerViewController> scanningViewController;
 
+@property (class, nonatomic, readonly) NSString *STATUS_SCAN_CANCELED;
+
 @property (nonatomic, strong) RCTPromiseResolveBlock promiseResolve;
 @property (nonatomic, strong) RCTPromiseRejectBlock promiseReject;
 
 @end
-
-// promise reject message codes
-static NSString* const kErrorLicenseKeyDoesNotExists = @"ERROR_LICENSE_KEY_DOES_NOT_EXISTS";
-static NSString* const kErrorCoordniatorDoesNotExists = @"COORDINATOR_DOES_NOT_EXISTS";
-static NSString* const kStatusScanCanceled = @"STATUS_SCAN_CANCELED";
-
-// NSError Domain
-static NSString* const MBErrorDomain = @"microblink.error";
 
 @implementation MBMicroblinkModule
 
@@ -137,10 +136,14 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     NSError *error = [NSError errorWithDomain:MBErrorDomain
                                          code:-58
                                      userInfo:nil];
-    self.promiseReject(kStatusScanCanceled, @"Scanning has been canceled", error);
+    self.promiseReject(MBMicroblinkModule.STATUS_SCAN_CANCELED, @"Scanning has been canceled", error);
 
     self.promiseResolve = nil;
     self.promiseReject = nil;
+}
+
++ (NSString *)STATUS_SCAN_CANCELED {
+    return @"STATUS_SCAN_CANCELED";
 }
 
 @end

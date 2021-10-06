@@ -99,6 +99,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("employer", result.getEmployer());
         jsonResult.putBoolean("expired", result.isExpired());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("fathersName", result.getFathersName());
         jsonResult.putString("firstName", result.getFirstName());
         jsonResult.putMap("frontImageAnalysisResult", BlinkIDSerializationUtils.serializeImageAnalysisResult(result.getFrontImageAnalysisResult()));
         jsonResult.putInt("frontProcessingStatus", SerializationUtils.serializeEnum(result.getFrontProcessingStatus()));
@@ -110,6 +111,7 @@ public final class BlinkIdCombinedRecognizerSerialization implements RecognizerS
         jsonResult.putString("lastName", result.getLastName());
         jsonResult.putString("localizedName", result.getLocalizedName());
         jsonResult.putString("maritalStatus", result.getMaritalStatus());
+        jsonResult.putString("mothersName", result.getMothersName());
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         jsonResult.putString("nationality", result.getNationality());
         jsonResult.putString("personalIdNumber", result.getPersonalIdNumber());

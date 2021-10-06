@@ -153,6 +153,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /**
+         * The father's name of the document owner.
+         */
+        this.fathersName = nativeResult.fathersName;
+        
+        /**
          * The first name of the document owner.
          */
         this.firstName = nativeResult.firstName;
@@ -206,6 +211,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The marital status of the document owner.
          */
         this.maritalStatus = nativeResult.maritalStatus;
+        
+        /**
+         * The mother's name of the document owner.
+         */
+        this.mothersName = nativeResult.mothersName;
         
         /**
          * The data extracted from the machine readable zone
