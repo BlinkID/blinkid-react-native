@@ -77,20 +77,22 @@ export const IdBarcodeDocumentType = Object.freeze(
         AAMVACompliant: 2,
         /** Argentina ID document was scanned */
         ArgentinaID: 3,
+        /** ArgentinaAlienID document was scanned */
+        ArgentinaAlienID: 4,
         /** Argentina driver license document was scanned */
-        ArgentinaDL: 4,
+        ArgentinaDL: 5,
         /** Colombia ID document was scanned */
-        ColombiaID: 5,
+        ColombiaID: 6,
         /** Colombia driver license document was scanned */
-        ColombiaDL: 6,
+        ColombiaDL: 7,
         /** NigeriaVoter ID document was scanned */
-        NigeriaVoterID: 7,
+        NigeriaVoterID: 8,
         /** Nigeria driver license document was scanned */
-        NigeriaDL: 8,
+        NigeriaDL: 9,
         /** Panama ID document was scanned */
-        PanamaID: 9,
+        PanamaID: 10,
         /** SouthAfrica ID document was scanned */
-        SouthAfricaID: 10
+        SouthAfricaID: 11
     }
 );
 
