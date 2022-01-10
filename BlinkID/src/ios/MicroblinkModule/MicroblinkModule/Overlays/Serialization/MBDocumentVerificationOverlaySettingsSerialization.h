@@ -9,6 +9,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MBDocumentVerificationOverlaySettingsSerialization : NSObject<MBOverlayVCCreator, MBDocumentVerificationOverlayViewControllerDelegate>
+@interface MBDocumentVerificationOverlaySettingsSerialization : NSObject<MBOverlayVCCreator, MBLegacyDocumentVerificationOverlayViewControllerDelegate>
 
 @end

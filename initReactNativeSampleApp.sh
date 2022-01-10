@@ -98,4 +98,4 @@ popd
 
 echo "Go to React Native project folder: cd $appName"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: go to $appName/ios and open $appName.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
+echo "To run on iOS: open $appName/ios/$appName.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
