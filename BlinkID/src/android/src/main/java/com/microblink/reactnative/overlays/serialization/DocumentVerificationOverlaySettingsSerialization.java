@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.fragment.overlay.blinkid.documentverification.DocumentVerificationOverlayStrings;
+import com.microblink.fragment.overlay.blinkid.legacy.documentverification.LegacyDocumentVerificationOverlayStrings;
 import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
-import com.microblink.uisettings.DocumentVerificationUISettings;
+import com.microblink.uisettings.LegacyDocumentVerificationUISettings;
 import com.microblink.uisettings.UISettings;
 
 import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
@@ -14,11 +14,11 @@ import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
 public final class DocumentVerificationOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override
     public UISettings createUISettings(Context context, ReadableMap jsonUISettings, RecognizerBundle recognizerBundle) {
-        DocumentVerificationUISettings settings = new DocumentVerificationUISettings(recognizerBundle);
+        LegacyDocumentVerificationUISettings settings = new LegacyDocumentVerificationUISettings(recognizerBundle);
         OverlaySerializationUtils.extractCommonUISettings(jsonUISettings, settings);
         BlinkIDOverlaySerializationUtils.extractCommonBlinkIdUiSettings(jsonUISettings, settings);
 
-        DocumentVerificationOverlayStrings.Builder stringsBuilder = new DocumentVerificationOverlayStrings.Builder(context);
+        LegacyDocumentVerificationOverlayStrings.Builder stringsBuilder = new LegacyDocumentVerificationOverlayStrings.Builder(context);
 
         String firstSideSplashMessage = getStringFromMap(jsonUISettings, "firstSideSplashMessage");
         if (firstSideSplashMessage != null) {

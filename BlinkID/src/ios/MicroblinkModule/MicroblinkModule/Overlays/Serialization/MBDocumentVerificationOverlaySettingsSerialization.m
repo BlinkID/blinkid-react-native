@@ -28,7 +28,7 @@
 
 -(MBOverlayViewController *) createOverlayViewController:(NSDictionary *)jsonOverlaySettings recognizerCollection:(MBRecognizerCollection*)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate>) delegate {
     // no settings deserialized at the moment
-    MBDocumentVerificationOverlaySettings *sett = [[MBDocumentVerificationOverlaySettings alloc] init];
+    MBLegacyDocumentVerificationOverlaySettings*sett = [[MBLegacyDocumentVerificationOverlaySettings alloc] init];
     self.delegate = delegate;
     [MBOverlaySerializationUtils extractCommonOverlaySettings:jsonOverlaySettings overlaySettings:sett];
     
@@ -74,15 +74,15 @@
         }
     }
     
-    return [[MBDocumentVerificationOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
+    return [[MBLegacyDocumentVerificationOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
 }
 
 
-- (void)documentVerificationOverlayViewControllerDidFinishScanning:(nonnull MBDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController state:(MBRecognizerResultState)state {
+- (void)documentVerificationOverlayViewControllerDidFinishScanning:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController state:(MBRecognizerResultState)state {
     [self.delegate overlayViewControllerDidFinishScanning:documentVerificationOverlayViewController state:state];
 }
 
-- (void)documentVerificationOverlayViewControllerDidTapClose:(nonnull MBDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController {
+- (void)documentVerificationOverlayViewControllerDidTapClose:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController {
     [self.delegate overlayDidTapClose:documentVerificationOverlayViewController];
 }
 
