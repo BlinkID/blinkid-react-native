@@ -14,6 +14,7 @@
 +(NSDictionary * _Nonnull) serializeMrzResult:(MBMrzResult * _Nonnull)mrzResult;
 +(MBImageExtensionFactors) deserializeMBImageExtensionFactors:(NSDictionary * _Nullable)jsonExtensionFactors;
 +(NSDictionary * _Nonnull) serializeDriverLicenseDetailedInfo:(MBDriverLicenseDetailedInfo * _Nonnull)driverLicenseDetailedInfo;
++(NSDictionary * _Nonnull) serializeVehicleClassInfo:(MBVehicleClassInfo * _Nonnull)vehicleClassInfo;
 +(NSDictionary * _Nonnull) serializeClassInfo:(MBClassInfo * _Nonnull)classInfo;
 +(NSDictionary * _Nonnull) serializeVizResult:(MBVizResult * _Nonnull)vizResult;
 +(NSDictionary * _Nonnull) serializeBarcodeResult:(MBBarcodeResult * _Nonnull)barcodeResult;

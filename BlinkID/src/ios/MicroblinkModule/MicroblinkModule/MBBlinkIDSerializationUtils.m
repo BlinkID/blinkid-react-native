@@ -54,12 +54,28 @@
 }
 
 +(NSDictionary *) serializeDriverLicenseDetailedInfo:(MBDriverLicenseDetailedInfo *)driverLicenseDetailedInfo {
+    NSMutableArray *vehicleClassesInfo = [NSMutableArray array];
+    
+    for (MBVehicleClassInfo *info in driverLicenseDetailedInfo.vehicleClassesInfo) {
+        [vehicleClassesInfo addObject:[MBBlinkIDSerializationUtils serializeVehicleClassInfo:info]];
+    }
+    
     return @{
              @"restrictions" : driverLicenseDetailedInfo.restrictions,
              @"endorsements" : driverLicenseDetailedInfo.endorsements,
              @"vehicleClass" : driverLicenseDetailedInfo.vehicleClass,
-             @"conditions" : driverLicenseDetailedInfo.conditions
+             @"conditions" : driverLicenseDetailedInfo.conditions,
+             @"vehicleClassesInfo" : vehicleClassesInfo
              };
+}
+
++(NSDictionary *) serializeVehicleClassInfo:(MBVehicleClassInfo *)vehicleClassInfo {
+    return @{
+        @"vehicleClass" : vehicleClassInfo.vehicleClass,
+        @"licenceType" : vehicleClassInfo.licenceType,
+        @"effectiveDate" : [MBSerializationUtils serializeMBDateResult:vehicleClassInfo.effectiveDate],
+        @"expiryDate" : [MBSerializationUtils serializeMBDateResult:vehicleClassInfo.expiryDate]
+    };
 }
 
 +(NSDictionary *) serializeClassInfo:(MBClassInfo *)classInfo {
@@ -84,6 +100,7 @@
         @"localizedName" : vizResult.localizedName,
         @"address" : vizResult.address,
         @"additionalAddressInformation" : vizResult.additionalAddressInformation,
+        @"additionalOptionalAddressInformation" : vizResult.additionalOptionalAddressInformation,
         @"placeOfBirth" : vizResult.placeOfBirth,
         @"nationality" : vizResult.nationality,
         @"race" : vizResult.race,
