@@ -37,6 +37,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.additionalNameInformation = nativeResult.additionalNameInformation;
         
         /**
+         * The one more additional address information of the document owner.
+         */
+        this.additionalOptionalAddressInformation = nativeResult.additionalOptionalAddressInformation;
+        
+        /**
          * The address of the document owner.
          */
         this.address = nativeResult.address;
@@ -47,6 +52,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * @return current age of the document owner in years or -1 if date of birth is unknown.
          */
         this.age = nativeResult.age;
+        
+        /**
+         * The back raw camera frame.
+         */
+        this.backCameraFrame = nativeResult.backCameraFrame;
         
         /**
          * Defines possible color and moire statuses determined from scanned back image.
@@ -62,6 +72,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * Defines the data extracted from the back side visual inspection zone.
          */
         this.backVizResult = nativeResult.backVizResult;
+        
+        /**
+         * The barcode raw camera frame.
+         */
+        this.barcodeCameraFrame = nativeResult.barcodeCameraFrame;
         
         /**
          * Defines the data extracted from the barcode.
@@ -92,16 +107,6 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The date of issue of the document.
          */
         this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
-        
-        /**
-         * Digital signature of the recognition result. Available only if enabled with signResult property.
-         */
-        this.digitalSignature = nativeResult.digitalSignature;
-        
-        /**
-         * Version of the digital signature. Available only if enabled with signResult property.
-         */
-        this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
         
         /**
          * The additional number of the document.
@@ -161,6 +166,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
          * The first name of the document owner.
          */
         this.firstName = nativeResult.firstName;
+        
+        /**
+         * The front raw camera frame.
+         */
+        this.frontCameraFrame = nativeResult.frontCameraFrame;
         
         /**
          * Defines possible color and moire statuses determined from scanned front image.
@@ -400,19 +410,20 @@ export class BlinkIdCombinedRecognizer extends Recognizer {
         this.returnSignatureImage = false;
         
         /**
+         * Configure the recognizer to save the raw camera frames.
+         * This significantly increases memory consumption.
+         * 
+         * 
+         */
+        this.saveCameraFrames = false;
+        
+        /**
          * Configure the recognizer to only work on already cropped and dewarped images.
          * This only works for still images - video feeds will ignore this setting.
          * 
          * 
          */
         this.scanCroppedDocumentImage = false;
-        
-        /**
-         * Whether or not recognition result should be signed.
-         * 
-         * 
-         */
-        this.signResult = false;
         
         /**
          * Property for setting DPI for signature images

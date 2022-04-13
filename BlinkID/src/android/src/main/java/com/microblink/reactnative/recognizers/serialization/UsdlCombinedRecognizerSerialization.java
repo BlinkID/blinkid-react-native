@@ -33,9 +33,6 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
         if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
-        if (jsonRecognizer.hasKey("signResult")) {
-            recognizer.setSignResult(jsonRecognizer.getBoolean("signResult"));
-        }
         return recognizer;
     }
 
@@ -44,8 +41,6 @@ public final class UsdlCombinedRecognizerSerialization implements RecognizerSeri
         UsdlCombinedRecognizer.Result result = ((UsdlCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
-        jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
-        jsonResult.putInt("digitalSignatureVersion", (int) result.getDigitalSignatureVersion());
         jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));

@@ -7,6 +7,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
+import com.microblink.entities.recognizers.blinkid.generic.VehicleClassInfo;
 import com.microblink.entities.recognizers.blinkid.generic.classinfo.ClassInfo;
 import com.microblink.reactnative.SerializationUtils;
 import com.microblink.entities.recognizers.blinkid.generic.imageanalysis.ImageAnalysisResult;
@@ -52,7 +53,21 @@ public abstract class BlinkIDSerializationUtils {
         jsonDriverLicenseDetailedInfo.putString("endorsements", dlDetailedInfo.getEndorsements());
         jsonDriverLicenseDetailedInfo.putString("vehicleClass", dlDetailedInfo.getVehicleClass());
         jsonDriverLicenseDetailedInfo.putString("conditions", dlDetailedInfo.getConditions());
+        WritableArray vehicleClassesInfo = new WritableNativeArray();
+        for (int i = 0; i < dlDetailedInfo.getVehicleClassesInfo().length; ++i) {
+            vehicleClassesInfo.pushMap(serializeVehicleClassInfo(dlDetailedInfo.getVehicleClassesInfo()[i]));
+        }
+        jsonDriverLicenseDetailedInfo.putArray("vehicleClassesInfo", vehicleClassesInfo);
         return jsonDriverLicenseDetailedInfo;
+    }
+
+    public static WritableMap serializeVehicleClassInfo(VehicleClassInfo vehicleClassInfo) {
+        WritableMap jsonVehicleClassInfo = new WritableNativeMap();
+        jsonVehicleClassInfo.putString("vehicleClass", vehicleClassInfo.getVehicleClass());
+        jsonVehicleClassInfo.putString("licenceType", vehicleClassInfo.getLicenceType());
+        jsonVehicleClassInfo.putMap("effectiveDate", SerializationUtils.serializeDate(vehicleClassInfo.getEffectiveDate().getDate()));
+        jsonVehicleClassInfo.putMap("expiryDate", SerializationUtils.serializeDate(vehicleClassInfo.getExpiryDate().getDate()));
+        return jsonVehicleClassInfo;
     }
 
     public static WritableMap serializeClassInfo(ClassInfo classInfo) {
@@ -85,6 +100,7 @@ public abstract class BlinkIDSerializationUtils {
         jsonViz.putString("localizedName", vizResult.getLocalizedName());
         jsonViz.putString("address", vizResult.getAddress());
         jsonViz.putString("additionalAddressInformation", vizResult.getAdditionalAddressInformation());
+        jsonViz.putString("additionalOptionalAddressInformation", vizResult.getAdditionalOptionalAddressInformation());
         jsonViz.putString("placeOfBirth", vizResult.getPlaceOfBirth());
         jsonViz.putString("nationality", vizResult.getNationality());
         jsonViz.putString("race", vizResult.getRace());

@@ -601,7 +601,10 @@ export const Region = Object.freeze(
         BajaCaliforniaSur: 111,
         Campeche: 112,
         Colima: 113,
-        QuintanaRooBenitoJuarez: 114
+        QuintanaRooBenitoJuarez: 114,
+        QuintanaRoo: 115,
+        QuintanaRooSolidaridad: 116,
+        Tlaxcala: 117
     }
 );
 
@@ -657,7 +660,8 @@ export const Type = Object.freeze(
         RefugeeId: 45,
         TribalId: 46,
         VeteranId: 47,
-        CitizenshipCertificate: 48
+        CitizenshipCertificate: 48,
+        MyNumberCard: 49
     }
 );
 
@@ -1705,6 +1709,9 @@ export class VizResult {
 
         /** The additional address information of the document owner. */
         this.additionalAddressInformation = nativeVizResult.additionalAddressInformation;
+
+        /** The one more additional address information of the document owner. */
+        this.additionalOptionalAddressInformation = nativeVizResult.additionalOptionalAddressInformation;
 
         /** The place of birth of the document owner. */
         this.placeOfBirth = nativeVizResult.placeOfBirth;

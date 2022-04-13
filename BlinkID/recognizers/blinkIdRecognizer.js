@@ -37,6 +37,11 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.additionalNameInformation = nativeResult.additionalNameInformation;
         
         /**
+         * The one more additional address information of the document owner.
+         */
+        this.additionalOptionalAddressInformation = nativeResult.additionalOptionalAddressInformation;
+        
+        /**
          * The address of the document owner.
          */
         this.address = nativeResult.address;
@@ -49,9 +54,19 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.age = nativeResult.age;
         
         /**
+         * The barcode raw camera frame.
+         */
+        this.barcodeCameraFrame = nativeResult.barcodeCameraFrame;
+        
+        /**
          * Defines the data extracted from the barcode.
          */
         this.barcodeResult = nativeResult.barcodeResult;
+        
+        /**
+         * The raw camera frame.
+         */
+        this.cameraFrame = nativeResult.cameraFrame;
         
         /**
          * The classification information.
@@ -334,6 +349,14 @@ export class BlinkIdRecognizer extends Recognizer {
          * 
          */
         this.returnSignatureImage = false;
+        
+        /**
+         * Configure the recognizer to save the raw camera frames.
+         * This significantly increases memory consumption.
+         * 
+         * 
+         */
+        this.saveCameraFrames = false;
         
         /**
          * Configure the recognizer to only work on already cropped and dewarped images.

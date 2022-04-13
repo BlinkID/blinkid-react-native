@@ -90,6 +90,12 @@
         }
     }
     {
+        id saveCameraFrames = [jsonRecognizer valueForKey:@"saveCameraFrames"];
+        if (saveCameraFrames != nil) {
+            recognizer.saveCameraFrames = [(NSNumber *)saveCameraFrames boolValue];
+        }
+    }
+    {
         id scanCroppedDocumentImage = [jsonRecognizer valueForKey:@"scanCroppedDocumentImage"];
         if (scanCroppedDocumentImage != nil) {
             recognizer.scanCroppedDocumentImage = [(NSNumber *)scanCroppedDocumentImage boolValue];
@@ -122,9 +128,12 @@
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
     [jsonResult setValue:self.result.additionalAddressInformation forKey:@"additionalAddressInformation"];
     [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
+    [jsonResult setValue:self.result.additionalOptionalAddressInformation forKey:@"additionalOptionalAddressInformation"];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.barcodeCameraFrame] forKey:@"barcodeCameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
+    [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.cameraFrame] forKey:@"cameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];

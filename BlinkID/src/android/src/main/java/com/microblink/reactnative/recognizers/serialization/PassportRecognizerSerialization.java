@@ -32,9 +32,6 @@ public final class PassportRecognizerSerialization implements RecognizerSerializ
         if (jsonMap.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
         }
-        if (jsonMap.hasKey("signResult")) {
-            recognizer.setSignResult(jsonMap.getBoolean("signResult"));
-        }
         return recognizer;
     }
 
@@ -43,8 +40,6 @@ public final class PassportRecognizerSerialization implements RecognizerSerializ
         com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
-        jsonResult.putString("digitalSignature", SerializationUtils.encodeByteArrayToBase64(result.getDigitalSignature()));
-        jsonResult.putInt("digitalSignatureVersion", (int)result.getDigitalSignatureVersion());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));

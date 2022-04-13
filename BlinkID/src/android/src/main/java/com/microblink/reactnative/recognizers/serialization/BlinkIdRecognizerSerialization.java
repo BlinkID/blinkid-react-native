@@ -47,6 +47,9 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         if (jsonMap.hasKey("returnSignatureImage")) {
             recognizer.setReturnSignatureImage(jsonMap.getBoolean("returnSignatureImage"));
         }
+        if (jsonMap.hasKey("saveCameraFrames")) {
+            recognizer.setSaveCameraFrames(jsonMap.getBoolean("saveCameraFrames"));
+        }
         if (jsonMap.hasKey("scanCroppedDocumentImage")) {
             recognizer.setScanCroppedDocumentImage(jsonMap.getBoolean("scanCroppedDocumentImage"));
         }
@@ -66,9 +69,12 @@ public final class BlinkIdRecognizerSerialization implements RecognizerSerializa
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("additionalAddressInformation", result.getAdditionalAddressInformation());
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
+        jsonResult.putString("additionalOptionalAddressInformation", result.getAdditionalOptionalAddressInformation());
         jsonResult.putString("address", result.getAddress());
         jsonResult.putInt("age", result.getAge());
+        jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
+        jsonResult.putString("cameraFrame", SerializationUtils.encodeImageBase64(result.getCameraFrame()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));

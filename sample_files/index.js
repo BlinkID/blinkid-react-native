@@ -18,9 +18,9 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: com.microblink.sample
-    ios: 'sRwAAAEVY29tLm1pY3JvYmxpbmsuc2FtcGxl1BIcP4FpSuS/38JVOIaKMxwPcbCIyP0vUvPF24aRSqLbl1Ietp3U7rXGfntq9kYtaEtu+SiPPkcbc3UtQH7hP7rgKHUK1+quHABe591IAnoFo7Aw0tfInuVQelUFsaxt0dGWMJgsNO+ujO+P4KsguSQdxI1eZPK+kEHXQbU3WzbeHJjmOUJwqM+0uC6y+Hp/aIlELYc5+n+K5enPZHIC+TtZB1mcSGZp2Ytqd7Aw7GOdCTQM8wrKIDIDYuzc3cv0DTKIoSEhdJZwY9r+jVzGyV4N0R8OlW9Av5kSZhc+YMj1R82RZ3jYCZGPLVQ+s2Ia5iF783NmG1srXLMm0GdGnW/7',
+    ios: 'sRwAAAEVY29tLm1pY3JvYmxpbmsuc2FtcGxl1BIcP4FpSuS/38KlP3avmLzrsviBmV88MupFPd0dvU7q90na2QxX62I2xowx1Wi9J9I6I5k4V2p1z917NGvULzZqkh1lDbt9eO6M3+Ki1138TbG6imO8S8XFZ+VjaDqUHv/hrjG1e1p8pxtjCPMqJvo8lzQHkjaF+ej4hc8xp5ZSzD+RUI9gxBrVrPewo6v5ug96yWSlD2NqO5XTDsdx71Z/GyXgVvWRdz5Lhl3y7p1HLDpk5cknfWM6Q9xOmiMErMPuiwsWtrQY7X2xm+IVvhnUEW8jDDiNmcJG1W9V9IwVKHl233QUu2mOamKgUjy1VjBYKq235Ui66NqCEkNFvvg=',
     // android license key for applicationID: com.microblink.sample
-    android: 'sRwAAAAVY29tLm1pY3JvYmxpbmsuc2FtcGxlU9kJdZhZkGlTu9U3OJtAYGbizcXhV5K1maxiDMJFmnmLT3IzuOot5d+g5HVnoLFduWFtl9egla46EkGtuAdJd1p0a67N0Q2JnbcTqZB5h6ksNpjPsrmcY9OLjmlul2n9rcunJkM1cxu96HES75tdPBQvPz+WBbdx8Tz1y8ZyW7sNjqzemaZ5oqGZEQPj/NrWl2nHjeFxectQG9iOVTmHUNaSPZN4bsYYAeD7v6bGrXG2sv1FrkMjPIQ7Ic50r/drJmq+qhMNPZOJ+M9PfyO5zGuZN+uChv5k4lxcRRZ/sYgxNvuA6plBiFcg3uYugkuIDTD1fVyCYE5BSUzOGQjyacgH'
+    android: 'sRwAAAAVY29tLm1pY3JvYmxpbmsuc2FtcGxlU9kJdZhZkGlTu9XHP2tly7tSD2ZBhUN9mBJgzB+kfcYY69dFpZaHtMkS44AAdMj7JJpg5dTgYeWbstEWDHNjqL0tvLOjYPeS0tfPZz7c3euhPFSj7MJHzxZMYG5wR3mAsGo2iNqv4B3+C5NLQOCc0QNNmWFAG1B3GNCqufRZGxtMiJxrxYrM5WreJ7dl6+TV9zfL2WSc6Uk1VPfVaa/T1VfEu4AGnBte8c4IJA48mvEOWKyh/qwU7joalKv/gJXJknGuUdSzJiOdmeKq+iTRGUoNmp8SL15RV47dZuyaPgE8evDECqGO6GMaz2HOJ/ZqtaYhWR3xHwiKesjsogGr5lo='
 })
 
 var renderIf = function(condition, content) {
@@ -176,11 +176,20 @@ export default class Sample extends Component {
 
             let licenceInfo = blinkIdResult.driverLicenseDetailedInfo;
             if (licenceInfo) {
+                var vehicleClassesInfoString = '';
+                if (licenceInfo.vehicleClassesInfo) {
+                  for (let i=0; i<licenceInfo.vehicleClassesInfo.length; i++) {
+                        vehicleClassesInfoString += buildResult(licenceInfo.vehicleClassesInfo[i].vehicleClass, 'Vehicle class') + 
+                        buildResult(licenceInfo.vehicleClassesInfo[i].licenceType, 'License type') + 
+                        buildDateResult(licenceInfo.vehicleClassesInfo[i].effectiveDate, 'Effective date') + 
+                        buildDateResult(licenceInfo.vehicleClassesInfo[i].expiryDate, 'Expiry date');
+                    }
+                }
                 resultString +=
                     buildResult(licenceInfo.restrictions, "Restrictions") +
                     buildResult(licenceInfo.endorsements, "Endorsements") +
                     buildResult(licenceInfo.vehicleClass, "Vehicle class") +
-                    buildResult(licenceInfo.conditions, "Conditions");
+                    buildResult(licenceInfo.conditions, "Conditions") + vehicleClassesInfoString;
             }
 
             // there are other fields to extract

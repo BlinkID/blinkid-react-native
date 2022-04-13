@@ -27,16 +27,6 @@ export class PassportRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /**
-         * Digital signature of the recognition result. Available only if enabled with signResult property.
-         */
-        this.digitalSignature = nativeResult.digitalSignature;
-        
-        /**
-         * Version of the digital signature. Available only if enabled with signResult property.
-         */
-        this.digitalSignatureVersion = nativeResult.digitalSignatureVersion;
-        
-        /**
          * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
@@ -112,13 +102,6 @@ export class PassportRecognizer extends Recognizer {
          * 
          */
         this.returnFullDocumentImage = false;
-        
-        /**
-         * Whether or not recognition result should be signed.
-         * 
-         * 
-         */
-        this.signResult = false;
         
         this.createResultFromNative = function (nativeResult) { return new PassportRecognizerResult(nativeResult); }
     }
