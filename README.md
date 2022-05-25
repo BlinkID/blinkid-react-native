@@ -9,7 +9,7 @@ For a full access to all features and functionalities, please consider using our
 
 ## Licensing
 
-- [Generate](https://microblink.com/login?url=/customer/generatedemolicence) a **free trial license key** to start using the SDK in your app (registration required)
+- A valid license key is required to initialize scanning. You can request a **free trial license key**, after you register, at [Microblink Developer Hub](https://account.microblink.com/signin)
 
 - For production licensing, please [contact sales](https://microblink.com/contact-us) to request a quote.
 
