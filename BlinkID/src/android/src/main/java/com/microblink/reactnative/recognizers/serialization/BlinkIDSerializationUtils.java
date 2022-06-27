@@ -47,6 +47,15 @@ public abstract class BlinkIDSerializationUtils {
         return jsonMrz;
     }
 
+    public static WritableMap serializeDataMatchDetailedInfo(DataMatchDetailedInfo dataMatchDetailedInfo) {
+        WritableMap jsonDataMatch = new WritableNativeMap();
+        jsonMrz.putInt("dateOfBirth", dataMatchDetailedInfo.getDateOfBirth().ordinal() + 1);
+        jsonMrz.putInt("dateOfExpiry", dataMatchDetailedInfo.getDateOfExpiry().ordinal() + 1);
+        jsonMrz.putInt("documentNumber", dataMatchDetailedInfo.getDocumentNumber().ordinal() + 1);
+        jsonMrz.putInt("dataMatchResult", dataMatchDetailedInfo.getDataMatchResult().ordinal() + 1);
+        return jsonDataMatch;
+    }
+
     public static WritableMap serializeDriverLicenseDetailedInfo(DriverLicenseDetailedInfo dlDetailedInfo) {
         WritableMap jsonDriverLicenseDetailedInfo = new WritableNativeMap();
         jsonDriverLicenseDetailedInfo.putString("restrictions", dlDetailedInfo.getRestrictions());
