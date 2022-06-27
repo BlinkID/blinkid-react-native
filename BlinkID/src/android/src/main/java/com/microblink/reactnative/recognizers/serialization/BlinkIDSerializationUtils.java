@@ -8,6 +8,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
 import com.microblink.entities.recognizers.blinkid.generic.VehicleClassInfo;
+import com.microblink.entities.recognizers.blinkid.generic.DataMatchDetailedInfo;
 import com.microblink.entities.recognizers.blinkid.generic.classinfo.ClassInfo;
 import com.microblink.reactnative.SerializationUtils;
 import com.microblink.entities.recognizers.blinkid.generic.imageanalysis.ImageAnalysisResult;
@@ -49,10 +50,10 @@ public abstract class BlinkIDSerializationUtils {
 
     public static WritableMap serializeDataMatchDetailedInfo(DataMatchDetailedInfo dataMatchDetailedInfo) {
         WritableMap jsonDataMatch = new WritableNativeMap();
-        jsonMrz.putInt("dateOfBirth", dataMatchDetailedInfo.getDateOfBirth().ordinal() + 1);
-        jsonMrz.putInt("dateOfExpiry", dataMatchDetailedInfo.getDateOfExpiry().ordinal() + 1);
-        jsonMrz.putInt("documentNumber", dataMatchDetailedInfo.getDocumentNumber().ordinal() + 1);
-        jsonMrz.putInt("dataMatchResult", dataMatchDetailedInfo.getDataMatchResult().ordinal() + 1);
+        jsonDataMatch.putInt("dateOfBirth", dataMatchDetailedInfo.getDateOfBirth().ordinal() + 1);
+        jsonDataMatch.putInt("dateOfExpiry", dataMatchDetailedInfo.getDateOfExpiry().ordinal() + 1);
+        jsonDataMatch.putInt("documentNumber", dataMatchDetailedInfo.getDocumentNumber().ordinal() + 1);
+        jsonDataMatch.putInt("dataMatchResult", dataMatchDetailedInfo.getDataMatchResult().ordinal() + 1);
         return jsonDataMatch;
     }
 
