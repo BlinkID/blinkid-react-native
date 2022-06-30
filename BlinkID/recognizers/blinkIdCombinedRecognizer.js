@@ -89,6 +89,11 @@ export class BlinkIdCombinedRecognizerResult extends RecognizerResult {
         this.classInfo = nativeResult.classInfo;
         
         /**
+         * Detailed info on data match.
+         */
+        this.dataMatchDetailedInfo = nativeResult.dataMatchDetailedInfo;
+        
+        /**
          * The date of birth of the document owner.
          */
         this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;

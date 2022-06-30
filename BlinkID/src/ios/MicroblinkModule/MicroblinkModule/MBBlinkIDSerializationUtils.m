@@ -78,6 +78,15 @@
     };
 }
 
++(NSDictionary * _Nonnull) serializeDataMatchDetailedInfo:(MBDataMatchDetailedInfo *)dataMatchDetailedInfo {
+    return @{
+        @"dateOfBirth" : @([dataMatchDetailedInfo getDateOfBirth]),
+        @"dateOfExpiry" : @([dataMatchDetailedInfo getDateOfExpiry]),
+        @"documentNumber" : @([dataMatchDetailedInfo getDocumentNumber]),
+        @"dataMatchResult" : @([dataMatchDetailedInfo getDataMatchResult])
+    };
+}
+
 +(NSDictionary *) serializeClassInfo:(MBClassInfo *)classInfo {
     return @{
              @"country" : [NSNumber numberWithInteger:(classInfo.country + 1)],

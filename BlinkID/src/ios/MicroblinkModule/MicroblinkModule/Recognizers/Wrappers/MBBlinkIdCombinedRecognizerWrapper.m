@@ -156,6 +156,7 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.barcodeCameraFrame] forKey:@"barcodeCameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDataMatchDetailedInfo:self.result.dataMatchDetailedInfo] forKey:@"dataMatchDetailedInfo"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
