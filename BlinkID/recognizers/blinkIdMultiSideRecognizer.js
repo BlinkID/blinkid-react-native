@@ -20,9 +20,9 @@ import {
 } from '../types'
 
 /**
- * Result object for BlinkIdRecognizer.
+ * Result object for BlinkIdMultiSideRecognizer.
  */
-export class BlinkIdRecognizerResult extends RecognizerResult {
+export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
     constructor(nativeResult) {
         super(nativeResult.resultState);
         
@@ -54,6 +54,31 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.age = nativeResult.age;
         
         /**
+         * Additional info on processing of the back side.
+         */
+        this.backAdditionalProcessingInfo = nativeResult.backAdditionalProcessingInfo;
+        
+        /**
+         * The back raw camera frame.
+         */
+        this.backCameraFrame = nativeResult.backCameraFrame;
+        
+        /**
+         * Defines possible color and moire statuses determined from scanned back image.
+         */
+        this.backImageAnalysisResult = nativeResult.backImageAnalysisResult;
+        
+        /**
+         * Status of the last back side recognition process.
+         */
+        this.backProcessingStatus = nativeResult.backProcessingStatus;
+        
+        /**
+         * Defines the data extracted from the back side visual inspection zone.
+         */
+        this.backVizResult = nativeResult.backVizResult;
+        
+        /**
          * The barcode raw camera frame.
          */
         this.barcodeCameraFrame = nativeResult.barcodeCameraFrame;
@@ -64,14 +89,14 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.barcodeResult = nativeResult.barcodeResult;
         
         /**
-         * The raw camera frame.
-         */
-        this.cameraFrame = nativeResult.cameraFrame;
-        
-        /**
          * The classification information.
          */
         this.classInfo = nativeResult.classInfo;
+        
+        /**
+         * Detailed info on data match.
+         */
+        this.dataMatchResult = nativeResult.dataMatchResult;
         
         /**
          * The date of birth of the document owner.
@@ -97,6 +122,14 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          * The additional number of the document.
          */
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
+        
+        /**
+         * Returns DataMatchStateSuccess if data from scanned parts/sides of the document match,
+         * DataMatchStateFailed otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return DataMatchStateFailed. Result will
+         * be DataMatchStateSuccess only if scanned values for all fields that are compared are the same.
+         */
+        this.documentDataMatch = nativeResult.documentDataMatch;
         
         /**
          * The document number.
@@ -145,19 +178,44 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.firstName = nativeResult.firstName;
         
         /**
-         * full document image if enabled with returnFullDocumentImage property.
+         * Additional info on processing of the front side.
          */
-        this.fullDocumentImage = nativeResult.fullDocumentImage;
+        this.frontAdditionalProcessingInfo = nativeResult.frontAdditionalProcessingInfo;
+        
+        /**
+         * The front raw camera frame.
+         */
+        this.frontCameraFrame = nativeResult.frontCameraFrame;
+        
+        /**
+         * Defines possible color and moire statuses determined from scanned front image.
+         */
+        this.frontImageAnalysisResult = nativeResult.frontImageAnalysisResult;
+        
+        /**
+         * Status of the last front side recognition process.
+         */
+        this.frontProcessingStatus = nativeResult.frontProcessingStatus;
+        
+        /**
+         * Defines the data extracted from the front side visual inspection zone.
+         */
+        this.frontVizResult = nativeResult.frontVizResult;
+        
+        /**
+         * back side image of the document if enabled with returnFullDocumentImage property.
+         */
+        this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
+        
+        /**
+         * front side image of the document if enabled with returnFullDocumentImage property.
+         */
+        this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
         /**
          * The full name of the document owner.
          */
         this.fullName = nativeResult.fullName;
-        
-        /**
-         * Defines possible color and moire statuses determined from scanned image.
-         */
-        this.imageAnalysisResult = nativeResult.imageAnalysisResult;
         
         /**
          * The issuing authority of the document.
@@ -235,6 +293,12 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
         this.residentialStatus = nativeResult.residentialStatus;
         
         /**
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side.
+         */
+        this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
+        
+        /**
          * The sex of the document owner.
          */
         this.sex = nativeResult.sex;
@@ -244,20 +308,15 @@ export class BlinkIdRecognizerResult extends RecognizerResult {
          */
         this.signatureImage = nativeResult.signatureImage;
         
-        /**
-         * Defines the data extracted from the visual inspection zone
-         */
-        this.vizResult = nativeResult.vizResult;
-        
     }
 }
 
 /**
- * The Blink ID Recognizer is used for scanning Blink ID.
+ * Recognizer which can scan front and back side of the United States driver license.
  */
-export class BlinkIdRecognizer extends Recognizer {
+export class BlinkIdMultiSideRecognizer extends Recognizer {
     constructor() {
-        super('BlinkIdRecognizer');
+        super('BlinkIdMultiSideRecognizer');
         
         /**
          * Defines whether blured frames filtering is allowed
@@ -265,6 +324,14 @@ export class BlinkIdRecognizer extends Recognizer {
          * 
          */
         this.allowBlurFilter = true;
+        
+        /**
+         * Proceed with scanning the back side even if the front side result is uncertain.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
+         */
+        this.allowUncertainFrontSideScan = false;
         
         /**
          * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
@@ -312,6 +379,13 @@ export class BlinkIdRecognizer extends Recognizer {
          * 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
+        
+        /**
+         * Configure the number of characters per field that are allowed to be inconsistent in data match.
+         * 
+         * 
+         */
+        this.maxAllowedMismatchesPerField = 0;
         
         /**
          * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case
@@ -375,6 +449,13 @@ export class BlinkIdRecognizer extends Recognizer {
         this.signatureImageDpi = 250;
         
         /**
+         * Skip back side capture and processing step when back side of the document is not supported
+         * 
+         * 
+         */
+        this.skipUnsupportedBack = false;
+        
+        /**
          * Defines whether result characters validatation is performed.
          * If a result member contains invalid character, the result state cannot be valid
          * 
@@ -382,6 +463,6 @@ export class BlinkIdRecognizer extends Recognizer {
          */
         this.validateResultCharacters = true;
         
-        this.createResultFromNative = function (nativeResult) { return new BlinkIdRecognizerResult(nativeResult); }
+        this.createResultFromNative = function (nativeResult) { return new BlinkIdMultiSideRecognizerResult(nativeResult); }
     }
 }

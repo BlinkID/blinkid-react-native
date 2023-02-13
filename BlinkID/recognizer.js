@@ -16,12 +16,12 @@ export class Recognizer {
 export const RecognizerResultState = Object.freeze(
     {
         /** Recognizer result is empty */
-        empty : 1,
+        empty : 0,
         /** Recognizer result contains some values, but is incomplete or it contains all values, but some are uncertain */
-        uncertain : 2,
+        uncertain : 1,
         /** Recognizer result contains all required values */
-        valid : 3,
-        stageValid: 4
+        valid : 2,
+        stageValid: 3
     }
 );
 
