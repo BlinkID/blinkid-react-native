@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.17.0.tgz
+  npm install --save blinkid-react-native-6.1.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -55,7 +55,7 @@ popd
 pushd ios || exit 1
 
   #Force minimal iOS version
-  sed -i '' "s/platform :ios, '10.0'/platform :ios, '12.0'/" Podfile
+  sed -i '' "s/platform :ios, '10.0'/platform :ios, '13.0'/" Podfile
 
 # install pod
 pod install

@@ -74,15 +74,15 @@ export default class Sample extends Component {
 
             // var mrtdSuccessFrameGrabber = new BlinkIDReactNative.SuccessFrameGrabberRecognizer(mrtdRecognizer);
 
-            // BlinkIDCombinedRecognizer automatically classifies different document types and scans the data from
+            // BlinkIDMultiSideRecognizer automatically classifies different document types and scans the data from
             // the supported document
-            var blinkIdCombinedRecognizer = new BlinkIDReactNative.BlinkIdCombinedRecognizer();
-            blinkIdCombinedRecognizer.returnFullDocumentImage = true;
-            blinkIdCombinedRecognizer.returnFaceImage = true;
+            var blinkIdMultiSideRecognizer = new BlinkIDReactNative.BlinkIdMultiSideRecognizer();
+            blinkIdMultiSideRecognizer.returnFullDocumentImage = true;
+            blinkIdMultiSideRecognizer.returnFaceImage = true;
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.BlinkIdOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([blinkIdCombinedRecognizer/*, mrtdSuccessFrameGrabber*/]),
+                new BlinkIDReactNative.RecognizerCollection([blinkIdMultiSideRecognizer/*, mrtdSuccessFrameGrabber*/]),
                 licenseKey
             );
 
@@ -142,44 +142,44 @@ export default class Sample extends Component {
             successFrame: ''
         };
 
-        if (result instanceof BlinkIDReactNative.BlinkIdCombinedRecognizerResult) {
+        if (result instanceof BlinkIDReactNative.BlinkIdMultiSideRecognizerResult) {
             let blinkIdResult = result;
 
             let resultString =
-                buildResult(blinkIdResult.firstName, "First name") +
-                buildResult(blinkIdResult.lastName, "Last name") +
-                buildResult(blinkIdResult.fullName, "Full name") +
-                buildResult(blinkIdResult.localizedName, "Localized name") +
-                buildResult(blinkIdResult.additionalNameInformation, "Additional name info") +
-                buildResult(blinkIdResult.address, "Address") +
-                buildResult(blinkIdResult.additionalAddressInformation, "Additional address info") +
-                buildResult(blinkIdResult.documentNumber, "Document number") +
-                buildResult(blinkIdResult.documentAdditionalNumber, "Additional document number") +
-                buildResult(blinkIdResult.sex, "Sex") +
-                buildResult(blinkIdResult.issuingAuthority, "Issuing authority") +
-                buildResult(blinkIdResult.nationality, "Nationality") +
+                buildResult(blinkIdResult.firstName.description, "First name") +
+                buildResult(blinkIdResult.lastName.description, "Last name") +
+                buildResult(blinkIdResult.fullName.description, "Full name") +
+                buildResult(blinkIdResult.localizedName.description, "Localized name") +
+                buildResult(blinkIdResult.additionalNameInformation.description, "Additional name info") +
+                buildResult(blinkIdResult.address.description, "Address") +
+                buildResult(blinkIdResult.additionalAddressInformation.description, "Additional address info") +
+                buildResult(blinkIdResult.documentNumber.description, "Document number") +
+                buildResult(blinkIdResult.documentAdditionalNumber.description, "Additional document number") +
+                buildResult(blinkIdResult.sex.description, "Sex") +
+                buildResult(blinkIdResult.issuingAuthority.description, "Issuing authority") +
+                buildResult(blinkIdResult.nationality.description, "Nationality") +
                 buildDateResult(blinkIdResult.dateOfBirth, "Date of birth") +
                 buildResult(blinkIdResult.age, "Age") +
                 buildDateResult(blinkIdResult.dateOfIssue, "Date of issue") +
                 buildDateResult(blinkIdResult.dateOfExpiry, "Date of expiry") +
                 buildResult(blinkIdResult.dateOfExpiryPermanent, "Date of expiry permanent") +
                 buildResult(blinkIdResult.expired, "Expired") +
-                buildResult(blinkIdResult.maritalStatus, "Martial status") +
-                buildResult(blinkIdResult.personalIdNumber, "Personal id number") +
-                buildResult(blinkIdResult.profession, "Profession") +
-                buildResult(blinkIdResult.race, "Race") +
-                buildResult(blinkIdResult.religion, "Religion") +
-                buildResult(blinkIdResult.residentialStatus, "Residential status") +
-                buildResult(blinkIdResult.processingStatus, "Processing status") +
-                buildResult(blinkIdResult.recognitionMode, "Recognition mode")
+                buildResult(blinkIdResult.maritalStatus.description, "Martial status") +
+                buildResult(blinkIdResult.personalIdNumber.description, "Personal id number") +
+                buildResult(blinkIdResult.profession.description, "Profession") +
+                buildResult(blinkIdResult.race.description, "Race") +
+                buildResult(blinkIdResult.religion.description, "Religion") +
+                buildResult(blinkIdResult.residentialStatus.description, "Residential status") +
+                buildResult(blinkIdResult.processingStatus.description, "Processing status") +
+                buildResult(blinkIdResult.recognitionMode.description, "Recognition mode")
                 ;
 
-            let dataMatchDetailedInfo = blinkIdResult.dataMatchDetailedInfo;
+            let dataMatchResult = blinkIdResult.dataMatchResult;
             resultString +=
-                    buildResult(dataMatchDetailedInfo.dataMatchResult, "Data match result") +
-                    buildResult(dataMatchDetailedInfo.dateOfExpiry, "dateOfExpiry") +
-                    buildResult(dataMatchDetailedInfo.dateOfBirth, "dateOfBirth") +
-                    buildResult(dataMatchDetailedInfo.documentNumber, "documentNumber");
+                    buildResult(dataMatchResult.stateForWholeDocument, "State for the whole document") +
+                    buildResult(dataMatchResult.states[0].state, "dateOfBirth") +
+                    buildResult(dataMatchResult.states[1].state, "dateOfExpiry") +
+                    buildResult(dataMatchResult.states[2].state, "documentNumber");
             
 
             let licenceInfo = blinkIdResult.driverLicenseDetailedInfo;
@@ -187,17 +187,17 @@ export default class Sample extends Component {
                 var vehicleClassesInfoString = '';
                 if (licenceInfo.vehicleClassesInfo) {
                   for (let i=0; i<licenceInfo.vehicleClassesInfo.length; i++) {
-                        vehicleClassesInfoString += buildResult(licenceInfo.vehicleClassesInfo[i].vehicleClass, 'Vehicle class') + 
-                        buildResult(licenceInfo.vehicleClassesInfo[i].licenceType, 'License type') + 
+                        vehicleClassesInfoString += buildResult(licenceInfo.vehicleClassesInfo[i].vehicleClass.description, 'Vehicle class') + 
+                        buildResult(licenceInfo.vehicleClassesInfo[i].licenceType.description, 'License type') + 
                         buildDateResult(licenceInfo.vehicleClassesInfo[i].effectiveDate, 'Effective date') + 
                         buildDateResult(licenceInfo.vehicleClassesInfo[i].expiryDate, 'Expiry date');
                     }
                 }
                 resultString +=
-                    buildResult(licenceInfo.restrictions, "Restrictions") +
-                    buildResult(licenceInfo.endorsements, "Endorsements") +
-                    buildResult(licenceInfo.vehicleClass, "Vehicle class") +
-                    buildResult(licenceInfo.conditions, "Conditions") + vehicleClassesInfoString;
+                    buildResult(licenceInfo.restrictions.description, "Restrictions") +
+                    buildResult(licenceInfo.endorsements.description, "Endorsements") +
+                    buildResult(licenceInfo.vehicleClass.description, "Vehicle class") +
+                    buildResult(licenceInfo.conditions.description, "Conditions") + vehicleClassesInfoString;
             }
 
             // there are other fields to extract
