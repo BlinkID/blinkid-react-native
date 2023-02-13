@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 #import "MBBlinkIDModule.h"
 #import <React/RCTConvert.h>
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 typedef NS_ENUM(NSUInteger, PPImageType) {
     PPImageTypeFace,
@@ -20,7 +20,7 @@ static NSString* const MBErrorDomain = @"microblink.error";
 static NSString* const RESULT_CAPTURED_FULL_IMAGE = @"capturedFullImage";
 static NSString* const RESULT_DOCUMENT_CAPTURE_RECOGNIZER_RESULT = @"documentCaptureRecognizerResult";
 
-@interface MBMicroblinkModule () <MBOverlayViewControllerDelegate>
+@interface MBBlinkIDModule () <MBOverlayViewControllerDelegate>
 
 @property (nonatomic, strong) MBRecognizerCollection *recognizerCollection;
 @property (nonatomic) id<MBRecognizerRunnerViewController> scanningViewController;
@@ -32,7 +32,7 @@ static NSString* const RESULT_DOCUMENT_CAPTURE_RECOGNIZER_RESULT = @"documentCap
 
 @end
 
-@implementation MBMicroblinkModule
+@implementation MBBlinkIDModule
 
 RCT_EXPORT_MODULE(BlinkIDIos);
 
@@ -136,7 +136,7 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     NSError *error = [NSError errorWithDomain:MBErrorDomain
                                          code:-58
                                      userInfo:nil];
-    self.promiseReject(MBMicroblinkModule.STATUS_SCAN_CANCELED, @"Scanning has been canceled", error);
+    self.promiseReject(MBBlinkIDModule.STATUS_SCAN_CANCELED, @"Scanning has been canceled", error);
 
     self.promiseResolve = nil;
     self.promiseReject = nil;

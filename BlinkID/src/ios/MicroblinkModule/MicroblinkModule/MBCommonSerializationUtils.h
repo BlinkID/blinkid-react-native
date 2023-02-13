@@ -5,7 +5,7 @@
 //  Created by DoDo on 04/06/2018.
 //
 
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 #import <Foundation/Foundation.h>
 

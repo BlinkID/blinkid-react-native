@@ -13,7 +13,7 @@
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
 
-    [result setObject:[NSNumber numberWithUnsignedInteger:(self.baseResult.resultState + 1)] forKey:@"resultState"];
+    [result setObject:[NSNumber numberWithUnsignedInteger:self.baseResult.resultState] forKey:@"resultState"];
     return result;
 }
 

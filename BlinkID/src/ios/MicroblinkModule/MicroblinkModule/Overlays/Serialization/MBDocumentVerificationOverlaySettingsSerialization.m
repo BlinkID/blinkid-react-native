@@ -78,11 +78,11 @@
 }
 
 
-- (void)documentVerificationOverlayViewControllerDidFinishScanning:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController state:(MBRecognizerResultState)state {
+- (void)legacyDocumentVerificationOverlayViewControllerDidFinishScanning:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController state:(MBRecognizerResultState)state {
     [self.delegate overlayViewControllerDidFinishScanning:documentVerificationOverlayViewController state:state];
 }
 
-- (void)documentVerificationOverlayViewControllerDidTapClose:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController {
+- (void)legacyDocumentVerificationOverlayViewControllerDidTapClose:(nonnull MBLegacyDocumentVerificationOverlayViewController *)documentVerificationOverlayViewController {
     [self.delegate overlayDidTapClose:documentVerificationOverlayViewController];
 }
 

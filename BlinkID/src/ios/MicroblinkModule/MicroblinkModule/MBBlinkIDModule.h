@@ -8,7 +8,7 @@
 
 #import <React/RCTBridgeModule.h>
 
-@interface MBMicroblinkModule : NSObject<RCTBridgeModule>
+@interface MBBlinkIDModule : NSObject<RCTBridgeModule>
 
 
 @end

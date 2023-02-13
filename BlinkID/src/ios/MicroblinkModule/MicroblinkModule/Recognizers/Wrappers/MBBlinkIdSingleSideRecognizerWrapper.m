@@ -1,22 +1,22 @@
-#import "MBBlinkIdRecognizerWrapper.h"
+#import "MBBlinkIdSingleSideRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
 #import "MBBlinkIDSerializationUtils.h"
 #import "MBCommonSerializationUtils.h"
 
-@implementation MBBlinkIdRecognizerCreator
+@implementation MBBlinkIdSingleSideRecognizerCreator
 
 @synthesize jsonName = _jsonName;
 
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _jsonName = @"BlinkIdRecognizer";
+        _jsonName = @"BlinkIdSingleSideRecognizer";
     }
     return self;
 }
 
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
-    MBBlinkIdRecognizer *recognizer = [[MBBlinkIdRecognizer alloc] init];
+    MBBlinkIdSingleSideRecognizer *recognizer = [[MBBlinkIdSingleSideRecognizer alloc] init];
     {
         id allowBlurFilter = [jsonRecognizer valueForKey:@"allowBlurFilter"];
         if (allowBlurFilter != nil) {
@@ -38,7 +38,7 @@
     {
         id anonymizationMode = [jsonRecognizer valueForKey:@"anonymizationMode"];
         if (anonymizationMode != nil) {
-            recognizer.anonymizationMode = (MBAnonymizationMode)([(NSNumber *)anonymizationMode unsignedIntegerValue] - 1);
+            recognizer.anonymizationMode = (MBAnonymizationMode)[(NSNumber *)anonymizationMode unsignedIntegerValue];
         }
     }
     {
@@ -119,17 +119,18 @@
 
 @end
 
-@interface MBBlinkIdRecognizer (JsonSerialization)
+@interface MBBlinkIdSingleSideRecognizer (JsonSerialization)
 @end
 
-@implementation MBBlinkIdRecognizer (JsonSerialization)
+@implementation MBBlinkIdSingleSideRecognizer (JsonSerialization)
 
 -(NSDictionary *) serializeResult {
     NSMutableDictionary* jsonResult = (NSMutableDictionary*)[super serializeResult];
-    [jsonResult setValue:self.result.additionalAddressInformation forKey:@"additionalAddressInformation"];
-    [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
-    [jsonResult setValue:self.result.additionalOptionalAddressInformation forKey:@"additionalOptionalAddressInformation"];
-    [jsonResult setValue:self.result.address forKey:@"address"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.additionalAddressInformation] forKey:@"additionalAddressInformation"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.additionalNameInformation] forKey:@"additionalNameInformation"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.additionalOptionalAddressInformation] forKey:@"additionalOptionalAddressInformation"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeAdditionalProcessingInfo:self.result.additionalProcessingInfo] forKey:@"additionalProcessingInfo"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.address] forKey:@"address"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.barcodeCameraFrame] forKey:@"barcodeCameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
@@ -139,34 +140,34 @@
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.dateOfExpiryPermanent] forKey:@"dateOfExpiryPermanent"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
-    [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
-    [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
-    [jsonResult setValue:self.result.documentOptionalAdditionalNumber forKey:@"documentOptionalAdditionalNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.documentAdditionalNumber] forKey:@"documentAdditionalNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.documentNumber] forKey:@"documentNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.documentOptionalAdditionalNumber] forKey:@"documentOptionalAdditionalNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
-    [jsonResult setValue:self.result.employer forKey:@"employer"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.employer] forKey:@"employer"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
-    [jsonResult setValue:self.result.fathersName forKey:@"fathersName"];
-    [jsonResult setValue:self.result.firstName forKey:@"firstName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.fathersName] forKey:@"fathersName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.firstName] forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];
-    [jsonResult setValue:self.result.fullName forKey:@"fullName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.fullName] forKey:@"fullName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeImageAnalysisResult:self.result.imageAnalysisResult] forKey:@"imageAnalysisResult"];
-    [jsonResult setValue:self.result.issuingAuthority forKey:@"issuingAuthority"];
-    [jsonResult setValue:self.result.lastName forKey:@"lastName"];
-    [jsonResult setValue:self.result.localizedName forKey:@"localizedName"];
-    [jsonResult setValue:self.result.maritalStatus forKey:@"maritalStatus"];
-    [jsonResult setValue:self.result.mothersName forKey:@"mothersName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.issuingAuthority] forKey:@"issuingAuthority"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.lastName] forKey:@"lastName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.localizedName] forKey:@"localizedName"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.maritalStatus] forKey:@"maritalStatus"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.mothersName] forKey:@"mothersName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
-    [jsonResult setValue:self.result.nationality forKey:@"nationality"];
-    [jsonResult setValue:self.result.personalIdNumber forKey:@"personalIdNumber"];
-    [jsonResult setValue:self.result.placeOfBirth forKey:@"placeOfBirth"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.processingStatus + 1)] forKey:@"processingStatus"];
-    [jsonResult setValue:self.result.profession forKey:@"profession"];
-    [jsonResult setValue:self.result.race forKey:@"race"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.recognitionMode + 1)] forKey:@"recognitionMode"];
-    [jsonResult setValue:self.result.religion forKey:@"religion"];
-    [jsonResult setValue:self.result.residentialStatus forKey:@"residentialStatus"];
-    [jsonResult setValue:self.result.sex forKey:@"sex"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.nationality] forKey:@"nationality"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.personalIdNumber] forKey:@"personalIdNumber"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.placeOfBirth] forKey:@"placeOfBirth"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.processingStatus] forKey:@"processingStatus"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.profession] forKey:@"profession"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.race] forKey:@"race"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.recognitionMode] forKey:@"recognitionMode"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.religion] forKey:@"religion"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.residentialStatus] forKey:@"residentialStatus"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.sex] forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.vizResult] forKey:@"vizResult"];
 

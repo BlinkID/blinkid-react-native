@@ -20,7 +20,7 @@
     {
         id detectorType = [jsonRecognizer valueForKey:@"detectorType"];
         if (detectorType != nil) {
-            recognizer.detectorType = (MBDocumentFaceDetectorType)([(NSNumber *)detectorType unsignedIntegerValue] - 1);
+            recognizer.detectorType = (MBDocumentFaceDetectorType)[(NSNumber *)detectorType unsignedIntegerValue];
         }
     }
     {

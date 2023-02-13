@@ -33,14 +33,14 @@
     [jsonResult setValue:self.result.additionalNameInformation forKey:@"additionalNameInformation"];
     [jsonResult setValue:self.result.address forKey:@"address"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.barcodeType + 1)] forKey:@"barcodeType"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.barcodeType] forKey:@"barcodeType"];
     [jsonResult setValue:self.result.city forKey:@"city"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
-    [jsonResult setValue:[NSNumber numberWithInteger:(self.result.documentType + 1)] forKey:@"documentType"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.documentType] forKey:@"documentType"];
     [jsonResult setValue:self.result.employer forKey:@"employer"];
     [jsonResult setValue:self.result.endorsements forKey:@"endorsements"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];

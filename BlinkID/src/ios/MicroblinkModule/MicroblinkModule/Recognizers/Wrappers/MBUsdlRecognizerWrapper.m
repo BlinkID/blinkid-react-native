@@ -29,14 +29,12 @@
             recognizer.scanUncertain = [(NSNumber*)uncertainDecoding boolValue];
         }
     }
-
     {
         id enableCompactParser = [jsonRecognizer valueForKey:@"enableCompactParser"];
         if (enableCompactParser != nil) {
             recognizer.enableCompactParser = [(NSNumber*)enableCompactParser boolValue];
         }
     }
-
 
     return recognizer;
 }

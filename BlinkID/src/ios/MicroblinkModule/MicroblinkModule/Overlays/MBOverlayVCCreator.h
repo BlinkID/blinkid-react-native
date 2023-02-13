@@ -1,6 +1,5 @@
 //
 //  MBOverlayVCCreator.h
-//  MicroblinkModule
 //
 //  Created by DoDo on 08/06/2018.
 //  Copyright © 2018 Microblink. All rights reserved.
@@ -10,13 +9,13 @@
 
 #import "MBOverlayViewControllerDelegate.h"
 
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 #import <Foundation/Foundation.h>
 
 @protocol MBOverlayVCCreator
 @required
 
--(MBOverlayViewController *) createOverlayViewController:(NSDictionary *)jsonOverlaySettings recognizerCollection:(MBRecognizerCollection*)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate>) delegate;
+- (MBOverlayViewController * _Nullable)createOverlayViewController:(NSDictionary * _Nullable)jsonOverlaySettings recognizerCollection:(MBRecognizerCollection * _Nullable)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate> _Nullable) delegate;
 
 @property (nonatomic, nonnull, readonly) NSString *jsonName;
 
