@@ -15,7 +15,6 @@
 +(MBImageExtensionFactors) deserializeMBImageExtensionFactors:(NSDictionary * _Nullable)jsonExtensionFactors;
 +(NSDictionary * _Nonnull) serializeDriverLicenseDetailedInfo:(MBDriverLicenseDetailedInfo * _Nonnull)driverLicenseDetailedInfo;
 +(NSDictionary * _Nonnull) serializeBarcodeDriverLicenseDetailedInfo:(MBBarcodeDriverLicenseDetailedInfo * _Nonnull)driverLicenseDetailedInfo;
-+(NSDictionary * _Nonnull) serializeVehicleClassInfo:(MBVehicleClassInfo * _Nonnull)vehicleClassInfo;
 +(NSDictionary * _Nonnull) serializeDataMatchResult:(MBDataMatchResult * _Nonnull)dataMatchResult;
 +(NSDictionary * _Nonnull) serializeFieldState:(MBFieldState * _Nonnull)fieldState;
 +(NSDictionary * _Nonnull) serializeClassInfo:(MBClassInfo * _Nonnull)classInfo;

@@ -8,7 +8,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init $appName --version="0.64.0" || exit 1
+npx react-native init $appName --version="0.71.2" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
@@ -55,7 +55,7 @@ popd
 pushd ios || exit 1
 
   #Force minimal iOS version
-  sed -i '' "s/platform :ios, '10.0'/platform :ios, '13.0'/" Podfile
+  sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '13.0'/" Podfile
 
 # install pod
 pod install
@@ -73,8 +73,8 @@ pod install
 # change bundle id
 sed -i '' s/\$\(PRODUCT_BUNDLE_IDENTIFIER\)/com.microblink.sample/g $appName/Info.plist
 
-#Disable Flipper since it causes build problems
-sed -i '' 's/use_flipper!()/# use_flipper!()/' Podfile
+#Disable Flipper since it spams console with errors
+export NO_FLIPPER=1
 
 pod install
 
