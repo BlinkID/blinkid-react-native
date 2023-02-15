@@ -56,7 +56,7 @@ RCT_EXPORT_MODULE(BlinkIDIos);
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
     for (NSString* key in dictionary.allKeys) {
         if (mutableDictionary[key] == [NSNull null]) {
-            mutableDictionary[key] = nil;
+            [mutableDictionary removeObjectForKey:key];
         }
     }
     return mutableDictionary;
