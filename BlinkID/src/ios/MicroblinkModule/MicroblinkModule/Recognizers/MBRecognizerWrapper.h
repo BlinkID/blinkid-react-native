@@ -7,13 +7,13 @@
 
 #pragma once
 
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 /** Object that knows how to create recognizer from JSON */
 @protocol MBRecognizerCreator
 @required
 
--(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer;
+- (MBRecognizer * _Nullable)createRecognizer:(NSDictionary * _Nullable) jsonRecognizer;
 
 @property (nonatomic, nonnull, readonly) NSString* jsonName;
 
@@ -23,6 +23,6 @@
 
 @interface MBRecognizer (JsonSerialization)
 
--(NSDictionary *) serializeResult;
+- (NSDictionary * _Nullable)serializeResult;
 
 @end

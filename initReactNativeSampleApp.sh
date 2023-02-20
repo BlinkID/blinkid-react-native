@@ -8,7 +8,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init $appName --version="0.64.0" || exit 1
+npx react-native init $appName --version="0.71.2" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-5.17.0.tgz
+  npm install --save blinkid-react-native-6.1.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -55,7 +55,7 @@ popd
 pushd ios || exit 1
 
   #Force minimal iOS version
-  sed -i '' "s/platform :ios, '10.0'/platform :ios, '12.0'/" Podfile
+  sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '13.0'/" Podfile
 
 # install pod
 pod install
@@ -73,8 +73,8 @@ pod install
 # change bundle id
 sed -i '' s/\$\(PRODUCT_BUNDLE_IDENTIFIER\)/com.microblink.sample/g $appName/Info.plist
 
-#Disable Flipper since it causes build problems
-sed -i '' 's/use_flipper!()/# use_flipper!()/' Podfile
+#Disable Flipper since it spams console with errors
+export NO_FLIPPER=1
 
 pod install
 
@@ -99,7 +99,6 @@ cp index.js index.android.js
 #update compile and target sdk versions to 31, add android:exported="true" to manifest
 sed -i '' 's#compileSdkVersion = 29#compileSdkVersion = 31#g' ./android/build.gradle
 sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 31#g' ./android/build.gradle
-sed -i '' 's#android:name=".MainActivity"#android:name=".MainActivity" android:exported="true"#g' ./android/app/src/main/AndroidManifest.xml
 
 # return to root folder
 popd

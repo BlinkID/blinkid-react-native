@@ -1,5 +1,5 @@
 #import "MBRecognizerWrapper.h"
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 @interface MBUsdlCombinedRecognizerCreator : NSObject<MBRecognizerCreator>
 

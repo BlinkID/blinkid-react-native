@@ -5,7 +5,7 @@
 //  Created by DoDo on 04/06/2018.
 //
 
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 #import <Foundation/Foundation.h>
 
@@ -14,14 +14,17 @@
 +(NSDictionary * _Nonnull) serializeMrzResult:(MBMrzResult * _Nonnull)mrzResult;
 +(MBImageExtensionFactors) deserializeMBImageExtensionFactors:(NSDictionary * _Nullable)jsonExtensionFactors;
 +(NSDictionary * _Nonnull) serializeDriverLicenseDetailedInfo:(MBDriverLicenseDetailedInfo * _Nonnull)driverLicenseDetailedInfo;
-+(NSDictionary * _Nonnull) serializeVehicleClassInfo:(MBVehicleClassInfo * _Nonnull)vehicleClassInfo;
-+(NSDictionary * _Nonnull) serializeDataMatchDetailedInfo:(MBDataMatchDetailedInfo * _Nonnull)dataMatchDetailedInfo;
++(NSDictionary * _Nonnull) serializeBarcodeDriverLicenseDetailedInfo:(MBBarcodeDriverLicenseDetailedInfo * _Nonnull)driverLicenseDetailedInfo;
++(NSDictionary * _Nonnull) serializeDataMatchResult:(MBDataMatchResult * _Nonnull)dataMatchResult;
++(NSDictionary * _Nonnull) serializeFieldState:(MBFieldState * _Nonnull)fieldState;
 +(NSDictionary * _Nonnull) serializeClassInfo:(MBClassInfo * _Nonnull)classInfo;
 +(NSDictionary * _Nonnull) serializeVizResult:(MBVizResult * _Nonnull)vizResult;
 +(NSDictionary * _Nonnull) serializeBarcodeResult:(MBBarcodeResult * _Nonnull)barcodeResult;
 +(NSDictionary * _Nonnull) serializeImageAnalysisResult:(MBImageAnalysisResult * _Nonnull)imageAnalysisResult;
-+(MBRecognitionModeFilter *) deserializeMBRecognitionModeFilter:(NSDictionary * _Nullable)jsonRecognitionModeFilter;
++(MBRecognitionModeFilter * _Nonnull) deserializeMBRecognitionModeFilter:(NSDictionary * _Nullable)jsonRecognitionModeFilter;
 +(NSDictionary * _Nonnull) serializeBarcodeElements:(MBBarcodeElements * _Nonnull)extendedElements;
-+(NSArray<NSString *> *) serializeBarcodeElementsValues:(MBBarcodeElements *)extendedElements;
++(NSArray<NSString *> * _Nonnull) serializeBarcodeElementsValues:(MBBarcodeElements * _Nonnull)extendedElements;
++ (NSDictionary * _Nonnull)serializeAdditionalProcessingInfo:(MBAdditionalProcessingInfo * _Nullable)additionalProcessingInfo;
++ (NSDictionary * _Nonnull)serializeMBDate:(MBDate * _Nonnull)date;
 
 @end

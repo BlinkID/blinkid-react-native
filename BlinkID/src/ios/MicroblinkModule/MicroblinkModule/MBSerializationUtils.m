@@ -22,8 +22,20 @@
     return [MBSerializationUtils serializeDay:components.day month:components.month year:components.year];
 }
 
-+(NSDictionary *) serializeMBDateResult:(MBDateResult *) value {
-    return [MBSerializationUtils serializeDay:value.day month:value.month year:value.year];
++ (NSDictionary *)serializeMBDateResult:(MBDateResult *) value {
+    NSMutableDictionary *dict = [MBSerializationUtils serializeDay:value.day month:value.month year:value.year].mutableCopy;
+    [dict setValue:[MBSerializationUtils serializeMBStringResult:value.originalDateStringResult] forKey:@"originalDateStringResult"];
+    return dict;
+}
+
++ (NSDictionary *)serializeMBStringResult:(MBStringResult *) value {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeLatin] forKey:@"latin"];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeArabic] forKey:@"arabic"];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeCyrillic] forKey:@"cyrillic"];
+    [dict setValue:value.description forKey:@"description"];
+    
+    return dict;
 }
 
 +(NSString *) encodeMBImage:(MBImage * _Nullable) image {

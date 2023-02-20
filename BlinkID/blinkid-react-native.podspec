@@ -10,14 +10,14 @@ Pod::Spec.new do |s|
   s.authors      = package['author']
   s.homepage     = package['homepage']
   s.license      = package['license']
-  s.platform     = :ios, "12.0"
+  s.platform     = :ios, "13.0"
 
   s.source       = { :git => "https://github.com/BlinkID/blinkid-react-native.git", :tag => "v#{s.version}" }
   s.source_files  = "src/ios", "src/ios/**/*.{h,m}"
   s.header_dir    = "blinkid-react-native"
 
   s.dependency 'React'
-  s.dependency 'PPBlinkID', '~> 5.17.0'
+  s.dependency 'PPBlinkID', '~> 6.1.1'
 
   s.frameworks = 'UIKit'
 end

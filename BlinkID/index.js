@@ -113,8 +113,8 @@ export * from './overlays/blinkidOverlays'
 
 // export recognizers that can be used and their results
 export * from './recognizers/successFrameGrabberRecognizer'
-export * from './recognizers/blinkIdCombinedRecognizer'
-export * from './recognizers/blinkIdRecognizer'
+export * from './recognizers/blinkIdMultiSideRecognizer'
+export * from './recognizers/blinkIdSingleSideRecognizer'
 export * from './recognizers/documentFaceRecognizer'
 export * from './recognizers/idBarcodeRecognizer'
 export * from './recognizers/mrtdCombinedRecognizer'

@@ -2,8 +2,8 @@
 
 #import "MBRecognizerWrapper.h"
 #import "MBSuccessFrameGrabberRecognizerWrapper.h"
-#import "MBBlinkIdCombinedRecognizerWrapper.h"
-#import "MBBlinkIdRecognizerWrapper.h"
+#import "MBBlinkIdMultiSideRecognizerWrapper.h"
+#import "MBBlinkIdSingleSideRecognizerWrapper.h"
 #import "MBDocumentFaceRecognizerWrapper.h"
 #import "MBIdBarcodeRecognizerWrapper.h"
 #import "MBMrtdCombinedRecognizerWrapper.h"
@@ -13,7 +13,6 @@
 #import "MBUsdlRecognizerWrapper.h"
 #import "MBUsdlCombinedRecognizerWrapper.h"
 
-//
 
 @interface MBRecognizerSerializers ()
 
@@ -32,8 +31,8 @@
     if (self) {
         _recognizerSerializers = [[NSMutableDictionary alloc] init];
         [self registerCreator:[[MBSuccessFrameGrabberRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBlinkIdCombinedRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBBlinkIdRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkIdMultiSideRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkIdSingleSideRecognizerCreator alloc] init]];
         [self registerCreator:[[MBDocumentFaceRecognizerCreator alloc] init]];
         [self registerCreator:[[MBIdBarcodeRecognizerCreator alloc] init]];
         [self registerCreator:[[MBMrtdCombinedRecognizerCreator alloc] init]];
@@ -43,7 +42,6 @@
         [self registerCreator:[[MBUsdlRecognizerCreator alloc] init]];
         [self registerCreator:[[MBUsdlCombinedRecognizerCreator alloc] init]];
         
-//
     }
     return self;
 }

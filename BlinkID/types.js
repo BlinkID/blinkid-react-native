@@ -41,28 +41,60 @@ export class Quadrilateral {
 }
 
 /**
+ * Represents data extracted from the Driver's license.
+ */
+export class DriverLicenseDetailedInfo {
+    constructor(nativeDriverLicenseDetailedInfo) {
+        /**  Restrictions to driving privileges for the driver license owner. */
+        this.restrictions = nativeDriverLicenseDetailedInfo.restrictions;
+        /** Additional privileges granted to the driver license owner. */
+        this.endorsements = nativeDriverLicenseDetailedInfo.endorsements;
+        /** The type of vehicle the driver license owner has privilege to drive. */
+        this.vehicleClass = nativeDriverLicenseDetailedInfo.vehicleClass;
+        /** The driver license conditions. */
+        this.conditions = nativeDriverLicenseDetailedInfo.conditions;
+        /** The additional information on vehicle class. */
+        this.vehicleClassesInfo = nativeDriverLicenseDetailedInfo.vehicleClassesInfo != null  ? new DriverLicenseDetailedInfo(nativeBarcodeResult.driverLicenseDetailedInfo) : null;
+    }
+}
+
+/**
+ * The additional information on vehicle class.
+ */
+function VehicleClassInfo(nativeVehicleClassesInfo) {
+    /**  The type of vehicle the driver license owner has privilege to drive. */
+    this.vehicleClass = nativeVehicleClassesInfo.vehicleClass;
+    /** The type of driver licence. */
+    this.licenceType = nativeVehicleClassesInfo.licenceType;
+    /** The date since licence is effective. */
+    this.effectiveDate = nativeVehicleClassesInfo.effectiveDate;
+    /** The date of expiry of licence. */
+    this.expiryDate = nativeVehicleClassesInfo.expiryDate;
+}
+
+/**
  * Possible types of Machine Readable Travel Documents (MRTDs).
  */
 export const MrtdDocumentType = Object.freeze(
     {
         /** Unknown document type */
-        Unknown : 1,
+        Unknown : 0,
         /** Identity card */
-        IdentityCard : 2,
+        IdentityCard : 1,
         /** Passport */
-        Passport : 3,
+        Passport : 2,
         /** Visa */
-        Visa : 4,
+        Visa : 3,
         /** US Green Card */
-        GreenCard : 5,
+        GreenCard : 4,
         /** Malaysian PASS type IMM13P */
-        MalaysianPassIMM13P : 6,
+        MalaysianPassIMM13P : 5,
         /** One liner ISO DL */
-        Dl: 7,
+        Dl: 6,
         /** One liner ISO DL */
-        InternalTravelDocument: 8,
+        InternalTravelDocument: 7,
         /** Border Crossing Card */
-        BorderCrossingCard: 9
+        BorderCrossingCard: 8
     }
 );
 
@@ -72,41 +104,41 @@ export const MrtdDocumentType = Object.freeze(
 export const IdBarcodeDocumentType = Object.freeze(
     {
         /** No document was scanned */
-        None: 1,
+        None: 0,
         /** AAMVACompliant document was scanned */
-        AAMVACompliant: 2,
+        AAMVACompliant: 1,
         /** Argentina ID document was scanned */
-        ArgentinaID: 3,
+        ArgentinaID: 2,
         /** ArgentinaAlienID document was scanned */
-        ArgentinaAlienID: 4,
+        ArgentinaAlienID: 3,
         /** Argentina driver license document was scanned */
-        ArgentinaDL: 5,
+        ArgentinaDL: 4,
         /** Colombia ID document was scanned */
-        ColombiaID: 6,
+        ColombiaID: 5,
         /** Colombia driver license document was scanned */
-        ColombiaDL: 7,
+        ColombiaDL: 6,
         /** NigeriaVoter ID document was scanned */
-        NigeriaVoterID: 8,
+        NigeriaVoterID: 7,
         /** Nigeria driver license document was scanned */
-        NigeriaDL: 9,
+        NigeriaDL: 8,
         /** Panama ID document was scanned */
-        PanamaID: 10,
+        PanamaID: 9,
         /** SouthAfrica ID document was scanned */
-        SouthAfricaID: 11
+        SouthAfricaID: 10
     }
 );
 
 /**
- * Defines possible color statuses determined from scanned image scanned with BlinkID or BlinkID Combined Recognizer
+ * Defines possible color statuses determined from scanned image scanned with BlinkID or BlinkID Multiside Recognizer
  */
 export const DocumentImageColorStatus = Object.freeze(
     {
         /** Determining image color status was not performed */
-        NotAvailable: 1,
+        NotAvailable: 0,
         /** Black-and-white image scanned */
-        BlackAndWhite: 2,
+        BlackAndWhite: 1,
         /** Color image scanned */
-        Color: 3
+        Color: 2
     }
 );
 
@@ -116,13 +148,13 @@ export const DocumentImageColorStatus = Object.freeze(
 export const DocumentImageMoireStatus = Object.freeze(
     {
         /** Detection of Moire patterns was not performed. */
-        NotAvailable: 1,
+        NotAvailable: 0,
 
         /** Moire pattern not detected on input image. */
-        NotDetected: 2,
+        NotDetected: 1,
 
         /** Moire pattern detected on input image. */
-        Detected: 3
+        Detected: 2
     }
 );
 
@@ -132,16 +164,16 @@ export const DocumentImageMoireStatus = Object.freeze(
 export const AnonymizationMode = Object.freeze(
     {
         /** Anonymization will not be performed. */
-        None: 1,
+        None: 0,
 
         /** FullDocumentImage is anonymized with black boxes covering sensitive data. */
-        ImageOnly: 2,
+        ImageOnly: 1,
 
         /** Result fields containing sensitive data are removed from result. */
-        ResultFieldsOnly: 3,
+        ResultFieldsOnly: 2,
 
         /** This mode is combination of ImageOnly and ResultFieldsOnly modes. */
-        FullResult: 4
+        FullResult: 3
     }
 );
 
@@ -151,52 +183,52 @@ export const AnonymizationMode = Object.freeze(
 export const ProcessingStatus = Object.freeze(
     {
     /** Recognition was successful. */
-    Success: 1,
+    Success: 0,
 
     /** Detection of the document failed. */
-    DetectionFailed: 2,
+    DetectionFailed: 1,
 
     /** Preprocessing of the input image has failed. */
-    ImagePreprocessingFailed: 3,
+    ImagePreprocessingFailed: 2,
 
     /** Recognizer has inconsistent results. */
-    StabilityTestFailed: 4,
+    StabilityTestFailed: 3,
 
     /** Wrong side of the document has been scanned. */
-    ScanningWrongSide: 5,
+    ScanningWrongSide: 4,
 
     /** Identification of the fields present on the document has failed. */
-    FieldIdentificationFailed: 6,
+    FieldIdentificationFailed: 5,
 
     /** Mandatory field for the specific document is missing. */
-    MandatoryFieldMissing: 7,
+    MandatoryFieldMissing: 6,
 
     /** Result contains invalid characters in some of the fields. */
-    InvalidCharactersFound: 8,
+    InvalidCharactersFound: 7,
 
     /** Failed to return a requested image. */
-    ImageReturnFailed: 9,
+    ImageReturnFailed: 8,
 
     /** Reading or parsing of the barcode has failed. */
-    BarcodeRecognitionFailed: 10,
+    BarcodeRecognitionFailed: 9,
 
     /** Parsing of the MRZ has failed. */
-    MrzParsingFailed: 11,
+    MrzParsingFailed: 10,
 
     /** Document class has been filtered out. */
-    ClassFiltered: 12,
+    ClassFiltered: 11,
 
     /** Document currently not supported by the recognizer. */
-    UnsupportedClass: 13,
+    UnsupportedClass: 12,
 
     /** License for the detected document is missing. */
-    UnsupportedByLicense: 14,
+    UnsupportedByLicense: 13,
 
     /** Front side recognition has completed successfully, and recognizer is waiting for the other side to be scanned. */
-    AwaitingOtherSide: 15,
+    AwaitingOtherSide: 14,
 
     /** Side not scanned. */
-    NotScanned: 16
+    NotScanned: 15
     }
 );
 
@@ -221,447 +253,455 @@ export class ImageAnalysisResult {
 }
 
 /**
- * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
  */
 export const Country = Object.freeze(
     {
-        None: 1,
-        Albania: 2,
-        Algeria: 3,
-        Argentina: 4,
-        Australia: 5,
-        Austria: 6,
-        Azerbaijan: 7,
-        Bahrain: 8,
-        Bangladesh: 9,
-        Belgium: 10,
-        BosniaAndHerzegovina: 11,
-        Brunei: 12,
-        Bulgaria: 13,
-        Cambodia: 14,
-        Canada: 15,
-        Chile: 16,
-        Colombia: 17,
-        CostaRica: 18,
-        Croatia: 19,
-        Cyprus: 20,
-        Czechia: 21,
-        Denmark: 22,
-        DominicanRepublic: 23,
-        Egypt: 24,
-        Estonia: 25,
-        Finland: 26,
-        France: 27,
-        Georgia: 28,
-        Germany: 29,
-        Ghana: 30,
-        Greece: 31,
-        Guatemala: 32,
-        HongKong: 33,
-        Hungary: 34,
-        India: 35,
-        Indonesia: 36,
-        Ireland: 37,
-        Israel: 38,
-        Italy: 39,
-        Jordan: 40,
-        Kazakhstan: 41,
-        Kenya: 42,
-        Kosovo: 43,
-        Kuwait: 44,
-        Latvia: 45,
-        Lithuania: 46,
-        Malaysia: 47,
-        Maldives: 48,
-        Malta: 49,
-        Mauritius: 50,
-        Mexico: 51,
-        Morocco: 52,
-        Netherlands: 53,
-        NewZealand: 54,
-        Nigeria: 55,
-        Pakistan: 56,
-        Panama: 57,
-        Paraguay: 58,
-        Philippines: 59,
-        Poland: 60,
-        Portugal: 61,
-        PuertoRico: 62,
-        Qatar: 63,
-        Romania: 64,
-        Russia: 65,
-        SaudiArabia: 66,
-        Serbia: 67,
-        Singapore: 68,
-        Slovakia: 69,
-        Slovenia: 70,
-        SouthAfrica: 71,
-        Spain: 72,
-        Sweden: 73,
-        Switzerland: 74,
-        Taiwan: 75,
-        Thailand: 76,
-        Tunisia: 77,
-        Turkey: 78,
-        UAE: 79,
-        Uganda: 80,
-        UK: 81,
-        Ukraine: 82,
-        Usa: 83,
-        Vietnam: 84,
-        Brazil: 85,
-        Norway: 86,
-        Oman: 87,
-        Ecuador: 88,
-        ElSalvador: 89,
-        SriLanka: 90,
-        Peru: 91,
-        Uruguay: 92,
-        Bahamas: 93,
-        Bermuda: 94,
-        Bolivia: 95,
-        China: 96,
-        EuropeanUnion: 97,
-        Haiti: 98,
-        Honduras: 99,
-        Iceland: 100,
-        Japan: 101,
-        Luxembourg: 102,
-        Montenegro: 103,
-        Nicaragua: 104,
-        SouthKorea: 105,
-        Venezuela: 106,
-        Afghanistan: 107,
-        AlandIslands: 108,
-        AmericanSamoa: 109,
-        Andorra: 110,
-        Angola: 111,
-        Anguilla: 112,
-        Antarctica: 113,
-        AntiguaAndBarbuda: 114,
-        Armenia: 115,
-        Aruba: 116,
-        BailiwickOfGuernsey: 117,
-        BailiwickOfJersey: 118,
-        Barbados: 119,
-        Belarus: 120,
-        Belize: 121,
-        Benin: 122,
-        Bhutan: 123,
-        BonaireSaintEustatiusAndSaba: 124,
-        Botswana: 125,
-        BouvetIsland: 126,
-        BritishIndianOceanTerritory: 127,
-        BurkinaFaso: 128,
-        Burundi: 129,
-        Cameroon: 130,
-        CapeVerde: 131,
-        CaribbeanNetherlands: 132,
-        CaymanIslands: 133,
-        CentralAfricanRepublic: 134,
-        Chad: 135,
-        ChristmasIsland: 136,
-        CocosIslands: 137,
-        Comoros: 138,
-        Congo: 139,
-        CookIslands: 140,
-        Cuba: 141,
-        Curacao: 142,
-        DemocraticRepublicOfTheCongo: 143,
-        Djibouti: 144,
-        Dominica: 145,
-        EastTimor: 146,
-        EquatorialGuinea: 147,
-        Eritrea: 148,
-        Ethiopia: 149,
-        FalklandIslands: 150,
-        FaroeIslands: 151,
-        FederatedStatesOfMicronesia: 152,
-        Fiji: 153,
-        FrenchGuiana: 154,
-        FrenchPolynesia: 155,
-        FrenchSouthernTerritories: 156,
-        Gabon: 157,
-        Gambia: 158,
-        Gibraltar: 159,
-        Greenland: 160,
-        Grenada: 161,
-        Guadeloupe: 162,
-        Guam: 163,
-        Guinea: 164,
-        GuineaBissau: 165,
-        Guyana: 166,
-        HeardIslandAndMcdonaldIslands: 167,
-        Iran: 168,
-        Iraq: 169,
-        IsleOfMan: 170,
-        IvoryCoast: 171,
-        Jamaica: 172,
-        Kiribati: 173,
-        Kyrgyzstan: 174,
-        Laos: 175,
-        Lebanon: 176,
-        Lesotho: 177,
-        Liberia: 178,
-        Libya: 179,
-        Liechtenstein: 180,
-        Macau: 181,
-        Madagascar: 182,
-        Malawi: 183,
-        Mali: 184,
-        MarshallIslands: 185,
-        Martinique: 186,
-        Mauritania: 187,
-        Mayotte: 188,
-        Moldova: 189,
-        Monaco: 190,
-        Mongolia: 191,
-        Montserrat: 192,
-        Mozambique: 193,
-        Myanmar: 194,
-        Namibia: 195,
-        Nauru: 196,
-        Nepal: 197,
-        NewCaledonia: 198,
-        Niger: 199,
-        Niue: 200,
-        NorfolkIsland: 201,
-        NorthernCyprus: 202,
-        NorthernMarianaIslands: 203,
-        NorthKorea: 204,
-        NorthMacedonia: 205,
-        Palau: 206,
-        Palestine: 207,
-        PapuaNewGuinea: 208,
-        Pitcairn: 209,
-        Reunion: 210,
-        Rwanda: 211,
-        SaintBarthelemy: 212,
-        SaintHelenaAscensionAndTristianDaCunha: 213,
-        SaintKittsAndNevis: 214,
-        SaintLucia: 215,
-        SaintMartin: 216,
-        SaintPierreAndMiquelon: 217,
-        SaintVincentAndTheGrenadines: 218,
-        Samoa: 219,
-        SanMarino: 220,
-        SaoTomeAndPrincipe: 221,
-        Senegal: 222,
-        Seychelles: 223,
-        SierraLeone: 224,
-        SintMaarten: 225,
-        SolomonIslands: 226,
-        Somalia: 227,
-        SouthGeorgiaAndTheSouthSandwichIslands: 228,
-        SouthSudan: 229,
-        Sudan: 230,
-        Suriname: 231,
-        SvalbardAndJanMayen: 232,
-        Eswatini: 233,
-        Syria: 234,
-        Tajikistan: 235,
-        Tanzania: 236,
-        Togo: 237,
-        Tokelau: 238,
-        Tonga: 239,
-        TrinidadAndTobago: 240,
-        Turkmenistan: 241,
-        TurksAndCaicosIslands: 242,
-        Tuvalu: 243,
-        UnitedStatesMinorOutlyingIslands: 244,
-        Uzbekistan: 245,
-        Vanuatu: 246,
-        VaticanCity: 247,
-        VirginIslandsBritish: 248,
-        VirginIslandsUs: 249,
-        WallisAndFutuna: 250,
-        WesternSahara: 251,
-        Yemen: 252,
-        Yugoslavia: 253,
-        Zambia: 254,
-        Zimbabwe: 255
+        None: 0,
+        Albania: 1,
+        Algeria: 2,
+        Argentina: 3,
+        Australia: 4,
+        Austria: 5,
+        Azerbaijan: 6,
+        Bahrain: 7,
+        Bangladesh: 8,
+        Belgium: 9,
+        BosniaAndHerzegovina: 10,
+        Brunei: 11,
+        Bulgaria: 12,
+        Cambodia: 13,
+        Canada: 14,
+        Chile: 15,
+        Colombia: 16,
+        CostaRica: 17,
+        Croatia: 18,
+        Cyprus: 19,
+        Czechia: 20,
+        Denmark: 21,
+        DominicanRepublic: 22,
+        Egypt: 23,
+        Estonia: 24,
+        Finland: 25,
+        France: 26,
+        Georgia: 27,
+        Germany: 28,
+        Ghana: 29,
+        Greece: 30,
+        Guatemala: 31,
+        HongKong: 32,
+        Hungary: 33,
+        India: 34,
+        Indonesia: 35,
+        Ireland: 36,
+        Israel: 37,
+        Italy: 38,
+        Jordan: 39,
+        Kazakhstan: 40,
+        Kenya: 41,
+        Kosovo: 42,
+        Kuwait: 43,
+        Latvia: 44,
+        Lithuania: 45,
+        Malaysia: 46,
+        Maldives: 47,
+        Malta: 48,
+        Mauritius: 49,
+        Mexico: 50,
+        Morocco: 51,
+        Netherlands: 52,
+        NewZealand: 53,
+        Nigeria: 54,
+        Pakistan: 55,
+        Panama: 56,
+        Paraguay: 57,
+        Philippines: 58,
+        Poland: 59,
+        Portugal: 60,
+        PuertoRico: 61,
+        Qatar: 62,
+        Romania: 63,
+        Russia: 64,
+        SaudiArabia: 65,
+        Serbia: 66,
+        Singapore: 67,
+        Slovakia: 68,
+        Slovenia: 69,
+        SouthAfrica: 70,
+        Spain: 71,
+        Sweden: 72,
+        Switzerland: 73,
+        Taiwan: 74,
+        Thailand: 75,
+        Tunisia: 76,
+        Turkey: 77,
+        UAE: 78,
+        Uganda: 79,
+        UK: 80,
+        Ukraine: 81,
+        Usa: 82,
+        Vietnam: 83,
+        Brazil: 84,
+        Norway: 85,
+        Oman: 86,
+        Ecuador: 87,
+        ElSalvador: 88,
+        SriLanka: 89,
+        Peru: 90,
+        Uruguay: 91,
+        Bahamas: 92,
+        Bermuda: 93,
+        Bolivia: 94,
+        China: 95,
+        EuropeanUnion: 96,
+        Haiti: 97,
+        Honduras: 98,
+        Iceland: 99,
+        Japan: 100,
+        Luxembourg: 101,
+        Montenegro: 102,
+        Nicaragua: 103,
+        SouthKorea: 104,
+        Venezuela: 105,
+        Afghanistan: 106,
+        AlandIslands: 107,
+        AmericanSamoa: 108,
+        Andorra: 109,
+        Angola: 110,
+        Anguilla: 111,
+        Antarctica: 112,
+        AntiguaAndBarbuda: 113,
+        Armenia: 114,
+        Aruba: 115,
+        BailiwickOfGuernsey: 116,
+        BailiwickOfJersey: 117,
+        Barbados: 118,
+        Belarus: 119,
+        Belize: 120,
+        Benin: 121,
+        Bhutan: 122,
+        BonaireSaintEustatiusAndSaba: 123,
+        Botswana: 124,
+        BouvetIsland: 125,
+        BritishIndianOceanTerritory: 126,
+        BurkinaFaso: 127,
+        Burundi: 128,
+        Cameroon: 129,
+        CapeVerde: 130,
+        CaribbeanNetherlands: 131,
+        CaymanIslands: 132,
+        CentralAfricanRepublic: 133,
+        Chad: 134,
+        ChristmasIsland: 135,
+        CocosIslands: 136,
+        Comoros: 137,
+        Congo: 138,
+        CookIslands: 139,
+        Cuba: 140,
+        Curacao: 141,
+        DemocraticRepublicOfTheCongo: 142,
+        Djibouti: 143,
+        Dominica: 144,
+        EastTimor: 145,
+        EquatorialGuinea: 146,
+        Eritrea: 147,
+        Ethiopia: 148,
+        FalklandIslands: 149,
+        FaroeIslands: 150,
+        FederatedStatesOfMicronesia: 151,
+        Fiji: 152,
+        FrenchGuiana: 153,
+        FrenchPolynesia: 154,
+        FrenchSouthernTerritories: 155,
+        Gabon: 156,
+        Gambia: 157,
+        Gibraltar: 158,
+        Greenland: 159,
+        Grenada: 160,
+        Guadeloupe: 161,
+        Guam: 162,
+        Guinea: 163,
+        GuineaBissau: 164,
+        Guyana: 165,
+        HeardIslandAndMcdonaldIslands: 166,
+        Iran: 167,
+        Iraq: 168,
+        IsleOfMan: 169,
+        IvoryCoast: 170,
+        Jamaica: 171,
+        Kiribati: 172,
+        Kyrgyzstan: 173,
+        Laos: 174,
+        Lebanon: 175,
+        Lesotho: 176,
+        Liberia: 177,
+        Libya: 178,
+        Liechtenstein: 179,
+        Macau: 180,
+        Madagascar: 181,
+        Malawi: 182,
+        Mali: 183,
+        MarshallIslands: 184,
+        Martinique: 185,
+        Mauritania: 186,
+        Mayotte: 187,
+        Moldova: 188,
+        Monaco: 189,
+        Mongolia: 190,
+        Montserrat: 191,
+        Mozambique: 192,
+        Myanmar: 193,
+        Namibia: 194,
+        Nauru: 195,
+        Nepal: 196,
+        NewCaledonia: 197,
+        Niger: 198,
+        Niue: 199,
+        NorfolkIsland: 200,
+        NorthernCyprus: 201,
+        NorthernMarianaIslands: 202,
+        NorthKorea: 203,
+        NorthMacedonia: 204,
+        Palau: 205,
+        Palestine: 206,
+        PapuaNewGuinea: 207,
+        Pitcairn: 208,
+        Reunion: 209,
+        Rwanda: 210,
+        SaintBarthelemy: 211,
+        SaintHelenaAscensionAndTristianDaCunha: 212,
+        SaintKittsAndNevis: 213,
+        SaintLucia: 214,
+        SaintMartin: 215,
+        SaintPierreAndMiquelon: 216,
+        SaintVincentAndTheGrenadines: 217,
+        Samoa: 218,
+        SanMarino: 219,
+        SaoTomeAndPrincipe: 220,
+        Senegal: 221,
+        Seychelles: 222,
+        SierraLeone: 223,
+        SintMaarten: 224,
+        SolomonIslands: 225,
+        Somalia: 226,
+        SouthGeorgiaAndTheSouthSandwichIslands: 227,
+        SouthSudan: 228,
+        Sudan: 229,
+        Suriname: 230,
+        SvalbardAndJanMayen: 231,
+        Eswatini: 232,
+        Syria: 233,
+        Tajikistan: 234,
+        Tanzania: 235,
+        Togo: 236,
+        Tokelau: 237,
+        Tonga: 238,
+        TrinidadAndTobago: 239,
+        Turkmenistan: 240,
+        TurksAndCaicosIslands: 241,
+        Tuvalu: 242,
+        UnitedStatesMinorOutlyingIslands: 243,
+        Uzbekistan: 244,
+        Vanuatu: 245,
+        VaticanCity: 246,
+        VirginIslandsBritish: 247,
+        VirginIslandsUs: 248,
+        WallisAndFutuna: 249,
+        WesternSahara: 250,
+        Yemen: 251,
+        Yugoslavia: 252,
+        Zambia: 253,
+        Zimbabwe: 254
     }
 );
 
 /**
- * Defines possible the document country's region from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ * Defines possible the document country's region from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
  */
 export const Region = Object.freeze(
     {
-        None: 1,
-        Alabama: 2,
-        Alaska: 3,
-        Alberta: 4,
-        Arizona: 5,
-        Arkansas: 6,
-        AustralianCapitalTerritory: 7,
-        BritishColumbia: 8,
-        California: 9,
-        Colorado: 10,
-        Connecticut: 11,
-        Delaware: 12,
-        DistrictOfColumbia: 13,
-        Florida: 14,
-        Georgia: 15,
-        Hawaii: 16,
-        Idaho: 17,
-        Illinois: 18,
-        Indiana: 19,
-        Iowa: 20,
-        Kansas: 21,
-        Kentucky: 22,
-        Louisiana: 23,
-        Maine: 24,
-        Manitoba: 25,
-        Maryland: 26,
-        Massachusetts: 27,
-        Michigan: 28,
-        Minnesota: 29,
-        Mississippi: 30,
-        Missouri: 31,
-        Montana: 32,
-        Nebraska: 33,
-        Nevada: 34,
-        NewBrunswick: 35,
-        NewHampshire: 36,
-        NewJersey: 37,
-        NewMexico: 38,
-        NewSouthWales: 39,
-        NewYork: 40,
-        NorthernTerritory: 41,
-        NorthCarolina: 42,
-        NorthDakota: 43,
-        NovaScotia: 44,
-        Ohio: 45,
-        Oklahoma: 46,
-        Ontario: 47,
-        Oregon: 48,
-        Pennsylvania: 49,
-        Quebec: 50,
-        Queensland: 51,
-        RhodeIsland: 52,
-        Saskatchewan: 53,
-        SouthAustralia: 54,
-        SouthCarolina: 55,
-        SouthDakota: 56,
-        Tasmania: 57,
-        Tennessee: 58,
-        Texas: 59,
-        Utah: 60,
-        Vermont: 61,
-        Victoria: 62,
-        Virginia: 63,
-        Washington: 64,
-        WesternAustralia: 65,
-        WestVirginia: 66,
-        Wisconsin: 67,
-        Wyoming: 68,
-        Yukon: 69,
-        CiudadDeMexico: 70,
-        Jalisco: 71,
-        NewfoundlandAndLabrador: 72,
-        NuevoLeon: 73,
-        BajaCalifornia: 74,
-        Chihuahua: 75,
-        Guanajuato: 76,
-        Guerrero: 77,
-        Mexico: 78,
-        Michoacan: 79,
-        NewYorkCity: 80,
-        Tamaulipas: 81,
-        Veracruz: 82,
-        Chiapas: 83,
-        Coahuila: 84,
-        Durango: 85,
-        GuerreroCocula: 86,
-        GuerreroJuchitan: 87,
-        GuerreroTepecoacuilco: 88,
-        GuerreroTlacoapa: 89,
-        Gujarat: 90,
-        Hidalgo: 91,
-        Karnataka: 92,
-        Kerala: 93,
-        KhyberPakhtunkhwa: 94,
-        MadhyaPradesh: 95,
-        Maharashtra: 96,
-        Morelos: 97,
-        Nayarit: 98,
-        Oaxaca: 99,
-        Puebla: 100,
-        Punjab: 101,
-        Queretaro: 102,
-        SanLuisPotosi: 103,
-        Sinaloa: 104,
-        Sonora: 105,
-        Tabasco: 106,
-        TamilNadu: 107,
-        Yucatan: 108,
-        Zacatecas: 109,
-        Aguascalientes: 110,
-        BajaCaliforniaSur: 111,
-        Campeche: 112,
-        Colima: 113,
-        QuintanaRooBenitoJuarez: 114,
-        QuintanaRoo: 115,
-        QuintanaRooSolidaridad: 116,
-        Tlaxcala: 117
+        None: 0,
+        Alabama: 1,
+        Alaska: 2,
+        Alberta: 3,
+        Arizona: 4,
+        Arkansas: 5,
+        AustralianCapitalTerritory: 6,
+        BritishColumbia: 7,
+        California: 8,
+        Colorado: 9,
+        Connecticut: 10,
+        Delaware: 11,
+        DistrictOfColumbia: 12,
+        Florida: 13,
+        Georgia: 14,
+        Hawaii: 15,
+        Idaho: 16,
+        Illinois: 17,
+        Indiana: 18,
+        Iowa: 19,
+        Kansas: 20,
+        Kentucky: 21,
+        Louisiana: 22,
+        Maine: 23,
+        Manitoba: 24,
+        Maryland: 25,
+        Massachusetts: 26,
+        Michigan: 27,
+        Minnesota: 28,
+        Mississippi: 29,
+        Missouri: 30,
+        Montana: 31,
+        Nebraska: 32,
+        Nevada: 33,
+        NewBrunswick: 34,
+        NewHampshire: 35,
+        NewJersey: 36,
+        NewMexico: 37,
+        NewSouthWales: 38,
+        NewYork: 39,
+        NorthernTerritory: 40,
+        NorthCarolina: 41,
+        NorthDakota: 42,
+        NovaScotia: 43,
+        Ohio: 44,
+        Oklahoma: 45,
+        Ontario: 46,
+        Oregon: 47,
+        Pennsylvania: 48,
+        Quebec: 49,
+        Queensland: 50,
+        RhodeIsland: 51,
+        Saskatchewan: 52,
+        SouthAustralia: 53,
+        SouthCarolina: 54,
+        SouthDakota: 55,
+        Tasmania: 56,
+        Tennessee: 57,
+        Texas: 58,
+        Utah: 59,
+        Vermont: 60,
+        Victoria: 61,
+        Virginia: 62,
+        Washington: 63,
+        WesternAustralia: 64,
+        WestVirginia: 65,
+        Wisconsin: 66,
+        Wyoming: 67,
+        Yukon: 68,
+        CiudadDeMexico: 69,
+        Jalisco: 70,
+        NewfoundlandAndLabrador: 71,
+        NuevoLeon: 72,
+        BajaCalifornia: 73,
+        Chihuahua: 74,
+        Guanajuato: 75,
+        Guerrero: 76,
+        Mexico: 77,
+        Michoacan: 78,
+        NewYorkCity: 79,
+        Tamaulipas: 80,
+        Veracruz: 81,
+        Chiapas: 82,
+        Coahuila: 83,
+        Durango: 84,
+        GuerreroCocula: 85,
+        GuerreroJuchitan: 86,
+        GuerreroTepecoacuilco: 87,
+        GuerreroTlacoapa: 88,
+        Gujarat: 89,
+        Hidalgo: 90,
+        Karnataka: 91,
+        Kerala: 92,
+        KhyberPakhtunkhwa: 93,
+        MadhyaPradesh: 94,
+        Maharashtra: 95,
+        Morelos: 96,
+        Nayarit: 97,
+        Oaxaca: 98,
+        Puebla: 99,
+        Punjab: 100,
+        Queretaro: 101,
+        SanLuisPotosi: 102,
+        Sinaloa: 103,
+        Sonora: 104,
+        Tabasco: 105,
+        TamilNadu: 106,
+        Yucatan: 107,
+        Zacatecas: 108,
+        Aguascalientes: 109,
+        BajaCaliforniaSur: 110,
+        Campeche: 111,
+        Colima: 112,
+        QuintanaRooBenitoJuarez: 113,
+        QuintanaRoo: 114,
+        QuintanaRooSolidaridad: 115,
+        Tlaxcala: 116,
+        QuintanaRooCozumel: 117,
+        SaoPaolo: 118,
+        RioDeJaneiro: 119,
+        RioGrandeDoSul: 120
     }
 );
 
 /**
- * Defines possible the document type from ClassInfo scanned with BlinkID or BlinkID Combined Recognizer
+ * Defines possible the document type from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
  */
 export const Type = Object.freeze(
     {
-        None: 1,
-        ConsularId: 2,
-        Dl: 3,
-        DlPublicServicesCard: 4,
-        EmploymentPass: 5,
-        FinCard: 6,
-        Id: 7,
-        MultipurposeId: 8,
-        MyKad: 9,
-        MyKid: 10,
-        MyPr: 11,
-        MyTentera: 12,
-        PanCard: 13,
-        ProfessionalId: 14,
-        PublicServicesCard: 15,
-        ResidencePermit: 16,
-        ResidentId: 17,
-        TemporaryResidencePermit: 18,
-        VoterId: 19,
-        WorkPermit: 20,
-        iKad: 21,
-        MilitaryId: 22,
-        MyKas: 23,
-        SocialSecurityCard: 24,
-        HealthInsuranceCard: 25,
-        Passport: 26,
-        SPass: 27,
-        AddressCard: 28,
-        AlienId: 29,
-        AlienPassport: 30,
-        GreenCard: 31,
-        MinorsId: 32,
-        PostalId: 33,
-        ProfessionalDl: 34,
-        TaxId: 35,
-        WeaponPermit: 36,
-        Visa: 37,
-        BorderCrossingCard: 38,
-        DriverCard: 39,
-        GlobalEntryCard: 40,
-        Mypolis: 41,
-        NexusCard: 42,
-        PassportCard: 43,
-        ProofOfAgeCard: 44,
-        RefugeeId: 45,
-        TribalId: 46,
-        VeteranId: 47,
-        CitizenshipCertificate: 48,
-        MyNumberCard: 49
+        None: 0,
+        ConsularId: 1,
+        Dl: 2,
+        DlPublicServicesCard: 3,
+        EmploymentPass: 4,
+        FinCard: 5,
+        Id: 6,
+        MultipurposeId: 7,
+        MyKad: 8,
+        MyKid: 9,
+        MyPr: 10,
+        MyTentera: 11,
+        PanCard: 12,
+        ProfessionalId: 13,
+        PublicServicesCard: 14,
+        ResidencePermit: 15,
+        ResidentId: 16,
+        TemporaryResidencePermit: 17,
+        VoterId: 18,
+        WorkPermit: 19,
+        iKad: 20,
+        MilitaryId: 21,
+        MyKas: 22,
+        SocialSecurityCard: 23,
+        HealthInsuranceCard: 24,
+        Passport: 25,
+        SPass: 26,
+        AddressCard: 27,
+        AlienId: 28,
+        AlienPassport: 29,
+        GreenCard: 30,
+        MinorsId: 31,
+        PostalId: 32,
+        ProfessionalDl: 33,
+        TaxId: 34,
+        WeaponPermit: 35,
+        Visa: 36,
+        BorderCrossingCard: 37,
+        DriverCard: 38,
+        GlobalEntryCard: 39,
+        Mypolis: 40,
+        NexusCard: 41,
+        PassportCard: 42,
+        ProofOfAgeCard: 43,
+        RefugeeId: 44,
+        TribalId: 45,
+        VeteranId: 46,
+        CitizenshipCertificate: 47,
+        MyNumberCard: 48,
+        ConsularPassport: 49,
+        MinorsPassport: 50,
+        MinorsPublicServicesCard: 51,
+        DrivingPrivilegeCard: 52
     }
 );
 
@@ -760,7 +800,7 @@ export class BarcodeResult {
         this.jurisdiction = nativeBarcodeResult.jurisdiction;
 
         /** The driver license detailed info. */
-        this.driverLicenseDetailedInfo = nativeBarcodeResult.driverLicenseDetailedInfo != null ? new DriverLicenseDetailedInfo(nativeBarcodeResult.driverLicenseDetailedInfo) : null;
+        this.driverLicenseDetailedInfo = nativeBarcodeResult.driverLicenseDetailedInfo != null ? new BarcodeDriverLicenseDetailedInfo(nativeBarcodeResult.driverLicenseDetailedInfo) : null;
 
         /** Flag that indicates if barcode result is empty */
         this.empty = nativeBarcodeResult.empty;
@@ -1904,11 +1944,11 @@ export class MrzResult {
 export const DocumentFaceDetectorType = Object.freeze(
     {
         /** Uses document detector for TD1 size identity cards */
-        TD1 : 1,
+        TD1 : 0,
         /** Uses document detector for TD2 size identity cards  */
-        TD2 : 2,
+        TD2 : 1,
         /** Uses MRTD detector for detecting documents with MRZ */
-        PassportsAndVisas : 3
+        PassportsAndVisas : 2
     }
 );
 
@@ -1934,30 +1974,30 @@ export class RecognitionModeFilter {
 }
 
 /**
- * Possible recognition modes used by BlinkID(Combined)Recognizer to scan the document.
+ * Possible recognition modes used by BlinkID(Multiside)Recognizer to scan the document.
  */
 export const RecognitionMode = Object.freeze(
     {
         /** No recognition performed. */
-        None: 1,
+        None: 0,
 
         /** Recognition of mrz document (does not include visa and passport) */
-        MrzId: 2,
+        MrzId: 1,
 
         /** Recognition of visa mrz. */
-        MrzVisa: 3,
+        MrzVisa: 2,
 
         /** Recognition of passport mrz. */
-        MrzPassport: 4,
+        MrzPassport: 3,
 
         /** Recognition of documents that have face photo on the front. */
-        PhotoId: 5,
+        PhotoId: 4,
 
         /** Detailed document recognition. */
-        FullRecognition: 6,
+        FullRecognition: 5,
 
         /** Recognition of barcode document. */
-        BarcodeId: 7
+        BarcodeId: 6
     }
 );
 
@@ -1984,13 +2024,13 @@ export class ImageExtensionFactors {
 };
 
 /** Result of the data matching algorithm for scanned parts/sides of the document. */
-export const DataMatchResult = Object.freeze(
+export const DataMatchState = Object.freeze(
     {
         /** Data matching has not been performed. */
-        NotPerformed : 1,
+        NotPerformed : 0,
         /** Data does not match. */
-        Failed : 2,
+        Failed : 1,
         /** Data match. */
-        Success : 3
+        Success : 2
     }
 );

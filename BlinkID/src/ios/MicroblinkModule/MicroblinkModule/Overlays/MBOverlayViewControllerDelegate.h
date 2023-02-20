@@ -6,7 +6,7 @@
 
 #pragma once
 
-#import <Microblink/Microblink.h>
+#import <BlinkID/BlinkID.h>
 
 @protocol MBOverlayViewControllerDelegate<NSObject>
 @required

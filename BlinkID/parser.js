@@ -18,11 +18,11 @@ export class Parser {
 export const ParserResultState = Object.freeze(
     {
         /** Parser result is empty */
-        empty : 1,
+        empty : 0,
         /** Parser result contains some values, but is incomplete or it contains all values, but some are uncertain */
-        uncertain : 2,
+        uncertain : 1,
         /** Parser result contains all required values */
-        valid : 3
+        valid : 2
     }
 );
 
