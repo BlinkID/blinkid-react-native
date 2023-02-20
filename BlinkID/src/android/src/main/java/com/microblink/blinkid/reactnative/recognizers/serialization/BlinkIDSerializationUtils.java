@@ -135,11 +135,9 @@ public abstract class BlinkIDSerializationUtils {
         WritableMap jsonStringResult = new WritableNativeMap();
         if (stringResult != null) {
             jsonStringResult.putBoolean("empty", stringResult.isEmpty());
-            WritableArray valuesArr = new WritableNativeArray();
-            for (int i = 0; i < AlphabetType.values().length; ++i) {
-                valuesArr.pushString(stringResult.value(AlphabetType.values()[i]));
-            }
-            jsonStringResult.putArray("values", valuesArr);
+            jsonStringResult.putString("latin", stringResult.value(AlphabetType.Latin));
+            jsonStringResult.putString("arabic", stringResult.value(AlphabetType.Arabic));
+            jsonStringResult.putString("cyrillic", stringResult.value(AlphabetType.Cyrillic));
             jsonStringResult.putString("description", stringResult.toString());
         }
         return jsonStringResult;
