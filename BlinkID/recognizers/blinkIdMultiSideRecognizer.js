@@ -27,7 +27,7 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         super(nativeResult.resultState);
         
         /**
-         * The additional name information of the document owner.
+         * The additional address information of the document owner.
          */
         this.additionalAddressInformation = nativeResult.additionalAddressInformation;
         
@@ -48,6 +48,8 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         
         /**
          * The current age of the document owner in years. It is calculated difference
+         * between now and date of birth. Now is current time on the device.
+         * @return current age of the document owner in years or -1 if date of birth is unknown.
          */
         this.age = nativeResult.age;
         
@@ -57,12 +59,12 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.backAdditionalProcessingInfo = nativeResult.backAdditionalProcessingInfo;
         
         /**
-         * Back camera frame.
+         * The back raw camera frame.
          */
         this.backCameraFrame = nativeResult.backCameraFrame;
         
         /**
-         * Image analysis result for the scanned document back side image
+         * Defines possible color and moire statuses determined from scanned back image.
          */
         this.backImageAnalysisResult = nativeResult.backImageAnalysisResult;
         
@@ -72,39 +74,39 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.backProcessingStatus = nativeResult.backProcessingStatus;
         
         /**
-         * The data extracted from the back side visual inspection zone.
+         * Defines the data extracted from the back side visual inspection zone.
          */
         this.backVizResult = nativeResult.backVizResult;
         
         /**
-         * Barcode camera frame.
+         * The barcode raw camera frame.
          */
         this.barcodeCameraFrame = nativeResult.barcodeCameraFrame;
         
         /**
-         * The data extracted from the barcode.
+         * Defines the data extracted from the barcode.
          */
         this.barcodeResult = nativeResult.barcodeResult;
         
         /**
-         * The document class information.
+         * The classification information.
          */
         this.classInfo = nativeResult.classInfo;
         
         /**
-         * Info on whether the data extracted from front image matches the data extracted from the back image.
+         * Detailed info on data match.
          */
         this.dataMatchResult = nativeResult.dataMatchResult;
         
         /**
          * The date of birth of the document owner.
          */
-        this.dateOfBirth = nativeResult.dateOfBirth;
+        this.dateOfBirth = nativeResult.dateOfBirth != null ? new Date(nativeResult.dateOfBirth) : null;
         
         /**
          * The date of expiry of the document.
          */
-        this.dateOfExpiry = nativeResult.dateOfExpiry;
+        this.dateOfExpiry = nativeResult.dateOfExpiry != null ? new Date(nativeResult.dateOfExpiry) : null;
         
         /**
          * Determines if date of expiry is permanent.
@@ -114,12 +116,20 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         /**
          * The date of issue of the document.
          */
-        this.dateOfIssue = nativeResult.dateOfIssue;
+        this.dateOfIssue = nativeResult.dateOfIssue != null ? new Date(nativeResult.dateOfIssue) : null;
         
         /**
          * The additional number of the document.
          */
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
+        
+        /**
+         * Returns DataMatchStateSuccess if data from scanned parts/sides of the document match,
+         * DataMatchStateFailed otherwise. For example if date of expiry is scanned from the front and back side
+         * of the document and values do not match, this method will return DataMatchStateFailed. Result will
+         * be DataMatchStateSuccess only if scanned values for all fields that are compared are the same.
+         */
+        this.documentDataMatch = nativeResult.documentDataMatch;
         
         /**
          * The document number.
@@ -143,16 +153,22 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         
         /**
          * Checks whether the document has expired or not by comparing the current
+         * time on the device with the date of expiry.
+         * 
+         * @return true if the document has expired, false in following cases:
+         * document does not expire (date of expiry is permanent)
+         * date of expiry has passed
+         * date of expiry is unknown and it is not permanent
          */
         this.expired = nativeResult.expired;
         
         /**
-         * Face image from the document
+         * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
         
         /**
-         * The fathers name of the document owner.
+         * The father's name of the document owner.
          */
         this.fathersName = nativeResult.fathersName;
         
@@ -167,12 +183,12 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.frontAdditionalProcessingInfo = nativeResult.frontAdditionalProcessingInfo;
         
         /**
-         * Front camera frame.
+         * The front raw camera frame.
          */
         this.frontCameraFrame = nativeResult.frontCameraFrame;
         
         /**
-         * Image analysis result for the scanned document front side image
+         * Defines possible color and moire statuses determined from scanned front image.
          */
         this.frontImageAnalysisResult = nativeResult.frontImageAnalysisResult;
         
@@ -182,17 +198,17 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.frontProcessingStatus = nativeResult.frontProcessingStatus;
         
         /**
-         * The data extracted from the front side visual inspection zone.
+         * Defines the data extracted from the front side visual inspection zone.
          */
         this.frontVizResult = nativeResult.frontVizResult;
         
         /**
-         * Back side image of the document
+         * back side image of the document if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentBackImage = nativeResult.fullDocumentBackImage;
         
         /**
-         * Front side image of the document
+         * front side image of the document if enabled with returnFullDocumentImage property.
          */
         this.fullDocumentFrontImage = nativeResult.fullDocumentFrontImage;
         
@@ -222,12 +238,12 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.maritalStatus = nativeResult.maritalStatus;
         
         /**
-         * The mothers name of the document owner.
+         * The mother's name of the document owner.
          */
         this.mothersName = nativeResult.mothersName;
         
         /**
-         * The data extracted from the machine readable zone.
+         * The data extracted from the machine readable zone
          */
         this.mrzResult = nativeResult.mrzResult != null ? new MrzResult(nativeResult.mrzResult) : null;
         
@@ -247,7 +263,7 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.placeOfBirth = nativeResult.placeOfBirth;
         
         /**
-         * Status of the last recognition process.
+         * Defines status of the last recognition process.
          */
         this.processingStatus = nativeResult.processingStatus;
         
@@ -277,7 +293,8 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.residentialStatus = nativeResult.residentialStatus;
         
         /**
-         * {true} if recognizer has finished scanning first side and is now scanning back side,
+         * Returns true if recognizer has finished scanning first side and is now scanning back side,
+         * false if it's still scanning first side.
          */
         this.scanningFirstSideDone = nativeResult.scanningFirstSideDone;
         
@@ -287,117 +304,162 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.sex = nativeResult.sex;
         
         /**
-         * Signature image from the document
+         * image of the signature if enabled with returnSignatureImage property.
          */
         this.signatureImage = nativeResult.signatureImage;
-        
-        /**
-         * The version of result.
-         */
-        this.version = nativeResult.version;
         
     }
 }
 
 /**
- * A generic recognizer which can scan front and back side of the document.
+ * Recognizer which can scan front and back side of the United States driver license.
  */
 export class BlinkIdMultiSideRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdMultiSideRecognizer');
         
         /**
-         * Skip processing of the blurred frames.
+         * Defines whether blured frames filtering is allowed
+         * 
+         * 
          */
         this.allowBlurFilter = true;
         
         /**
-         * Proceed to scan the back side of a document even if some of the validity checks have failed while scanning the front side of a document.
+         * Proceed with scanning the back side even if the front side result is uncertain.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
          */
         this.allowUncertainFrontSideScan = false;
         
         /**
-         * Allow reading of non-standard MRZ (Machine Readable Zone). Only raw MRZ result is returned.
+         * Defines whether returning of unparsed MRZ (Machine Readable Zone) results is allowed
+         * 
+         * 
          */
         this.allowUnparsedMrzResults = false;
         
         /**
-         * Allow reading of standard MRZ (Machine Readable Zone) which gets successfully parsed,
+         * Defines whether returning unverified MRZ (Machine Readable Zone) results is allowed
+         * Unverified MRZ is parsed, but check digits are incorrect
+         * 
+         * 
          */
         this.allowUnverifiedMrzResults = true;
         
         /**
-         * Redact specific fields based on requirements or laws regarding a specific document.
+         * Defines whether sensitive data should be removed from images, result fields or both.
+         * The setting only applies to certain documents
+         * 
+         * 
          */
         this.anonymizationMode = AnonymizationMode.FullResult;
         
         /**
-         * The DPI (Dots Per Inch) for face image that should be returned.
+         * Property for setting DPI for face images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.faceImageDpi = 250;
         
         /**
-         * The DPI (Dots Per Inch) for full document image that should be returned.
+         * Property for setting DPI for full document images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.fullDocumentImageDpi = 250;
         
         /**
-         * The extension factors for full document image.
+         * Image extension factors for full document image.
+         * 
+         * @see ImageExtensionFactors
+         * 
          */
         this.fullDocumentImageExtensionFactors = new ImageExtensionFactors();
         
         /**
          * Configure the number of characters per field that are allowed to be inconsistent in data match.
+         * 
+         * 
          */
         this.maxAllowedMismatchesPerField = 0;
         
         /**
-         * Minimum required distance between the edge of the scanning frame and the document.
+         * Pading is a minimum distance from the edge of the frame and is defined as a percentage of the frame width. Default value is 0.0f and in that case
+         * padding edge and image edge are the same.
+         * Recommended value is 0.02f.
+         * 
+         * 
          */
         this.paddingEdge = 0.0;
         
         /**
-         * Currently set recognition mode filter.
+         * Enable or disable recognition of specific document groups supported by the current license.
+         * 
+         * 
          */
         this.recognitionModeFilter = new RecognitionModeFilter();
         
         /**
-         * Defines whether face image will be available in result.
+         * Sets whether face image from ID card should be extracted
+         * 
+         * 
          */
         this.returnFaceImage = false;
         
         /**
-         * Defines whether full document image will be available in
+         * Sets whether full document image of ID card should be extracted.
+         * 
+         * 
          */
         this.returnFullDocumentImage = false;
         
         /**
-         * Defines whether signature image will be available in result.
+         * Sets whether signature image from ID card should be extracted.
+         * 
+         * 
          */
         this.returnSignatureImage = false;
         
         /**
-         * Save the raw camera frames at the moment of the data extraction or timeout.
+         * Configure the recognizer to save the raw camera frames.
+         * This significantly increases memory consumption.
+         * 
+         * 
          */
         this.saveCameraFrames = false;
         
         /**
-         * Process only cropped document images with corrected perspective (frontal images of a document).
+         * Configure the recognizer to only work on already cropped and dewarped images.
+         * This only works for still images - video feeds will ignore this setting.
+         * 
+         * 
          */
         this.scanCroppedDocumentImage = false;
         
         /**
-         * The DPI (Dots Per Inch) for signature image that should be returned.
+         * Property for setting DPI for signature images
+         * Valid ranges are [100,400]. Setting DPI out of valid ranges throws an exception
+         * 
+         * 
          */
         this.signatureImageDpi = 250;
         
         /**
-         * Back side of the document will not be scanned if only the front side is supported for a specific document.
+         * Skip back side capture and processing step when back side of the document is not supported
+         * 
+         * 
          */
         this.skipUnsupportedBack = false;
         
         /**
-         * Allow only results containing expected characters for a given field.
+         * Defines whether result characters validatation is performed.
+         * If a result member contains invalid character, the result state cannot be valid
+         * 
+         * 
          */
         this.validateResultCharacters = true;
         
