@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.microblink.reactnative"
+    package="com.microblink.blinkid.reactnative"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -14,9 +14,9 @@
         android:required="false"/>
 
     <application>
-        <activity android:name="com.microblink.activity.DocumentScanActivity" android:noHistory="true" />
-        <activity android:name="com.microblink.activity.DocumentVerificationActivity" android:noHistory="true" />
-        <activity android:name="com.microblink.activity.BlinkIdActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.blinkid.activity.DocumentScanActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.blinkid.activity.DocumentVerificationActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.blinkid.activity.BlinkIdActivity" android:noHistory="true" />
     </application>
 
 </manifest>

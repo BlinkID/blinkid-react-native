@@ -1,34 +1,51 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.blinkid.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlKeys;
-import com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer;
-import com.microblink.reactnative.recognizers.RecognizerSerialization;
-import com.microblink.reactnative.SerializationUtils;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.entities.recognizers.blinkid.usdl.UsdlCombinedRecognizer;
+import com.microblink.blinkid.entities.recognizers.blinkbarcode.usdl.UsdlKeys;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.blinkid.reactnative.SerializationUtils;
 
-public final class UsdlRecognizerSerialization implements RecognizerSerialization {
+public final class UsdlCombinedRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonRecognizer) {
-        com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer recognizer = new com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer();
-        if (jsonRecognizer.hasKey("nullQuietZoneAllowed")) {
-            recognizer.setNullQuietZoneAllowed(jsonRecognizer.getBoolean("nullQuietZoneAllowed"));
+        UsdlCombinedRecognizer recognizer = new UsdlCombinedRecognizer();
+        if (jsonRecognizer.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonRecognizer.getInt("faceImageDpi"));
         }
-        if (jsonRecognizer.hasKey("uncertainDecoding")) {
-            recognizer.setUncertainDecoding(jsonRecognizer.getBoolean("uncertainDecoding"));
+        if (jsonRecognizer.hasKey("fullDocumentImageDpi")) {
+            recognizer.setFullDocumentImageDpi(jsonRecognizer.getInt("fullDocumentImageDpi"));
+        }
+        if (jsonRecognizer.hasKey("fullDocumentImageExtensionFactors")) {
+            recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonRecognizer.getMap("fullDocumentImageExtensionFactors")));
+        }
+        if (jsonRecognizer.hasKey("numStableDetectionsThreshold")) {
+            recognizer.setNumStableDetectionsThreshold(jsonRecognizer.getInt("numStableDetectionsThreshold"));
+        }
+        if (jsonRecognizer.hasKey("returnFaceImage")) {
+            recognizer.setReturnFaceImage(jsonRecognizer.getBoolean("returnFaceImage"));
+        }
+        if (jsonRecognizer.hasKey("returnFullDocumentImage")) {
+            recognizer.setReturnFullDocumentImage(jsonRecognizer.getBoolean("returnFullDocumentImage"));
         }
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        UsdlRecognizer.Result result = ((UsdlRecognizer)recognizer).getResult();
+        UsdlCombinedRecognizer.Result result = ((UsdlCombinedRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
+        jsonResult.putInt("documentDataMatch", SerializationUtils.serializeEnum(result.getDocumentDataMatch()));
+        jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
+        jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
+
         jsonResult.putArray("optionalElements", SerializationUtils.serializeStringArray(result.getOptionalElements()));
         jsonResult.putString("rawData", SerializationUtils.encodeByteArrayToBase64(result.getRawData()));
         jsonResult.putString("rawStringData", result.getRawStringData());
@@ -49,11 +66,11 @@ public final class UsdlRecognizerSerialization implements RecognizerSerializatio
         jsonResult.putMap("dateOfBirth", SerializationUtils.serializeDate(result.getDateOfBirth()));
         jsonResult.putMap("dateOfIssue", SerializationUtils.serializeDate(result.getDateOfIssue()));
         jsonResult.putMap("dateOfExpiry", SerializationUtils.serializeDate(result.getDateOfExpiry()));
-
+        
         return jsonResult;
     }
 
-    private WritableArray serializeFields(UsdlRecognizer.Result result) {
+    private WritableArray serializeFields(UsdlCombinedRecognizer.Result result) {
         WritableArray fieldsArr = new WritableNativeArray();
         for (int i = 0; i < UsdlKeys.values().length; ++i) {
             fieldsArr.pushString(result.getField(UsdlKeys.values()[i]));
@@ -63,11 +80,11 @@ public final class UsdlRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public String getJsonName() {
-        return "UsdlRecognizer";
+        return "UsdlCombinedRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkbarcode.usdl.UsdlRecognizer.class;
+        return com.microblink.blinkid.entities.recognizers.blinkid.usdl.UsdlCombinedRecognizer.class;
     }
 }

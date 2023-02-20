@@ -1,11 +1,11 @@
-package com.microblink.reactnative.overlays.serialization;
+package com.microblink.blinkid.reactnative.overlays.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.microblink.hardware.camera.CameraType;
-import com.microblink.reactnative.R;
-import com.microblink.uisettings.CameraSettings;
-import com.microblink.uisettings.UISettings;
-import com.microblink.uisettings.options.BeepSoundUIOptions;
+import com.microblink.blinkid.hardware.camera.CameraType;
+import com.microblink.blinkid.reactnative.R;
+import com.microblink.blinkid.uisettings.CameraSettings;
+import com.microblink.blinkid.uisettings.UISettings;
+import com.microblink.blinkid.uisettings.options.BeepSoundUIOptions;
 
 public abstract class OverlaySerializationUtils {
     public static void extractCommonUISettings(ReadableMap jsonOverlaySettings, UISettings uiSettings) {

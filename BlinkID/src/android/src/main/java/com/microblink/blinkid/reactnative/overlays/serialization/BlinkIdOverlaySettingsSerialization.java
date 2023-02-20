@@ -1,15 +1,16 @@
-package com.microblink.reactnative.overlays.serialization;
+package com.microblink.blinkid.reactnative.overlays.serialization;
 
 import android.content.Context;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.fragment.overlay.blinkid.reticleui.ReticleOverlayStrings;
-import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
-import com.microblink.uisettings.BlinkIdUISettings;
-import com.microblink.uisettings.UISettings;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.fragment.overlay.blinkid.reticleui.ReticleOverlayStrings;
+import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerialization;
+import com.microblink.blinkid.uisettings.BlinkIdUISettings;
+import com.microblink.blinkid.uisettings.UISettings;
+import com.microblink.blinkid.locale.LanguageUtils;
 
-import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
+import static com.microblink.blinkid.reactnative.SerializationUtils.getStringFromMap;
 
 public final class BlinkIdOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override
@@ -21,6 +22,12 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
         Boolean requireDocumentSidesDataMatch = getBooleanFromMap(jsonUISettings, "requireDocumentSidesDataMatch");
         if (requireDocumentSidesDataMatch != null) {
             settings.setDocumentDataMatchRequired(requireDocumentSidesDataMatch);
+        }
+
+        String language = getStringFromMap(jsonUISettings, "language");
+        if (language != null) {
+            String country = jsonUISettings.hasKey("country") ? jsonUISettings.getString("country") : null;
+            LanguageUtils.setLanguageAndCountry(language, country, context);
         }
 
         Boolean showNotSupportedDialog = getBooleanFromMap(jsonUISettings, "showNotSupportedDialog");

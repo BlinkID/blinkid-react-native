@@ -99,7 +99,6 @@ cp index.js index.android.js
 #update compile and target sdk versions to 31, add android:exported="true" to manifest
 sed -i '' 's#compileSdkVersion = 29#compileSdkVersion = 31#g' ./android/build.gradle
 sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 31#g' ./android/build.gradle
-sed -i '' 's#android:name=".MainActivity"#android:name=".MainActivity" android:exported="true"#g' ./android/app/src/main/AndroidManifest.xml
 
 # return to root folder
 popd

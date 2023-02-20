@@ -81,6 +81,11 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         this.requireDocumentSidesDataMatch = true;
 
         /**
+        * Language of UI.
+        */
+        this.language = null;
+
+        /**
          * Defines whether Document Not Supported dialog will be displayed in UI.
          *
          * Default: true

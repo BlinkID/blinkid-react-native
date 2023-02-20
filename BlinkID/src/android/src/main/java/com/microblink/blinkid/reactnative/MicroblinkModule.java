@@ -1,4 +1,4 @@
-package com.microblink.reactnative;
+package com.microblink.blinkid.reactnative;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,15 +14,14 @@ import com.facebook.react.bridge.ReadableNativeMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.WritableArray;
-import com.microblink.MicroblinkSDK;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.intent.IntentDataTransferMode;
-import com.microblink.reactnative.overlays.OverlaySettingsSerializers;
-import com.microblink.uisettings.ActivityRunner;
+import com.microblink.blinkid.MicroblinkSDK;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.intent.IntentDataTransferMode;
+import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerializers;
+import com.microblink.blinkid.uisettings.ActivityRunner;
 
-import com.microblink.uisettings.UISettings;
-import com.microblink.locale.LanguageUtils;
-import com.microblink.reactnative.recognizers.RecognizerSerializers;
+import com.microblink.blinkid.uisettings.UISettings;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerializers;
 
 /**
  * React Native module for BlinkID.
@@ -64,14 +63,6 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
         mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
         UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
-        if (jsonOverlaySettings.hasKey("language")) {
-            String language = jsonOverlaySettings.getString("language");
-            if (language != null) {
-                String country = jsonOverlaySettings.hasKey("country") ? jsonOverlaySettings.getString("country") : null;
-                LanguageUtils.setLanguageAndCountry(language, country, getCurrentActivity());
-            }
-        }
-
         ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
     }
 

@@ -38,7 +38,7 @@ function buildResult(result, key) {
 }
 
 function buildDateResult(result, key) {
-    if (result) {
+    if (result && result.day && result.month && result.year) {
         return key + ": " +
             result.day + "." + result.month + "." + result.year + "."
             + "\n";

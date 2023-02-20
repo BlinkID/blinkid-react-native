@@ -1,22 +1,22 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.blinkid.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.reactnative.recognizers.RecognizerSerialization;
-import com.microblink.reactnative.SerializationUtils;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.blinkid.reactnative.SerializationUtils;
 
 public final class IdBarcodeRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
-        com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer();
+        com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer();
         return recognizer;
     }
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer)recognizer).getResult();
+        com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer.Result result = ((com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("additionalNameInformation", result.getAdditionalNameInformation());
@@ -66,6 +66,6 @@ public final class IdBarcodeRecognizerSerialization implements RecognizerSeriali
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer.class;
+        return com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.IdBarcodeRecognizer.class;
     }
 }

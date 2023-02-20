@@ -1,12 +1,20 @@
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.microblink.com' }
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 33
     }
     buildTypes {
         release {
@@ -18,7 +26,7 @@ android {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation('com.microblink:blinkid:5.17.0@aar') {
+    implementation('com.microblink:blinkid:6.1.0@aar') {
         transitive = true
     }
 }

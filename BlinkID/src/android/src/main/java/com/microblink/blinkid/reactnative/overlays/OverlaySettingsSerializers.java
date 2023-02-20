@@ -1,11 +1,11 @@
-package com.microblink.reactnative.overlays;
+package com.microblink.blinkid.reactnative.overlays;
 
 import android.content.Context;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.reactnative.overlays.serialization.*;
-import com.microblink.uisettings.UISettings;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.reactnative.overlays.serialization.*;
+import com.microblink.blinkid.uisettings.UISettings;
 
 import java.util.HashMap;
 

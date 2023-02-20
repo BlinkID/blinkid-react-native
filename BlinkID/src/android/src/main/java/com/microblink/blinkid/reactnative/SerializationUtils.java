@@ -1,4 +1,4 @@
-package com.microblink.reactnative;
+package com.microblink.blinkid.reactnative;
 
 import android.graphics.Bitmap;
 import android.util.Base64;
@@ -8,13 +8,13 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.geometry.Point;
-import com.microblink.geometry.Quadrilateral;
-import com.microblink.image.Image;
-import com.microblink.results.date.Date;
-import com.microblink.results.date.DateResult;
-import com.microblink.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.geometry.Point;
+import com.microblink.blinkid.geometry.Quadrilateral;
+import com.microblink.blinkid.image.Image;
+import com.microblink.blinkid.results.date.SimpleDate;
+import com.microblink.blinkid.results.date.Date;
+import com.microblink.blinkid.entities.recognizers.blinkid.imageoptions.extension.ImageExtensionFactors;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public abstract class SerializationUtils {
         jsonObject.putInt("resultState", serializeEnum(result.getResultState()));
     }
 
-    public static WritableMap serializeDate(Date date) {
+    public static WritableMap serializeSimpleDate(SimpleDate date) {
         if (date != null ) {
             WritableMap jsonDate = new WritableNativeMap();
             jsonDate.putInt("day", date.getDay());
@@ -38,16 +38,16 @@ public abstract class SerializationUtils {
         }
     }
 
-    public static WritableMap serializeDate(DateResult dateResult) {
+    public static WritableMap serializeDate(Date dateResult) {
         if (dateResult == null) {
             return null;
         } else {
-            return serializeDate(dateResult.getDate());
+            return serializeSimpleDate(dateResult.getDate());
         }
     }
 
     public static int serializeEnum(Enum e) {
-        return e.ordinal() + 1;
+        return e.ordinal();
     }
 
     public static WritableArray serializeStringArray(String[] strings) {

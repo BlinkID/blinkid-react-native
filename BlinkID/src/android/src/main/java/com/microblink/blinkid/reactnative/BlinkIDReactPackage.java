@@ -1,4 +1,4 @@
-package com.microblink.reactnative;
+package com.microblink.blinkid.reactnative;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

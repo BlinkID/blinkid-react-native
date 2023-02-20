@@ -1,33 +1,33 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.blinkid.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.reactnative.recognizers.RecognizerSerialization;
-import com.microblink.reactnative.SerializationUtils;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.blinkid.reactnative.SerializationUtils;
 
-public final class MrtdRecognizerSerialization implements RecognizerSerialization {
+public final class PassportRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer();
-        if (jsonMap.hasKey("allowSpecialCharacters")) {
-            recognizer.setAllowSpecialCharacters(jsonMap.getBoolean("allowSpecialCharacters"));
-        }
-        if (jsonMap.hasKey("allowUnparsedResults")) {
-            recognizer.setAllowUnparsedResults(jsonMap.getBoolean("allowUnparsedResults"));
-        }
-        if (jsonMap.hasKey("allowUnverifiedResults")) {
-            recognizer.setAllowUnverifiedResults(jsonMap.getBoolean("allowUnverifiedResults"));
+        com.microblink.blinkid.entities.recognizers.blinkid.passport.PassportRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.passport.PassportRecognizer();
+        if (jsonMap.hasKey("anonymizeNetherlandsMrz")) {
+            recognizer.setAnonymizeNetherlandsMrz(jsonMap.getBoolean("anonymizeNetherlandsMrz"));
         }
         if (jsonMap.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonMap.getBoolean("detectGlare"));
+        }
+        if (jsonMap.hasKey("faceImageDpi")) {
+            recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
         }
         if (jsonMap.hasKey("fullDocumentImageDpi")) {
             recognizer.setFullDocumentImageDpi(jsonMap.getInt("fullDocumentImageDpi"));
         }
         if (jsonMap.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonMap.getMap("fullDocumentImageExtensionFactors")));
+        }
+        if (jsonMap.hasKey("returnFaceImage")) {
+            recognizer.setReturnFaceImage(jsonMap.getBoolean("returnFaceImage"));
         }
         if (jsonMap.hasKey("returnFullDocumentImage")) {
             recognizer.setReturnFullDocumentImage(jsonMap.getBoolean("returnFullDocumentImage"));
@@ -37,9 +37,10 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer)recognizer).getResult();
+        com.microblink.blinkid.entities.recognizers.blinkid.passport.PassportRecognizer.Result result = ((com.microblink.blinkid.entities.recognizers.blinkid.passport.PassportRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
+        jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));
         jsonResult.putMap("mrzResult", BlinkIDSerializationUtils.serializeMrzResult(result.getMrzResult()));
         return jsonResult;
@@ -47,11 +48,11 @@ public final class MrtdRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public String getJsonName() {
-        return "MrtdRecognizer";
+        return "PassportRecognizer";
     }
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer.class;
+        return com.microblink.blinkid.entities.recognizers.blinkid.passport.PassportRecognizer.class;
     }
 }

@@ -1,12 +1,12 @@
-package com.microblink.reactnative.overlays.serialization;
+package com.microblink.blinkid.reactnative.overlays.serialization;
 
 import android.content.Context;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
-import com.microblink.uisettings.DocumentUISettings;
-import com.microblink.uisettings.UISettings;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerialization;
+import com.microblink.blinkid.uisettings.DocumentUISettings;
+import com.microblink.blinkid.uisettings.UISettings;
 
 public final class DocumentOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override

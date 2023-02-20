@@ -1,15 +1,15 @@
-package com.microblink.reactnative.overlays.serialization;
+package com.microblink.blinkid.reactnative.overlays.serialization;
 
 import android.content.Context;
 
 import com.facebook.react.bridge.ReadableMap;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.fragment.overlay.blinkid.legacy.documentverification.LegacyDocumentVerificationOverlayStrings;
-import com.microblink.reactnative.overlays.OverlaySettingsSerialization;
-import com.microblink.uisettings.LegacyDocumentVerificationUISettings;
-import com.microblink.uisettings.UISettings;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.fragment.overlay.blinkid.legacy.documentverification.LegacyDocumentVerificationOverlayStrings;
+import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerialization;
+import com.microblink.blinkid.uisettings.LegacyDocumentVerificationUISettings;
+import com.microblink.blinkid.uisettings.UISettings;
 
-import static com.microblink.reactnative.SerializationUtils.getStringFromMap;
+import static com.microblink.blinkid.reactnative.SerializationUtils.getStringFromMap;
 
 public final class DocumentVerificationOverlaySettingsSerialization implements OverlaySettingsSerialization {
     @Override

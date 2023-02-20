@@ -1,12 +1,12 @@
-package com.microblink.reactnative.recognizers;
+package com.microblink.blinkid.reactnative.recognizers;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.entities.recognizers.RecognizerBundle;
-import com.microblink.reactnative.recognizers.serialization.*;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
+import com.microblink.blinkid.reactnative.recognizers.serialization.*;
 
 import java.util.HashMap;
 
@@ -18,8 +18,8 @@ public enum RecognizerSerializers {
 
     RecognizerSerializers() {
         registerMapping(new SuccessFrameGrabberRecognizerSerialization());
-        registerMapping(new BlinkIdCombinedRecognizerSerialization());
-        registerMapping(new BlinkIdRecognizerSerialization());
+        registerMapping(new BlinkIdMultiSideRecognizerSerialization());
+        registerMapping(new BlinkIdSingleSideRecognizerSerialization());
         registerMapping(new DocumentFaceRecognizerSerialization());
         registerMapping(new IdBarcodeRecognizerSerialization());
         registerMapping(new MrtdCombinedRecognizerSerialization());

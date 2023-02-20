@@ -1,16 +1,16 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.blinkid.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.reactnative.recognizers.RecognizerSerialization;
-import com.microblink.reactnative.SerializationUtils;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.blinkid.reactnative.SerializationUtils;
 
 public final class VisaRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
-        com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer();
+        com.microblink.blinkid.entities.recognizers.blinkid.visa.VisaRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.visa.VisaRecognizer();
         if (jsonMap.hasKey("detectGlare")) {
             recognizer.setDetectGlare(jsonMap.getBoolean("detectGlare"));
         }
@@ -34,7 +34,7 @@ public final class VisaRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer)recognizer).getResult();
+        com.microblink.blinkid.entities.recognizers.blinkid.visa.VisaRecognizer.Result result = ((com.microblink.blinkid.entities.recognizers.blinkid.visa.VisaRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
@@ -50,6 +50,6 @@ public final class VisaRecognizerSerialization implements RecognizerSerializatio
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.visa.VisaRecognizer.class;
+        return com.microblink.blinkid.entities.recognizers.blinkid.visa.VisaRecognizer.class;
     }
 }

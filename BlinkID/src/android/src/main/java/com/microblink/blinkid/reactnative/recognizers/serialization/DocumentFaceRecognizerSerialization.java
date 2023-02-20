@@ -1,18 +1,18 @@
-package com.microblink.reactnative.recognizers.serialization;
+package com.microblink.blinkid.reactnative.recognizers.serialization;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.microblink.entities.recognizers.Recognizer;
-import com.microblink.reactnative.recognizers.RecognizerSerialization;
-import com.microblink.reactnative.SerializationUtils;
+import com.microblink.blinkid.entities.recognizers.Recognizer;
+import com.microblink.blinkid.reactnative.recognizers.RecognizerSerialization;
+import com.microblink.blinkid.reactnative.SerializationUtils;
 
 public final class DocumentFaceRecognizerSerialization implements RecognizerSerialization {
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
-        com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer recognizer = new com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer();
+        com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer();
         if (jsonMap.hasKey("detectorType")) {
-            recognizer.setDetectorType(com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonMap.getInt("detectorType") - 1]);
+            recognizer.setDetectorType(com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceDetectorType.values()[jsonMap.getInt("detectorType")]);
         }
         if (jsonMap.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
@@ -37,7 +37,7 @@ public final class DocumentFaceRecognizerSerialization implements RecognizerSeri
 
     @Override
     public WritableMap serializeResult(Recognizer<?> recognizer) {
-        com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.Result result = ((com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer)recognizer).getResult();
+        com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.Result result = ((com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer)recognizer).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonRecognizerResultData(jsonResult, result);
         jsonResult.putMap("documentLocation", SerializationUtils.serializeQuad(result.getDocumentLocation()));
@@ -54,6 +54,6 @@ public final class DocumentFaceRecognizerSerialization implements RecognizerSeri
 
     @Override
     public Class<?> getRecognizerClass() {
-        return com.microblink.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.class;
+        return com.microblink.blinkid.entities.recognizers.blinkid.documentface.DocumentFaceRecognizer.class;
     }
 }
