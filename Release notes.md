@@ -1,4 +1,4 @@
-## 6.1.2
+## 6.1.1
 
 We have updated plugin to [Android SDK v6.1.2](https://github.com/BlinkID/blinkid-android/releases/tag/v6.1.2) and [iOS SDK v6.1.2](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.1.2)
 
