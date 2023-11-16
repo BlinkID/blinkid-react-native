@@ -11,6 +11,9 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.blinkid.entities.recognizers.blinkid.generic.BlinkIdSingleSideRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.generic.BlinkIdSingleSideRecognizer();
+        if (jsonMap.hasKey("additionalAnonymization")) {
+            recognizer.setAdditionalAnonymization(BlinkIDSerializationUtils.deserializeClassAnonymizationSettings(jsonMap.getArray("additionalAnonymization")));
+        }
         if (jsonMap.hasKey("allowBlurFilter")) {
             recognizer.setAllowBlurFilter(jsonMap.getBoolean("allowBlurFilter"));
         }
@@ -88,6 +91,8 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putMap("employer", BlinkIDSerializationUtils.serializeStringResult(result.getEmployer()));
         jsonResult.putBoolean("expired", result.isExpired());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putMap("faceImageLocation", SerializationUtils.serializeRectangle(result.getFaceImageLocation()));
+        jsonResult.putInt("faceImageSide", BlinkIDSerializationUtils.serializeSide(result.getFaceImageSide()));
         jsonResult.putMap("fathersName", BlinkIDSerializationUtils.serializeStringResult(result.getFathersName()));
         jsonResult.putMap("firstName", BlinkIDSerializationUtils.serializeStringResult(result.getFirstName()));
         jsonResult.putString("fullDocumentImage", SerializationUtils.encodeImageBase64(result.getFullDocumentImage()));

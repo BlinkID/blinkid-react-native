@@ -8,7 +8,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init $appName --version="0.71.2" || exit 1
+npx react-native init $appName --version="0.72.6" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-6.1.1.tgz
+  npm install --save blinkid-react-native-6.3.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -104,5 +104,5 @@ sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 31#g' ./android/build.grad
 popd
 
 echo "Go to React Native project folder: cd $appName"
-echo "To run on Android execute: react-native run-android"
+echo "To run on Android execute: npx react-native run-android"
 echo "To run on iOS: open $appName/ios/$appName.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"

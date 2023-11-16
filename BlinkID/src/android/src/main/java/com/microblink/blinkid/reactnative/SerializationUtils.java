@@ -11,6 +11,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.microblink.blinkid.entities.recognizers.Recognizer;
 import com.microblink.blinkid.geometry.Point;
 import com.microblink.blinkid.geometry.Quadrilateral;
+import com.microblink.blinkid.geometry.Rectangle;
 import com.microblink.blinkid.image.Image;
 import com.microblink.blinkid.results.date.SimpleDate;
 import com.microblink.blinkid.results.date.Date;
@@ -99,6 +100,18 @@ public abstract class SerializationUtils {
         jsonQuad.putMap("lowerLeft", serializePoint(quad.getLowerLeft()));
         jsonQuad.putMap("lowerRight", serializePoint(quad.getLowerRight()));
         return jsonQuad;
+    }
+
+    public static WritableMap serializeRectangle(Rectangle rectangle) {
+        WritableMap jsonRectangle = new WritableNativeMap();
+
+        if (rectangle != null) {
+            jsonRectangle.putDouble("x", rectangle.getX());
+            jsonRectangle.putDouble("y", rectangle.getY());
+            jsonRectangle.putDouble("height", rectangle.getHeight());
+            jsonRectangle.putDouble("width", rectangle.getWidth());
+        }
+        return jsonRectangle;
     }
 
     public static ImageExtensionFactors deserializeExtensionFactors(ReadableMap jsonExtensionFactors) {

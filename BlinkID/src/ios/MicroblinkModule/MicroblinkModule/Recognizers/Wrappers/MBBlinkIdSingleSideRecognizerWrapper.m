@@ -18,6 +18,16 @@
 -(MBRecognizer *) createRecognizer:(NSDictionary*) jsonRecognizer {
     MBBlinkIdSingleSideRecognizer *recognizer = [[MBBlinkIdSingleSideRecognizer alloc] init];
     {
+        id additionalAnonymization = [jsonRecognizer valueForKey:@"additionalAnonymization"];
+        if (additionalAnonymization != nil) {
+            NSArray<NSDictionary *> *anonClasses = additionalAnonymization;
+            for (NSDictionary *class in anonClasses) {
+                MBClassAnonymizationSettings *settings = [MBBlinkIDSerializationUtils deserializeMBClassAnonymizationSettings:(NSDictionary*)class];
+                [recognizer recognizerAddClassToAdditionalAnonymization:settings];
+            }
+        }
+    }
+    {
         id allowBlurFilter = [jsonRecognizer valueForKey:@"allowBlurFilter"];
         if (allowBlurFilter != nil) {
             recognizer.allowBlurFilter = [(NSNumber *)allowBlurFilter boolValue];
@@ -147,6 +157,8 @@
     [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.employer] forKey:@"employer"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
+    [jsonResult setValue:[MBSerializationUtils serializeCGRect:self.result.faceImageLocation] forKey:@"faceImageLocation"];
+    [jsonResult setValue:[NSNumber numberWithInteger:self.result.faceImageSide] forKey:@"faceImageSide"];
     [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.fathersName] forKey:@"fathersName"];
     [jsonResult setValue:[MBSerializationUtils serializeMBStringResult:self.result.firstName] forKey:@"firstName"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.fullDocumentImage] forKey:@"fullDocumentImage"];

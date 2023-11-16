@@ -11,6 +11,9 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
     @Override
     public Recognizer<?> createRecognizer(ReadableMap jsonMap) {
         com.microblink.blinkid.entities.recognizers.blinkid.generic.BlinkIdMultiSideRecognizer recognizer = new com.microblink.blinkid.entities.recognizers.blinkid.generic.BlinkIdMultiSideRecognizer();
+        if (jsonMap.hasKey("additionalAnonymization")) {
+            recognizer.setAdditionalAnonymization(BlinkIDSerializationUtils.deserializeClassAnonymizationSettings(jsonMap.getArray("additionalAnonymization")));
+        }
         if (jsonMap.hasKey("allowBlurFilter")) {
             recognizer.setAllowBlurFilter(jsonMap.getBoolean("allowBlurFilter"));
         }
@@ -89,7 +92,7 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
-        jsonResult.putMap("dataMatchResult", BlinkIDSerializationUtils.serializeDataMatchResult(result.getDataMatch()));
+        jsonResult.putMap("dataMatch", BlinkIDSerializationUtils.serializeDataMatchResult(result.getDataMatch()));
         jsonResult.putMap("dateOfBirth", BlinkIDSerializationUtils.serializeDateResult(result.getDateOfBirth()));
         jsonResult.putMap("dateOfExpiry", BlinkIDSerializationUtils.serializeDateResult(result.getDateOfExpiry()));
         jsonResult.putBoolean("dateOfExpiryPermanent", result.isDateOfExpiryPermanent());
@@ -101,6 +104,8 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putMap("employer", BlinkIDSerializationUtils.serializeStringResult(result.getEmployer()));
         jsonResult.putBoolean("expired", result.isExpired());
         jsonResult.putString("faceImage", SerializationUtils.encodeImageBase64(result.getFaceImage()));
+        jsonResult.putMap("faceImageLocation", SerializationUtils.serializeRectangle(result.getFaceImageLocation()));
+        jsonResult.putInt("faceImageSide", BlinkIDSerializationUtils.serializeSide(result.getFaceImageSide()));
         jsonResult.putMap("fathersName", BlinkIDSerializationUtils.serializeStringResult(result.getFathersName()));
         jsonResult.putMap("firstName", BlinkIDSerializationUtils.serializeStringResult(result.getFirstName()));
         jsonResult.putMap("frontAdditionalProcessingInfo", BlinkIDSerializationUtils.serializeAdditionalProcessingInfo(result.getFrontAdditionalProcessingInfo()));
@@ -129,7 +134,6 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putMap("sex", BlinkIDSerializationUtils.serializeStringResult(result.getSex()));
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
-        jsonResult.putInt("version", (int)result.getVersion());
         return jsonResult;
     }
 

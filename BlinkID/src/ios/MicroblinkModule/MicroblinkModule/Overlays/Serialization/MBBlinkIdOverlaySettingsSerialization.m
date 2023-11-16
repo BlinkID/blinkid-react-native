@@ -33,6 +33,34 @@
     [MBOverlaySerializationUtils extractCommonOverlaySettings:jsonOverlaySettings overlaySettings:sett];
 
     {
+        id requireDocumentSidesDataMatch = [jsonOverlaySettings valueForKey:@"requireDocumentSidesDataMatch"];
+        if (requireDocumentSidesDataMatch != nil) {
+            sett.requireDocumentSidesDataMatch = [requireDocumentSidesDataMatch boolValue];
+        }
+    }
+
+    {
+        id showNotSupportedDialog = [jsonOverlaySettings valueForKey:@"showNotSupportedDialog"];
+        if (showNotSupportedDialog != nil) {
+            sett.showNotSupportedDialog = [showNotSupportedDialog boolValue];
+        }
+    }
+
+    {
+        id showFlashlightWarning = [jsonOverlaySettings valueForKey:@"showFlashlightWarning"];
+        if (showFlashlightWarning != nil) {
+            sett.showFlashlightWarning = [showFlashlightWarning boolValue];
+        }
+    }
+
+    {
+        id backSideScanningTimeoutMilliseconds = [jsonOverlaySettings valueForKey:@"backSideScanningTimeoutMilliseconds"];
+        if (backSideScanningTimeoutMilliseconds != nil) {
+            sett.backSideScanningTimeout = [backSideScanningTimeoutMilliseconds doubleValue] / 1000.0;
+        }
+    }
+    
+    {
         id firstSideInstructionsText = [jsonOverlaySettings valueForKey:@"firstSideInstructionsText"];
         if (firstSideInstructionsText != nil) {
             sett.firstSideInstructionsText = (NSString *)firstSideInstructionsText;
@@ -73,6 +101,20 @@
             sett.sidesNotMatchingMessage = (NSString *)sidesNotMatchingMessage;
         }
     }
+    
+    {
+        id dataMismatchTitle = [jsonOverlaySettings valueForKey:@"dataMismatchTitle"];
+        if (dataMismatchTitle != nil) {
+            sett.dataMismatchTitle = (NSString *)dataMismatchTitle;
+        }
+    }
+
+    {
+        id dataMismatchMessage = [jsonOverlaySettings valueForKey:@"dataMismatchMessage"];
+        if (dataMismatchMessage != nil) {
+            sett.dataMismatchMessage = (NSString *)dataMismatchMessage;
+        }
+    }
 
     {
         id unsupportedDocumentTitle = [jsonOverlaySettings valueForKey:@"unsupportedDocumentTitle"];
@@ -110,44 +152,52 @@
     }
 
     {
-        id requireDocumentSidesDataMatch = [jsonOverlaySettings valueForKey:@"requireDocumentSidesDataMatch"];
-        if (requireDocumentSidesDataMatch != nil) {
-            sett.requireDocumentSidesDataMatch = [requireDocumentSidesDataMatch boolValue];
+        id errorDocumentTooCloseToEdge = [jsonOverlaySettings valueForKey:@"errorDocumentTooCloseToEdge"];
+        if (errorDocumentTooCloseToEdge != nil) {
+            sett.errorDocumentTooCloseToEdge = (NSString *)errorDocumentTooCloseToEdge;
         }
     }
-
-    {
-        id showNotSupportedDialog = [jsonOverlaySettings valueForKey:@"showNotSupportedDialog"];
-        if (showNotSupportedDialog != nil) {
-            sett.showNotSupportedDialog = [showNotSupportedDialog boolValue];
-        }
-    }
-
-    {
-        id showFlashlightWarning = [jsonOverlaySettings valueForKey:@"showFlashlightWarning"];
-        if (showFlashlightWarning != nil) {
-            sett.showFlashlightWarning = [showFlashlightWarning boolValue];
-        }
-    }
-
-    {
-        id backSideScanningTimeoutMilliseconds = [jsonOverlaySettings valueForKey:@"backSideScanningTimeoutMilliseconds"];
-        if (backSideScanningTimeoutMilliseconds != nil) {
-            sett.backSideScanningTimeout = [backSideScanningTimeoutMilliseconds doubleValue] / 1000.0;
-        }
-    }
-
+    
     {
         id scanBarcodeText = [jsonOverlaySettings valueForKey:@"scanBarcodeText"];
         if (scanBarcodeText != nil) {
             sett.scanBarcodeText = (NSString *)scanBarcodeText;
         }
     }
-
+    
     {
-        id errorDocumentTooCloseToEdge = [jsonOverlaySettings valueForKey:@"errorDocumentTooCloseToEdge"];
-        if (errorDocumentTooCloseToEdge != nil) {
-            sett.errorDocumentTooCloseToEdge = (NSString *)errorDocumentTooCloseToEdge;
+        id errorMandatoryFieldMissing = [jsonOverlaySettings valueForKey:@"errorDocumentNotFullyVisible"];
+        if (errorMandatoryFieldMissing != nil) {
+            sett.errorMandatoryFieldMissing = (NSString *)errorMandatoryFieldMissing;
+        }
+    }
+    
+    {
+        id showOnboardingInfo = [jsonOverlaySettings valueForKey:@"showOnboardingInfo"];
+        if (showOnboardingInfo != nil) {
+            sett.showOnboardingInfo = [showOnboardingInfo boolValue];
+        }
+    }
+    
+    {
+        id showIntroductionDialog = [jsonOverlaySettings valueForKey:@"showIntroductionDialog"];
+        if (showIntroductionDialog != nil) {
+            sett.showIntroductionDialog = [showIntroductionDialog boolValue];
+        }
+    }
+    
+    {
+        id onboardingButtonTooltipDelay = [jsonOverlaySettings valueForKey:@"onboardingButtonTooltipDelay"];
+        if (onboardingButtonTooltipDelay != nil) {
+            sett.onboardingButtonTooltipDelay = [onboardingButtonTooltipDelay doubleValue] / 1000.0;
+        }
+    }
+    
+    {
+        
+        id showMandatoryFieldsMissing = [jsonOverlaySettings valueForKey: @"showMandatoryFieldsMissing"];
+        if (showMandatoryFieldsMissing != nil) {
+            sett.defineSpecificMissingMandatoryFields = [showMandatoryFieldsMissing boolValue];
         }
     }
 
