@@ -22,6 +22,7 @@
 +(NSDictionary * _Nonnull) serializeBarcodeResult:(MBBarcodeResult * _Nonnull)barcodeResult;
 +(NSDictionary * _Nonnull) serializeImageAnalysisResult:(MBImageAnalysisResult * _Nonnull)imageAnalysisResult;
 +(MBRecognitionModeFilter * _Nonnull) deserializeMBRecognitionModeFilter:(NSDictionary * _Nullable)jsonRecognitionModeFilter;
++(MBClassAnonymizationSettings * _Nonnull) deserializeMBClassAnonymizationSettings:(NSDictionary * _Nullable)jsonClassAnonymizationSettings;
 +(NSDictionary * _Nonnull) serializeBarcodeElements:(MBBarcodeElements * _Nonnull)extendedElements;
 +(NSArray<NSString *> * _Nonnull) serializeBarcodeElementsValues:(MBBarcodeElements * _Nonnull)extendedElements;
 + (NSDictionary * _Nonnull)serializeAdditionalProcessingInfo:(MBAdditionalProcessingInfo * _Nullable)additionalProcessingInfo;

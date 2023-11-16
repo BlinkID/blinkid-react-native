@@ -96,7 +96,7 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         /**
          * Detailed info on data match.
          */
-        this.dataMatchResult = nativeResult.dataMatchResult;
+        this.dataMatch = nativeResult.dataMatch;
         
         /**
          * The date of birth of the document owner.
@@ -166,6 +166,16 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
          * face image from the document if enabled with returnFaceImage property.
          */
         this.faceImage = nativeResult.faceImage;
+        
+        /**
+         * face image location from the document if enabled with returnFaceImage property.
+         */
+        this.faceImageLocation = nativeResult.faceImageLocation;
+        
+        /**
+         * side of document that face image is located on if enabled with returnFaceImage property.
+         */
+        this.faceImageSide = nativeResult.faceImageSide;
         
         /**
          * The father's name of the document owner.
@@ -317,6 +327,11 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
 export class BlinkIdMultiSideRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdMultiSideRecognizer');
+        
+        /**
+         * Additional anonymization settings.
+         */
+        this.additionalAnonymization = [];
         
         /**
          * Defines whether blured frames filtering is allowed

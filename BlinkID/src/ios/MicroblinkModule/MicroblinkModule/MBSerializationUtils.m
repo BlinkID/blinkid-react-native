@@ -25,6 +25,8 @@
 + (NSDictionary *)serializeMBDateResult:(MBDateResult *) value {
     NSMutableDictionary *dict = [MBSerializationUtils serializeDay:value.day month:value.month year:value.year].mutableCopy;
     [dict setValue:[MBSerializationUtils serializeMBStringResult:value.originalDateStringResult] forKey:@"originalDateStringResult"];
+    [dict setValue:[NSNumber numberWithBool:value.isFilledByDomainKnowledge] forKey:@"isFilledByDomainKnowledge"];
+
     return dict;
 }
 
@@ -35,7 +37,26 @@
     [dict setValue:[value valueForAlphabetType:MBAlphabetTypeCyrillic] forKey:@"cyrillic"];
     [dict setValue:value.description forKey:@"description"];
     
+    NSMutableDictionary *location = [NSMutableDictionary dictionary];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [dict setValue:location forKey:@"location"];
+    
+    NSMutableDictionary *side = [NSMutableDictionary dictionary];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [dict setValue:side forKey:@"side"];
+    
     return dict;
+}
+
++(NSNumber *)serializeMBSide:(MBSide) value {
+    if (value == MBSideNone) {
+        return nil;
+    }
+    return [NSNumber numberWithLong:value - 1];
 }
 
 +(NSString *) encodeMBImage:(MBImage * _Nullable) image {
@@ -63,6 +84,19 @@
         @"lowerLeft" : [MBSerializationUtils serializeCGPoint:quad.lowerLeft],
         @"lowerRight" : [MBSerializationUtils serializeCGPoint:quad.lowerRight]
     };
+}
+
++(NSDictionary *)serializeCGRect:(CGRect) rect {
+    NSDictionary *rectDictionaty = [NSDictionary new];
+    if (!CGRectIsNull(rect)) {
+      rectDictionaty =  @{
+            @"x" : [NSNumber numberWithFloat:rect.origin.x],
+            @"y" : [NSNumber numberWithFloat:rect.origin.y],
+            @"height": [NSNumber numberWithFloat:rect.size.height],
+            @"width": [NSNumber numberWithFloat:rect.size.width],
+        };
+    }
+    return rectDictionaty;
 }
 
 @end

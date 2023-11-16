@@ -100,6 +100,12 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         this.showFlashlightWarning = true;
 
         /**
+        * Option to configure missing mandatory fields feedback during scanning. If disabled, general message is presented.
+        *
+         * Default: true
+        */
+        this.showMandatoryFieldsMissing = true;
+        /**
          * Option to configure back side scanning timeout.
          *
          * Default: 17000
@@ -118,6 +124,25 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         */
         this.errorDocumentTooCloseToEdge = null;
 
+        /**
+         * String: title of the dialog which is shown when the data on the document is not matching.
+        * If null, default value will be used.
+        */
+        this.showOnboardingInfo = true;
+
+        /**
+        * Defines whether introduction dialog is turned on by default.
+        *
+        * Default: false
+        */
+        this.showIntroductionDialog = false;
+
+        /**
+        * Option to configure onboarding button tooltip delay time.
+        *
+        * Default: 12000
+        */
+        this.onboardingButtonTooltipDelay = 12000;
     }
 }
 

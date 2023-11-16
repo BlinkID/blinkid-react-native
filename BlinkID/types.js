@@ -9,6 +9,10 @@ export class Date {
         this.month = nativeDate.month;
         /** year */
         this.year = nativeDate.year;
+        /** original date string */
+        this.originalDateStringResult = nativeDate.originalDateStringResult;
+        /** isFilledByDomainKnowledge */
+        this.isFilledByDomainKnowledge = nativeDate.isFilledByDomainKnowledge;
     }
 }
 
@@ -129,7 +133,7 @@ export const IdBarcodeDocumentType = Object.freeze(
 );
 
 /**
- * Defines possible color statuses determined from scanned image scanned with BlinkID or BlinkID Multiside Recognizer
+ * Defines possible color statuses determined from scanned image scanned with BlinkID or BlinkID MultiSide Recognizer
  */
 export const DocumentImageColorStatus = Object.freeze(
     {
@@ -253,7 +257,7 @@ export class ImageAnalysisResult {
 }
 
 /**
- * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
+ * Defines possible the document country from ClassInfo scanned with BlinkID or BlinkID MultiSide Recognizer
  */
 export const Country = Object.freeze(
     {
@@ -511,12 +515,13 @@ export const Country = Object.freeze(
         Yemen: 251,
         Yugoslavia: 252,
         Zambia: 253,
-        Zimbabwe: 254
+        Zimbabwe: 254,
+        SchengenArea: 255
     }
 );
 
 /**
- * Defines possible the document country's region from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
+ * Defines possible the document country's region from ClassInfo scanned with BlinkID or BlinkID MultiSide Recognizer
  */
 export const Region = Object.freeze(
     {
@@ -640,12 +645,15 @@ export const Region = Object.freeze(
         QuintanaRooCozumel: 117,
         SaoPaolo: 118,
         RioDeJaneiro: 119,
-        RioGrandeDoSul: 120
+        RioGrandeDoSul: 120,
+        NorthWestTerritories: 121,
+        Nunavut: 122,
+        PrinceEdwardIsland: 123        
     }
 );
 
 /**
- * Defines possible the document type from ClassInfo scanned with BlinkID or BlinkID Multiside Recognizer
+ * Defines possible the document type from ClassInfo scanned with BlinkID or BlinkID MultiSide Recognizer
  */
 export const Type = Object.freeze(
     {
@@ -701,7 +709,60 @@ export const Type = Object.freeze(
         ConsularPassport: 49,
         MinorsPassport: 50,
         MinorsPublicServicesCard: 51,
-        DrivingPrivilegeCard: 52
+        DrivingPrivilegeCard: 52,
+        AsylumRequest: 53,
+        DriverQualificationCard: 54,
+        ProvisionalDl: 55,
+        RefugeePassport: 56,
+        SpecialId: 57,
+        UniformedServicesId: 58,
+        ImmigrantVisa: 59
+    }
+);
+
+/**
+ * Defines possible document field types scanned with BlinkID or BlinkID MultiSide Recognizer
+ */
+ export const FieldType = Object.freeze(
+    {
+        AdditionalAddressInformation: 0,
+        AdditionalNameInformation: 1,
+        AdditionalOptionalAddressInformation: 2,
+        AdditionalPersonalIdNumber: 3,
+        Address: 4,
+        ClassEffectiveDate: 5,
+        ClassExpiryDate: 6,
+        Conditions: 7,
+        DateOfBirth: 8,
+        DateOfExpiry: 9,
+        DateOfIssue: 10,
+        DocumentAdditionalNumber: 11,
+        DocumentOptionalAdditionalNumber: 12,
+        DocumentNumber: 13,
+        Employer: 14,
+        Endorsements: 15,
+        FathersName: 16,
+        FirstName: 17,
+        FullName: 18,
+        IssuingAuthority: 19,
+        LastName: 20,
+        LicenceType: 21,
+        LocalizedName: 22,
+        MaritalStatus: 23,
+        MothersName: 24,
+        Mrz: 25,
+        Nationality: 26,
+        PersonalIdNumber: 27,
+        PlaceOfBirth: 28,
+        Profession: 29,
+        Race: 30,
+        Religion: 31,
+        ResidentialStatus: 32,
+        Restrictions: 33,
+        Sex: 34,
+        VehicleClass: 35,
+        BloodType: 36,
+        Sponsor: 37
     }
 );
 
@@ -1974,7 +2035,25 @@ export class RecognitionModeFilter {
 }
 
 /**
- * Possible recognition modes used by BlinkID(Multiside)Recognizer to scan the document.
+ * ClassAnonymizationSettings is used to anonymize specific documents and fields.
+ * It can be modified with countries, regions, document types and document fields. 
+ * See Country, Region, Type and FieldType objects to get more information which fields can be anonymized.
+ * Setting is taken into account if AnonymizationMode is set to ImageOnly,ResultFieldsOnly or FullResult.
+ */
+export class ClassAnonymizationSettings {
+    constructor() {
+        this.country = null;
+
+        this.region = null;
+
+        this.type = null;
+
+        this.fields = [];
+    }
+}
+
+/**
+ * Possible recognition modes used by BlinkID(MultiSide)Recognizer to scan the document.
  */
 export const RecognitionMode = Object.freeze(
     {

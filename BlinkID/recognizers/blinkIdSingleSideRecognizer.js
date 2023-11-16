@@ -140,6 +140,16 @@ export class BlinkIdSingleSideRecognizerResult extends RecognizerResult {
         this.faceImage = nativeResult.faceImage;
         
         /**
+         * face image location from the document if enabled with returnFaceImage property.
+         */
+        this.faceImageLocation = nativeResult.faceImageLocation;
+        
+        /**
+         * side of document that face image is located on if enabled with returnFaceImage property.
+         */
+        this.faceImageSide = nativeResult.faceImageSide;
+        
+        /**
          * The father's name of the document owner.
          */
         this.fathersName = nativeResult.fathersName;
@@ -263,6 +273,11 @@ export class BlinkIdSingleSideRecognizerResult extends RecognizerResult {
 export class BlinkIdSingleSideRecognizer extends Recognizer {
     constructor() {
         super('BlinkIdSingleSideRecognizer');
+        
+        /**
+         * Additional anonymization settings.
+         */
+        this.additionalAnonymization = [];
         
         /**
          * Defines whether blured frames filtering is allowed

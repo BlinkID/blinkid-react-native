@@ -1,5 +1,6 @@
 package com.microblink.blinkid.reactnative.recognizers.serialization;
 
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
@@ -25,6 +26,12 @@ import com.microblink.blinkid.entities.recognizers.blinkid.generic.barcode.Barco
 import com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.BarcodeElements;
 import com.microblink.blinkid.entities.recognizers.blinkid.idbarcode.BarcodeElementKey;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.RecognitionModeFilter;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.ClassAnonymizationSettings;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.FieldType;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Country;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Region;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Type;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.Side;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -124,6 +131,7 @@ public abstract class BlinkIDSerializationUtils {
         WritableMap jsonDateResult = new WritableNativeMap();
         if (dateResult != null && dateResult.getDate() != null) {
             jsonDateResult.putMap("originalDateStringResult", serializeStringResult(dateResult.getOriginalDateString()));
+            jsonDateResult.putBoolean("isFilledByDomainKnowledge", dateResult.isFilledByDomainKnowledge());
             jsonDateResult.putInt("day", dateResult.getDate().getDay());
             jsonDateResult.putInt("month", dateResult.getDate().getMonth());
             jsonDateResult.putInt("year", dateResult.getDate().getYear());
@@ -139,6 +147,18 @@ public abstract class BlinkIDSerializationUtils {
             jsonStringResult.putString("arabic", stringResult.value(AlphabetType.Arabic));
             jsonStringResult.putString("cyrillic", stringResult.value(AlphabetType.Cyrillic));
             jsonStringResult.putString("description", stringResult.toString());
+
+            WritableMap jsonFieldLocations = new WritableNativeMap();
+            jsonFieldLocations.putMap("latin",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Latin)));
+            jsonFieldLocations.putMap("arabic",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Arabic)));
+            jsonFieldLocations.putMap("cyrillic",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Cyrillic)));
+            jsonStringResult.putMap("location", jsonFieldLocations);
+
+            WritableMap jsonDocumentSides = new WritableNativeMap();
+            jsonDocumentSides.putInt("latin",serializeSide(stringResult.side(AlphabetType.Latin)));
+            jsonDocumentSides.putInt("arabic",serializeSide(stringResult.side(AlphabetType.Arabic)));
+            jsonDocumentSides.putInt("cyrillic",serializeSide(stringResult.side(AlphabetType.Cyrillic)));
+            jsonStringResult.putMap("side", jsonDocumentSides);
         }
         return jsonStringResult;
     }
@@ -279,4 +299,56 @@ public abstract class BlinkIDSerializationUtils {
         }
     }
 
+    public static int serializeSide(Side side) {
+        if (side != null) {
+        return side.ordinal() + 1;
+        }
+        return 0;
+    }
+    
+    public static ClassAnonymizationSettings[] deserializeClassAnonymizationSettings (ReadableArray jsonArray) {
+
+        if (jsonArray != null && jsonArray.size() > 0) {
+            ClassAnonymizationSettings[] classAnonymizationSettingsArray = new ClassAnonymizationSettings[jsonArray.size()];
+
+            for (int i = 0; i < jsonArray.size(); i++) {
+
+                FieldType[] fieldTypes = new FieldType[0];
+                Country country = Country.NONE;
+                Region region = Region.NONE;
+                Type type = Type.NONE;
+                try {
+                    ReadableMap jsonClassAnonymizationSettings = jsonArray.getMap(i);
+
+                    ReadableArray fieldTypeJsonArray = jsonClassAnonymizationSettings.getArray("fields");
+                    fieldTypes = new FieldType[fieldTypeJsonArray.size()];
+                    for (int x = 0; x < fieldTypeJsonArray.size(); x++) {
+                        fieldTypes[x] = FieldType.values()[fieldTypeJsonArray.getInt(x)];
+                    }
+                    try {
+                        country = Country.values()[jsonClassAnonymizationSettings.getInt("country")];
+                    } catch (Exception e) {
+                        country = null;
+                    }
+                    try {
+                        region = Region.values()[jsonClassAnonymizationSettings.getInt("region")];
+                    } catch (Exception e) {
+                        region = null;
+                    }
+                    try {
+                        type = Type.values()[jsonClassAnonymizationSettings.getInt("type")];
+                    } catch (Exception e) {
+                        type = null;
+                    }
+                    ClassAnonymizationSettings classAnonymizationSettings = new ClassAnonymizationSettings(country, region, type, fieldTypes);
+                    classAnonymizationSettingsArray[i] = classAnonymizationSettings;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return classAnonymizationSettingsArray;
+        } else {
+            return new ClassAnonymizationSettings[]{};
+        }
+    }
 }
