@@ -174,7 +174,7 @@ export default class Sample extends Component {
                 buildResult(blinkIdResult.recognitionMode.description, "Recognition mode")
                 ;
 
-            let dataMatchResult = blinkIdResult.dataMatchResult;
+            let dataMatchResult = blinkIdResult.dataMatch;
             resultString +=
                     buildResult(dataMatchResult.stateForWholeDocument, "State for the whole document") +
                     buildResult(dataMatchResult.states[0].state, "dateOfBirth") +
