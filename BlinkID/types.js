@@ -149,7 +149,7 @@ export const DocumentImageColorStatus = Object.freeze(
 /**
  * Defines possible states of Moire pattern detection.
  */
-export const DocumentImageMoireStatus = Object.freeze(
+export const ImageAnalysisDetectionStatus = Object.freeze(
     {
         /** Detection of Moire patterns was not performed. */
         NotAvailable: 0,
@@ -237,6 +237,28 @@ export const ProcessingStatus = Object.freeze(
 );
 
 /**
+ * Defines possible document card rotation positions
+ */
+export const CardRotation = Object.freeze(
+    {
+    /** Zero degrees */
+    Zero: 0,
+
+    /** Clockwise 90 degrees */
+    Clockwise90: 1,
+
+    /** Counter clockwise 90 degrees */
+    CounterClockwise90: 2,
+
+    /** Upside down */
+    UpsideDown: 3,
+
+    /** Card rotation was not performed */
+    None: 4
+    }
+);
+
+/**
  * Defines possible color and moire statuses determined from scanned image.
  */
 export class ImageAnalysisResult {
@@ -253,6 +275,10 @@ export class ImageAnalysisResult {
         this.mrzDetectionStatus = nativeImageAnalysisResult.mrzDetectionStatus;
         /** Barcode detection status determined from the scanned image. */
         this.barcodeDetectionStatus = nativeImageAnalysisResult.barcodeDetectionStatus;
+        /** Orientation determined from the scanned image. */
+        this.cardOrientation = nativeImageAnalysisResult.cardOrientation;
+        /** Document card rotation positions */
+    	this.cardRotation = nativeImageAnalysisResult.cardRotation;
     }
 }
 
@@ -648,7 +674,15 @@ export const Region = Object.freeze(
         RioGrandeDoSul: 120,
         NorthWestTerritories: 121,
         Nunavut: 122,
-        PrinceEdwardIsland: 123        
+        PrinceEdwardIsland: 123,
+        DistritoFederal: 124,
+        Maranhao: 125,
+        MatoGrosso: 126,
+        MinasGerais: 127,
+        Para: 128,
+        Parana: 129,
+        Pernambuco: 130,
+        SantaCatarina: 131 
     }
 );
 
@@ -716,7 +750,9 @@ export const Type = Object.freeze(
         RefugeePassport: 56,
         SpecialId: 57,
         UniformedServicesId: 58,
-        ImmigrantVisa: 59
+        ImmigrantVisa: 59,
+        ConsularVoterId: 60,
+        TwicCard: 61
     }
 );
 
