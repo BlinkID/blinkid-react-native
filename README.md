@@ -124,7 +124,7 @@ DocumentVerificationOverlay is overlay for RecognizerRunnerFragment best suited 
 
 ## Usage
 
-To use the module you call it in your index.android.js or index.ios.js file like in the [sample app](SampleFiles/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
+To use the module you call it in your index.android.js or index.ios.js file like in the [sample app](sample_files/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
 
 ## FAQ
 
