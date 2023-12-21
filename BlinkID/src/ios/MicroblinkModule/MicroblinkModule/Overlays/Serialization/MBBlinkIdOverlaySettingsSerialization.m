@@ -194,7 +194,6 @@
     }
     
     {
-        
         id showMandatoryFieldsMissing = [jsonOverlaySettings valueForKey: @"showMandatoryFieldsMissing"];
         if (showMandatoryFieldsMissing != nil) {
             sett.defineSpecificMissingMandatoryFields = [showMandatoryFieldsMissing boolValue];

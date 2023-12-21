@@ -124,14 +124,6 @@ export class BlinkIdMultiSideRecognizerResult extends RecognizerResult {
         this.documentAdditionalNumber = nativeResult.documentAdditionalNumber;
         
         /**
-         * Returns DataMatchStateSuccess if data from scanned parts/sides of the document match,
-         * DataMatchStateFailed otherwise. For example if date of expiry is scanned from the front and back side
-         * of the document and values do not match, this method will return DataMatchStateFailed. Result will
-         * be DataMatchStateSuccess only if scanned values for all fields that are compared are the same.
-         */
-        this.documentDataMatch = nativeResult.documentDataMatch;
-        
-        /**
          * The document number.
          */
         this.documentNumber = nativeResult.documentNumber;

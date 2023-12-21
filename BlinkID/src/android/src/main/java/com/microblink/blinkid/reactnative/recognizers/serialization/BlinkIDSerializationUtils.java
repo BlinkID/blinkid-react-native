@@ -32,6 +32,8 @@ import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Cou
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Region;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Type;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.Side;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.CardRotation;
+
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -201,6 +203,10 @@ public abstract class BlinkIDSerializationUtils {
         jsonImageAnalysis.putBoolean("blurred", imageAnalysisResult.isBlurred());
         jsonImageAnalysis.putInt("documentImageColorStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getDocumentImageColorStatus()));
         jsonImageAnalysis.putInt("documentImageMoireStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getDocumentImageMoireStatus()));
+        jsonImageAnalysis.putInt("faceDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getFaceDetectionStatus()));
+        jsonImageAnalysis.putInt("mrzDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getMrzDetectionStatus()));
+        jsonImageAnalysis.putInt("barcodeDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getBarcodeDetectionStatus()));
+        jsonImageAnalysis.putInt("cardRotation", BlinkIDSerializationUtils.serializeCardRotation(imageAnalysisResult.getCardRotation()));
         return jsonImageAnalysis;
     }
 
@@ -304,6 +310,13 @@ public abstract class BlinkIDSerializationUtils {
         return side.ordinal() + 1;
         }
         return 0;
+    }
+
+    public static int serializeCardRotation(CardRotation rotation) {
+        if (rotation != null) {
+            return rotation.ordinal();
+        }
+        return 4;
     }
     
     public static ClassAnonymizationSettings[] deserializeClassAnonymizationSettings (ReadableArray jsonArray) {

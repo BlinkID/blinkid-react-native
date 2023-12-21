@@ -213,7 +213,8 @@
              @"documentImageMoireStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageMoireStatus)],
              @"faceDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.faceDetectionStatus)],
              @"mrzDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.mrzDetectionStatus)],
-             @"barcodeDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.barcodeDetectionStatus)]
+             @"barcodeDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.barcodeDetectionStatus)],
+             @"cardRotation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardRotation)]
         };
 }
 
