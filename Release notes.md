@@ -1,3 +1,9 @@
+## 6.5.0
+
+- We have updated the plugin to [Android SDK v6.5.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.5.0) and [iOS SDK v6.5.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.5.0)
+- Added `cardOrientation` property to `ImageAnalysisResult`
+- Fixed issue with the SDK localization
+
 ## 6.4.0
 
 We have updated plugin to [Android SDK v6.4.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.4.0) and [iOS SDK v6.4.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.4.0)
