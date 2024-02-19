@@ -207,6 +207,7 @@ public abstract class BlinkIDSerializationUtils {
         jsonImageAnalysis.putInt("mrzDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getMrzDetectionStatus()));
         jsonImageAnalysis.putInt("barcodeDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getBarcodeDetectionStatus()));
         jsonImageAnalysis.putInt("cardRotation", BlinkIDSerializationUtils.serializeCardRotation(imageAnalysisResult.getCardRotation()));
+        jsonImageAnalysis.putInt("cardOrientation", SerializationUtils.serializeEnum(imageAnalysisResult.getCardOrientation()));
         return jsonImageAnalysis;
     }
 

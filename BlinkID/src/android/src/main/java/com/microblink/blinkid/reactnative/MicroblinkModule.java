@@ -19,6 +19,7 @@ import com.microblink.blinkid.entities.recognizers.RecognizerBundle;
 import com.microblink.blinkid.intent.IntentDataTransferMode;
 import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerializers;
 import com.microblink.blinkid.uisettings.ActivityRunner;
+import com.microblink.blinkid.locale.LanguageUtils;
 
 import com.microblink.blinkid.uisettings.UISettings;
 import com.microblink.blinkid.reactnative.recognizers.RecognizerSerializers;
@@ -60,7 +61,11 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void scanWithCamera(ReadableMap jsonOverlaySettings, ReadableMap jsonRecognizerCollection, ReadableMap license, Promise promise) {
         prepareScanning(license, promise);
-
+        try {
+            LanguageUtils.setLanguageAndCountry(jsonOverlaySettings.getString("language"),
+                    jsonOverlaySettings.getString("country"),
+                    getCurrentActivity());
+        } catch (Exception e) {}
         mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
         UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
         ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);

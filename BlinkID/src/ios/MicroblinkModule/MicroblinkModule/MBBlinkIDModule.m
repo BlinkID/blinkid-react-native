@@ -86,6 +86,14 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
         [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense errorCallback:^(MBLicenseError licenseError) {
         }];
     }
+    
+    if (jsonOverlaySettings[@"language"] != nil) {
+        if (jsonOverlaySettings[@"country"] != nil && ![jsonOverlaySettings[@"country"]  isEqual: @""]) {
+            MBMicroblinkApp.sharedInstance.language = [[(NSString *)jsonOverlaySettings[@"language"] stringByAppendingString:@"-" ] stringByAppendingString:(NSString *)jsonOverlaySettings[@"country"]];
+        } else {
+            MBMicroblinkApp.sharedInstance.language = jsonOverlaySettings[@"language"];
+        }
+    }
 
     self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
 

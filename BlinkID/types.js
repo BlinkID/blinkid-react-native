@@ -259,6 +259,22 @@ export const CardRotation = Object.freeze(
 );
 
 /**
+ * Defines possible card orientations
+ */
+export const CardOrientation = Object.freeze(
+    {
+    /** Horizontal card orientation */
+    Horizontal: 0,
+
+    /** Vertical card orientation */
+    Vertical: 1,
+
+    /** Detection was not performed */
+    NotAvailable: 2,
+    }
+);
+
+/**
  * Defines possible color and moire statuses determined from scanned image.
  */
 export class ImageAnalysisResult {
