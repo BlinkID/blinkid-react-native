@@ -8,13 +8,16 @@
 ### Major API update
 
 - We have introduced the **DirectAPI** method of scanning, which allows the SDK to extract the document information from static images without the need to use the device’s camera and our UI.
-    - Usage:
-        - The `scanWithDirectApi` method requires four parameters:
-        - `RecognizerCollection`, which is a collection of Recognizers used for document scanning.
-        - `frontImage`, which would represent the front image of the document in the Base64 format string
-        - `backImage`,  which would represent the back image of the document in the Base64 format string
-        - `license`, the licenses for iOS and Android required to unlock the SDK
-        - the `backImage` parameter is optional when using the `BlinkIdSingleSideRecognizer`, and can be passed as `null` or an empty string (`””`).
+- Usage:
+    - The `scanWithDirectApi` method requires four parameters:
+    - `RecognizerCollection`, which is a collection of Recognizers used for document scanning.
+    - `frontImage`, which would represent the front image of the document in the Base64 format string
+    - `backImage`,  which would represent the back image of the document in the Base64 format string
+    - `license`, the licenses for iOS and Android required to unlock the SDK
+    - the `backImage` parameter is optional when using the `BlinkIdSingleSideRecognizer`, and can be passed as `null` or an empty string (`””`).
+- An example of its usage can be found in the [sample application](https://github.com/BlinkID/blinkid-react-native/blob/master/sample_files/index.js) , both for the Multiside and Singleside scanning. 
+- More information about the DirectAPI scanning can be found here in the native documentation for [iOS](https://github.com/BlinkID/blinkid-ios?tab=readme-ov-file#direct-api-processing) and [Android](https://github.com/BlinkID/blinkid-android?tab=readme-ov-file#direct-api).
+- Keep in mind that we still recommend using our ‘regular’ way of scanning with the camera, as static images can sometimes be in lower-quality which can cause SDK extraction error. It would be best to use the `scanWithDirectApi` method when using the device’s camera is not an option.
         
 ## 6.5.0
 
