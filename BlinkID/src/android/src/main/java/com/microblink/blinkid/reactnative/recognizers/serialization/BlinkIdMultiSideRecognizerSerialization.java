@@ -91,6 +91,7 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putMap("backVizResult", BlinkIDSerializationUtils.serializeVizResult(result.getBackVizResult()));
         jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
+        jsonResult.putMap("bloodType", BlinkIDSerializationUtils.serializeStringResult(result.getBloodType()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putMap("dataMatch", BlinkIDSerializationUtils.serializeDataMatchResult(result.getDataMatch()));
         jsonResult.putMap("dateOfBirth", BlinkIDSerializationUtils.serializeDateResult(result.getDateOfBirth()));
@@ -134,6 +135,7 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putBoolean("scanningFirstSideDone", result.isScanningFirstSideDone());
         jsonResult.putMap("sex", BlinkIDSerializationUtils.serializeStringResult(result.getSex()));
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
+        jsonResult.putMap("sponsor", BlinkIDSerializationUtils.serializeStringResult(result.getSponsor()));
         return jsonResult;
     }
 

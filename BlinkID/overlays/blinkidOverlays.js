@@ -80,10 +80,19 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
          */
         this.requireDocumentSidesDataMatch = true;
 
-        /**
-        * Language of UI.
+        /** 
+        * If default overlay contains textual information, text will be localized to this language. Otherwise device langauge will be used
+        *
+        * example: "en" 
         */
         this.language = null;
+
+        /**
+        * Used with language variable, it defines the country locale 
+        * 
+        * example: "US" to use "en_US" on Android and en-US on iOS 
+        */
+        this.country = null;
 
         /**
          * Defines whether Document Not Supported dialog will be displayed in UI.
@@ -102,30 +111,31 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         /**
         * Option to configure missing mandatory fields feedback during scanning. If disabled, general message is presented.
         *
-         * Default: true
+        * Default: true
         */
         this.showMandatoryFieldsMissing = true;
+
         /**
-         * Option to configure back side scanning timeout.
-         *
-         * Default: 17000
+        * Option to configure back side scanning timeout.
+        *
+        * Default: 17000
         */
         this.backSideScanningTimeoutMilliseconds = 17000;
 
-       /**
+        /**
         * Message that is shown while scanning the barcode.
         * If null, default value will be used.
-       */
-       this.scanBarcodeText = null;
+        */
+        this.scanBarcodeText = null;
 
         /**
-         * Instructions for the user to move the document from the edge.
-         * If null, default value will be used.
+        * Instructions for the user to move the document from the edge.
+        * If null, default value will be used.
         */
         this.errorDocumentTooCloseToEdge = null;
 
         /**
-         * String: title of the dialog which is shown when the data on the document is not matching.
+        * String: title of the dialog which is shown when the data on the document is not matching.
         * If null, default value will be used.
         */
         this.showOnboardingInfo = true;
@@ -143,6 +153,20 @@ export class BlinkIdOverlaySettings extends OverlaySettings {
         * Default: 12000
         */
         this.onboardingButtonTooltipDelay = 12000;
+
+        /**
+        * Defines whether torch button used for turning the flashlight on and off is shown on the screen during the scanning session.
+        *
+        * Default: true
+        */
+        this.showTorchButton = true;
+
+        /**
+        * Defines whether exit (cancel) button used for cancelling the scan is shown on the screen during the scanning session.
+        *
+        * Default: true
+        */
+        this.showCancelButton = true;
     }
 }
 

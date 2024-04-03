@@ -78,6 +78,7 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putInt("age", result.getAge());
         jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
+        jsonResult.putMap("bloodType", BlinkIDSerializationUtils.serializeStringResult(result.getBloodType()));
         jsonResult.putString("cameraFrame", SerializationUtils.encodeImageBase64(result.getCameraFrame()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putMap("dateOfBirth", BlinkIDSerializationUtils.serializeDateResult(result.getDateOfBirth()));
@@ -115,6 +116,7 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putMap("residentialStatus", BlinkIDSerializationUtils.serializeStringResult(result.getResidentialStatus()));
         jsonResult.putMap("sex", BlinkIDSerializationUtils.serializeStringResult(result.getSex()));
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
+        jsonResult.putMap("sponsor", BlinkIDSerializationUtils.serializeStringResult(result.getSponsor()));
         jsonResult.putMap("vizResult", BlinkIDSerializationUtils.serializeVizResult(result.getVizResult()));
         return jsonResult;
     }

@@ -9,54 +9,14 @@
 
 @implementation MBSerializationUtils
 
-+(NSDictionary *) serializeDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year {
++ (NSDictionary *)serializeMBDate:(MBDate *) date {
     return @{
-      @"day" : [NSNumber numberWithInteger:day],
-      @"month" : [NSNumber numberWithInteger:month],
-      @"year" : [NSNumber numberWithInteger:year]
+        @"day" : @(date.day),
+        @"month" : @(date.month),
+        @"year" : @(date.year),
+        @"originalDateString" : date.originalDateString,
+        @"isFilledByDomainKnowledge" : [NSNumber numberWithBool:date.isFilledByDomainKnowledge],
     };
-}
-
-+(NSDictionary *) serializeNSDate:(NSDate*) value {
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:value];
-    return [MBSerializationUtils serializeDay:components.day month:components.month year:components.year];
-}
-
-+ (NSDictionary *)serializeMBDateResult:(MBDateResult *) value {
-    NSMutableDictionary *dict = [MBSerializationUtils serializeDay:value.day month:value.month year:value.year].mutableCopy;
-    [dict setValue:[MBSerializationUtils serializeMBStringResult:value.originalDateStringResult] forKey:@"originalDateStringResult"];
-    [dict setValue:[NSNumber numberWithBool:value.isFilledByDomainKnowledge] forKey:@"isFilledByDomainKnowledge"];
-
-    return dict;
-}
-
-+ (NSDictionary *)serializeMBStringResult:(MBStringResult *) value {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeLatin] forKey:@"latin"];
-    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeArabic] forKey:@"arabic"];
-    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeCyrillic] forKey:@"cyrillic"];
-    [dict setValue:value.description forKey:@"description"];
-    
-    NSMutableDictionary *location = [NSMutableDictionary dictionary];
-    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
-    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
-    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
-    [dict setValue:location forKey:@"location"];
-    
-    NSMutableDictionary *side = [NSMutableDictionary dictionary];
-    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
-    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
-    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
-    [dict setValue:side forKey:@"side"];
-    
-    return dict;
-}
-
-+(NSNumber *)serializeMBSide:(MBSide) value {
-    if (value == MBSideNone) {
-        return nil;
-    }
-    return [NSNumber numberWithLong:value - 1];
 }
 
 +(NSString *) encodeMBImage:(MBImage * _Nullable) image {

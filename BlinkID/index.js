@@ -66,6 +66,48 @@ class BlinkIDWrapper {
                   return [];
             }
       }
+      
+      async scanWithDirectApi(recognizerCollection, frontImage, backImage, license) {
+            try {
+                  var licenseObject = license;
+                  if (typeof license === 'string' || license instanceof String) {
+                      licenseObject = { licenseKey: license };
+                  }
+
+                  var frontImageObject = frontImage;
+                  if (typeof frontImage === 'string' || frontImage instanceof String) {
+                      frontImageObject = { frontImage: frontImage };
+                  }
+
+                  var backImageObject = backImage;
+                  if (typeof backImage === 'string' || backImage instanceof String) {
+                      backImageObject = { backImage: backImage };
+                  }
+
+                  const nativeResults = await BlinkIDNative.scanWithDirectApi(recognizerCollection, frontImageObject, backImageObject, licenseObject);
+                  if (nativeResults.length != recognizerCollection.recognizerArray.length) {
+                        console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
+                        return [];
+                  } else {
+                        let results = [];
+                        for (let i = 0; i < nativeResults.length; ++i) {
+                              // native plugin must ensure types match
+                              // recognizerCollection.recognizerArray[i].result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+
+                              // unlike Cordova, ReactNative does not allow mutation of user-provided recognizers, so we need to
+                              // return results and let user handle them manually.
+                              let result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+                              if (result.resultState != RecognizerResultState.empty) {
+                                    results.push(result);
+                              }
+                        }
+                        return results;
+                  }
+            } catch (error) {
+                  console.log(error);
+                  return [];
+            }
+      }
 }
 
 export var BlinkID = new BlinkIDWrapper();

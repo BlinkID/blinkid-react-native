@@ -16,12 +16,12 @@
         @"primaryId" : mrzResult.primaryID,
         @"secondaryId" : mrzResult.secondaryID,
         @"issuer" : mrzResult.issuer,
-        @"dateOfBirth" : [MBBlinkIDSerializationUtils serializeMBDate:mrzResult.dateOfBirth],
+        @"dateOfBirth" : [MBSerializationUtils serializeMBDate:mrzResult.dateOfBirth],
         @"documentNumber" : mrzResult.documentNumber,
         @"nationality" : mrzResult.nationality,
         @"gender" : mrzResult.gender,
         @"documentCode" : mrzResult.documentCode,
-        @"dateOfExpiry" : [MBBlinkIDSerializationUtils serializeMBDate:mrzResult.dateOfExpiry],
+        @"dateOfExpiry" : [MBSerializationUtils serializeMBDate:mrzResult.dateOfExpiry],
         @"opt1" : mrzResult.opt1,
         @"opt2" : mrzResult.opt2,
         @"alienNumber" : mrzResult.alienNumber,
@@ -61,10 +61,10 @@
     }
     
     return @{
-        @"restrictions" : [MBSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.restrictions],
-        @"endorsements" : [MBSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.endorsements],
-        @"vehicleClass" : [MBSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.vehicleClass],
-        @"conditions" : [MBSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.conditions],
+        @"restrictions" : [MBBlinkIDSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.restrictions],
+        @"endorsements" : [MBBlinkIDSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.endorsements],
+        @"vehicleClass" : [MBBlinkIDSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.vehicleClass],
+        @"conditions" : [MBBlinkIDSerializationUtils serializeMBStringResult:driverLicenseDetailedInfo.conditions],
         @"vehicleClassesInfo" : vehicleClassesInfo
     };
 }
@@ -87,10 +87,10 @@
 
 +(NSDictionary *) serializeVehicleClassInfo:(MBVehicleClassInfo *)vehicleClassInfo {
     return @{
-        @"vehicleClass" : [MBSerializationUtils serializeMBStringResult:vehicleClassInfo.vehicleClass],
-        @"licenceType" : [MBSerializationUtils serializeMBStringResult:vehicleClassInfo.licenceType],
-        @"effectiveDate" : [MBSerializationUtils serializeMBDateResult:vehicleClassInfo.effectiveDate],
-        @"expiryDate" : [MBSerializationUtils serializeMBDateResult:vehicleClassInfo.expiryDate]
+        @"vehicleClass" : [MBBlinkIDSerializationUtils serializeMBStringResult:vehicleClassInfo.vehicleClass],
+        @"licenceType" : [MBBlinkIDSerializationUtils serializeMBStringResult:vehicleClassInfo.licenceType],
+        @"effectiveDate" : [MBBlinkIDSerializationUtils serializeMBDateResult:vehicleClassInfo.effectiveDate],
+        @"expiryDate" : [MBBlinkIDSerializationUtils serializeMBDateResult:vehicleClassInfo.expiryDate]
     };
 }
 
@@ -98,8 +98,8 @@
     return @{
         @"vehicleClass" : vehicleClassInfo.vehicleClass,
         @"licenceType" : vehicleClassInfo.licenceType,
-        @"effectiveDate" : [MBBlinkIDSerializationUtils serializeMBDate:vehicleClassInfo.effectiveDate],
-        @"expiryDate" : [MBBlinkIDSerializationUtils serializeMBDate:vehicleClassInfo.expiryDate]
+        @"effectiveDate" : [MBSerializationUtils serializeMBDate :vehicleClassInfo.effectiveDate],
+        @"expiryDate" : [MBSerializationUtils serializeMBDate:vehicleClassInfo.expiryDate]
     };
 }
 
@@ -138,31 +138,31 @@
 
 +(NSDictionary *) serializeVizResult:(MBVizResult *)vizResult {
     return @{
-        @"firstName" : [MBSerializationUtils serializeMBStringResult:vizResult.firstName],
-        @"lastName" : [MBSerializationUtils serializeMBStringResult:vizResult.lastName],
-        @"fullName" : [MBSerializationUtils serializeMBStringResult:vizResult.fullName],
-        @"additionalNameInformation" : [MBSerializationUtils serializeMBStringResult:vizResult.additionalNameInformation],
-        @"localizedName" : [MBSerializationUtils serializeMBStringResult:vizResult.localizedName],
-        @"address" : [MBSerializationUtils serializeMBStringResult:vizResult.address],
-        @"additionalAddressInformation" : [MBSerializationUtils serializeMBStringResult:vizResult.additionalAddressInformation],
-        @"additionalOptionalAddressInformation" : [MBSerializationUtils serializeMBStringResult:vizResult.additionalOptionalAddressInformation],
-        @"placeOfBirth" : [MBSerializationUtils serializeMBStringResult:vizResult.placeOfBirth],
-        @"nationality" : [MBSerializationUtils serializeMBStringResult:vizResult.nationality],
-        @"race" : [MBSerializationUtils serializeMBStringResult:vizResult.race],
-        @"religion" : [MBSerializationUtils serializeMBStringResult:vizResult.religion],
-        @"profession" : [MBSerializationUtils serializeMBStringResult:vizResult.profession],
-        @"maritalStatus" : [MBSerializationUtils serializeMBStringResult:vizResult.maritalStatus],
-        @"residentialStatus" : [MBSerializationUtils serializeMBStringResult:vizResult.residentialStatus],
-        @"employer" : [MBSerializationUtils serializeMBStringResult:vizResult.employer],
-        @"sex" : [MBSerializationUtils serializeMBStringResult:vizResult.sex],
-        @"dateOfBirth" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfBirth],
-        @"dateOfIssue" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfIssue],
-        @"dateOfExpiry" : [MBSerializationUtils serializeMBDateResult:vizResult.dateOfExpiry],
-        @"documentNumber" : [MBSerializationUtils serializeMBStringResult:vizResult.documentNumber],
-        @"personalIdNumber" : [MBSerializationUtils serializeMBStringResult:vizResult.personalIdNumber],
-        @"documentAdditionalNumber" : [MBSerializationUtils serializeMBStringResult:vizResult.documentAdditionalNumber],
-        @"additionalPersonalIdNumber" : [MBSerializationUtils serializeMBStringResult:vizResult.additionalPersonalIdNumber],
-        @"issuingAuthority" : [MBSerializationUtils serializeMBStringResult:vizResult.issuingAuthority],
+        @"firstName" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.firstName],
+        @"lastName" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.lastName],
+        @"fullName" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.fullName],
+        @"additionalNameInformation" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.additionalNameInformation],
+        @"localizedName" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.localizedName],
+        @"address" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.address],
+        @"additionalAddressInformation" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.additionalAddressInformation],
+        @"additionalOptionalAddressInformation" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.additionalOptionalAddressInformation],
+        @"placeOfBirth" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.placeOfBirth],
+        @"nationality" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.nationality],
+        @"race" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.race],
+        @"religion" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.religion],
+        @"profession" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.profession],
+        @"maritalStatus" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.maritalStatus],
+        @"residentialStatus" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.residentialStatus],
+        @"employer" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.employer],
+        @"sex" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.sex],
+        @"dateOfBirth" : [MBBlinkIDSerializationUtils serializeMBDateResult:vizResult.dateOfBirth],
+        @"dateOfIssue" : [MBBlinkIDSerializationUtils serializeMBDateResult:vizResult.dateOfIssue],
+        @"dateOfExpiry" : [MBBlinkIDSerializationUtils serializeMBDateResult:vizResult.dateOfExpiry],
+        @"documentNumber" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.documentNumber],
+        @"personalIdNumber" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.personalIdNumber],
+        @"documentAdditionalNumber" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.documentAdditionalNumber],
+        @"additionalPersonalIdNumber" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.additionalPersonalIdNumber],
+        @"issuingAuthority" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.issuingAuthority],
         @"driverLicenseDetailedInfo" : [MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:vizResult.driverLicenseDetailedInfo],
         @"empty" : [NSNumber numberWithBool:vizResult.empty]
     };
@@ -189,9 +189,9 @@
         @"residentialStatus" : barcodeResult.residentialStatus,
         @"employer" : barcodeResult.employer,
         @"sex" : barcodeResult.sex,
-        @"dateOfBirth" : [MBBlinkIDSerializationUtils serializeMBDate:barcodeResult.dateOfBirth],
-        @"dateOfIssue" : [MBBlinkIDSerializationUtils serializeMBDate:barcodeResult.dateOfIssue],
-        @"dateOfExpiry" : [MBBlinkIDSerializationUtils serializeMBDate:barcodeResult.dateOfExpiry],
+        @"dateOfBirth" : [MBSerializationUtils serializeMBDate:barcodeResult.dateOfBirth],
+        @"dateOfIssue" : [MBSerializationUtils serializeMBDate:barcodeResult.dateOfIssue],
+        @"dateOfExpiry" : [MBSerializationUtils serializeMBDate:barcodeResult.dateOfExpiry],
         @"documentNumber" : barcodeResult.documentNumber,
         @"personalIdNumber" : barcodeResult.personalIdNumber,
         @"documentAdditionalNumber" : barcodeResult.documentAdditionalNumber,
@@ -293,14 +293,53 @@
     };
 }
 
-+ (NSDictionary *)serializeMBDate:(MBDate *)date {
++ (NSDictionary *)serializeMBDateResult:(MBDateResult *) value {
+    NSMutableDictionary *dict = [MBBlinkIDSerializationUtils serializeDay:value.day month:value.month year:value.year].mutableCopy;
+    [dict setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:value.originalDateStringResult] forKey:@"originalDateStringResult"];
+    [dict setValue:[NSNumber numberWithBool:value.isFilledByDomainKnowledge] forKey:@"isFilledByDomainKnowledge"];
+    return dict;
+}
+
++(NSDictionary *) serializeDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year {
     return @{
-        @"day" : @(date.day),
-        @"month" : @(date.month),
-        @"year" : @(date.year),
-        @"originalDateString" : date.originalDateString,
-        @"isFilledByDomainKnowledge" : [NSNumber numberWithBool:date.isFilledByDomainKnowledge],
+      @"day" : [NSNumber numberWithInteger:day],
+      @"month" : [NSNumber numberWithInteger:month],
+      @"year" : [NSNumber numberWithInteger:year]
     };
+}
+
++(NSDictionary *) serializeNSDate:(NSDate*) value {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:value];
+    return [MBBlinkIDSerializationUtils serializeDay:components.day month:components.month year:components.year];
+}
+
++ (NSDictionary *)serializeMBStringResult:(MBStringResult *) value {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeLatin] forKey:@"latin"];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeArabic] forKey:@"arabic"];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeCyrillic] forKey:@"cyrillic"];
+    [dict setValue:value.description forKey:@"description"];
+    
+    NSMutableDictionary *location = [NSMutableDictionary dictionary];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [dict setValue:location forKey:@"location"];
+    
+    NSMutableDictionary *side = [NSMutableDictionary dictionary];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [dict setValue:side forKey:@"side"];
+    
+    return dict;
+}
+
++(NSNumber *)serializeMBSide:(MBSide) value {
+    if (value == MBSideNone) {
+        return nil;
+    }
+    return [NSNumber numberWithLong:value - 1];
 }
 
 @end

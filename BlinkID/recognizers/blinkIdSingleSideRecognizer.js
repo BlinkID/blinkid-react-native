@@ -69,6 +69,11 @@ export class BlinkIdSingleSideRecognizerResult extends RecognizerResult {
         this.barcodeResult = nativeResult.barcodeResult;
         
         /**
+         * The blood type of the document owner.
+         */
+        this.bloodType = nativeResult.bloodType;
+        
+        /**
          * The raw camera frame.
          */
         this.cameraFrame = nativeResult.cameraFrame;
@@ -258,6 +263,11 @@ export class BlinkIdSingleSideRecognizerResult extends RecognizerResult {
          * image of the signature if enabled with returnSignatureImage property.
          */
         this.signatureImage = nativeResult.signatureImage;
+        
+        /**
+         * The sponsor of the document owner.
+         */
+        this.sponsor = nativeResult.sponsor;
         
         /**
          * Defines the data extracted from the visual inspection zone

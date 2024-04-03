@@ -199,6 +199,20 @@
             sett.defineSpecificMissingMandatoryFields = [showMandatoryFieldsMissing boolValue];
         }
     }
+    
+    {
+        id showTorchButton = [jsonOverlaySettings valueForKey: @"showTorchButton"];
+        if (showTorchButton != nil) {
+            sett.displayTorchButton = [showTorchButton boolValue];
+        }
+    }
+    
+    {
+        id showCancelButton = [jsonOverlaySettings valueForKey: @"showCancelButton"];
+        if (showCancelButton != nil) {
+            sett.displayCancelButton = [showCancelButton boolValue];
+        }
+    }
 
     return [[MBBlinkIdOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
 }

@@ -35,9 +35,9 @@
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.barcodeType] forKey:@"barcodeType"];
     [jsonResult setValue:self.result.city forKey:@"city"];
-    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
-    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
     [jsonResult setValue:self.result.documentAdditionalNumber forKey:@"documentAdditionalNumber"];
     [jsonResult setValue:self.result.documentNumber forKey:@"documentNumber"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.documentType] forKey:@"documentType"];

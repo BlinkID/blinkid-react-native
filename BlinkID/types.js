@@ -698,7 +698,13 @@ export const Region = Object.freeze(
         Para: 128,
         Parana: 129,
         Pernambuco: 130,
-        SantaCatarina: 131 
+        SantaCatarina: 131,
+        AndhraPradesh: 132,
+        Ceara: 133,
+        Goias: 134,
+        GuerreroAcapulcoDeJuarez: 135,
+        Haryana: 136,
+        Sergipe: 137,
     }
 );
 
@@ -768,7 +774,12 @@ export const Type = Object.freeze(
         UniformedServicesId: 58,
         ImmigrantVisa: 59,
         ConsularVoterId: 60,
-        TwicCard: 61
+        TwicCard: 61,
+        ExitEntryPermit: 62,
+        MainlandTravelPermitTaiwan: 63,
+        NbiClearance: 64,
+        ProofOfRegistration: 65,
+        TemporaryProtectionPermit: 66,
     }
 );
 
