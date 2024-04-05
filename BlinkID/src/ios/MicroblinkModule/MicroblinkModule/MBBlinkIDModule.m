@@ -115,7 +115,7 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
             [self handleDirectApiError:MBBlinkIDModule.STATUS_BASE64_ERROR errorMessaege:@"Could not decode Base64 image!"];
         }
     } else {
-        [self handleDirectApiError:MBBlinkIDModule.STATUS_FRONTSIDE_EMPTY errorMessaege:@"First side image is empty!"];
+        [self handleDirectApiError:MBBlinkIDModule.STATUS_FRONTSIDE_EMPTY errorMessaege:@"The provided image for the 'frontImage' parameter is empty!"];
     }
 }
 
@@ -185,7 +185,7 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
             self.recognizerCollection = nil;
             self.recognizerRunner = nil;
         } else if (state == MBRecognizerResultStateEmpty) {
-            [self handleDirectApiError:MBBlinkIDModule.STATUS_NO_DATA errorMessaege:@"Could not extract the data with DirectAPI!"];
+            [self handleDirectApiError:MBBlinkIDModule.STATUS_NO_DATA errorMessaege:@"Could not extract the information with DirectAPI!"];
             self.recognizerCollection = nil;
             self.recognizerRunner = nil;
         }

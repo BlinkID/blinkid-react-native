@@ -122,7 +122,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
                         } else if (recognitionSuccessType != RecognitionSuccessType.UNSUCCESSFUL) {
                             handleDirectApiResult(recognitionSuccessType);
                         } else {
-                            handleDirectApiError("Backside image is empty and could not read the information from the front side!", promise);
+                            handleDirectApiError("Could not extract the information from the front side and back side is empty!", promise);
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -132,7 +132,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
                     handleDirectApiResult(recognitionSuccessType);
                 } else {
                     mFirstSideScanned = false;
-                    handleDirectApiError("Could not extract the data with DirectAPI!", promise);
+                    handleDirectApiError("Could not extract the information with DirectAPI!", promise);
                 }
             }
             @Override
@@ -146,7 +146,7 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         if (frontImage != null) {
             processImage(frontImage.getString(PARAM_FRONT_IMAGE), mScanResultListenerFrontSide);
         } else {
-            handleDirectApiError("First side image is empty!", promise);
+            handleDirectApiError("The provided image for the 'frontImage' parameter is empty!", promise);
         }
     }
 
@@ -177,25 +177,26 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     private void setupRecognizerRunner(ReadableMap jsonRecognizerCollection, FirstSideRecognitionCallback mFirstSideRecognitionCallback, Promise promise) {
         if (mRecognizerRunner != null) {
-            mRecognizerRunner.resetRecognitionState(true);
-        } else {
-            mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
-            try {
-                mRecognizerRunner = RecognizerRunner.getSingletonInstance();
-            } catch (Exception e) {
-                handleDirectApiError("DirectAPI not support: " + e.getMessage(), promise);
-            }
-
-            MetadataCallbacks metadataCallbacks = new MetadataCallbacks();
-            metadataCallbacks.setFirstSideRecognitionCallback(mFirstSideRecognitionCallback);
-            mRecognizerRunner.setMetadataCallbacks(metadataCallbacks);
-            mRecognizerRunner.initialize(getCurrentActivity(), mRecognizerBundle, new DirectApiErrorListener() {
-                @Override
-                public void onRecognizerError(@NonNull Throwable throwable) {
-                    handleDirectApiError("Failed to initialize recognizer with DirectAPI: " + throwable.getMessage(), promise);
-                }
-            });
+            mRecognizerRunner.terminate();
         }
+
+        mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
+        
+        try {
+            mRecognizerRunner = RecognizerRunner.getSingletonInstance();
+        } catch (Exception e) {
+            handleDirectApiError("DirectAPI not support: " + e.getMessage(), promise);
+        }
+
+        MetadataCallbacks metadataCallbacks = new MetadataCallbacks();
+        metadataCallbacks.setFirstSideRecognitionCallback(mFirstSideRecognitionCallback);
+        mRecognizerRunner.setMetadataCallbacks(metadataCallbacks);
+        mRecognizerRunner.initialize(getCurrentActivity(), mRecognizerBundle, new DirectApiErrorListener() {
+            @Override
+            public void onRecognizerError(@NonNull Throwable throwable) {
+                handleDirectApiError("Failed to initialize recognizer with DirectAPI: " + throwable.getMessage(), promise);
+            }
+        });
     }
 
     private void processImage(String base64Image, ScanResultListener scanResultListener) {

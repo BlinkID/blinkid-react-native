@@ -77,7 +77,7 @@ export default class Sample extends Component {
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.BlinkIdOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([blinkIdMultiSideRecognizer/*, mrtdSuccessFrameGrabber*/]),
+                new BlinkIDReactNative.RecognizerCollection([blinkIdMultiSideRecognizer]),
                 licenseKey
             );
 
@@ -162,7 +162,6 @@ export default class Sample extends Component {
                         showSuccessFrame: false,
                         successFrame: ''});
                 } else {
-
                     let newState = {
                     showFrontImageDocument: false,
                     resultFrontImageDocument: '',
@@ -202,7 +201,7 @@ export default class Sample extends Component {
                 }
             }
         } catch (error) {
-            this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: "The images could not be extracted with DirectAPI!", showSuccessFrame: false,
+            this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: error, showSuccessFrame: false,
             successFrame: ''});
         }
     }
@@ -214,7 +213,7 @@ export default class Sample extends Component {
             // Get the document image (it can be either front or back) and return it in the Base64 format
             let image = await this.pickImage();
             
-            const recognizer = new BlinkIDReactNative.BlinkIdMultiSideRecognizer();
+            const recognizer = new BlinkIDReactNative.BlinkIdSingleSideRecognizer();
             recognizer.returnFullDocumentImage = true;
             recognizer.returnFaceImage = true;
 
@@ -243,7 +242,6 @@ export default class Sample extends Component {
                         showSuccessFrame: false,
                         successFrame: ''});
                 } else {
-
                     let newState = {
                     showFrontImageDocument: false,
                     resultFrontImageDocument: '',
@@ -275,11 +273,9 @@ export default class Sample extends Component {
                     if (localState.successFrame) {
                         newState.successFrame = localState.successFrame;
                     }
-
                 }
                 newState.results += '\n';
                 this.setState(newState);
-
                 }
             } 
 

@@ -34,6 +34,31 @@ const BlinkIDNative = Platform.select({
  *      licensee: String,
  *      showTrialLicenseKeyWarning: Boolean
  *  }
+ * 
+ * -> 'scanWithDirectApi' takes the following parameters:
+ * 1. RecognizerCollection recognizerCollection: object containing recognizers to use for scanning
+ * 2. String frontImage: a string in base64 format that contains an image of the front side of the document
+ * 3. String backImage: a string in base64 format that contains an image of the front side of the document
+ *     - backImage parameter is optional with the singleside recognizer, as only one side of the document is required.
+ * 4. String license: BlinkID base64 license key bound to application ID for Android or iOS. To obtain
+ *                       valid license key, please visit http://microblink.com/login or
+ *                       contact us at http://help.microblink.com
+ *
+ *    OR
+ *
+ *    Object license: containing:
+ *               - mandatory parameter 'licenseKey': base64 license key bound to application ID
+ *                       for Android or iOS. To obtain valid license key, please visit
+ *                       http://microblink.com/login or contact us at http://help.microblink.com
+ *               - optioanl parameter 'licensee' when license for multiple apps is used
+ *               - optional flag 'showTrialLicenseKeyWarning' which indicates
+ *                  whether warning for trial license key will be shown
+ *        in format
+ *  {
+ *      licenseKey: '<base64iOSLicense or base64AndroidLicense>',
+ *      licensee: String,
+ *      showTrialLicenseKeyWarning: Boolean
+ *  }
  */
 class BlinkIDWrapper {
       async scanWithCamera(overlaySettings, recognizerCollection, license) {
