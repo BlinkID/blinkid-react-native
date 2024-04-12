@@ -17,7 +17,7 @@
     - `license`, the licenses for iOS and Android required to unlock the SDK
 - An example of its usage can be found in the [sample application](https://github.com/BlinkID/blinkid-react-native/blob/master/sample_files/index.js) , both for the Multiside and Singleside scanning. 
 - More information about the DirectAPI scanning can be found here in the native documentation for [Android](https://github.com/BlinkID/blinkid-android?tab=readme-ov-file#direct-api) and [iOS](https://github.com/BlinkID/blinkid-ios?tab=readme-ov-file#direct-api-processing)
-- Keep in mind that we still recommend using our ‘regular’ way of scanning with the camera, as static images can sometimes be in lower-quality which can cause SDK extraction error. It would be best to use the `scanWithDirectApi` method when using the device’s camera is not an option.
+- We still recommend using our ‘regular’ way of scanning with the camera, as static images can sometimes be in lower-quality which can cause SDK extraction error. It would be best to use the `scanWithDirectApi` method when using the device’s camera is not an option.
         
 ## 6.5.0
 
