@@ -207,7 +207,7 @@ export default class Sample extends Component {
     }
 
     /* BlinkID scanning with DirectAPI and the BlinkIDSingleSide recognizer.
-    Best used for getting the information from only one side of the various documents */
+    Best used for getting the information from only one side from various documents */
     async directApiSingleSide() {
         try {
             // Get the document image (it can be either front or back) and return it in the Base64 format
@@ -217,7 +217,7 @@ export default class Sample extends Component {
             recognizer.returnFullDocumentImage = true;
             recognizer.returnFaceImage = true;
 
-            /* Uncomment line 224 if you're using DirectAPI and you are sending cropped images for processing. 
+            /* Uncomment line 223 if you're using DirectAPI and you are sending cropped images for processing. 
             The processing will most likely not work if cropped images are being sent with the scanCroppedDocumentImage property being set to false */
             
             //recognizer.scanCroppedDocumentImage = true;
