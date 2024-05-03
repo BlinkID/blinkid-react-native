@@ -33,6 +33,8 @@ import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Reg
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.classinfo.Type;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.Side;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.CardRotation;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.DocumentNumberAnonymizationSettings;
+
 
 
 public abstract class BlinkIDSerializationUtils {
@@ -208,6 +210,7 @@ public abstract class BlinkIDSerializationUtils {
         jsonImageAnalysis.putInt("barcodeDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getBarcodeDetectionStatus()));
         jsonImageAnalysis.putInt("cardRotation", BlinkIDSerializationUtils.serializeCardRotation(imageAnalysisResult.getCardRotation()));
         jsonImageAnalysis.putInt("cardOrientation", SerializationUtils.serializeEnum(imageAnalysisResult.getCardOrientation()));
+        jsonImageAnalysis.putInt("realIdDetectionStatus", SerializationUtils.serializeEnum(imageAnalysisResult.getRealIdDetectionStatus()));
         return jsonImageAnalysis;
     }
 
@@ -320,7 +323,7 @@ public abstract class BlinkIDSerializationUtils {
         return 4;
     }
     
-    public static ClassAnonymizationSettings[] deserializeClassAnonymizationSettings (ReadableArray jsonArray) {
+    public static ClassAnonymizationSettings[] deserializeClassAnonymizationSettings(ReadableArray jsonArray) {
 
         if (jsonArray != null && jsonArray.size() > 0) {
             ClassAnonymizationSettings[] classAnonymizationSettingsArray = new ClassAnonymizationSettings[jsonArray.size()];
@@ -331,9 +334,9 @@ public abstract class BlinkIDSerializationUtils {
                 Country country = Country.NONE;
                 Region region = Region.NONE;
                 Type type = Type.NONE;
+                DocumentNumberAnonymizationSettings documentNumberAnonymizationSettings = null;
                 try {
                     ReadableMap jsonClassAnonymizationSettings = jsonArray.getMap(i);
-
                     ReadableArray fieldTypeJsonArray = jsonClassAnonymizationSettings.getArray("fields");
                     fieldTypes = new FieldType[fieldTypeJsonArray.size()];
                     for (int x = 0; x < fieldTypeJsonArray.size(); x++) {
@@ -354,7 +357,15 @@ public abstract class BlinkIDSerializationUtils {
                     } catch (Exception e) {
                         type = null;
                     }
-                    ClassAnonymizationSettings classAnonymizationSettings = new ClassAnonymizationSettings(country, region, type, fieldTypes);
+                    try {
+                       ReadableMap jsonDocumentNumberAnonymizationSettings = jsonClassAnonymizationSettings.getMap("documentNumberAnonymizationSettings");
+                       if (jsonDocumentNumberAnonymizationSettings != null) {
+                           documentNumberAnonymizationSettings = deserializeDocumentNumberAnonymizationSettings(jsonDocumentNumberAnonymizationSettings);
+                       }
+                    } catch (Exception e) {
+                        documentNumberAnonymizationSettings = null;
+                    }
+                    ClassAnonymizationSettings classAnonymizationSettings = new ClassAnonymizationSettings(country, region, type, fieldTypes, documentNumberAnonymizationSettings);
                     classAnonymizationSettingsArray[i] = classAnonymizationSettings;
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -364,5 +375,8 @@ public abstract class BlinkIDSerializationUtils {
         } else {
             return new ClassAnonymizationSettings[]{};
         }
+    }
+    private static DocumentNumberAnonymizationSettings deserializeDocumentNumberAnonymizationSettings (ReadableMap jsonDocumentNumberAnonymizationSettings) {
+        return new DocumentNumberAnonymizationSettings(jsonDocumentNumberAnonymizationSettings.getInt("prefixDigitsVisible"),jsonDocumentNumberAnonymizationSettings.getInt("suffixDigitsVisible"));
     }
 }

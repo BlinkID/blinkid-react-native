@@ -215,7 +215,8 @@
              @"mrzDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.mrzDetectionStatus)],
              @"barcodeDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.barcodeDetectionStatus)],
              @"cardRotation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardRotation)],
-             @"cardOrientation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardOrientation)]
+             @"cardOrientation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardOrientation)],
+             @"realIdDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.realIDDetectionStatus)]
         };
 }
 
@@ -249,23 +250,44 @@
         NSNumber *country = [jsonClassAnonymizationSettings valueForKey:@"country"];
         NSNumber *region = [jsonClassAnonymizationSettings valueForKey:@"region"];
         NSNumber *type = [jsonClassAnonymizationSettings valueForKey:@"type"];
+        NSDictionary *jsonDocumentNumberAnonymizationSettings = [jsonClassAnonymizationSettings valueForKey:@"documentNumberAnonymizationSettings"];
         
-        if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil) {
-            return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue type:type.integerValue fields:fields];
-        } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil){
-            return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue type:type.integerValue fields:fields];
-        } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil ) {
-            return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue fields:fields];
-       } else if (![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-           return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue type:type.integerValue fields:fields];
-        } else if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
-            return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue fields:fields];
-        } else if (![region isEqual:[NSNull null]] && region.integerValue != nil) {
-            return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue fields:fields];
-        } else if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-            return [[MBClassAnonymizationSettings alloc] initWithType:type.integerValue fields:fields];
+        if (![jsonDocumentNumberAnonymizationSettings isEqual:[NSNull null]] && jsonDocumentNumberAnonymizationSettings != nil) {
+            MBDocumentNumberAnonymizationSettings *documentNumberAnonymizationSettings = [[MBDocumentNumberAnonymizationSettings alloc] initWithPrefixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"prefixDigitsVisible"] integerValue] suffixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"suffixDigitsVisible"] integerValue]];
+                                                                                          
+            if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil){
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+           } else if (![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil ) {
+               return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            } else if (![region isEqual:[NSNull null]] && region.integerValue != nil) {
+                return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            } else if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithType:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+            }
+            return [[MBClassAnonymizationSettings alloc] initWithFields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+        } else {
+            if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue type:type.integerValue fields:fields];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil){
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue type:type.integerValue fields:fields];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue fields:fields];
+           } else if (![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil ) {
+               return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue type:type.integerValue fields:fields];
+            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue fields:fields];
+            } else if (![region isEqual:[NSNull null]] && region.integerValue != nil) {
+                return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue fields:fields];
+            } else if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
+                return [[MBClassAnonymizationSettings alloc] initWithType:type.integerValue fields:fields];
+            }
         }
-        
         return [[MBClassAnonymizationSettings alloc] initWithFields:fields];
     }
 }

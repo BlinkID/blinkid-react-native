@@ -232,7 +232,10 @@ export const ProcessingStatus = Object.freeze(
     AwaitingOtherSide: 14,
 
     /** Side not scanned. */
-    NotScanned: 15
+    NotScanned: 15,
+
+    /** Detection of the barcode failed.  */
+    BarcodeDetectionFailed: 16
     }
 );
 
@@ -295,6 +298,8 @@ export class ImageAnalysisResult {
         this.cardOrientation = nativeImageAnalysisResult.cardOrientation;
         /** Document card rotation positions */
     	this.cardRotation = nativeImageAnalysisResult.cardRotation;
+        /** RealID detection status determined from the scanned image. */
+        this.realIdDetectionStatus = nativeImageAnalysisResult.realIdDetectionStatus;
     }
 }
 
@@ -2099,19 +2104,35 @@ export class RecognitionModeFilter {
 
 /**
  * ClassAnonymizationSettings is used to anonymize specific documents and fields.
- * It can be modified with countries, regions, document types and document fields. 
- * See Country, Region, Type and FieldType objects to get more information which fields can be anonymized.
+ * It can be modified with countries, regions, document types, document fields and the partial document number anonymization. 
+ * See Country, Region, Type, FieldType and DocumentNumberAnonymizationSettings objects to get more information which settings can be anonymized.
  * Setting is taken into account if AnonymizationMode is set to ImageOnly,ResultFieldsOnly or FullResult.
  */
 export class ClassAnonymizationSettings {
     constructor() {
+        /** Documents from the set country will be anonymized */
         this.country = null;
-
+        /** Documents from the set region will be anonymized */
         this.region = null;
-
+        /** Document type that will be anonymized */
         this.type = null;
-
+        /** Document fields that will be anonymized */
         this.fields = [];
+        /** Partial document number anonymization */
+        this.documentNumberAnonymizationSettings = null;
+    }
+}
+
+/** 
+ * DocumentNumberAnonymizationSettings is implemented with ClassAnonymizationSettings class.
+ * It can partially anonymize the document number from the scanned document. 
+*/
+export class DocumentNumberAnonymizationSettings {
+    constructor() {
+        /** Set how many digits will be visible at the beggining of the document number. */
+        this.prefixDigitsVisible = 0;
+        /** Set how many digits will be visible at the end of the document number. */
+        this.suffixDigitsVisible = 0;
     }
 }
 
