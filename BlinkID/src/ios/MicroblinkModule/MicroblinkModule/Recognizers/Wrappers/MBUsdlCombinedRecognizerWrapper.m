@@ -81,9 +81,9 @@
     [jsonResult setValue:self.result.restrictions forKey:@"restrictions"];
     [jsonResult setValue:self.result.endorsements forKey:@"endorsements"];
     [jsonResult setValue:self.result.vehicleClass forKey:@"vehicleClass"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfBirth] forKey:@"dateOfBirth"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfIssue] forKey:@"dateOfIssue"];
-    [jsonResult setValue:[MBSerializationUtils serializeMBDateResult:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfBirth] forKey:@"dateOfBirth"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfIssue] forKey:@"dateOfIssue"];
+    [jsonResult setValue:[MBSerializationUtils serializeMBDate:self.result.dateOfExpiry] forKey:@"dateOfExpiry"];
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
 
     [jsonResult setValue:[self.result optionalElements] forKey:@"optionalElements"];

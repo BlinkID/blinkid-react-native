@@ -5,6 +5,8 @@
 
 import React, { Component } from 'react';
 import * as BlinkIDReactNative from 'blinkid-react-native';
+import * as ImagePicker from 'react-native-image-picker';
+
 import {
     AppRegistry,
     Platform,
@@ -18,9 +20,9 @@ import {
 
 const licenseKey = Platform.select({
     // iOS license key for applicationID: com.microblink.sample
-    ios: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTURnd09EUTFNamM1TnpJc0lrTnlaV0YwWldSR2IzSWlPaUkwT1RabFpEQXpaUzAwT0RBeExUUXpZV1F0WVRrMU5DMDBNemMyWlRObU9UTTVNR1FpZlE9PTYmqMAMVMiFzaNDv15W9/CxDFVRDWRjok+uP0GtswDV4XTVGmhbivKDEb9Gtk2iMzf29qFWF8aUjIES4QSQFJG0xfBXZhluSk7lt4A959aHAZ0+BWgDnqZUPJAF2jZd0Pl2Kt1oDxLtqtf8V/RR+dPYzUV0PEA=',
+    ios: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTVRRM016STRPRE0zTnpVc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PT4PFNbaGYbx8lz0VdMw0rwMahZJsnnMY0+blCuN/m+QolwrXwoZIVhisfNF7p9UPmh44A6nnFILPB2z3pyoV0mmbTrZ/6/sfoWf4v2SlJjpwM5pBxCooWZr4IAmv5YT6Ef3x4iC6U1gL8zUB0T53LpWoY9+CElD',
     // android license key for applicationID: com.microblink.sample
-    android: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTURnd09EUTNNelkxTmprc0lrTnlaV0YwWldSR2IzSWlPaUkwT1RabFpEQXpaUzAwT0RBeExUUXpZV1F0WVRrMU5DMDBNemMyWlRObU9UTTVNR1FpZlE9PRIv5OawGAVdpvmuz+999CsJyIAgtV3h96BJo1Fq+xBZnKDoKhL01jBUrxC0E4+EeWoTuEtPPcDte2KHgjOP7Z4y+Mk9ihWDHTjgANWfFwG2Gd7HYJxgwcYQsTvICqS1CBklIILTfbXahwtD4ZKh0ghaxUJf7gU='
+    android: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTVRNNE5qWXdNVEE1TURnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PYrV4CMxsRU+iUM/SeDbRDbjxRQsXIYuDXKzh5n0zmLHgSdRllWR/wE/J2MZ2MkpDdegbPTLRoJV+59G9F1QY8gIW7ua07A6f7wzTGq4laEyCo+f1rOOUBTZfKBIzqUJtR9NZIkb6YMkfLY5cmmNb5vnwIM+9BNI'
 })
 
 var renderIf = function(condition, content) {
@@ -49,7 +51,7 @@ function buildDateResult(result, key) {
 export default class Sample extends Component {
     constructor(props) {
         super(props);
-
+        this.pickImage = this.pickImage.bind(this);
         this.state = {
             showFrontImageDocument: false,
             resultFrontImageDocument: '',
@@ -63,16 +65,9 @@ export default class Sample extends Component {
             licenseKeyErrorMessage: ''
         };
     }
-
+    /* BlinkID scanning using the camera */
     async scan() {
         try {
-
-            // to scan any machine readable travel document (passports, visas and IDs with
-            // machine readable zone), use MrtdRecognizer
-            // var mrtdRecognizer = new BlinkIDReactNative.MrtdRecognizer();
-            // mrtdRecognizer.returnFullDocumentImage = true;
-
-            // var mrtdSuccessFrameGrabber = new BlinkIDReactNative.SuccessFrameGrabberRecognizer(mrtdRecognizer);
 
             // BlinkIDMultiSideRecognizer automatically classifies different document types and scans the data from
             // the supported document
@@ -82,7 +77,7 @@ export default class Sample extends Component {
 
             const scanningResults = await BlinkIDReactNative.BlinkID.scanWithCamera(
                 new BlinkIDReactNative.BlinkIdOverlaySettings(),
-                new BlinkIDReactNative.RecognizerCollection([blinkIdMultiSideRecognizer/*, mrtdSuccessFrameGrabber*/]),
+                new BlinkIDReactNative.RecognizerCollection([blinkIdMultiSideRecognizer]),
                 licenseKey
             );
 
@@ -124,12 +119,199 @@ export default class Sample extends Component {
                 this.setState(newState);
             }
         } catch (error) {
-            console.log(error);
             this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: 'Scanning has been cancelled', showSuccessFrame: false,
             successFrame: ''});
         }
     }
 
+    /* BlinkID scanning with DirectAPI and the BlinkIDMultiSide recognizer.
+    Best used for getting the information from both front and backside information from various documents */
+    async directApiMultiSide() {
+        try {
+            // Get the front side of the document and return it in the Base64 format
+            let frontImage = await this.pickImage();
+            // Get the back side of the document and return it in the Base64 format
+            let backImage = await this.pickImage();
+            
+            const recognizer = new BlinkIDReactNative.BlinkIdMultiSideRecognizer();
+            recognizer.returnFullDocumentImage = true;
+            recognizer.returnFaceImage = true;
+
+            /* Uncomment line 143 if you're using DirectAPI and you are sending cropped images for processing. 
+            The processing will most likely not work if cropped images are being sent with the scanCroppedDocumentImage property being set to false */
+            
+            //recognizer.scanCroppedDocumentImage = true;
+
+            // Pass the recogizer along with the license and the Base64 images to the DirectAPI method of processing
+            const scanningResults = await BlinkIDReactNative.BlinkID.scanWithDirectApi(
+                new BlinkIDReactNative.RecognizerCollection([recognizer]),
+                frontImage,
+                backImage,
+                licenseKey
+            );
+    
+            if (scanningResults) {
+                if (scanningResults.length == 0) {
+                    this.setState({ showFrontImageDocument: false, 
+                        resultFrontImageDocument: '', 
+                        showBackImageDocument: false, 
+                        resultBackImageDocument: '', 
+                        showImageFace: false, 
+                        resultImageFace: '', 
+                        results: "Could not extract the images with DirectAPI!", 
+                        showSuccessFrame: false,
+                        successFrame: ''});
+                } else {
+                    let newState = {
+                    showFrontImageDocument: false,
+                    resultFrontImageDocument: '',
+                    showBackImageDocument: false,
+                    resultBackImageDocument: '',
+                    showImageFace: false,
+                    resultImageFace: '',
+                    results: '',
+                    showSuccessFrame: false,
+                    successFrame: ''
+                };
+
+                for (let i = 0; i < scanningResults.length; ++i) {
+                    let localState = this.handleResult(scanningResults[i]);
+                    newState.showFrontImageDocument = newState.showFrontImageDocument || localState.showFrontImageDocument;
+                    if (localState.showFrontImageDocument) {
+                        newState.resultFrontImageDocument = localState.resultFrontImageDocument;
+                    }
+                    newState.showBackImageDocument = newState.showBackImageDocument || localState.showBackImageDocument;
+                    if (localState.showBackImageDocument) {
+                        newState.resultBackImageDocument = localState.resultBackImageDocument;
+                    }
+                    newState.showImageFace = newState.showImageFace || localState.showImageFace;
+                    if (localState.resultImageFace) {
+                        newState.resultImageFace = localState.resultImageFace;
+                    }
+                    newState.results += localState.results;
+                    newState.showSuccessFrame = newState.showSuccessFrame || localState.showSuccessFrame;
+                    if (localState.successFrame) {
+                        newState.successFrame = localState.successFrame;
+                    }
+
+                }
+                newState.results += '\n';
+                this.setState(newState);
+
+                }
+            }
+        } catch (error) {
+            this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: error, showSuccessFrame: false,
+            successFrame: ''});
+        }
+    }
+
+    /* BlinkID scanning with DirectAPI and the BlinkIDSingleSide recognizer.
+    Best used for getting the information from only one side from various documents */
+    async directApiSingleSide() {
+        try {
+            // Get the document image (it can be either front or back) and return it in the Base64 format
+            let image = await this.pickImage();
+            
+            const recognizer = new BlinkIDReactNative.BlinkIdSingleSideRecognizer();
+            recognizer.returnFullDocumentImage = true;
+            recognizer.returnFaceImage = true;
+
+            /* Uncomment line 223 if you're using DirectAPI and you are sending cropped images for processing. 
+            The processing will most likely not work if cropped images are being sent with the scanCroppedDocumentImage property being set to false */
+            
+            //recognizer.scanCroppedDocumentImage = true;
+
+            // Pass the recogizer along with the license and the Base64 image to the DirectAPI method of processing
+            const scanningResults = await BlinkIDReactNative.BlinkID.scanWithDirectApi(
+                new BlinkIDReactNative.RecognizerCollection([recognizer]),
+                image,
+                null,
+                licenseKey
+            );
+            
+            if (scanningResults) {
+                if (scanningResults.length == 0) {
+                    this.setState({ showFrontImageDocument: false, 
+                        resultFrontImageDocument: '', 
+                        showBackImageDocument: false, 
+                        resultBackImageDocument: '', 
+                        showImageFace: false, 
+                        resultImageFace: '', 
+                        results: "Could not extract the image with DirectAPI!", 
+                        showSuccessFrame: false,
+                        successFrame: ''});
+                } else {
+                    let newState = {
+                    showFrontImageDocument: false,
+                    resultFrontImageDocument: '',
+                    showBackImageDocument: false,
+                    resultBackImageDocument: '',
+                    showImageFace: false,
+                    resultImageFace: '',
+                    results: '',
+                    showSuccessFrame: false,
+                    successFrame: ''
+                };
+
+                for (let i = 0; i < scanningResults.length; ++i) {
+                    let localState = this.handleResult(scanningResults[i]);
+                    newState.showFrontImageDocument = newState.showFrontImageDocument || localState.showFrontImageDocument;
+                    if (localState.showFrontImageDocument) {
+                        newState.resultFrontImageDocument = localState.resultFrontImageDocument;
+                    }
+                    newState.showBackImageDocument = newState.showBackImageDocument || localState.showBackImageDocument;
+                    if (localState.showBackImageDocument) {
+                        newState.resultBackImageDocument = localState.resultBackImageDocument;
+                    }
+                    newState.showImageFace = newState.showImageFace || localState.showImageFace;
+                    if (localState.resultImageFace) {
+                        newState.resultImageFace = localState.resultImageFace;
+                    }
+                    newState.results += localState.results;
+                    newState.showSuccessFrame = newState.showSuccessFrame || localState.showSuccessFrame;
+                    if (localState.successFrame) {
+                        newState.successFrame = localState.successFrame;
+                    }
+                }
+                newState.results += '\n';
+                this.setState(newState);
+                }
+            } 
+
+        } catch (error) {
+            this.setState({ showFrontImageDocument: false, resultFrontImageDocument: '', showBackImageDocument: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: error, showSuccessFrame: false,
+            successFrame: ''});
+        }
+    }
+
+    /* A helper method for handling the picked document image */
+    async pickImage() {
+        return new Promise((resolve, reject) => {
+            ImagePicker.launchImageLibrary({
+                mediaType: 'photo',
+                includeBase64: true,
+            }, response => {
+                if (response.didCancel) {
+                    reject('Image selection canceled');
+                } else if (response.error) {
+                    reject(response.error);
+                } else {
+                    if (response.assets && response.assets.length > 0) {
+                        const base64Data = response.assets[0].base64;
+                        if (base64Data) {
+                            resolve(base64Data);
+                        } else {
+                            reject('Base64 data not found in response');
+                        }
+                    } else {
+                        reject('No assets found in response');
+                    }
+                }
+            });
+        });
+    }
+    
     handleResult(result) {
         var localState = {
             showFrontImageDocument: false,
@@ -142,7 +324,7 @@ export default class Sample extends Component {
             successFrame: ''
         };
 
-        if (result instanceof BlinkIDReactNative.BlinkIdMultiSideRecognizerResult) {
+        if (result instanceof BlinkIDReactNative.BlinkIdMultiSideRecognizerResult || result instanceof BlinkIDReactNative.BlinkIdSingleSideRecognizerResult) {
             let blinkIdResult = result;
 
             let resultString =
@@ -173,14 +355,14 @@ export default class Sample extends Component {
                 buildResult(blinkIdResult.processingStatus.description, "Processing status") +
                 buildResult(blinkIdResult.recognitionMode.description, "Recognition mode")
                 ;
-
-            let dataMatchResult = blinkIdResult.dataMatch;
-            resultString +=
-                    buildResult(dataMatchResult.stateForWholeDocument, "State for the whole document") +
-                    buildResult(dataMatchResult.states[0].state, "dateOfBirth") +
-                    buildResult(dataMatchResult.states[1].state, "dateOfExpiry") +
-                    buildResult(dataMatchResult.states[2].state, "documentNumber");
-            
+             if (result instanceof BlinkIDReactNative.BlinkIdMultiSideRecognizerResult) {
+                let dataMatchResult = blinkIdResult.dataMatch;
+                resultString +=
+                        buildResult(dataMatchResult.stateForWholeDocument, "State for the whole document") +
+                        buildResult(dataMatchResult.states[0].state, "dateOfBirth") +
+                        buildResult(dataMatchResult.states[1].state, "dateOfExpiry") +
+                        buildResult(dataMatchResult.states[2].state, "documentNumber");    
+             }
 
             let licenceInfo = blinkIdResult.driverLicenseDetailedInfo;
             if (licenceInfo) {
@@ -204,13 +386,22 @@ export default class Sample extends Component {
             localState.results += resultString;
 
             // Document image is returned as Base64 encoded JPEG
-            if (blinkIdResult.fullDocumentFrontImage) {
-                localState.showFrontImageDocument = true;
-                localState.resultFrontImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentFrontImage;
-            }
-            if (blinkIdResult.fullDocumentBackImage) {
-                localState.showBackImageDocument = true;
-                localState.resultBackImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentBackImage;
+            if (result instanceof BlinkIDReactNative.BlinkIdMultiSideRecognizerResult) {
+                if (blinkIdResult.fullDocumentFrontImage) {
+                    localState.showFrontImageDocument = true;
+                    localState.resultFrontImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentFrontImage;
+                }
+                if (blinkIdResult.fullDocumentBackImage) {
+                    localState.showBackImageDocument = true;
+                    localState.resultBackImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentBackImage;
+                }
+            } else {
+                if (blinkIdResult.fullDocumentImage) {
+                    localState.showFrontImageDocument = true;
+                    localState.resultFrontImageDocument = 'data:image/jpg;base64,' + blinkIdResult.fullDocumentImage;
+                    localState.showBackImageDocument = false;
+                    localState.resultBackImageDocument = "";
+                }
             }
             // Face image is returned as Base64 encoded JPEG
             if (blinkIdResult.faceImage) {
@@ -236,6 +427,16 @@ export default class Sample extends Component {
                 title="Scan"
                 color="#48B2E8"
             />
+             <Button
+                onPress={this.directApiMultiSide.bind(this)} 
+                title="DirectAPI MultiSide"
+                color="#48B2E8"
+                />
+            <Button
+                onPress={this.directApiSingleSide.bind(this)}
+                title="DirectAPI SingleSide"
+                color="#48B2E8"
+                />
             </View>
             <ScrollView
             automaticallyAdjustContentInsets={false}
@@ -286,10 +487,15 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 30,
     textAlign: 'center',
-    marginTop: 50
+    marginTop: 50,
+    color: "black"
   },
   buttonContainer: {
-    margin: 20
+    margin: 20,
+    marginTop: 20,
+    marginBottom: 20,
+    marginTop: 20,
+    gap: 20,
   },
   imageContainer: {
     flexDirection: 'row',
@@ -299,6 +505,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'left',
     margin: 10,
+    color: 'black'
   },
   imageResult: {
     flex: 1,

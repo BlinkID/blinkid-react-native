@@ -7,56 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		048A409E8A605D420974E19B /* MBBlinkIDModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D930451FA02EC5813CC0D175 /* MBBlinkIDModule.h */; };
-		05B74780B6737DB12AFDB3FF /* MBDocumentOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C90E47B6B466CA3CE156C379 /* MBDocumentOverlaySettingsSerialization.h */; };
-		06AB4C3D8E55F650AA1094BC /* MBSuccessFrameGrabberRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5754D568643018665C2782D /* MBSuccessFrameGrabberRecognizerWrapper.m */; };
-		0B06486E936846D6329264FC /* MBPassportRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C24D63B05AEB08ADC43FFA /* MBPassportRecognizerWrapper.m */; };
-		17604F6C90E6C20BEEC4A3BA /* MBBlinkIdOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FDBA46549C8B9BB23B30D302 /* MBBlinkIdOverlaySettingsSerialization.h */; };
-		18334860BA9B2E49178E24E8 /* MBBlinkIdOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F94C5D894E685FA3B70D67 /* MBBlinkIdOverlaySettingsSerialization.m */; };
-		1EEC47FAB461DA8C6D357ADB /* MBIdBarcodeRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45214122BECD1DA4BB26D08F /* MBIdBarcodeRecognizerWrapper.m */; };
-		24E14349B108D1BA66D4BFAD /* MBOverlaySerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C33346ADA5996939329AAF7E /* MBOverlaySerializationUtils.h */; };
-		29454BCFBE90E765BB949C83 /* MBVisaRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D28441BC9337242B586EACA4 /* MBVisaRecognizerWrapper.m */; };
-		2C5F4F158A03BD1D1F4E302E /* MBRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 76174BD69AC1EE5EF22DC917 /* MBRecognizerWrapper.m */; };
-		3E4B4221BF527A6D74A2432C /* MBOverlaySettingsSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BA747CCBECC90ECFDB43AF8 /* MBOverlaySettingsSerializers.h */; };
-		42E446879D6DEF923779703C /* MBUsdlCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFF4F44BE07BB63D7D3FEF0 /* MBUsdlCombinedRecognizerWrapper.m */; };
-		480D423180B1893A57892846 /* MBPassportRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 66964889867C90EDF7CFA89E /* MBPassportRecognizerWrapper.h */; };
-		560A42D78456D63B83167BE2 /* MBVisaRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B664BF3BABA8EC3FD69177A /* MBVisaRecognizerWrapper.h */; };
-		5652492BBC574503CFCBE3D2 /* MBIdBarcodeRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 66B54D4A8FDDCBFA4C82CA03 /* MBIdBarcodeRecognizerWrapper.h */; };
-		60F74F73812E3C383672F4E2 /* MBUsdlCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C245DBAA5F05FE5869E5C3 /* MBUsdlCombinedRecognizerWrapper.h */; };
-		706C4F4CA5AFA3298A441FF6 /* MBBlinkIdMultiSideRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C0204B4EAD535D57DDE731FD /* MBBlinkIdMultiSideRecognizerWrapper.m */; };
-		71814CEABAFA16151F82C1A5 /* MBCommonSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A304DF1AE6AEEEBB795FE2C /* MBCommonSerializationUtils.h */; };
-		755F4A37B442D6CFA7A1551C /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B674679AFE33DAB1E15F4EB /* MBDocumentVerificationOverlaySettingsSerialization.m */; };
-		78AF434F9444519D330E8038 /* MBRecognizerSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B48D78AC9CE04BA7231B5 /* MBRecognizerSerializers.m */; };
-		87A0424E8524AD6D5660C17B /* MBBlinkIDModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A0084558A8AC2E4DF810FE2F /* MBBlinkIDModule.m */; };
-		8AF145D8809DB8365FF317F1 /* MBMrtdCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EA4E3687D7CC38EDFA7622 /* MBMrtdCombinedRecognizerWrapper.m */; };
-		8DC049989AB55ADA94155B3D /* MBMrtdRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F8674AE8A916F04DF40F39D7 /* MBMrtdRecognizerWrapper.h */; };
-		96E74583AE6D35FEF1E87F1F /* MBBlinkIDSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CC499FB074CB5465B14884 /* MBBlinkIDSerializationUtils.h */; };
-		9A3B4B05944337F6ED69A4A6 /* MBBlinkIdSingleSideRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F8434A09A64A6E6B482CE9B7 /* MBBlinkIdSingleSideRecognizerWrapper.h */; };
-		9D5943F28B4AB42FEEC75372 /* MBSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B164A48B4739735099C623C /* MBSerializationUtils.h */; };
-		9F9842DFAC134B6E48138CF9 /* MBDocumentFaceRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A2547C7B02E7BBC79270EE6 /* MBDocumentFaceRecognizerWrapper.h */; };
-		A1864103913949BC38E6F446 /* MBCommonSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84184E10A2CE6565686141CE /* MBCommonSerializationUtils.m */; };
+		019843C492E5AB6DE5BD95D2 /* MBIdBarcodeRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F85745F4B918170365AC539D /* MBIdBarcodeRecognizerWrapper.h */; };
+		0E3B436290FAD304554E2567 /* MBDocumentOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = C2204AE5B4560D5819B44DF2 /* MBDocumentOverlaySettingsSerialization.h */; };
+		138A436288A8EF04358B02BA /* MBBlinkIdSingleSideRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D5D479F8F7959590D52644F /* MBBlinkIdSingleSideRecognizerWrapper.h */; };
+		16F74DA08DD988281BBBFBC7 /* MBPassportRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 45934F8EA7C9C98101170724 /* MBPassportRecognizerWrapper.h */; };
+		1B714687B796E5D6661BFF4B /* MBBlinkIDModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B84544C18EBBE0100FD9A50E /* MBBlinkIDModule.m */; };
+		1D2A43E48E246898519CF346 /* MBUsdlCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9044C82B0C665DD79E00B55 /* MBUsdlCombinedRecognizerWrapper.h */; };
+		205D406092F0986434C0ABF3 /* MBSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6E48CAA82B9CB1811A1FF0 /* MBSerializationUtils.h */; };
+		22DD40138314F86ADA8FDAE1 /* MBOverlayViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B474409A19C74CDC5C132CA /* MBOverlayViewControllerDelegate.h */; };
+		255C46C0AD9DF46520362693 /* MBIdBarcodeRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C74D38BE7D2560117FF7D4 /* MBIdBarcodeRecognizerWrapper.m */; };
+		258547FE9F19CA27BE9C2D2B /* MBOverlaySerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF34CDDB1B9853C82142686 /* MBOverlaySerializationUtils.m */; };
+		2B654A7FAD82A2F89DC199A6 /* MBPassportRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9330460FA4516DE3636DAB90 /* MBPassportRecognizerWrapper.m */; };
+		30CE42B3809676C871DBDCFA /* MBCommonSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE14F15BD9F3007E089759C /* MBCommonSerializationUtils.m */; };
+		329A4DE8B09793346845F6C7 /* MBBlinkIdSingleSideRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C114DAAB17A49E3F8BF64DD /* MBBlinkIdSingleSideRecognizerWrapper.m */; };
+		386E43AD9C2ED3C7293BEC4F /* MBSuccessFrameGrabberRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 54094219854D202C50DFAF43 /* MBSuccessFrameGrabberRecognizerWrapper.h */; };
+		394547F69E9612A6AAD4B37A /* MBUsdlRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D5684CA9900153B6C98439CA /* MBUsdlRecognizerWrapper.m */; };
+		50B74D20960F2C1B175A5FE3 /* MBVisaRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3093485599E2EAEF0324230E /* MBVisaRecognizerWrapper.m */; };
+		52704755A391E4B65E100E04 /* MBMrtdCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 369C4ACEA045103AA1392C2A /* MBMrtdCombinedRecognizerWrapper.h */; };
+		613843119EDD5157E61DA6F2 /* MBSuccessFrameGrabberRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1C46A6B513548150105C05 /* MBSuccessFrameGrabberRecognizerWrapper.m */; };
+		648D442C91D49C6E840F74F4 /* MBBlinkIdOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2434494FA8B53BED22649515 /* MBBlinkIdOverlaySettingsSerialization.m */; };
+		68A84E5A900E64DD7B2B2A0B /* MBUsdlRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A2EB4CD184842CBE05068824 /* MBUsdlRecognizerWrapper.h */; };
+		6A2F449EB55C9990401B2D22 /* MBCommonSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = CDE34A9ABBF396F1D16BCD6A /* MBCommonSerializationUtils.h */; };
+		7222472E9000FC84834DB7C6 /* MBBlinkIDSerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 36624316A4CB5201BA2DA24B /* MBBlinkIDSerializationUtils.h */; };
+		77AA450B9BA94519A59D3866 /* MBBlinkIDSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 338745D9A9865BBE9916D433 /* MBBlinkIDSerializationUtils.m */; };
+		789640D682A0EBB8F03BB611 /* MBRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF54EFD9F225DC6283E7660 /* MBRecognizerWrapper.m */; };
+		7C3F416AA48F3DF62DA568CD /* MBMrtdRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47644712A58D0F68C2BEA927 /* MBMrtdRecognizerWrapper.h */; };
+		837D4035B83E0E23CA47EFCE /* MBDocumentOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 531F4C34B1250CA86E069CA5 /* MBDocumentOverlaySettingsSerialization.m */; };
+		91344BE2AE3A22964630D62C /* MBBlinkIDModule.h in Headers */ = {isa = PBXBuildFile; fileRef = F40348588A730C6EE5E5C225 /* MBBlinkIDModule.h */; };
+		92BB4C53B2571FAC7D23F8C4 /* MBBlinkIdMultiSideRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = DBC84707920B53D4101FB957 /* MBBlinkIdMultiSideRecognizerWrapper.h */; };
+		9AC242B1957DC35764BAFF27 /* MBSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9740E181D1E6EBDED933AE /* MBSerializationUtils.m */; };
+		9CE2459B91499ABF1985ABDC /* MBUsdlCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 818B428B92AEC52ECA8C53F1 /* MBUsdlCombinedRecognizerWrapper.m */; };
+		9D60486B8BC66572436A6043 /* MBOverlaySerializationUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B90E46F0A79B4085AE280BD5 /* MBOverlaySerializationUtils.h */; };
+		A0CA4981A9EAD8179326ADE8 /* MBMrtdRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED704624AB0F4DAACA18689A /* MBMrtdRecognizerWrapper.m */; };
 		A27CCA401E9E5D8D00BED675 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA3A1E9E57CF00BED675 /* Accelerate.framework */; };
 		A27CCA421E9E5D9400BED675 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA411E9E5D9400BED675 /* CoreFoundation.framework */; };
 		A27CCA431E9E5D9900BED675 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA381E9E57C900BED675 /* AudioToolbox.framework */; };
 		A27CCA441E9E5DAE00BED675 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27CCA3E1E9E57DA00BED675 /* CoreMedia.framework */; };
-		A66F4C4BB8B2C941DE3B2C78 /* MBOverlayViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 733A465BB6D302A8A686A871 /* MBOverlayViewControllerDelegate.h */; };
-		A6E447578E057D4AF8BEE34A /* MBSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF54C75A7D995BE55DE6AAC /* MBSerializationUtils.m */; };
-		AE3C400CBEC317A29A6BAB05 /* MBRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 83F2488296CF93CC70F4DE34 /* MBRecognizerWrapper.h */; };
-		B8054FD88394B04AF4547567 /* MBDocumentOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 406A4F1A8AFBEE4121C50969 /* MBDocumentOverlaySettingsSerialization.m */; };
-		BCFC4B57964DE2D164C66171 /* MBSuccessFrameGrabberRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A7F04110924A96CC533C1454 /* MBSuccessFrameGrabberRecognizerWrapper.h */; };
-		BDD14A1D8F740B6F60CB5D6D /* MBBlinkIdMultiSideRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B194F80B77E96BFF0C3F4BE /* MBBlinkIdMultiSideRecognizerWrapper.h */; };
-		C02E44309007AD23540BD319 /* MBBlinkIdSingleSideRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5848C0B10573064CA6C342 /* MBBlinkIdSingleSideRecognizerWrapper.m */; };
-		C450415FA0FA29B35B8DED2D /* MBUsdlRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = AC584892A333542C7B41FBEB /* MBUsdlRecognizerWrapper.m */; };
-		C82F46A8BA3559C1EFC03120 /* MBOverlaySettingsSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FE4D149697A9FC5CA171C8 /* MBOverlaySettingsSerializers.m */; };
-		D9F34D1188B25A53515FF836 /* MBBlinkIDSerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 31AC49E387085625D8BD4964 /* MBBlinkIDSerializationUtils.m */; };
-		DCB640AD91496712018FA65D /* MBDocumentFaceRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 70614708BF7AE2925EFE3C8B /* MBDocumentFaceRecognizerWrapper.m */; };
-		E9A8418DB8729AB8DAE4FD7E /* MBUsdlRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A2C84750A0AF6B941E773F96 /* MBUsdlRecognizerWrapper.h */; };
-		EBF046CDAED926303E35C506 /* MBMrtdRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 87074E808F2C1FDAC8009852 /* MBMrtdRecognizerWrapper.m */; };
-		EE574EF787D5671AA0ACAB96 /* MBOverlayVCCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = 96FE47AAAA025003EF82C71E /* MBOverlayVCCreator.h */; };
-		F09C4FFBADDB78F15088F1C1 /* MBOverlaySerializationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 66894324B5FB95170774A6DE /* MBOverlaySerializationUtils.m */; };
-		FA0B494DAE8D9833302056C6 /* MBMrtdCombinedRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C59E4555BBB334A9042EA755 /* MBMrtdCombinedRecognizerWrapper.h */; };
-		FEA14A8C8BCEF365BFD96D8F /* MBRecognizerSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = F557446290C773C80A72492D /* MBRecognizerSerializers.h */; };
-		FEDF44D3B2528E38707632E1 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 73F04DDAB5D0ED3A58B56A6A /* MBDocumentVerificationOverlaySettingsSerialization.h */; };
+		A7314AE5A0B7719F10E7E325 /* MBOverlayVCCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A9A4DCA92EF6D2BF02548ED /* MBOverlayVCCreator.h */; };
+		A906401984B596069CDF9E1B /* MBDocumentFaceRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B4FC1881FE3B054B6152B /* MBDocumentFaceRecognizerWrapper.m */; };
+		A9D645EDAB8632449513027B /* MBDocumentFaceRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAC4FC38786AB2FEB9B38F0 /* MBDocumentFaceRecognizerWrapper.h */; };
+		A9FB4EA2A102C5C312726EAC /* MBVisaRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B645E8A7396EA818BA81DC /* MBVisaRecognizerWrapper.h */; };
+		AAFD47D486B92E523F338354 /* MBRecognizerSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D49DD830A3EF19937330C /* MBRecognizerSerializers.m */; };
+		AF004ECF91F349DE31E7B096 /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C2488799F15C22C2801CC3 /* MBDocumentVerificationOverlaySettingsSerialization.m */; };
+		B36E4A8890F96CE88DE4CA55 /* MBBlinkIdOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = A8304F1F82FFFC1A1AF30A04 /* MBBlinkIdOverlaySettingsSerialization.h */; };
+		CED542E388D85AB1F38060F9 /* MBRecognizerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C744401EBAFAAE5794992E6E /* MBRecognizerWrapper.h */; };
+		CFC2422BAC55F6C444251968 /* MBMrtdCombinedRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C904153BEC82BB5E914EB9D /* MBMrtdCombinedRecognizerWrapper.m */; };
+		D37248FEA9F42A4451B658A7 /* MBOverlaySettingsSerializers.m in Sources */ = {isa = PBXBuildFile; fileRef = D12644EA957861345909CFEA /* MBOverlaySettingsSerializers.m */; };
+		D567449BB0AEDCBA4E63AB6C /* MBOverlaySettingsSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = 044F4570B6D4B332C1E1081B /* MBOverlaySettingsSerializers.h */; };
+		E5B3418E973C191B57429669 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 68D34191B55D29A456DED1E5 /* MBDocumentVerificationOverlaySettingsSerialization.h */; };
+		EEA049DE9E34A3A4A7EA6283 /* MBBlinkIdMultiSideRecognizerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 905547B89490BC37C6A53241 /* MBBlinkIdMultiSideRecognizerWrapper.m */; };
+		F76E454EB6B727CB670804B4 /* MBRecognizerSerializers.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EDE4793876CA33621A768AF /* MBRecognizerSerializers.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,58 +72,58 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		14F94C5D894E685FA3B70D67 /* MBBlinkIdOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBBlinkIdOverlaySettingsSerialization.m; sourceTree = "<group>"; };
-		1A304DF1AE6AEEEBB795FE2C /* MBCommonSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCommonSerializationUtils.h; path = MicroblinkModule/MBCommonSerializationUtils.h; sourceTree = "<group>"; };
-		2A2547C7B02E7BBC79270EE6 /* MBDocumentFaceRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentFaceRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.h; sourceTree = "<group>"; };
-		31AC49E387085625D8BD4964 /* MBBlinkIDSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIDSerializationUtils.m; path = MicroblinkModule/MBBlinkIDSerializationUtils.m; sourceTree = "<group>"; };
-		3B664BF3BABA8EC3FD69177A /* MBVisaRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBVisaRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBVisaRecognizerWrapper.h; sourceTree = "<group>"; };
-		406A4F1A8AFBEE4121C50969 /* MBDocumentOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.m; sourceTree = "<group>"; };
-		45214122BECD1DA4BB26D08F /* MBIdBarcodeRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBIdBarcodeRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBIdBarcodeRecognizerWrapper.m; sourceTree = "<group>"; };
-		4B164A48B4739735099C623C /* MBSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerializationUtils.h; path = MicroblinkModule/MBSerializationUtils.h; sourceTree = "<group>"; };
-		5B674679AFE33DAB1E15F4EB /* MBDocumentVerificationOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentVerificationOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.m; sourceTree = "<group>"; };
-		64EA4E3687D7CC38EDFA7622 /* MBMrtdCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMrtdCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdCombinedRecognizerWrapper.m; sourceTree = "<group>"; };
-		66894324B5FB95170774A6DE /* MBOverlaySerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySerializationUtils.m; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.m; sourceTree = "<group>"; };
-		66964889867C90EDF7CFA89E /* MBPassportRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPassportRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPassportRecognizerWrapper.h; sourceTree = "<group>"; };
-		66B54D4A8FDDCBFA4C82CA03 /* MBIdBarcodeRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBIdBarcodeRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBIdBarcodeRecognizerWrapper.h; sourceTree = "<group>"; };
-		6BA747CCBECC90ECFDB43AF8 /* MBOverlaySettingsSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySettingsSerializers.h; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.h; sourceTree = "<group>"; };
-		70614708BF7AE2925EFE3C8B /* MBDocumentFaceRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentFaceRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.m; sourceTree = "<group>"; };
-		733A465BB6D302A8A686A871 /* MBOverlayViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayViewControllerDelegate.h; path = MicroblinkModule/Overlays/MBOverlayViewControllerDelegate.h; sourceTree = "<group>"; };
-		73F04DDAB5D0ED3A58B56A6A /* MBDocumentVerificationOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentVerificationOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.h; sourceTree = "<group>"; };
-		76174BD69AC1EE5EF22DC917 /* MBRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerWrapper.m; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.m; sourceTree = "<group>"; };
-		82C245DBAA5F05FE5869E5C3 /* MBUsdlCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUsdlCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlCombinedRecognizerWrapper.h; sourceTree = "<group>"; };
-		83F2488296CF93CC70F4DE34 /* MBRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerWrapper.h; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.h; sourceTree = "<group>"; };
-		84184E10A2CE6565686141CE /* MBCommonSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCommonSerializationUtils.m; path = MicroblinkModule/MBCommonSerializationUtils.m; sourceTree = "<group>"; };
-		87074E808F2C1FDAC8009852 /* MBMrtdRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMrtdRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.m; sourceTree = "<group>"; };
-		8B194F80B77E96BFF0C3F4BE /* MBBlinkIdMultiSideRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdMultiSideRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdMultiSideRecognizerWrapper.h; sourceTree = "<group>"; };
-		96FE47AAAA025003EF82C71E /* MBOverlayVCCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayVCCreator.h; path = MicroblinkModule/Overlays/MBOverlayVCCreator.h; sourceTree = "<group>"; };
-		9E9B48D78AC9CE04BA7231B5 /* MBRecognizerSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerSerializers.m; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.m; sourceTree = "<group>"; };
-		A0084558A8AC2E4DF810FE2F /* MBBlinkIDModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIDModule.m; path = MicroblinkModule/MBBlinkIDModule.m; sourceTree = "<group>"; };
+		044F4570B6D4B332C1E1081B /* MBOverlaySettingsSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySettingsSerializers.h; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.h; sourceTree = "<group>"; };
+		0B1C46A6B513548150105C05 /* MBSuccessFrameGrabberRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSuccessFrameGrabberRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSuccessFrameGrabberRecognizerWrapper.m; sourceTree = "<group>"; };
+		1D5B4FC1881FE3B054B6152B /* MBDocumentFaceRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentFaceRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.m; sourceTree = "<group>"; };
+		1FAC4FC38786AB2FEB9B38F0 /* MBDocumentFaceRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentFaceRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBDocumentFaceRecognizerWrapper.h; sourceTree = "<group>"; };
+		2434494FA8B53BED22649515 /* MBBlinkIdOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBBlinkIdOverlaySettingsSerialization.m; sourceTree = "<group>"; };
+		2B474409A19C74CDC5C132CA /* MBOverlayViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayViewControllerDelegate.h; path = MicroblinkModule/Overlays/MBOverlayViewControllerDelegate.h; sourceTree = "<group>"; };
+		2D5D479F8F7959590D52644F /* MBBlinkIdSingleSideRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdSingleSideRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdSingleSideRecognizerWrapper.h; sourceTree = "<group>"; };
+		2EDE4793876CA33621A768AF /* MBRecognizerSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerSerializers.h; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.h; sourceTree = "<group>"; };
+		3093485599E2EAEF0324230E /* MBVisaRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBVisaRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBVisaRecognizerWrapper.m; sourceTree = "<group>"; };
+		338745D9A9865BBE9916D433 /* MBBlinkIDSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIDSerializationUtils.m; path = MicroblinkModule/MBBlinkIDSerializationUtils.m; sourceTree = "<group>"; };
+		36624316A4CB5201BA2DA24B /* MBBlinkIDSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIDSerializationUtils.h; path = MicroblinkModule/MBBlinkIDSerializationUtils.h; sourceTree = "<group>"; };
+		369C4ACEA045103AA1392C2A /* MBMrtdCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMrtdCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdCombinedRecognizerWrapper.h; sourceTree = "<group>"; };
+		39C2488799F15C22C2801CC3 /* MBDocumentVerificationOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentVerificationOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.m; sourceTree = "<group>"; };
+		45934F8EA7C9C98101170724 /* MBPassportRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBPassportRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBPassportRecognizerWrapper.h; sourceTree = "<group>"; };
+		47644712A58D0F68C2BEA927 /* MBMrtdRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMrtdRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.h; sourceTree = "<group>"; };
+		4A9A4DCA92EF6D2BF02548ED /* MBOverlayVCCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlayVCCreator.h; path = MicroblinkModule/Overlays/MBOverlayVCCreator.h; sourceTree = "<group>"; };
+		531F4C34B1250CA86E069CA5 /* MBDocumentOverlaySettingsSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBDocumentOverlaySettingsSerialization.m; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.m; sourceTree = "<group>"; };
+		54094219854D202C50DFAF43 /* MBSuccessFrameGrabberRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSuccessFrameGrabberRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSuccessFrameGrabberRecognizerWrapper.h; sourceTree = "<group>"; };
+		68D34191B55D29A456DED1E5 /* MBDocumentVerificationOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentVerificationOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentVerificationOverlaySettingsSerialization.h; sourceTree = "<group>"; };
+		818B428B92AEC52ECA8C53F1 /* MBUsdlCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUsdlCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlCombinedRecognizerWrapper.m; sourceTree = "<group>"; };
+		8B6E48CAA82B9CB1811A1FF0 /* MBSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSerializationUtils.h; path = MicroblinkModule/MBSerializationUtils.h; sourceTree = "<group>"; };
+		8C114DAAB17A49E3F8BF64DD /* MBBlinkIdSingleSideRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdSingleSideRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdSingleSideRecognizerWrapper.m; sourceTree = "<group>"; };
+		8C904153BEC82BB5E914EB9D /* MBMrtdCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMrtdCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdCombinedRecognizerWrapper.m; sourceTree = "<group>"; };
+		905547B89490BC37C6A53241 /* MBBlinkIdMultiSideRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdMultiSideRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdMultiSideRecognizerWrapper.m; sourceTree = "<group>"; };
+		9330460FA4516DE3636DAB90 /* MBPassportRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPassportRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPassportRecognizerWrapper.m; sourceTree = "<group>"; };
+		9BF54EFD9F225DC6283E7660 /* MBRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerWrapper.m; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.m; sourceTree = "<group>"; };
 		A27CCA2B1E9E57A500BED675 /* libMicroblinkModule.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMicroblinkModule.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27CCA381E9E57C900BED675 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A27CCA3A1E9E57CF00BED675 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		A27CCA3C1E9E57D600BED675 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A27CCA3E1E9E57DA00BED675 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A27CCA411E9E5D9400BED675 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		A2C84750A0AF6B941E773F96 /* MBUsdlRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUsdlRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.h; sourceTree = "<group>"; };
-		A3CC499FB074CB5465B14884 /* MBBlinkIDSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIDSerializationUtils.h; path = MicroblinkModule/MBBlinkIDSerializationUtils.h; sourceTree = "<group>"; };
-		A5754D568643018665C2782D /* MBSuccessFrameGrabberRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSuccessFrameGrabberRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBSuccessFrameGrabberRecognizerWrapper.m; sourceTree = "<group>"; };
-		A5C24D63B05AEB08ADC43FFA /* MBPassportRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBPassportRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBPassportRecognizerWrapper.m; sourceTree = "<group>"; };
-		A7F04110924A96CC533C1454 /* MBSuccessFrameGrabberRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBSuccessFrameGrabberRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBSuccessFrameGrabberRecognizerWrapper.h; sourceTree = "<group>"; };
-		AC584892A333542C7B41FBEB /* MBUsdlRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUsdlRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.m; sourceTree = "<group>"; };
-		ACF54C75A7D995BE55DE6AAC /* MBSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerializationUtils.m; path = MicroblinkModule/MBSerializationUtils.m; sourceTree = "<group>"; };
-		C0204B4EAD535D57DDE731FD /* MBBlinkIdMultiSideRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdMultiSideRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdMultiSideRecognizerWrapper.m; sourceTree = "<group>"; };
-		C33346ADA5996939329AAF7E /* MBOverlaySerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySerializationUtils.h; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.h; sourceTree = "<group>"; };
-		C59E4555BBB334A9042EA755 /* MBMrtdCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMrtdCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdCombinedRecognizerWrapper.h; sourceTree = "<group>"; };
-		C90E47B6B466CA3CE156C379 /* MBDocumentOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.h; sourceTree = "<group>"; };
-		D28441BC9337242B586EACA4 /* MBVisaRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBVisaRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBVisaRecognizerWrapper.m; sourceTree = "<group>"; };
-		D930451FA02EC5813CC0D175 /* MBBlinkIDModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIDModule.h; path = MicroblinkModule/MBBlinkIDModule.h; sourceTree = "<group>"; };
-		DB5848C0B10573064CA6C342 /* MBBlinkIdSingleSideRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIdSingleSideRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdSingleSideRecognizerWrapper.m; sourceTree = "<group>"; };
-		E9FE4D149697A9FC5CA171C8 /* MBOverlaySettingsSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySettingsSerializers.m; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.m; sourceTree = "<group>"; };
-		EAFF4F44BE07BB63D7D3FEF0 /* MBUsdlCombinedRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUsdlCombinedRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlCombinedRecognizerWrapper.m; sourceTree = "<group>"; };
-		F557446290C773C80A72492D /* MBRecognizerSerializers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerSerializers.h; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.h; sourceTree = "<group>"; };
-		F8434A09A64A6E6B482CE9B7 /* MBBlinkIdSingleSideRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdSingleSideRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdSingleSideRecognizerWrapper.h; sourceTree = "<group>"; };
-		F8674AE8A916F04DF40F39D7 /* MBMrtdRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBMrtdRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.h; sourceTree = "<group>"; };
-		FDBA46549C8B9BB23B30D302 /* MBBlinkIdOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBBlinkIdOverlaySettingsSerialization.h; sourceTree = "<group>"; };
+		A2EB4CD184842CBE05068824 /* MBUsdlRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUsdlRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.h; sourceTree = "<group>"; };
+		A6B645E8A7396EA818BA81DC /* MBVisaRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBVisaRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBVisaRecognizerWrapper.h; sourceTree = "<group>"; };
+		A8304F1F82FFFC1A1AF30A04 /* MBBlinkIdOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBBlinkIdOverlaySettingsSerialization.h; sourceTree = "<group>"; };
+		ADF34CDDB1B9853C82142686 /* MBOverlaySerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySerializationUtils.m; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.m; sourceTree = "<group>"; };
+		B84544C18EBBE0100FD9A50E /* MBBlinkIDModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBBlinkIDModule.m; path = MicroblinkModule/MBBlinkIDModule.m; sourceTree = "<group>"; };
+		B90E46F0A79B4085AE280BD5 /* MBOverlaySerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBOverlaySerializationUtils.h; path = MicroblinkModule/Overlays/MBOverlaySerializationUtils.h; sourceTree = "<group>"; };
+		BF9740E181D1E6EBDED933AE /* MBSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBSerializationUtils.m; path = MicroblinkModule/MBSerializationUtils.m; sourceTree = "<group>"; };
+		C2204AE5B4560D5819B44DF2 /* MBDocumentOverlaySettingsSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBDocumentOverlaySettingsSerialization.h; path = MicroblinkModule/Overlays/Serialization/MBDocumentOverlaySettingsSerialization.h; sourceTree = "<group>"; };
+		C744401EBAFAAE5794992E6E /* MBRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBRecognizerWrapper.h; path = MicroblinkModule/Recognizers/MBRecognizerWrapper.h; sourceTree = "<group>"; };
+		C9044C82B0C665DD79E00B55 /* MBUsdlCombinedRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBUsdlCombinedRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlCombinedRecognizerWrapper.h; sourceTree = "<group>"; };
+		CDE34A9ABBF396F1D16BCD6A /* MBCommonSerializationUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBCommonSerializationUtils.h; path = MicroblinkModule/MBCommonSerializationUtils.h; sourceTree = "<group>"; };
+		CFE14F15BD9F3007E089759C /* MBCommonSerializationUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBCommonSerializationUtils.m; path = MicroblinkModule/MBCommonSerializationUtils.m; sourceTree = "<group>"; };
+		D12644EA957861345909CFEA /* MBOverlaySettingsSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBOverlaySettingsSerializers.m; path = MicroblinkModule/Overlays/MBOverlaySettingsSerializers.m; sourceTree = "<group>"; };
+		D5684CA9900153B6C98439CA /* MBUsdlRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBUsdlRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBUsdlRecognizerWrapper.m; sourceTree = "<group>"; };
+		D7C74D38BE7D2560117FF7D4 /* MBIdBarcodeRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBIdBarcodeRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBIdBarcodeRecognizerWrapper.m; sourceTree = "<group>"; };
+		DBC84707920B53D4101FB957 /* MBBlinkIdMultiSideRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIdMultiSideRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBBlinkIdMultiSideRecognizerWrapper.h; sourceTree = "<group>"; };
+		ED704624AB0F4DAACA18689A /* MBMrtdRecognizerWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBMrtdRecognizerWrapper.m; path = MicroblinkModule/Recognizers/Wrappers/MBMrtdRecognizerWrapper.m; sourceTree = "<group>"; };
+		F40348588A730C6EE5E5C225 /* MBBlinkIDModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBBlinkIDModule.h; path = MicroblinkModule/MBBlinkIDModule.h; sourceTree = "<group>"; };
+		F67D49DD830A3EF19937330C /* MBRecognizerSerializers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBRecognizerSerializers.m; path = MicroblinkModule/Recognizers/MBRecognizerSerializers.m; sourceTree = "<group>"; };
+		F85745F4B918170365AC539D /* MBIdBarcodeRecognizerWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBIdBarcodeRecognizerWrapper.h; path = MicroblinkModule/Recognizers/Wrappers/MBIdBarcodeRecognizerWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,81 +141,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B454A529CCF8850680CCD44 /* Wrappers */ = {
+		260C4B918F912BB4CD961EF9 /* Wrappers */ = {
 			isa = PBXGroup;
 			children = (
-				70614708BF7AE2925EFE3C8B /* MBDocumentFaceRecognizerWrapper.m */,
-				D28441BC9337242B586EACA4 /* MBVisaRecognizerWrapper.m */,
-				C0204B4EAD535D57DDE731FD /* MBBlinkIdMultiSideRecognizerWrapper.m */,
-				A7F04110924A96CC533C1454 /* MBSuccessFrameGrabberRecognizerWrapper.h */,
-				87074E808F2C1FDAC8009852 /* MBMrtdRecognizerWrapper.m */,
-				A2C84750A0AF6B941E773F96 /* MBUsdlRecognizerWrapper.h */,
-				F8434A09A64A6E6B482CE9B7 /* MBBlinkIdSingleSideRecognizerWrapper.h */,
-				64EA4E3687D7CC38EDFA7622 /* MBMrtdCombinedRecognizerWrapper.m */,
-				A5C24D63B05AEB08ADC43FFA /* MBPassportRecognizerWrapper.m */,
-				EAFF4F44BE07BB63D7D3FEF0 /* MBUsdlCombinedRecognizerWrapper.m */,
-				45214122BECD1DA4BB26D08F /* MBIdBarcodeRecognizerWrapper.m */,
-				3B664BF3BABA8EC3FD69177A /* MBVisaRecognizerWrapper.h */,
-				2A2547C7B02E7BBC79270EE6 /* MBDocumentFaceRecognizerWrapper.h */,
-				C59E4555BBB334A9042EA755 /* MBMrtdCombinedRecognizerWrapper.h */,
-				DB5848C0B10573064CA6C342 /* MBBlinkIdSingleSideRecognizerWrapper.m */,
-				AC584892A333542C7B41FBEB /* MBUsdlRecognizerWrapper.m */,
-				8B194F80B77E96BFF0C3F4BE /* MBBlinkIdMultiSideRecognizerWrapper.h */,
-				A5754D568643018665C2782D /* MBSuccessFrameGrabberRecognizerWrapper.m */,
-				F8674AE8A916F04DF40F39D7 /* MBMrtdRecognizerWrapper.h */,
-				66B54D4A8FDDCBFA4C82CA03 /* MBIdBarcodeRecognizerWrapper.h */,
-				82C245DBAA5F05FE5869E5C3 /* MBUsdlCombinedRecognizerWrapper.h */,
-				66964889867C90EDF7CFA89E /* MBPassportRecognizerWrapper.h */,
+				1D5B4FC1881FE3B054B6152B /* MBDocumentFaceRecognizerWrapper.m */,
+				3093485599E2EAEF0324230E /* MBVisaRecognizerWrapper.m */,
+				905547B89490BC37C6A53241 /* MBBlinkIdMultiSideRecognizerWrapper.m */,
+				54094219854D202C50DFAF43 /* MBSuccessFrameGrabberRecognizerWrapper.h */,
+				ED704624AB0F4DAACA18689A /* MBMrtdRecognizerWrapper.m */,
+				A2EB4CD184842CBE05068824 /* MBUsdlRecognizerWrapper.h */,
+				2D5D479F8F7959590D52644F /* MBBlinkIdSingleSideRecognizerWrapper.h */,
+				8C904153BEC82BB5E914EB9D /* MBMrtdCombinedRecognizerWrapper.m */,
+				9330460FA4516DE3636DAB90 /* MBPassportRecognizerWrapper.m */,
+				818B428B92AEC52ECA8C53F1 /* MBUsdlCombinedRecognizerWrapper.m */,
+				D7C74D38BE7D2560117FF7D4 /* MBIdBarcodeRecognizerWrapper.m */,
+				A6B645E8A7396EA818BA81DC /* MBVisaRecognizerWrapper.h */,
+				1FAC4FC38786AB2FEB9B38F0 /* MBDocumentFaceRecognizerWrapper.h */,
+				369C4ACEA045103AA1392C2A /* MBMrtdCombinedRecognizerWrapper.h */,
+				8C114DAAB17A49E3F8BF64DD /* MBBlinkIdSingleSideRecognizerWrapper.m */,
+				D5684CA9900153B6C98439CA /* MBUsdlRecognizerWrapper.m */,
+				DBC84707920B53D4101FB957 /* MBBlinkIdMultiSideRecognizerWrapper.h */,
+				0B1C46A6B513548150105C05 /* MBSuccessFrameGrabberRecognizerWrapper.m */,
+				47644712A58D0F68C2BEA927 /* MBMrtdRecognizerWrapper.h */,
+				F85745F4B918170365AC539D /* MBIdBarcodeRecognizerWrapper.h */,
+				C9044C82B0C665DD79E00B55 /* MBUsdlCombinedRecognizerWrapper.h */,
+				45934F8EA7C9C98101170724 /* MBPassportRecognizerWrapper.h */,
 			);
 			name = Wrappers;
 			path = MicroblinkModule/Recognizers/Wrappers;
 			sourceTree = "<group>";
 		};
-		610043E9B31DEEA0EEC07094 /* MicroblinkModule */ = {
+		3B504B58BC21530F2ED23483 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
-				31AC49E387085625D8BD4964 /* MBBlinkIDSerializationUtils.m */,
-				84184E10A2CE6565686141CE /* MBCommonSerializationUtils.m */,
-				677B4E0E81962413C6E92683 /* Overlays */,
-				ACF54C75A7D995BE55DE6AAC /* MBSerializationUtils.m */,
-				A0084558A8AC2E4DF810FE2F /* MBBlinkIDModule.m */,
-				A3CC499FB074CB5465B14884 /* MBBlinkIDSerializationUtils.h */,
-				DD6C4F4B9FD0290A6212441D /* Recognizers */,
-				1A304DF1AE6AEEEBB795FE2C /* MBCommonSerializationUtils.h */,
-				D930451FA02EC5813CC0D175 /* MBBlinkIDModule.h */,
-				4B164A48B4739735099C623C /* MBSerializationUtils.h */,
-			);
-			name = MicroblinkModule;
-			path = MicroblinkModule;
-			sourceTree = "<group>";
-		};
-		677B4E0E81962413C6E92683 /* Overlays */ = {
-			isa = PBXGroup;
-			children = (
-				66894324B5FB95170774A6DE /* MBOverlaySerializationUtils.m */,
-				6BF94D73A5E7E979DE3B7AA0 /* Serialization */,
-				96FE47AAAA025003EF82C71E /* MBOverlayVCCreator.h */,
-				E9FE4D149697A9FC5CA171C8 /* MBOverlaySettingsSerializers.m */,
-				C33346ADA5996939329AAF7E /* MBOverlaySerializationUtils.h */,
-				733A465BB6D302A8A686A871 /* MBOverlayViewControllerDelegate.h */,
-				6BA747CCBECC90ECFDB43AF8 /* MBOverlaySettingsSerializers.h */,
+				ADF34CDDB1B9853C82142686 /* MBOverlaySerializationUtils.m */,
+				A442495887C9B93397EC25D5 /* Serialization */,
+				4A9A4DCA92EF6D2BF02548ED /* MBOverlayVCCreator.h */,
+				D12644EA957861345909CFEA /* MBOverlaySettingsSerializers.m */,
+				B90E46F0A79B4085AE280BD5 /* MBOverlaySerializationUtils.h */,
+				2B474409A19C74CDC5C132CA /* MBOverlayViewControllerDelegate.h */,
+				044F4570B6D4B332C1E1081B /* MBOverlaySettingsSerializers.h */,
 			);
 			name = Overlays;
 			path = MicroblinkModule/Overlays;
 			sourceTree = "<group>";
 		};
-		6BF94D73A5E7E979DE3B7AA0 /* Serialization */ = {
+		8AA548308CF9533069FBD22D /* MicroblinkModule */ = {
 			isa = PBXGroup;
 			children = (
-				C90E47B6B466CA3CE156C379 /* MBDocumentOverlaySettingsSerialization.h */,
-				5B674679AFE33DAB1E15F4EB /* MBDocumentVerificationOverlaySettingsSerialization.m */,
-				14F94C5D894E685FA3B70D67 /* MBBlinkIdOverlaySettingsSerialization.m */,
-				406A4F1A8AFBEE4121C50969 /* MBDocumentOverlaySettingsSerialization.m */,
-				73F04DDAB5D0ED3A58B56A6A /* MBDocumentVerificationOverlaySettingsSerialization.h */,
-				FDBA46549C8B9BB23B30D302 /* MBBlinkIdOverlaySettingsSerialization.h */,
+				338745D9A9865BBE9916D433 /* MBBlinkIDSerializationUtils.m */,
+				CFE14F15BD9F3007E089759C /* MBCommonSerializationUtils.m */,
+				3B504B58BC21530F2ED23483 /* Overlays */,
+				BF9740E181D1E6EBDED933AE /* MBSerializationUtils.m */,
+				B84544C18EBBE0100FD9A50E /* MBBlinkIDModule.m */,
+				36624316A4CB5201BA2DA24B /* MBBlinkIDSerializationUtils.h */,
+				D80141EF99252CB1DDA96B36 /* Recognizers */,
+				CDE34A9ABBF396F1D16BCD6A /* MBCommonSerializationUtils.h */,
+				F40348588A730C6EE5E5C225 /* MBBlinkIDModule.h */,
+				8B6E48CAA82B9CB1811A1FF0 /* MBSerializationUtils.h */,
 			);
-			name = Serialization;
-			path = MicroblinkModule/Overlays/Serialization;
+			name = MicroblinkModule;
+			path = MicroblinkModule;
 			sourceTree = "<group>";
 		};
 		A27CCA221E9E57A500BED675 = {
@@ -223,7 +209,7 @@
 			children = (
 				A27CCA2C1E9E57A500BED675 /* Products */,
 				A27CCA371E9E57C900BED675 /* Frameworks */,
-				610043E9B31DEEA0EEC07094 /* MicroblinkModule */,
+				8AA548308CF9533069FBD22D /* MicroblinkModule */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,14 +233,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DD6C4F4B9FD0290A6212441D /* Recognizers */ = {
+		A442495887C9B93397EC25D5 /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
-				83F2488296CF93CC70F4DE34 /* MBRecognizerWrapper.h */,
-				0B454A529CCF8850680CCD44 /* Wrappers */,
-				F557446290C773C80A72492D /* MBRecognizerSerializers.h */,
-				76174BD69AC1EE5EF22DC917 /* MBRecognizerWrapper.m */,
-				9E9B48D78AC9CE04BA7231B5 /* MBRecognizerSerializers.m */,
+				C2204AE5B4560D5819B44DF2 /* MBDocumentOverlaySettingsSerialization.h */,
+				39C2488799F15C22C2801CC3 /* MBDocumentVerificationOverlaySettingsSerialization.m */,
+				2434494FA8B53BED22649515 /* MBBlinkIdOverlaySettingsSerialization.m */,
+				531F4C34B1250CA86E069CA5 /* MBDocumentOverlaySettingsSerialization.m */,
+				68D34191B55D29A456DED1E5 /* MBDocumentVerificationOverlaySettingsSerialization.h */,
+				A8304F1F82FFFC1A1AF30A04 /* MBBlinkIdOverlaySettingsSerialization.h */,
+			);
+			name = Serialization;
+			path = MicroblinkModule/Overlays/Serialization;
+			sourceTree = "<group>";
+		};
+		D80141EF99252CB1DDA96B36 /* Recognizers */ = {
+			isa = PBXGroup;
+			children = (
+				C744401EBAFAAE5794992E6E /* MBRecognizerWrapper.h */,
+				260C4B918F912BB4CD961EF9 /* Wrappers */,
+				2EDE4793876CA33621A768AF /* MBRecognizerSerializers.h */,
+				9BF54EFD9F225DC6283E7660 /* MBRecognizerWrapper.m */,
+				F67D49DD830A3EF19937330C /* MBRecognizerSerializers.m */,
 			);
 			name = Recognizers;
 			path = MicroblinkModule/Recognizers;
@@ -263,34 +263,34 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		88264A8EAE0060FCBA7D1779 /* Headers */ = {
+		044D4640A0039C117042E40F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B74780B6737DB12AFDB3FF /* MBDocumentOverlaySettingsSerialization.h in Headers */,
-				FEDF44D3B2528E38707632E1 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */,
-				17604F6C90E6C20BEEC4A3BA /* MBBlinkIdOverlaySettingsSerialization.h in Headers */,
-				EE574EF787D5671AA0ACAB96 /* MBOverlayVCCreator.h in Headers */,
-				24E14349B108D1BA66D4BFAD /* MBOverlaySerializationUtils.h in Headers */,
-				A66F4C4BB8B2C941DE3B2C78 /* MBOverlayViewControllerDelegate.h in Headers */,
-				3E4B4221BF527A6D74A2432C /* MBOverlaySettingsSerializers.h in Headers */,
-				96E74583AE6D35FEF1E87F1F /* MBBlinkIDSerializationUtils.h in Headers */,
-				AE3C400CBEC317A29A6BAB05 /* MBRecognizerWrapper.h in Headers */,
-				BCFC4B57964DE2D164C66171 /* MBSuccessFrameGrabberRecognizerWrapper.h in Headers */,
-				E9A8418DB8729AB8DAE4FD7E /* MBUsdlRecognizerWrapper.h in Headers */,
-				9A3B4B05944337F6ED69A4A6 /* MBBlinkIdSingleSideRecognizerWrapper.h in Headers */,
-				560A42D78456D63B83167BE2 /* MBVisaRecognizerWrapper.h in Headers */,
-				9F9842DFAC134B6E48138CF9 /* MBDocumentFaceRecognizerWrapper.h in Headers */,
-				FA0B494DAE8D9833302056C6 /* MBMrtdCombinedRecognizerWrapper.h in Headers */,
-				BDD14A1D8F740B6F60CB5D6D /* MBBlinkIdMultiSideRecognizerWrapper.h in Headers */,
-				8DC049989AB55ADA94155B3D /* MBMrtdRecognizerWrapper.h in Headers */,
-				5652492BBC574503CFCBE3D2 /* MBIdBarcodeRecognizerWrapper.h in Headers */,
-				60F74F73812E3C383672F4E2 /* MBUsdlCombinedRecognizerWrapper.h in Headers */,
-				480D423180B1893A57892846 /* MBPassportRecognizerWrapper.h in Headers */,
-				FEA14A8C8BCEF365BFD96D8F /* MBRecognizerSerializers.h in Headers */,
-				71814CEABAFA16151F82C1A5 /* MBCommonSerializationUtils.h in Headers */,
-				048A409E8A605D420974E19B /* MBBlinkIDModule.h in Headers */,
-				9D5943F28B4AB42FEEC75372 /* MBSerializationUtils.h in Headers */,
+				0E3B436290FAD304554E2567 /* MBDocumentOverlaySettingsSerialization.h in Headers */,
+				E5B3418E973C191B57429669 /* MBDocumentVerificationOverlaySettingsSerialization.h in Headers */,
+				B36E4A8890F96CE88DE4CA55 /* MBBlinkIdOverlaySettingsSerialization.h in Headers */,
+				A7314AE5A0B7719F10E7E325 /* MBOverlayVCCreator.h in Headers */,
+				9D60486B8BC66572436A6043 /* MBOverlaySerializationUtils.h in Headers */,
+				22DD40138314F86ADA8FDAE1 /* MBOverlayViewControllerDelegate.h in Headers */,
+				D567449BB0AEDCBA4E63AB6C /* MBOverlaySettingsSerializers.h in Headers */,
+				7222472E9000FC84834DB7C6 /* MBBlinkIDSerializationUtils.h in Headers */,
+				CED542E388D85AB1F38060F9 /* MBRecognizerWrapper.h in Headers */,
+				386E43AD9C2ED3C7293BEC4F /* MBSuccessFrameGrabberRecognizerWrapper.h in Headers */,
+				68A84E5A900E64DD7B2B2A0B /* MBUsdlRecognizerWrapper.h in Headers */,
+				138A436288A8EF04358B02BA /* MBBlinkIdSingleSideRecognizerWrapper.h in Headers */,
+				A9FB4EA2A102C5C312726EAC /* MBVisaRecognizerWrapper.h in Headers */,
+				A9D645EDAB8632449513027B /* MBDocumentFaceRecognizerWrapper.h in Headers */,
+				52704755A391E4B65E100E04 /* MBMrtdCombinedRecognizerWrapper.h in Headers */,
+				92BB4C53B2571FAC7D23F8C4 /* MBBlinkIdMultiSideRecognizerWrapper.h in Headers */,
+				7C3F416AA48F3DF62DA568CD /* MBMrtdRecognizerWrapper.h in Headers */,
+				019843C492E5AB6DE5BD95D2 /* MBIdBarcodeRecognizerWrapper.h in Headers */,
+				1D2A43E48E246898519CF346 /* MBUsdlCombinedRecognizerWrapper.h in Headers */,
+				16F74DA08DD988281BBBFBC7 /* MBPassportRecognizerWrapper.h in Headers */,
+				F76E454EB6B727CB670804B4 /* MBRecognizerSerializers.h in Headers */,
+				6A2F449EB55C9990401B2D22 /* MBCommonSerializationUtils.h in Headers */,
+				91344BE2AE3A22964630D62C /* MBBlinkIDModule.h in Headers */,
+				205D406092F0986434C0ABF3 /* MBSerializationUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 				A27CCA271E9E57A500BED675 /* Sources */,
 				A27CCA281E9E57A500BED675 /* Frameworks */,
 				A27CCA291E9E57A500BED675 /* CopyFiles */,
-				88264A8EAE0060FCBA7D1779 /* Headers */,
+				044D4640A0039C117042E40F /* Headers */,
 			);
 			buildRules = (
 			);
@@ -354,28 +354,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9F34D1188B25A53515FF836 /* MBBlinkIDSerializationUtils.m in Sources */,
-				A1864103913949BC38E6F446 /* MBCommonSerializationUtils.m in Sources */,
-				F09C4FFBADDB78F15088F1C1 /* MBOverlaySerializationUtils.m in Sources */,
-				755F4A37B442D6CFA7A1551C /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */,
-				18334860BA9B2E49178E24E8 /* MBBlinkIdOverlaySettingsSerialization.m in Sources */,
-				B8054FD88394B04AF4547567 /* MBDocumentOverlaySettingsSerialization.m in Sources */,
-				C82F46A8BA3559C1EFC03120 /* MBOverlaySettingsSerializers.m in Sources */,
-				A6E447578E057D4AF8BEE34A /* MBSerializationUtils.m in Sources */,
-				87A0424E8524AD6D5660C17B /* MBBlinkIDModule.m in Sources */,
-				DCB640AD91496712018FA65D /* MBDocumentFaceRecognizerWrapper.m in Sources */,
-				29454BCFBE90E765BB949C83 /* MBVisaRecognizerWrapper.m in Sources */,
-				706C4F4CA5AFA3298A441FF6 /* MBBlinkIdMultiSideRecognizerWrapper.m in Sources */,
-				EBF046CDAED926303E35C506 /* MBMrtdRecognizerWrapper.m in Sources */,
-				8AF145D8809DB8365FF317F1 /* MBMrtdCombinedRecognizerWrapper.m in Sources */,
-				0B06486E936846D6329264FC /* MBPassportRecognizerWrapper.m in Sources */,
-				42E446879D6DEF923779703C /* MBUsdlCombinedRecognizerWrapper.m in Sources */,
-				1EEC47FAB461DA8C6D357ADB /* MBIdBarcodeRecognizerWrapper.m in Sources */,
-				C02E44309007AD23540BD319 /* MBBlinkIdSingleSideRecognizerWrapper.m in Sources */,
-				C450415FA0FA29B35B8DED2D /* MBUsdlRecognizerWrapper.m in Sources */,
-				06AB4C3D8E55F650AA1094BC /* MBSuccessFrameGrabberRecognizerWrapper.m in Sources */,
-				2C5F4F158A03BD1D1F4E302E /* MBRecognizerWrapper.m in Sources */,
-				78AF434F9444519D330E8038 /* MBRecognizerSerializers.m in Sources */,
+				77AA450B9BA94519A59D3866 /* MBBlinkIDSerializationUtils.m in Sources */,
+				30CE42B3809676C871DBDCFA /* MBCommonSerializationUtils.m in Sources */,
+				258547FE9F19CA27BE9C2D2B /* MBOverlaySerializationUtils.m in Sources */,
+				AF004ECF91F349DE31E7B096 /* MBDocumentVerificationOverlaySettingsSerialization.m in Sources */,
+				648D442C91D49C6E840F74F4 /* MBBlinkIdOverlaySettingsSerialization.m in Sources */,
+				837D4035B83E0E23CA47EFCE /* MBDocumentOverlaySettingsSerialization.m in Sources */,
+				D37248FEA9F42A4451B658A7 /* MBOverlaySettingsSerializers.m in Sources */,
+				9AC242B1957DC35764BAFF27 /* MBSerializationUtils.m in Sources */,
+				1B714687B796E5D6661BFF4B /* MBBlinkIDModule.m in Sources */,
+				A906401984B596069CDF9E1B /* MBDocumentFaceRecognizerWrapper.m in Sources */,
+				50B74D20960F2C1B175A5FE3 /* MBVisaRecognizerWrapper.m in Sources */,
+				EEA049DE9E34A3A4A7EA6283 /* MBBlinkIdMultiSideRecognizerWrapper.m in Sources */,
+				A0CA4981A9EAD8179326ADE8 /* MBMrtdRecognizerWrapper.m in Sources */,
+				CFC2422BAC55F6C444251968 /* MBMrtdCombinedRecognizerWrapper.m in Sources */,
+				2B654A7FAD82A2F89DC199A6 /* MBPassportRecognizerWrapper.m in Sources */,
+				9CE2459B91499ABF1985ABDC /* MBUsdlCombinedRecognizerWrapper.m in Sources */,
+				255C46C0AD9DF46520362693 /* MBIdBarcodeRecognizerWrapper.m in Sources */,
+				329A4DE8B09793346845F6C7 /* MBBlinkIdSingleSideRecognizerWrapper.m in Sources */,
+				394547F69E9612A6AAD4B37A /* MBUsdlRecognizerWrapper.m in Sources */,
+				613843119EDD5157E61DA6F2 /* MBSuccessFrameGrabberRecognizerWrapper.m in Sources */,
+				789640D682A0EBB8F03BB611 /* MBRecognizerWrapper.m in Sources */,
+				AAFD47D486B92E523F338354 /* MBRecognizerSerializers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

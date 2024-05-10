@@ -26,6 +26,8 @@
 +(NSDictionary * _Nonnull) serializeBarcodeElements:(MBBarcodeElements * _Nonnull)extendedElements;
 +(NSArray<NSString *> * _Nonnull) serializeBarcodeElementsValues:(MBBarcodeElements * _Nonnull)extendedElements;
 + (NSDictionary * _Nonnull)serializeAdditionalProcessingInfo:(MBAdditionalProcessingInfo * _Nullable)additionalProcessingInfo;
-+ (NSDictionary * _Nonnull)serializeMBDate:(MBDate * _Nonnull)date;
-
++ (NSDictionary * _Nonnull)serializeMBDateResult:(MBDateResult * _Nullable) value;
++(NSDictionary * _Nonnull) serializeMBStringResult:(MBStringResult * _Nullable) value;
++(NSNumber * _Nullable)serializeMBSide:(MBSide) value;
++(NSDictionary * _Nonnull) serializeNSDate:(NSDate * _Nullable) value;
 @end

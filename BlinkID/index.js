@@ -34,6 +34,31 @@ const BlinkIDNative = Platform.select({
  *      licensee: String,
  *      showTrialLicenseKeyWarning: Boolean
  *  }
+ * 
+ * -> 'scanWithDirectApi' takes the following parameters:
+ * 1. RecognizerCollection recognizerCollection: object containing recognizers to use for scanning
+ * 2. String frontImage: a Base64 format string that represents the front image of the document that will be used for processing with DirectAPI
+ * 3. String backImage: a Base64 format string that represents the back image of the document that will be used for processing with DirectAPI
+ *     - backImage parameter is optional with the BlinkIdSingleSide recognizer, as only one side of the document is required. Pass 'null' or an empty string "" for this parameter in this case
+ * 4. String license: BlinkID base64 license key bound to application ID for Android or iOS. To obtain
+ *                       valid license key, please visit http://microblink.com/login or
+ *                       contact us at http://help.microblink.com
+ *
+ *    OR
+ *
+ *    Object license: containing:
+ *               - mandatory parameter 'licenseKey': base64 license key bound to application ID
+ *                       for Android or iOS. To obtain valid license key, please visit
+ *                       http://microblink.com/login or contact us at http://help.microblink.com
+ *               - optioanl parameter 'licensee' when license for multiple apps is used
+ *               - optional flag 'showTrialLicenseKeyWarning' which indicates
+ *                  whether warning for trial license key will be shown
+ *        in format
+ *  {
+ *      licenseKey: '<base64iOSLicense or base64AndroidLicense>',
+ *      licensee: String,
+ *      showTrialLicenseKeyWarning: Boolean
+ *  }
  */
 class BlinkIDWrapper {
       async scanWithCamera(overlaySettings, recognizerCollection, license) {
@@ -43,6 +68,48 @@ class BlinkIDWrapper {
                       licenseObject = { licenseKey: license };
                   }
                   const nativeResults = await BlinkIDNative.scanWithCamera(overlaySettings, recognizerCollection, licenseObject);
+                  if (nativeResults.length != recognizerCollection.recognizerArray.length) {
+                        console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
+                        return [];
+                  } else {
+                        let results = [];
+                        for (let i = 0; i < nativeResults.length; ++i) {
+                              // native plugin must ensure types match
+                              // recognizerCollection.recognizerArray[i].result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+
+                              // unlike Cordova, ReactNative does not allow mutation of user-provided recognizers, so we need to
+                              // return results and let user handle them manually.
+                              let result = recognizerCollection.recognizerArray[i].createResultFromNative(nativeResults[i]);
+                              if (result.resultState != RecognizerResultState.empty) {
+                                    results.push(result);
+                              }
+                        }
+                        return results;
+                  }
+            } catch (error) {
+                  console.log(error);
+                  return [];
+            }
+      }
+      
+      async scanWithDirectApi(recognizerCollection, frontImage, backImage, license) {
+            try {
+                  var licenseObject = license;
+                  if (typeof license === 'string' || license instanceof String) {
+                      licenseObject = { licenseKey: license };
+                  }
+
+                  var frontImageObject = frontImage;
+                  if (typeof frontImage === 'string' || frontImage instanceof String) {
+                      frontImageObject = { frontImage: frontImage };
+                  }
+
+                  var backImageObject = backImage;
+                  if (typeof backImage === 'string' || backImage instanceof String) {
+                      backImageObject = { backImage: backImage };
+                  }
+
+                  const nativeResults = await BlinkIDNative.scanWithDirectApi(recognizerCollection, frontImageObject, backImageObject, licenseObject);
                   if (nativeResults.length != recognizerCollection.recognizerArray.length) {
                         console.log("INTERNAL ERROR: native plugin returned wrong number of results!");
                         return [];

@@ -55,6 +55,16 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
             settings.setShowIntroductionDialog(showIntroductionDialog);
         }
 
+        Boolean showTorchButton = getBooleanFromMap(jsonUISettings, "showTorchButton");
+        if (showTorchButton != null) {
+            settings.setShowTorchButton(showTorchButton);
+        }
+
+        Boolean showCancelButton = getBooleanFromMap(jsonUISettings, "showCancelButton");
+        if (showCancelButton != null) {
+            settings.setShowCancelButton(showCancelButton);
+        }
+
         if (jsonUISettings.hasKey("onboardingButtonTooltipDelay")) {
             settings.setShowTooltipTimeIntervalMs(jsonUISettings.getInt("onboardingButtonTooltipDelay"));
         }

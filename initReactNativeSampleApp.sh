@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-6.5.0.tgz
+  npm install --save blinkid-react-native-6.7.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -28,6 +28,9 @@ else
   echo "Downloading blinkid-react-native module"
   npm install --save blinkid-react-native
 fi
+
+# react-native-image-picker plugin needed only for sample application with DirectAPI to get the document images
+npm install react-native-image-picker
 
 # Auto-linking is done in 0.6 versions
 
@@ -97,12 +100,12 @@ cp index.js index.ios.js
 cp index.js index.android.js
 
 #update compile and target sdk versions to 31, add android:exported="true" to manifest
-sed -i '' 's#compileSdkVersion = 29#compileSdkVersion = 31#g' ./android/build.gradle
-sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 31#g' ./android/build.gradle
+sed -i '' 's#compileSdkVersion = 29#compileSdkVersion = 34#g' ./android/build.gradle
+sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 34#g' ./android/build.gradle
 
 # return to root folder
 popd
 
 echo "Go to React Native project folder: cd $appName"
 echo "To run on Android execute: npx react-native run-android"
-echo "To run on iOS: open $appName/ios/$appName.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
+echo "To run on iOS: open $appName/ios/$appName.xcworkspace; set your development team; add Privacy - Camera Usage Description and Privacy - Photo Library Usage Description keys to your info.plist file and press run"
