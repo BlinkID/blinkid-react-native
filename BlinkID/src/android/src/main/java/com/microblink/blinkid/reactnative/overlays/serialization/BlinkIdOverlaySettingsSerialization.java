@@ -9,6 +9,9 @@ import com.microblink.blinkid.reactnative.overlays.OverlaySettingsSerialization;
 import com.microblink.blinkid.uisettings.BlinkIdUISettings;
 import com.microblink.blinkid.uisettings.UISettings;
 import com.microblink.blinkid.locale.LanguageUtils;
+import com.microblink.blinkid.hardware.camera.VideoResolutionPreset;
+import com.microblink.blinkid.uisettings.CameraSettings;
+
 
 import static com.microblink.blinkid.reactnative.SerializationUtils.getStringFromMap;
 
@@ -17,8 +20,9 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
     public UISettings createUISettings(Context context, ReadableMap jsonUISettings, RecognizerBundle recognizerBundle) {
         BlinkIdUISettings settings = new BlinkIdUISettings(recognizerBundle);
         OverlaySerializationUtils.extractCommonUISettings(jsonUISettings, settings);
+        
         BlinkIDOverlaySerializationUtils.extractCommonBlinkIdUiSettings(jsonUISettings, settings);
-
+        
         Boolean requireDocumentSidesDataMatch = getBooleanFromMap(jsonUISettings, "requireDocumentSidesDataMatch");
         if (requireDocumentSidesDataMatch != null) {
             settings.setDocumentDataMatchRequired(requireDocumentSidesDataMatch);
@@ -73,6 +77,21 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
             settings.setBackSideScanningTimeoutMs(jsonUISettings.getInt("backSideScanningTimeoutMilliseconds"));
         }
 
+        VideoResolutionPreset videoResolutionPreset = VideoResolutionPreset.values()[0];
+        if (jsonUISettings.hasKey("androidCameraResolutionPreset")) {
+            videoResolutionPreset = VideoResolutionPreset.values()[jsonUISettings.getInt("androidCameraResolutionPreset")];
+        }
+
+        Boolean androidLegacyCameraApi = false;
+        if (jsonUISettings.hasKey("enableAndroidLegacyCameraApi")) {
+            androidLegacyCameraApi = jsonUISettings.getBoolean("enableAndroidLegacyCameraApi");
+        }
+
+        settings.setCameraSettings(new CameraSettings.Builder()
+                .setVideoResolutionPreset(videoResolutionPreset)
+                .setForceLegacyApi(androidLegacyCameraApi)
+                .build());
+
         ReticleOverlayStrings.Builder overlasStringsBuilder = new ReticleOverlayStrings.Builder(context);
 
         String firstSideInstructionsText = getStringFromMap(jsonUISettings, "firstSideInstructionsText");
@@ -126,6 +145,14 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
         String errorDocumentTooCloseToEdge = getStringFromMap(jsonUISettings, "errorDocumentTooCloseToEdge");
         if (errorDocumentTooCloseToEdge != null) {
             overlasStringsBuilder.setErrorDocumentTooCloseToEdge(errorDocumentTooCloseToEdge);
+        }
+        String errorBlurDetected = getStringFromMap(jsonUISettings, "errorBlurDetected");
+        if (errorBlurDetected != null) {
+            overlasStringsBuilder.setErrorBlurDetected(errorBlurDetected);
+        }
+        String errorGlareDetected = getStringFromMap(jsonUISettings, "errorGlareDetected");
+        if (errorGlareDetected != null) {
+            overlasStringsBuilder.setErrorGlareDetected(errorGlareDetected);
         }
 
         settings.setStrings(overlasStringsBuilder.build());

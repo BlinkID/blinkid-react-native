@@ -31,6 +31,8 @@ static NSString* const RESULT_DOCUMENT_CAPTURE_RECOGNIZER_RESULT = @"documentCap
 @property (class, nonatomic, readonly) NSString *STATUS_FRONTSIDE_EMPTY;
 @property (class, nonatomic, readonly) NSString *STATUS_BASE64_ERROR;
 @property (class, nonatomic, readonly) NSString *STATUS_NO_DATA;
+@property (class, nonatomic, readonly) NSString *STATUS_INVALID_LICENSE_KEY;
+
 
 @property (nonatomic, strong) RCTPromiseResolveBlock promiseResolve;
 @property (nonatomic, strong) RCTPromiseRejectBlock promiseReject;
@@ -77,20 +79,21 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     self.promiseResolve = resolve;
     self.promiseReject = reject;
     
-    [self setupLicense:jsonLicense];
-    [self setupLanguage:jsonOverlaySettings];
+    if([self setupLicense:jsonLicense]) {
+        [self setupLanguage:jsonOverlaySettings];
 
-    self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
+        self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
 
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
 
-        UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
-        self.scanningViewController = recognizerRunnerViewController;
+            UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
+            self.scanningViewController = recognizerRunnerViewController;
 
-        UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        [rootViewController presentViewController:self.scanningViewController animated:YES completion:nil];
-    });
+            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            [rootViewController presentViewController:self.scanningViewController animated:YES completion:nil];
+        });
+    }
 }
 
 RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRecognizerCollection frontImage:(NSDictionary *)jsonFrontImage backImage:(NSDictionary*)jsonBackImage license:(NSDictionary *)jsonLicense resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
@@ -103,19 +106,18 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
     self.promiseResolve = resolve;
     self.promiseReject = reject;
     
-    [self setupLicense:jsonLicense];
-    [self setupRecognizerRunner:jsonRecognizerCollection];
-    
-    [self setupRecognizerRunner:jsonRecognizerCollection];
-    if (jsonFrontImage[@"frontImage"] != nil) {
-        UIImage *frontImage = [self convertbase64ToImage:jsonFrontImage[@"frontImage"]];
-        if (!CGSizeEqualToSize(frontImage.size, CGSizeZero)) {
-            [self processImage:frontImage];
+    if( [self setupLicense:jsonLicense]) {
+        [self setupRecognizerRunner:jsonRecognizerCollection];
+        if (jsonFrontImage[@"frontImage"] != nil) {
+            UIImage *frontImage = [self convertbase64ToImage:jsonFrontImage[@"frontImage"]];
+            if (!CGSizeEqualToSize(frontImage.size, CGSizeZero)) {
+                [self processImage:frontImage];
+            } else {
+                [self handleDirectApiError:MBBlinkIDModule.STATUS_BASE64_ERROR errorMessaege:@"Could not decode Base64 image!"];
+            }
         } else {
-            [self handleDirectApiError:MBBlinkIDModule.STATUS_BASE64_ERROR errorMessaege:@"Could not decode Base64 image!"];
+            [self handleDirectApiError:MBBlinkIDModule.STATUS_FRONTSIDE_EMPTY errorMessaege:@"The provided image for the 'frontImage' parameter is empty!"];
         }
-    } else {
-        [self handleDirectApiError:MBBlinkIDModule.STATUS_FRONTSIDE_EMPTY errorMessaege:@"The provided image for the 'frontImage' parameter is empty!"];
     }
 }
 
@@ -248,7 +250,8 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
     self.promiseReject = nil;
 }
 
-- (void) setupLicense:(NSDictionary *)jsonLicense {
+- (BOOL) setupLicense:(NSDictionary *)jsonLicense {
+    __block BOOL isLicenseKeyValid = YES;
     if ([jsonLicense objectForKey:@"showTrialLicenseWarning"] != nil) {
         BOOL showTrialLicenseWarning = [[jsonLicense objectForKey:@"showTrialLicenseWarning"] boolValue];
         [MBMicroblinkSDK sharedInstance].showTrialLicenseWarning = showTrialLicenseWarning;
@@ -258,12 +261,23 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
     if ([jsonLicense objectForKey:@"licensee"] != nil) {
         NSString *licensee = [jsonLicense objectForKey:@"licensee"];
         [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense andLicensee:licensee errorCallback:^(MBLicenseError licenseError) {
+            NSError *error = [NSError errorWithDomain:MBErrorDomain
+                                                 code:-58
+                                             userInfo:nil];
+            self.promiseReject(MBBlinkIDModule.STATUS_INVALID_LICENSE_KEY, [self licenseErrorToString:licenseError], error);
+            isLicenseKeyValid = NO;
         }];
     }
     else {
         [[MBMicroblinkSDK sharedInstance] setLicenseKey:iosLicense errorCallback:^(MBLicenseError licenseError) {
+            NSError *error = [NSError errorWithDomain:MBErrorDomain
+                                                 code:-58
+                                             userInfo:nil];
+            self.promiseReject(MBBlinkIDModule.STATUS_INVALID_LICENSE_KEY, [self licenseErrorToString:licenseError], error);
+            isLicenseKeyValid = NO;
         }];
     }
+    return isLicenseKeyValid;
 }
 
 - (void) setupLanguage:(NSDictionary *)jsonOverlaySettings {
@@ -273,6 +287,38 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
         } else {
             MBMicroblinkApp.sharedInstance.language = jsonOverlaySettings[@"language"];
         }
+    }
+}
+
+- (NSString *)licenseErrorToString:(MBLicenseError)licenseError {
+    switch(licenseError) {
+        case MBLicenseErrorNetworkRequired:
+            return @"License error network required";
+            break;
+        case MBLicenseErrorUnableToDoRemoteLicenceCheck:
+            return @"License error unable to do remote licence check";
+            break;
+        case MBLicenseErrorLicenseIsLocked:
+            return @"License error license is locked";
+            break;
+        case MBLicenseErrorLicenseCheckFailed:
+            return @"License error license check failed";
+            break;
+        case MBLicenseErrorInvalidLicense:
+            return @"License error invalid license";
+            break;
+        case MBLicenseErrorPermissionExpired:
+            return @"License error permission expired";
+            break;
+        case MBLicenseErrorPayloadCorrupted:
+            return @"License error payload corrupted";
+            break;
+        case MBLicenseErrorPayloadSignatureVerificationFailed:
+            return @"License error payload signature verification failed";
+            break;
+        case MBLicenseErrorIncorrectTokenState:
+            return @"License error incorrect token state";
+            break;
     }
 }
 
@@ -290,6 +336,10 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
 
 + (NSString *)STATUS_SCAN_CANCELED {
     return @"STATUS_SCAN_CANCELED";
+}
+
++ (NSString *)STATUS_INVALID_LICENSE_KEY {
+    return @"STATUS_INVALID_LICENSE_KEY";
 }
 
 @end

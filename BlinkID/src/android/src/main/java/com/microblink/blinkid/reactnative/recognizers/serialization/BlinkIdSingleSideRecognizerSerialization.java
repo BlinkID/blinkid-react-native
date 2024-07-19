@@ -14,9 +14,6 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         if (jsonMap.hasKey("additionalAnonymization")) {
             recognizer.setAdditionalAnonymization(BlinkIDSerializationUtils.deserializeClassAnonymizationSettings(jsonMap.getArray("additionalAnonymization")));
         }
-        if (jsonMap.hasKey("allowBlurFilter")) {
-            recognizer.setAllowBlurFilter(jsonMap.getBoolean("allowBlurFilter"));
-        }
         if (jsonMap.hasKey("allowUnparsedMrzResults")) {
             recognizer.setAllowUnparsedMrzResults(jsonMap.getBoolean("allowUnparsedMrzResults"));
         }
@@ -26,6 +23,18 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         if (jsonMap.hasKey("anonymizationMode")) {
             recognizer.setAnonymizationMode(com.microblink.blinkid.entities.recognizers.blinkid.generic.AnonymizationMode.values()[jsonMap.getInt("anonymizationMode")]);
         }
+        if (jsonMap.hasKey("blurStrictnessLevel")) {
+            recognizer.setBlurStrictnessLevel(com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.StrictnessLevel.values()[jsonMap.getInt("blurStrictnessLevel")]);
+        }
+        if (jsonMap.hasKey("customClassRules")) {
+            recognizer.setCustomClassRules(BlinkIDSerializationUtils.deserializeCustomClassRules(jsonMap.getArray("customClassRules")));
+        }
+        if (jsonMap.hasKey("enableBlurFilter")) {
+            recognizer.setEnableBlurFilter(jsonMap.getBoolean("enableBlurFilter"));
+        }
+        if (jsonMap.hasKey("enableGlareFilter")) {
+            recognizer.setEnableGlareFilter(jsonMap.getBoolean("enableGlareFilter"));
+        }
         if (jsonMap.hasKey("faceImageDpi")) {
             recognizer.setFaceImageDpi(jsonMap.getInt("faceImageDpi"));
         }
@@ -34,6 +43,9 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         }
         if (jsonMap.hasKey("fullDocumentImageExtensionFactors")) {
             recognizer.setFullDocumentImageExtensionFactors(SerializationUtils.deserializeExtensionFactors(jsonMap.getMap("fullDocumentImageExtensionFactors")));
+        }
+        if (jsonMap.hasKey("glareStrictnessLevel")) {
+            recognizer.setGlareStrictnessLevel(com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.StrictnessLevel.values()[jsonMap.getInt("glareStrictnessLevel")]);
         }
         if (jsonMap.hasKey("paddingEdge")) {
             recognizer.setPaddingEdge((float)jsonMap.getDouble("paddingEdge"));
@@ -88,6 +100,7 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putMap("documentAdditionalNumber", BlinkIDSerializationUtils.serializeStringResult(result.getDocumentAdditionalNumber()));
         jsonResult.putMap("documentNumber", BlinkIDSerializationUtils.serializeStringResult(result.getDocumentNumber()));
         jsonResult.putMap("documentOptionalAdditionalNumber", BlinkIDSerializationUtils.serializeStringResult(result.getDocumentOptionalAdditionalNumber()));
+        jsonResult.putMap("documentSubtype", BlinkIDSerializationUtils.serializeStringResult(result.getDocumentSubtype()));
         jsonResult.putMap("driverLicenseDetailedInfo", BlinkIDSerializationUtils.serializeDriverLicenseDetailedInfo(result.getDriverLicenseDetailedInfo()));
         jsonResult.putMap("employer", BlinkIDSerializationUtils.serializeStringResult(result.getEmployer()));
         jsonResult.putBoolean("expired", result.isExpired());
@@ -113,10 +126,13 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putMap("race", BlinkIDSerializationUtils.serializeStringResult(result.getRace()));
         jsonResult.putInt("recognitionMode", SerializationUtils.serializeEnum(result.getRecognitionMode()));
         jsonResult.putMap("religion", BlinkIDSerializationUtils.serializeStringResult(result.getReligion()));
+        jsonResult.putMap("remarks", BlinkIDSerializationUtils.serializeStringResult(result.getRemarks()));
+        jsonResult.putMap("residencePermitType", BlinkIDSerializationUtils.serializeStringResult(result.getResidencePermitType()));
         jsonResult.putMap("residentialStatus", BlinkIDSerializationUtils.serializeStringResult(result.getResidentialStatus()));
         jsonResult.putMap("sex", BlinkIDSerializationUtils.serializeStringResult(result.getSex()));
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         jsonResult.putMap("sponsor", BlinkIDSerializationUtils.serializeStringResult(result.getSponsor()));
+        jsonResult.putMap("visaType", BlinkIDSerializationUtils.serializeStringResult(result.getVisaType()));
         jsonResult.putMap("vizResult", BlinkIDSerializationUtils.serializeVizResult(result.getVizResult()));
         return jsonResult;
     }

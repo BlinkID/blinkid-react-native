@@ -163,6 +163,22 @@ export const ImageAnalysisDetectionStatus = Object.freeze(
 );
 
 /**
+ * Defines possible strictness levels for blur are glare detection.
+ */
+export const StrictnessLevel = Object.freeze(
+    {
+        /** The most strict level for blur are glare detection. */
+        Strict: 0,
+
+        /** The default strictness level for blur are glare detection. */
+        Normal: 1,
+
+        /** The least strict level for blur are glare detection. */
+        Relaxed: 2,
+    }
+);
+
+/**
  * Define level of anonymization performed on recognizer result.
  */
 export const AnonymizationMode = Object.freeze(
@@ -282,9 +298,7 @@ export const CardOrientation = Object.freeze(
  */
 export class ImageAnalysisResult {
     constructor(nativeImageAnalysisResult) {
-        /**  Whether the image is blurred. */
-        this.blurred = nativeImageAnalysisResult.blurred;
-        /** he color status determined from scanned image. */
+        /** The color status determined from scanned image. */
         this.documentImageColorStatus = nativeImageAnalysisResult.documentImageColorStatus;
         /** The Moire pattern detection status determined from the scanned image. */
         this.documentImageMoireStatus = nativeImageAnalysisResult.documentImageMoireStatus;
@@ -300,6 +314,10 @@ export class ImageAnalysisResult {
     	this.cardRotation = nativeImageAnalysisResult.cardRotation;
         /** RealID detection status determined from the scanned image. */
         this.realIdDetectionStatus = nativeImageAnalysisResult.realIdDetectionStatus;
+        /** Indicates if blur was detected on the scanned image. */
+        this.blurDetected = nativeImageAnalysisResult.blurDetected;
+        /** Indicates if glare was detected on the scanned image. */
+        this.glareDetected = nativeImageAnalysisResult.glareDetected;
     }
 }
 
@@ -710,6 +728,7 @@ export const Region = Object.freeze(
         GuerreroAcapulcoDeJuarez: 135,
         Haryana: 136,
         Sergipe: 137,
+        Alagos: 138,
     }
 );
 
@@ -785,6 +804,10 @@ export const Type = Object.freeze(
         NbiClearance: 64,
         ProofOfRegistration: 65,
         TemporaryProtectionPermit: 66,
+        AfghanCitizenCard: 67,
+        Eid: 68,
+        Pass: 69,
+        SisId: 70,
     }
 );
 
@@ -830,7 +853,11 @@ export const Type = Object.freeze(
         Sex: 34,
         VehicleClass: 35,
         BloodType: 36,
-        Sponsor: 37
+        Sponsor: 37,
+        VisaType: 38,
+        DocumentSubtype: 39,
+        Remarks: 40,
+        ResidencePermitType: 41
     }
 );
 
@@ -2137,6 +2164,53 @@ export class DocumentNumberAnonymizationSettings {
 }
 
 /**
+ * CustomClassRules represent custom rules of mandatory fields for each class of a document.
+ * Setting the fields in the CustomClassRules will make them mandatory.
+ * If CustomClassRules is not set, all default fields are mandatory.
+*/
+export class CustomClassRules {
+    constructor() {
+        /** Documents from the set country will be used with CustomClassRules */
+        this.country = null;
+        /** Documents from the set region will be used with CustomClassRules */
+        this.region = null;
+        /** Document type that will be used with CustomClassRules */
+        this.type = null;
+        /** An array of the document fields and alphabets that will be used with CustomClassRules. See DetailedFieldType for more information. */
+        this.detailedFieldTypes = [];
+    }
+}
+
+/**
+ * DetailedFieldType represents a detailed field type used for custom mandatory fields.
+ * Used with CustomClassRules. A field type (see FieldType for all fields) along with Alphabet type (see AlphabetType for all alphabets) is required.
+*/
+export class DetailedFieldType { 
+    constructor() {
+    /** Field type that will be mandatory for extraction for CustomClassRules. */
+    this.fieldType = null;
+    /** Alphabet type connected with the field type that will be optional for extraction for CustomClassRules. */
+    this.alphabetType = null;
+    }
+}
+
+/**
+ * AlphabetType represents all of the alphabet types that BlinkID supports extracting.
+*/
+export const AlphabetType = Object.freeze(
+    {
+        /** The Latin alphabet type. */
+        Latin: 0,
+
+        /** The Arabic alphabet type. */
+        Arabic: 1,
+
+        /** The Cyrillic alphabet type. */
+        Cyrillic: 2,
+    }
+);
+
+/**
  * Possible recognition modes used by BlinkID(MultiSide)Recognizer to scan the document.
  */
 export const RecognitionMode = Object.freeze(
@@ -2162,6 +2236,60 @@ export const RecognitionMode = Object.freeze(
         /** Recognition of barcode document. */
         BarcodeId: 6
     }
+);
+
+/**
+ * Defines possible Android device camera video resolution preset 
+ */
+export const AndroidCameraResolutionPreset = Object.freeze (
+    {
+        /** Will choose camera video resolution which is best for current device */
+        PresetDefault: 0,
+
+        /** Attempts to choose camera video resolution as closely as 480p */
+        Preset480p: 1,
+    
+        /** Attempts to choose camera video resolution as closely as 720p */
+        Preset720p: 2,
+    
+        /** Attempts to choose camera video resolution as closely as 1080p */
+        Preset1080p: 3,
+
+        /** Attempts to choose camera video resolution as closely as 2160p */
+        Preset2160p: 4,
+
+        /** Will choose max available camera video resolution */
+        PresetMaxAvailable: 5
+    }
+);
+
+/**
+ * Defines possible iOS device camera video resolution preset 
+ */
+export const iOSCameraResolutionPreset = Object.freeze(
+    {
+        /** 480p video will always be used */
+        Preset480p: 0,
+
+        /** 720p video will always be used */
+        Preset720p: 1,
+            
+        /** 1080p video will always be used */
+        Preset1080p: 2,
+            
+        /** 4K video will always be used */
+        Preset4K: 3,
+        
+        /** The library will calculate optimal resolution based on the use case and device used */
+        PresetOptimal: 4,
+        
+        /** Device's maximal video resolution will be used */
+        PresetMax: 5,
+        
+        /** Device's photo preview resolution will be used */
+        PresetPhoto: 6
+    }
+
 );
 
 

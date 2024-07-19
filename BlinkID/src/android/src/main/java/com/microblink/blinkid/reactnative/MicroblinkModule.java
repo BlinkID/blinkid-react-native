@@ -31,6 +31,7 @@ import com.microblink.blinkid.metadata.MetadataCallbacks;
 import com.microblink.blinkid.metadata.recognition.FirstSideRecognitionCallback;
 import com.microblink.blinkid.recognition.RecognitionSuccessType;
 import com.microblink.blinkid.view.recognition.ScanResultListener;
+import com.microblink.blinkid.licence.exception.LicenceKeyException;
 
 import com.microblink.blinkid.uisettings.UISettings;
 import com.microblink.blinkid.reactnative.recognizers.RecognizerSerializers;
@@ -75,93 +76,94 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void scanWithCamera(ReadableMap jsonOverlaySettings, ReadableMap jsonRecognizerCollection, ReadableMap license, Promise promise) {
-        prepareScanning(license, promise);
-        try {
-            LanguageUtils.setLanguageAndCountry(jsonOverlaySettings.getString("language"),
-                    jsonOverlaySettings.getString("country"),
-                    getCurrentActivity());
-        } catch (Exception e) {}
-        mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
-        UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
-        ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
+        if(prepareScanning(license, promise)) {
+            try {
+                LanguageUtils.setLanguageAndCountry(jsonOverlaySettings.getString("language"),
+                        jsonOverlaySettings.getString("country"),
+                        getCurrentActivity());
+            } catch (Exception e) {}
+            mRecognizerBundle = RecognizerSerializers.INSTANCE.deserializeRecognizerCollection(jsonRecognizerCollection);
+            UISettings overlaySettings = OverlaySettingsSerializers.INSTANCE.getOverlaySettings(getReactApplicationContext(), jsonOverlaySettings, mRecognizerBundle);
+            ActivityRunner.startActivityForResult(getCurrentActivity(), REQUEST_CODE, overlaySettings);
+        }
     }
 
     @ReactMethod
     private void scanWithDirectApi(ReadableMap jsonRecognizerCollection, ReadableMap frontImage, ReadableMap backImage, ReadableMap license, Promise promise) {
         //DirectAPI processing
         mScanPromise = promise;
-        prepareScanning(license, promise);
-
-        ScanResultListener mScanResultListenerBackSide = new ScanResultListener() {
-            @Override
-            public void onScanningDone(@NonNull RecognitionSuccessType recognitionSuccessType) {
-                mFirstSideScanned = false;
-                handleDirectApiResult(recognitionSuccessType);
-            }
-            @Override
-            public void onUnrecoverableError(@NonNull Throwable throwable) {
-                promise.reject(throwable);
-            }
-        };
-
-        FirstSideRecognitionCallback mFirstSideRecognitionCallback = new FirstSideRecognitionCallback() {
-            @Override
-            public void onFirstSideRecognitionFinished() {
-                mFirstSideScanned = true;
-            }
-        };
-
-        ScanResultListener mScanResultListenerFrontSide = new ScanResultListener() {
-            @Override
-            public void onScanningDone(@NonNull RecognitionSuccessType recognitionSuccessType) {
-                if (mFirstSideScanned == true) {
-                    //multiside recognizer used
-                    try {
-                        if (backImage != null) {
-                            processImage(backImage.getString(PARAM_BACK_IMAGE), mScanResultListenerBackSide);
-                        } else if (recognitionSuccessType != RecognitionSuccessType.UNSUCCESSFUL) {
-                            handleDirectApiResult(recognitionSuccessType);
-                        } else {
-                            handleDirectApiError("Could not extract the information from the front side and back side is empty!", promise);
-                        }
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (mFirstSideScanned == false && recognitionSuccessType != RecognitionSuccessType.UNSUCCESSFUL){
-                    //singleside recognizer used
-                    handleDirectApiResult(recognitionSuccessType);
-                } else {
+        if(prepareScanning(license, promise)) {
+            ScanResultListener mScanResultListenerBackSide = new ScanResultListener() {
+                @Override
+                public void onScanningDone(@NonNull RecognitionSuccessType recognitionSuccessType) {
                     mFirstSideScanned = false;
-                    handleDirectApiError("Could not extract the information with DirectAPI!", promise);
+                    handleDirectApiResult(recognitionSuccessType);
                 }
-            }
-            @Override
-            public void onUnrecoverableError(@NonNull Throwable throwable) {
-                promise.reject(throwable);
-            }
-        };
+                @Override
+                public void onUnrecoverableError(@NonNull Throwable throwable) {
+                    promise.reject(throwable);
+                }
+            };
 
-        setupRecognizerRunner(jsonRecognizerCollection, mFirstSideRecognitionCallback, promise);
+            FirstSideRecognitionCallback mFirstSideRecognitionCallback = new FirstSideRecognitionCallback() {
+                @Override
+                public void onFirstSideRecognitionFinished() {
+                    mFirstSideScanned = true;
+                }
+            };
 
-        if (frontImage != null) {
-            processImage(frontImage.getString(PARAM_FRONT_IMAGE), mScanResultListenerFrontSide);
-        } else {
-            handleDirectApiError("The provided image for the 'frontImage' parameter is empty!", promise);
+            ScanResultListener mScanResultListenerFrontSide = new ScanResultListener() {
+                @Override
+                public void onScanningDone(@NonNull RecognitionSuccessType recognitionSuccessType) {
+                    if (mFirstSideScanned == true) {
+                        //multiside recognizer used
+                        try {
+                            if (backImage != null) {
+                                processImage(backImage.getString(PARAM_BACK_IMAGE), mScanResultListenerBackSide);
+                            } else if (recognitionSuccessType != RecognitionSuccessType.UNSUCCESSFUL) {
+                                handleDirectApiResult(recognitionSuccessType);
+                            } else {
+                                handleDirectApiError("Could not extract the information from the front side and back side is empty!", promise);
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (mFirstSideScanned == false && recognitionSuccessType != RecognitionSuccessType.UNSUCCESSFUL){
+                        //singleside recognizer used
+                        handleDirectApiResult(recognitionSuccessType);
+                    } else {
+                        mFirstSideScanned = false;
+                        handleDirectApiError("Could not extract the information with DirectAPI!", promise);
+                    }
+                }
+                @Override
+                public void onUnrecoverableError(@NonNull Throwable throwable) {
+                    promise.reject(throwable);
+                }
+            };
+
+            setupRecognizerRunner(jsonRecognizerCollection, mFirstSideRecognitionCallback, promise);
+
+            if (frontImage != null) {
+                processImage(frontImage.getString(PARAM_FRONT_IMAGE), mScanResultListenerFrontSide);
+            } else {
+                handleDirectApiError("The provided image for the 'frontImage' parameter is empty!", promise);
+            }
         }
     }
 
-    private void prepareScanning(ReadableMap license, Promise promise) {
+    private boolean prepareScanning(ReadableMap license, Promise promise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(ERROR_ACTIVITY_DOES_NOT_EXIST, "Activity does not exist");
-            return;
+            return false;
         }
 
         // Store the promise to resolve/reject when scanning is done
         mScanPromise = promise;
         if (!license.hasKey(PARAM_LICENSE_KEY)) {
             promise.reject(ERROR_LICENSE_KEY_NOT_SET, "License key is not set");
-            return;
+            return false;
         }
         String licenseKey = license.getString(PARAM_LICENSE_KEY);
         String licensee = null;
@@ -172,7 +174,8 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         if (license.hasKey(PARAM_SHOW_TRIAL_LICENSE_WARNING)) {
             showTrialLicenseKeyWarning = license.getBoolean(PARAM_SHOW_TRIAL_LICENSE_WARNING);
         }
-        setLicense(licenseKey, licensee, showTrialLicenseKeyWarning);
+
+        return setLicense(licenseKey, licensee, showTrialLicenseKeyWarning);
     }
 
     private void setupRecognizerRunner(ReadableMap jsonRecognizerCollection, FirstSideRecognitionCallback mFirstSideRecognitionCallback, Promise promise) {
@@ -233,16 +236,27 @@ public class MicroblinkModule extends ReactContextBaseJavaModule {
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
-    private void setLicense( String licenseKey, String licensee, Boolean showTrialLicenseKeyWarning ) {
+    private boolean setLicense( String licenseKey, String licensee, Boolean showTrialLicenseKeyWarning ) {
         if (showTrialLicenseKeyWarning != null) {
             MicroblinkSDK.setShowTrialLicenseWarning(showTrialLicenseKeyWarning);
         }
         if (licensee != null) {
-            MicroblinkSDK.setLicenseKey(licenseKey, licensee, this.getCurrentActivity());
+            try {
+                MicroblinkSDK.setLicenseKey(licenseKey, licensee, this.getCurrentActivity());
+            } catch (LicenceKeyException licenceKeyException) {
+                mScanPromise.reject("Android license key error: " + licenceKeyException.toString());
+                return false;
+            }
         } else {
-            MicroblinkSDK.setLicenseKey(licenseKey, this.getCurrentActivity());
+            try {
+                MicroblinkSDK.setLicenseKey(licenseKey, this.getCurrentActivity());
+            } catch (LicenceKeyException licenceKeyException) {
+                mScanPromise.reject("Android license key error: " + licenceKeyException.toString());
+                return false;
+            }
         }
         MicroblinkSDK.setIntentDataTransferMode(IntentDataTransferMode.PERSISTED_OPTIMISED);
+        return true;
     }
 
     private void rejectPromise(String code, String message) {

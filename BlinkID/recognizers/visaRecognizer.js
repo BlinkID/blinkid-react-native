@@ -13,6 +13,7 @@ import {
     DocumentImageMoireStatus,
     AnonymizationMode,
     RecognitionModeFilter,
+    StrictnessLevel,
     
     
     ImageExtensionFactors,
