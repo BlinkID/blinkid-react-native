@@ -8,7 +8,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-npx react-native init $appName --version="0.72.6" || exit 1
+npx react-native init $appName --version="0.74" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-6.7.0.tgz
+  npm install --save blinkid-react-native-6.9.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -57,8 +57,8 @@ popd
 # enter into ios project folder
 pushd ios || exit 1
 
-  #Force minimal iOS version
-  sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '13.0'/" Podfile
+#Force minimal iOS version
+#sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '13.0'/" Podfile
 
 # install pod
 pod install
@@ -98,10 +98,6 @@ cp ../sample_files/index.js ./
 # use the same index.js file for Android and iOS
 cp index.js index.ios.js
 cp index.js index.android.js
-
-#update compile and target sdk versions to 31, add android:exported="true" to manifest
-sed -i '' 's#compileSdkVersion = 29#compileSdkVersion = 34#g' ./android/build.gradle
-sed -i '' 's#targetSdkVersion = 29#targetSdkVersion = 34#g' ./android/build.gradle
 
 # return to root folder
 popd
