@@ -22,7 +22,7 @@ Once the validation is complete, you can continue using the SDK in offline mode 
 
 ## React Native Version
 
-BlinkID React Native was built and tested with [React Native v0.71.2](https://github.com/facebook/react-native/releases/tag/v0.71.2)
+BlinkID React Native was built and tested with [React Native v0.74.0](https://github.com/facebook/react-native/releases/tag/v0.74.0)
 
 ## Installation
 

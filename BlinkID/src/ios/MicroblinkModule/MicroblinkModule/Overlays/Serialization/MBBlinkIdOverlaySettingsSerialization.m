@@ -213,6 +213,27 @@
             sett.displayCancelButton = [showCancelButton boolValue];
         }
     }
+    
+    {
+        id iOSCameraResolutionPreset = [jsonOverlaySettings valueForKey: @"iosCameraResolutionPreset"];
+        if (iOSCameraResolutionPreset != nil) {
+            sett.cameraSettings.cameraPreset = [iOSCameraResolutionPreset integerValue];
+        }
+    }
+    
+    {
+        id errorBlurDetected = [jsonOverlaySettings valueForKey:@"errorBlurDetected"];
+        if (errorBlurDetected != nil) {
+            sett.blurDetectedMessage = (NSString *)errorBlurDetected;
+        }
+    }
+    
+    {
+        id errorGlareDetected = [jsonOverlaySettings valueForKey:@"errorGlareDetected"];
+        if (errorGlareDetected != nil) {
+            sett.glareDetectedMessage = (NSString *)errorGlareDetected;
+        }
+    }
 
     return [[MBBlinkIdOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
 }

@@ -208,7 +208,6 @@
 
 +(NSDictionary *) serializeImageAnalysisResult:(MBImageAnalysisResult *)imageAnalysisResult {
     return @{
-             @"blurred" : [NSNumber numberWithBool:imageAnalysisResult.blurred],
              @"documentImageColorStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageColorStatus)],
              @"documentImageMoireStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.documentImageMoireStatus)],
              @"faceDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.faceDetectionStatus)],
@@ -216,7 +215,10 @@
              @"barcodeDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.barcodeDetectionStatus)],
              @"cardRotation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardRotation)],
              @"cardOrientation" : [NSNumber numberWithInteger:(imageAnalysisResult.cardOrientation)],
-             @"realIdDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.realIDDetectionStatus)]
+             @"realIdDetectionStatus" : [NSNumber numberWithInteger:(imageAnalysisResult.realIDDetectionStatus)],
+             @"blurDetected" : [NSNumber numberWithBool:imageAnalysisResult.blurDetected],
+             @"glareDetected" : [NSNumber numberWithBool:imageAnalysisResult.glareDetected],
+
         };
 }
 
@@ -237,59 +239,78 @@
 }
 
 +(MBClassAnonymizationSettings *) deserializeMBClassAnonymizationSettings:(NSDictionary *)jsonClassAnonymizationSettings {
-    if (jsonClassAnonymizationSettings == nil) {
-        return [[MBClassAnonymizationSettings alloc] init];
-    } else {
-        NSArray<NSNumber *> *fields = [jsonClassAnonymizationSettings objectForKey:@"fields"];
-        NSMutableArray<NSNumber *> *newFields = [[NSMutableArray alloc] init];
-
-        for (NSNumber *field in fields) {
-            [newFields addObject:field];
-        }
-
-        NSNumber *country = [jsonClassAnonymizationSettings valueForKey:@"country"];
-        NSNumber *region = [jsonClassAnonymizationSettings valueForKey:@"region"];
-        NSNumber *type = [jsonClassAnonymizationSettings valueForKey:@"type"];
-        NSDictionary *jsonDocumentNumberAnonymizationSettings = [jsonClassAnonymizationSettings valueForKey:@"documentNumberAnonymizationSettings"];
-        
-        if (![jsonDocumentNumberAnonymizationSettings isEqual:[NSNull null]] && jsonDocumentNumberAnonymizationSettings != nil) {
-            MBDocumentNumberAnonymizationSettings *documentNumberAnonymizationSettings = [[MBDocumentNumberAnonymizationSettings alloc] initWithPrefixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"prefixDigitsVisible"] integerValue] suffixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"suffixDigitsVisible"] integerValue]];
-                                                                                          
-            if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil){
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-           } else if (![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-               return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue type:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            } else if (![region isEqual:[NSNull null]] && region.integerValue != nil) {
-                return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            } else if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithType:type.integerValue fields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-            }
-            return [[MBClassAnonymizationSettings alloc] initWithFields:fields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
-        } else {
-            if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue type:type.integerValue fields:fields];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil){
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue type:type.integerValue fields:fields];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil && ![region isEqual:[NSNull null]] && region.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue region:region.integerValue fields:fields];
-           } else if (![region isEqual:[NSNull null]] && region.integerValue != nil && ![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-               return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue type:type.integerValue fields:fields];
-            } else if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithCountry:country.integerValue fields:fields];
-            } else if (![region isEqual:[NSNull null]] && region.integerValue != nil) {
-                return [[MBClassAnonymizationSettings alloc] initWithRegion:region.integerValue fields:fields];
-            } else if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
-                return [[MBClassAnonymizationSettings alloc] initWithType:type.integerValue fields:fields];
-            }
-        }
-        return [[MBClassAnonymizationSettings alloc] initWithFields:fields];
+  if (jsonClassAnonymizationSettings == nil) {
+      return [[MBClassAnonymizationSettings alloc] init];
+  }
+    
+    NSArray<NSNumber *> *fields = [jsonClassAnonymizationSettings objectForKey:@"fields"];
+    NSMutableArray<NSNumber *> *newFields = [[NSMutableArray alloc] init];
+    for (NSNumber *field in fields) {
+      [newFields addObject:field];
     }
+
+    NSDictionary *jsonDocumentNumberAnonymizationSettings = [jsonClassAnonymizationSettings valueForKey:@"documentNumberAnonymizationSettings"];
+    
+    if (jsonDocumentNumberAnonymizationSettings != nil && ![jsonDocumentNumberAnonymizationSettings isEqual:[NSNull null]]) {
+        MBDocumentNumberAnonymizationSettings *documentNumberAnonymizationSettings = [[MBDocumentNumberAnonymizationSettings alloc] initWithPrefixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"prefixDigitsVisible"] integerValue] suffixDigitsVisible:[[jsonDocumentNumberAnonymizationSettings valueForKey:@"suffixDigitsVisible"] integerValue]];
+        
+      if ([jsonClassAnonymizationSettings valueForKey:@"country"] != nil||
+        [jsonClassAnonymizationSettings valueForKey:@"region"] != nil ||
+        [jsonClassAnonymizationSettings valueForKey:@"type"] != nil) {
+          
+          MBClassFilter *classInfoFilter = [self deserializeClassInfoFilter:jsonClassAnonymizationSettings];
+          return [[MBClassAnonymizationSettings alloc] initWithClassFilter:classInfoFilter documentNumberAnonymizationSettings:documentNumberAnonymizationSettings fields:newFields];
+      } else {
+          return [[MBClassAnonymizationSettings alloc] initWithFields:newFields documentNumberAnonymizationSettings:documentNumberAnonymizationSettings];
+      }
+    } else {
+        return [[MBClassAnonymizationSettings alloc] initWithFields:newFields documentNumberAnonymizationSettings:nil];
+    }
+}
+
++(MBCustomClassRules *) deserializeMBCustomClassRules:(NSDictionary *)jsonCustomClassRules {
+    if (jsonCustomClassRules == nil) {
+        return [[MBCustomClassRules alloc] initWithClassFilter:nil fields:nil];
+    } else {
+        NSArray<NSNumber *> *detailedFieldTypes = [jsonCustomClassRules objectForKey:@"detailedFieldTypes"];
+        NSMutableArray<MBDetailedFieldType *> *newDetailedFieldTypes = [[NSMutableArray alloc] init];
+
+        for (NSNumber *detailedfield in detailedFieldTypes) {
+            NSNumber *fieldType = [detailedfield valueForKey:@"fieldType"];
+            NSNumber *alphabetType = [detailedfield valueForKey:@"alphabetType"];
+            
+            MBDetailedFieldType *detailedFieldType = [[MBDetailedFieldType alloc] initWithFieldType:[fieldType integerValue] alphabetType: [alphabetType integerValue]];
+            [newDetailedFieldTypes addObject:detailedFieldType];
+        }
+        
+        MBClassFilter *classFilter = [self deserializeClassInfoFilter:jsonCustomClassRules];
+        
+        return [[MBCustomClassRules alloc] initWithClassFilter:classFilter fields:newDetailedFieldTypes];
+    }
+}
+
++(MBClassFilter *)deserializeClassInfoFilter:(NSDictionary *)jsonClassInfoFilter {
+    if (jsonClassInfoFilter == nil) {
+        return [[MBClassFilter alloc] init];
+    }
+    
+    NSNumber *country = [jsonClassInfoFilter valueForKey:@"country"];
+    NSNumber *region = [jsonClassInfoFilter valueForKey:@"region"];
+    NSNumber *type = [jsonClassInfoFilter valueForKey:@"type"];
+    
+    MBClassFilterBuilder *classFilterBuilder = [[MBClassFilterBuilder alloc] init];
+    
+    if (![country isEqual:[NSNull null]] && country.integerValue != nil ) {
+        [classFilterBuilder withCountry:country.integerValue];
+    }
+    if (![region isEqual:[NSNull null]] && region.integerValue != nil ) {
+        [classFilterBuilder withRegion:region.integerValue];
+    }
+    if (![type isEqual:[NSNull null]] && type.integerValue != nil ) {
+        [classFilterBuilder withType:type.integerValue];
+    }
+    
+    return [classFilterBuilder build];
 }
 
 +(NSDictionary * _Nonnull) serializeBarcodeElements:(MBBarcodeElements * _Nonnull)extendedElements {

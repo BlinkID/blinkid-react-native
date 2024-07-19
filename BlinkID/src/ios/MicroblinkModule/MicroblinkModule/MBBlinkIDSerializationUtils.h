@@ -30,4 +30,5 @@
 +(NSDictionary * _Nonnull) serializeMBStringResult:(MBStringResult * _Nullable) value;
 +(NSNumber * _Nullable)serializeMBSide:(MBSide) value;
 +(NSDictionary * _Nonnull) serializeNSDate:(NSDate * _Nullable) value;
++(MBCustomClassRules * _Nonnull) deserializeMBCustomClassRules:(NSDictionary * _Nullable)jsonCustomClassRules;
 @end
