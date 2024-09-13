@@ -14,6 +14,9 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         if (jsonMap.hasKey("additionalAnonymization")) {
             recognizer.setAdditionalAnonymization(BlinkIDSerializationUtils.deserializeClassAnonymizationSettings(jsonMap.getArray("additionalAnonymization")));
         }
+        if (jsonMap.hasKey("allowBarcodeScanOnly")) {
+            recognizer.setAllowBarcodeScanOnly(jsonMap.getBoolean("allowBarcodeScanOnly"));
+        }
         if (jsonMap.hasKey("allowUnparsedMrzResults")) {
             recognizer.setAllowUnparsedMrzResults(jsonMap.getBoolean("allowUnparsedMrzResults"));
         }
@@ -25,6 +28,9 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         }
         if (jsonMap.hasKey("blurStrictnessLevel")) {
             recognizer.setBlurStrictnessLevel(com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.StrictnessLevel.values()[jsonMap.getInt("blurStrictnessLevel")]);
+        }
+        if (jsonMap.hasKey("combineFrameResults")) {
+            recognizer.setCombineFrameResults(jsonMap.getBoolean("combineFrameResults"));
         }
         if (jsonMap.hasKey("customClassRules")) {
             recognizer.setCustomClassRules(BlinkIDSerializationUtils.deserializeCustomClassRules(jsonMap.getArray("customClassRules")));
@@ -90,6 +96,7 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putInt("age", result.getAge());
         jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
+        jsonResult.putBoolean("barcodeStepUsed", result.isBarcodeStepUsed());
         jsonResult.putMap("bloodType", BlinkIDSerializationUtils.serializeStringResult(result.getBloodType()));
         jsonResult.putString("cameraFrame", SerializationUtils.encodeImageBase64(result.getCameraFrame()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));

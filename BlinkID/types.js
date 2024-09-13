@@ -256,6 +256,20 @@ export const ProcessingStatus = Object.freeze(
 );
 
 /**
+ * Defines the type of the extracted image.
+ */
+export const ImageExtractionType = Object.freeze(
+    {
+    /** Full document image. */
+    FullDocument: 0,
+    /** Face image. */
+    Face: 1,
+    /** Signature image. */
+    Signature: 2
+    }
+);
+
+/**
  * Defines possible document card rotation positions
  */
 export const CardRotation = Object.freeze(

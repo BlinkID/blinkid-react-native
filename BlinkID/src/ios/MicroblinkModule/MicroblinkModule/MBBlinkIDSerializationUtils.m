@@ -332,7 +332,8 @@
     return @{
         @"missingMandatoryFields": additionalProcessingInfo.missingMandatoryFields,
         @"invalidCharacterFields" : additionalProcessingInfo.invalidCharacterFields,
-        @"extraPresentFields": additionalProcessingInfo.extraPresentFields
+        @"extraPresentFields": additionalProcessingInfo.extraPresentFields,
+        @"imageExtractionFailures": additionalProcessingInfo.imageExtractionFailures
     };
 }
 

@@ -181,9 +181,14 @@ public abstract class BlinkIDSerializationUtils {
         for (int i = 0; i < additionalProcessingInfo.getExtraPresentFields().length; ++i) {
             extraPresentFieldsArr.pushInt(SerializationUtils.serializeEnum(additionalProcessingInfo.getExtraPresentFields()[i]));
         }
+        WritableArray imageExtractionFailuresArr = new WritableNativeArray();
+        for (int i = 0; i < additionalProcessingInfo.getImageExtractionFailures().length; ++i) {
+            imageExtractionFailuresArr.pushInt(SerializationUtils.serializeEnum(additionalProcessingInfo.getImageExtractionFailures()[i]));
+        }
         jsonAdditionalProcessingInfo.putArray("missingMandatoryFields", missingMandatoryFieldsArr);
         jsonAdditionalProcessingInfo.putArray("invalidCharacterFields", invalidCharacterFieldsArr);
         jsonAdditionalProcessingInfo.putArray("extraPresentFields", extraPresentFieldsArr);
+        jsonAdditionalProcessingInfo.putArray("imageExtractionFailures", imageExtractionFailuresArr);
         return jsonAdditionalProcessingInfo;
     }
 
