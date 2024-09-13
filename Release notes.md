@@ -1,3 +1,23 @@
+## 6.10.0
+
+- We have updated the plugin to [Android SDK v6.10.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.10.0) and [iOS SDK v6.10.1](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.10.1)
+
+**Expanded document coverage**
+
+- All of the new documents & document versions can also be found in the release notes for native Android and iOS SDKs.
+
+**New features**
+
+- ***Avoiding Double Scans of the Front Side***: For a more reliable scanning process, BlinkID now prompts users to flip the document when they scan the front side twice. This improves the overall experience and reduces the chance of mistakes.
+- ***Starting with the Right Side***: If users attempt to scan the back side of a document first, BlinkID will prompt them to begin with the front side. This feature ensures that users follow the correct order, leading to a more reliable and user-friendly experience.
+- Added `imageExtractionFailures` to `AdditionalProcessingInfo`
+    - `imageExtractionFailures` allows tracking if any images are not visible on the presented document
+    - Added  `ImageExtractionType` (`FullDocument`, `Face`, `Signature`) enum to specify the image type
+- Added a new result member, `barcodeStepUsed` to BlinkID recognizers, which indicates whether the barcode scanning step was utilized during the scanning process.
+- Added two new settings to BlinkID recognizers:
+    - `allowBarcodeScanOnly` - allows barcode recognition to proceed even if the initial extraction fails - set to `false` by default
+    - `combineFrameResults` - enables the aggregation of data from multiple frames - set to `true` by default
+
 ## 6.9.0
 
 - We have updated the plugin to [Android SDK v6.9.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.9.0) and [iOS SDK v6.9.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.9.0)
