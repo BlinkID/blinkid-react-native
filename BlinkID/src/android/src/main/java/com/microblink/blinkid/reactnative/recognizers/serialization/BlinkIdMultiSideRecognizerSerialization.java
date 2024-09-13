@@ -14,6 +14,9 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         if (jsonMap.hasKey("additionalAnonymization")) {
             recognizer.setAdditionalAnonymization(BlinkIDSerializationUtils.deserializeClassAnonymizationSettings(jsonMap.getArray("additionalAnonymization")));
         }
+        if (jsonMap.hasKey("allowBarcodeScanOnly")) {
+            recognizer.setAllowBarcodeScanOnly(jsonMap.getBoolean("allowBarcodeScanOnly"));
+        }
         if (jsonMap.hasKey("allowUncertainFrontSideScan")) {
             recognizer.setAllowUncertainFrontSideScan(jsonMap.getBoolean("allowUncertainFrontSideScan"));
         }
@@ -28,6 +31,9 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         }
         if (jsonMap.hasKey("blurStrictnessLevel")) {
             recognizer.setBlurStrictnessLevel(com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.StrictnessLevel.values()[jsonMap.getInt("blurStrictnessLevel")]);
+        }
+        if (jsonMap.hasKey("combineFrameResults")) {
+            recognizer.setCombineFrameResults(jsonMap.getBoolean("combineFrameResults"));
         }
         if (jsonMap.hasKey("customClassRules")) {
             recognizer.setCustomClassRules(BlinkIDSerializationUtils.deserializeCustomClassRules(jsonMap.getArray("customClassRules")));
@@ -103,6 +109,7 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         jsonResult.putMap("backVizResult", BlinkIDSerializationUtils.serializeVizResult(result.getBackVizResult()));
         jsonResult.putString("barcodeCameraFrame", SerializationUtils.encodeImageBase64(result.getBarcodeCameraFrame()));
         jsonResult.putMap("barcodeResult", BlinkIDSerializationUtils.serializeBarcodeResult(result.getBarcodeResult()));
+        jsonResult.putBoolean("barcodeStepUsed", result.isBarcodeStepUsed());
         jsonResult.putMap("bloodType", BlinkIDSerializationUtils.serializeStringResult(result.getBloodType()));
         jsonResult.putMap("classInfo", BlinkIDSerializationUtils.serializeClassInfo(result.getClassInfo()));
         jsonResult.putMap("dataMatch", BlinkIDSerializationUtils.serializeDataMatchResult(result.getDataMatch()));

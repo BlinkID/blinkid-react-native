@@ -28,6 +28,12 @@
         }
     }
     {
+        id allowBarcodeScanOnly = [jsonRecognizer valueForKey:@"allowBarcodeScanOnly"];
+        if (allowBarcodeScanOnly != nil) {
+            recognizer.allowBarcodeScanOnly = [(NSNumber *)allowBarcodeScanOnly boolValue];
+        }
+    }
+    {
         id allowUnparsedMrzResults = [jsonRecognizer valueForKey:@"allowUnparsedMrzResults"];
         if (allowUnparsedMrzResults != nil) {
             recognizer.allowUnparsedMrzResults = [(NSNumber *)allowUnparsedMrzResults boolValue];
@@ -49,6 +55,12 @@
         id blurStrictnessLevel = [jsonRecognizer valueForKey:@"blurStrictnessLevel"];
         if (blurStrictnessLevel != nil) {
             recognizer.blurStrictnessLevel = (MBStrictnessLevel)[(NSNumber *)blurStrictnessLevel unsignedIntegerValue];
+        }
+    }
+    {
+        id combineFrameResults = [jsonRecognizer valueForKey:@"combineFrameResults"];
+        if (combineFrameResults != nil) {
+            recognizer.combineFrameResults = [(NSNumber *)combineFrameResults boolValue];
         }
     }
     {
@@ -172,6 +184,7 @@
     [jsonResult setValue:[NSNumber numberWithInteger:self.result.age] forKey:@"age"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.barcodeCameraFrame] forKey:@"barcodeCameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeBarcodeResult:self.result.barcodeResult] forKey:@"barcodeResult"];
+    [jsonResult setValue:[NSNumber numberWithBool:self.result.barcodeStepUsed] forKey:@"barcodeStepUsed"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.bloodType] forKey:@"bloodType"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.cameraFrame] forKey:@"cameraFrame"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeClassInfo:self.result.classInfo] forKey:@"classInfo"];
