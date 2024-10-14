@@ -158,7 +158,7 @@ export class RecognizerCollection {
              */
             this.allowMultipleResults = false;
             /** Number of miliseconds after first non-empty result becomes available to end scanning with a timeout */
-            this.milisecondsBeforeTimeout = 10000;
+            this.milisecondsBeforeTimeout = 0;
 
             if (!(this.recognizerArray instanceof Array)) {
                   throw new Error("recognizerArray must be array of Recognizer objects!");

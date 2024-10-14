@@ -220,6 +220,7 @@
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.documentOptionalAdditionalNumber] forKey:@"documentOptionalAdditionalNumber"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.documentSubtype] forKey:@"documentSubtype"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDriverLicenseDetailedInfo:self.result.driverLicenseDetailedInfo] forKey:@"driverLicenseDetailedInfo"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.eligibilityCategory] forKey:@"eligibilityCategory"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.employer] forKey:@"employer"];
     [jsonResult setValue:[NSNumber numberWithBool:self.result.expired] forKey:@"expired"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.faceImage] forKey:@"faceImage"];
@@ -238,6 +239,7 @@
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.issuingAuthority] forKey:@"issuingAuthority"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.lastName] forKey:@"lastName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.localizedName] forKey:@"localizedName"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.manufacturingYear] forKey:@"manufacturingYear"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.maritalStatus] forKey:@"maritalStatus"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.mothersName] forKey:@"mothersName"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMrzResult:self.result.mrzResult] forKey:@"mrzResult"];
@@ -255,8 +257,11 @@
     [jsonResult setValue:[NSNumber numberWithBool:self.result.scanningFirstSideDone] forKey:@"scanningFirstSideDone"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.sex] forKey:@"sex"];
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.specificDocumentValidity] forKey:@"specificDocumentValidity"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.sponsor] forKey:@"sponsor"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.vehicleType] forKey:@"vehicleType"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.visaType] forKey:@"visaType"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeDependentInfo:self.result.dependentInfos] forKey:@"dependentsInfo"];
 
     return jsonResult;
 }

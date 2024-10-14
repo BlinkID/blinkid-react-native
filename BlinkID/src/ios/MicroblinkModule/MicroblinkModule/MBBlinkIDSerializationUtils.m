@@ -362,18 +362,21 @@
     [dict setValue:[value valueForAlphabetType:MBAlphabetTypeLatin] forKey:@"latin"];
     [dict setValue:[value valueForAlphabetType:MBAlphabetTypeArabic] forKey:@"arabic"];
     [dict setValue:[value valueForAlphabetType:MBAlphabetTypeCyrillic] forKey:@"cyrillic"];
+    [dict setValue:[value valueForAlphabetType:MBAlphabetTypeGreek] forKey:@"greek"];
     [dict setValue:value.description forKey:@"description"];
     
     NSMutableDictionary *location = [NSMutableDictionary dictionary];
     [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
     [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
     [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [location setValue:[MBSerializationUtils serializeCGRect:[value locationForAlphabetType:MBAlphabetTypeGreek]] forKey:@"greek"];
     [dict setValue:location forKey:@"location"];
     
     NSMutableDictionary *side = [NSMutableDictionary dictionary];
     [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeLatin]] forKey:@"latin"];
     [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeArabic]] forKey:@"arabic"];
     [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeCyrillic]] forKey:@"cyrillic"];
+    [side setValue:[NSNumber numberWithInteger:[value sideForAlphabetType:MBAlphabetTypeGreek]] forKey:@"greek"];
     [dict setValue:side forKey:@"side"];
     
     return dict;
@@ -384,6 +387,25 @@
         return nil;
     }
     return [NSNumber numberWithLong:value - 1];
+}
+
++(NSMutableArray<NSDictionary *> *) serializeDependentInfo:(NSArray<MBDependentInfo *>*)dependentInfos {
+    
+    NSMutableArray<NSDictionary *> * jsonDependentInfos = [[NSMutableArray alloc] init];
+
+    for (MBDependentInfo *dependentInfo in dependentInfos) {
+        NSDictionary *jsonDependentInfo =
+        @{
+            @"dateOfBirth": [MBBlinkIDSerializationUtils serializeMBDateResult:(dependentInfo.dateOfBirth)],
+            @"documentNumber": [MBBlinkIDSerializationUtils serializeMBStringResult:(dependentInfo.documentNumber)],
+            @"sex": [MBBlinkIDSerializationUtils serializeMBStringResult:(dependentInfo.sex)],
+            @"fullName": [MBBlinkIDSerializationUtils serializeMBStringResult:(dependentInfo.fullName)],
+            @"empty":[NSNumber numberWithBool:dependentInfo.empty]
+        };
+        [jsonDependentInfos addObject:jsonDependentInfo];
+    }
+    
+    return jsonDependentInfos;
 }
 
 @end

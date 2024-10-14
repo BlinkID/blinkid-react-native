@@ -36,6 +36,7 @@ import com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.DocumentNumberAnonymizationSettings;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.CustomClassRules;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.DetailedFieldType;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.DependentInfo;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -150,18 +151,21 @@ public abstract class BlinkIDSerializationUtils {
             jsonStringResult.putString("latin", stringResult.value(AlphabetType.Latin));
             jsonStringResult.putString("arabic", stringResult.value(AlphabetType.Arabic));
             jsonStringResult.putString("cyrillic", stringResult.value(AlphabetType.Cyrillic));
+            jsonStringResult.putString("greek", stringResult.value(AlphabetType.Greek));
             jsonStringResult.putString("description", stringResult.toString());
 
             WritableMap jsonFieldLocations = new WritableNativeMap();
             jsonFieldLocations.putMap("latin",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Latin)));
             jsonFieldLocations.putMap("arabic",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Arabic)));
             jsonFieldLocations.putMap("cyrillic",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Cyrillic)));
+            jsonFieldLocations.putMap("greek",SerializationUtils.serializeRectangle(stringResult.location(AlphabetType.Greek)));
             jsonStringResult.putMap("location", jsonFieldLocations);
 
             WritableMap jsonDocumentSides = new WritableNativeMap();
             jsonDocumentSides.putInt("latin",serializeSide(stringResult.side(AlphabetType.Latin)));
             jsonDocumentSides.putInt("arabic",serializeSide(stringResult.side(AlphabetType.Arabic)));
             jsonDocumentSides.putInt("cyrillic",serializeSide(stringResult.side(AlphabetType.Cyrillic)));
+            jsonDocumentSides.putInt("greek",serializeSide(stringResult.side(AlphabetType.Greek)));
             jsonStringResult.putMap("side", jsonDocumentSides);
         }
         return jsonStringResult;
@@ -433,5 +437,19 @@ public abstract class BlinkIDSerializationUtils {
         } else {
             return new CustomClassRules[]{};
         }
+    }
+
+    public static WritableArray serializeDependentInfo (DependentInfo[] dependentInfos) {
+        WritableArray jsonDependentInfos = new WritableNativeArray();
+        for (int i = 0; i < dependentInfos.length; ++i) {
+            WritableMap jsonDependetsInfo = new WritableNativeMap();
+            jsonDependetsInfo.putMap("dateOfBirth", BlinkIDSerializationUtils.serializeDateResult(dependentInfos[i].getDateOfBirth()));
+            jsonDependetsInfo.putMap("documentNumber",BlinkIDSerializationUtils.serializeStringResult(dependentInfos[i].getDocumentNumber()));
+            jsonDependetsInfo.putMap("sex",BlinkIDSerializationUtils.serializeStringResult(dependentInfos[i].getSex()));
+            jsonDependetsInfo.putMap("fullName",BlinkIDSerializationUtils.serializeStringResult(dependentInfos[i].getFullName()));
+            jsonDependetsInfo.putBoolean("empty", dependentInfos[i].isEmpty());
+            jsonDependentInfos.pushMap(jsonDependetsInfo);
+        }
+        return jsonDependentInfos;
     }
 }
