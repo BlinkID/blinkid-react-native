@@ -1,3 +1,25 @@
+## 6.11.0
+
+- We have updated the plugin to [Android SDK v6.11.1](https://github.com/BlinkID/blinkid-android/releases/tag/v6.11.1) and [iOS SDK v6.11.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.11.0)
+
+**Expanded document coverage**
+
+- All of the new documents & document versions can also be found in the release notes for native Android and iOS SDKs.
+
+**New features**
+
+- **Greek Alphabet Support**
+    - Added support for extracting `Place of Birth` in both Greek and Latin scripts.
+- New result fields in the `BlinkIdSingleSideRecognizer` and `BlinkIdMultiSideRecognizer`
+    - `manufacturingYear`, `vehicleType`, `eligibilityCategory`, `specificDocumentValidity`, `dependentsInfo`
+
+**Bug fixes**
+
+- Android specific
+    - Removed unused `libc++_shared.so` from the SDK
+    - Fix for duplicate attrs resource: `attr/mb_onboardingImageColor` when combining multiple Microblink's SDKs in the same app
+    - Raised `minSdkVersion` to 23 to support React-Native v0.75
+
 ## 6.10.0
 
 - We have updated the plugin to [Android SDK v6.10.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.10.0) and [iOS SDK v6.10.1](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.10.1)

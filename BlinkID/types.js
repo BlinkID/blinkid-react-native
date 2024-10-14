@@ -743,6 +743,7 @@ export const Region = Object.freeze(
         Haryana: 136,
         Sergipe: 137,
         Alagos: 138,
+        Bangsamoro: 139
     }
 );
 
@@ -822,6 +823,12 @@ export const Type = Object.freeze(
         Eid: 68,
         Pass: 69,
         SisId: 70,
+        AsicCard: 71,
+        BidoonCard: 72,
+        InterimHealthInsuranceCard: 73,
+        NonVoterId: 74,
+        ReciprocalHealthInsuranceCard: 75,
+        VehicleRegistration: 76
     }
 );
 
@@ -871,7 +878,15 @@ export const Type = Object.freeze(
         VisaType: 38,
         DocumentSubtype: 39,
         Remarks: 40,
-        ResidencePermitType: 41
+        ResidencePermitType: 41,
+        ManufacturingYear: 42,
+        VehicleType: 43,
+        DependentDateOfBirth: 44,
+        DependentSex: 45,
+        DependentDocumentNumber: 46,
+        DependentFullName: 47,
+        EligibilityCategory: 48,
+        SpecificDocumentValidity: 49
     }
 );
 
@@ -2221,6 +2236,9 @@ export const AlphabetType = Object.freeze(
 
         /** The Cyrillic alphabet type. */
         Cyrillic: 2,
+
+        /** The Greek alphabet type. */
+        Greek: 3,
     }
 );
 
