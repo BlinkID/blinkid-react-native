@@ -1,3 +1,12 @@
+## 6.11.1
+
+- We have updated the plugin to [Android SDK v6.11.2](https://github.com/BlinkID/blinkid-android/releases/tag/v6.11.2) and [iOS SDK v6.11.1](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.11.1)
+
+**Bug fixes**
+
+- NYC Municipal ID & USA Border Crossing Card 
+    - Resolved an issue where the scanning process could get stuck on the back side during multi-side scanning.
+
 ## 6.11.0
 
 - We have updated the plugin to [Android SDK v6.11.1](https://github.com/BlinkID/blinkid-android/releases/tag/v6.11.1) and [iOS SDK v6.11.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.11.0)
