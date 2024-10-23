@@ -25,7 +25,7 @@ android {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation('com.microblink:blinkid:6.11.1@aar') {
+    implementation('com.microblink:blinkid:6.11.2@aar') {
         transitive = true
     }
 }
