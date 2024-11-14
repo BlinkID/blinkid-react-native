@@ -19,7 +19,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkid-react-native-6.11.1.tgz
+  npm install --save blinkid-react-native-6.12.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -104,4 +104,8 @@ popd
 
 echo "Go to React Native project folder: cd $appName"
 echo "To run on Android execute: npx react-native run-android"
-echo "To run on iOS: open $appName/ios/$appName.xcworkspace; set your development team; add Privacy - Camera Usage Description and Privacy - Photo Library Usage Description keys to your info.plist file and press run"
+echo "To run on iOS: 
+1. Open $appName/ios/$appName.xcworkspace
+2. Set your development team 
+3. Add the NSCameraUsageDescription & NSPhotoLibraryUsageDescription keys to your Info.plist file
+4. Press run"

@@ -154,6 +154,42 @@ public final class BlinkIdOverlaySettingsSerialization implements OverlaySetting
         if (errorGlareDetected != null) {
             overlasStringsBuilder.setErrorGlareDetected(errorGlareDetected);
         }
+        String topPageInstructions = getStringFromMap(jsonUISettings, "topPageInstructions");
+        if (topPageInstructions != null) {
+            overlasStringsBuilder.setTopPageInstructions(topPageInstructions);
+        }
+        String leftPageInstructions = getStringFromMap(jsonUISettings, "leftPageInstructions");
+        if (leftPageInstructions != null) {
+            overlasStringsBuilder.setLeftPageInstructions(leftPageInstructions);
+        }
+        String rightPageInstructions = getStringFromMap(jsonUISettings, "rightPageInstructions");
+        if (rightPageInstructions != null) {
+            overlasStringsBuilder.setRightPageInstructions(rightPageInstructions);
+        }
+        String turnTopPageInstructions = getStringFromMap(jsonUISettings, "turnTopPageInstructions");
+        if (turnTopPageInstructions != null) {
+            overlasStringsBuilder.setTurnTopPageInstructions(turnTopPageInstructions);
+        }
+        String turnLeftPageInstructions = getStringFromMap(jsonUISettings, "turnLeftPageInstructions");
+        if (turnLeftPageInstructions != null) {
+            overlasStringsBuilder.setTurnLeftPageInstructions(turnLeftPageInstructions);
+        }
+        String turnRightPageInstructions = getStringFromMap(jsonUISettings, "turnRightPageInstructions");
+        if (turnRightPageInstructions != null) {
+            overlasStringsBuilder.setTurnRightPageInstructions(turnRightPageInstructions);
+        }
+        String errorScanningWrongPageTop = getStringFromMap(jsonUISettings, "errorScanningWrongPageTop");
+        if (errorScanningWrongPageTop != null) {
+            overlasStringsBuilder.setErrorScanningWrongPageTop(errorScanningWrongPageTop);
+        }
+        String errorScanningWrongPageLeft = getStringFromMap(jsonUISettings, "errorScanningWrongPageLeft");
+        if (errorScanningWrongPageLeft != null) {
+            overlasStringsBuilder.setErrorScanningWrongPageLeft(errorScanningWrongPageLeft);
+        }
+        String errorScanningWrongPageRight = getStringFromMap(jsonUISettings, "errorScanningWrongPageRight");
+        if (errorScanningWrongPageRight != null) {
+            overlasStringsBuilder.setErrorScanningWrongPageRight(errorScanningWrongPageRight);
+        }
 
         settings.setStrings(overlasStringsBuilder.build());
 
