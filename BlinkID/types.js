@@ -45,6 +45,60 @@ export class Quadrilateral {
 }
 
 /**
+ * Defines possible Android device camera video resolution preset 
+ */
+export const AndroidCameraResolutionPreset = Object.freeze (
+    {
+        /** Will choose camera video resolution which is best for current device */
+        PresetDefault: 0,
+
+        /** Attempts to choose camera video resolution as closely as 480p */
+        Preset480p: 1,
+    
+        /** Attempts to choose camera video resolution as closely as 720p */
+        Preset720p: 2,
+    
+        /** Attempts to choose camera video resolution as closely as 1080p */
+        Preset1080p: 3,
+
+        /** Attempts to choose camera video resolution as closely as 2160p */
+        Preset2160p: 4,
+
+        /** Will choose max available camera video resolution */
+        PresetMaxAvailable: 5
+    }
+);
+
+/**
+ * Defines possible iOS device camera video resolution preset 
+ */
+export const iOSCameraResolutionPreset = Object.freeze(
+    {
+        /** 480p video will always be used */
+        Preset480p: 0,
+
+        /** 720p video will always be used */
+        Preset720p: 1,
+            
+        /** 1080p video will always be used */
+        Preset1080p: 2,
+            
+        /** 4K video will always be used */
+        Preset4K: 3,
+        
+        /** The library will calculate optimal resolution based on the use case and device used */
+        PresetOptimal: 4,
+        
+        /** Device's maximal video resolution will be used */
+        PresetMax: 5,
+        
+        /** Device's photo preview resolution will be used */
+        PresetPhoto: 6
+    }
+
+);
+
+/**
  * Represents data extracted from the Driver's license.
  */
 export class DriverLicenseDetailedInfo {
@@ -2268,60 +2322,6 @@ export const RecognitionMode = Object.freeze(
         /** Recognition of barcode document. */
         BarcodeId: 6
     }
-);
-
-/**
- * Defines possible Android device camera video resolution preset 
- */
-export const AndroidCameraResolutionPreset = Object.freeze (
-    {
-        /** Will choose camera video resolution which is best for current device */
-        PresetDefault: 0,
-
-        /** Attempts to choose camera video resolution as closely as 480p */
-        Preset480p: 1,
-    
-        /** Attempts to choose camera video resolution as closely as 720p */
-        Preset720p: 2,
-    
-        /** Attempts to choose camera video resolution as closely as 1080p */
-        Preset1080p: 3,
-
-        /** Attempts to choose camera video resolution as closely as 2160p */
-        Preset2160p: 4,
-
-        /** Will choose max available camera video resolution */
-        PresetMaxAvailable: 5
-    }
-);
-
-/**
- * Defines possible iOS device camera video resolution preset 
- */
-export const iOSCameraResolutionPreset = Object.freeze(
-    {
-        /** 480p video will always be used */
-        Preset480p: 0,
-
-        /** 720p video will always be used */
-        Preset720p: 1,
-            
-        /** 1080p video will always be used */
-        Preset1080p: 2,
-            
-        /** 4K video will always be used */
-        Preset4K: 3,
-        
-        /** The library will calculate optimal resolution based on the use case and device used */
-        PresetOptimal: 4,
-        
-        /** Device's maximal video resolution will be used */
-        PresetMax: 5,
-        
-        /** Device's photo preview resolution will be used */
-        PresetPhoto: 6
-    }
-
 );
 
 

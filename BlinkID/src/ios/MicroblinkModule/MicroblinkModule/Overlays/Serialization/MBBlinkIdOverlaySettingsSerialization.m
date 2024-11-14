@@ -234,6 +234,60 @@
             sett.glareDetectedMessage = (NSString *)errorGlareDetected;
         }
     }
+    {
+        id topPageInstructions = [jsonOverlaySettings valueForKey:@"topPageInstructions"];
+        if (topPageInstructions != nil) {
+            sett.scanTopPageInstructions = (NSString *)topPageInstructions;
+        }
+    }
+    {
+        id leftPageInstructions = [jsonOverlaySettings valueForKey:@"leftPageInstructions"];
+        if (leftPageInstructions != nil) {
+            sett.scanLeftPageInstructions = (NSString *)leftPageInstructions;
+        }
+    }
+    {
+        id rightPageInstructions = [jsonOverlaySettings valueForKey:@"rightPageInstructions"];
+        if (rightPageInstructions != nil) {
+            sett.scanRightPageInstructions = (NSString *)rightPageInstructions;
+        }
+    }
+    {
+        id turnTopPageInstructions = [jsonOverlaySettings valueForKey:@"turnTopPageInstructions"];
+        if (turnTopPageInstructions != nil) {
+            sett.turnTopPageInstructions = (NSString *)turnTopPageInstructions;
+        }
+    }
+    {
+        id turnLeftPageInstructions = [jsonOverlaySettings valueForKey:@"turnLeftPageInstructions"];
+        if (turnLeftPageInstructions != nil) {
+            sett.turnLeftPageInstructions = (NSString *)turnLeftPageInstructions;
+        }
+    }
+    {
+        id turnRightPageInstructions = [jsonOverlaySettings valueForKey:@"turnRightPageInstructions"];
+        if (turnRightPageInstructions != nil) {
+            sett.turnRightPageInstructions = (NSString *)turnRightPageInstructions;
+        }
+    }
+    {
+        id errorScanningWrongPageTop = [jsonOverlaySettings valueForKey:@"errorScanningWrongPageTop"];
+        if (errorScanningWrongPageTop != nil) {
+            sett.scanningWrongSidePassportTopMessage = (NSString *)errorScanningWrongPageTop;
+        }
+    }
+    {
+        id errorScanningWrongPageLeft = [jsonOverlaySettings valueForKey:@"errorScanningWrongPageLeft"];
+        if (errorScanningWrongPageLeft != nil) {
+            sett.scanningWrongSidePassportLeftMessage = (NSString *)errorScanningWrongPageLeft;
+        }
+    }
+    {
+        id errorScanningWrongPageRight = [jsonOverlaySettings valueForKey:@"errorScanningWrongPageRight"];
+        if (errorScanningWrongPageRight != nil) {
+            sett.scanningWrongSidePassportRightMessage = (NSString *)errorScanningWrongPageRight;
+        }
+    }
 
     return [[MBBlinkIdOverlayViewController alloc] initWithSettings:sett recognizerCollection:recognizerCollection delegate:self];
 }

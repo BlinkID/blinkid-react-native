@@ -164,6 +164,12 @@
         }
     }
     {
+        id scanPassportDataPageOnly = [jsonRecognizer valueForKey:@"scanPassportDataPageOnly"];
+        if (scanPassportDataPageOnly != nil) {
+            recognizer.scanPassportDataPageOnly = [(NSNumber *)scanPassportDataPageOnly boolValue];
+        }
+    }
+    {
         id signatureImageDpi = [jsonRecognizer valueForKey:@"signatureImageDpi"];
         if (signatureImageDpi != nil) {
             recognizer.signatureImageDpi = [(NSNumber *)signatureImageDpi integerValue];

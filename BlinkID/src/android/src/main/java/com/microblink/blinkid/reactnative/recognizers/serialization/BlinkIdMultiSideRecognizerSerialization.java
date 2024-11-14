@@ -80,6 +80,9 @@ public final class BlinkIdMultiSideRecognizerSerialization implements Recognizer
         if (jsonMap.hasKey("scanCroppedDocumentImage")) {
             recognizer.setScanCroppedDocumentImage(jsonMap.getBoolean("scanCroppedDocumentImage"));
         }
+        if (jsonMap.hasKey("scanPassportDataPageOnly")) {
+            recognizer.setScanPassportDataPageOnly(jsonMap.getBoolean("scanPassportDataPageOnly"));
+        }
         if (jsonMap.hasKey("signatureImageDpi")) {
             recognizer.setSignatureImageDpi(jsonMap.getInt("signatureImageDpi"));
         }
