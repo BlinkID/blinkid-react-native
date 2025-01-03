@@ -3,7 +3,7 @@
 #import "MBOverlaySettingsSerializers.h"
 #import "MBRecognizerWrapper.h"
 #import "MBSerializationUtils.h"
-
+#import "MBBlinkIDSerializationUtils.h"
 #import <Foundation/Foundation.h>
 #import "MBBlinkIDModule.h"
 #import <React/RCTConvert.h>
@@ -19,12 +19,13 @@ typedef NS_ENUM(NSUInteger, PPImageType) {
 static NSString* const MBErrorDomain = @"microblink.error";
 static NSString* const RESULT_CAPTURED_FULL_IMAGE = @"capturedFullImage";
 static NSString* const RESULT_DOCUMENT_CAPTURE_RECOGNIZER_RESULT = @"documentCaptureRecognizerResult";
-
-@interface MBBlinkIDModule () <MBOverlayViewControllerDelegate, MBScanningRecognizerRunnerDelegate, MBFirstSideFinishedRecognizerRunnerDelegate>
+@interface MBBlinkIDModule () <MBOverlayViewControllerDelegate, MBScanningRecognizerRunnerDelegate, MBFirstSideFinishedRecognizerRunnerDelegate, MBBlinkIdMultiSideRecognizerDelegate, MBBlinkIdSingleSideRecognizerDelegate>
 
 @property (nonatomic, strong) MBRecognizerCollection *recognizerCollection;
 @property (nonatomic) id<MBRecognizerRunnerViewController> scanningViewController;
 @property (nonatomic, strong) MBRecognizerRunner *recognizerRunner;
+@property (nonatomic, strong) MBOverlayViewController *overlayVc;
+@property (nonatomic, strong) NSDictionary *recognizerCollectionDict;
 @property (nonatomic, strong) NSDictionary *backImageBase64Image;
 
 @property (class, nonatomic, readonly) NSString *STATUS_SCAN_CANCELED;
@@ -55,7 +56,7 @@ RCT_EXPORT_MODULE(BlinkIDIos);
 
 /**
  Method  sanitizes the dictionary replaces all occurances of NSNull with nil
-
+ 
  @param dictionary JSON objects
  @return new dictionary with NSNull values replaced with nil
  */
@@ -70,10 +71,11 @@ RCT_EXPORT_MODULE(BlinkIDIos);
 }
 
 RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySettings recognizerCollection:(NSDictionary *)jsonRecognizerCollection license:(NSDictionary *)jsonLicense resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
-
+    
     // Sanitize the dictionaries
     jsonOverlaySettings = [self sanitizeDictionary:jsonOverlaySettings];
     jsonRecognizerCollection = [self sanitizeDictionary:jsonRecognizerCollection];
+    _recognizerCollectionDict = jsonRecognizerCollection;
     jsonLicense = [self sanitizeDictionary:jsonLicense];
     
     self.promiseResolve = resolve;
@@ -81,15 +83,24 @@ RCT_REMAP_METHOD(scanWithCamera, scanWithCamera:(NSDictionary *)jsonOverlaySetti
     
     if([self setupLicense:jsonLicense]) {
         [self setupLanguage:jsonOverlaySettings];
-
+        
         self.recognizerCollection = [[MBRecognizerSerializers sharedInstance] deserializeRecognizerCollection:jsonRecognizerCollection];
-
+        for (MBRecognizer *recognizer in self.recognizerCollection.recognizerList) {
+            if([recognizer isKindOfClass:[MBBlinkIdMultiSideRecognizer class]]) {
+                [(MBBlinkIdMultiSideRecognizer *)recognizer setDelegate:self];
+                break;
+            } else if ([recognizer isKindOfClass:[MBBlinkIdSingleSideRecognizer class]]) {
+                [(MBBlinkIdSingleSideRecognizer *)recognizer setDelegate:self];
+                break;
+            }
+        }
         dispatch_sync(dispatch_get_main_queue(), ^{
-            MBOverlayViewController *overlayVC = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
-
-            UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:overlayVC];
+            _overlayVc = [[MBOverlaySettingsSerializers sharedInstance] createOverlayViewController:jsonOverlaySettings recognizerCollection:self.recognizerCollection delegate:self];
+            
+            UIViewController<MBRecognizerRunnerViewController>* recognizerRunnerViewController = [MBViewControllerFactory recognizerRunnerViewControllerWithOverlayViewController:_overlayVc];
+            [recognizerRunnerViewController setModalPresentationStyle:UIModalPresentationFullScreen];
             self.scanningViewController = recognizerRunnerViewController;
-
+            
             UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
             [rootViewController presentViewController:self.scanningViewController animated:YES completion:nil];
         });
@@ -120,30 +131,49 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
         }
     }
 }
+- (BOOL)multiSideClassInfoFilter:(MBClassInfo *)classInfo {
+    return [MBBlinkIDSerializationUtils deserializeClassFilter:self.recognizerCollectionDict classInfo:classInfo];
+}
+
+- (void)onMultiSideDocumentSupportStatus:(BOOL)isDocumentSupported {
+    if([_overlayVc isKindOfClass:[MBBlinkIdOverlayViewController class]]) {
+        [(MBBlinkIdOverlayViewController *)_overlayVc onDocumentSupportStatus:isDocumentSupported];
+    }
+}
+
+- (BOOL)classInfoFilter:(MBClassInfo *)classInfo {
+    return [MBBlinkIDSerializationUtils deserializeClassFilter:self.recognizerCollectionDict classInfo:classInfo];
+}
+
+- (void)onDocumentSupportStatus:(BOOL)isDocumentSupported {
+    if([_overlayVc isKindOfClass:[MBBlinkIdOverlayViewController class]]) {
+        [(MBBlinkIdOverlayViewController *)_overlayVc onDocumentSupportStatus:isDocumentSupported];
+    }
+}
 
 - (void)overlayViewControllerDidFinishScanning:(MBOverlayViewController *)overlayViewController state:(MBRecognizerResultState)state {
     if (state != MBRecognizerResultStateEmpty) {
         [overlayViewController.recognizerRunnerViewController pauseScanning];
         // recognizers within self.recognizerCollection now have their results filled
-
+        
         BOOL isDocumentCaptureRecognizer = NO;
-
+        
         NSMutableArray *jsonResults = [[NSMutableArray alloc] initWithCapacity:self.recognizerCollection.recognizerList.count];
-
+        
         for (NSUInteger i = 0; i < self.recognizerCollection.recognizerList.count; ++i) {
             [jsonResults addObject:[[self.recognizerCollection.recognizerList objectAtIndex:i] serializeResult]];
-
-        if (!isDocumentCaptureRecognizer) {
-            self.promiseResolve(jsonResults);
-        }
-        // dismiss recognizer runner view controller
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-            [rootViewController dismissViewControllerAnimated:YES completion:nil];
-            self.recognizerCollection = nil;
-            self.scanningViewController = nil;
-            self.promiseResolve = nil;
-            self.promiseReject = nil;
+            
+            if (!isDocumentCaptureRecognizer) {
+                self.promiseResolve(jsonResults);
+            }
+            // dismiss recognizer runner view controller
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+                [rootViewController dismissViewControllerAnimated:YES completion:nil];
+                self.recognizerCollection = nil;
+                self.scanningViewController = nil;
+                self.promiseResolve = nil;
+                self.promiseReject = nil;
             });
         }
     }
@@ -158,7 +188,7 @@ RCT_REMAP_METHOD(scanWithDirectApi, recognizerCollection:(NSDictionary *)jsonRec
                                          code:-58
                                      userInfo:nil];
     self.promiseReject(MBBlinkIDModule.STATUS_SCAN_CANCELED, @"Scanning has been canceled", error);
-
+    
     self.promiseResolve = nil;
     self.promiseReject = nil;
 }

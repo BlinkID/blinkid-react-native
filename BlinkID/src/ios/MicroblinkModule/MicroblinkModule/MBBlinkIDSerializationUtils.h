@@ -32,4 +32,5 @@
 +(NSDictionary * _Nonnull) serializeNSDate:(NSDate * _Nullable) value;
 +(MBCustomClassRules * _Nonnull) deserializeMBCustomClassRules:(NSDictionary * _Nullable)jsonCustomClassRules;
 +(NSMutableArray<NSDictionary *> * _Nullable) serializeDependentInfo:(NSArray<MBDependentInfo *>* _Nullable)dependentInfos;
++ (BOOL)deserializeClassFilter:(NSDictionary * _Nullable)jsonRecognizerCollection classInfo:(MBClassInfo * _Nullable)classInfo;
 @end

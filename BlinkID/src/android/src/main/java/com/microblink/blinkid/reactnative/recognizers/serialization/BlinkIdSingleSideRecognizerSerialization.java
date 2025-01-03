@@ -29,6 +29,9 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         if (jsonMap.hasKey("blurStrictnessLevel")) {
             recognizer.setBlurStrictnessLevel(com.microblink.blinkid.entities.recognizers.blinkid.generic.imageanalysis.StrictnessLevel.values()[jsonMap.getInt("blurStrictnessLevel")]);
         }
+        if (jsonMap.hasKey("classFilter")) {
+            recognizer.setClassFilter(BlinkIDSerializationUtils.deserializeClassFilter(jsonMap.getMap("classFilter")));
+        }
         if (jsonMap.hasKey("combineFrameResults")) {
             recognizer.setCombineFrameResults(jsonMap.getBoolean("combineFrameResults"));
         }
@@ -143,6 +146,7 @@ public final class BlinkIdSingleSideRecognizerSerialization implements Recognize
         jsonResult.putString("signatureImage", SerializationUtils.encodeImageBase64(result.getSignatureImage()));
         jsonResult.putMap("specificDocumentValidity", BlinkIDSerializationUtils.serializeStringResult(result.getSpecificDocumentValidity()));
         jsonResult.putMap("sponsor", BlinkIDSerializationUtils.serializeStringResult(result.getSponsor()));
+        jsonResult.putMap("vehicleOwner", BlinkIDSerializationUtils.serializeStringResult(result.getVehicleOwner()));
         jsonResult.putMap("vehicleType", BlinkIDSerializationUtils.serializeStringResult(result.getVehicleType()));
         jsonResult.putMap("visaType", BlinkIDSerializationUtils.serializeStringResult(result.getVisaType()));
         jsonResult.putMap("vizResult", BlinkIDSerializationUtils.serializeVizResult(result.getVizResult()));

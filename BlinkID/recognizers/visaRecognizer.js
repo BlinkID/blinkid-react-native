@@ -14,6 +14,7 @@ import {
     AnonymizationMode,
     RecognitionModeFilter,
     StrictnessLevel,
+    ClassFilter,
     
     
     ImageExtensionFactors,
