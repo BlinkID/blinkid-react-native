@@ -1,3 +1,26 @@
+## 6.13.0
+- Updated the plugin to [Android SDK v6.13.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.13.0) and [iOS SDK v6.13.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.13.0)
+
+**New features**
+- **ClassFilter**
+    - `ClassFilter` represents the document filter used to determine which documents will be processed.
+    - Document information (Country, Region, Type) is evaluated with the content set in the filter, and their inclusion or exclusion depends on the defined rules.
+    - The recognition results of the excluded documents will not be returned.
+    - If using the standard BlinkID Overlay, an alert will be displayed that the document will not be scanned.
+    - Modifying the `includeClasses` property will set the filter to scan only the set document classes. Other document classes will be rejected.
+    - Modifying the `excludeClasses` property will set the filter to reject only the set document classes. Other document classes will be accepted.
+        - By defult, all of the document classes are accepted.
+
+**Expanded document coverage**
+- All of the new documents & document versions can also be found in the release notes for native Android and iOS SDKs.
+
+**Bug fixes**
+- NY ID/DL: Added logic to expose the Enhanced document subtype, allowing customers to distinguish between regular and enhanced versions.
+- Bolivia & Namibia ID: Resolved data match inconsistencies that were causing data match failures.
+- Romanian ID: Multi side scan no longer expects blank back card of old IDs, even with skipUnsupportedBack set to false.
+- Fixed backImageAnalysisResult.cardRotation not being correctly populated when scanning the wrong side of a document.
+- [iOS-specific] Fixed document flip animation on the `BlinkIdOverlayViewController`
+
 ## 6.12.0
 
 - Updated the plugin to [Android SDK v6.12.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.12.0) and [iOS SDK v6.12.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.12.0)
