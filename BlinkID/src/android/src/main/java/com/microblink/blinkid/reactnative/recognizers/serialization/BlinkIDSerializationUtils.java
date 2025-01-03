@@ -498,9 +498,9 @@ public abstract class BlinkIDSerializationUtils {
     }
 
     private static <T extends Enum<T>> T getEnumValue(ReadableMap jsonObject, String key, Class<T> enumType) {
-        try {
+        if (!jsonObject.isNull(key)) {
             return enumType.getEnumConstants()[jsonObject.getInt(key)];
-        } catch (Exception e) {
+        } else {
             return null;
         }
     }
