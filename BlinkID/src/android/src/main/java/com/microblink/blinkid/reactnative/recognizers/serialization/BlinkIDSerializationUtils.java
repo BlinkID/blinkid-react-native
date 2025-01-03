@@ -6,6 +6,8 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+import android.os.Parcel;
+import androidx.annotation.NonNull;
 import com.microblink.blinkid.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.DriverLicenseDetailedInfo;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.barcode.BarcodeDriverLicenseDetailedInfo;
@@ -37,6 +39,7 @@ import com.microblink.blinkid.entities.recognizers.blinkid.generic.DocumentNumbe
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.CustomClassRules;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.DetailedFieldType;
 import com.microblink.blinkid.entities.recognizers.blinkid.generic.DependentInfo;
+import com.microblink.blinkid.entities.recognizers.blinkid.generic.ClassFilter;
 
 public abstract class BlinkIDSerializationUtils {
     public static WritableMap serializeMrzResult(MrzResult mrzResult) {
@@ -438,6 +441,70 @@ public abstract class BlinkIDSerializationUtils {
             return new CustomClassRules[]{};
         }
     }
+
+    public static ClassFilter deserializeClassFilter(ReadableMap jsonClassFilter) {
+        return new ClassFilter() {
+            @Override
+            public boolean classFilter(@NonNull ClassInfo classInfo) {
+                ReadableArray jsonIncludeClasses = jsonClassFilter.getArray("includeClasses");
+                ReadableArray jsonExcludeClasses = jsonClassFilter.getArray("excludeClasses");
+                boolean includeClass = false;
+                boolean excludeClass = true;
+
+                if (jsonIncludeClasses != null) {
+                    if (jsonIncludeClasses.size() > 0) {
+                        for (int x = 0; x < jsonIncludeClasses.size(); x++) {
+                            try {
+                                includeClass = includeClass || matchClassInfo(classInfo, jsonIncludeClasses.getMap(x));
+                            } catch (Exception e) {}
+                        }   
+                    } else {
+                        includeClass = true;
+                    }
+                } else {
+                    includeClass = true;
+                }
+
+                if (jsonExcludeClasses != null) {
+                    for (int x = 0; x < jsonExcludeClasses.size(); x++) {
+                        try {
+                            excludeClass = excludeClass && !matchClassInfo(classInfo, jsonExcludeClasses.getMap(x));
+                        } catch (Exception e) {}
+                    }
+                }
+                return includeClass && excludeClass;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(@NonNull Parcel parcel, int i) {
+            }
+        };
+    }
+
+    // helper methods for ClassFilter
+    private static boolean matchClassInfo(ClassInfo classInfo, ReadableMap jsonObject) {
+        Country country = getEnumValue(jsonObject, "country", Country.class);
+        Type type = getEnumValue(jsonObject, "type", Type.class);
+        Region region = getEnumValue(jsonObject, "region", Region.class);
+
+        return (country == null || classInfo.getCountry() == country) &&
+                (type == null || classInfo.getType() == type) &&
+                (region == null || classInfo.getRegion() == region);
+    }
+
+    private static <T extends Enum<T>> T getEnumValue(ReadableMap jsonObject, String key, Class<T> enumType) {
+        if (!jsonObject.isNull(key)) {
+            return enumType.getEnumConstants()[jsonObject.getInt(key)];
+        } else {
+            return null;
+        }
+    }
+
 
     public static WritableArray serializeDependentInfo (DependentInfo[] dependentInfos) {
         WritableArray jsonDependentInfos = new WritableNativeArray();

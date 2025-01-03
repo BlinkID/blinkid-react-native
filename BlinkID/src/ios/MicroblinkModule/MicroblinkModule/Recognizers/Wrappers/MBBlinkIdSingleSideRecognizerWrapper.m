@@ -230,6 +230,7 @@
     [jsonResult setValue:[MBSerializationUtils encodeMBImage:self.result.signatureImage] forKey:@"signatureImage"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.specificDocumentValidity] forKey:@"specificDocumentValidity"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.sponsor] forKey:@"sponsor"];
+    [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.vehicleOwner] forKey:@"vehicleOwner"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.vehicleType] forKey:@"vehicleType"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeMBStringResult:self.result.visaType] forKey:@"visaType"];
     [jsonResult setValue:[MBBlinkIDSerializationUtils serializeVizResult:self.result.vizResult] forKey:@"vizResult"];

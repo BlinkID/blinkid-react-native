@@ -136,6 +136,59 @@
              };
 }
 
++ (BOOL)deserializeClassFilter:(NSDictionary *)jsonRecognizerCollection classInfo:(MBClassInfo *)classInfo {
+    BOOL includeClass = NO;
+    BOOL excludeClass = YES;
+    NSDictionary *classFilter;
+    
+    for (NSDictionary *recognizer in jsonRecognizerCollection[@"recognizerArray"]) {
+        NSString *recognizerType = recognizer[@"recognizerType"];
+        
+        if ([recognizerType isEqualToString:@"BlinkIdMultiSideRecognizer"] ||
+            [recognizerType isEqualToString:@"BlinkIdSingleSideRecognizer"]) {
+            
+            classFilter = recognizer[@"classFilter"];
+            if (!classFilter) {
+                return YES;
+            }
+        }
+    }
+    
+    NSArray *addClassToClassFilter = classFilter[@"includeClasses"];
+    if (addClassToClassFilter != nil && ![addClassToClassFilter isEqual:[NSNull null]]) {
+        if ([addClassToClassFilter count] > 0) {
+            for (int i = 0; i < [addClassToClassFilter count]; i++) {
+                NSDictionary *jsonClassInfo = addClassToClassFilter[i];
+                includeClass = includeClass || [self matchClassFilter:jsonClassInfo classInfo:classInfo];
+            }
+        } else {
+            includeClass = YES;
+        }
+    } else {
+        includeClass = YES;
+    }
+    
+    NSArray *removeClassFromClassFilter = classFilter[@"excludeClasses"];
+    if (removeClassFromClassFilter != nil && ![removeClassFromClassFilter isEqual:[NSNull null]]) {
+        for (int i = 0; i < [removeClassFromClassFilter count]; i++) {
+            NSDictionary *jsonClassInfo = removeClassFromClassFilter[i];
+            excludeClass = excludeClass && ![self matchClassFilter:jsonClassInfo classInfo:classInfo];
+        }
+    }
+    return  includeClass && excludeClass;
+}
+
++ (BOOL)matchClassFilter:(NSDictionary *)jsonClassFilterInfo classInfo:(MBClassInfo *)classInfo {
+    
+    NSNumber *country = [jsonClassFilterInfo valueForKey:@"country"];
+    NSNumber *region = [jsonClassFilterInfo valueForKey:@"region"];
+    NSNumber *type = [jsonClassFilterInfo valueForKey:@"type"];
+
+    return (![self isNotNullandNil:country] || classInfo.country == country.integerValue) &&
+           (![self isNotNullandNil:type] || classInfo.type == type.integerValue) &&
+           (![self isNotNullandNil:region]|| classInfo.region == region.integerValue);
+}
+
 +(NSDictionary *) serializeVizResult:(MBVizResult *)vizResult {
     return @{
         @"firstName" : [MBBlinkIDSerializationUtils serializeMBStringResult:vizResult.firstName],
@@ -406,6 +459,9 @@
     }
     
     return jsonDependentInfos;
+}
++ (BOOL)isNotNullandNil:(NSNumber *)value {
+    return ![value isEqual:[NSNull null]] && (value != nil);
 }
 
 @end
