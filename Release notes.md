@@ -1,3 +1,7 @@
+## 6.13.1
+- Android-specific
+    - Fixed naming of the deprecated `LegacyDocumentVerificationActivity` in `AndroidManifest.xml`
+
 ## 6.13.0
 - Updated the plugin to [Android SDK v6.13.0](https://github.com/BlinkID/blinkid-android/releases/tag/v6.13.0) and [iOS SDK v6.13.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v6.13.0)
 

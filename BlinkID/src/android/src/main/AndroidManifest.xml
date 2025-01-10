@@ -15,7 +15,7 @@
 
     <application>
         <activity android:name="com.microblink.blinkid.activity.DocumentScanActivity" android:noHistory="true" />
-        <activity android:name="com.microblink.blinkid.activity.DocumentVerificationActivity" android:noHistory="true" />
+        <activity android:name="com.microblink.blinkid.activity.LegacyDocumentVerificationActivity" android:noHistory="true" />
         <activity android:name="com.microblink.blinkid.activity.BlinkIdActivity" android:noHistory="true" />
     </application>
 
