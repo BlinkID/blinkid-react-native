@@ -1,5 +1,3 @@
-import { type BlinkIdScanningSettingsData, type BlinkIdSdkSettingsData, type BlinkIdSessionSettingsData, type CroppedImageSettingsData } from './NativeBlinkidReactNative';
-import { Serializable } from './NativeBlinkIdReactNativeTypes';
 import {
     DetectionLevel, 
     AnonymizationMode, 
@@ -13,7 +11,7 @@ import {
  *  Settings for the initialization of the BlinkID SDK.
  * 
  */
-export class BlinkIdSdkSettings extends Serializable<BlinkIdSdkSettingsData> {
+export class BlinkIdSdkSettings {
   /**
    * License key for the native SDK.
    * 
@@ -74,7 +72,6 @@ export class BlinkIdSdkSettings extends Serializable<BlinkIdSdkSettingsData> {
     resourceLocalFolder?: string,
     bundleURL?: string,
     resourceRequestTimeout?: number) {
-    super();
     this.licenseKey = licenseKey;
     this.licensee = licensee;
     this.downloadResources = downloadResources;
@@ -83,22 +80,6 @@ export class BlinkIdSdkSettings extends Serializable<BlinkIdSdkSettingsData> {
     this.bundleURL = bundleURL;
     this.resourceRequestTimeout = resourceRequestTimeout;
   }
-
-    getSerializableFields(): (keyof BlinkIdSdkSettingsData)[] {
-    return ['licenseKey', 'licensee', 'downloadResources', 'resourceDownloadUrl', 'resourceLocalFolder', 'bundleURL', 'resourceRequestTimeout']
-  }
-    createData(): BlinkIdSdkSettingsData {
-      return {
-      licenseKey: this.licenseKey,
-      licensee: this.licensee,
-      downloadResources: this.downloadResources,
-      resourceDownloadUrl: this.resourceDownloadUrl,
-      resourceLocalFolder: this.resourceLocalFolder,
-      bundleURL: this.bundleURL,
-      resourceRequestTimeout: this.resourceRequestTimeout,
-      }
-    }
-  
 }
 
 /**
@@ -108,7 +89,7 @@ export class BlinkIdSdkSettings extends Serializable<BlinkIdSdkSettingsData> {
  * scanning mode, and specific scanning configurations that define how the scanning
  * session should behave.
  */
-export class BlinkIdSessionSettings extends Serializable<BlinkIdSessionSettingsData> {
+export class BlinkIdSessionSettings {
   /**
    * The scanning mode to be used during the scanning session.
    * 
@@ -143,34 +124,9 @@ export class BlinkIdSessionSettings extends Serializable<BlinkIdSessionSettingsD
    * session should behave.
    */
   constructor() {
-    super();
     this.scanningMode = ScanningMode.Automatic;
     this.scanningSettings = new BlinkIdScanningSettings();
     this.stepTimeoutDuration = 15000;
-  }
-
-      createData(): BlinkIdSessionSettingsData {
-      return {
-      scanningMode: this.scanningMode,
-      scanningSettings: this.scanningSettings.toPlainObject(),
-      stepTimeoutDuration: this.stepTimeoutDuration,
-      }
-    }
-
-  /**
-   * 
-   * @returns 
-   *     toPlainObject(): BlinkIdSessionSettingsData {
-    return {
-      scanningMode: this.scanningMode,
-      scanningSettings: this.scanningSettings.toPlainObject(),
-      stepTimeoutDuration: this.stepTimeoutDuration
-    }
-  }
-   */
-
-    getSerializableFields(): (keyof BlinkIdSessionSettingsData)[] {
-    return ['scanningMode', 'scanningSettings', 'stepTimeoutDuration'];
   }
 }
 
@@ -182,7 +138,7 @@ export class BlinkIdSessionSettings extends Serializable<BlinkIdSessionSettingsD
  * along with options for frame processing and image extraction.
  * 
  *  */ 
-export class BlinkIdScanningSettings extends Serializable<BlinkIdScanningSettingsData> {
+export class BlinkIdScanningSettings {
   /**
    * The level of blur detection in the document image.
    * 
@@ -453,7 +409,6 @@ export class BlinkIdScanningSettings extends Serializable<BlinkIdScanningSetting
   * along with options for frame processing and image extraction.
   */
   constructor() {
-    super();
     this.blurDetectionLevel = DetectionLevel.Mid;
     this.skipImagesWithBlur = true;
     this.glareDetectionLevel = DetectionLevel.Mid;
@@ -475,46 +430,13 @@ export class BlinkIdScanningSettings extends Serializable<BlinkIdScanningSetting
     this.scanPassportDataPageOnly = true;
     this.croppedImageSettings = new CroppedImageSettings();
   }
-
- 
-    createData(): BlinkIdScanningSettingsData {
-    return {
-      blurDetectionLevel: this.blurDetectionLevel,
-      skipImagesWithBlur: this.skipImagesWithBlur,
-      glareDetectionLevel: this.glareDetectionLevel,
-      skipImagesWithGlare: this.skipImagesWithGlare,
-      tiltDetectionLevel:  this.tiltDetectionLevel,
-      skipImagesWithInadequateLightingConditions: this.skipImagesWithInadequateLightingConditions,
-      skipImagesOccludedByHand: this.skipImagesOccludedByHand,
-    combineResultsFromMultipleInputImages: this.combineResultsFromMultipleInputImages,
-    enableBarcodeScanOnly :this.enableBarcodeScanOnly,
-    anonymizationMode: this.anonymizationMode,
-    returnInputImages: this.returnInputImages,
-    scanCroppedDocumentImage: this.scanCroppedDocumentImage,
-    recognitionModeFilter: this.recognitionModeFilter.toPlainObject(),
-    enableCharacterValidation: this.enableCharacterValidation,
-    inputImageMargin: this.inputImageMargin,
-    scanUnsupportedBack: this.scanUnsupportedBack,
-    allowUncertainFrontSideScan: this.allowUncertainFrontSideScan,
-    maxAllowedMismatchesPerField: this.maxAllowedMismatchesPerField,
-    scanPassportDataPageOnly: this.scanPassportDataPageOnly,
-    croppedImageSettings: this.croppedImageSettings.toPlainObject()
-    }
-     }
-
-    getSerializableFields(): (keyof BlinkIdScanningSettingsData)[] {
-    return ['blurDetectionLevel', 'skipImagesWithBlur', 'glareDetectionLevel', 'skipImagesWithGlare', 'tiltDetectionLevel', 'skipImagesWithInadequateLightingConditions', 'skipImagesOccludedByHand', 
-      'combineResultsFromMultipleInputImages', 'enableBarcodeScanOnly', 'anonymizationMode', 'returnInputImages', 'scanCroppedDocumentImage', 'recognitionModeFilter', 'enableCharacterValidation',
-      'inputImageMargin', 'scanUnsupportedBack', 'allowUncertainFrontSideScan', 'maxAllowedMismatchesPerField', 'scanPassportDataPageOnly', 'croppedImageSettings'
-    ]
-  }
 }
 
 /**
  * Represents the image cropping settings.
  * 
  */
-export class CroppedImageSettings extends Serializable<CroppedImageSettingsData> {
+export class CroppedImageSettings {
   /**
    * The DPI value for the cropped image.
    * 
@@ -555,15 +477,10 @@ export class CroppedImageSettings extends Serializable<CroppedImageSettingsData>
    * 
    */
   constructor() {
-    super();
     this.dotsPerInch = 250;
     this.extensionFactor = 0;
     this.returnDocumentImage = false;
     this.returnFaceImage = false;
     this.returnSignatureImage = false;
-  }
-
-    getSerializableFields(): (keyof CroppedImageSettingsData)[] {
-    return ['dotsPerInch', 'extensionFactor', 'returnDocumentImage', 'returnFaceImage', 'returnSignatureImage']
   }
 }

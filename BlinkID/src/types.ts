@@ -542,67 +542,67 @@ export class DataMatchResultField {
  * Represents the type of the field used in data match.
  *
  */
-export const enum DataMatchField {
+export enum DataMatchField {
   /**
    * The date of birth field.
    *
    */
-  DateOfBirth = 'dateOfBirth',
+  DateOfBirth = 0,
 
   /**
    * The date of expiry field.
    *
    */
-  DateOfExpiry = 'dateOfExpiry',
+  DateOfExpiry = 1,
 
   /**
    * The document number field.
    *
    */
-  DocumentNumber = 'documentNumber',
+  DocumentNumber = 2,
 
   /**
    * The document additional number field.
    *
    */
-  DocumentAdditionalNumber = 'documentAdditionalNumber',
+  DocumentAdditionalNumber = 3,
 
   /**
    * The document optional additional number field.
    *
    */
-  DocumentOptionalAdditionalNumber = 'documentOptionalAdditionalNumber',
+  DocumentOptionalAdditionalNumber = 4,
 
   /**
    * The personal ID number field.
    *
    */
 
-  PersonalIdNumber = 'personalIdNumber',
+  PersonalIdNumber = 5,
 }
 
 /**
  * Represents the state of the data match.
  *
  */
-export const enum DataMatchState {
+export enum DataMatchState {
   /**
    * Data matching has not been performed.
    *
    */
-  NotPerformed = 'notPerformed',
+  NotPerformed = 0,
 
   /**
    * Data does not match.
    *
    */
-  Failed = 'failed',
+  Failed = 1,
 
   /**
    * Data does match.
    *
    */
-  Success = 'success',
+  Success = 2,
 }
 
 /**
@@ -1934,78 +1934,78 @@ export class BarcodeData {
  * Represents the type of scanned barcode
  *
  */
-export const enum BarcodeType {
+export enum BarcodeType {
   /**
    * No barcode was scanned
    *
    */
-  None = 'none',
+  None = 0,
 
   /**
    * QR code was scanned
    *
    */
-  QrCode = 'qrCode',
+  QrCode = 1,
 
   /**
    * Data Matrix 2D barcode was scanned
    *
    */
-  DataMatrix = 'dataMatrix',
+  DataMatrix = 2,
 
   /**
    * UPC E barcode was scanned
    *
    */
-  Upce = 'upce',
+  Upce = 3,
 
   /**
    * UPC A barcode was scanned
    *
    */
-  Upca = 'upca',
+  Upca = 4,
 
   /**
    * EAN 8 barcode was scanned
    *
    */
-  Ean8 = 'ean8',
+  Ean8 = 5,
 
   /**
    * EAN 13 barcode was scanned
    *
    */
-  Ean13 = 'ean13',
+  Ean13 = 6,
 
   /**
    * Code 128 barcode was scanned
    *
    */
-  Code128 = 'code128',
+  Code128 = 7,
 
   /**
    * Code 39 barcode was scanned
    *
    */
-  Code39 = 'code39',
+  Code39 = 8,
 
   /**
    * ITF barcode was scanned
    *
    */
-  Itf = 'itf',
+  Itf = 9,
 
   /**
    * Aztec 2D barcode was scanned
    *
    */
-  Aztec = 'aztec',
+  Aztec = 10,
 
   /**
    * PDF417 2D barcode was scanned
    *
    */
-  Pdf417 = 'pdf417',
+  Pdf417 = 11,
 }
 
 /**
@@ -3150,60 +3150,60 @@ export const enum AnonymizationMode {
  * Represents the document type found on the Machine Readable Zone
  *
  */
-enum MRZDocumentType {
+export enum MRZDocumentType {
   /**
    * Document type was not identified.
    *
    */
-  Unknown = 'unknown',
+  Unknown = 0,
 
   /**
    * Identity card
    *
    */
-  IdentityCard = 'identityCard',
+  IdentityCard = 1,
 
   /**
    * Passport
    *
    */
-  Passport = 'passport',
+  Passport = 2,
 
   /**
    * VISA
    *
    */
-  Visa = 'visa',
+  Visa = 3,
 
   /**
    * Green card
    *
    */
-  GreenCard = 'greenCard',
+  GreenCard = 4,
 
   /**
    * IIM13P Pass
    *
    */
-  MysPassIMM13P = 'mysPassIMM13P',
+  MysPassIMM13P = 5,
 
   /**
    * Driver license
    *
    */
-  DriverLicense = 'driverLicense',
+  DriverLicense = 6,
 
   /**
    * Internal travel document
    *
    */
-  InternalTravelDocument = 'internalTravelDocument',
+  InternalTravelDocument = 7,
 
   /**
    * Border crossing card
    *
    */
-  BorderCrossingCard = 'borderCrossingCard',
+  BorderCrossingCard = 8,
 }
 
 /**
@@ -3256,13 +3256,13 @@ enum ScanningSide {
    * The first side of the scanned document
    *
    */
-  First = 'first',
+  First = 0,
 
   /**
    * The second side of the scanned document
    *
    */
-  Second = 'second',
+  Second = 1,
 }
 
 /**

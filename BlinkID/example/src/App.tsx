@@ -1,33 +1,60 @@
 import React, { useState } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, Image } from 'react-native';
+import {
+  Button,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+} from 'react-native';
 import { performScan, performDirectApiScan } from 'blinkid-react-native';
-import { BlinkIdScanningSettings, BlinkIdSdkSettings, BlinkIdSessionSettings, CroppedImageSettings } from '../../src/blinkIdSettings';
-import { ClassFilter, Country, DocumentFilter, DocumentType, Region, ScanningMode } from '../../src/types';
+import {
+  BlinkIdScanningSettings,
+  BlinkIdSdkSettings,
+  BlinkIdSessionSettings,
+  CroppedImageSettings,
+} from '../../src/blinkIdSettings';
+import {
+  ClassFilter,
+  Country,
+  DocumentFilter,
+  DocumentType,
+  Region,
+  ScanningMode,
+} from '../../src/types';
 import type { BlinkIdScanningResult } from '../../src/blinkIdResult';
 import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
 
 export default function App() {
-  const [result, setResult] = useState<string>('Press the "Perform Scan" button for default BlinkID UX scanning experience.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.');
+  const [result, setResult] = useState<string>(
+    'Press the "Perform Scan" button for default BlinkID UX scanning experience.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.'
+  );
 
-const [firstCroppedImage, setFirstCroppedImage] = useState<string | undefined>();
-const [secondCroppedImage, setSecondCroppedImage] = useState<string | undefined>();
-const [faceImage, setFaceImage] = useState<string | undefined>();
-const [signatureImage, setSignatureImage] = useState<string | undefined>();
-const [firstInputImage, setFirstInputImage] = useState<string | undefined>();
-const [secondInputImage, setSecondInputImage] = useState<string | undefined>();
-
+  const [firstCroppedImage, setFirstCroppedImage] = useState<
+    string | undefined
+  >();
+  const [secondCroppedImage, setSecondCroppedImage] = useState<
+    string | undefined
+  >();
+  const [faceImage, setFaceImage] = useState<string | undefined>();
+  const [signatureImage, setSignatureImage] = useState<string | undefined>();
+  const [firstInputImage, setFirstInputImage] = useState<string | undefined>();
+  const [secondInputImage, setSecondInputImage] = useState<
+    string | undefined
+  >();
 
   const handlePerformScan = async () => {
     try {
-      const settings = new BlinkIdSdkSettings(          "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ==");
-      //console.log('hello' + settings.createData());
+      const settings = new BlinkIdSdkSettings(
+        'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
+      );
 
       const sessionSettings = new BlinkIdSessionSettings();
       sessionSettings.scanningMode = ScanningMode.Automatic;
 
       const scanningSettings = new BlinkIdScanningSettings();
       scanningSettings.returnInputImages = true;
-      
+
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
@@ -37,22 +64,24 @@ const [secondInputImage, setSecondInputImage] = useState<string | undefined>();
       sessionSettings.scanningSettings = scanningSettings;
 
       const classFilter = new ClassFilter();
-      classFilter.includeDocuments = [new DocumentFilter(Country.Croatia, undefined, DocumentType.Id), new DocumentFilter(Country.USA, Region.California, DocumentType.Dl)];
+      classFilter.includeDocuments = [
+        new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
+        new DocumentFilter(Country.USA, Region.California, DocumentType.Dl),
+      ];
 
-    await performScan(settings, sessionSettings)//, classFilter)
-        .then ((result: BlinkIdScanningResult) => { 
+      await performScan(settings, sessionSettings) //, classFilter)
+        .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
-          console.log("Front document image:", result.firstDocumentImage);
-            setFirstCroppedImage(result.firstDocumentImage);
-            setSecondCroppedImage(result.secondDocumentImage);
-            setFaceImage(result.faceImage?.image);
-            setSignatureImage(result.signatureImage?.image)
-            setFirstInputImage(result.firstInputImage);
-            setSecondInputImage(result.secondInputImage);  
-      })
-      .catch((error) => {
-        setResult(`Error during scan: ${error}`);
-      })
+          setFirstCroppedImage(result.firstDocumentImage);
+          setSecondCroppedImage(result.secondDocumentImage);
+          setFaceImage(result.faceImage?.image);
+          setSignatureImage(result.signatureImage?.image);
+          setFirstInputImage(result.firstInputImage);
+          setSecondInputImage(result.secondInputImage);
+        })
+        .catch((error) => {
+          setResult(`Error during scan: ${error}`);
+        });
     } catch (error) {
       setResult(`Error during scan: ${error}`);
     }
@@ -60,67 +89,65 @@ const [secondInputImage, setSecondInputImage] = useState<string | undefined>();
 
   const handlePerformDirectApiScan = async () => {
     try {
-    //const scanResult = await performDirectApiScan();
-    //  setResult(JSON.stringify(scanResult, null, 2));
+      //const scanResult = await performDirectApiScan();
+      //  setResult(JSON.stringify(scanResult, null, 2));
     } catch (error) {
       setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
     }
   };
 
-return (
-<View style={styles.container}>
-  <View>
-    <Button title="Perform Scan" onPress={handlePerformScan}/>
-    <View style={styles.spacer} />
-    <Button title="Direct API Scan" onPress={handlePerformDirectApiScan} />
-  </View>
+  return (
+    <View style={styles.container}>
+      <View>
+        <Button title="Perform Scan" onPress={handlePerformScan} />
+        <View style={styles.spacer} />
+        <Button title="Direct API Scan" onPress={handlePerformDirectApiScan} />
+      </View>
 
-  <ScrollView style={styles.resultBox}>
-    <Text>{result}</Text>
-  </ScrollView>
+      <ScrollView style={styles.resultBox}>
+        <Text>{result}</Text>
+      </ScrollView>
 
-  <ScrollView style={styles.imageScroll} horizontal>
-    {firstCroppedImage && (
-      <DocumentImageContainer
-        label="Front Document Image"
-        imageUri={`data:image/jpeg;base64,${firstCroppedImage}`}
-      />
-    )}
-    {secondCroppedImage && (
-      <DocumentImageContainer
-        label="Back Document Image"
-        imageUri={`data:image/jpeg;base64,${secondCroppedImage}`}
-      />
-    )}
-    {faceImage && (
-      <DocumentImageContainer
-        label="Face Image"
-        imageUri={`data:image/jpeg;base64,${faceImage}`}
-      />
-    )}
-            {signatureImage && (
-      <DocumentImageContainer
-        label="Signature image"
-        imageUri={`data:image/jpeg;base64,${signatureImage}`}
-      />
-    )}
+      <ScrollView style={styles.imageScroll} horizontal>
+        {firstCroppedImage && (
+          <DocumentImageContainer
+            label="Front Document Image"
+            imageUri={`data:image/jpeg;base64,${firstCroppedImage}`}
+          />
+        )}
+        {secondCroppedImage && (
+          <DocumentImageContainer
+            label="Back Document Image"
+            imageUri={`data:image/jpeg;base64,${secondCroppedImage}`}
+          />
+        )}
+        {faceImage && (
+          <DocumentImageContainer
+            label="Face Image"
+            imageUri={`data:image/jpeg;base64,${faceImage}`}
+          />
+        )}
+        {signatureImage && (
+          <DocumentImageContainer
+            label="Signature Image"
+            imageUri={`data:image/jpeg;base64,${signatureImage}`}
+          />
+        )}
         {firstInputImage && (
-      <DocumentImageContainer
-        label="First input image"
-        imageUri={`data:image/jpeg;base64,${firstInputImage}`}
-      />
-    )}
+          <DocumentImageContainer
+            label="First Input Image"
+            imageUri={`data:image/jpeg;base64,${firstInputImage}`}
+          />
+        )}
         {secondInputImage && (
-      <DocumentImageContainer
-        label="Second input image"
-        imageUri={`data:image/jpeg;base64,${secondInputImage}`}
-      />
-    )}
-  </ScrollView>
-</View>
-
-);
-
+          <DocumentImageContainer
+            label="Second Input Image"
+            imageUri={`data:image/jpeg;base64,${secondInputImage}`}
+          />
+        )}
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -135,19 +162,20 @@ const styles = StyleSheet.create({
   },
 
   resultBox: {
-  flex: 1,
-  marginTop: 20,
-  backgroundColor: '#f2f2f2',
-  padding: 10,
-  borderRadius: 8,
-  maxHeight: 300
-},
+    flex: 1,
+    marginTop: 20,
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+    borderRadius: 8,
+    maxHeight: 300,
+  },
 
-imageScroll: {
-  marginTop: 20,
-  maxHeight: 300,
-},
-    imageContainer: {
+  imageScroll: {
+    marginTop: 20,
+    maxHeight: 300,
+  },
+  imageContainer: {
+    margin: 10,
     marginTop: 20,
     alignItems: 'center',
   },
@@ -161,7 +189,6 @@ imageScroll: {
     borderRadius: 8,
     backgroundColor: '#eee',
   },
-  
 });
 
 type DocumentImageContainerProps = {
@@ -169,11 +196,18 @@ type DocumentImageContainerProps = {
   imageUri: string;
 };
 
-const DocumentImageContainer: React.FC<DocumentImageContainerProps> = ({ label, imageUri }) => {
+const DocumentImageContainer: React.FC<DocumentImageContainerProps> = ({
+  label,
+  imageUri,
+}) => {
   return (
     <View style={styles.imageContainer}>
       <Text style={styles.imageLabel}>{label}</Text>
-      <Image source={{ uri: imageUri }} style={styles.image} resizeMode="contain" />
+      <Image
+        source={{ uri: imageUri }}
+        style={styles.image}
+        resizeMode="contain"
+      />
     </View>
   );
 };

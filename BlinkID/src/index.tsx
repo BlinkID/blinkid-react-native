@@ -9,13 +9,11 @@ import type { ClassFilter } from './types';
  * 
  */
 export async function performScan(blinkIdSdkSettings: BlinkIdSdkSettings, blinkIdSessionSettings: BlinkIdSessionSettings, classFilter?: ClassFilter): Promise<BlinkIdScanningResult> {
-  const stringResult = await BlinkidReactNative.performScan(JSON.stringify(blinkIdSdkSettings), JSON.stringify(blinkIdSessionSettings), JSON.stringify(classFilter));
-  console.log('string result: ' + stringResult);
-  const result = JSON.parse(stringResult);
-  console.log('JSON result: ', result);
- return new BlinkIdScanningResult(result);
+  const jsonResult = await BlinkidReactNative.performScan(JSON.stringify(blinkIdSdkSettings), JSON.stringify(blinkIdSessionSettings), JSON.stringify(classFilter));
+ return new BlinkIdScanningResult(JSON.parse(jsonResult));
 }
 
-export function performDirectApiScan(blinkIdSdkSettings: BlinkIdSdkSettings, blinkIdSessionSettings: BlinkIdSessionSettings, firstImage: string, secondImage?: string): Promise<BlinkIdScanningResult>  {
-  return BlinkidReactNative.performDirectApiScan(blinkIdSdkSettings.toPlainObject(), blinkIdSessionSettings.toPlainObject(), firstImage, secondImage);
+export async function performDirectApiScan(blinkIdSdkSettings: BlinkIdSdkSettings, blinkIdSessionSettings: BlinkIdSessionSettings, firstImage: string, secondImage?: string): Promise<BlinkIdScanningResult>  {
+  const jsonResult = await BlinkidReactNative.performDirectApiScan(JSON.stringify(blinkIdSdkSettings), JSON.stringify(blinkIdSessionSettings), firstImage, secondImage);
+  return new BlinkIdScanningResult(JSON.parse(jsonResult));
 }
