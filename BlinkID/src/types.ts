@@ -1,13 +1,17 @@
+import {type ClassFilterData, type DetailedFieldTypeData, type DocumentAnonymizationSettingsData, type DocumentFilterData, type DocumentNumberAnonymizationSettingsData, type DocumentRulesData, type RecognitionModeFilterData } from "./NativeBlinkidReactNative";
+
+import { Serializable } from "./NativeBlinkIdReactNativeTypes";
+
 /**
  * ClassFilter represents the document filter used to determine which documents will be processed.
  * Document information (Country, Region, Type) is evaluated with the content set in the filter, and their inclusion or exclusion depends on the defined rules.
- * To set the document information, use [DocumentFilter].
+ * To set the document information, use {@link DocumentFilter}.
  * The recognition results of the excluded documents will not be returned.
  * If using the standard BlinkID UX, an alert will be displayed that the document will not be scanned.
  *
  * By default, the ClassFilter is turned off, and all documents will be included.
  */
-export class ClassFilter {
+export class ClassFilter extends Serializable<ClassFilterData> {
   /**
    * Document classes that will be explicitly accepted by this filter.
    * Only documents belonging to the specified classes will be processed. All other documents will be rejected.
@@ -71,8 +75,13 @@ export class ClassFilter {
     includeDocuments?: DocumentFilter[],
     excludeDocuments?: DocumentFilter[]
   ) {
+      super();
     this.includeDocuments = includeDocuments;
     this.excludeDocuments = excludeDocuments;
+  }
+
+    getSerializableFields(): (keyof ClassFilterData)[] {
+      return ['includeDocuments', 'excludeDocuments']
   }
 }
 
@@ -81,7 +90,7 @@ export class ClassFilter {
  *
  * Used with other classes like the {@link ClassFilter}, {@link DocumentRules} and the {@link DocumentAnonymizationSettings}.
  */
-export class DocumentFilter {
+export class DocumentFilter extends Serializable<DocumentFilterData>{
   /**
    * If set, only specified country will pass the filter criteria.
    * Otherwise, issuing country will not betaken into account.
@@ -120,9 +129,14 @@ export class DocumentFilter {
    * ```
    */
   constructor(country?: Country, region?: Region, documentType?: DocumentType) {
+    super();
     this.country = country;
     this.region = region;
     this.documentType = documentType;
+  }
+
+    getSerializableFields(): (keyof DocumentFilterData)[] {
+      return ['country', 'region', 'documentType']
   }
 }
 
@@ -135,7 +149,7 @@ export class DocumentFilter {
  *
  * Document fields are validated using internal rules that define mandatory fields for the scanned document class.
  */
-export class DocumentRules {
+export class DocumentRules extends Serializable<DocumentRulesData> {
   /**
    * Specified fields will overrule our document class field rules if filter conditions are met.
    *
@@ -175,8 +189,13 @@ export class DocumentRules {
    * This parameter is optional.
    */
   constructor(fields: [DetailedFieldType], documentFilter?: DocumentFilter) {
+      super();
     this.fields = fields;
     this.documentFilter = documentFilter;
+  }
+
+    getSerializableFields(): (keyof DocumentRulesData)[] {
+      return ['documentFilter', 'fields']
   }
 }
 
@@ -184,7 +203,7 @@ export class DocumentRules {
  * Represents the detailed field type.
  *
  */
-export class DetailedFieldType {
+export class DetailedFieldType extends Serializable<DetailedFieldTypeData> {
   /**
    * The field type.
    *
@@ -207,8 +226,13 @@ export class DetailedFieldType {
    * Both parameters are mandatory.
    */
   constructor(fieldType: FieldType, alphabetType: AlphabetType) {
+      super();
     this.fieldType = fieldType;
     this.alphabetType = alphabetType;
+  }
+
+    getSerializableFields(): (keyof DetailedFieldTypeData)[] {
+      return ['fieldType', 'alphabetType']
   }
 }
 
@@ -216,7 +240,7 @@ export class DetailedFieldType {
  * Represents the document anonymization settings.
  *
  */
-export class DocumentAnonymizationSettings {
+export class DocumentAnonymizationSettings extends Serializable<DocumentAnonymizationSettingsData>{
   /**
    * Document fields that will be anonymized.
    *
@@ -255,10 +279,15 @@ export class DocumentAnonymizationSettings {
     documentFilter?: DocumentFilter,
     documentNumberAnonymizationSettings?: DocumentNumberAnonymizationSettings
   ) {
+      super();
     this.fields = fields;
     this.documentFilter = documentFilter;
     this.documentNumberAnonymizationSettings =
       documentNumberAnonymizationSettings;
+  }
+
+    getSerializableFields(): (keyof DocumentAnonymizationSettingsData)[] {
+      return ['fields', 'documentFilter', 'documentNumberAnonymizationSettings']
   }
 }
 
@@ -272,7 +301,7 @@ export class DocumentAnonymizationSettings {
  *
  * If any parameter is `undefined`, the value of the parameter will be set to `0`.
  */
-export class DocumentNumberAnonymizationSettings {
+export class DocumentNumberAnonymizationSettings extends Serializable<DocumentNumberAnonymizationSettingsData> {
   /**
    * Defines how many digits at the beginning of the document number remain visible after anonymization.
    *
@@ -289,8 +318,13 @@ export class DocumentNumberAnonymizationSettings {
     prefixDigitsVisible: number = 0,
     suffixDigitsVisible: number = 0
   ) {
+    super();
     this.prefixDigitsVisible = prefixDigitsVisible;
     this.suffixDigitsVisible = suffixDigitsVisible;
+  }
+
+    getSerializableFields(): (keyof DocumentNumberAnonymizationSettingsData)[] {
+      return ['prefixDigitsVisible', 'suffixDigitsVisible']
   }
 }
 /**
@@ -299,7 +333,7 @@ export class DocumentNumberAnonymizationSettings {
  *
  * By default all modes are enabled.
  */
-export class RecognitionModeFilter {
+export class RecognitionModeFilter extends Serializable<RecognitionModeFilterData>{
   /**
    * Enable scanning of MRZ IDs.
    *
@@ -337,12 +371,28 @@ export class RecognitionModeFilter {
   enableFullDocumentRecognition: boolean;
 
   constructor() {
+    super();
     this.enableMrzId = true;
     this.enableMrzVisa = true;
     this.enableMrzPassport = true;
     this.enablePhotoId = true;
     this.enableBarcodeId = true;
     this.enableFullDocumentRecognition = true;
+  }
+
+  createData(): RecognitionModeFilterData {
+    return {
+        enableMrzId: this.enableMrzId,
+        enableMrzVisa: this.enableMrzVisa,
+        enableMrzPassport: this.enableMrzPassport,
+        enableBarcodeId: this.enableBarcodeId,
+        enableFullDocumentRecognition: this.enableFullDocumentRecognition,
+        enablePhotoId: this.enablePhotoId
+    }
+  }
+  
+    getSerializableFields(): (keyof RecognitionModeFilterData)[] {
+      return ['enableMrzId', 'enableMrzVisa', 'enableMrzPassport', 'enablePhotoId', 'enableBarcodeId', 'enableFullDocumentRecognition'];
   }
 }
 
@@ -667,7 +717,7 @@ export class StringResult {
    *
    */
   constructor(nativeStringResult: any) {
-    this.value = nativeStringResult.value;
+    this.value = nativeStringResult.value ?? null;
     this.latin = nativeStringResult.latin;
     this.cyrillic = nativeStringResult.cyrillic;
     this.arabic = nativeStringResult.arabic;
@@ -891,9 +941,7 @@ export class DateResult<T> {
 
   constructor(nativeDateResult: any) {
     this.date =
-      nativeDateResult.date != undefined
-        ? new Date(nativeDateResult.date)
-        : undefined;
+      nativeDateResult.date;
     this.originalString = handleStringType<T>(nativeDateResult.originalString);
     this.isFilledByDomainKnowledge = nativeDateResult.isFilledByDomainKnowledge;
     this.successfullyParsed = nativeDateResult.successfullyParsed;

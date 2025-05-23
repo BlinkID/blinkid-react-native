@@ -6,7 +6,8 @@ import {
   DependentInfo,
   SingleSideScanningResult,
   DriverLicenseDetailedInfo,
-  DateResult
+  DateResult,
+  DetailedCroppedImageResult
 } from './types';
 
 /**
@@ -346,377 +347,293 @@ export class BlinkIdScanningResult {
    *
    */
   constructor(nativeBlinkIdResult: any) {
+    console.log('firstName:', nativeBlinkIdResult.firstName);
+console.log('lastName:', nativeBlinkIdResult.lastName)
+  console.log('nativeBlinkIdResult:', nativeBlinkIdResult);
     /**
      * Scanning mode used to scan the current document.
      *
      * See {@link RecognitionMode} for more information.
      */
     this.recognitionMode =
-      nativeBlinkIdResult.recognitionMode != undefined
-        ? (nativeBlinkIdResult.recognitionMode as RecognitionMode)
-        : undefined;
+      nativeBlinkIdResult.recognitionMode;
     /**
      * The document class information.
      *
      * See {@link DocumentClassInfo} for more information.
      */
     this.documentClassInfo =
-      nativeBlinkIdResult.documentClassInfo != undefined
-        ? new DocumentClassInfo(nativeBlinkIdResult.documentClassInfo)
-        : undefined;
-
+      nativeBlinkIdResult.documentClassInfo;
     /**
      * Info on whether the data extracted from multiple sides matches.
      *
      * See {@link DataMatchResult} for more information.
      */
     this.dataMatchResult =
-      nativeBlinkIdResult.dataMatchResult != undefined
-        ? new DataMatchResult(nativeBlinkIdResult.dataMatchResult)
-        : undefined;
+      nativeBlinkIdResult.dataMatchResult;
 
     /**
      * The first name of the document owner.
      *
      */
     this.firstName =
-      nativeBlinkIdResult.firstName != undefined
-        ? new StringResult(nativeBlinkIdResult.firstName)
-        : undefined;
+      nativeBlinkIdResult.firstName;
 
     /**
      * The last name of the document owner.
      *
      */
     this.lastName =
-      nativeBlinkIdResult.lastName != undefined
-        ? new StringResult(nativeBlinkIdResult.lastName)
-        : undefined;
+      nativeBlinkIdResult.lastName;
 
     /**
      * The full name of the document owner.
      *
      */
     this.fullName =
-      nativeBlinkIdResult.firstName != undefined
-        ? new StringResult(nativeBlinkIdResult.fullName)
-        : undefined;
+      nativeBlinkIdResult.firstName;
 
     /**
      * The additional name information of the document owner.
      *
      */
     this.additionalNameInformation =
-      nativeBlinkIdResult.additionalNameInformation != undefined
-        ? new StringResult(nativeBlinkIdResult.additionalNameInformation)
-        : undefined;
+      nativeBlinkIdResult.additionalNameInformation;
 
     /**
      * The localized name of the document owner.
      *
      */
     this.localizedName =
-      nativeBlinkIdResult.localizedName != undefined
-        ? new StringResult(nativeBlinkIdResult.localizedName)
-        : undefined;
+      nativeBlinkIdResult.localizedName;
     /**
      * The fathers name of the document owner.
      *
      */
     this.fathersName =
-      nativeBlinkIdResult.fathersName != undefined
-        ? new StringResult(nativeBlinkIdResult.fathersName)
-        : undefined;
+      nativeBlinkIdResult.fathersName;
 
     /**
      * The mothers name of the document owner.
      *
      */
     this.mothersName =
-      nativeBlinkIdResult.mothersName != undefined
-        ? new StringResult(nativeBlinkIdResult.mothersName)
-        : undefined;
+      nativeBlinkIdResult.mothersName;
 
     /**
      * The address of the doicument owner.
      *
      */
     this.address =
-      nativeBlinkIdResult.address != undefined
-        ? new StringResult(nativeBlinkIdResult.address)
-        : undefined;
+      nativeBlinkIdResult.address;
 
     /**
      * The additional address information of the document owner.
      *
      */
     this.additionalAddressInformation =
-      nativeBlinkIdResult.additionalAddressInformation != undefined
-        ? new StringResult(nativeBlinkIdResult.additionalAddressInformation)
-        : undefined;
+      nativeBlinkIdResult.additionalAddressInformation;
 
     /**
      * The one more additional address information of the document owner.
      *
      */
     this.additionalOptionalAddressInformation =
-      nativeBlinkIdResult.additionalOptionalAddressInformation != undefined
-        ? new StringResult(
-            nativeBlinkIdResult.additionalOptionalAddressInformation
-          )
-        : undefined;
+      nativeBlinkIdResult.additionalOptionalAddressInformation;
 
     /**
      * The place of birth of the document owner.
      *
      */
     this.placeOfBirth =
-      nativeBlinkIdResult.placeOfBirth != undefined
-        ? new StringResult(nativeBlinkIdResult.placeOfBirth)
-        : undefined;
+      nativeBlinkIdResult.placeOfBirth;
 
     /**
      * The nationality of the document owner.
      *
      */
     this.nationality =
-      nativeBlinkIdResult.nationality != undefined
-        ? new StringResult(nativeBlinkIdResult.nationality)
-        : undefined;
+      nativeBlinkIdResult.nationality;
 
     /**
      * The race of the document owner.
      *
      */
     this.race =
-      nativeBlinkIdResult.race != undefined
-        ? new StringResult(nativeBlinkIdResult.race)
-        : undefined;
+      nativeBlinkIdResult.race;
 
     /**
      * The religion of the document owner.
      *
      */
     this.religion =
-      nativeBlinkIdResult.religion != undefined
-        ? new StringResult(nativeBlinkIdResult.religion)
-        : undefined;
+      nativeBlinkIdResult.religion;
 
     /**
      * The profession of the document owner.
      *
      */
     this.profession =
-      nativeBlinkIdResult.profession != undefined
-        ? new StringResult(nativeBlinkIdResult.profession)
-        : undefined;
+      nativeBlinkIdResult.profession;
 
     /**
      * The marital status of the document owner.
      *
      */
     this.maritalStatus =
-      nativeBlinkIdResult.maritalStatus != undefined
-        ? new StringResult(nativeBlinkIdResult.maritalStatus)
-        : undefined;
+      nativeBlinkIdResult.maritalStatus;
 
     /**
      * The residential status of the document owner.
      *
      */
     this.residentialStatus =
-      nativeBlinkIdResult.residentialStatus != undefined
-        ? new StringResult(nativeBlinkIdResult.residentialStatus)
-        : undefined;
-
+      nativeBlinkIdResult.residentialStatus;
     /**
      * The employer of the document owner.
      *
      */
     this.employer =
-      nativeBlinkIdResult.employer != undefined
-        ? new StringResult(nativeBlinkIdResult.employer)
-        : undefined;
+      nativeBlinkIdResult.employer;
 
     /**
      * The sex of the document owner.
      *
      */
     this.sex =
-      nativeBlinkIdResult.sex != undefined
-        ? new StringResult(nativeBlinkIdResult.sex)
-        : undefined;
+      nativeBlinkIdResult.sex;
 
     /**
      * The sponsor of the document owner.
      *
      */
     this.sponsor =
-      nativeBlinkIdResult.sponsor != undefined
-        ? new StringResult(nativeBlinkIdResult.sponsor)
-        : undefined;
+      nativeBlinkIdResult.sponsor;
 
     /**
      * The blood type of the document owner.
      *
      */
     this.bloodType =
-      nativeBlinkIdResult.bloodType != undefined
-        ? new StringResult(nativeBlinkIdResult.bloodType)
-        : undefined;
+      nativeBlinkIdResult.bloodType;
 
     /**
      * The document number.
      *
      */
     this.documentNumber =
-      nativeBlinkIdResult.documentNumber != undefined
-        ? new StringResult(nativeBlinkIdResult.documentNumber)
-        : undefined;
+      nativeBlinkIdResult.documentNumber;
 
     /**
      * The personal identification number.
      *
      */
     this.personalIdNumber =
-      nativeBlinkIdResult.personalIdNumber != undefined
-        ? new StringResult(nativeBlinkIdResult.personalIdNumber)
-        : undefined;
+      nativeBlinkIdResult.personalIdNumber;
 
     /**
      * The additional number of the document.
      *
      */
     this.documentAdditionalNumber =
-      nativeBlinkIdResult.documentAdditionalNumber != undefined
-        ? new StringResult(nativeBlinkIdResult.documentAdditionalNumber)
-        : undefined;
+      nativeBlinkIdResult.documentAdditionalNumber;
 
     /**
      * The one more additional number of the document.
      *
      */
     this.documentOptionalAdditionalNumber =
-      nativeBlinkIdResult.documentOptionalAdditionalNumber != undefined
-        ? new StringResult(nativeBlinkIdResult.documentOptionalAdditionalNumber)
-        : undefined;
+      nativeBlinkIdResult.documentOptionalAdditionalNumber;
 
     /**
      * The additional personal identification number.
      *
      */
     this.additionalPersonalIdNumber =
-      nativeBlinkIdResult.additionalPersonalIdNumber != undefined
-        ? new StringResult(nativeBlinkIdResult.additionalPersonalIdNumber)
-        : undefined;
+      nativeBlinkIdResult.additionalPersonalIdNumber;
 
     /**
      * The issuing authority of the document.
      *
      */
     this.issuingAuthority =
-      nativeBlinkIdResult.issuingAuthority != undefined
-        ? new StringResult(nativeBlinkIdResult.issuingAuthority)
-        : undefined;
+      nativeBlinkIdResult.issuingAuthority;
 
     /**
      * The transcription of the document subtype.
      *
      */
     this.documentSubtype =
-      nativeBlinkIdResult.documentSubtype != undefined
-        ? new StringResult(nativeBlinkIdResult.documentSubtype)
-        : undefined;
+      nativeBlinkIdResult.documentSubtype;
 
     /**
      * The remarks on the residence permit.
      *
      */
     this.remarks =
-      nativeBlinkIdResult.remarks != undefined
-        ? new StringResult(nativeBlinkIdResult.remarks)
-        : undefined;
+      nativeBlinkIdResult.remarks;
 
     /**
      * The residence permit type.
      *
      */
     this.residencePermitType =
-      nativeBlinkIdResult.residencePermitType != undefined
-        ? new StringResult(nativeBlinkIdResult.residencePermitType)
-        : undefined;
+      nativeBlinkIdResult.residencePermitType;
 
     /**
      * The manufacturing year.
      *
      */
     this.manufacturingYear =
-      nativeBlinkIdResult.manufacturingYear != undefined
-        ? new StringResult(nativeBlinkIdResult.manufacturingYear)
-        : undefined;
-
+      nativeBlinkIdResult.manufacturingYear;
     /**
      * The vehicle type.
      *
      */
     this.vehicleType =
-      nativeBlinkIdResult.vehicleType != undefined
-        ? new StringResult(nativeBlinkIdResult.vehicleType)
-        : undefined;
+      nativeBlinkIdResult.vehicleType;
 
     /**
      * The eligibility category.
      *
      */
     this.eligibilityCategory =
-      nativeBlinkIdResult.eligibilityCategory != undefined
-        ? new StringResult(nativeBlinkIdResult.eligibilityCategory)
-        : undefined;
+      nativeBlinkIdResult.eligibilityCategory;
 
     /**
      * The specific document validity.
      *
      */
     this.specificDocumentValidity =
-      nativeBlinkIdResult.specificDocumentValidity != undefined
-        ? new StringResult(nativeBlinkIdResult.specificDocumentValidity)
-        : undefined;
+      nativeBlinkIdResult.specificDocumentValidity;
 
     /**
      * The visa type of the document.
      *
      */
     this.visaType =
-      nativeBlinkIdResult.visaType != undefined
-        ? new StringResult(nativeBlinkIdResult.visaType)
-        : undefined;
+      nativeBlinkIdResult.visaType;
 
     /**
      * The date of birth of the document owner.
      *
      */
     this.dateOfBirth =
-      nativeBlinkIdResult.dateOfBirth != undefined
-        ? new DateResult<StringResult>(nativeBlinkIdResult.dateOfBirth)
-        : undefined;
+      nativeBlinkIdResult.dateOfBirth;
 
     /**
      * The date of issue of the document.
      *
      */
     this.dateOfIssue =
-      nativeBlinkIdResult.dateOfIssue != undefined
-        ? new DateResult<StringResult>(nativeBlinkIdResult.dateOfIssue)
-        : undefined;
+      nativeBlinkIdResult.dateOfIssue;
 
     /**
      * The date of expiry of the document.
      *
      */
     this.dateOfExpiry =
-      nativeBlinkIdResult.dateOfExpiry != undefined
-        ? new DateResult<StringResult>(nativeBlinkIdResult.dateOfExpiry)
-        : undefined;
+      nativeBlinkIdResult.dateOfExpiry;
 
     /**
      * Determines if date of expiry is permanent.
@@ -787,9 +704,7 @@ export class BlinkIdScanningResult {
      * See {@link DetailedCroppedImageResult} for more information.
      */
     this.faceImage =
-      nativeBlinkIdResult.faceImage != undefined
-        ? new DetailedCroppedImageResult(nativeBlinkIdResult.faceImage)
-        : undefined;
+      nativeBlinkIdResult.faceImage;
 
     /**
      * Returns the cropped signature image with additional info.
@@ -798,8 +713,6 @@ export class BlinkIdScanningResult {
      * See {@link DetailedCroppedImageResult} for more information.
      */
     this.signatureImage =
-      nativeBlinkIdResult.signatureImage != undefined
-        ? new DetailedCroppedImageResult(nativeBlinkIdResult.signatureImage)
-        : undefined;
+      nativeBlinkIdResult.signatureImage;
   }
 }
