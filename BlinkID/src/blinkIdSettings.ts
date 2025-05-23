@@ -514,7 +514,7 @@ export class BlinkIdScanningSettings extends Serializable<BlinkIdScanningSetting
  * Represents the image cropping settings.
  * 
  */
-class CroppedImageSettings extends Serializable<CroppedImageSettingsData> {
+export class CroppedImageSettings extends Serializable<CroppedImageSettingsData> {
   /**
    * The DPI value for the cropped image.
    * 
@@ -541,7 +541,7 @@ class CroppedImageSettings extends Serializable<CroppedImageSettingsData> {
    * 
    * Default: `false`
    */
-  returnFaceImage: false;
+  returnFaceImage: boolean;
 
   /**
    * Indicates whether the signature image should be returned.

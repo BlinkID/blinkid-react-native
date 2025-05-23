@@ -11,7 +11,7 @@ import { Serializable } from "./NativeBlinkIdReactNativeTypes";
  *
  * By default, the ClassFilter is turned off, and all documents will be included.
  */
-export class ClassFilter extends Serializable<ClassFilterData> {
+export class ClassFilter {
   /**
    * Document classes that will be explicitly accepted by this filter.
    * Only documents belonging to the specified classes will be processed. All other documents will be rejected.
@@ -75,13 +75,8 @@ export class ClassFilter extends Serializable<ClassFilterData> {
     includeDocuments?: DocumentFilter[],
     excludeDocuments?: DocumentFilter[]
   ) {
-      super();
     this.includeDocuments = includeDocuments;
     this.excludeDocuments = excludeDocuments;
-  }
-
-    getSerializableFields(): (keyof ClassFilterData)[] {
-      return ['includeDocuments', 'excludeDocuments']
   }
 }
 
@@ -90,7 +85,7 @@ export class ClassFilter extends Serializable<ClassFilterData> {
  *
  * Used with other classes like the {@link ClassFilter}, {@link DocumentRules} and the {@link DocumentAnonymizationSettings}.
  */
-export class DocumentFilter extends Serializable<DocumentFilterData>{
+export class DocumentFilter{
   /**
    * If set, only specified country will pass the filter criteria.
    * Otherwise, issuing country will not betaken into account.
@@ -129,14 +124,9 @@ export class DocumentFilter extends Serializable<DocumentFilterData>{
    * ```
    */
   constructor(country?: Country, region?: Region, documentType?: DocumentType) {
-    super();
     this.country = country;
     this.region = region;
     this.documentType = documentType;
-  }
-
-    getSerializableFields(): (keyof DocumentFilterData)[] {
-      return ['country', 'region', 'documentType']
   }
 }
 
@@ -149,7 +139,7 @@ export class DocumentFilter extends Serializable<DocumentFilterData>{
  *
  * Document fields are validated using internal rules that define mandatory fields for the scanned document class.
  */
-export class DocumentRules extends Serializable<DocumentRulesData> {
+export class DocumentRules {
   /**
    * Specified fields will overrule our document class field rules if filter conditions are met.
    *
@@ -189,13 +179,8 @@ export class DocumentRules extends Serializable<DocumentRulesData> {
    * This parameter is optional.
    */
   constructor(fields: [DetailedFieldType], documentFilter?: DocumentFilter) {
-      super();
     this.fields = fields;
     this.documentFilter = documentFilter;
-  }
-
-    getSerializableFields(): (keyof DocumentRulesData)[] {
-      return ['documentFilter', 'fields']
   }
 }
 
@@ -230,17 +215,13 @@ export class DetailedFieldType extends Serializable<DetailedFieldTypeData> {
     this.fieldType = fieldType;
     this.alphabetType = alphabetType;
   }
-
-    getSerializableFields(): (keyof DetailedFieldTypeData)[] {
-      return ['fieldType', 'alphabetType']
-  }
 }
 
 /**
  * Represents the document anonymization settings.
  *
  */
-export class DocumentAnonymizationSettings extends Serializable<DocumentAnonymizationSettingsData>{
+export class DocumentAnonymizationSettings {
   /**
    * Document fields that will be anonymized.
    *
@@ -279,15 +260,10 @@ export class DocumentAnonymizationSettings extends Serializable<DocumentAnonymiz
     documentFilter?: DocumentFilter,
     documentNumberAnonymizationSettings?: DocumentNumberAnonymizationSettings
   ) {
-      super();
     this.fields = fields;
     this.documentFilter = documentFilter;
     this.documentNumberAnonymizationSettings =
       documentNumberAnonymizationSettings;
-  }
-
-    getSerializableFields(): (keyof DocumentAnonymizationSettingsData)[] {
-      return ['fields', 'documentFilter', 'documentNumberAnonymizationSettings']
   }
 }
 
@@ -301,7 +277,7 @@ export class DocumentAnonymizationSettings extends Serializable<DocumentAnonymiz
  *
  * If any parameter is `undefined`, the value of the parameter will be set to `0`.
  */
-export class DocumentNumberAnonymizationSettings extends Serializable<DocumentNumberAnonymizationSettingsData> {
+export class DocumentNumberAnonymizationSettings {
   /**
    * Defines how many digits at the beginning of the document number remain visible after anonymization.
    *
@@ -318,13 +294,8 @@ export class DocumentNumberAnonymizationSettings extends Serializable<DocumentNu
     prefixDigitsVisible: number = 0,
     suffixDigitsVisible: number = 0
   ) {
-    super();
     this.prefixDigitsVisible = prefixDigitsVisible;
     this.suffixDigitsVisible = suffixDigitsVisible;
-  }
-
-    getSerializableFields(): (keyof DocumentNumberAnonymizationSettingsData)[] {
-      return ['prefixDigitsVisible', 'suffixDigitsVisible']
   }
 }
 /**
@@ -333,7 +304,7 @@ export class DocumentNumberAnonymizationSettings extends Serializable<DocumentNu
  *
  * By default all modes are enabled.
  */
-export class RecognitionModeFilter extends Serializable<RecognitionModeFilterData>{
+export class RecognitionModeFilter {
   /**
    * Enable scanning of MRZ IDs.
    *
@@ -371,28 +342,12 @@ export class RecognitionModeFilter extends Serializable<RecognitionModeFilterDat
   enableFullDocumentRecognition: boolean;
 
   constructor() {
-    super();
     this.enableMrzId = true;
     this.enableMrzVisa = true;
     this.enableMrzPassport = true;
     this.enablePhotoId = true;
     this.enableBarcodeId = true;
     this.enableFullDocumentRecognition = true;
-  }
-
-  createData(): RecognitionModeFilterData {
-    return {
-        enableMrzId: this.enableMrzId,
-        enableMrzVisa: this.enableMrzVisa,
-        enableMrzPassport: this.enableMrzPassport,
-        enableBarcodeId: this.enableBarcodeId,
-        enableFullDocumentRecognition: this.enableFullDocumentRecognition,
-        enablePhotoId: this.enablePhotoId
-    }
-  }
-  
-    getSerializableFields(): (keyof RecognitionModeFilterData)[] {
-      return ['enableMrzId', 'enableMrzVisa', 'enableMrzPassport', 'enablePhotoId', 'enableBarcodeId', 'enableFullDocumentRecognition'];
   }
 }
 
@@ -507,17 +462,11 @@ export class DocumentClassInfo {
    */
   constructor(nativeDocumentClassInfo: any) {
     this.country =
-      nativeDocumentClassInfo.country != undefined
-        ? (nativeDocumentClassInfo.country as Country)
-        : undefined;
+      nativeDocumentClassInfo.country;
     this.region =
-      nativeDocumentClassInfo.region != undefined
-        ? (nativeDocumentClassInfo.region as Region)
-        : undefined;
+      nativeDocumentClassInfo.region;
     this.documentType =
-      nativeDocumentClassInfo.documentType != undefined
-        ? (nativeDocumentClassInfo.documentType as DocumentType)
-        : undefined;
+      nativeDocumentClassInfo.documentType;
     this.empty = nativeDocumentClassInfo.empty;
     this.countryName = nativeDocumentClassInfo.countryName;
     this.isoNumericCountryCode = nativeDocumentClassInfo.isoNumericCountryCode;
@@ -583,13 +532,9 @@ export class DataMatchResultField {
    */
   constructor(nativeDataMatchResultField: any) {
     this.field =
-      nativeDataMatchResultField.field != undefined
-        ? (nativeDataMatchResultField.field as DataMatchField)
-        : undefined;
+      nativeDataMatchResultField.field;
     this.state =
-      nativeDataMatchResultField.state != undefined
-        ? (nativeDataMatchResultField.state as DataMatchState)
-        : undefined;
+      nativeDataMatchResultField.state;
   }
 }
 
@@ -717,7 +662,7 @@ export class StringResult {
    *
    */
   constructor(nativeStringResult: any) {
-    this.value = nativeStringResult.value ?? null;
+    this.value = nativeStringResult.value;
     this.latin = nativeStringResult.latin;
     this.cyrillic = nativeStringResult.cyrillic;
     this.arabic = nativeStringResult.arabic;
@@ -865,21 +810,13 @@ export class Side {
    */
   constructor(nativeSide: any) {
     this.latin =
-      nativeSide.latin != undefined
-        ? (nativeSide.latin as DocumentSide)
-        : undefined;
+      nativeSide.latin;
     this.arabic =
-      nativeSide.arabic != undefined
-        ? (nativeSide.arabic as DocumentSide)
-        : undefined;
+      nativeSide.arabic;
     this.cyrillic =
-      nativeSide.cyrillic != undefined
-        ? (nativeSide.cyrillic as DocumentSide)
-        : undefined;
+      nativeSide.cyrillic;
     this.greek =
-      nativeSide.greek != undefined
-        ? (nativeSide.greek as DocumentSide)
-        : undefined;
+      nativeSide.greek;
   }
 }
 
@@ -1077,13 +1014,9 @@ export class VehicleClassInfo<T> {
       nativeVehicleClassInfo.vehicleClass
     );
     this.effectiveDate =
-      nativeVehicleClassInfo.effectiveDate != undefined
-        ? new DateResult<T>(nativeVehicleClassInfo.effectiveDate)
-        : undefined;
+      nativeVehicleClassInfo.effectiveDate;
     this.expiryDate =
-      nativeVehicleClassInfo.expiryDate != undefined
-        ? new DateResult<T>(nativeVehicleClassInfo.expiryDate)
-        : undefined;
+      nativeVehicleClassInfo.expiryDate;
   }
 }
 
@@ -1124,21 +1057,13 @@ export class DependentInfo {
 
   constructor(nativeDependentInfo: any) {
     this.dateOfBirth =
-      nativeDependentInfo.dateOfBirth != undefined
-        ? new DateResult<StringResult>(nativeDependentInfo.dateOfBirth)
-        : undefined;
+      nativeDependentInfo.dateOfBirth;
     this.sex =
-      nativeDependentInfo.sex != undefined
-        ? new StringResult(nativeDependentInfo.sex)
-        : undefined;
+      nativeDependentInfo.sex;
     this.documentNumber =
-      nativeDependentInfo.documentNumber != undefined
-        ? new StringResult(nativeDependentInfo.documentNumber)
-        : undefined;
+      nativeDependentInfo.documentNumber;
     this.fullName =
-      nativeDependentInfo.fullName != undefined
-        ? new StringResult(nativeDependentInfo.fullName)
-        : undefined;
+      nativeDependentInfo.fullName;
     this.empty = nativeDependentInfo.empty;
   }
 }
@@ -1205,32 +1130,18 @@ export class SingleSideScanningResult {
    */
   constructor(nativeSingleSideScanningResult: any) {
     this.viz =
-      nativeSingleSideScanningResult.viz != undefined
-        ? new VizResult(nativeSingleSideScanningResult.viz)
-        : undefined;
+      nativeSingleSideScanningResult.viz;
     this.mrz =
-      nativeSingleSideScanningResult.mrz != undefined
-        ? new MrzResult(nativeSingleSideScanningResult.mrz)
-        : undefined;
+      nativeSingleSideScanningResult.mrz;;
     this.barcode =
-      nativeSingleSideScanningResult.barcode != undefined
-        ? new BarcodeResult(nativeSingleSideScanningResult.barcode)
-        : undefined;
+      nativeSingleSideScanningResult.barcode;
     this.inputImage = nativeSingleSideScanningResult.inputImage;
     this.barcodeInputImage = nativeSingleSideScanningResult.barcodeInputImage;
     this.documentImage = nativeSingleSideScanningResult.documentImage;
     this.faceImage =
-      nativeSingleSideScanningResult.faceImage != undefined
-        ? new DetailedCroppedImageResult(
-            nativeSingleSideScanningResult.faceImage
-          )
-        : undefined;
+      nativeSingleSideScanningResult.faceImage;
     this.signatureImage =
-      nativeSingleSideScanningResult.signatureImage != undefined
-        ? new DetailedCroppedImageResult(
-            nativeSingleSideScanningResult.signatureImage
-          )
-        : undefined;
+      nativeSingleSideScanningResult.signatureImage;
   }
 }
 
@@ -1497,169 +1408,87 @@ export class VizResult {
    */
   constructor(nativeVizResult: any) {
     this.firstName =
-      nativeVizResult.firstName != undefined
-        ? new StringResult(nativeVizResult.firstName)
-        : undefined;
+      nativeVizResult.firstName;
     this.lastName =
-      nativeVizResult.lastName != undefined
-        ? new StringResult(nativeVizResult.lastName)
-        : undefined;
+      nativeVizResult.lastName;
     this.fullName =
-      nativeVizResult.fullName != undefined
-        ? new StringResult(nativeVizResult.fullName)
-        : undefined;
+      nativeVizResult.fullName;;
     this.additionalNameInformation =
-      nativeVizResult.additionalNameInformation != undefined
-        ? new StringResult(nativeVizResult.additionalNameInformation)
-        : undefined;
+      nativeVizResult.additionalNameInformation;
     this.localizedName =
-      nativeVizResult.localizedName != undefined
-        ? new StringResult(nativeVizResult.localizedName)
-        : undefined;
+      nativeVizResult.localizedName;
     this.fathersName =
-      nativeVizResult.fathersName != undefined
-        ? new StringResult(nativeVizResult.fathersName)
-        : undefined;
+      nativeVizResult.fathersName;
     this.mothersName =
-      nativeVizResult.mothersName != undefined
-        ? new StringResult(nativeVizResult.mothersName)
-        : undefined;
+      nativeVizResult.mothersName;
     this.address =
-      nativeVizResult.address != undefined
-        ? new StringResult(nativeVizResult.address)
-        : undefined;
+      nativeVizResult.address;
     this.additionalAddressInformation =
-      nativeVizResult.additionalAddressInformation != undefined
-        ? new StringResult(nativeVizResult.additionalAddressInformation)
-        : undefined;
+      nativeVizResult.additionalAddressInformation;
     this.additionalOptionalAddressInformation =
-      nativeVizResult.additionalOptionalAddressInformation != undefined
-        ? new StringResult(nativeVizResult.additionalOptionalAddressInformation)
-        : undefined;
+      nativeVizResult.additionalOptionalAddressInformation;
     this.placeOfBirth =
-      nativeVizResult.placeOfBirth != undefined
-        ? new StringResult(nativeVizResult.placeOfBirth)
-        : undefined;
+      nativeVizResult.placeOfBirth;
     this.nationality =
-      nativeVizResult.nationality != undefined
-        ? new StringResult(nativeVizResult.nationality)
-        : undefined;
+      nativeVizResult.nationality;
     this.race =
-      nativeVizResult.race != undefined
-        ? new StringResult(nativeVizResult.race)
-        : undefined;
+      nativeVizResult.race;
     this.religion =
-      nativeVizResult.religion != undefined
-        ? new StringResult(nativeVizResult.religion)
-        : undefined;
+      nativeVizResult.religion;
     this.profession =
-      nativeVizResult.profession != undefined
-        ? new StringResult(nativeVizResult.profession)
-        : undefined;
+      nativeVizResult.profession;
     this.maritalStatus =
-      nativeVizResult.maritalStatus != undefined
-        ? new StringResult(nativeVizResult.maritalStatus)
-        : undefined;
+      nativeVizResult.maritalStatus;
     this.residentialStatus =
-      nativeVizResult.residentialStatus != undefined
-        ? new StringResult(nativeVizResult.residentialStatus)
-        : undefined;
+      nativeVizResult.residentialStatus;
     this.employer =
-      nativeVizResult.employer != undefined
-        ? new StringResult(nativeVizResult.employer)
-        : undefined;
+      nativeVizResult.employer;
     this.sex =
-      nativeVizResult.sex != undefined
-        ? new StringResult(nativeVizResult.sex)
-        : undefined;
+      nativeVizResult.sex;
     this.sponsor =
-      nativeVizResult.sponsor != undefined
-        ? new StringResult(nativeVizResult.sponsor)
-        : undefined;
+      nativeVizResult.sponsor;
     this.bloodType =
-      nativeVizResult.bloodType != undefined
-        ? new StringResult(nativeVizResult.bloodType)
-        : undefined;
+      nativeVizResult.bloodType;
     this.dateOfBirth =
-      nativeVizResult.dateOfBirth != undefined
-        ? new DateResult<StringResult>(nativeVizResult.dateOfBirth)
-        : undefined;
+      nativeVizResult.dateOfBirth;
     this.dateOfIssue =
-      nativeVizResult.dateOfIssue != undefined
-        ? new DateResult<StringResult>(nativeVizResult.dateOfIssue)
-        : undefined;
+      nativeVizResult.dateOfIssue;
     this.dateOfExpiry =
-      nativeVizResult.dateOfExpiry != undefined
-        ? new DateResult<StringResult>(nativeVizResult.dateOfExpiry)
-        : undefined;
+      nativeVizResult.dateOfExpiry;
     this.dateOfExpiryPermanent = nativeVizResult.dateOfExpiryPermanent;
     this.documentNumber =
-      nativeVizResult.documentNumber != undefined
-        ? new StringResult(nativeVizResult.documentNumber)
-        : undefined;
+      nativeVizResult.documentNumber;
     this.personalIdNumber =
-      nativeVizResult.personalIdNumber != undefined
-        ? new StringResult(nativeVizResult.personalIdNumber)
-        : undefined;
+      nativeVizResult.personalIdNumber;
     this.documentAdditionalNumber =
-      nativeVizResult.documentAdditionalNumber != undefined
-        ? new StringResult(nativeVizResult.documentAdditionalNumber)
-        : undefined;
+      nativeVizResult.documentAdditionalNumber;
     this.documentOptionalAdditionalNumber =
-      nativeVizResult.documentOptionalAdditionalNumber != undefined
-        ? new StringResult(nativeVizResult.documentOptionalAdditionalNumber)
-        : undefined;
+      nativeVizResult.documentOptionalAdditionalNumber;
     this.additionalPersonalIdNumber =
-      nativeVizResult.additionalPersonalIdNumber != undefined
-        ? new StringResult(nativeVizResult.additionalPersonalIdNumber)
-        : undefined;
+      nativeVizResult.additionalPersonalIdNumber;
     this.issuingAuthority =
-      nativeVizResult.issuingAuthority != undefined
-        ? new StringResult(nativeVizResult.issuingAuthority)
-        : undefined;
+      nativeVizResult.issuingAuthority;
     this.visaType =
-      nativeVizResult.visaType != undefined
-        ? new StringResult(nativeVizResult.visaType)
-        : undefined;
+      nativeVizResult.visaType;
     this.driverLicenseDetailedInfo =
-      nativeVizResult.driverLicenseDetailedInfo != undefined
-        ? new DriverLicenseDetailedInfo<StringResult>(
-            nativeVizResult.driverLicenseDetailedInfo
-          )
-        : undefined;
+      nativeVizResult.driverLicenseDetailedInfo;
     this.documentSubtype =
-      nativeVizResult.documentSubtype != undefined
-        ? new StringResult(nativeVizResult.documentSubtype)
-        : undefined;
+      nativeVizResult.documentSubtype;
     this.remarks =
-      nativeVizResult.remarks != undefined
-        ? new StringResult(nativeVizResult.remarks)
-        : undefined;
+      nativeVizResult.remarks;
     this.residencePermitType =
-      nativeVizResult.residencePermitType != undefined
-        ? new StringResult(nativeVizResult.residencePermitType)
-        : undefined;
+      nativeVizResult.residencePermitType;
     this.manufacturingYear =
-      nativeVizResult.manufacturingYear != undefined
-        ? new StringResult(nativeVizResult.manufacturingYear)
-        : undefined;
+      nativeVizResult.manufacturingYear;
     this.vehicleType =
-      nativeVizResult.vehicleType != undefined
-        ? new StringResult(nativeVizResult.vehicleType)
-        : undefined;
+      nativeVizResult.vehicleType;
     this.eligibilityCategory =
-      nativeVizResult.eligibilityCategory != undefined
-        ? new StringResult(nativeVizResult.eligibilityCategory)
-        : undefined;
+      nativeVizResult.eligibilityCategory;
     this.specificDocumentValidity =
-      nativeVizResult.specificDocumentValidity != undefined
-        ? new StringResult(nativeVizResult.specificDocumentValidity)
-        : undefined;
+      nativeVizResult.specificDocumentValidity;
     this.dependentsInfo = nativeVizResult.dependentsInfo;
     this.vehicleOwner =
-      nativeVizResult.vehicleOwner != undefined
-        ? new StringResult(nativeVizResult.vehicleOwner)
-        : undefined;
+      nativeVizResult.vehicleOwner;
   }
 }
 
@@ -1841,17 +1670,11 @@ export class MrzResult {
     this.nationalityName = nativeMrzResult.nationalityName;
     this.verified = nativeMrzResult.verified;
     this.dateOfBirth =
-      nativeMrzResult.dateOfBirth != undefined
-        ? new DateResult<string>(nativeMrzResult.dateOfBirth)
-        : undefined;
+      nativeMrzResult.dateOfBirth;
     this.dateOfExpiry =
-      nativeMrzResult.dateOfExpiry != undefined
-        ? new DateResult<string>(nativeMrzResult.dateOfExpiry)
-        : undefined;
+      nativeMrzResult.dateOfExpiry;
     this.documentType =
-      nativeMrzResult.documentType != undefined
-        ? (nativeMrzResult.documentType as MRZDocumentType)
-        : undefined;
+      nativeMrzResult.documentType;
     this.sanitizedOpt1 = nativeMrzResult.sanitizedOpt1;
     this.sanitizedOpt2 = nativeMrzResult.sanitizedOpt2;
     this.sanitizedNationality = nativeMrzResult.sanitizedNationality;
@@ -2028,9 +1851,7 @@ export class BarcodeResult {
    */
   constructor(nativeBarcodeResult: any) {
     this.barcodeData =
-      nativeBarcodeResult.barcodeData != undefined
-        ? new BarcodeData(nativeBarcodeResult.barcodeData)
-        : undefined;
+      nativeBarcodeResult.barcodeData;
     this.firstName = nativeBarcodeResult.firstName;
     this.middleName = nativeBarcodeResult.middleName;
     this.lastName = nativeBarcodeResult.lastName;
@@ -2048,36 +1869,22 @@ export class BarcodeResult {
     this.employer = nativeBarcodeResult.employer;
     this.sex = nativeBarcodeResult.sex;
     this.dateOfBirth =
-      nativeBarcodeResult.dateOfBirth != undefined
-        ? new DateResult<string>(nativeBarcodeResult.dateOfBirth)
-        : undefined;
+      nativeBarcodeResult.dateOfBirth;
     this.dateOfIssue =
-      nativeBarcodeResult.dateOfIssue != undefined
-        ? new DateResult<string>(nativeBarcodeResult.dateOfIssue)
-        : undefined;
+      nativeBarcodeResult.dateOfIssue;
     this.dateOfExpiry =
-      nativeBarcodeResult.dateOfExpiry != undefined
-        ? new DateResult<string>(nativeBarcodeResult.dateOfExpiry)
-        : undefined;
+      nativeBarcodeResult.dateOfExpiry;
     this.documentNumber = nativeBarcodeResult.documentNumber;
     this.personalIdNumber = nativeBarcodeResult.personalIdNumber;
     this.documentAdditionalNumber =
       nativeBarcodeResult.documentAdditionalNumber;
     this.issuingAuthority = nativeBarcodeResult.issuingAuthority;
     this.addressDetailedInfo =
-      nativeBarcodeResult.addressDetailedInfo != undefined
-        ? new AddressDetailedInfo(nativeBarcodeResult.addressDetailedInfo)
-        : undefined;
+      nativeBarcodeResult.addressDetailedInfo;
     this.driverLicenseDetailedInfo =
-      nativeBarcodeResult.driverLicenseDetailedInfo != undefined
-        ? new DriverLicenseDetailedInfo<string>(
-            nativeBarcodeResult.driverLicenseDetailedInfo
-          )
-        : undefined;
+      nativeBarcodeResult.driverLicenseDetailedInfo;
     this.extendedElements =
-      nativeBarcodeResult.extendedElements != undefined
-        ? new BarcodeExtendedElements(nativeBarcodeResult.extendedElements)
-        : undefined;
+      nativeBarcodeResult.extendedElements;
   }
 }
 
@@ -2085,7 +1892,7 @@ export class BarcodeResult {
  * Represents the raw, unparsed data extracted from a scanned barcode.
  *
  */
-class BarcodeData {
+export class BarcodeData {
   /**
    * Type of the scanned barcode.
    *
@@ -2116,9 +1923,7 @@ class BarcodeData {
    */
   constructor(nativeBarcodeData: any) {
     this.barcodeType =
-      nativeBarcodeData.barcodeType != undefined
-        ? (nativeBarcodeData.barcodeType as BarcodeType)
-        : undefined;
+      nativeBarcodeData.barcodeType;
     this.rawData = nativeBarcodeData.rawData;
     this.stringData = nativeBarcodeData.stringData;
     this.uncertain = nativeBarcodeData.uncertain;
@@ -2207,7 +2012,7 @@ export const enum BarcodeType {
  * Detailed information about the address.
  *
  */
-class AddressDetailedInfo {
+export class AddressDetailedInfo {
   /**
    * he address street portion of the document owner.
    *
