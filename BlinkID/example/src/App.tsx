@@ -89,8 +89,39 @@ export default function App() {
 
   const handlePerformDirectApiScan = async () => {
     try {
-      //const scanResult = await performDirectApiScan();
-      //  setResult(JSON.stringify(scanResult, null, 2));
+
+    const settings = new BlinkIdSdkSettings(
+        'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
+      );
+
+      const sessionSettings = new BlinkIdSessionSettings();
+      sessionSettings.scanningMode = ScanningMode.Automatic;
+
+      const scanningSettings = new BlinkIdScanningSettings();
+      scanningSettings.returnInputImages = true;
+
+      const croppedImageSettings = new CroppedImageSettings();
+      croppedImageSettings.returnDocumentImage = true;
+      croppedImageSettings.returnFaceImage = true;
+      croppedImageSettings.returnSignatureImage = true;
+
+      scanningSettings.croppedImageSettings = croppedImageSettings;
+      sessionSettings.scanningSettings = scanningSettings;
+
+      await performDirectApiScan(settings, sessionSettings, "firstImage", "secondImage") //, classFilter)
+        .then((result: BlinkIdScanningResult) => {
+          setResult(BlinkIdResultBuilder.getIdResultString(result));
+          setFirstCroppedImage(result.firstDocumentImage);
+          setSecondCroppedImage(result.secondDocumentImage);
+          setFaceImage(result.faceImage?.image);
+          setSignatureImage(result.signatureImage?.image);
+          setFirstInputImage(result.firstInputImage);
+          setSecondInputImage(result.secondInputImage);
+        })
+        .catch((error) => {
+          setResult(`Error during scan: ${error}`);
+        });
+
     } catch (error) {
       setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
     }

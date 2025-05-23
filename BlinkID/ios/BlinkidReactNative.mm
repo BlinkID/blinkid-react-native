@@ -33,10 +33,6 @@ RCT_EXPORT_MODULE()
     return dict;
 }
 
-- (void)performDirectApiScan:(JS::NativeBlinkidReactNative::BlinkIdSdkSettingsData &)blinkIdSdkSettings blinkIdSessionSettings:(JS::NativeBlinkidReactNative::BlinkIdSessionSettingsData &)blinkIdSessionSettings firstImage:(nonnull NSString *)firstImage secondImage:(nonnull NSString *)secondImage resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
-  
-}
-
 - (void)performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings classFilter:(nonnull NSString *)classFilter resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
   
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -52,10 +48,25 @@ RCT_EXPORT_MODULE()
       }
        onReject:^(NSString * _Nonnull error) {
         NSLog(@"Error obtained: %@", error);
-        //reject(@[error], nil, false);
+        reject(@"BlinkIdIosError", error, nil);
       }];
     });
 }
+
+- (void)performDirectApiScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings firstImage:(nonnull NSString *)firstImage secondImage:(nonnull NSString *)secondImage resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject { 
+  [self->moduleImplementation
+   performDirectApiScanWithBlinkIdSdkSettings: [self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
+   blinkIdSessionSettings: [self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
+   firstImage:firstImage
+   secondImage:secondImage
+   onResolve:^(NSString * _Nonnull result) {
+    resolve(@[result]);
+  } onReject:^(NSString * _Nonnull error) {
+    NSLog(@"DirectAPI error obtained: %@", error);
+    reject(@"BlinkIdIosError", error, nil);
+  }];
+}
+
 
 
 - (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString {
