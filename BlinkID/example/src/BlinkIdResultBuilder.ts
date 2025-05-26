@@ -304,10 +304,9 @@ export class BlinkIdResultBuilder {
 
     return (
       this.handleStringType('Restrictions', result.restrictions) ??
-      '' + this.handleStringType('Endorsements', result.endorsements) ??
-      '' + this.handleStringType('Vehicle class', result.vehicleClass) ??
-      '' + this.handleStringType('Conditions', result.conditions) ??
-      ''
+      '' + this.handleStringType('Endorsements', result.endorsements) + 
+      this.handleStringType('Vehicle class', result.vehicleClass) 
+      + this.handleStringType('Conditions', result.conditions)
     );
   }
 

@@ -1,4 +1,4 @@
-import type { Country, DetailedFieldType, DocumentAnonymizationSettings, DocumentFilter, DocumentNumberAnonymizationSettings, DocumentRules, DocumentType, FieldType, RecognitionModeFilter, Region, ScanningMode } from "./types";
+import type { Country, DetailedFieldType, DocumentAnonymizationSettings, DocumentFilter, DocumentNumberAnonymizationSettings, DocumentRules, DocumentType, FieldType, RecognitionModeFilter, Region} from "./types";
 
 export abstract class Serializable<T extends Record<string, any>> {
   abstract getSerializableFields(): (keyof T)[];

@@ -1,7 +1,3 @@
-import {type ClassFilterData, type DetailedFieldTypeData, type DocumentAnonymizationSettingsData, type DocumentFilterData, type DocumentNumberAnonymizationSettingsData, type DocumentRulesData, type RecognitionModeFilterData } from "./NativeBlinkidReactNative";
-
-import { Serializable } from "./NativeBlinkIdReactNativeTypes";
-
 /**
  * ClassFilter represents the document filter used to determine which documents will be processed.
  * Document information (Country, Region, Type) is evaluated with the content set in the filter, and their inclusion or exclusion depends on the defined rules.
@@ -188,7 +184,7 @@ export class DocumentRules {
  * Represents the detailed field type.
  *
  */
-export class DetailedFieldType extends Serializable<DetailedFieldTypeData> {
+export class DetailedFieldType {
   /**
    * The field type.
    *
@@ -211,7 +207,6 @@ export class DetailedFieldType extends Serializable<DetailedFieldTypeData> {
    * Both parameters are mandatory.
    */
   constructor(fieldType: FieldType, alphabetType: AlphabetType) {
-      super();
     this.fieldType = fieldType;
     this.alphabetType = alphabetType;
   }

@@ -24,6 +24,7 @@ import {
 } from '../../src/types';
 import type { BlinkIdScanningResult } from '../../src/blinkIdResult';
 import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
   const [result, setResult] = useState<string>(
@@ -88,43 +89,70 @@ export default function App() {
   };
 
   const handlePerformDirectApiScan = async () => {
-    try {
+  try {
+    // Pick first image
+    const first = await launchImageLibrary({
+      mediaType: 'photo',
+      includeBase64: true,
+    });
 
-    const settings = new BlinkIdSdkSettings(
-        'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
-      );
-
-      const sessionSettings = new BlinkIdSessionSettings();
-      sessionSettings.scanningMode = ScanningMode.Automatic;
-
-      const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.returnInputImages = true;
-
-      const croppedImageSettings = new CroppedImageSettings();
-      croppedImageSettings.returnDocumentImage = true;
-      croppedImageSettings.returnFaceImage = true;
-      croppedImageSettings.returnSignatureImage = true;
-
-      scanningSettings.croppedImageSettings = croppedImageSettings;
-      sessionSettings.scanningSettings = scanningSettings;
-
-      await performDirectApiScan(settings, sessionSettings, "firstImage", "secondImage") //, classFilter)
-        .then((result: BlinkIdScanningResult) => {
-          setResult(BlinkIdResultBuilder.getIdResultString(result));
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
-        })
-        .catch((error) => {
-          setResult(`Error during scan: ${error}`);
-        });
-
-    } catch (error) {
-      setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
+    if (first.assets == null || !first.assets[0]?.base64) {
+      setResult("First image not selected or invalid.");
+      return;
     }
+
+    const firstImage = first.assets[0].base64;
+
+    // Pick second image
+    const second = await launchImageLibrary({
+      mediaType: 'photo',
+      includeBase64: true,
+    });
+
+    if (second.assets == null || !second.assets[0]?.base64) {
+      setResult("Second image not selected or invalid.");
+      return;
+    }
+
+    const secondImage = second.assets[0].base64;
+
+    // SDK setup
+    const settings = new BlinkIdSdkSettings(
+      'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
+    );
+
+    const sessionSettings = new BlinkIdSessionSettings();
+    sessionSettings.scanningMode = ScanningMode.Automatic;
+
+    const scanningSettings = new BlinkIdScanningSettings();
+    scanningSettings.returnInputImages = true;
+
+    const croppedImageSettings = new CroppedImageSettings();
+    croppedImageSettings.returnDocumentImage = true;
+    croppedImageSettings.returnFaceImage = true;
+    croppedImageSettings.returnSignatureImage = true;
+
+    scanningSettings.croppedImageSettings = croppedImageSettings;
+    sessionSettings.scanningSettings = scanningSettings;
+
+    // Call scan method with base64 strings
+    await performDirectApiScan(settings, sessionSettings, firstImage, secondImage)
+      .then((result: BlinkIdScanningResult) => {
+        setResult(BlinkIdResultBuilder.getIdResultString(result));
+        setFirstCroppedImage(result.firstDocumentImage);
+        setSecondCroppedImage(result.secondDocumentImage);
+        setFaceImage(result.faceImage?.image);
+        setSignatureImage(result.signatureImage?.image);
+        setFirstInputImage(result.firstInputImage);
+        setSecondInputImage(result.secondInputImage);
+      })
+      .catch((error) => {
+        setResult(`Error during scan: ${error}`);
+      });
+
+  } catch (error) {
+    setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
+  }
   };
 
   return (
