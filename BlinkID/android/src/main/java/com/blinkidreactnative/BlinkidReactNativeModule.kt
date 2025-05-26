@@ -1,6 +1,9 @@
 package com.blinkidreactnative
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
@@ -12,10 +15,28 @@ import org.json.JSONObject
 @ReactModule(name = BlinkidReactNativeModule.NAME)
 class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
   NativeBlinkidReactNativeSpec(reactContext) {
+  var pendingPromise: Promise? = null
 
   override fun getName(): String {
     return NAME
   }
+
+  init {
+    reactApplicationContext.addActivityEventListener(object : BaseActivityEventListener() {
+      override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1040 && resultCode == Activity.RESULT_OK && data != null) {
+          val result = MbBlinkIdScan().parseResult(resultCode, data)
+          val resultJson = BlinkIdSerializationUtils.serializeBlinkIdScanningResult(result.result)
+          println("RESULTS: $resultJson")
+          pendingPromise?.resolve(resultJson.toString())
+        } else if (requestCode == 1040) {
+          pendingPromise?.reject("BlinkID", "Scan cancelled or failed.")
+        }
+        pendingPromise = null
+      }
+    })
+  }
+
 
   override fun performScan(
     blinkIdSdkSettings: String?,
@@ -23,22 +44,21 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     classFilter: String?,
     promise: Promise?
   ) {
-    promise?.let { blinkIdPromise ->
+    pendingPromise = promise
+
       try {
         val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
         val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
         val classFilterJson = classFilter?.let { JSONObject(it) }
-        println("SDK SETTINGS" + sdkSettingsJson)
-        println("SESSION SETTINGS: " + sessionSettingsJson)
-        println("CLASSFILTER: " + classFilterJson)
 
-        val sdkSettings = blinkIdSdkSettings?.let { JSONObject(it) }?.let {
-          BlinkIdDeserializationUtils
-            .deserializeBlinkIdSdkSettings(it)
+        val sdkSettings = sdkSettingsJson?.let {
+          BlinkIdDeserializationUtils.deserializeBlinkIdSdkSettings(it)
+        } ?: run {
+          pendingPromise?.reject("BlinkIdAndroid", "Invalid SDK settings.")
+          return
         }
-          ?: return blinkIdPromise.reject("BlinkIdAndroid", "Invalid SDK settings")
 
-        reactApplicationContext?.let {
+        currentActivity?.applicationContext?.let {
           val intent = MbBlinkIdScan().createIntent(
             it,
             BlinkIdScanActivitySettings(
@@ -47,21 +67,20 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
               uxSettings = BlinkIdDeserializationUtils.deserializeBlinkIdUxSettings(sessionSettingsJson, classFilterJson)
             )
           )
-          it.startActivityForResult(intent, 1040, Bundle())
-        } ?: promise.reject("BlinkIdAndroid", "Activity not found.", null)
+          currentActivity?.startActivityForResult(intent, 1040, Bundle())
+        }?: pendingPromise?.reject("BlinkIdAndroid", "Activity not found.")
       } catch (error: Exception) {
         when (error) {
           is LicenseLockedException -> {
-            blinkIdPromise.reject("BlinkIdAndroid", error.message, null)
+            pendingPromise?.reject("BlinkIdAndroid", error.message)
           }
 
           else -> {
             println("SDK ERROR" + error)
-            blinkIdPromise.reject("BlinkIdAndroid", error.message, null)
+            pendingPromise?.reject("BlinkIdAndroid", error.message)
           }
         }
       }
-    }
   }
 
   override fun performDirectApiScan(

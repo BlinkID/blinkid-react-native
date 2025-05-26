@@ -24,569 +24,597 @@ import java.io.ByteArrayOutputStream
 import android.util.Base64
 import com.microblink.blinkid.core.result.ScanningSide
 import com.microblink.blinkid.core.result.barcode.BarcodeElement
+import kotlinx.serialization.json.Json
+import org.json.JSONArray
 
 object BlinkIdSerializationUtils {
   fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String? {
-    val scanningResultDict: MutableMap<String, Any?> = mutableMapOf()
+    val scanningResultJson: JSONObject = JSONObject()
 
     scanningResult?.mode.let {
-      scanningResultDict["recognitionMode"] = it?.ordinal
+      scanningResultJson.put("recognitionMode", it?.name)
     }
     scanningResult?.documentClassInfo?.let {
-      scanningResultDict["documentClassInfo"] = serializeDocumentClassInfo(it)
+      scanningResultJson.put("documentClassInfo", serializeDocumentClassInfo(it))
     }
     scanningResult?.dataMatchResult?.let {
-      scanningResultDict["dataMatchResult"] = serializeDataMatchResult(it)
+      scanningResultJson.put("dataMatchResult", serializeDataMatchResult(it))
     }
     scanningResult?.firstName?.let {
-      scanningResultDict["firstName"] = serializeStringResult(it)
+      scanningResultJson.put("firstName", serializeStringResult(it))
     }
     scanningResult?.lastName?.let {
-      scanningResultDict["lastName"] = serializeStringResult(it)
+      scanningResultJson.put("lastName", serializeStringResult(it))
     }
     scanningResult?.fullName?.let {
-      scanningResultDict["fullName"] = serializeStringResult(it)
+      scanningResultJson.put("fullName", serializeStringResult(it))
     }
     scanningResult?.additionalNameInformation?.let {
-      scanningResultDict["additionalNameInformation"] = serializeStringResult(it)
+      scanningResultJson.put("additionalNameInformation", serializeStringResult(it))
     }
     scanningResult?.localizedName?.let {
-      scanningResultDict["localizedName"] = serializeStringResult(it)
+      scanningResultJson.put("localizedName", serializeStringResult(it))
     }
     scanningResult?.fathersName?.let {
-      scanningResultDict["fathersName"] = serializeStringResult(it)
+      scanningResultJson.put("fathersName", serializeStringResult(it))
     }
     scanningResult?.mothersName?.let {
-      scanningResultDict["mothersName"] = serializeStringResult(it)
+      scanningResultJson.put("mothersName", serializeStringResult(it))
     }
     scanningResult?.address?.let {
-      scanningResultDict["address"] = serializeStringResult(it)
+      scanningResultJson.put("address", serializeStringResult(it))
     }
     scanningResult?.additionalAddressInformation?.let {
-      scanningResultDict["additionalAddressInformation"] = serializeStringResult(it)
+      scanningResultJson.put("additionalAddressInformation", serializeStringResult(it))
     }
     scanningResult?.additionalOptionalAddressInformation?.let {
-      scanningResultDict["additionalOptionalAddressInformation"] = serializeStringResult(it)
+      scanningResultJson.put("additionalOptionalAddressInformation", serializeStringResult(it))
     }
     scanningResult?.placeOfBirth?.let {
-      scanningResultDict["placeOfBirth"] = serializeStringResult(it)
+      scanningResultJson.put("placeOfBirth", serializeStringResult(it))
     }
     scanningResult?.nationality?.let {
-      scanningResultDict["nationality"] = serializeStringResult(it)
+      scanningResultJson.put("nationality", serializeStringResult(it))
     }
     scanningResult?.race?.let {
-      scanningResultDict["race"] = serializeStringResult(it)
+      scanningResultJson.put("race", serializeStringResult(it))
     }
     scanningResult?.religion?.let {
-      scanningResultDict["religion"] = serializeStringResult(it)
+      scanningResultJson.put("religion", serializeStringResult(it))
     }
     scanningResult?.profession?.let {
-      scanningResultDict["profession"] = serializeStringResult(it)
+      scanningResultJson.put("profession", serializeStringResult(it))
     }
     scanningResult?.maritalStatus?.let {
-      scanningResultDict["maritalStatus"] = serializeStringResult(it)
+      scanningResultJson.put("maritalStatus", serializeStringResult(it))
     }
     scanningResult?.residentialStatus?.let {
-      scanningResultDict["residentialStatus"] = serializeStringResult(it)
+      scanningResultJson.put("residentialStatus", serializeStringResult(it))
     }
     scanningResult?.employer?.let {
-      scanningResultDict["employer"] = serializeStringResult(it)
+      scanningResultJson.put("employer", serializeStringResult(it))
     }
     scanningResult?.sex?.let {
-      scanningResultDict["sex"] = serializeStringResult(it)
+      scanningResultJson.put("sex", serializeStringResult(it))
     }
     scanningResult?.sponsor?.let {
-      scanningResultDict["sponsor"] = serializeStringResult(it)
+      scanningResultJson.put("sponsor", serializeStringResult(it))
     }
     scanningResult?.bloodType?.let {
-      scanningResultDict["bloodType"] = serializeStringResult(it)
+      scanningResultJson.put("bloodType", serializeStringResult(it))
     }
     scanningResult?.documentNumber?.let {
-      scanningResultDict["documentNumber"] = serializeStringResult(it)
+      scanningResultJson.put("documentNumber", serializeStringResult(it))
     }
     scanningResult?.personalIdNumber?.let {
-      scanningResultDict["personalIdNumber"] = serializeStringResult(it)
+      scanningResultJson.put("personalIdNumber", serializeStringResult(it))
     }
     scanningResult?.documentAdditionalNumber?.let {
-      scanningResultDict["documentAdditionalNumber"] = serializeStringResult(it)
+      scanningResultJson.put("documentAdditionalNumber", serializeStringResult(it))
     }
     scanningResult?.documentOptionalAdditionalNumber?.let {
-      scanningResultDict["documentOptionalAdditionalNumber"] = serializeStringResult(it)
+      scanningResultJson.put("documentOptionalAdditionalNumber", serializeStringResult(it))
     }
     scanningResult?.additionalPersonalIdNumber?.let {
-      scanningResultDict["additionalPersonalIdNumber"] = serializeStringResult(it)
+      scanningResultJson.put("additionalPersonalIdNumber", serializeStringResult(it))
     }
     scanningResult?.issuingAuthority?.let {
-      scanningResultDict["issuingAuthority"] = serializeStringResult(it)
+      scanningResultJson.put("issuingAuthority", serializeStringResult(it))
     }
     scanningResult?.documentSubtype?.let {
-      scanningResultDict["documentSubtype"] = serializeStringResult(it)
+      scanningResultJson.put("documentSubtype", serializeStringResult(it))
     }
     scanningResult?.remarks?.let {
-      scanningResultDict["remarks"] = serializeStringResult(it)
+      scanningResultJson.put("remarks", serializeStringResult(it))
     }
     scanningResult?.residencePermitType?.let {
-      scanningResultDict["residencePermitType"] = serializeStringResult(it)
+      scanningResultJson.put("residencePermitType", serializeStringResult(it))
     }
     scanningResult?.manufacturingYear?.let {
-      scanningResultDict["manufacturingYear"] = serializeStringResult(it)
+      scanningResultJson.put("manufacturingYear", serializeStringResult(it))
     }
     scanningResult?.vehicleType?.let {
-      scanningResultDict["vehicleType"] = serializeStringResult(it)
+      scanningResultJson.put("vehicleType", serializeStringResult(it))
     }
     scanningResult?.eligibilityCategory?.let {
-      scanningResultDict["eligibilityCategory"] = serializeStringResult(it)
+      scanningResultJson.put("eligibilityCategory", serializeStringResult(it))
     }
     scanningResult?.specificDocumentValidity?.let {
-      scanningResultDict["specificDocumentValidity"] = serializeStringResult(it)
+      scanningResultJson.put("specificDocumentValidity", serializeStringResult(it))
     }
     scanningResult?.visaType?.let {
-      scanningResultDict["visaType"] = serializeStringResult(it)
+      scanningResultJson.put("visaType", serializeStringResult(it))
     }
 
     scanningResult?.dateOfBirth?.let {
-      scanningResultDict["dateOfBirth"] = serializeDateResult(it)
+      scanningResultJson.put("dateOfBirth", serializeDateResult(it))
     }
     scanningResult?.dateOfIssue?.let {
-      scanningResultDict["dateOfIssue"] = serializeDateResult(it)
+      scanningResultJson.put("dateOfIssue", serializeDateResult(it))
     }
     scanningResult?.dateOfExpiry?.let {
-      scanningResultDict["dateOfExpiry"] = serializeDateResult(it)
+      scanningResultJson.put("dateOfExpiry", serializeDateResult(it))
     }
     scanningResult?.dateOfExpiryPermanent?.let {
-      scanningResultDict["dateOfExpiryPermanent"] = it
+      scanningResultJson.put("dateOfExpiryPermanent", it)
     }
     scanningResult?.driverLicenseDetailedInfo?.let {
-      scanningResultDict["driverLicenseDetailedInfo"] = serializeDriverLicenseDetailedInfo(it)
+      scanningResultJson.put("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(it))
     }
     scanningResult?.dependentsInfo?.let {
-      scanningResultDict["dependentsInfo"] =
-        it.map { dependentInfo -> serializeDependentInfo(dependentInfo) }
+      scanningResultJson.put(
+        "dependentsInfo",
+        JSONArray(it.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
+      )
     }
     scanningResult?.subResults?.let {
-      scanningResultDict["subResults"] = it.map { subResult -> serializeSubResult(subResult) }
+      scanningResultJson.put(
+        "subResults",
+        JSONArray(it.map { subResult -> serializeSubResult(subResult) })
+      )
     }
 
     scanningResult?.inputImage(ScanningSide.First)?.let {
-      scanningResultDict["firstInputImage"] = encodeBase64Image(it.bitmap)
+      scanningResultJson.put("firstInputImage", encodeBase64Image(it.bitmap))
     }
     scanningResult?.inputImage(ScanningSide.Second)?.let {
-      scanningResultDict["secondInputImage"] = encodeBase64Image(it.bitmap)
+      scanningResultJson.put("secondInputImage", encodeBase64Image(it.bitmap))
     }
     scanningResult?.barcodeInputImage()?.let {
-      scanningResultDict["barcodeInputImage"] = encodeBase64Image(it.bitmap)
+      scanningResultJson.put("barcodeInputImage", encodeBase64Image(it.bitmap))
     }
     scanningResult?.documentImage(ScanningSide.First)?.let {
-      scanningResultDict["firstDocumentImage"] = encodeBase64Image(it.bitmap)
+      scanningResultJson.put("firstDocumentImage", encodeBase64Image(it.bitmap))
     }
     scanningResult?.documentImage(ScanningSide.Second)?.let {
-      scanningResultDict["secondDocumentImage"] = encodeBase64Image(it.bitmap)
+      scanningResultJson.put("secondDocumentImage", encodeBase64Image(it.bitmap))
     }
     scanningResult?.faceImage()?.let {
-      scanningResultDict["faceImage"] = serializeDetailedCroppedImageResult(it)
+      scanningResultJson.put("faceImage", serializeDetailedCroppedImageResult(it))
     }
     scanningResult?.signatureImage()?.let {
-      scanningResultDict["signatureImage"] = serializeDetailedCroppedImageResult(it)
+      scanningResultJson.put("signatureImage", serializeDetailedCroppedImageResult(it))
     }
 
-
-    return JSONObject(scanningResultDict).toString()
+    return scanningResultJson.toString()
   }
 
-  private fun <T> serializeDateResult(dateResult: DateResult<T>?): Map<String, Any?> {
-    val dateResultDict: MutableMap<String, Any?> = mutableMapOf()
+  private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject? {
+    val dateResultJson= JSONObject()
     dateResult?.day?.let {
-      dateResultDict["day"] = it
+      dateResultJson.put("day", it)
     }
     dateResult?.month?.let {
-      dateResultDict["month"] = it
+      dateResultJson.put("month", it)
     }
     dateResult?.year?.let {
-      dateResultDict["year"] = it
+      dateResultJson.put("year", it)
     }
-    dateResultDict["filledByDomainKnowledge"] = dateResult?.filledByDomainKnowledge
-    dateResultDict["successfullyParsed"] = dateResult?.successfullyParsed
-    dateResultDict["originalString"] = serializeStringType(dateResult?.originalString)
-    return dateResultDict
+    dateResultJson.put("filledByDomainKnowledge", dateResult?.filledByDomainKnowledge)
+    dateResultJson.put("successfullyParsed", dateResult?.successfullyParsed)
+    dateResultJson.put("originalString", dateResult?.originalString)
+    return dateResultJson
   }
 
-  private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): Map<String, Any> {
-    val documentClassInfoDict: MutableMap<String, Any> = mutableMapOf()
+  private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject? {
+    val documentClassInfoJson = JSONObject()
     documentClassInfo.country?.name?.let {
-      documentClassInfoDict["country"] = it.replaceFirstChar { char -> char.lowercase() }
+      documentClassInfoJson.put("country", it.replaceFirstChar { char -> char.lowercase() })
     }
     documentClassInfo.region?.name?.let {
-      documentClassInfoDict["region"] = it.replaceFirstChar { char -> char.lowercase() }
+      documentClassInfoJson.put("region", it.replaceFirstChar { char -> char.lowercase() })
     }
     documentClassInfo.type?.name?.let {
-      documentClassInfoDict["documentType"] = it.replaceFirstChar { char -> char.lowercase() }
+      documentClassInfoJson.put("documentType", it.replaceFirstChar { char -> char.lowercase() })
     }
     documentClassInfo.countryName?.let {
-      documentClassInfoDict["countryName"] = it
+      documentClassInfoJson.put("countryName", it)
     }
     documentClassInfo.isoAlpha2CountryCode?.let {
-      documentClassInfoDict["isoAlpha2CountryCode"] = it
+      documentClassInfoJson.put("isoAlpha2CountryCode", it)
     }
     documentClassInfo.isoAlpha3CountryCode?.let {
-      documentClassInfoDict["isoAlpha3CountryCode"] = it
+      documentClassInfoJson.put("isoAlpha3CountryCode", it)
     }
-    return documentClassInfoDict
+    return documentClassInfoJson
   }
 
-  private fun serializeDataMatchResult(dataMatchResult: DataMatchResult): Map<String, Any> {
-    return mapOf(
-      "states" to dataMatchResult.statePerField.map { serializeDataMatchFiled(it) },
-      "overallState" to dataMatchResult.overallState.ordinal
-    )
+  private fun serializeDataMatchResult(dataMatchResult: DataMatchResult): JSONObject {
+    val dataMatchResultJson = JSONObject()
+
+    val statesArray = JSONArray()
+    dataMatchResult.statePerField.forEach {
+      statesArray.put(serializeDataMatchFiled(it))
+    }
+
+    dataMatchResultJson.put("states", statesArray)
+    dataMatchResultJson.put("overallState", dataMatchResult.overallState.ordinal)
+
+    return dataMatchResultJson
   }
 
-  private fun serializeDataMatchFiled(dataMatchField: DataMatchFieldState): Map<String, Any> {
-    return mapOf(
-      "field" to dataMatchField.fieldType.ordinal,
-      "state" to dataMatchField.state.ordinal
-    )
+  private fun serializeDataMatchFiled(dataMatchField: DataMatchFieldState): JSONObject {
+    val dataMatchFieldJson = JSONObject()
+    dataMatchFieldJson.put("field", dataMatchField.fieldType.ordinal)
+    dataMatchFieldJson.put("state", dataMatchField.state.ordinal)
+    return dataMatchFieldJson
   }
 
-  private fun serializeStringResult(stringResult: StringResult): Map<String, Any> {
-    val stringResultDict: MutableMap<String, Any> = mutableMapOf()
+  private fun serializeStringResult(stringResult: StringResult): JSONObject? {
+    val stringResultJson = JSONObject()
+    stringResultJson.put("value", stringResult.value(AlphabetType.Latin))
+    stringResultJson.put("latin", stringResult.value(AlphabetType.Latin))
+    stringResultJson.put("arabic", stringResult.value(AlphabetType.Arabic))
+    stringResultJson.put("cyrillic", stringResult.value(AlphabetType.Cyrillic))
+    stringResultJson.put("greek", stringResult.value(AlphabetType.Greek))
 
-    stringResultDict["value"] = stringResult.value(AlphabetType.Latin)
-    stringResultDict["latin"] = stringResult.value(AlphabetType.Latin)
-    stringResultDict["arabic"] = stringResult.value(AlphabetType.Arabic)
-    stringResultDict["cyrillic"] = stringResult.value(AlphabetType.Cyrillic)
-    stringResultDict["greek"] = stringResult.value(AlphabetType.Greek)
-
-    val locationDict: MutableMap<String, Any?> = mutableMapOf()
+    val locationJson = JSONObject()
     stringResult.location(AlphabetType.Latin)?.let {
-      locationDict["latin"] = serializeLocation(it)
+      locationJson.put("latin", serializeLocation(it))
     }
     stringResult.location(AlphabetType.Arabic)?.let {
-      locationDict["arabic"] = serializeLocation(it)
+      locationJson.put("arabic", serializeLocation(it))
     }
     stringResult.location(AlphabetType.Cyrillic)?.let {
-      locationDict["cyrillic"] = serializeLocation(it)
+      locationJson.put("cyrillic", serializeLocation(it))
     }
     stringResult.location(AlphabetType.Greek)?.let {
-      locationDict["greek"] = serializeLocation(it)
+      locationJson.put("greek", serializeLocation(it))
     }
+    stringResultJson.put("location", locationJson)
 
-    val sideDict: MutableMap<String, Any?> = mutableMapOf()
+    val sideJson = JSONObject()
     stringResult.side(AlphabetType.Latin)?.let {
-      sideDict["latin"] = it.ordinal
+      sideJson.put("latin", it.ordinal)
     }
     stringResult.side(AlphabetType.Arabic)?.let {
-      sideDict["arabic"] = it.ordinal
+      sideJson.put("arabic", it.ordinal)
     }
     stringResult.side(AlphabetType.Cyrillic)?.let {
-      sideDict["cyrillic"] = it.ordinal
+      sideJson.put("cyrillic", it.ordinal)
     }
     stringResult.side(AlphabetType.Greek)?.let {
-      sideDict["greek"] = it.ordinal
+      sideJson.put("greek", it.ordinal)
     }
-    stringResultDict["side"] = sideDict
+    stringResultJson.put("side", sideJson)
 
-    return stringResultDict
+    return stringResultJson
   }
 
-  private fun serializeLocation(rectangle: Rectangle): Map<String, Any?> {
-    return mapOf(
-      "x" to rectangle.x.toDouble(),
-      "y" to rectangle.y.toDouble(),
-      "width" to rectangle.width.toDouble(),
-      "height" to rectangle.height.toDouble()
-    )
+  private fun serializeLocation(rectangle: Rectangle): JSONObject? {
+    val locationJson = JSONObject()
+    locationJson.put("x", rectangle.x.toDouble())
+    locationJson.put("y", rectangle.y.toDouble())
+    locationJson.put("width", rectangle.width.toDouble())
+    locationJson.put("height", rectangle.height.toDouble())
+    return locationJson
   }
 
-  private fun <T> serializeDriverLicenseDetailedInfo(driverLicenseDetailedInfo: DriverLicenseDetailedInfo<T>?): Map<String, Any?> {
-    return mapOf(
-      "conditions" to serializeStringType(driverLicenseDetailedInfo?.conditions),
-      "endorsements" to serializeStringType(driverLicenseDetailedInfo?.endorsements),
-      "restrictions" to serializeStringType(driverLicenseDetailedInfo?.restrictions),
-      "vehicleClass" to serializeStringType(driverLicenseDetailedInfo?.vehicleClass),
-      "vehicleClassesInfo" to driverLicenseDetailedInfo?.vehicleClassesInfo?.map {
-        serializeVehicleClassInfo(
-          it
-        )
+  private fun <T> serializeDriverLicenseDetailedInfo(
+    driverLicenseDetailedInfo: DriverLicenseDetailedInfo<T>?
+  ): JSONObject {
+    val json = JSONObject()
+
+    json.put("conditions", serializeStringType(driverLicenseDetailedInfo?.conditions))
+    json.put("endorsements", serializeStringType(driverLicenseDetailedInfo?.endorsements))
+    json.put("restrictions", serializeStringType(driverLicenseDetailedInfo?.restrictions))
+    json.put("vehicleClass", serializeStringType(driverLicenseDetailedInfo?.vehicleClass))
+
+    driverLicenseDetailedInfo?.vehicleClassesInfo?.let { vehicleClasses ->
+      val array = JSONArray()
+      for (info in vehicleClasses) {
+        array.put(serializeVehicleClassInfo(info))
       }
-    )
+      json.put("vehicleClassesInfo", array)
+    }
+
+    return json
   }
 
-  private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): Map<String, Any?> {
-    return mapOf(
-      "effectiveDate" to serializeStringType(vehicleClassInfo.effectiveDate),
-      "expiryDate" to serializeStringType(vehicleClassInfo.expiryDate),
-      "licenceType" to serializeStringType(vehicleClassInfo.licenceType),
-      "vehicleClass" to serializeStringType(vehicleClassInfo.vehicleClass)
-    )
+  private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): JSONObject {
+    val vehicleClassInfoJson = JSONObject()
+    vehicleClassInfoJson.put("effectiveDate", serializeStringType(vehicleClassInfo.effectiveDate))
+    vehicleClassInfoJson.put("expiryDate", serializeStringType(vehicleClassInfo.expiryDate))
+    vehicleClassInfoJson.put("licenceType", serializeStringType(vehicleClassInfo.licenceType))
+    vehicleClassInfoJson.put("vehicleClass", serializeStringType(vehicleClassInfo.vehicleClass))
+    return vehicleClassInfoJson
   }
 
-  private fun serializeDependentInfo(dependentInfo: DependentInfo): Map<String, Any?> {
-    val dependentInfoDict: MutableMap<String, Any?> = mutableMapOf()
+  private fun serializeDependentInfo(dependentInfo: DependentInfo): JSONObject {
+    val dependentInfoJson = JSONObject()
 
     dependentInfo.fullName?.let {
-      dependentInfoDict["fullName"] = serializeStringResult(it)
+      dependentInfoJson.put("fullName", serializeStringResult(it))
     }
     dependentInfo.sex?.let {
-      dependentInfoDict["sex"] = serializeStringResult(it)
+      dependentInfoJson.put("sex", serializeStringResult(it))
     }
     dependentInfo.dateOfBirth?.let {
-      dependentInfoDict["dateOfBirth"] = serializeDateResult(it)
+      dependentInfoJson.put("dateOfBirth", serializeDateResult(it))
     }
+
     dependentInfo.documentNumber?.let {
-      dependentInfoDict["documentNumber"] = serializeStringResult(it)
+      dependentInfoJson.put("documentNumber", serializeStringResult(it))
     }
-    return dependentInfoDict
+
+    return dependentInfoJson
   }
 
-  private fun serializeSubResult(subResult: SingleSideScanningResult): Map<String, Any?> {
-    return mapOf(
-      "barcode" to serializeBarcodeResult(subResult.barcode),
-      "barcodeInputImage" to encodeBase64Image(subResult.barcodeInputImage?.bitmap),
-      "documentImage" to encodeBase64Image(subResult.documentImage?.bitmap),
-      "faceImage" to serializeDetailedCroppedImageResult(subResult.faceImage),
-      "inputImage" to encodeBase64Image(subResult.inputImage?.bitmap),
-      "mrz" to serializeMrzResult(subResult.mrz),
-      "signatureImage" to serializeDetailedCroppedImageResult(subResult.signatureImage),
-      "viz" to serializeVizResult(subResult.viz)
-    )
+  private fun serializeSubResult(subResult: SingleSideScanningResult): JSONObject {
+    val subResultJson = JSONObject()
+    subResultJson.put("barcode", serializeBarcodeResult(subResult.barcode))
+    subResultJson.put("barcodeInputImage", encodeBase64Image(subResult.barcodeInputImage?.bitmap))
+    subResultJson.put("documentImage", encodeBase64Image(subResult.documentImage?.bitmap))
+    subResultJson.put("faceImage", serializeDetailedCroppedImageResult(subResult.faceImage))
+    subResultJson.put("inputImage", encodeBase64Image(subResult.inputImage?.bitmap))
+    subResultJson.put("mrz", serializeMrzResult(subResult.mrz))
+    subResultJson.put("signatureImage", serializeDetailedCroppedImageResult(subResult.signatureImage))
+    subResultJson.put("viz", serializeVizResult(subResult.viz))
+    return subResultJson
   }
 
-  private fun serializeBarcodeResult(barcodeResult: BarcodeResult?): Map<String, Any?> {
-    return mapOf(
-      "additionalNameInformation" to barcodeResult?.additionalNameInformation,
-      "address" to barcodeResult?.address,
-      "addressDetailedInfo" to serializeAddressDetailedInfo(barcodeResult?.addressDetailedInfo),
-      "barcodeData" to serializeBarcodeData(barcodeResult?.barcodeData),
-      "dateOfBirth" to serializeDateResult(barcodeResult?.dateOfBirth),
-      "dateOfExpiry" to serializeDateResult(barcodeResult?.dateOfExpiry),
-      "dateOfIssue" to serializeDateResult(barcodeResult?.dateOfIssue),
-      "documentAdditionalNumber" to barcodeResult?.documentAdditionalNumber,
-      "documentNumber" to barcodeResult?.documentNumber,
-      "driverLicenseDetailedInfo" to serializeDriverLicenseDetailedInfo(barcodeResult?.driverLicenseDetailedInfo),
-      "employer" to barcodeResult?.employer,
-      "extendedElements" to serializeBarcodeExtendedElements(barcodeResult?.extendedElements?.barcodeElements),
-      "firstName" to barcodeResult?.firstName,
-      "fullName" to barcodeResult?.fullName,
-      "issuingAuthority" to barcodeResult?.issuingAuthority,
-      "lastName" to barcodeResult?.lastName,
-      "maritalStatus" to barcodeResult?.maritalStatus,
-      "middleName" to barcodeResult?.middleName,
-      "nationality" to barcodeResult?.nationality,
-      "personalIdNumber" to barcodeResult?.personalIdNumber,
-      "placeOfBirth" to barcodeResult?.placeOfBirth,
-      "profession" to barcodeResult?.profession,
-      "race" to barcodeResult?.race,
-      "religion" to barcodeResult?.religion,
-      "residentialStatus" to barcodeResult?.residentialStatus,
-      "sex" to barcodeResult?.sex
-    )
+  private fun serializeBarcodeResult(barcodeResult: BarcodeResult?): JSONObject {
+    val barcodeResultJson = JSONObject()
+    barcodeResultJson.put("additionalNameInformation", barcodeResult?.additionalNameInformation)
+    barcodeResultJson.put("address", barcodeResult?.address)
+    barcodeResultJson.put("addressDetailedInfo", serializeAddressDetailedInfo(barcodeResult?.addressDetailedInfo))
+    barcodeResultJson.put("barcodeData", serializeBarcodeData(barcodeResult?.barcodeData))
+    barcodeResultJson.put("dateOfBirth", serializeDateResult(barcodeResult?.dateOfBirth))
+    barcodeResultJson.put("dateOfExpiry", serializeDateResult(barcodeResult?.dateOfExpiry))
+    barcodeResultJson.put("dateOfIssue", serializeDateResult(barcodeResult?.dateOfIssue))
+    barcodeResultJson.put("documentAdditionalNumber", barcodeResult?.documentAdditionalNumber)
+    barcodeResultJson.put("documentNumber", barcodeResult?.documentNumber)
+    barcodeResultJson.put("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(barcodeResult?.driverLicenseDetailedInfo))
+    barcodeResultJson.put("employer", barcodeResult?.employer)
+    barcodeResultJson.put("firstName",  barcodeResult?.firstName)
+    barcodeResultJson.put("fullName", barcodeResult?.fullName)
+    barcodeResultJson.put("issuingAuthority", barcodeResult?.issuingAuthority)
+    barcodeResultJson.put("lastName", barcodeResult?.lastName)
+    barcodeResultJson.put("maritalStatus", barcodeResult?.maritalStatus)
+    barcodeResultJson.put("middleName", barcodeResult?.middleName)
+    barcodeResultJson.put("nationality", barcodeResult?.nationality)
+    barcodeResultJson.put("personalIdNumber", barcodeResult?.personalIdNumber)
+    barcodeResultJson.put("placeOfBirth", barcodeResult?.placeOfBirth)
+    barcodeResultJson.put("profession", barcodeResult?.profession)
+    barcodeResultJson.put("race", barcodeResult?.race)
+    barcodeResultJson.put("religion", barcodeResult?.religion)
+    barcodeResultJson.put("residentialStatus", barcodeResult?.residentialStatus)
+    barcodeResultJson.put("sex", barcodeResult?.sex)
+    barcodeResultJson.put("extendedElements", serializeBarcodeExtendedElements(barcodeResult?.extendedElements?.barcodeElements))
+
+   return barcodeResultJson
   }
 
-  private fun serializeAddressDetailedInfo(addressDetailedInfo: AddressDetailedInfo?): Map<String, Any?> {
-    return mapOf(
-      "city" to addressDetailedInfo?.city,
-      "postalCode" to addressDetailedInfo?.postalCode,
-      "jurisdiction" to addressDetailedInfo?.jurisdiction,
-      "street" to addressDetailedInfo?.street
-    )
+  private fun serializeAddressDetailedInfo(addressDetailedInfo: AddressDetailedInfo?): JSONObject {
+    val addressDetailedInfoJson = JSONObject()
+    addressDetailedInfoJson.put("city", addressDetailedInfo?.city)
+    addressDetailedInfoJson.put("postalCode", addressDetailedInfo?.postalCode)
+    addressDetailedInfoJson.put("jurisdiction", addressDetailedInfo?.jurisdiction)
+    addressDetailedInfoJson.put("street", addressDetailedInfo?.street)
+
+    return addressDetailedInfoJson
   }
 
-  private fun serializeBarcodeData(barcodeData: BarcodeData?): Map<String, Any?> {
-    return mapOf(
-      "barcodeType" to barcodeData?.barcodeType?.ordinal,
-      "rawData" to barcodeData?.rawData.toString(),
-      "stringData" to barcodeData?.stringData,
-      "uncertain" to barcodeData?.uncertain
-    )
+  private fun serializeBarcodeData(barcodeData: BarcodeData?): JSONObject {
+    val barcodeDataJson = JSONObject()
+    barcodeDataJson.put("barcodeType", barcodeData?.barcodeType?.ordinal)
+    barcodeDataJson.put("rawData", barcodeData?.rawData.toString())
+    barcodeDataJson.put("stringData", barcodeData?.stringData)
+    barcodeDataJson.put("uncertain", barcodeData?.uncertain)
+
+    return barcodeDataJson
   }
 
-  private fun serializeMrzResult(mrzResult: MrzResult?): Map<String, Any?> {
-    return mapOf(
-      "dateOfBirth" to serializeDateResult(mrzResult?.dateOfBirth),
-      "dateOfExpiry" to serializeDateResult(mrzResult?.dateOfExpiry),
-      "documentCode" to mrzResult?.documentCode,
-      "documentNumber" to mrzResult?.documentNumber,
-      "documentType" to mrzResult?.documentType?.ordinal,
-      "gender" to mrzResult?.gender,
-      "issuer" to mrzResult?.issuer,
-      "issuerName" to mrzResult?.issuerName,
-      "nationality" to mrzResult?.nationality,
-      "nationalityName" to mrzResult?.nationalityName,
-      "opt1" to mrzResult?.opt1,
-      "opt2" to mrzResult?.opt2,
-      "primaryID" to mrzResult?.primaryID,
-      "rawMRZString" to mrzResult?.rawMRZString,
-      "sanitizedDocumentCode" to mrzResult?.sanitizedDocumentCode,
-      "sanitizedDocumentNumber" to mrzResult?.sanitizedDocumentNumber,
-      "sanitizedIssuer" to mrzResult?.sanitizedIssuer,
-      "sanitizedNationality" to mrzResult?.sanitizedNationality,
-      "sanitizedOpt1" to mrzResult?.sanitizedOpt1,
-      "sanitizedOpt2" to mrzResult?.sanitizedOpt2,
-      "secondaryID" to mrzResult?.secondaryID,
-      "verified" to mrzResult?.verified
-    )
+  private fun serializeMrzResult(mrzResult: MrzResult?): JSONObject {
+    val mrzResultJson = JSONObject()
+    mrzResultJson.put("dateOfBirth", serializeDateResult(mrzResult?.dateOfBirth))
+    mrzResultJson.put("dateOfExpiry", serializeDateResult(mrzResult?.dateOfExpiry))
+    mrzResultJson.put("documentCode", mrzResult?.documentCode)
+    mrzResultJson.put("documentNumber", mrzResult?.documentNumber)
+    mrzResultJson.put("documentType", mrzResult?.documentType?.ordinal)
+    mrzResultJson.put("gender", mrzResult?.gender)
+    mrzResultJson.put("issuer", mrzResult?.issuer)
+    mrzResultJson.put("issuerName", mrzResult?.issuerName)
+    mrzResultJson.put("nationality", mrzResult?.nationality)
+    mrzResultJson.put("nationalityName", mrzResult?.nationalityName)
+    mrzResultJson.put("opt1", mrzResult?.opt1)
+    mrzResultJson.put("opt2", mrzResult?.opt2)
+    mrzResultJson.put("primaryID", mrzResult?.primaryID)
+    mrzResultJson.put("rawMrzString", mrzResult?.rawMRZString)
+    mrzResultJson.put("sanitizedDocumentCode", mrzResult?.sanitizedDocumentCode)
+    mrzResultJson.put("sanitizedDocumentNumber", mrzResult?.sanitizedDocumentNumber)
+    mrzResultJson.put("sanitizedIssuer", mrzResult?.sanitizedIssuer)
+    mrzResultJson.put("sanitizedNationality", mrzResult?.sanitizedNationality)
+    mrzResultJson.put("sanitizedOpt1", mrzResult?.sanitizedOpt1)
+    mrzResultJson.put("sanitizedOpt2", mrzResult?.sanitizedOpt2)
+    mrzResultJson.put("secondaryID", mrzResult?.secondaryID)
+    mrzResultJson.put("verified", mrzResult?.verified)
+
+    return mrzResultJson
   }
 
-  private fun serializeVizResult(vizResult: VizResult?): Map<String, Any?> {
-    val vizResultDict: MutableMap<String, Any> = mutableMapOf()
+  private fun serializeVizResult(vizResult: VizResult?): JSONObject {
+    val vizResultJson = JSONObject()
 
     vizResult?.additionalAddressInformation?.let {
-      vizResultDict["additionalAddressInformation"] = serializeStringResult(it)
+      vizResultJson.put("additionalAddressInformation", serializeStringResult(it))
     }
     vizResult?.additionalNameInformation?.let {
-      vizResultDict["additionalNameInformation"] = serializeStringResult(it)
+      vizResultJson.put("additionalNameInformation", serializeStringResult(it))
     }
     vizResult?.additionalOptionalAddressInformation?.let {
-      vizResultDict["additionalOptionalAddressInformation"] = serializeStringResult(it)
+      vizResultJson.put("additionalOptionalAddressInformation", serializeStringResult(it))
     }
     vizResult?.additionalPersonalIdNumber?.let {
-      vizResultDict["additionalPersonalIdNumber"] = serializeStringResult(it)
+      vizResultJson.put("additionalPersonalIdNumber", serializeStringResult(it))
     }
     vizResult?.address?.let {
-      vizResultDict["address"] = serializeStringResult(it)
+      vizResultJson.put("address", serializeStringResult(it))
     }
     vizResult?.bloodType?.let {
-      vizResultDict["bloodType"] = serializeStringResult(it)
+      vizResultJson.put("bloodType", serializeStringResult(it))
     }
     vizResult?.dateOfBirth?.let {
-      vizResultDict["dateOfBirth"] = serializeDateResult(it)
+      vizResultJson.put("dateOfBirth", serializeDateResult(it))
     }
     vizResult?.dateOfExpiry?.let {
-      vizResultDict["dateOfExpiry"] = serializeDateResult(it)
+      vizResultJson.put("dateOfExpiry", serializeDateResult(it))
     }
     vizResult?.dateOfIssue?.let {
-      vizResultDict["dateOfIssue"] = serializeDateResult(it)
+      vizResultJson.put("dateOfIssue", serializeDateResult(it))
     }
     vizResult?.dateOfExpiryPermanent?.let {
-      vizResultDict["dateOfExpiryPermanent"] = it
+      vizResultJson.put("dateOfExpiryPermanent", it)
     }
     vizResult?.documentAdditionalNumber?.let {
-      vizResultDict["documentAdditionalNumber"] = serializeStringResult(it)
+      vizResultJson.put("documentAdditionalNumber", serializeStringResult(it))
     }
     vizResult?.dependentsInfo.let {
-      it?.let {
-        vizResultDict["dependentsInfo"] =
-          it.map { dependentInfo -> serializeDependentInfo(dependentInfo) }
-      }
+      vizResultJson.put(
+        "dependentsInfo",
+        JSONArray(it?.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
+      )
     }
     vizResult?.documentNumber?.let {
-      vizResultDict["documentNumber"] = serializeStringResult(it)
+      vizResultJson.put("documentNumber", serializeStringResult(it))
     }
     vizResult?.documentOptionalAdditionalNumber?.let {
-      vizResultDict["documentOptionalAdditionalNumber"] = serializeStringResult(it)
+      vizResultJson.put("documentOptionalAdditionalNumber", serializeStringResult(it))
     }
     vizResult?.documentSubtype?.let {
-      vizResultDict["documentSubtype"] = serializeStringResult(it)
+      vizResultJson.put("documentSubtype", serializeStringResult(it))
     }
     vizResult?.driverLicenseDetailedInfo?.let {
-      vizResultDict["driverLicenseDetailedInfo"] = serializeDriverLicenseDetailedInfo(it)
+      vizResultJson.put("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(it))
     }
     vizResult?.eligibilityCategory?.let {
-      vizResultDict["eligibilityCategory"] = serializeStringResult(it)
+      vizResultJson.put("eligibilityCategory", serializeStringResult(it))
     }
     vizResult?.employer?.let {
-      vizResultDict["employer"] = serializeStringResult(it)
+      vizResultJson.put("employer", serializeStringResult(it))
     }
     vizResult?.fathersName?.let {
-      vizResultDict["fathersName"] = serializeStringResult(it)
+      vizResultJson.put("fathersName", serializeStringResult(it))
     }
     vizResult?.firstName?.let {
-      vizResultDict["firstName"] = serializeStringResult(it)
+      vizResultJson.put("firstName", serializeStringResult(it))
     }
     vizResult?.fullName?.let {
-      vizResultDict["fullName"] = serializeStringResult(it)
+      vizResultJson.put("fullName", serializeStringResult(it))
     }
     vizResult?.issuingAuthority?.let {
-      vizResultDict["issuingAuthority"] = serializeStringResult(it)
+      vizResultJson.put("issuingAuthority", serializeStringResult(it))
     }
     vizResult?.lastName?.let {
-      vizResultDict["lastName"] = serializeStringResult(it)
+      vizResultJson.put("lastName", serializeStringResult(it))
     }
     vizResult?.localizedName?.let {
-      vizResultDict["localizedName"] = serializeStringResult(it)
+      vizResultJson.put("localizedName", serializeStringResult(it))
     }
     vizResult?.profession?.let {
-      vizResultDict["profession"] = serializeStringResult(it)
+      vizResultJson.put("profession", serializeStringResult(it))
     }
     vizResult?.placeOfBirth?.let {
-      vizResultDict["placeOfBirth"] = serializeStringResult(it)
+      vizResultJson.put("placeOfBirth", serializeStringResult(it))
     }
     vizResult?.personalIdNumber?.let {
-      vizResultDict["personalIdNumber"] = serializeStringResult(it)
+      vizResultJson.put("personalIdNumber", serializeStringResult(it))
     }
     vizResult?.nationality?.let {
-      vizResultDict["nationality"] = serializeStringResult(it)
+      vizResultJson.put("nationality", serializeStringResult(it))
     }
     vizResult?.mothersName?.let {
-      vizResultDict["mothersName"] = serializeStringResult(it)
+      vizResultJson.put("mothersName", serializeStringResult(it))
     }
     vizResult?.maritalStatus?.let {
-      vizResultDict["maritalStatus"] = serializeStringResult(it)
+      vizResultJson.put("maritalStatus", serializeStringResult(it))
     }
     vizResult?.manufacturingYear?.let {
-      vizResultDict["manufacturingYear"] = serializeStringResult(it)
+      vizResultJson.put("manufacturingYear", serializeStringResult(it))
     }
     vizResult?.race?.let {
-      vizResultDict["race"] = serializeStringResult(it)
+      vizResultJson.put("race", serializeStringResult(it))
     }
     vizResult?.religion?.let {
-      vizResultDict["religion"] = serializeStringResult(it)
+      vizResultJson.put("religion", serializeStringResult(it))
     }
     vizResult?.remarks?.let {
-      vizResultDict["remarks"] = serializeStringResult(it)
+      vizResultJson.put("remarks", serializeStringResult(it))
     }
     vizResult?.residencePermitType?.let {
-      vizResultDict["residencePermitType"] = serializeStringResult(it)
+      vizResultJson.put("residencePermitType", serializeStringResult(it))
     }
     vizResult?.residentialStatus?.let {
-      vizResultDict["residentialStatus"] = serializeStringResult(it)
+      vizResultJson.put("residentialStatus", serializeStringResult(it))
     }
     vizResult?.sex?.let {
-      vizResultDict["sex"] = serializeStringResult(it)
+      vizResultJson.put("sex", serializeStringResult(it))
     }
     vizResult?.specificDocumentValidity?.let {
-      vizResultDict["specificDocumentValidity"] = serializeStringResult(it)
+      vizResultJson.put("specificDocumentValidity", serializeStringResult(it))
     }
     vizResult?.sponsor?.let {
-      vizResultDict["sponsor"] = serializeStringResult(it)
+      vizResultJson.put("sponsor", serializeStringResult(it))
     }
     vizResult?.vehicleOwner?.let {
-      vizResultDict["vehicleOwner"] = serializeStringResult(it)
+      vizResultJson.put("vehicleOwner", serializeStringResult(it))
     }
     vizResult?.vehicleType?.let {
-      vizResultDict["vehicleType"] = serializeStringResult(it)
+      vizResultJson.put("vehicleType", serializeStringResult(it))
     }
     vizResult?.visaType?.let {
-      vizResultDict["visaType"] = serializeStringResult(it)
+      vizResultJson.put("visaType", serializeStringResult(it))
     }
-    return vizResultDict
+    return vizResultJson
   }
 
-  private fun serializeDetailedCroppedImageResult(detailedCroppedImageResult: DetailedCroppedImageResult?): Map<String, Any> {
-    val detailedCroppedImageResultDict: MutableMap<String, Any> = mutableMapOf()
+  private fun serializeDetailedCroppedImageResult(detailedCroppedImageResult: DetailedCroppedImageResult?): JSONObject {
+    val detailedCroppedImageResultJson = JSONObject()
+
     detailedCroppedImageResult?.bitmap?.let {
       encodeBase64Image(it)?.let { image ->
-        detailedCroppedImageResultDict["image"] = image
+        detailedCroppedImageResultJson.put("image", image)
       }
     }
     detailedCroppedImageResult?.location?.let {
-      detailedCroppedImageResultDict["location"] = serializeLocation(it)
+      detailedCroppedImageResultJson.put("location", serializeLocation(it))
     }
     detailedCroppedImageResult?.side?.let {
-      detailedCroppedImageResultDict["side"] = it.ordinal
+      detailedCroppedImageResultJson.put("side", it.ordinal)
+
     }
-    return detailedCroppedImageResultDict
+    return detailedCroppedImageResultJson
   }
 
-  private fun serializeBarcodeExtendedElements(barcodeExtendedElements: Array<BarcodeElement>?): Map<String, Any?> {
-    val barcodeExtendedElementsDict: MutableMap<String, Any?> = mutableMapOf()
+  private fun serializeBarcodeExtendedElements(barcodeExtendedElements: Array<BarcodeElement>?): JSONObject {
+    val barcodeExtendedElementsJson = JSONObject()
+
     barcodeExtendedElements?.let {
       it.map { element ->
-        barcodeExtendedElementsDict[element.key.name.replaceFirstChar { char -> char.lowercase() }] =
-          element.value
+        barcodeExtendedElementsJson.put(element.key.name.replaceFirstChar { char -> char.lowercase() }, element.value)
       }
     }
-    return barcodeExtendedElementsDict
+    return barcodeExtendedElementsJson
   }
 
   private fun serializeStringType(value: Any?): Any? {
