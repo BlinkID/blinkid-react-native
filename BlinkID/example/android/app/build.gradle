@@ -79,7 +79,7 @@ android {
 
     namespace "blinkidreactnative.example"
     defaultConfig {
-        applicationId "blinkidreactnative.example"
+        applicationId 'com.microblink.sample'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

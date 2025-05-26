@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Platform
 } from 'react-native';
 import { performScan, performDirectApiScan } from 'blinkid-react-native';
 import {
@@ -46,9 +47,13 @@ export default function App() {
 
   const handlePerformScan = async () => {
     try {
-      const settings = new BlinkIdSdkSettings(
-        'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
-      );
+      let licenseKey = "";
+      if (Platform.OS == 'ios') {
+        licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ==';
+      } else if (Platform.OS == 'android') {
+                licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhOREEwTkRnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRa9SyKj7hAPz1SXQtyKj4KqR7EaKJiHiKtUjMvnpse12U2wrgGGOd4w61PGSxu0C+lp3pS+oHB0LNlHXKaVu2n9VsKWnPtEymQflYdUM4LjlsYhdzuOg8WBsvpvrA==';
+      }
+      const settings = new BlinkIdSdkSettings(licenseKey);
 
       const sessionSettings = new BlinkIdSessionSettings();
       sessionSettings.scanningMode = ScanningMode.Automatic;
@@ -67,10 +72,10 @@ export default function App() {
       const classFilter = new ClassFilter();
       classFilter.includeDocuments = [
         new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
-        new DocumentFilter(Country.USA, Region.California, DocumentType.Dl),
+        new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
       ];
 
-      await performScan(settings, sessionSettings) //, classFilter)
+      await performScan(settings, sessionSettings, classFilter)
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setFirstCroppedImage(result.firstDocumentImage);

@@ -18,6 +18,7 @@ buildscript {
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+apply plugin: 'kotlin-parcelize'
 
 apply plugin: "com.facebook.react"
 
@@ -74,6 +75,7 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation("com.microblink:blinkid-ux:7.2.0")
 }
 
 react {
