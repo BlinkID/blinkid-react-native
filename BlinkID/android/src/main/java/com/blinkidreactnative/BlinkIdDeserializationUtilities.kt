@@ -35,7 +35,7 @@ import com.microblink.core.network.RequestTimeout
 import org.json.JSONArray
 import org.json.JSONObject
 
-object BlinkIdDeserializationUtils {
+object BlinkIdDeserializationUtilities {
 
   fun deserializeBlinkIdSdkSettings(blinkIdSdkSettingsMap: JSONObject?): BlinkIdSdkSettings? {
     val licenseKey = blinkIdSdkSettingsMap?.get("licenseKey") as? String ?: return null
@@ -44,9 +44,19 @@ object BlinkIdDeserializationUtils {
       licenseKey = licenseKey,
       licensee = blinkIdSdkSettingsMap.optString("licensee", null),
       downloadResources = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
-      resourceDownloadUrl = blinkIdSdkSettingsMap.optString("resourceDownloadUrl", defaultResourceDownloadUrl),
-      resourceLocalFolder = blinkIdSdkSettingsMap.optString("resourceLocalFolder", defaultResourcesLocalFolder),
-      resourceRequestTimeout = deserializeResourceRequestTimeout(blinkIdSdkSettingsMap.optJSONObject("resourceRequestTimeout"))
+      resourceDownloadUrl = blinkIdSdkSettingsMap.optString(
+        "resourceDownloadUrl",
+        defaultResourceDownloadUrl
+      ),
+      resourceLocalFolder = blinkIdSdkSettingsMap.optString(
+        "resourceLocalFolder",
+        defaultResourcesLocalFolder
+      ),
+      resourceRequestTimeout = deserializeResourceRequestTimeout(
+        blinkIdSdkSettingsMap.optJSONObject(
+          "resourceRequestTimeout"
+        )
+      )
     )
   }
 
@@ -58,7 +68,11 @@ object BlinkIdDeserializationUtils {
 
     return BlinkIdSessionSettings(
       inputImageSource = if (isDirectApi) InputImageSource.Photo else InputImageSource.Video,
-      scanningMode = enumValueOf<ScanningMode>(blinkIdSdkSessionSettingsMap.optString("scanningMode", ScanningMode.Automatic.name).replaceFirstChar { char -> char.uppercase() }),
+      scanningMode = enumValueOf<ScanningMode>(
+        blinkIdSdkSessionSettingsMap.optString(
+          "scanningMode",
+          ScanningMode.Automatic.name
+        ).replaceFirstChar { char -> char.uppercase() }),
       scanningSettings = deserializeScanningSettings(blinkIdSdkSessionSettingsMap.optJSONObject("scanningSettings")),
     )
   }
@@ -66,17 +80,39 @@ object BlinkIdDeserializationUtils {
   private fun deserializeScanningSettings(scanningSettingsMap: JSONObject?): ScanningSettings {
     if (scanningSettingsMap == null) return ScanningSettings()
     return ScanningSettings(
-      blurDetectionLevel = enumValueOf<DetectionLevel>(scanningSettingsMap.optString("blurDetectionLevel", DetectionLevel.Mid.name).replaceFirstChar { char -> char.uppercase() }),
+      blurDetectionLevel = enumValueOf<DetectionLevel>(
+        scanningSettingsMap.optString(
+          "blurDetectionLevel",
+          DetectionLevel.Mid.name
+        ).replaceFirstChar { char -> char.uppercase() }),
       skipImagesWithBlur = scanningSettingsMap.optBoolean("skipImagesWithBlur", true),
-      glareDetectionLevel = enumValueOf<DetectionLevel>(scanningSettingsMap.optString("glareDetectionLevel", DetectionLevel.Mid.name).replaceFirstChar { char -> char.uppercase() }),
+      glareDetectionLevel = enumValueOf<DetectionLevel>(
+        scanningSettingsMap.optString(
+          "glareDetectionLevel",
+          DetectionLevel.Mid.name
+        ).replaceFirstChar { char -> char.uppercase() }),
       skipImagesWithGlare = scanningSettingsMap["skipImagesWithGlare"] as? Boolean ?: true,
-      tiltDetectionLevel = enumValueOf<DetectionLevel>(scanningSettingsMap.optString("tiltDetectionLevel", DetectionLevel.Off.name).replaceFirstChar { char -> char.uppercase() }),
-      skipImagesWithInadequateLightingConditions = scanningSettingsMap.optBoolean("skipImagesWithInadequateLightingConditions", true),
+      tiltDetectionLevel = enumValueOf<DetectionLevel>(
+        scanningSettingsMap.optString(
+          "tiltDetectionLevel",
+          DetectionLevel.Off.name
+        ).replaceFirstChar { char -> char.uppercase() }),
+      skipImagesWithInadequateLightingConditions = scanningSettingsMap.optBoolean(
+        "skipImagesWithInadequateLightingConditions",
+        true
+      ),
       skipImagesOccludedByHand = scanningSettingsMap.optBoolean("skipImagesOccludedByHand", true),
-      combineResultsFromMultipleInputImages = scanningSettingsMap.optBoolean("combineResultsFromMultipleInputImages", true),
+      combineResultsFromMultipleInputImages = scanningSettingsMap.optBoolean(
+        "combineResultsFromMultipleInputImages",
+        true
+      ),
       enableBarcodeScanOnly = scanningSettingsMap.optBoolean("enableBarcodeScanOnly", false),
       customDocumentRules = deserializeDocumentRules(scanningSettingsMap.optJSONArray("customDocumentRules")),
-      anonymizationMode = enumValueOf<AnonymizationMode>(scanningSettingsMap.optString("anonymizationMode", AnonymizationMode.FullResult.name).replaceFirstChar { char -> char.uppercase() }),
+      anonymizationMode = enumValueOf<AnonymizationMode>(
+        scanningSettingsMap.optString(
+          "anonymizationMode",
+          AnonymizationMode.FullResult.name
+        ).replaceFirstChar { char -> char.uppercase() }),
       customDocumentAnonymizationSettings = deserializeCustomAnonymizationSettings(
         scanningSettingsMap.optJSONArray("customDocumentAnonymizationSettings")
       ),
@@ -86,8 +122,14 @@ object BlinkIdDeserializationUtils {
       enableCharacterValidation = scanningSettingsMap.optBoolean("enableCharacterValidation", true),
       inputImageMargin = (scanningSettingsMap.optDouble("inputImageMargin", 0.02)).toFloat(),
       scanUnsupportedBack = scanningSettingsMap.optBoolean("scanUnsupportedBack", false),
-      allowUncertainFrontSideScan = scanningSettingsMap.optBoolean("allowUncertainFrontSideScan", false),
-      maxAllowedMismatchesPerField = (scanningSettingsMap.optInt("maxAllowedMismatchesPerField", 0)).toUInt(),
+      allowUncertainFrontSideScan = scanningSettingsMap.optBoolean(
+        "allowUncertainFrontSideScan",
+        false
+      ),
+      maxAllowedMismatchesPerField = (scanningSettingsMap.optInt(
+        "maxAllowedMismatchesPerField",
+        0
+      )).toUInt(),
       scanPassportDataPageOnly = scanningSettingsMap.optBoolean("scanPassportDataPageOnly", true),
       croppedImageSettings = deserializeCroppedImageSettings(scanningSettingsMap.optJSONObject("croppedImageSettings")),
     )
@@ -107,7 +149,10 @@ object BlinkIdDeserializationUtils {
   private fun deserializeResourceRequestTimeout(resourceRequestTimeoutMap: JSONObject?): RequestTimeout {
     if (resourceRequestTimeoutMap == null) return RequestTimeout.DEFAULT
     return RequestTimeout(
-      connectionTimeoutMillis = resourceRequestTimeoutMap.optInt("connectionTimeoutMilliseconds", 10000),
+      connectionTimeoutMillis = resourceRequestTimeoutMap.optInt(
+        "connectionTimeoutMilliseconds",
+        10000
+      ),
       writeTimeoutMillis = resourceRequestTimeoutMap.optInt("writeTimeoutMilliseconds", 10000),
       readTimeoutMillis = resourceRequestTimeoutMap.optInt("readTimeoutMilliseconds", 10000)
     )
@@ -128,9 +173,9 @@ object BlinkIdDeserializationUtils {
         val fields = mutableListOf<DetailedFieldType>()
         for (j in 0 until fieldsJsonArray.length()) {
           val fieldTypeJson = fieldsJsonArray.optJSONObject(j)
-            deserializeDetailedFieldType(fieldTypeJson)?.let { deserialized ->
-              fields.add(deserialized)
-            }
+          deserializeDetailedFieldType(fieldTypeJson)?.let { deserialized ->
+            fields.add(deserialized)
+          }
         }
 
         val documentFilter = documentFilterJson?.let { deserializeDocumentFilter(it) }
@@ -194,24 +239,24 @@ object BlinkIdDeserializationUtils {
           val enumName = raw.replaceFirstChar { it.uppercase() }
           runCatching { enumValueOf<FieldType>(enumName) }
             .onSuccess { deserializedFields.add(it) }
-            .onFailure { println("Unknown enum case: $enumName") }
         }
       }
 
-      val documentFilter = item.optJSONObject("documentFilter")?.let { deserializeDocumentFilter(it) }
+      val documentFilter =
+        item.optJSONObject("documentFilter")?.let { deserializeDocumentFilter(it) }
       val documentNumberAnonymizationSettings = item
         .optJSONObject("documentNumberAnonymizationSettings")
         ?.let { deserializeDocumentNumberAnonymizationSettings(it) }
 
-    documentFilter?.let {
-      customAnonymizationList.add(
-        DocumentAnonymizationSettings(
-          documentFilter,
-          deserializedFields,
-          documentNumberAnonymizationSettings
+      documentFilter?.let {
+        customAnonymizationList.add(
+          DocumentAnonymizationSettings(
+            documentFilter,
+            deserializedFields,
+            documentNumberAnonymizationSettings
+          )
         )
-      )
-    }
+      }
     }
 
     return customAnonymizationList
@@ -221,8 +266,14 @@ object BlinkIdDeserializationUtils {
   private fun deserializeDocumentNumberAnonymizationSettings(documentNumberAnonymizationSettingsMap: JSONObject?): DocumentNumberAnonymizationSettings? {
     if (documentNumberAnonymizationSettingsMap == null) return null
     return DocumentNumberAnonymizationSettings(
-      prefixDigitsVisible = (documentNumberAnonymizationSettingsMap.optInt("prefixDigitsVisible", 0)).toUByte(),
-      suffixDigitsVisible = (documentNumberAnonymizationSettingsMap.optInt("suffixDigitsVisible", 0)).toUByte()
+      prefixDigitsVisible = (documentNumberAnonymizationSettingsMap.optInt(
+        "prefixDigitsVisible",
+        0
+      )).toUByte(),
+      suffixDigitsVisible = (documentNumberAnonymizationSettingsMap.optInt(
+        "suffixDigitsVisible",
+        0
+      )).toUByte()
     )
   }
 
@@ -246,7 +297,10 @@ object BlinkIdDeserializationUtils {
   ): BlinkIdUxSettings {
     if (blinkidUxSettingsMap == null) return BlinkIdUxSettings()
     return BlinkIdUxSettings(
-      stepTimeoutDuration = (blinkidUxSettingsMap.optInt("stepTimeoutDuration",15000).milliseconds),
+      stepTimeoutDuration = (blinkidUxSettingsMap.optInt(
+        "stepTimeoutDuration",
+        15000
+      ).milliseconds),
       classFilter = classFilterMap?.let { CustomClassFilter(it.toString()) }
     )
   }
@@ -272,7 +326,8 @@ object BlinkIdDeserializationUtils {
     val excludedClasses = classFilterMap.optJSONArray("excludeDocuments")
     if (excludedClasses != null) {
       for (i in 0 until excludedClasses.length()) {
-        excludeClass = excludeClass && !matchClassFilter(excludedClasses.optJSONObject(i), classInfo)
+        excludeClass =
+          excludeClass && !matchClassFilter(excludedClasses.optJSONObject(i), classInfo)
       }
     }
 
@@ -280,16 +335,16 @@ object BlinkIdDeserializationUtils {
   }
 
   private fun matchClassFilter(
-    filteredClass: JSONObject,
+    filteredClass: JSONObject?,
     classInfo: DocumentClassInfo
   ): Boolean {
-    val country = filteredClass.optString("country")
-    val region = filteredClass.optString("region")
-    val documentType = filteredClass.optString("documentType")
+    val country = filteredClass?.optString("country")
+    val region = filteredClass?.optString("region")
+    val documentType = filteredClass?.optString("documentType")
 
-    return (country == null || enumValueOf<Country>(country.replaceFirstChar { char -> char.uppercase() }) == classInfo.country) &&
-      (region == null || enumValueOf<Region>(region.replaceFirstChar { char -> char.uppercase() }) == classInfo.region) &&
-      (documentType == null || enumValueOf<Type>(documentType.replaceFirstChar { char -> char.uppercase() }) == classInfo.type)
+    return (country.isNullOrEmpty() || enumValueOf<Country>(country.replaceFirstChar { char -> char.uppercase() }) == classInfo.country) &&
+      (region.isNullOrEmpty() || enumValueOf<Region>(region.replaceFirstChar { char -> char.uppercase() }) == classInfo.region) &&
+      (documentType.isNullOrEmpty() || enumValueOf<Type>(documentType.replaceFirstChar { char -> char.uppercase() }) == classInfo.type)
   }
 
   fun base64ToBitmap(base64Str: String?): Bitmap? {
@@ -308,6 +363,9 @@ private class CustomClassFilter(
 ) : ClassFilter, Parcelable {
 
   override fun classAllowed(documentClass: DocumentClassInfo): Boolean {
-    return BlinkIdDeserializationUtils.deserializeClassFilter(JSONObject(classFilterMap), documentClass)
+    return BlinkIdDeserializationUtilities.deserializeClassFilter(
+      JSONObject(classFilterMap),
+      documentClass
+    )
   }
 }

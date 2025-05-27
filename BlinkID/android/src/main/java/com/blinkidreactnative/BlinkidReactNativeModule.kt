@@ -1,7 +1,6 @@
 package com.blinkidreactnative
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.Promise
@@ -16,7 +15,6 @@ import com.microblink.core.LicenseLockedException
 import com.microblink.core.image.InputImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -35,14 +33,19 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
 
   init {
     reactApplicationContext.addActivityEventListener(object : BaseActivityEventListener() {
-      override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+      override fun onActivityResult(
+        activity: Activity?,
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+      ) {
         if (requestCode == BLINKID_REQUEST_CODE) {
 
           val blinkIdResult = MbBlinkIdScan().parseResult(resultCode, data)
           when (blinkIdResult.status) {
             BlinkIdScanActivityResultStatus.DocumentScanned -> {
               blinkIdResult.result?.let { scanningResult ->
-                val success = BlinkIdSerializationUtils.serializeBlinkIdScanningResult(
+                val success = BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(
                   scanningResult
                 )
                 pendingPromise?.resolve(success)
@@ -75,40 +78,46 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
   ) {
     pendingPromise = promise
 
-      try {
-        val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
-        val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
-        val classFilterJson = classFilter?.let { JSONObject(it) }
+    try {
+      val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
+      val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
+      val classFilterJson = classFilter?.let { JSONObject(it) }
 
-        val sdkSettings = sdkSettingsJson?.let {
-          BlinkIdDeserializationUtils.deserializeBlinkIdSdkSettings(it)
-        } ?: run {
-          pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings.")
-          return
-        }
+      val sdkSettings = sdkSettingsJson?.let {
+        BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(it)
+      } ?: run {
+        pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings.")
+        return
+      }
 
-        currentActivity?.applicationContext?.let {
-          val intent = MbBlinkIdScan().createIntent(
-            it,
-            BlinkIdScanActivitySettings(
-              sdkSettings = sdkSettings,
-              scanningSessionSettings = BlinkIdDeserializationUtils.deserializeBlinkIdSessionSettings(sessionSettingsJson, false),
-              uxSettings = BlinkIdDeserializationUtils.deserializeBlinkIdUxSettings(sessionSettingsJson, classFilterJson)
+      currentActivity?.applicationContext?.let {
+        val intent = MbBlinkIdScan().createIntent(
+          it,
+          BlinkIdScanActivitySettings(
+            sdkSettings = sdkSettings,
+            scanningSessionSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
+              sessionSettingsJson,
+              false
+            ),
+            uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdUxSettings(
+              sessionSettingsJson,
+              classFilterJson
             )
           )
-          currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
-        }?: pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Activity not found.")
-      } catch (error: Exception) {
-        when (error) {
-          is LicenseLockedException -> {
-            pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
-          }
+        )
+        currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
+      } ?: pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Activity not found.")
+    } catch (error: Exception) {
+      when (error) {
+        is LicenseLockedException -> {
+          pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
+        }
 
-          else -> {
-            pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
-          }
+        else -> {
+          pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
         }
       }
+    }
   }
 
   override fun performDirectApiScan(
@@ -123,10 +132,11 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
         val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
         val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
 
-        val sdkSettings = BlinkIdDeserializationUtils.deserializeBlinkIdSdkSettings(sdkSettingsJson)
-          ?: return@launch withContext(Dispatchers.Main) {
-            promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
-          }
+        val sdkSettings =
+          BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(sdkSettingsJson)
+            ?: return@launch withContext(Dispatchers.Main) {
+              promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
+            }
 
         val context = currentActivity?.applicationContext
           ?: return@launch withContext(Dispatchers.Main) {
@@ -134,46 +144,53 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
           }
 
         val sdkInit = BlinkIdSdk.initializeSdk(context, sdkSettings)
+        when {
+          sdkInit.isSuccess -> {
+            val instance = sdkInit.getOrNull() ?: return@launch withContext(Dispatchers.Main) {
+              promise?.reject(BLINKID_ERROR_RESULT_CODE, "SDK returned null instance")
+            }
 
-        if (sdkInit.isFailure) {
-          return@launch withContext(Dispatchers.Main) {
-            promise?.reject(BLINKID_ERROR_RESULT_CODE, sdkInit.exceptionOrNull()?.message)
+            val session = instance.createScanningSession(
+              BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
+                sessionSettingsJson,
+                true
+              )
+            )
+
+            val inputImages = listOfNotNull(
+              firstImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) },
+              secondImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) }
+            )
+
+            var result: Result<BlinkIdProcessResult>? = null
+
+            for (img in inputImages) {
+              result = session.process(InputImage.createFromBitmap(img))
+            }
+
+            if (result?.isSuccess == true) {
+              val scanResult = session.getResult()
+              val resultJson =
+                BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
+
+              withContext(Dispatchers.Main) {
+                promise?.resolve(resultJson.toString())
+              }
+            } else {
+              withContext(Dispatchers.Main) {
+                promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
+              }
+            }
+
+            instance.close()
+          }
+
+          sdkInit.isFailure -> {
+            return@launch withContext(Dispatchers.Main) {
+              promise?.reject(BLINKID_ERROR_RESULT_CODE, sdkInit.exceptionOrNull()?.message)
+            }
           }
         }
-
-        val instance = sdkInit.getOrNull() ?: return@launch withContext(Dispatchers.Main) {
-          promise?.reject(BLINKID_ERROR_RESULT_CODE, "SDK returned null instance")
-        }
-
-        val session = instance.createScanningSession(
-          BlinkIdDeserializationUtils.deserializeBlinkIdSessionSettings(sessionSettingsJson, true)
-        )
-
-        val inputImages = listOfNotNull(
-          firstImage?.let { BlinkIdDeserializationUtils.base64ToBitmap(it) },
-          secondImage?.let { BlinkIdDeserializationUtils.base64ToBitmap(it) }
-        )
-
-        var result: Result<BlinkIdProcessResult>? = null
-
-        for (img in inputImages) {
-          result = session.process(InputImage.createFromBitmap(img))
-        }
-
-        if (result?.isSuccess == true) {
-          val scanResult = session.getResult()
-          val resultJson = BlinkIdSerializationUtils.serializeBlinkIdScanningResult(scanResult)
-
-          withContext(Dispatchers.Main) {
-            promise?.resolve(resultJson.toString())
-          }
-        } else {
-          withContext(Dispatchers.Main) {
-            promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
-          }
-        }
-
-        instance.close()
 
       } catch (e: Exception) {
         withContext(Dispatchers.Main) {
@@ -182,7 +199,6 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       }
     }
   }
-
 
   companion object {
     const val NAME = "BlinkidReactNative"

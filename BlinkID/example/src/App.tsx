@@ -29,21 +29,15 @@ import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
   const [result, setResult] = useState<string>(
-    'Press the "Perform Scan" button for default BlinkID UX scanning experience.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.'
+    'Press the "Perform Scan" button for default BlinkID UX scanning experience with the device camera.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.'
   );
 
-  const [firstCroppedImage, setFirstCroppedImage] = useState<
-    string | undefined
-  >();
-  const [secondCroppedImage, setSecondCroppedImage] = useState<
-    string | undefined
-  >();
+  const [firstCroppedImage, setFirstCroppedImage] = useState<string | undefined>();
+  const [secondCroppedImage, setSecondCroppedImage] = useState<string | undefined>();
   const [faceImage, setFaceImage] = useState<string | undefined>();
   const [signatureImage, setSignatureImage] = useState<string | undefined>();
   const [firstInputImage, setFirstInputImage] = useState<string | undefined>();
-  const [secondInputImage, setSecondInputImage] = useState<
-    string | undefined
-  >();
+  const [secondInputImage, setSecondInputImage] = useState<string | undefined>();
 
   const handlePerformScan = async () => {
     try {
@@ -93,7 +87,7 @@ export default function App() {
     }
   };
 
-  const handlePerformDirectApiScan = async () => {
+  const handlePerformDirectApiMultiSideScan = async () => {
   try {
     // Pick first image
     const first = await launchImageLibrary({
@@ -120,11 +114,14 @@ export default function App() {
     }
 
     const secondImage = second.assets[0].base64;
-
+     let licenseKey = "";
+      if (Platform.OS == 'ios') {
+        licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ==';
+      } else if (Platform.OS == 'android') {
+                licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhOREEwTkRnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRa9SyKj7hAPz1SXQtyKj4KqR7EaKJiHiKtUjMvnpse12U2wrgGGOd4w61PGSxu0C+lp3pS+oHB0LNlHXKaVu2n9VsKWnPtEymQflYdUM4LjlsYhdzuOg8WBsvpvrA==';
+      }
     // SDK setup
-    const settings = new BlinkIdSdkSettings(
-      'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ=='
-    );
+    const settings = new BlinkIdSdkSettings(licenseKey);
 
     const sessionSettings = new BlinkIdSessionSettings();
     sessionSettings.scanningMode = ScanningMode.Automatic;
@@ -160,12 +157,72 @@ export default function App() {
   }
   };
 
+    const handlePerformDirectApiSingleSideScan = async () => {
+  try {
+    // Pick first image
+    const first = await launchImageLibrary({
+      mediaType: 'photo',
+      includeBase64: true,
+    });
+
+    if (first.assets == null || !first.assets[0]?.base64) {
+      setResult("First image not selected or invalid.");
+      return;
+    }
+
+    const firstImage = first.assets[0].base64;
+
+     let licenseKey = "";
+      if (Platform.OS == 'ios') {
+        licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ==';
+      } else if (Platform.OS == 'android') {
+                licenseKey = 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhOREEwTkRnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRa9SyKj7hAPz1SXQtyKj4KqR7EaKJiHiKtUjMvnpse12U2wrgGGOd4w61PGSxu0C+lp3pS+oHB0LNlHXKaVu2n9VsKWnPtEymQflYdUM4LjlsYhdzuOg8WBsvpvrA==';
+      }
+    // SDK setup
+    const settings = new BlinkIdSdkSettings(licenseKey);
+
+    const sessionSettings = new BlinkIdSessionSettings();
+    sessionSettings.scanningMode = ScanningMode.Single;
+
+    const scanningSettings = new BlinkIdScanningSettings();
+    scanningSettings.returnInputImages = true;
+
+     const croppedImageSettings = new CroppedImageSettings();
+    croppedImageSettings.returnDocumentImage = true;
+    croppedImageSettings.returnFaceImage = true;
+    croppedImageSettings.returnSignatureImage = true;
+
+    scanningSettings.croppedImageSettings = croppedImageSettings;
+    sessionSettings.scanningSettings = scanningSettings;
+
+    // Call scan method with base64 strings
+    await performDirectApiScan(settings, sessionSettings, firstImage)
+      .then((result: BlinkIdScanningResult) => {
+        setResult(BlinkIdResultBuilder.getIdResultString(result));
+        setFirstCroppedImage(result.firstDocumentImage);
+        setSecondCroppedImage(result.secondDocumentImage);
+        setFaceImage(result.faceImage?.image);
+        setSignatureImage(result.signatureImage?.image);
+        setFirstInputImage(result.firstInputImage);
+        setSecondInputImage(result.secondInputImage);
+      })
+      .catch((error) => {
+        setResult(`Error during scan: ${error}`);
+      });
+
+  } catch (error) {
+    setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
+  }
+  };
+
   return (
     <View style={styles.container}>
       <View>
         <Button title="Perform Scan" onPress={handlePerformScan} />
         <View style={styles.spacer} />
-        <Button title="Direct API Scan" onPress={handlePerformDirectApiScan} />
+        <Button title="Direct API MultiSide Scan" onPress={handlePerformDirectApiMultiSideScan} />
+        <View style={styles.spacer}/>
+        <Button title="Direct API SingleSide Scan" onPress={handlePerformDirectApiSingleSideScan} />
       </View>
 
       <ScrollView style={styles.resultBox}>
@@ -231,7 +288,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     padding: 10,
     borderRadius: 8,
-    maxHeight: 300,
+    maxHeight: "auto",
   },
 
   imageScroll: {

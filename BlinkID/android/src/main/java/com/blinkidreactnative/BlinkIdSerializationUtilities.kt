@@ -24,10 +24,9 @@ import java.io.ByteArrayOutputStream
 import android.util.Base64
 import com.microblink.blinkid.core.result.ScanningSide
 import com.microblink.blinkid.core.result.barcode.BarcodeElement
-import kotlinx.serialization.json.Json
 import org.json.JSONArray
 
-object BlinkIdSerializationUtils {
+object BlinkIdSerializationUtilities {
   fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String? {
     val scanningResultJson: JSONObject = JSONObject()
 
@@ -200,7 +199,7 @@ object BlinkIdSerializationUtils {
   }
 
   private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject? {
-    val dateResultJson= JSONObject()
+    val dateResultJson = JSONObject()
     dateResult?.day?.let {
       dateResultJson.put("day", it)
     }
@@ -368,7 +367,10 @@ object BlinkIdSerializationUtils {
     subResultJson.put("faceImage", serializeDetailedCroppedImageResult(subResult.faceImage))
     subResultJson.put("inputImage", encodeBase64Image(subResult.inputImage?.bitmap))
     subResultJson.put("mrz", serializeMrzResult(subResult.mrz))
-    subResultJson.put("signatureImage", serializeDetailedCroppedImageResult(subResult.signatureImage))
+    subResultJson.put(
+      "signatureImage",
+      serializeDetailedCroppedImageResult(subResult.signatureImage)
+    )
     subResultJson.put("viz", serializeVizResult(subResult.viz))
     return subResultJson
   }
@@ -377,16 +379,22 @@ object BlinkIdSerializationUtils {
     val barcodeResultJson = JSONObject()
     barcodeResultJson.put("additionalNameInformation", barcodeResult?.additionalNameInformation)
     barcodeResultJson.put("address", barcodeResult?.address)
-    barcodeResultJson.put("addressDetailedInfo", serializeAddressDetailedInfo(barcodeResult?.addressDetailedInfo))
+    barcodeResultJson.put(
+      "addressDetailedInfo",
+      serializeAddressDetailedInfo(barcodeResult?.addressDetailedInfo)
+    )
     barcodeResultJson.put("barcodeData", serializeBarcodeData(barcodeResult?.barcodeData))
     barcodeResultJson.put("dateOfBirth", serializeDateResult(barcodeResult?.dateOfBirth))
     barcodeResultJson.put("dateOfExpiry", serializeDateResult(barcodeResult?.dateOfExpiry))
     barcodeResultJson.put("dateOfIssue", serializeDateResult(barcodeResult?.dateOfIssue))
     barcodeResultJson.put("documentAdditionalNumber", barcodeResult?.documentAdditionalNumber)
     barcodeResultJson.put("documentNumber", barcodeResult?.documentNumber)
-    barcodeResultJson.put("driverLicenseDetailedInfo", serializeDriverLicenseDetailedInfo(barcodeResult?.driverLicenseDetailedInfo))
+    barcodeResultJson.put(
+      "driverLicenseDetailedInfo",
+      serializeDriverLicenseDetailedInfo(barcodeResult?.driverLicenseDetailedInfo)
+    )
     barcodeResultJson.put("employer", barcodeResult?.employer)
-    barcodeResultJson.put("firstName",  barcodeResult?.firstName)
+    barcodeResultJson.put("firstName", barcodeResult?.firstName)
     barcodeResultJson.put("fullName", barcodeResult?.fullName)
     barcodeResultJson.put("issuingAuthority", barcodeResult?.issuingAuthority)
     barcodeResultJson.put("lastName", barcodeResult?.lastName)
@@ -400,9 +408,12 @@ object BlinkIdSerializationUtils {
     barcodeResultJson.put("religion", barcodeResult?.religion)
     barcodeResultJson.put("residentialStatus", barcodeResult?.residentialStatus)
     barcodeResultJson.put("sex", barcodeResult?.sex)
-    barcodeResultJson.put("extendedElements", serializeBarcodeExtendedElements(barcodeResult?.extendedElements?.barcodeElements))
+    barcodeResultJson.put(
+      "extendedElements",
+      serializeBarcodeExtendedElements(barcodeResult?.extendedElements?.barcodeElements)
+    )
 
-   return barcodeResultJson
+    return barcodeResultJson
   }
 
   private fun serializeAddressDetailedInfo(addressDetailedInfo: AddressDetailedInfo?): JSONObject {
@@ -611,7 +622,10 @@ object BlinkIdSerializationUtils {
 
     barcodeExtendedElements?.let {
       it.map { element ->
-        barcodeExtendedElementsJson.put(element.key.name.replaceFirstChar { char -> char.lowercase() }, element.value)
+        barcodeExtendedElementsJson.put(
+          element.key.name.replaceFirstChar { char -> char.lowercase() },
+          element.value
+        )
       }
     }
     return barcodeExtendedElementsJson
