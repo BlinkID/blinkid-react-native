@@ -1,15 +1,24 @@
 package com.blinkidreactnative
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.annotations.ReactModule
+import com.microblink.blinkid.core.BlinkIdSdk
+import com.microblink.blinkid.core.session.BlinkIdProcessResult
 import com.microblink.blinkid.ux.contract.BlinkIdScanActivityResultStatus
 import com.microblink.blinkid.ux.contract.BlinkIdScanActivitySettings
 import com.microblink.blinkid.ux.contract.MbBlinkIdScan
 import com.microblink.core.LicenseLockedException
+import com.microblink.core.image.InputImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 @ReactModule(name = BlinkidReactNativeModule.NAME)
@@ -109,8 +118,71 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     secondImage: String?,
     promise: Promise?
   ) {
+    CoroutineScope(Dispatchers.Default).launch {
+      try {
+        val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
+        val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
 
+        val sdkSettings = BlinkIdDeserializationUtils.deserializeBlinkIdSdkSettings(sdkSettingsJson)
+          ?: return@launch withContext(Dispatchers.Main) {
+            promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
+          }
+
+        val context = currentActivity?.applicationContext
+          ?: return@launch withContext(Dispatchers.Main) {
+            promise?.reject(BLINKID_ERROR_RESULT_CODE, "No activity")
+          }
+
+        val sdkInit = BlinkIdSdk.initializeSdk(context, sdkSettings)
+
+        if (sdkInit.isFailure) {
+          return@launch withContext(Dispatchers.Main) {
+            promise?.reject(BLINKID_ERROR_RESULT_CODE, sdkInit.exceptionOrNull()?.message)
+          }
+        }
+
+        val instance = sdkInit.getOrNull() ?: return@launch withContext(Dispatchers.Main) {
+          promise?.reject(BLINKID_ERROR_RESULT_CODE, "SDK returned null instance")
+        }
+
+        val session = instance.createScanningSession(
+          BlinkIdDeserializationUtils.deserializeBlinkIdSessionSettings(sessionSettingsJson, true)
+        )
+
+        val inputImages = listOfNotNull(
+          firstImage?.let { BlinkIdDeserializationUtils.base64ToBitmap(it) },
+          secondImage?.let { BlinkIdDeserializationUtils.base64ToBitmap(it) }
+        )
+
+        var result: Result<BlinkIdProcessResult>? = null
+
+        for (img in inputImages) {
+          result = session.process(InputImage.createFromBitmap(img))
+        }
+
+        if (result?.isSuccess == true) {
+          val scanResult = session.getResult()
+          val resultJson = BlinkIdSerializationUtils.serializeBlinkIdScanningResult(scanResult)
+
+          withContext(Dispatchers.Main) {
+            promise?.resolve(resultJson.toString())
+          }
+        } else {
+          withContext(Dispatchers.Main) {
+            promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
+          }
+        }
+
+        instance.close()
+
+      } catch (e: Exception) {
+        withContext(Dispatchers.Main) {
+          promise?.reject(BLINKID_ERROR_RESULT_CODE, e.message)
+        }
+      }
+    }
   }
+
 
   companion object {
     const val NAME = "BlinkidReactNative"
