@@ -347,9 +347,6 @@ export class BlinkIdScanningResult {
    *
    */
   constructor(nativeBlinkIdResult: any) {
-    console.log('firstName:', nativeBlinkIdResult.firstName);
-console.log('lastName:', nativeBlinkIdResult.lastName)
-  console.log('nativeBlinkIdResult:', nativeBlinkIdResult);
     /**
      * Scanning mode used to scan the current document.
      *
@@ -647,11 +644,7 @@ console.log('lastName:', nativeBlinkIdResult.lastName)
      * See {@link DriverLicenseDetailedInfo} for more information.
      */
     this.driverLicenseDetailedInfo =
-      nativeBlinkIdResult.driverLicenseDetailedInfo != undefined
-        ? new DriverLicenseDetailedInfo<StringResult>(
-            nativeBlinkIdResult.driverLicenseDetailedInfo
-          )
-        : undefined;
+      nativeBlinkIdResult.driverLicenseDetailedInfo;
     /**
      * The dependents info.
      *

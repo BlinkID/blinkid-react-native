@@ -1,3 +1,5 @@
+import { BlinkIdUtilities } from "./blinkIdUtilities";
+
 /**
  * ClassFilter represents the document filter used to determine which documents will be processed.
  * Document information (Country, Region, Type) is evaluated with the content set in the filter, and their inclusion or exclusion depends on the defined rules.
@@ -874,7 +876,7 @@ export class DateResult<T> {
   constructor(nativeDateResult: any) {
     this.date =
       nativeDateResult.date;
-    this.originalString = handleStringType<T>(nativeDateResult.originalString);
+    this.originalString = BlinkIdUtilities.handleStringType<T>(nativeDateResult.originalString);
     this.isFilledByDomainKnowledge = nativeDateResult.isFilledByDomainKnowledge;
     this.successfullyParsed = nativeDateResult.successfullyParsed;
   }
@@ -954,13 +956,13 @@ export class DriverLicenseDetailedInfo<T> {
   vehicleClassesInfo?: VehicleClassInfo<T>;
 
   constructor(nativeDriverLicenseDetailedInfo: any) {
-    this.restrictions = handleStringType(
+    this.restrictions = BlinkIdUtilities.handleStringType(
       nativeDriverLicenseDetailedInfo.restrictions
     );
-    this.endorsements = handleStringType(
+    this.endorsements = BlinkIdUtilities.handleStringType(
       nativeDriverLicenseDetailedInfo.endorsements
     );
-    this.vehicleClass = handleStringType(
+    this.vehicleClass = BlinkIdUtilities.handleStringType(
       nativeDriverLicenseDetailedInfo.vehicleClass
     );
     this.vehicleClassesInfo =
@@ -1004,8 +1006,8 @@ export class VehicleClassInfo<T> {
   expiryDate?: DateResult<T>;
 
   constructor(nativeVehicleClassInfo: any) {
-    this.licenceType = handleStringType<T>(nativeVehicleClassInfo.licenceType);
-    this.vehicleClass = handleStringType<T>(
+    this.licenceType = BlinkIdUtilities.handleStringType<T>(nativeVehicleClassInfo.licenceType);
+    this.vehicleClass = BlinkIdUtilities.handleStringType<T>(
       nativeVehicleClassInfo.vehicleClass
     );
     this.effectiveDate =
@@ -3031,7 +3033,7 @@ export class BarcodeExtendedElements {
  * This enum class defines whether the scanning process is limited to a single
  * side of the document or includes multiple sides, automatically identifying how many sides need to be scanned.
  */
-export const enum ScanningMode {
+export enum ScanningMode {
   /**
    * Specifies the scanning process to be for single side only.
    *
@@ -3261,50 +3263,10 @@ enum ScanningSide {
 }
 
 /**
- * Helper method for serializing enums from the native Android and iOS platforms. 
- * 
- * T ? enumFromValue<T>(List < T > values, dynamic input) {
-    if (input == null) return null;
-    if (input is T) return input;
-
-    if (input is int) {
-        if (input >= 0 && input < values.length) return values[input];
-    }
-
-  final inputStr = input.toString().split('.').last.toLowerCase();
-    for (var value in values) {
-    final enumStr = value.toString().split('.').last.toLowerCase();
-        if (enumStr == inputStr) return value;
-    }
-
-    return null;
-}
- */
-
-/**
- * Helper method for handling different string types,
- * based on the document information source.
- */
-function handleStringType<T>(raw: any): T | undefined {
-  if (typeof raw === 'string') {
-    return raw as T;
-  }
-
-  // Heuristically assume it's a StringResult if it's an object and matches expected shape
-  if (typeof raw === 'object' && raw !== null && 'value' in raw) {
-    return new StringResult(raw) as T;
-  }
-
-  return undefined;
-}
-
-
-
-/**
  * Document country.
  *
  */
-export const enum Country {
+export enum Country {
   None = 'none',
 
   Albania = 'albania',
@@ -3820,7 +3782,7 @@ export const enum Country {
 /**
  * Document region.
  */
-export const enum Region {
+export enum Region {
   None = 'none',
 
   Alabama = 'alabama',
@@ -4106,7 +4068,7 @@ export const enum Region {
  * Document type.
  *
  */
-export const enum DocumentType {
+export enum DocumentType {
   None = 'none',
 
   ConsularId = 'consularId',

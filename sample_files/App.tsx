@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image,
   Platform,
-  SafeAreaView
 } from 'react-native';
 import {
   BlinkIdScanningSettings,
@@ -215,9 +214,9 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView>
     <View style={styles.container}>
       <View>
+        <View style={styles.spacer} />
         <Button title="Perform Scan" onPress={handlePerformScan} />
         <View style={styles.spacer} />
         <Button
@@ -274,7 +273,6 @@ export default function App() {
         )}
       </ScrollView>
     </View>
-    </SafeAreaView>
   );
 }
 
@@ -286,7 +284,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   spacer: {
-    height: 20,
+    height: 40,
   },
 
   resultBox: {

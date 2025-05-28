@@ -3,6 +3,21 @@ import type { BlinkIdSdkSettings, BlinkIdSessionSettings } from './blinkIdSettin
 import BlinkidReactNative from './NativeBlinkidReactNative';
 import type { ClassFilter } from './types';
 
+// Configuration classes
+export {
+  BlinkIdScanningSettings,
+  BlinkIdSdkSettings,
+  BlinkIdSessionSettings,
+  CroppedImageSettings,
+} from './blinkIdSettings';
+
+export {
+  BlinkIdScanningResult
+} from './blinkIdResult'
+
+// Types & enums
+export * from './types';
+
 /**
  * Just a random class
  * @returns STH
