@@ -30,7 +30,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
   npm pack $blink_id_plugin_path
-  npm i --save blinkid-react-native-0.1.0.tgz
+  npm i --save blinkid-react-native-7.2.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkid-react-native
   #popd
@@ -80,10 +80,19 @@ cp ../sample_files/BlinkIdResultBuilder.ts ./
 
 # return to root folder
 popd
+echo "
+Instruction for running the $appName sample application:
+ 
+Go to the React Native project folder: cd $appName
 
-echo "Go to React Native project folder: cd $appName"
-echo "To run on Android execute: npx react-native run-android"
-echo "To run on iOS: 
+----- Android instuctions -----
+
+Execute: npx react-native run-android
+
+----- iOS instuctions -----
+
+1. Execute npx react-native start
 1. Open $appName/ios/$appName.xcworkspace
 2. Set your development team
-3. Press run"
+3. Press run
+"

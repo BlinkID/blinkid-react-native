@@ -1,0 +1,89 @@
+{
+  "name": "React-CoreModules",
+  "version": "0.79.2",
+  "summary": "-",
+  "homepage": "https://reactnative.dev/",
+  "license": "MIT",
+  "authors": "Meta Platforms, Inc. and its affiliates",
+  "platforms": {
+    "ios": "15.1"
+  },
+  "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness",
+  "source": {
+    "git": "https://github.com/facebook/react-native.git",
+    "tag": "v0.79.2"
+  },
+  "source_files": "**/*.{c,m,mm,cpp}",
+  "ios": {
+    "exclude_files": "PlatformStubs/**/*"
+  },
+  "osx": {
+    "exclude_files": [
+      "RCTStatusBarManager.mm"
+    ]
+  },
+  "visionos": {
+    "exclude_files": [
+      "RCTStatusBarManager.mm"
+    ]
+  },
+  "tvos": {
+    "exclude_files": [
+      "RCTStatusBarManager.mm"
+    ]
+  },
+  "header_dir": "CoreModules",
+  "pod_target_xcconfig": {
+    "USE_HEADERMAP": "YES",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\" \"$(PODS_TARGET_SRCROOT)/React/CoreModules\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/DoubleConversion\" \"$(PODS_ROOT)/fast_float/include\" \"$(PODS_ROOT)/fmt/include\" \"${PODS_ROOT}/Headers/Public/ReactCodegen/react/renderer/components\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspector/jsinspector_modern.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-jsinspectortracing/jsinspector_moderntracing.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-RCTFBReactNativeSpec/React_RCTFBReactNativeSpec.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers\" \"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core\" \"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers\""
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "DoubleConversion": [
+
+    ],
+    "fast_float": [
+      "6.1.4"
+    ],
+    "fmt": [
+      "11.0.2"
+    ],
+    "RCT-Folly": [
+      "2024.11.18.00"
+    ],
+    "RCTTypeSafety": [
+      "0.79.2"
+    ],
+    "React-Core/CoreModulesHeaders": [
+      "0.79.2"
+    ],
+    "React-RCTImage": [
+      "0.79.2"
+    ],
+    "React-jsi": [
+      "0.79.2"
+    ],
+    "React-RCTBlob": [
+
+    ],
+    "SocketRocket": [
+      "0.7.1"
+    ],
+    "React-jsinspector": [
+
+    ],
+    "React-jsinspectortracing": [
+
+    ],
+    "React-RCTFBReactNativeSpec": [
+
+    ],
+    "ReactCommon": [
+
+    ],
+    "React-NativeModulesApple": [
+
+    ]
+  }
+}

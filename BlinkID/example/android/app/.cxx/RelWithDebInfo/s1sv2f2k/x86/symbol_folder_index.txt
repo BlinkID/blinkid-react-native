@@ -1,0 +1,1 @@
+/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/build/intermediates/cxx/RelWithDebInfo/s1sv2f2k/obj/x86

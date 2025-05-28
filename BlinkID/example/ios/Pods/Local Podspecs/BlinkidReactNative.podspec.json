@@ -1,0 +1,110 @@
+{
+  "name": "BlinkidReactNative",
+  "version": "0.1.0",
+  "summary": "The BlinkID SDK for React-Native",
+  "homepage": "https://github.com/BlinkID/blinkid-react-native#readme",
+  "license": "MIT",
+  "authors": "mparadina <milan.paradina@microblink.com> (https://github.com/mparadina)",
+  "platforms": {
+    "ios": "16.0"
+  },
+  "source": {
+    "git": "https://github.com/BlinkID/blinkid-react-native.git",
+    "tag": "0.1.0"
+  },
+  "requires_arc": true,
+  "source_files": [
+    "ios/*.{swift,h,m,mm,cpp}",
+    "ios/generated/**/*.{swift,h,m,mm,cpp}",
+    "ios/Frameworks/Source/**/*.{swift,h,m,mm,cpp}"
+  ],
+  "private_header_files": "ios/**/*.h",
+  "vendored_frameworks": [
+    "ios/Frameworks/*.xcframework"
+  ],
+  "resource_bundles": {
+    "BlinkIDUXResources": [
+      "ios/Frameworks/Source/**/*.{xcassets,json,xcstrings,png}"
+    ]
+  },
+  "swift_versions": "5.0",
+  "compiler_flags": "-DRCT_NEW_ARCH_ENABLED=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32",
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "RCT-Folly": [
+      "2024.11.18.00"
+    ],
+    "glog": [
+
+    ],
+    "React-RCTFabric": [
+
+    ],
+    "ReactCodegen": [
+
+    ],
+    "RCTRequired": [
+
+    ],
+    "RCTTypeSafety": [
+
+    ],
+    "ReactCommon/turbomodule/bridging": [
+
+    ],
+    "ReactCommon/turbomodule/core": [
+
+    ],
+    "React-NativeModulesApple": [
+
+    ],
+    "Yoga": [
+
+    ],
+    "React-Fabric": [
+
+    ],
+    "React-graphics": [
+
+    ],
+    "React-utils": [
+
+    ],
+    "React-featureflags": [
+
+    ],
+    "React-debug": [
+
+    ],
+    "React-ImageManager": [
+
+    ],
+    "React-rendererdebug": [
+
+    ],
+    "DoubleConversion": [
+
+    ],
+    "React-jsi": [
+
+    ],
+    "React-renderercss": [
+
+    ],
+    "hermes-engine": [
+
+    ],
+    "React-hermes": [
+
+    ]
+  },
+  "pod_target_xcconfig": {
+    "HEADER_SEARCH_PATHS": "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/Headers/Private/Yoga\"",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
+    "OTHER_CPLUSPLUSFLAGS": "$(inherited) -DRCT_NEW_ARCH_ENABLED=1 -DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_CFG_NO_COROUTINES=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -Wno-comma -Wno-shorten-64-to-32",
+    "OTHER_SWIFT_FLAGS": "$(inherited) -DRCT_NEW_ARCH_ENABLED"
+  },
+  "swift_version": "5.0"
+}

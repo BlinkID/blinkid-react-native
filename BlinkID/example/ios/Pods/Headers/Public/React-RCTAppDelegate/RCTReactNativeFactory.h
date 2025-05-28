@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native/Libraries/AppDelegate/RCTReactNativeFactory.h

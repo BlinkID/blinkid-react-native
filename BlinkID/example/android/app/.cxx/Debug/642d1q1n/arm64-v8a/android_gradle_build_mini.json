@@ -1,0 +1,43 @@
+{
+  "buildFiles": [
+    "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/node_modules/react-native-image-picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/milanparadina/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/milanparadina/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "react_codegen_BlinkidReactNativeSpec::@f6651a96cd186d085c53": {
+      "artifactName": "react_codegen_BlinkidReactNativeSpec",
+      "abi": "arm64-v8a",
+      "runtimeFiles": []
+    },
+    "react_codegen_RNImagePickerSpec::@f66ee9a2efecfb28bee4": {
+      "artifactName": "react_codegen_RNImagePickerSpec",
+      "abi": "arm64-v8a",
+      "runtimeFiles": []
+    },
+    "appmodules::@6890427a1f51a3e7e1df": {
+      "artifactName": "appmodules",
+      "abi": "arm64-v8a",
+      "output": "/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/build/intermediates/cxx/Debug/642d1q1n/obj/arm64-v8a/libappmodules.so",
+      "runtimeFiles": [
+        "/Users/milanparadina/.gradle/caches/8.13/transforms/72cde7dc85b5006383f56c98fcfedfa5/transformed/fbjni-0.7.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/milanparadina/.gradle/caches/8.13/transforms/8cb416b8178cb0e7f140959230f7f0bf/transformed/react-android-0.79.2-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/milanparadina/.gradle/caches/8.13/transforms/8cb416b8178cb0e7f140959230f7f0bf/transformed/react-android-0.79.2-debug/prefab/modules/reactnative/libs/android.arm64-v8a/libreactnative.so"
+      ]
+    }
+  }
+}

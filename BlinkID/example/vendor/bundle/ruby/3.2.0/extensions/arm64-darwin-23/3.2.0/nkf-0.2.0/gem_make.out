@@ -1,0 +1,19 @@
+current directory: /Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+/Users/milanparadina/.rbenv/versions/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250522-19390-3j4rw0 sitelibdir\=./.gem.20250522-19390-3j4rw0 clean
+
+current directory: /Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250522-19390-3j4rw0 sitelibdir\=./.gem.20250522-19390-3j4rw0
+compiling nkf.c
+linking shared-object nkf.bundle
+ld: warning: ignoring duplicate libraries: '-lruby.3.2'
+
+current directory: /Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250522-19390-3j4rw0 sitelibdir\=./.gem.20250522-19390-3j4rw0 install
+/opt/homebrew/bin/ginstall -c -m 0755 nkf.bundle ./.gem.20250522-19390-3j4rw0
+
+current directory: /Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/vendor/bundle/ruby/3.2.0/gems/nkf-0.2.0/ext/nkf
+make DESTDIR\= sitearchdir\=./.gem.20250522-19390-3j4rw0 sitelibdir\=./.gem.20250522-19390-3j4rw0 clean

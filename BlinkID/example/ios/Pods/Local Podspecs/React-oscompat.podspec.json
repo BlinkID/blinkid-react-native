@@ -1,0 +1,20 @@
+{
+  "name": "React-oscompat",
+  "version": "0.79.2",
+  "summary": "Small set of OS-level utilities for React Native",
+  "homepage": "https://reactnative.dev/",
+  "license": "MIT",
+  "authors": "Meta Platforms, Inc. and its affiliates",
+  "platforms": {
+    "ios": "15.1"
+  },
+  "source": {
+    "git": "https://github.com/facebook/react-native.git",
+    "tag": "v0.79.2"
+  },
+  "source_files": "*.{cpp,h}",
+  "pod_target_xcconfig": {
+    "HEADER_SEARCH_PATHS": ""
+  },
+  "header_dir": "oscompat"
+}

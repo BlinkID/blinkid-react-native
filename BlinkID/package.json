@@ -1,6 +1,6 @@
 {
   "name": "blinkid-react-native",
-  "version": "0.1.0",
+  "version": "7.2.0",
   "description": "The BlinkID SDK for React-Native",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
