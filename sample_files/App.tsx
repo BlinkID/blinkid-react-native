@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   Platform,
+  SafeAreaView
 } from 'react-native';
 import {
   BlinkIdScanningSettings,
@@ -28,9 +29,7 @@ import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
-  const [result, setResult] = useState<string>(
-    'Press the "Perform Scan" button for default BlinkID UX scanning experience with the device camera.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.'
-  );
+  const [result, setResult] = useState<string | undefined>();
 
   const [firstCroppedImage, setFirstCroppedImage] = useState<
     string | undefined
@@ -78,18 +77,15 @@ export default function App() {
       await performScan(settings, sessionSettings, classFilter)
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
+          setImages(result);
         })
         .catch((error) => {
           setResult(`Error during scan: ${error}`);
+          resetImages();
         });
     } catch (error) {
       setResult(`Error during scan: ${error}`);
+      resetImages();
     }
   };
 
@@ -147,18 +143,15 @@ export default function App() {
       )
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
+          setImages(result);
         })
         .catch((error) => {
           setResult(`Error during scan: ${error}`);
+          resetImages();
         });
     } catch (error) {
-      setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
+      setResult(`SDK error: ${error}`);
+      resetImages();
     }
   };
 
@@ -192,30 +185,48 @@ export default function App() {
       croppedImageSettings.returnSignatureImage = true;
 
       scanningSettings.croppedImageSettings = croppedImageSettings;
+      scanningSettings.scanCroppedDocumentImage = true;
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings
       await performDirectApiScan(settings, sessionSettings, firstImage)
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
+          setImages(result);
+        })
+        .catch((error) => {
+          setResult(`Error during DirectAPI scan: ${error}`);
+          resetImages();
+        });
+    } catch (error) {
+      setResult(`SDK error: ${error}`);
+                resetImages();
+
+    }
+  };
+
+function setImages(result: BlinkIdScanningResult) {
           setFirstCroppedImage(result.firstDocumentImage);
           setSecondCroppedImage(result.secondDocumentImage);
           setFaceImage(result.faceImage?.image);
           setSignatureImage(result.signatureImage?.image);
           setFirstInputImage(result.firstInputImage);
           setSecondInputImage(result.secondInputImage);
-        })
-        .catch((error) => {
-          setResult(`Error during scan: ${error}`);
-        });
-    } catch (error) {
-      setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
-    }
-  };
+  }
+
+  function resetImages() {
+        setFirstCroppedImage(undefined);
+          setSecondCroppedImage(undefined);
+          setFaceImage(undefined);
+          setSignatureImage(undefined);
+          setFirstInputImage(undefined);
+          setSecondInputImage(undefined);
+  }
 
   return (
     <View style={styles.container}>
       <View>
+        <SafeAreaView></SafeAreaView>
         <View style={styles.spacer} />
         <Button title="Perform Scan" onPress={handlePerformScan} />
         <View style={styles.spacer} />
@@ -229,7 +240,6 @@ export default function App() {
           onPress={handlePerformDirectApiSingleSideScan}
         />
       </View>
-
       <ScrollView style={styles.resultBox}>
         <Text>{result}</Text>
       </ScrollView>
@@ -284,7 +294,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   spacer: {
-    height: 40,
+    height: 25,
   },
 
   resultBox: {
