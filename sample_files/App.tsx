@@ -23,6 +23,7 @@ import {
   BlinkIdScanningResult,
   performScan,
   performDirectApiScan,
+  DetectionLevel,
 } from 'blinkid-react-native';
 
 import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
@@ -52,35 +53,65 @@ export default function App() {
 
   const handlePerformScan = async () => {
     try {
-      const settings = new BlinkIdSdkSettings(licenseKey);
 
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
+
+      /**
+       * Create and modify the Session Settings
+       */
       const sessionSettings = new BlinkIdSessionSettings();
       sessionSettings.scanningMode = ScanningMode.Automatic;
-
+      /**
+       * Create and modify the scanning settings
+       */
       const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.returnInputImages = true;
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
 
+      /**
+       * Create and modify the Image settings
+       */
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
-
+      /**
+       * Place the image settings in the scanning settings
+       */
       scanningSettings.croppedImageSettings = croppedImageSettings;
+
+      /**
+       * Place the scanning settings in the session settings
+       */
       sessionSettings.scanningSettings = scanningSettings;
 
+      /**
+       * Add the document class filter. This parameter is optional.
+       */
       const classFilter = new ClassFilter();
       classFilter.includeDocuments = [
         new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
         new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
       ];
-
-      await performScan(settings, sessionSettings, classFilter)
+      /**
+       * Call the performScan method, where the SDK and session settings need to be passed
+       * Here, you can also pass the optional ClassFilter.
+       */
+      await performScan(sdkSettings, sessionSettings) 
         .then((result: BlinkIdScanningResult) => {
+          //handle the results here.
+          console.log(result.firstName?.value);
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
         .catch((error) => {
-          setResult(`Error during scan: ${error}`);
+          // handle any errors here.
+          console.log(`Error during scan: ${error}`);
+          setResult
           resetImages();
         });
     } catch (error) {
@@ -117,26 +148,57 @@ export default function App() {
 
       const secondImage = second.assets[0].base64;
 
-      // SDK setup
-      const settings = new BlinkIdSdkSettings(licenseKey);
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
 
+      /**
+       * Create and modify the Session Settings
+       */
       const sessionSettings = new BlinkIdSessionSettings();
+
+      /**
+       * Important: if two images are being passed, use the `Automatic` 
+       * scanning mode
+       * if just one image is being passed, use the `Single` scanning mode.
+      */
       sessionSettings.scanningMode = ScanningMode.Automatic;
 
+      /**
+       * Create and modify the scanning settings
+       */
       const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.returnInputImages = true;
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+      /**
+       * if tge input images consist solely 
+       * of the cropped document image, set the 
+       * `scanCroppedDocumentImage` to true.
+       */
+      // scanningSettings.scanCroppedDocumentImage = true;
 
+      /**
+       * Create and modify the Image settings
+       */
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
-
+      /**
+       * Place the image settings in the scanning settings
+       */
       scanningSettings.croppedImageSettings = croppedImageSettings;
+
+      /**
+       * Place the scanning settings in the session settings
+       */
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings
       await performDirectApiScan(
-        settings,
+        sdkSettings,
         sessionSettings,
         firstImage,
         secondImage
@@ -185,7 +247,7 @@ export default function App() {
       croppedImageSettings.returnSignatureImage = true;
 
       scanningSettings.croppedImageSettings = croppedImageSettings;
-     // scanningSettings.scanCroppedDocumentImage = true;
+      //scanningSettings.scanCroppedDocumentImage = true;
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings
