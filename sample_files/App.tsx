@@ -185,7 +185,7 @@ export default function App() {
       croppedImageSettings.returnSignatureImage = true;
 
       scanningSettings.croppedImageSettings = croppedImageSettings;
-      scanningSettings.scanCroppedDocumentImage = true;
+     // scanningSettings.scanCroppedDocumentImage = true;
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings

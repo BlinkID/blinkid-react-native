@@ -1,153 +1,382 @@
-# BlinkID SDK wrapper for React Native
+<p align="center" >
+  <img src="https://raw.githubusercontent.com/wiki/blinkid/blinkid-android/images/logo-microblink.png" alt="Microblink" title="Microblink">
+</p>
 
-Best-in-class ID scanning software for cross-platform apps built with React Native.
+# _BlinkID_ React Native plugin
 
-Below, you’ll find a quick guide on starting your own demo project as well as complete guidance on installing and linking BlinkID library with your iOS and Android apps ⬇️
+The BlinkID SDK is a comprehensive solution for implementing secure document scanning on the React Native cross-platform.
+It offers powerful capabilities for capturing and analyzing a wide range of identification documents. The Flutter plugin consists of BlinkID, which serves as the core module, and the BlinkIDUX package that provides a complete, ready-to-use solution with a user-friendly interface.
 
-For a full access to all features and functionalities, please consider using our native SDKs (for [iOS](https://github.com/BlinkID/blinkid-ios) or [Android](https://github.com/BlinkID/blinkid-android))
+**Please note that, for maximum performance and full access to all features, it’s best to go with one of our native SDKs (for [iOS](https://github.com/BlinkID/blinkid-ios) or [Android](https://github.com/BlinkID/blinkid-android)).**
 
-
-## Licensing
-
-- A valid license key is required to initialize scanning. You can request a **free trial license key**, after you register, at [Microblink Developer Hub](https://account.microblink.com/signin)
-
-- For production licensing, please [contact sales](https://microblink.com/contact-us) to request a quote.
-
-**Keep in mind:** Versions 5.8.0 and above require an internet connection to work under our new License Management Program.
-
-We’re only asking you to do this so we can validate your trial license key. Scanning or data extraction of identity documents still happens offline, on the device itself. 
-
-Once the validation is complete, you can continue using the SDK in offline mode (or over a private network) until the next check.
+However, since the wrapper is open source, you can add the features you need on your own.
 
 
-## React Native Version
+# Table of contents
+- [Licensing](#licensing)
+- [Requirements](#requirements)
+- [Quickstart with the sample application](#quickstart-with-the-sample-application)
+- [Plugin integration](#plugin-integration)
+- [Plugin usage](#plugin-usage)
+- [Plugin specifics](#plugin-specifics)
+  - [Scanning methods](#scanning-methods)
+  - [BlinkID Settings](#blinkid-settings)
+  - [BlinkID Results](#blinkid-results)
+- [Additional information and Support](#additional-information-and-support)
 
-BlinkID React Native was built and tested with [React Native v0.75.0](https://github.com/facebook/react-native/releases/tag/v0.75.0)
+## <a name="licensing"></a> Licensing
+A valid license key is required to initialize the BlinkID plugin. A free trial license key can be requested after registering at the [Microblink Developer Hub](https://developer.microblink.com/).
 
-## Installation
 
-First generate an empty project if needed:
+## <a name="requirements"></a> Requirements
 
-```shell
-react-native init --version="0.75.0" NameOfYourProject
+- BlinkID React Native was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
+- For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/environment-setup).
+
+**Device requirements**
+
+The BlinkID React Native plugin requires:
+- iOS version 16.0 and above
+- Android API version 24 and above
+
+- For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/BlinkID/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/BlinkID/blinkid-ios?tab=readme-ov-file#requirements)).
+
+## <a name="quickstart-with-the-sample-application"></a> Quickstart with the sample application
+The sample application demonstrates how the BlinkID plugin is implemented, used and shows how to obtain the scanned results. 
+
+It contains the implementation for:
+1. The **default implementation** with the default BlinkID UX scanning experience.
+2. **Multiside DirectAPI scanning** - extracting the document information from multiple static images (from the gallery).
+3. **Singleside DirectAPI scanning** - extracting the document information from a single static images (from the gallery).
+
+To obtain and run the sample application, follow the steps below:
+1. Git clone the repository:
+```bash
+git clone https://github.com/BlinkID/blinkid-react-native.git
+```
+2. Position to the obtained BlinkID folder and run the `initBlinkIdReactNativeSample.sh` script:
+```bash
+cd blinkid-react-native && ./initBlinkIdReactNativeSample.sh
+```
+3. After the script finishes running, position to the `BlinkIdSample` folder.
+
+**Running the sample application on Android**
+
+For running the sample application on Android, execute the following command:
+
+```bash
+npx react-native run-android
 ```
 
-Add the **blinkid-react-native** module to your project:
+**Note:** the plugin can be run directly via Android Studio as well:
 
-```shell
-cd <path_to_your_project>
-npm i --save blinkid-react-native
+1. Execute the following command:
+```bash
+npx react-native start
+```
+2. Open the `android` folder via Android Studio in the `BlinkIdSample` folder to run the Android sample application.
+
+**Running the sample application on iOS**
+
+1. For running the sample application on iOS, execute the following command:
+```bash
+npx react-native start
+```
+2. Open the `BlinkIdSample.xcworkspace` located in the `ios` folder
+3. Set your development team
+4. Press run
+
+## <a name="plugin-integration"></a> Plugin integration
+
+1. To add the BlinkID plugin to a React Native project, first create empty project if needed:
+```bash
+npx @react-native-community/cli init YourAppName --package-name YourPackageName --title YourAppTitle --version "React Native version"
 ```
 
-## Linking
-
-### iOS
-
-Link module with your project: 
-
-```shell
-react-native link blinkid-react-native
+3. Install the `blinkid-react-native` dependency:
+```bash
+  npm install --save blinkid-react-native
 ```
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like BlinkID in your projects.
+4. Android: the BlinkID library is available on Maven Central repository.
 
-- If you wish to use version v1.4.0 or above, you need to install [Git Large File Storage](https://git-lfs.github.com) by running these comamnds:
-
-```shell
-brew install git-lfs
-git lfs install
-```
-
-- **Be sure to restart your console after installing Git LFS**
-
-#### Installing pods
-
-From [react-native 0.60](https://facebook.github.io/react-native/blog/2019/07/03/version-60#cocoapods-by-default) CocoaPods are now part of React Native's iOS project.
-
-Go to `NameOfYourProject/ios` folder and install Pods
-
-```shell
-pod install
-```
-
-Our `blinkid-react-native` depends on latest `PPBlinkID` pod so it will be installed automatically.
-
-**To run iOS application, open NameOfYourProject.xcworkspace, set Your team for every Target in General settings and add Privacy - Camera Usage Description key to Your info.plist file and press run**
-
-### Android
-
-Add microblink maven repository to project level build.gradle:
-
-```
-allprojects {
-  repositories {
-    // don't forget to add maven and jcenter
-    mavenLocal()
-    jcenter()
-    
-    // ... other repositories your project needs
-    
-    maven { url "http://maven.microblink.com" }
-  }
+In your project root, add `mavenCentral()` repository to the repositories list, if not already present:
+```bash
+repositories {
+    // ... other repositories
+    mavenCentral()
 }
 ```
 
-## Sample
+5. iOS: position to the `ios` folder and run `pod install` to install the iOS dependency.
 
-This repository contains **initReactNativeSampleApp.sh** script that will create React Native project and download all of its dependencies. You can run this script with following command: 
-```shell
-./initReactNativeSampleApp.sh
+## <a name="plugin-usage"></a> Plugin usage
+1. After the dependency has been added to the project, first add the necessary import:
+```typescript
+import {
+  performScan,
+  performDirectApiScan,
+} from 'blinkid-react-native';
+```
+2. Add the license key, for each platform, obtained from the [Developer Hub portal](https://developer.microblink.com/):
+```typescript
+  const licenseKey = Platform.select({
+    ios: 'your-ios-key',
+    android:
+      'your-android-key',
+  });
+```
+**Default BlinkID UX**
+1. Set all of the necessary BlinkID settings (SDK settings, session settings, and the scanning settings). If the mentioned settings are not modified, the default values will be used:
+```typescript
+
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
+
+      /**
+       * Create and modify the Session Settings
+       */
+      const sessionSettings = new BlinkIdSessionSettings();
+      sessionSettings.scanningMode = ScanningMode.Automatic;
+      /**
+       * Create and modify the scanning settings
+       */
+      const scanningSettings = new BlinkIdScanningSettings();
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+
+      /**
+       * Create and modify the Image settings
+       */
+      const croppedImageSettings = new CroppedImageSettings();
+      croppedImageSettings.returnDocumentImage = true;
+      croppedImageSettings.returnFaceImage = true;
+      croppedImageSettings.returnSignatureImage = true;
+      /**
+       * Place the image settings in the scanning settings
+       */
+      scanningSettings.croppedImageSettings = croppedImageSettings;
+
+      /**
+       * Place the scanning settings in the session settings
+       */
+      sessionSettings.scanningSettings = scanningSettings;
+
+      /**
+       * Add the document class filter. This parameter is optional.
+       */
+      const classFilter = new ClassFilter();
+      classFilter.includeDocuments = [
+        new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
+        new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
+      ];
 ```
 
-## Video tutorial
+2. Call the `performScan` scanning method, handle the results and catch any errors:
+```typescript
+      /**
+       * Call the performScan method, where the SDK and session settings 
+       * need to be passed.
+       * Here, you can also pass the optional ClassFilter.
+       */
+      await performScan(sdkSettings, sessionSettings) 
+        .then((result: BlinkIdScanningResult) => {
+          //handle the results here.
+          console.log(result.firstName?.value);
+        })
+        .catch((error) => {
+          // handle any errors here.
+          console.log(`Error during scan: ${error}`);
+        });
+```
+**BlinkID DirectAPI**
+1. Set all of the necessary BlinkID settings (SDK settings, session settings, and the scanning settings). If the mentioned settings are not modified, the default values will be used:
+```typescript
 
-Step by step guide how to start blinkid-reactnative sample app. A tutorial flows from cloning repository via git clone to successfully deployed sample application on Android and iOS device with real-time screen mirroring. Application sample contains the simple use of USDL recognizer with Ontario drivers license card.
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
 
-<p align="center" >
-  <a href="https://vimeo.com/289850200" target="_blank">
-    <img src="https://i.vimeocdn.com/video/725592267_1280x720.jpg" alt="Video tutorial" />
-  </a>
-  <a href="https://vimeo.com/289850200" target="_blank">Watch on Vimeo</a>
-</p>
+      /**
+       * Create and modify the Session Settings
+       */
+      const sessionSettings = new BlinkIdSessionSettings();
 
-  ### Using documentVerificationOverlay and CombinedRecognizer
+      /**
+       * Important: if two images are being passed, use the `Automatic` 
+       * scanning mode
+       * if just one image is being passed, use the `Single` scanning mode.
+      */
+      sessionSettings.scanningMode = ScanningMode.Automatic;
 
-This video tutorial describes how to use documentVerificationOverlay with UsdlCombinedRecognizer.
-DocumentVerificationOverlay is overlay for RecognizerRunnerFragment best suited for combined recognizers because it manages scanning of multiple document sides in the single camera opening and guides the user through the scanning process. It can also be used for single side scanning of ID cards, passports, driver’s licenses, etc
+      /**
+       * Create and modify the scanning settings
+       */
+      const scanningSettings = new BlinkIdScanningSettings();
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+      /**
+       * if tge input images consist solely 
+       * of the cropped document image, set the 
+       * `scanCroppedDocumentImage` to true.
+       */
+      // scanningSettings.scanCroppedDocumentImage = true;
 
-<p align="center" >
-  <a href="https://vimeo.com/293090827" target="_blank">
-    <img src="https://i.vimeocdn.com/video/729644410_1280x720.jpg" alt="Video tutorial" />
-  </a>
-  <a href="https://vimeo.com/293090827" target="_blank">Watch on Vimeo</a>
-</p>
+      /**
+       * Create and modify the Image settings
+       */
+      const croppedImageSettings = new CroppedImageSettings();
+      croppedImageSettings.returnDocumentImage = true;
+      croppedImageSettings.returnFaceImage = true;
+      croppedImageSettings.returnSignatureImage = true;
+      /**
+       * Place the image settings in the scanning settings
+       */
+      scanningSettings.croppedImageSettings = croppedImageSettings;
 
-## Usage
+      /**
+       * Place the scanning settings in the session settings
+       */
+      sessionSettings.scanningSettings = scanningSettings;
 
-To use the module you call it in your index.android.js or index.ios.js file like in the [sample app](sample_files/index.js). Available recognizers and API documentation is available in [JS API files](BlinkID).
+      /**
+       * Add the Base64 string of the first side of the document
+       */
+      const firstImageBase64 = "your-base64-image";
 
-## FAQ
+      /**
+       * Add the Base64 string of the second side of the document
+       * This paramater is optional if only one side 
+       * of the document is requred.
+       */
+      const secondImageBase64 = "your-base64-image";
+```
 
-**Can I create a custom UI overlay?**
+2. Call the `performDirectApiScan` scanning method, handle the results and catch any errors:
+```typescript
+      /**
+       * Call the `performDirectApiScan` method, 
+       * where the SDK and session settings need to be passed,
+       *  along with the Base64 images.
+       */
+      await performDirectApiScan(
+        sdkSettings,
+        sessionSettings,
+        firstImageBase64,
+        secondImageBase64
+      )
+        .then((result: BlinkIdScanningResult) => {
+          //handle the results here.
+          console.log(result.firstName?.value);
+        })
+        .catch((error) => {
+          // handle any errors here.
+          console.log(`Error during scan: ${error}`);
+        });
+```
+**Note:**
+- The whole integration process can be found in the sample app `App.tsx` file [here](https://github.com/BlinkID/blinkid-react-native/blob/master/sample_files/App.tsx).
+- The settings and the results that can be used with the BlinkID plugin can be found in the paragraphs below, but also in the comments of each BlinkID TS file.
 
-Yes you can, but you will have to implement it natively for android and ios, you can see native implementation guides [here(Android)](https://github.com/BlinkID/blinkid-android#recognizerRunnerView) and [here(ios)](https://github.com/BlinkID/blinkid-ios#recognizerRunnerViewController).
+## <a name="plugin-specifics"></a> Plugin specifics
+The BlinkID plugin implementation is located in the `src` folder [here](https://github.com/BlinkID/blinkid-react-native/tree/master/BlinkID/src), while platform-specific implementation is located in the `android` and `ios` folders.
 
-## Known react-native problems:
+### <a name="scanning-methods"></a> Scanning methods
+Currently, the BlinkID plugin contains the two main methods of scanning: `performScan` and `performDirectApiScan`.
 
-### iOS
-React native v0.62.2
+**The `performScan` method**
 
-** [NSURLResponse allHeaderFields]: unrecognized selector sent to instance**
+The `performScan` method launches the BlinkID scanning process with the default UX properties.\
+It takes the following parameters: 
+1. BlinkID SDK settings
+2. BlinkID session settings
+3. The optional ClassFilter object for filtering documents.
 
-Make sure to use the Flipper version 0.37.0 in your Podfile:
+**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
 
-`versions['Flipper'] ||= '~> 0.37.0'` 
+**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
 
-### Android build exception - missing `ReactSwipeRefreshLayout`
+The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
 
-**java.lang.NoClassDefFoundError: com.facebook.react.views.swiperefresh.ReactSwipeRefreshLayout**
+- The implementation of the `performScan` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
 
-Add the following line to dependencies section in android/app/build.gradle:
+**The `performDirectApiScan` method**
 
-`implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'`
+The `performDirectApiScan` method launches the BlinkID scanning process intended for information extraction from static images.\
+It takes the following parameters: 
+1. BlinkID SDK settings
+2. BlinkID session settings
+3. First image string in the Base64 format
+4. The optional second image string in the Base64 format
 
+**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+
+**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+
+The first image Base64 string - `String`: image that represents one side of the document. If the document contains two sides and the `ScanningMode` is set to `automatic`, this should contain the image of the front side of the document. In case the `ScanningMode` is set to `single`, it can be either the front or the back side of the document. If the document contains only one side (for example, various passports), the SDK will automatically detect it, and will not look for the other side.
+
+The optional second image Base64 string - `String`: needed if the information from back side of the document is required and the `ScanningMode` is set to `automatic`.
+
+- The implementation of the `performDirectApiScanning` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+
+### <a name="blinkid-settings"></a> BlinkID Settings
+The BlinkID SDK contains various settings, modifying different parts of scanning process:
+1. [BlinkID SDK settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L14) - `BlinkIdSdkSettings` \
+These settings are used for the initialization of the BlinkID SDK.
+
+2. [BlinkID session settings](https://github.com/BlinkID/blinkid-react-native/blob/feature/blinkid-v7/BlinkID/src/blinkIdSettings.ts#L92) - `BlinkIdSessionSettings`\
+These settings represent the configuration settings for a scanning session.\
+This class holds the settings related to the resources initialization, scanning mode, and specific scanning configurations that define how the scanning session should behave.
+
+3. [BlinkID scanning settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`
+These settings represent the configurable settings for scanning a document.`
+This class defines various parameters and policies related to the scanning process, including image quality handling, data extraction and anonymization, along with options for frame processing and image extraction.
+
+4. [Cropped image settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L439) - `CroppedImageSettings`\
+These settings represent the image cropping settings.
+
+**Additional notes:**
+
+- The [blinkIdSettings.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contains all the settings that can be modified and explains what each setting does in more detail.
+
+- The native documentation for the above mentioned settings can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/).
+
+- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdDeserializationUtilities.kt) & [iOS](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdDeserializationUtilities.swift) in the BlinkID deserialization utilities.
+
+### <a name="blinkid-result"></a> BlinkID Results
+
+The result of the scanning process is stored in the `BlinkIdScanningResult`. It contains the results of scanning a document, including the extracted data and images from the document.
+
+Along with the information scanned from the document, the BlinkID also provides additional details that was obtained during the scanning process:
+
+1. **Recognition mode**- `RecognitionMode`\
+Scanning mode used to scan the current document.
+
+2. **Document class info** - `DocumentClassInfo`\
+The document class information.
+
+3. **Data match informatoin** - `DataMatchResult`\
+Info on whether the data extracted from multiple sides matches.
+
+4. **Singleside scanning result** - `SingleSideScanningResult`\
+Represents the result of scanning a single side of the document.\
+Contains the data extracted from the Visual Inspection Zone, Machine Readable Zone, barcode, the input image, and the cropped document, face, and signature images.
+
+5. **Detailed cropped image result** - `DetailedCroppedImageResult`\
+Represents the result of the image crop transformation with additional details.
+
+**Additional notes:**
+
+- The [blinkIdResult.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all the results after the scanning process finishes.
+
+- The native documentation for the above mentioned results can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core.result/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/blinkidscanningresult).
+
+- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdSerializationUtilities.swift) in the BlinkID deserialization utilities.
+
+## <a name="additional-information-and-support"></a> Additional information and Support
+For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team via mail support@microblink.com.

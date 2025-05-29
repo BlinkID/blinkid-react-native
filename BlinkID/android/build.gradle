@@ -27,7 +27,7 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  namespace "com.blinkidreactnative"
+  namespace "com.microblink.blinkid.reactnative"
 
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
 
@@ -81,5 +81,5 @@ dependencies {
 react {
   jsRootDir = file("../src/")
   libraryName = "BlinkidReactNative"
-  codegenJavaPackageName = "com.blinkidreactnative"
+  codegenJavaPackageName = "com.microblink.blinkid.reactnative"
 }

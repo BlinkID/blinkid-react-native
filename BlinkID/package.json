@@ -153,7 +153,7 @@
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.blinkidreactnative"
+      "javaPackageName": "com.microblink.blinkid.reactnative"
     }
   },
   "create-react-native-library": {
