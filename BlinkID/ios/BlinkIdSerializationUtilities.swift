@@ -172,8 +172,7 @@ class BlinkIdSerializationUtilities {
   }
   
   static func serializeDocumentClassInfo(_ documentClassInfo: BlinkIDSDK.DocumentClassInfo?) -> Dictionary<String, Any> {
-      return
-      [
+      let classInfoDict: [String: Any?] = [
           "country": documentClassInfo?.country.rawValue,
           "region": documentClassInfo?.region.rawValue,
           "documentType": documentClassInfo?.documentType.rawValue,
@@ -183,24 +182,29 @@ class BlinkIdSerializationUtilities {
           "isoAlpha3CountryCode": documentClassInfo?.isoAlpha3CountryCode,
           "isEmpty": documentClassInfo?.isEmpty()
       ]
+      return classInfoDict.compactMapValues { $0 }
   }
   
   static func serializeDataMatchResult(_ dataMatchResult: DataMatchResult?) -> Dictionary<String, Any> {
-      return [
+      let dataMatchResultDict: [String: Any?] = [
           "states": dataMatchResult?.states.map(serializeDataMatchState(_:)),
           "overallState": deserializeDataMatchState(dataMatchResult?.overallState)
       ]
+      
+      return dataMatchResultDict.compactMapValues{ $0 }
   }
   
   static func serializeDataMatchState(_ dataMatchState: FieldState?) -> Dictionary<String, Any> {
-      return [
+      let dataMatchStateDict: [String: Any?] = [
         "field": deserializeDataMatchField(dataMatchState?.fieldType),
           "state": deserializeDataMatchState(dataMatchState?.state)
       ]
+      
+      return dataMatchStateDict.compactMapValues { $0 }
   }
   
   static func serializeStringResult(_ stringResult: BlinkIDSDK.StringResult?) -> Dictionary<String, Any>{
-      var stringResultDict: Dictionary<String, Any> = [
+      var stringResultDict: [String: Any?] = [
           "value": stringResult?.value,
           "latin": stringResult?.value(for: .latin),
           "arabic": stringResult?.value(for: .arabic),
@@ -215,73 +219,81 @@ class BlinkIdSerializationUtilities {
           "greek": serializeRect(stringResult?.location(for: .greek))
       ]
       
-      var sideDict: Dictionary<String, Any> = [
+      var sideDict: [String: Any?] = [
         "latin": serializeScanningSide(stringResult?.side(for: .latin)),
           "arabic": serializeScanningSide(stringResult?.side(for: .arabic)),
           "cyrillic": serializeScanningSide(stringResult?.side(for: .cyrillic)),
           "greek": serializeScanningSide(stringResult?.side(for: .greek))
       ]
+      
       stringResultDict["side"] = sideDict
       
-      return stringResultDict
+      return stringResultDict.compactMapValues { $0 }
   }
   
   static func serializeRect(_ rectangle:  BlinkID.RectangleF?) -> Dictionary<String, Any> {
-      return [
+      let rectangleDict: [String: Any?] = [
         "x": rectangle?.origin.x,
         "y": rectangle?.origin.y,
         "width": rectangle?.width,
         "height": rectangle?.height
       ]
+      return rectangleDict.compactMapValues { $0 }
   }
   
   
   
   static func serializeDateResult<T>(_ dateResult: DateResult<T>?) -> Dictionary<String, Any>? {
-      return [
+      let dateResultDict: [String: Any?] = [
         "date": serializeSimpleDate(dateResult),
           "filledByDomainKnowledge": dateResult?.filledByDomainKnowledge,
           "successfullyParsed": dateResult?.successfullyParsed,
           "originalString": serializeStringType(dateResult?.originalString)
       ]
+      return dateResultDict.compactMapValues { $0 }
   }
   static func serializeSimpleDate<T>(_ dateResult: DateResult<T>?) -> Dictionary<String, Any>? {
-    return [
+      let simpleDateDict: [String: Any?] = [
       "day": dateResult?.day,
       "month": dateResult?.month,
       "year": dateResult?.year,
     ]
+      return simpleDateDict.compactMapValues { $0 }
   }
   
   static func serializeDriverLicenseDetailedInfo<T>(_ driverLicenseDetailedInfo:  DriverLicenseDetailedInfo<T>?) -> Dictionary<String, Any>? {
-      return [
+      let driverLicenseDetailedInfoDict: [String: Any?] = [
           "conditions": serializeStringType(driverLicenseDetailedInfo?.conditions),
           "endorsements": serializeStringType(driverLicenseDetailedInfo?.endorsements),
           "restrictions": serializeStringType(driverLicenseDetailedInfo?.restrictions),
           "vehicleClass": serializeStringType(driverLicenseDetailedInfo?.vehicleClass),
           "vehicleClassesInfo": driverLicenseDetailedInfo?.vehicleClassesInfo?.map(serializeVehicleClassInfo(_:)),
       ]
+      
+      return driverLicenseDetailedInfoDict.compactMapValues { $0 }
   }
   
   static func serializeVehicleClassInfo<T>(_ vehicleClassInfo: VehicleClassInfo<T>?) -> Dictionary<String, Any> {
-      return [
+      let vehicleClassInfoDict: [String: Any?] = [
           "effectiveDate": serializeStringType(vehicleClassInfo?.effectiveDate),
           "expiryDate":  serializeStringType(vehicleClassInfo?.expiryDate),
           "licenceType": serializeStringType(vehicleClassInfo?.licenceType),
           "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass as? String)
       ]
+      return vehicleClassInfoDict.compactMapValues { $0 }
   }
   static func serializeDependentInfo(_ dependentInfo: DependentInfo?) -> Dictionary<String, Any> {
-      return [
+      let dependentInfoDict: [String: Any?] = [
           "dateOfBirth": serializeDateResult(dependentInfo?.dateOfBirth),
           "documentNumber": serializeStringResult(dependentInfo?.documentNumber),
           "fullName": serializeStringResult(dependentInfo?.fullName),
           "sex": serializeStringResult(dependentInfo?.sex)
       ]
+      return dependentInfoDict.compactMapValues { $0 }
   }
   
   static func serializeSingleSideScanningResult(_ singleSideScanningResult: SingleSideScanningResult?) -> Dictionary<String, Any> {
-      return [
+      let singleSideScanningDict: [String: Any?] = [
               "barcode": serializeBarcodeResult(singleSideScanningResult?.barcode),
               "barcodeInputImage": encodeImage(singleSideScanningResult?.barcodeInputImage?.uiImage),
               "documentImage": encodeImage(singleSideScanningResult?.documentImage?.uiImage),
@@ -291,10 +303,12 @@ class BlinkIdSerializationUtilities {
               "signatureImage": serializeDetailedCroppedImageResult(singleSideScanningResult?.signatureImage),
               "viz": serializeVizResult(singleSideScanningResult?.viz)
           ]
+      
+      return singleSideScanningDict.compactMapValues { $0 }
   }
   
   static func serializeBarcodeResult(_ barcodeResult: BarcodeResult?) -> Dictionary<String, Any> {
-      return [
+      let barcodeResultDict: [String: Any?] = [
           "additionalNameInformation": barcodeResult?.additionalNameInformation,
           "address": barcodeResult?.address,
           "addressDetailedInfo": serializeAddressDetailedInfo(barcodeResult?.addressDetailedInfo),
@@ -322,28 +336,35 @@ class BlinkIdSerializationUtilities {
           "residentialStatus": barcodeResult?.residentialStatus,
           "sex": barcodeResult?.sex
       ]
+      
+      return barcodeResultDict.compactMapValues { $0 }
   }
   
   static func serializeAddressDetailedInfo(_ addressDetailedInfo: AddressDetailedInfo?) -> Dictionary<String, Any> {
-      return [
+      let addressDetailedInfoDict: [String: Any?] = [
           "city": addressDetailedInfo?.city,
           "postalCode": addressDetailedInfo?.postalCode,
           "jurisdiction": addressDetailedInfo?.jurisdiction,
           "street": addressDetailedInfo?.street
       ]
+      return addressDetailedInfoDict.compactMapValues { $0 }
   }
+    
   static func serializeBarcodeData(_ barcodeData: BarcodeData?) -> Dictionary<String, Any> {
-      return [
+      let barcodeDataDict: [String: Any?] = [
         "barcodeType": serializeBarcodeType(barcodeData?.barcodeType),
           "rawData": barcodeData?.rawData.base64EncodedString(),
           "stringData": barcodeData?.stringData,
           "uncertain": barcodeData?.uncertain
       ]
+      
+      return barcodeDataDict.compactMapValues { $0 }
   }
   
   static func serializeBarcodeExtendedElements(_ barcodeExtendedElements: BarcodeElements?) -> [String: Any] {
       var elements = barcodeExtendedElements
-      return [
+      
+      let barcodeElementDict: [String: Any?] = [
           "addressCity": elements?.getValue(for: .addressCity),
           "addressJurisdictionCode": elements?.getValue(for: .addressJurisdictionCode),
           "addressPostalCode": elements?.getValue(for: .addressPostalCode),
@@ -428,6 +449,7 @@ class BlinkIdSerializationUtilities {
           "weightPounds": elements?.getValue(for: .weightPounds),
           "weightRange": elements?.getValue(for: .weightRange),
       ]
+      return barcodeElementDict.compactMapValues { $0 }
   }
 
   
@@ -444,7 +466,7 @@ class BlinkIdSerializationUtilities {
       return image?.jpegData(compressionQuality: 1.0)?.base64EncodedString()
   }
   static func serializeMrzResult(_ mrzResult: MRZResult?) -> Dictionary<String, Any> {
-      return [
+      let mrzResultDict: [String: Any?] = [
           "dateOfBirth": serializeDateResult(mrzResult?.dateOfBirth),
           "dateOfExpiry": serializeDateResult(mrzResult?.dateOfExpiry),
           "documentCode": mrzResult?.documentCode,
@@ -468,11 +490,13 @@ class BlinkIdSerializationUtilities {
           "secondaryID": mrzResult?.secondaryID,
           "verified": mrzResult?.verified
       ]
+      
+      return mrzResultDict.compactMapValues { $0 }
   }
   
   static func serializeVizResult(_ vizResult: VIZResult?) -> Dictionary<String, Any> {
       
-      return
+      let vizResultDict: [String: Any?] =
        [
           "additionalAddressInformation": serializeStringResult(vizResult?.additionalAddressInformation),
           "additionalNameInformation": serializeStringResult(vizResult?.additionalNameInformation),
@@ -517,14 +541,17 @@ class BlinkIdSerializationUtilities {
           "vehicleType": serializeStringResult(vizResult?.vehicleType),
           "visaType": serializeStringResult(vizResult?.visaType)
       ]
+      
+      return vizResultDict.compactMapValues { $0 }
   }
   
   static func serializeDetailedCroppedImageResult(_ detailedcroppedImageResult: DetailedCroppedImageResult?) -> Dictionary<String, Any> {
-      return [
+      let detailedcroppedImageResultDict: [String: Any?] = [
           "location": serializeRect(detailedcroppedImageResult?.location),
           "side": serializeScanningSide(detailedcroppedImageResult?.side),
           "image": encodeImage(detailedcroppedImageResult?.uiImage)
       ]
+      return detailedcroppedImageResultDict.compactMapValues { $0 }
   }
   
   static func deserializeDataMatchState(_ state: DataMatchState?) -> Int {
@@ -535,6 +562,8 @@ class BlinkIdSerializationUtilities {
           return 1
       case .success:
           return 2
+      case .none:
+          return 0
       @unknown default:
           return 0
       }
@@ -554,6 +583,8 @@ class BlinkIdSerializationUtilities {
           return 4
       case .personalIdNumber:
           return 5
+      case .none:
+          return 0
       @unknown default:
           return nil
       }
@@ -565,6 +596,8 @@ class BlinkIdSerializationUtilities {
           return 0
       case .second:
           return 1
+      case .none:
+          return nil
       @unknown default:
           return nil
       }
@@ -572,7 +605,7 @@ class BlinkIdSerializationUtilities {
   
   static func serializeBarcodeType(_ barcodeType: BarcodeType?) -> Int? {
       switch barcodeType {
-      case .none:
+      case BarcodeType?.none:
           return 0
       case .qrCode:
           return 1
@@ -596,6 +629,8 @@ class BlinkIdSerializationUtilities {
           return 10
       case .pdf417:
           return 11
+      case .some(.none):
+          return 0
       @unknown default:
           return 0
       }
@@ -621,6 +656,8 @@ class BlinkIdSerializationUtilities {
           return 7
       case .borderCrossingCard:
           return 8
+      case .none:
+          return 0
       @unknown default:
           return nil
       }
