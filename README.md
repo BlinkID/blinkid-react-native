@@ -31,7 +31,7 @@ A valid license key is required to initialize the BlinkID plugin. A free trial l
 ## <a name="requirements"></a> Requirements
 
 - BlinkID React Native was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
-- For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/environment-setup).
+- For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
 
 **Device requirements**
 
@@ -50,6 +50,19 @@ It contains the implementation for:
 3. **Singleside DirectAPI scanning** - extracting the document information from a single static images (from the gallery).
 
 To obtain and run the sample application, follow the steps below:
+Make sure you have the Node, Watchman and React Native types installed before running the sample application:
+```bash
+# install Watcman
+brew install watchman
+
+# install Node
+brew install node
+
+# install React Native types
+npm install --save-dev @types/react-native
+```
+
+**To install & run the sample application:**
 1. Git clone the repository:
 ```bash
 git clone https://github.com/BlinkID/blinkid-react-native.git
@@ -184,7 +197,7 @@ import {
        */
       await performScan(sdkSettings, sessionSettings) 
         .then((result: BlinkIdScanningResult) => {
-          //handle the results here.
+          // handle the results here.
           console.log(result.firstName?.value);
         })
         .catch((error) => {
