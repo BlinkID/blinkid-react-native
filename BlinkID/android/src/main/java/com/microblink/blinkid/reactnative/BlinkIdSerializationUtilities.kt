@@ -27,7 +27,7 @@ import com.microblink.blinkid.core.result.barcode.BarcodeElement
 import org.json.JSONArray
 
 object BlinkIdSerializationUtilities {
-  fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String? {
+  fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String {
     val scanningResultJson: JSONObject = JSONObject()
 
     scanningResult?.mode.let {
@@ -198,7 +198,7 @@ object BlinkIdSerializationUtilities {
     return scanningResultJson.toString()
   }
 
-  private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject? {
+  private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject {
     val dateResultJson = JSONObject()
     dateResult?.day?.let {
       dateResultJson.put("day", it)
@@ -215,7 +215,7 @@ object BlinkIdSerializationUtilities {
     return dateResultJson
   }
 
-  private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject? {
+  private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject {
     val documentClassInfoJson = JSONObject()
     documentClassInfo.country?.name?.let {
       documentClassInfoJson.put("country", it.replaceFirstChar { char -> char.lowercase() })
@@ -259,7 +259,7 @@ object BlinkIdSerializationUtilities {
     return dataMatchFieldJson
   }
 
-  private fun serializeStringResult(stringResult: StringResult): JSONObject? {
+  private fun serializeStringResult(stringResult: StringResult): JSONObject {
     val stringResultJson = JSONObject()
     stringResultJson.put("value", stringResult.value(AlphabetType.Latin))
     stringResultJson.put("latin", stringResult.value(AlphabetType.Latin))
@@ -300,7 +300,7 @@ object BlinkIdSerializationUtilities {
     return stringResultJson
   }
 
-  private fun serializeLocation(rectangle: Rectangle): JSONObject? {
+  private fun serializeLocation(rectangle: Rectangle): JSONObject {
     val locationJson = JSONObject()
     locationJson.put("x", rectangle.x.toDouble())
     locationJson.put("y", rectangle.y.toDouble())
