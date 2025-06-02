@@ -156,7 +156,7 @@ export declare class DocumentRules {
      * @param documentFilter - specifies the {@link DocumentFilter} to specify the document to which the rule applies.
      * This parameter is optional.
      */
-    constructor(fields: [DetailedFieldType], documentFilter?: DocumentFilter);
+    constructor(fields: DetailedFieldType[], documentFilter?: DocumentFilter);
 }
 /**
  * Represents the detailed field type.
@@ -2334,7 +2334,7 @@ export declare enum AlphabetType {
  * The levels range from turning detection
  * off completely to setting various levels of sensitivity (`Low`, `Mid`, `High`).
  */
-export declare const enum DetectionLevel {
+export declare enum DetectionLevel {
     /**
      * Disables the `DetectionLevel`
      *
@@ -2360,7 +2360,7 @@ export declare const enum DetectionLevel {
  * Represents level of anonymization performed on the scanning result.
  *
  */
-export declare const enum AnonymizationMode {
+export declare enum AnonymizationMode {
     /**
      * Anonymization will not be performed.
      *
@@ -2973,7 +2973,7 @@ export declare enum DocumentType {
  * Represents all possible field types that can be extracted from the document.
  *
  */
-export declare const enum FieldType {
+export declare enum FieldType {
     AdditionalAddressInformation = "additionalAddressInformation",
     AdditionalNameInformation = "additionalNameInformation",
     AdditionalOptionalAddressInformation = "additionalOptionalAddressInformation",

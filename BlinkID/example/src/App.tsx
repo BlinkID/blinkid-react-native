@@ -23,15 +23,21 @@ import {
   BlinkIdScanningResult,
   performScan,
   performDirectApiScan,
+  DetectionLevel,
+  DocumentRules,
+  DetailedFieldType,
+  FieldType,
+  AlphabetType,
+  DocumentAnonymizationSettings,
+  DocumentNumberAnonymizationSettings,
+  RecognitionModeFilter,
 } from 'blinkid-react-native';
 
 import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
 import { launchImageLibrary } from 'react-native-image-picker';
 
 export default function App() {
-  const [result, setResult] = useState<string>(
-    'Press the "Perform Scan" button for default BlinkID UX scanning experience with the device camera.\n\nPress the "Perform DirectAPI scan" button to get the information from document images via gallery.'
-  );
+  const [result, setResult] = useState<string | undefined>();
 
   const [firstCroppedImage, setFirstCroppedImage] = useState<
     string | undefined
@@ -54,43 +60,121 @@ export default function App() {
 
   const handlePerformScan = async () => {
     try {
-      const settings = new BlinkIdSdkSettings(licenseKey);
 
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
+
+      /**
+       * Create and modify the Session Settings
+       */
       const sessionSettings = new BlinkIdSessionSettings();
       sessionSettings.scanningMode = ScanningMode.Automatic;
-
+      /**
+       * Create and modify the scanning settings
+       */
       const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.returnInputImages = true;
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
 
+      /**
+       * Create and modify the Image settings
+       */
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
-
+      /**
+       * Place the image settings in the scanning settings
+       */
       scanningSettings.croppedImageSettings = croppedImageSettings;
+
+
+      const filterOne = new DocumentFilter(Country.Croatia);
+      const filterTwo = new DocumentFilter(
+        undefined,
+        Region.California,
+        DocumentType.Dl,
+      );
+
+      /// DOCUMENT RULES
+      const documentRules = [
+        new DocumentRules([
+          new DetailedFieldType(FieldType.FirstName, AlphabetType.Latin)], filterOne),
+        new DocumentRules([
+          new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
+          new DetailedFieldType(FieldType.LastName, AlphabetType.Latin)],
+        filterTwo)
+      ];
+
+      scanningSettings.customDocumentRules = documentRules;
+
+      /// ADDITIONAL ANONYMIZATION SETTINGS
+      const additionalAnonSettingsOne = new DocumentAnonymizationSettings(
+        [FieldType.FirstName, FieldType.Address],
+        filterOne,
+        new DocumentNumberAnonymizationSettings(undefined, 2),
+      );
+
+      const additionalAnonSettingsTwo = new DocumentAnonymizationSettings([
+        FieldType.BloodType,
+        FieldType.Address,
+      ]);
+
+      scanningSettings.customDocumentAnonymizationSettings = [
+        additionalAnonSettingsOne,
+        additionalAnonSettingsTwo,
+      ];
+
+      /// RECOGNITION MODE FILTER
+      const recognitionModeFilter = new RecognitionModeFilter();
+      recognitionModeFilter.enableBarcodeId = true;
+      recognitionModeFilter.enableFullDocumentRecognition = true;
+      recognitionModeFilter.enableMrzId = true;
+      recognitionModeFilter.enableMrzPassport = true;
+      recognitionModeFilter.enableMrzVisa = true;
+      recognitionModeFilter.enablePhotoId = true;
+
+      scanningSettings.recognitionModeFilter = recognitionModeFilter;
+
+      /// Place the Scanning settings in the Session settings
       sessionSettings.scanningSettings = scanningSettings;
 
+      /**
+       * Place the scanning settings in the session settings
+       */
+      sessionSettings.scanningSettings = scanningSettings;
+
+      /**
+       * Add the document class filter. This parameter is optional.
+       */
       const classFilter = new ClassFilter();
       classFilter.includeDocuments = [
         new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
         new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
       ];
-
-      await performScan(settings, sessionSettings, classFilter)
+      /**
+       * Call the performScan method, where the SDK and session settings need to be passed
+       * Here, you can also pass the optional ClassFilter.
+       */
+      await performScan(sdkSettings, sessionSettings) 
         .then((result: BlinkIdScanningResult) => {
+          //handle the results here.
+          console.log(result.firstName?.value);
           setResult(BlinkIdResultBuilder.getIdResultString(result));
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
+          setImages(result);
         })
         .catch((error) => {
-          setResult(`Error during scan: ${error}`);
+          // handle any errors here.
+          console.log(`Error during scan: ${error}`);
+          setResult
+          resetImages();
         });
     } catch (error) {
       setResult(`Error during scan: ${error}`);
+      resetImages();
     }
   };
 
@@ -122,44 +206,72 @@ export default function App() {
 
       const secondImage = second.assets[0].base64;
 
-      // SDK setup
-      const settings = new BlinkIdSdkSettings(licenseKey);
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
 
+      /**
+       * Create and modify the Session Settings
+       */
       const sessionSettings = new BlinkIdSessionSettings();
+
+      /**
+       * Important: if two images are being passed, use the `Automatic` 
+       * scanning mode
+       * if just one image is being passed, use the `Single` scanning mode.
+      */
       sessionSettings.scanningMode = ScanningMode.Automatic;
 
+      /**
+       * Create and modify the scanning settings
+       */
       const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.returnInputImages = true;
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+      /**
+       * if tge input images consist solely 
+       * of the cropped document image, set the 
+       * `scanCroppedDocumentImage` to true.
+       */
+      // scanningSettings.scanCroppedDocumentImage = true;
 
+      /**
+       * Create and modify the Image settings
+       */
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
-
+      /**
+       * Place the image settings in the scanning settings
+       */
       scanningSettings.croppedImageSettings = croppedImageSettings;
+
+      /**
+       * Place the scanning settings in the session settings
+       */
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings
       await performDirectApiScan(
-        settings,
+        sdkSettings,
         sessionSettings,
         firstImage,
         secondImage
       )
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
+          setImages(result);
         })
         .catch((error) => {
           setResult(`Error during scan: ${error}`);
+          resetImages();
         });
     } catch (error) {
-      setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
+      setResult(`SDK error: ${error}`);
+      resetImages();
     }
   };
 
@@ -193,31 +305,49 @@ export default function App() {
       croppedImageSettings.returnSignatureImage = true;
 
       scanningSettings.croppedImageSettings = croppedImageSettings;
+      //scanningSettings.scanCroppedDocumentImage = true;
       sessionSettings.scanningSettings = scanningSettings;
 
       // Call scan method with base64 strings
       await performDirectApiScan(settings, sessionSettings, firstImage)
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
+          setImages(result);
+        })
+        .catch((error) => {
+          setResult(`Error during DirectAPI scan: ${error}`);
+          resetImages();
+        });
+    } catch (error) {
+      setResult(`SDK error: ${error}`);
+                resetImages();
+
+    }
+  };
+
+function setImages(result: BlinkIdScanningResult) {
           setFirstCroppedImage(result.firstDocumentImage);
           setSecondCroppedImage(result.secondDocumentImage);
           setFaceImage(result.faceImage?.image);
           setSignatureImage(result.signatureImage?.image);
           setFirstInputImage(result.firstInputImage);
           setSecondInputImage(result.secondInputImage);
-        })
-        .catch((error) => {
-          setResult(`Error during scan: ${error}`);
-        });
-    } catch (error) {
-      setResult(`Error during direct API scan: ${JSON.stringify(error)}`);
-    }
-  };
+  }
+
+  function resetImages() {
+        setFirstCroppedImage(undefined);
+          setSecondCroppedImage(undefined);
+          setFaceImage(undefined);
+          setSignatureImage(undefined);
+          setFirstInputImage(undefined);
+          setSecondInputImage(undefined);
+  }
 
   return (
-    <SafeAreaView>
     <View style={styles.container}>
       <View>
+        <SafeAreaView></SafeAreaView>
+        <View style={styles.spacer} />
         <Button title="Perform Scan" onPress={handlePerformScan} />
         <View style={styles.spacer} />
         <Button
@@ -230,7 +360,6 @@ export default function App() {
           onPress={handlePerformDirectApiSingleSideScan}
         />
       </View>
-
       <ScrollView style={styles.resultBox}>
         <Text>{result}</Text>
       </ScrollView>
@@ -274,7 +403,6 @@ export default function App() {
         )}
       </ScrollView>
     </View>
-    </SafeAreaView>
   );
 }
 
@@ -286,7 +414,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   spacer: {
-    height: 20,
+    height: 25,
   },
 
   resultBox: {

@@ -24,6 +24,14 @@ import {
   performScan,
   performDirectApiScan,
   DetectionLevel,
+  DocumentRules,
+  DetailedFieldType,
+  FieldType,
+  AlphabetType,
+  DocumentAnonymizationSettings,
+  DocumentNumberAnonymizationSettings,
+  RecognitionModeFilter,
+  AnonymizationMode,
 } from 'blinkid-react-native';
 
 import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
@@ -71,6 +79,7 @@ export default function App() {
        */
       const scanningSettings = new BlinkIdScanningSettings();
       scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+      scanningSettings.anonymizationMode = AnonymizationMode.FullResult;
 
       /**
        * Create and modify the Image settings
@@ -83,6 +92,65 @@ export default function App() {
        * Place the image settings in the scanning settings
        */
       scanningSettings.croppedImageSettings = croppedImageSettings;
+
+      /**
+       * Document filters for doc rules & anonymization
+       */
+      const filterOne = new DocumentFilter(Country.Croatia);
+      const filterTwo = new DocumentFilter(
+        undefined,
+        Region.California,
+        DocumentType.Dl,
+      );
+
+      /**
+       * DOCUMENT RULES
+       */
+      const documentRules = [
+        new DocumentRules([
+          new DetailedFieldType(FieldType.FirstName, AlphabetType.Latin)], filterOne),
+        new DocumentRules([
+          new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
+          new DetailedFieldType(FieldType.LastName, AlphabetType.Latin)],
+        filterTwo)
+      ];
+
+      scanningSettings.customDocumentRules = documentRules;
+
+      /**
+       * ADDITIONAL ANONYMIZATION SETTINGS
+       */
+      const additionalAnonSettingsOne = new DocumentAnonymizationSettings(
+        [FieldType.FirstName, FieldType.Address],
+        filterOne,
+        new DocumentNumberAnonymizationSettings(undefined, 2),
+      );
+
+      const additionalAnonSettingsTwo = new DocumentAnonymizationSettings([
+        FieldType.BloodType,
+        FieldType.Address,
+      ]);
+
+      scanningSettings.customDocumentAnonymizationSettings = [
+        additionalAnonSettingsOne,
+        additionalAnonSettingsTwo,
+      ];
+
+      /**
+       * RECOGNITION MODE FILTER
+       */
+      const recognitionModeFilter = new RecognitionModeFilter();
+      recognitionModeFilter.enableBarcodeId = true;
+      recognitionModeFilter.enableFullDocumentRecognition = true;
+      recognitionModeFilter.enableMrzId = true;
+      recognitionModeFilter.enableMrzPassport = true;
+      recognitionModeFilter.enableMrzVisa = true;
+      recognitionModeFilter.enablePhotoId = true;
+
+      scanningSettings.recognitionModeFilter = recognitionModeFilter;
+
+      /// Place the Scanning settings in the Session settings
+      sessionSettings.scanningSettings = scanningSettings;
 
       /**
        * Place the scanning settings in the session settings
