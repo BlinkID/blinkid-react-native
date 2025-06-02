@@ -80,7 +80,7 @@ export default function App() {
       const scanningSettings = new BlinkIdScanningSettings();
       scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
       scanningSettings.anonymizationMode = AnonymizationMode.FullResult;
-
+      scanningSettings.returnInputImages = true;
       /**
        * Create and modify the Image settings
        */
