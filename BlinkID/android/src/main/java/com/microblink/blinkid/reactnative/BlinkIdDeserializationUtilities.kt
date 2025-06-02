@@ -42,7 +42,7 @@ object BlinkIdDeserializationUtilities {
 
     return BlinkIdSdkSettings(
       licenseKey = licenseKey,
-      licensee = blinkIdSdkSettingsMap.optString("licensee", null),
+      licensee = if (blinkIdSdkSettingsMap.has("licensee")) blinkIdSdkSettingsMap.getString("licensee") else null,
       downloadResources = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
       resourceDownloadUrl = blinkIdSdkSettingsMap.optString(
         "resourceDownloadUrl",
@@ -206,14 +206,15 @@ object BlinkIdDeserializationUtilities {
     return if (documentFilterMap != null) {
       val filter = DocumentFilter()
 
-      (documentFilterMap.optString("country")).let {
-        filter.country = enumValueOf<Country>(it.replaceFirstChar { char -> char.uppercase() })
+      if (!documentFilterMap.optString("country").isNullOrEmpty()) {
+        filter.country = enumValueOf<Country>(documentFilterMap.optString("country").replaceFirstChar { char -> char.uppercase() })
       }
-      (documentFilterMap.optString("region")).let {
-        filter.region = enumValueOf<Region>(it.replaceFirstChar { char -> char.uppercase() })
+      if (!documentFilterMap.optString("region").isNullOrEmpty()) {
+        println("Region fam: ${documentFilterMap.optString("region")}")
+        filter.region = enumValueOf<Region>(documentFilterMap.optString("region").replaceFirstChar { char -> char.uppercase() })
       }
-      (documentFilterMap.optString("documentType")).let {
-        filter.type = enumValueOf<Type>(it.replaceFirstChar { char -> char.uppercase() })
+      if (!documentFilterMap.optString("documentType").isNullOrEmpty()) {
+        filter.type = enumValueOf<Type>(documentFilterMap.optString("documentType").replaceFirstChar { char -> char.uppercase() })
       }
       filter
     } else {
