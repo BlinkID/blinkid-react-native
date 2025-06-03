@@ -68,11 +68,7 @@ object BlinkIdDeserializationUtilities {
 
     return BlinkIdSessionSettings(
       inputImageSource = if (isDirectApi) InputImageSource.Photo else InputImageSource.Video,
-      scanningMode = enumValueOf<ScanningMode>(
-        blinkIdSdkSessionSettingsMap.optString(
-          "scanningMode",
-          ScanningMode.Automatic.name
-        ).replaceFirstChar { char -> char.uppercase() }),
+      scanningMode = ScanningMode.entries[blinkIdSdkSessionSettingsMap.optInt("scanningMode", ScanningMode.Automatic.ordinal)],
       scanningSettings = deserializeScanningSettings(blinkIdSdkSessionSettingsMap.optJSONObject("scanningSettings")),
     )
   }
@@ -80,23 +76,11 @@ object BlinkIdDeserializationUtilities {
   private fun deserializeScanningSettings(scanningSettingsMap: JSONObject?): ScanningSettings {
     if (scanningSettingsMap == null) return ScanningSettings()
     return ScanningSettings(
-      blurDetectionLevel = enumValueOf<DetectionLevel>(
-        scanningSettingsMap.optString(
-          "blurDetectionLevel",
-          DetectionLevel.Mid.name
-        ).replaceFirstChar { char -> char.uppercase() }),
+      blurDetectionLevel = DetectionLevel.entries[scanningSettingsMap.optInt("blurDetectionLevel", DetectionLevel.Mid.ordinal)],
       skipImagesWithBlur = scanningSettingsMap.optBoolean("skipImagesWithBlur", true),
-      glareDetectionLevel = enumValueOf<DetectionLevel>(
-        scanningSettingsMap.optString(
-          "glareDetectionLevel",
-          DetectionLevel.Mid.name
-        ).replaceFirstChar { char -> char.uppercase() }),
+      glareDetectionLevel = DetectionLevel.entries[scanningSettingsMap.optInt("glareDetectionLevel", DetectionLevel.Mid.ordinal)],
       skipImagesWithGlare = scanningSettingsMap["skipImagesWithGlare"] as? Boolean ?: true,
-      tiltDetectionLevel = enumValueOf<DetectionLevel>(
-        scanningSettingsMap.optString(
-          "tiltDetectionLevel",
-          DetectionLevel.Off.name
-        ).replaceFirstChar { char -> char.uppercase() }),
+      tiltDetectionLevel = DetectionLevel.entries[scanningSettingsMap.optInt("tiltDetectionLevel", DetectionLevel.Off.ordinal)],
       skipImagesWithInadequateLightingConditions = scanningSettingsMap.optBoolean(
         "skipImagesWithInadequateLightingConditions",
         true

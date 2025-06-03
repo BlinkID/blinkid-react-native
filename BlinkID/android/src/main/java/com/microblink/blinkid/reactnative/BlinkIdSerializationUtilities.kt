@@ -243,7 +243,7 @@ object BlinkIdSerializationUtilities {
 
     val statesArray = JSONArray()
     dataMatchResult.statePerField.forEach {
-      statesArray.put(serializeDataMatchFiled(it))
+      statesArray.put(serializeDataMatchField(it))
     }
 
     dataMatchResultJson.put("states", statesArray)
@@ -252,7 +252,7 @@ object BlinkIdSerializationUtilities {
     return dataMatchResultJson
   }
 
-  private fun serializeDataMatchFiled(dataMatchField: DataMatchFieldState): JSONObject {
+  private fun serializeDataMatchField(dataMatchField: DataMatchFieldState): JSONObject {
     val dataMatchFieldJson = JSONObject()
     dataMatchFieldJson.put("field", dataMatchField.fieldType.ordinal)
     dataMatchFieldJson.put("state", dataMatchField.state.ordinal)
