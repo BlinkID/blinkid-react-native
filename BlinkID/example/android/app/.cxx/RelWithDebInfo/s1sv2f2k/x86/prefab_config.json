@@ -1,9 +1,0 @@
-{
-  "enabled": true,
-  "prefabPath": "/Users/milanparadina/.gradle/caches/modules-2/files-2.1/com.google.prefab/cli/2.1.0/aa32fec809c44fa531f01dcfb739b5b3304d3050/cli-2.1.0-all.jar",
-  "packages": [
-    "/Users/milanparadina/.gradle/caches/8.13/transforms/48de17ae001fd5f1bcfd4007338aaa12/transformed/react-android-0.79.2-release/prefab",
-    "/Users/milanparadina/.gradle/caches/8.13/transforms/532fdff9465dd631d517bd26502bc504/transformed/hermes-android-0.79.2-release/prefab",
-    "/Users/milanparadina/.gradle/caches/8.13/transforms/72cde7dc85b5006383f56c98fcfedfa5/transformed/fbjni-0.7.0/prefab"
-  ]
-}

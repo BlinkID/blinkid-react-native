@@ -1,1 +1,0 @@
-../../../Target Support Files/ReactAppDependencyProvider/ReactAppDependencyProvider-umbrella.h

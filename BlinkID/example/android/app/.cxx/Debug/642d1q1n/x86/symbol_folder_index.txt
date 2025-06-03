@@ -1,1 +1,0 @@
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/build/intermediates/cxx/Debug/642d1q1n/obj/x86

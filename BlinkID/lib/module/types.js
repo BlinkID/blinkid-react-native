@@ -321,49 +321,6 @@ export class RecognitionModeFilter {
 }
 
 /**
- * Represents possible recognition modes.
- *
- */
-export let RecognitionMode = /*#__PURE__*/function (RecognitionMode) {
-  /**
-   * No recognition performed.
-   *
-   */
-  RecognitionMode["None"] = "none";
-  /**
-   * Recognition of mrz document (does not include visa and passport).
-   *
-   */
-  RecognitionMode["MrzId"] = "mrzId";
-  /**
-   * Recognition of visa mrz.
-   *
-   */
-  RecognitionMode["MrzVisa"] = "mrzVisa";
-  /**
-   * Recognition of passport mrz.
-   *
-   */
-  RecognitionMode["MrzPassport"] = "mrzPassport";
-  /*
-   * Recognition of documents that have face photo on the front.
-   *
-   */
-  RecognitionMode["PhotoId"] = "photoId";
-  /**
-   * Detailed document recognition.
-   *
-   */
-  RecognitionMode["FullRecognition"] = "fullRecognition";
-  /**
-   * Recognition of barcode document.
-   *
-   */
-  RecognitionMode["BarcodeId"] = "barcodeId";
-  return RecognitionMode;
-}({});
-
-/**
  * Represents the document class information.
  *
  */
@@ -482,67 +439,6 @@ export class DataMatchResultField {
     this.state = nativeDataMatchResultField.state;
   }
 }
-
-/**
- * Represents the type of the field used in data match.
- *
- */
-export let DataMatchField = /*#__PURE__*/function (DataMatchField) {
-  /**
-   * The date of birth field.
-   *
-   */
-  DataMatchField[DataMatchField["DateOfBirth"] = 0] = "DateOfBirth";
-  /**
-   * The date of expiry field.
-   *
-   */
-  DataMatchField[DataMatchField["DateOfExpiry"] = 1] = "DateOfExpiry";
-  /**
-   * The document number field.
-   *
-   */
-  DataMatchField[DataMatchField["DocumentNumber"] = 2] = "DocumentNumber";
-  /**
-   * The document additional number field.
-   *
-   */
-  DataMatchField[DataMatchField["DocumentAdditionalNumber"] = 3] = "DocumentAdditionalNumber";
-  /**
-   * The document optional additional number field.
-   *
-   */
-  DataMatchField[DataMatchField["DocumentOptionalAdditionalNumber"] = 4] = "DocumentOptionalAdditionalNumber";
-  /**
-   * The personal ID number field.
-   *
-   */
-  DataMatchField[DataMatchField["PersonalIdNumber"] = 5] = "PersonalIdNumber";
-  return DataMatchField;
-}({});
-
-/**
- * Represents the state of the data match.
- *
- */
-export let DataMatchState = /*#__PURE__*/function (DataMatchState) {
-  /**
-   * Data matching has not been performed.
-   *
-   */
-  DataMatchState[DataMatchState["NotPerformed"] = 0] = "NotPerformed";
-  /**
-   * Data does not match.
-   *
-   */
-  DataMatchState[DataMatchState["Failed"] = 1] = "Failed";
-  /**
-   * Data does match.
-   *
-   */
-  DataMatchState[DataMatchState["Success"] = 2] = "Success";
-  return DataMatchState;
-}({});
 
 /**
  * Represents the multi-alphabet string result extracted from the OCR.
@@ -717,29 +613,6 @@ export class Side {
     this.greek = nativeSide.greek;
   }
 }
-
-/**
- * Define document side where the document field is located.
- *
- */
-export let DocumentSide = /*#__PURE__*/function (DocumentSide) {
-  /**
-   * The field was not detected.
-   *
-   */
-  DocumentSide["None"] = "none";
-  /**
-   * The field is located on the front side of the document
-   *
-   */
-  DocumentSide["Front"] = "front";
-  /**
-   * The field is located on the back side of the document
-   *
-   */
-  DocumentSide["Back"] = "back";
-  return DocumentSide;
-}({});
 
 /**
  * Represents the result of the date extraction.
@@ -926,6 +799,38 @@ export class DependentInfo {
     this.documentNumber = nativeDependentInfo.documentNumber;
     this.fullName = nativeDependentInfo.fullName;
     this.empty = nativeDependentInfo.empty;
+  }
+}
+
+/**
+ * Represents the result of the image crop transformation with additional details.
+ *
+ */
+export class DetailedCroppedImageResult {
+  /**
+   * The cropped image in the Base64 format
+   *
+   */
+
+  /**
+   * The document side that was cropped.
+   *
+   */
+
+  /**
+   * The location of the cropped image in the transformed image of the document.
+   *
+   */
+
+  /**
+   *
+   * @param nativeDetailedCroppedImageResult
+   *
+   */
+  constructor(nativeDetailedCroppedImageResult) {
+    this.image = nativeDetailedCroppedImageResult.image;
+    this.side = nativeDetailedCroppedImageResult.side != undefined ? nativeDetailedCroppedImageResult.side : undefined;
+    this.location = nativeDetailedCroppedImageResult.location != undefined ? new Rectangle(nativeDetailedCroppedImageResult.location) : undefined;
   }
 }
 
@@ -1637,74 +1542,6 @@ export class BarcodeData {
     this.uncertain = nativeBarcodeData.uncertain;
   }
 }
-
-/**
- * Represents the type of scanned barcode
- *
- */
-export let BarcodeType = /*#__PURE__*/function (BarcodeType) {
-  /**
-   * No barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["None"] = 0] = "None";
-  /**
-   * QR code was scanned
-   *
-   */
-  BarcodeType[BarcodeType["QrCode"] = 1] = "QrCode";
-  /**
-   * Data Matrix 2D barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["DataMatrix"] = 2] = "DataMatrix";
-  /**
-   * UPC E barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Upce"] = 3] = "Upce";
-  /**
-   * UPC A barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Upca"] = 4] = "Upca";
-  /**
-   * EAN 8 barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Ean8"] = 5] = "Ean8";
-  /**
-   * EAN 13 barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Ean13"] = 6] = "Ean13";
-  /**
-   * Code 128 barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Code128"] = 7] = "Code128";
-  /**
-   * Code 39 barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Code39"] = 8] = "Code39";
-  /**
-   * ITF barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Itf"] = 9] = "Itf";
-  /**
-   * Aztec 2D barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Aztec"] = 10] = "Aztec";
-  /**
-   * PDF417 2D barcode was scanned
-   *
-   */
-  BarcodeType[BarcodeType["Pdf417"] = 11] = "Pdf417";
-  return BarcodeType;
-}({});
 
 /**
  * Detailed information about the address.
@@ -2620,13 +2457,13 @@ export let ScanningMode = /*#__PURE__*/function (ScanningMode) {
    * Specifies the scanning process to be for single side only.
    *
    */
-  ScanningMode["Single"] = "single";
+  ScanningMode[ScanningMode["Single"] = 0] = "Single";
   /**
    * The default `ScanningMode`.
    *
    * Automatically determines the number of sides to scan.
    */
-  ScanningMode["Automatic"] = "automatic";
+  ScanningMode[ScanningMode["Automatic"] = 1] = "Automatic";
   return ScanningMode;
 }({});
 
@@ -2672,22 +2509,22 @@ export let DetectionLevel = /*#__PURE__*/function (DetectionLevel) {
    * Disables the `DetectionLevel`
    *
    */
-  DetectionLevel["Off"] = "off";
+  DetectionLevel[DetectionLevel["Off"] = 0] = "Off";
   /**
    * Sets the `DetectionLevel` to be less sensitive.
    *
    */
-  DetectionLevel["Low"] = "low";
+  DetectionLevel[DetectionLevel["Low"] = 1] = "Low";
   /**
    * The default `DetectionLevel` sensitivity.
    *
    */
-  DetectionLevel["Mid"] = "mid";
+  DetectionLevel[DetectionLevel["Mid"] = 2] = "Mid";
   /**
    * Sets the `DetectionLevel` to be highly sensitive.
    *
    */
-  DetectionLevel["High"] = "high";
+  DetectionLevel[DetectionLevel["High"] = 3] = "High";
   return DetectionLevel;
 }({});
 
@@ -2717,6 +2554,135 @@ export let AnonymizationMode = /*#__PURE__*/function (AnonymizationMode) {
    */
   AnonymizationMode["FullResult"] = "fullResult";
   return AnonymizationMode;
+}({});
+
+/**
+ * Represents possible recognition modes.
+ *
+ */
+export let RecognitionMode = /*#__PURE__*/function (RecognitionMode) {
+  /**
+   * No recognition performed.
+   *
+   */
+  RecognitionMode["None"] = "none";
+  /**
+   * Recognition of mrz document (does not include visa and passport).
+   *
+   */
+  RecognitionMode["MrzId"] = "mrzId";
+  /**
+   * Recognition of visa mrz.
+   *
+   */
+  RecognitionMode["MrzVisa"] = "mrzVisa";
+  /**
+   * Recognition of passport mrz.
+   *
+   */
+  RecognitionMode["MrzPassport"] = "mrzPassport";
+  /*
+   * Recognition of documents that have face photo on the front.
+   *
+   */
+  RecognitionMode["PhotoId"] = "photoId";
+  /**
+   * Detailed document recognition.
+   *
+   */
+  RecognitionMode["FullRecognition"] = "fullRecognition";
+  /**
+   * Recognition of barcode document.
+   *
+   */
+  RecognitionMode["BarcodeId"] = "barcodeId";
+  return RecognitionMode;
+}({});
+
+/**
+ * Define document side where the document field is located.
+ *
+ */
+export let DocumentSide = /*#__PURE__*/function (DocumentSide) {
+  /**
+   * The field is located on the front side of the document
+   *
+   */
+  DocumentSide[DocumentSide["Front"] = 0] = "Front";
+  /**
+   * The field is located on the back side of the document
+   *
+   */
+  DocumentSide[DocumentSide["Back"] = 1] = "Back";
+  return DocumentSide;
+}({});
+
+/**
+ * Represents the type of scanned barcode
+ *
+ */
+export let BarcodeType = /*#__PURE__*/function (BarcodeType) {
+  /**
+   * No barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["None"] = 0] = "None";
+  /**
+   * QR code was scanned
+   *
+   */
+  BarcodeType[BarcodeType["QrCode"] = 1] = "QrCode";
+  /**
+   * Data Matrix 2D barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["DataMatrix"] = 2] = "DataMatrix";
+  /**
+   * UPC E barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Upce"] = 3] = "Upce";
+  /**
+   * UPC A barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Upca"] = 4] = "Upca";
+  /**
+   * EAN 8 barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Ean8"] = 5] = "Ean8";
+  /**
+   * EAN 13 barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Ean13"] = 6] = "Ean13";
+  /**
+   * Code 128 barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Code128"] = 7] = "Code128";
+  /**
+   * Code 39 barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Code39"] = 8] = "Code39";
+  /**
+   * ITF barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Itf"] = 9] = "Itf";
+  /**
+   * Aztec 2D barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Aztec"] = 10] = "Aztec";
+  /**
+   * PDF417 2D barcode was scanned
+   *
+   */
+  BarcodeType[BarcodeType["Pdf417"] = 11] = "Pdf417";
+  return BarcodeType;
 }({});
 
 /**
@@ -2773,38 +2739,6 @@ export let MRZDocumentType = /*#__PURE__*/function (MRZDocumentType) {
 }({});
 
 /**
- * Represents the result of the image crop transformation with additional details.
- *
- */
-export class DetailedCroppedImageResult {
-  /**
-   * The cropped image in the Base64 format
-   *
-   */
-
-  /**
-   * The document side that was cropped.
-   *
-   */
-
-  /**
-   * The location of the cropped image in the transformed image of the document.
-   *
-   */
-
-  /**
-   *
-   * @param nativeDetailedCroppedImageResult
-   *
-   */
-  constructor(nativeDetailedCroppedImageResult) {
-    this.image = nativeDetailedCroppedImageResult.image;
-    this.side = nativeDetailedCroppedImageResult.side != undefined ? nativeDetailedCroppedImageResult.side : undefined;
-    this.location = nativeDetailedCroppedImageResult.location != undefined ? new Rectangle(nativeDetailedCroppedImageResult.location) : undefined;
-  }
-}
-
-/**
  * Represents the side of the document being scanned.
  *
  */
@@ -2821,6 +2755,67 @@ var ScanningSide = /*#__PURE__*/function (ScanningSide) {
   ScanningSide[ScanningSide["Second"] = 1] = "Second";
   return ScanningSide;
 }(ScanningSide || {});
+/**
+ * Represents the type of the field used in data match.
+ *
+ */
+export let DataMatchField = /*#__PURE__*/function (DataMatchField) {
+  /**
+   * The date of birth field.
+   *
+   */
+  DataMatchField[DataMatchField["DateOfBirth"] = 0] = "DateOfBirth";
+  /**
+   * The date of expiry field.
+   *
+   */
+  DataMatchField[DataMatchField["DateOfExpiry"] = 1] = "DateOfExpiry";
+  /**
+   * The document number field.
+   *
+   */
+  DataMatchField[DataMatchField["DocumentNumber"] = 2] = "DocumentNumber";
+  /**
+   * The document additional number field.
+   *
+   */
+  DataMatchField[DataMatchField["DocumentAdditionalNumber"] = 3] = "DocumentAdditionalNumber";
+  /**
+   * The document optional additional number field.
+   *
+   */
+  DataMatchField[DataMatchField["DocumentOptionalAdditionalNumber"] = 4] = "DocumentOptionalAdditionalNumber";
+  /**
+   * The personal ID number field.
+   *
+   */
+  DataMatchField[DataMatchField["PersonalIdNumber"] = 5] = "PersonalIdNumber";
+  return DataMatchField;
+}({});
+
+/**
+ * Represents the state of the data match.
+ *
+ */
+export let DataMatchState = /*#__PURE__*/function (DataMatchState) {
+  /**
+   * Data matching has not been performed.
+   *
+   */
+  DataMatchState[DataMatchState["NotPerformed"] = 0] = "NotPerformed";
+  /**
+   * Data does not match.
+   *
+   */
+  DataMatchState[DataMatchState["Failed"] = 1] = "Failed";
+  /**
+   * Data does match.
+   *
+   */
+  DataMatchState[DataMatchState["Success"] = 2] = "Success";
+  return DataMatchState;
+}({});
+
 /**
  * Document country.
  *

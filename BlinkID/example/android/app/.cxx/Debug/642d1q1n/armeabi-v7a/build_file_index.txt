@@ -1,3 +1,0 @@
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/android/build/generated/source/codegen/jni/CMakeLists.txt
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/node_modules/react-native-image-picker/android/build/generated/source/codegen/jni/CMakeLists.txt
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt

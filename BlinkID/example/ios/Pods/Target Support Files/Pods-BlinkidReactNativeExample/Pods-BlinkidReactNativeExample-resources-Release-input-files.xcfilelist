@@ -1,8 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-BlinkidReactNativeExample/Pods-BlinkidReactNativeExample-resources.sh
-${PODS_CONFIGURATION_BUILD_DIR}/BlinkidReactNative/BlinkIDUXResources.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/RCT-Folly/RCT-Folly_privacy.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/boost/boost_privacy.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/glog/glog_privacy.bundle
-${PODS_CONFIGURATION_BUILD_DIR}/react-native-image-picker/RNImagePickerPrivacyInfo.bundle

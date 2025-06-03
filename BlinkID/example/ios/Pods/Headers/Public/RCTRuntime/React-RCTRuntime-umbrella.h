@@ -1,1 +1,0 @@
-../../../Target Support Files/React-RCTRuntime/React-RCTRuntime-umbrella.h

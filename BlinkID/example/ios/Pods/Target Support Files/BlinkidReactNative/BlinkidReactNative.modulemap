@@ -1,6 +1,0 @@
-module BlinkidReactNative {
-  umbrella header "BlinkidReactNative-umbrella.h"
-
-  export *
-  module * { export * }
-}

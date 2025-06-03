@@ -324,4 +324,6 @@ Pods/*
 
 # Jest
 .jest/
+
+# sample app
 /BlinkIdSample

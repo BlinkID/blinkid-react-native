@@ -1,9 +1,0 @@
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/CMakeFiles/appmodules.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/CMakeFiles/edit_cache.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/CMakeFiles/rebuild_cache.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/BlinkidReactNativeSpec_autolinked_build/CMakeFiles/react_codegen_BlinkidReactNativeSpec.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/BlinkidReactNativeSpec_autolinked_build/CMakeFiles/edit_cache.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/BlinkidReactNativeSpec_autolinked_build/CMakeFiles/rebuild_cache.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/RNImagePickerSpec_autolinked_build/CMakeFiles/react_codegen_RNImagePickerSpec.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/RNImagePickerSpec_autolinked_build/CMakeFiles/edit_cache.dir
-/Users/milanparadina/Desktop/bid_rn/v7/blinkid-react-native/BlinkID/example/android/app/.cxx/Debug/642d1q1n/x86_64/RNImagePickerSpec_autolinked_build/CMakeFiles/rebuild_cache.dir

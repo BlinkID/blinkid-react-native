@@ -284,43 +284,6 @@ export declare class RecognitionModeFilter {
     constructor();
 }
 /**
- * Represents possible recognition modes.
- *
- */
-export declare const enum RecognitionMode {
-    /**
-     * No recognition performed.
-     *
-     */
-    None = "none",
-    /**
-     * Recognition of mrz document (does not include visa and passport).
-     *
-     */
-    MrzId = "mrzId",
-    /**
-     * Recognition of visa mrz.
-     *
-     */
-    MrzVisa = "mrzVisa",
-    /**
-     * Recognition of passport mrz.
-     *
-     */
-    MrzPassport = "mrzPassport",
-    PhotoId = "photoId",
-    /**
-     * Detailed document recognition.
-     *
-     */
-    FullRecognition = "fullRecognition",
-    /**
-     * Recognition of barcode document.
-     *
-     */
-    BarcodeId = "barcodeId"
-}
-/**
  * Represents the document class information.
  *
  */
@@ -421,63 +384,6 @@ export declare class DataMatchResultField {
      *
      */
     constructor(nativeDataMatchResultField: any);
-}
-/**
- * Represents the type of the field used in data match.
- *
- */
-export declare enum DataMatchField {
-    /**
-     * The date of birth field.
-     *
-     */
-    DateOfBirth = 0,
-    /**
-     * The date of expiry field.
-     *
-     */
-    DateOfExpiry = 1,
-    /**
-     * The document number field.
-     *
-     */
-    DocumentNumber = 2,
-    /**
-     * The document additional number field.
-     *
-     */
-    DocumentAdditionalNumber = 3,
-    /**
-     * The document optional additional number field.
-     *
-     */
-    DocumentOptionalAdditionalNumber = 4,
-    /**
-     * The personal ID number field.
-     *
-     */
-    PersonalIdNumber = 5
-}
-/**
- * Represents the state of the data match.
- *
- */
-export declare enum DataMatchState {
-    /**
-     * Data matching has not been performed.
-     *
-     */
-    NotPerformed = 0,
-    /**
-     * Data does not match.
-     *
-     */
-    Failed = 1,
-    /**
-     * Data does match.
-     *
-     */
-    Success = 2
 }
 /**
  * Represents the multi-alphabet string result extracted from the OCR.
@@ -625,27 +531,6 @@ export declare class Side {
      *
      */
     constructor(nativeSide: any);
-}
-/**
- * Define document side where the document field is located.
- *
- */
-export declare enum DocumentSide {
-    /**
-     * The field was not detected.
-     *
-     */
-    None = "none",
-    /**
-     * The field is located on the front side of the document
-     *
-     */
-    Front = "front",
-    /**
-     * The field is located on the back side of the document
-     *
-     */
-    Back = "back"
 }
 /**
  * Represents the result of the date extraction.
@@ -804,6 +689,33 @@ export declare class DependentInfo {
      */
     empty?: boolean;
     constructor(nativeDependentInfo: any);
+}
+/**
+ * Represents the result of the image crop transformation with additional details.
+ *
+ */
+export declare class DetailedCroppedImageResult {
+    /**
+     * The cropped image in the Base64 format
+     *
+     */
+    image?: string;
+    /**
+     * The document side that was cropped.
+     *
+     */
+    side?: ScanningSide;
+    /**
+     * The location of the cropped image in the transformed image of the document.
+     *
+     */
+    location?: Rectangle;
+    /**
+     *
+     * @param nativeDetailedCroppedImageResult
+     *
+     */
+    constructor(nativeDetailedCroppedImageResult: any);
 }
 /**
  * Represents the result of scanning a single side of the document.
@@ -1399,72 +1311,6 @@ export declare class BarcodeData {
      * @param nativeBarcodeData - specifies the barcode data obtained from the native SDK.
      */
     constructor(nativeBarcodeData: any);
-}
-/**
- * Represents the type of scanned barcode
- *
- */
-export declare enum BarcodeType {
-    /**
-     * No barcode was scanned
-     *
-     */
-    None = 0,
-    /**
-     * QR code was scanned
-     *
-     */
-    QrCode = 1,
-    /**
-     * Data Matrix 2D barcode was scanned
-     *
-     */
-    DataMatrix = 2,
-    /**
-     * UPC E barcode was scanned
-     *
-     */
-    Upce = 3,
-    /**
-     * UPC A barcode was scanned
-     *
-     */
-    Upca = 4,
-    /**
-     * EAN 8 barcode was scanned
-     *
-     */
-    Ean8 = 5,
-    /**
-     * EAN 13 barcode was scanned
-     *
-     */
-    Ean13 = 6,
-    /**
-     * Code 128 barcode was scanned
-     *
-     */
-    Code128 = 7,
-    /**
-     * Code 39 barcode was scanned
-     *
-     */
-    Code39 = 8,
-    /**
-     * ITF barcode was scanned
-     *
-     */
-    Itf = 9,
-    /**
-     * Aztec 2D barcode was scanned
-     *
-     */
-    Aztec = 10,
-    /**
-     * PDF417 2D barcode was scanned
-     *
-     */
-    Pdf417 = 11
 }
 /**
  * Detailed information about the address.
@@ -2291,13 +2137,13 @@ export declare enum ScanningMode {
      * Specifies the scanning process to be for single side only.
      *
      */
-    Single = "single",
+    Single = 0,
     /**
      * The default `ScanningMode`.
      *
      * Automatically determines the number of sides to scan.
      */
-    Automatic = "automatic"
+    Automatic = 1
 }
 /**
  * Represents the type of the alphabet used in the document.
@@ -2339,22 +2185,22 @@ export declare enum DetectionLevel {
      * Disables the `DetectionLevel`
      *
      */
-    Off = "off",
+    Off = 0,
     /**
      * Sets the `DetectionLevel` to be less sensitive.
      *
      */
-    Low = "low",
+    Low = 1,
     /**
      * The default `DetectionLevel` sensitivity.
      *
      */
-    Mid = "mid",
+    Mid = 2,
     /**
      * Sets the `DetectionLevel` to be highly sensitive.
      *
      */
-    High = "high"
+    High = 3
 }
 /**
  * Represents level of anonymization performed on the scanning result.
@@ -2381,6 +2227,125 @@ export declare enum AnonymizationMode {
      *
      */
     FullResult = "fullResult"
+}
+/**
+ * Represents possible recognition modes.
+ *
+ */
+export declare const enum RecognitionMode {
+    /**
+     * No recognition performed.
+     *
+     */
+    None = "none",
+    /**
+     * Recognition of mrz document (does not include visa and passport).
+     *
+     */
+    MrzId = "mrzId",
+    /**
+     * Recognition of visa mrz.
+     *
+     */
+    MrzVisa = "mrzVisa",
+    /**
+     * Recognition of passport mrz.
+     *
+     */
+    MrzPassport = "mrzPassport",
+    PhotoId = "photoId",
+    /**
+     * Detailed document recognition.
+     *
+     */
+    FullRecognition = "fullRecognition",
+    /**
+     * Recognition of barcode document.
+     *
+     */
+    BarcodeId = "barcodeId"
+}
+/**
+ * Define document side where the document field is located.
+ *
+ */
+export declare enum DocumentSide {
+    /**
+     * The field is located on the front side of the document
+     *
+     */
+    Front = 0,
+    /**
+     * The field is located on the back side of the document
+     *
+     */
+    Back = 1
+}
+/**
+ * Represents the type of scanned barcode
+ *
+ */
+export declare enum BarcodeType {
+    /**
+     * No barcode was scanned
+     *
+     */
+    None = 0,
+    /**
+     * QR code was scanned
+     *
+     */
+    QrCode = 1,
+    /**
+     * Data Matrix 2D barcode was scanned
+     *
+     */
+    DataMatrix = 2,
+    /**
+     * UPC E barcode was scanned
+     *
+     */
+    Upce = 3,
+    /**
+     * UPC A barcode was scanned
+     *
+     */
+    Upca = 4,
+    /**
+     * EAN 8 barcode was scanned
+     *
+     */
+    Ean8 = 5,
+    /**
+     * EAN 13 barcode was scanned
+     *
+     */
+    Ean13 = 6,
+    /**
+     * Code 128 barcode was scanned
+     *
+     */
+    Code128 = 7,
+    /**
+     * Code 39 barcode was scanned
+     *
+     */
+    Code39 = 8,
+    /**
+     * ITF barcode was scanned
+     *
+     */
+    Itf = 9,
+    /**
+     * Aztec 2D barcode was scanned
+     *
+     */
+    Aztec = 10,
+    /**
+     * PDF417 2D barcode was scanned
+     *
+     */
+    Pdf417 = 11
 }
 /**
  * Represents the document type found on the Machine Readable Zone
@@ -2434,33 +2399,6 @@ export declare enum MRZDocumentType {
     BorderCrossingCard = 8
 }
 /**
- * Represents the result of the image crop transformation with additional details.
- *
- */
-export declare class DetailedCroppedImageResult {
-    /**
-     * The cropped image in the Base64 format
-     *
-     */
-    image?: string;
-    /**
-     * The document side that was cropped.
-     *
-     */
-    side?: ScanningSide;
-    /**
-     * The location of the cropped image in the transformed image of the document.
-     *
-     */
-    location?: Rectangle;
-    /**
-     *
-     * @param nativeDetailedCroppedImageResult
-     *
-     */
-    constructor(nativeDetailedCroppedImageResult: any);
-}
-/**
  * Represents the side of the document being scanned.
  *
  */
@@ -2475,6 +2413,63 @@ declare enum ScanningSide {
      *
      */
     Second = 1
+}
+/**
+ * Represents the type of the field used in data match.
+ *
+ */
+export declare enum DataMatchField {
+    /**
+     * The date of birth field.
+     *
+     */
+    DateOfBirth = 0,
+    /**
+     * The date of expiry field.
+     *
+     */
+    DateOfExpiry = 1,
+    /**
+     * The document number field.
+     *
+     */
+    DocumentNumber = 2,
+    /**
+     * The document additional number field.
+     *
+     */
+    DocumentAdditionalNumber = 3,
+    /**
+     * The document optional additional number field.
+     *
+     */
+    DocumentOptionalAdditionalNumber = 4,
+    /**
+     * The personal ID number field.
+     *
+     */
+    PersonalIdNumber = 5
+}
+/**
+ * Represents the state of the data match.
+ *
+ */
+export declare enum DataMatchState {
+    /**
+     * Data matching has not been performed.
+     *
+     */
+    NotPerformed = 0,
+    /**
+     * Data does not match.
+     *
+     */
+    Failed = 1,
+    /**
+     * Data does match.
+     *
+     */
+    Success = 2
 }
 /**
  * Document country.

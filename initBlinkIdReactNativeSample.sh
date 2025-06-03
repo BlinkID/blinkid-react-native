@@ -11,8 +11,7 @@ rm -rf $appName
 
 # create a sample application
 # https://github.com/react-native-community/cli#using-npx-recommended
-#npx @react-native-community/cli init $appName  || exit 1
-npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version"
+npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" || exit 1
 
 # enter into demo project folder
 pushd $appName || exit 1
@@ -29,15 +28,13 @@ IS_LOCAL_BUILD=true || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # use directly source code from this repo instead of npm package
+  npm i
   npm pack $blink_id_plugin_path
   npm i --save blinkid-react-native-7.2.0.tgz
-  #pushd node_modules
-    #ln -s $blink_id_plugin_path blinkid-react-native
-  #popd
 else
   # download npm package
   echo "Downloading blinkid-react-native module"
-  npm install --save blinkid-react-native
+  npm i --save blinkid-react-native
 fi
 
 # react-native-image-picker plugin needed only for sample application with DirectAPI to get the document images
