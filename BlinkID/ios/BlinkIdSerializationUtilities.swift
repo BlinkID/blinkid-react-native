@@ -188,19 +188,17 @@ class BlinkIdSerializationUtilities {
   static func serializeDataMatchResult(_ dataMatchResult: DataMatchResult?) -> Dictionary<String, Any> {
       let dataMatchResultDict: [String: Any?] = [
           "states": dataMatchResult?.states.map(serializeDataMatchState(_:)),
-          "overallState": deserializeDataMatchState(dataMatchResult?.overallState)
+          "overallState": serializeDataMatchState(dataMatchResult?.overallState)
       ]
       
       return dataMatchResultDict.compactMapValues{ $0 }
   }
   
   static func serializeDataMatchState(_ dataMatchState: FieldState?) -> Dictionary<String, Any> {
-      let dataMatchStateDict: [String: Any?] = [
-        "field": deserializeDataMatchField(dataMatchState?.fieldType),
-          "state": deserializeDataMatchState(dataMatchState?.state)
-      ]
-      
-      return dataMatchStateDict.compactMapValues { $0 }
+      [
+        "field": serializeDataMatchField(dataMatchState?.fieldType),
+          "state": serializeDataMatchState(dataMatchState?.state)
+      ].compactMapValues { $0 }
   }
   
   static func serializeStringResult(_ stringResult: BlinkIDSDK.StringResult?) -> Dictionary<String, Any>{
@@ -212,19 +210,21 @@ class BlinkIdSerializationUtilities {
           "greek": stringResult?.value(for: .greek)
       ]
               
-      stringResultDict["location"] = [
+      let locationDict: [String: Any?] = [
           "latin": serializeRect(stringResult?.location(for: .latin)),
           "arabic": serializeRect(stringResult?.location(for: .arabic)),
           "cyrillic": serializeRect(stringResult?.location(for: .cyrillic)),
           "greek": serializeRect(stringResult?.location(for: .greek))
-      ]
+      ].compactMapValues { $0 }
       
-      var sideDict: [String: Any?] = [
+      stringResultDict["location"] = locationDict
+      
+      let sideDict: [String: Any?] = [
         "latin": serializeScanningSide(stringResult?.side(for: .latin)),
           "arabic": serializeScanningSide(stringResult?.side(for: .arabic)),
           "cyrillic": serializeScanningSide(stringResult?.side(for: .cyrillic)),
           "greek": serializeScanningSide(stringResult?.side(for: .greek))
-      ]
+      ].compactMapValues { $0 }
       
       stringResultDict["side"] = sideDict
       
@@ -554,7 +554,7 @@ class BlinkIdSerializationUtilities {
       return detailedcroppedImageResultDict.compactMapValues { $0 }
   }
   
-  static func deserializeDataMatchState(_ state: DataMatchState?) -> Int {
+  static func serializeDataMatchState(_ state: DataMatchState?) -> Int {
       switch state {
       case .notPerformed:
           return 0
@@ -569,7 +569,7 @@ class BlinkIdSerializationUtilities {
       }
   }
   
-  static func deserializeDataMatchField(_ field: DataMatchFieldType?) -> Int? {
+  static func serializeDataMatchField(_ field: DataMatchFieldType?) -> Int? {
       switch field {
       case .dateOfBirth:
           return 0

@@ -94,9 +94,11 @@ class BlinkIdDeserializationUtilities {
           scanningSettings.customDocumentRules = deserializeCustomDocumentRules(customDocumentRules)
       }
       
-      if let anonymizationMode = scanningSettingsDict?["anonymizationMode"] as? Int {
-          scanningSettings.anonymizationMode = deseralizeAnonymizationMode(anonymizationMode)
-      }
+      if let anonymizationMode = scanningSettingsDict?["anonymizationMode"] as? String,
+          let value = AnonymizationMode(rawValue: anonymizationMode) {
+              scanningSettings.anonymizationMode = value
+          }
+      
       if let customDocumentAnonymizationSettings = scanningSettingsDict?["customDocumentAnonymizationSettings"] as? Array<Dictionary<String, Any>> {
           scanningSettings.customDocumentAnonymizationSettings = deserializeCustomDocumentAnonymizationSettings(customDocumentAnonymizationSettings)
       }
@@ -153,48 +155,6 @@ class BlinkIdDeserializationUtilities {
       return croppedImageSettings
   }
   
-  
-  static func deseralizeDetectionLevel(_ value: Int) -> DetectionLevel {
-      switch value {
-      case 0:
-          return DetectionLevel.off
-      case 1:
-          return DetectionLevel.low
-      case 2:
-          return DetectionLevel.mid
-      case 3:
-          return DetectionLevel.high
-      default:
-          return DetectionLevel.mid
-      }
-  }
-  
-  static func deseralizeAnonymizationMode(_ value: Int) -> AnonymizationMode {
-      switch value {
-      case 0:
-          return AnonymizationMode.none
-      case 1:
-          return AnonymizationMode.imageOnly
-      case 2:
-          return AnonymizationMode.resultFieldsOnly
-      case 3:
-          return AnonymizationMode.fullResult
-      default:
-          return AnonymizationMode.fullResult
-      }
-  }
-  
-  static func deseralizeScanningMode(_ value: Int) -> ScanningMode {
-      switch value {
-      case 0:
-          return ScanningMode.single
-      case 1:
-          return ScanningMode.automatic
-      default:
-          return ScanningMode.automatic
-      }
-  }
-  
   static func deserializeRecognitionModeFilter(_ recognitionModeFilterDict: Dictionary<String, Any>) -> RecognitionModeFilter {
       var recognitionModeFilter = RecognitionModeFilter()
       
@@ -238,7 +198,7 @@ class BlinkIdDeserializationUtilities {
       return documentRulesArr
   }
   
-  static func deserializeDocumentFilter(_ documentFilterDict: Dictionary<String, Any>) -> DocumentFilter {
+    static func deserializeDocumentFilter(_ documentFilterDict: Dictionary<String, Any>) -> DocumentFilter {
       var documentFilter = DocumentFilter()
       
       if let country = documentFilterDict["country"] as? String {
@@ -255,7 +215,7 @@ class BlinkIdDeserializationUtilities {
       return documentFilter
   }
   
-  static func deserializeDetailedFieldType(_ detailedFieldTypeDict: Dictionary<String, Any>?) -> DetailedFieldType? {
+    static func deserializeDetailedFieldType(_ detailedFieldTypeDict: Dictionary<String, Any>?) -> DetailedFieldType? {
       if let fieldType = detailedFieldTypeDict?["fieldType"] as? String,
          let alphabetType = detailedFieldTypeDict?["alphabetType"] as? String,
          let fieldTypeValue = FieldType.init(rawValue: fieldType),
@@ -335,6 +295,32 @@ class BlinkIdDeserializationUtilities {
       (type == nil || classInfo.documentType == DocumentType.init(rawValue: type!) &&
        (region == nil || classInfo.region == Region.init(rawValue: region!)))
   }
+    
+    static func deseralizeDetectionLevel(_ value: Int) -> DetectionLevel {
+        switch value {
+        case 0:
+            return DetectionLevel.off
+        case 1:
+            return DetectionLevel.low
+        case 2:
+            return DetectionLevel.mid
+        case 3:
+            return DetectionLevel.high
+        default:
+            return DetectionLevel.mid
+        }
+    }
+    
+    static func deseralizeScanningMode(_ value: Int) -> ScanningMode {
+        switch value {
+        case 0:
+            return ScanningMode.single
+        case 1:
+            return ScanningMode.automatic
+        default:
+            return ScanningMode.automatic
+        }
+    }
   
   static func sanitizeDictionary(_ dictionary: Dictionary<String, Any>?) -> Dictionary<String, Any>? {
       if let dictionary = dictionary {
