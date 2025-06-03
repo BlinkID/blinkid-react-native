@@ -58,7 +58,7 @@ pushd ios || exit 1
 #Force minimal iOS version
 sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '16.0'/" Podfile
 
-# Add the camera and photo usage descriptions into Info.plist to enable camera scanning the image upload via gallery
+# Add the camera and photo usage descriptions into Info.plist to enable camera scanning and the image upload via gallery
 sed -i '' '/<dict>/a\
   <key>NSCameraUsageDescription</key>\
   <string>Enable the camera usage for BlinkID default UX scanning</string>\
@@ -85,11 +85,11 @@ Instruction for running the $appName sample application:
  
 Go to the React Native project folder: cd $appName
 
------ Android instuctions -----
+----- Android instructions -----
 
 Execute: npx react-native run-android
 
------ iOS instuctions -----
+----- iOS instructions -----
 
 1. Execute npx react-native start
 2. Open $appName/ios/$appName.xcworkspace
