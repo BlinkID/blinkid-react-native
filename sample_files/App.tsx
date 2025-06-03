@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Text,
@@ -7,7 +7,7 @@ import {
   ScrollView,
   Image,
   Platform,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import {
   BlinkIdScanningSettings,
@@ -34,11 +34,13 @@ import {
   AnonymizationMode,
 } from 'blinkid-react-native';
 
-import { BlinkIdResultBuilder } from './BlinkIdResultBuilder';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {BlinkIdResultBuilder} from './BlinkIdResultBuilder';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function App() {
-  const [result, setResult] = useState<string | undefined>();
+  const [result, setResult] = useState<string | undefined>(
+    'Press the "Perform scan" button to scan documents with the Default BlinkID UX experience.\n\nPress the "Direct API MultiSide Scan" button to extract document information from multiple static images.\n\nPress the "Direct API SingleSide Scan" button to extract document information from a single static image.',
+  );
 
   const [firstCroppedImage, setFirstCroppedImage] = useState<
     string | undefined
@@ -61,7 +63,6 @@ export default function App() {
 
   const handlePerformScan = async () => {
     try {
-
       /**
        * Set the BlinkID SDK settings
        * Add the license key here from the code above
@@ -107,12 +108,17 @@ export default function App() {
        * DOCUMENT RULES
        */
       const documentRules = [
-        new DocumentRules([
-          new DetailedFieldType(FieldType.FirstName, AlphabetType.Latin)], filterOne),
-        new DocumentRules([
-          new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
-          new DetailedFieldType(FieldType.LastName, AlphabetType.Latin)],
-        filterTwo)
+        new DocumentRules(
+          [new DetailedFieldType(FieldType.FirstName, AlphabetType.Latin)],
+          filterOne,
+        ),
+        new DocumentRules(
+          [
+            new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
+            new DetailedFieldType(FieldType.LastName, AlphabetType.Latin),
+          ],
+          filterTwo,
+        ),
       ];
 
       scanningSettings.customDocumentRules = documentRules;
@@ -169,52 +175,64 @@ export default function App() {
        * Call the performScan method, where the SDK and session settings need to be passed
        * Here, you can also pass the optional ClassFilter.
        */
-      await performScan(sdkSettings, sessionSettings) 
+      await performScan(sdkSettings, sessionSettings) // -> classFilter
         .then((result: BlinkIdScanningResult) => {
           //handle the results here.
           console.log(result.firstName?.value);
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch((error) => {
+        .catch(error => {
           // handle any errors here.
           console.log(`Error during scan: ${error}`);
-          setResult
+          setResult(`Error during scan: ${error}`);
           resetImages();
         });
     } catch (error) {
-      setResult(`Error during scan: ${error}`);
+      setResult(`Error with setting the SDK: ${error}`);
       resetImages();
     }
   };
 
   const handlePerformDirectApiMultiSideScan = async () => {
     try {
-      // Pick first image
-      const first = await launchImageLibrary({
+      /**
+       * Pick the first image of the document
+       * Make sure it is the front side
+       */
+      const firstImage = await launchImageLibrary({
         mediaType: 'photo',
         includeBase64: true,
       });
 
-      if (first.assets == null || !first.assets[0]?.base64) {
+      if (firstImage.assets == null || !firstImage.assets[0]?.base64) {
         setResult('First image not selected or invalid.');
         return;
       }
 
-      const firstImage = first.assets[0].base64;
+      /**
+       * Take the Base64 of the selected image
+       */
+      const firstImageBase64 = firstImage.assets[0].base64;
 
-      // Pick second image
-      const second = await launchImageLibrary({
+      /**
+       * Pick the second image of the document
+       * Make sure it is the back side of the document
+       */
+      const secondImage = await launchImageLibrary({
         mediaType: 'photo',
         includeBase64: true,
       });
 
-      if (second.assets == null || !second.assets[0]?.base64) {
+      if (secondImage.assets == null || !secondImage.assets[0]?.base64) {
         setResult('Second image not selected or invalid.');
         return;
       }
 
-      const secondImage = second.assets[0].base64;
+      /**
+       * Take the Base64 of the selected image
+       */
+      const secondImageBase64 = secondImage.assets[0].base64;
 
       /**
        * Set the BlinkID SDK settings
@@ -229,10 +247,10 @@ export default function App() {
       const sessionSettings = new BlinkIdSessionSettings();
 
       /**
-       * Important: if two images are being passed, use the `Automatic` 
+       * Important: if two images are being passed, use the `Automatic`
        * scanning mode
        * if just one image is being passed, use the `Single` scanning mode.
-      */
+       */
       sessionSettings.scanningMode = ScanningMode.Automatic;
 
       /**
@@ -241,8 +259,8 @@ export default function App() {
       const scanningSettings = new BlinkIdScanningSettings();
       scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
       /**
-       * if tge input images consist solely 
-       * of the cropped document image, set the 
+       * If the input images consist solely
+       * of the cropped document image, set the
        * `scanCroppedDocumentImage` to true.
        */
       // scanningSettings.scanCroppedDocumentImage = true;
@@ -264,18 +282,21 @@ export default function App() {
        */
       sessionSettings.scanningSettings = scanningSettings;
 
-      // Call scan method with base64 strings
+      /**
+       * Call the performDirectApiScan method, where the SDK and session settings need to
+       * be passed, along with the Base64 images.
+       */
       await performDirectApiScan(
         sdkSettings,
         sessionSettings,
-        firstImage,
-        secondImage
+        firstImageBase64,
+        secondImageBase64,
       )
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch((error) => {
+        .catch(error => {
           setResult(`Error during scan: ${error}`);
           resetImages();
         });
@@ -287,70 +308,109 @@ export default function App() {
 
   const handlePerformDirectApiSingleSideScan = async () => {
     try {
-      // Pick first image
-      const first = await launchImageLibrary({
+      /**
+       * Pick an image of the document
+       * It can either be the front of the back side of the document
+       */
+      const image = await launchImageLibrary({
         mediaType: 'photo',
         includeBase64: true,
       });
 
-      if (first.assets == null || !first.assets[0]?.base64) {
-        setResult('First image not selected or invalid.');
+      if (image.assets == null || !image.assets[0]?.base64) {
+        setResult('The selected image is not selected or is invalid.');
         return;
       }
 
-      const firstImage = first.assets[0].base64;
+      /**
+       * Take the Base64 of the selected image
+       */
+      const imageBase64 = image.assets[0].base64;
 
-      // SDK setup
-      const settings = new BlinkIdSdkSettings(licenseKey);
+      /**
+       * Set the BlinkID SDK settings
+       * Add the license key here from the code above
+       */
+      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+      sdkSettings.downloadResources = true;
 
+      /**
+       * Create and modify the Session Settings
+       */
       const sessionSettings = new BlinkIdSessionSettings();
+
+      /**
+       * Important: if only one image is being passed, use the `Single`
+       * scanning mode
+       */
       sessionSettings.scanningMode = ScanningMode.Single;
 
+      /**
+       * Create and modify the scanning settings
+       */
       const scanningSettings = new BlinkIdScanningSettings();
+      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
       scanningSettings.returnInputImages = true;
 
+      /**
+       * If the input images consist solely
+       * of the cropped document image, set the
+       * `scanCroppedDocumentImage` to true.
+       */
+      // scanningSettings.scanCroppedDocumentImage = true;
+
+      /**
+       * Create and modify the Image settings
+       */
       const croppedImageSettings = new CroppedImageSettings();
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
-
+      /**
+       * Place the image settings in the scanning settings
+       */
       scanningSettings.croppedImageSettings = croppedImageSettings;
-      //scanningSettings.scanCroppedDocumentImage = true;
+
+      /**
+       * Place the scanning settings in the session settings
+       */
       sessionSettings.scanningSettings = scanningSettings;
 
-      // Call scan method with base64 strings
-      await performDirectApiScan(settings, sessionSettings, firstImage)
+      /**
+       * Call the performDirectApiScan method, where the SDK and session settings need to
+       * be passed, along with the Base64 images.
+       */
+      await performDirectApiScan(sdkSettings, sessionSettings, imageBase64)
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch((error) => {
+        .catch(error => {
           setResult(`Error during DirectAPI scan: ${error}`);
           resetImages();
         });
     } catch (error) {
       setResult(`SDK error: ${error}`);
-                resetImages();
-
+      resetImages();
     }
   };
 
-function setImages(result: BlinkIdScanningResult) {
-          setFirstCroppedImage(result.firstDocumentImage);
-          setSecondCroppedImage(result.secondDocumentImage);
-          setFaceImage(result.faceImage?.image);
-          setSignatureImage(result.signatureImage?.image);
-          setFirstInputImage(result.firstInputImage);
-          setSecondInputImage(result.secondInputImage);
+  function setImages(result: BlinkIdScanningResult) {
+    setFirstCroppedImage(result.firstDocumentImage);
+    setSecondCroppedImage(result.secondDocumentImage);
+    setFaceImage(result.faceImage?.image);
+    setSignatureImage(result.signatureImage?.image);
+    setFirstInputImage(result.firstInputImage);
+    setSecondInputImage(result.secondInputImage);
   }
 
   function resetImages() {
-        setFirstCroppedImage(undefined);
-          setSecondCroppedImage(undefined);
-          setFaceImage(undefined);
-          setSignatureImage(undefined);
-          setFirstInputImage(undefined);
-          setSecondInputImage(undefined);
+    setFirstCroppedImage(undefined);
+    setSecondCroppedImage(undefined);
+    setFaceImage(undefined);
+    setSignatureImage(undefined);
+    setFirstInputImage(undefined);
+    setSecondInputImage(undefined);
   }
 
   return (
@@ -470,7 +530,7 @@ const DocumentImageContainer: React.FC<DocumentImageContainerProps> = ({
     <View style={styles.imageContainer}>
       <Text style={styles.imageLabel}>{label}</Text>
       <Image
-        source={{ uri: imageUri }}
+        source={{uri: imageUri}}
         style={styles.image}
         resizeMode="contain"
       />
