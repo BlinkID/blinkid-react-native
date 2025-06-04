@@ -5,15 +5,14 @@ appName=BlinkIdSample
 appId=com.microblink.sample
 rn_version="0.79.0"
 
-# remove any existing code
+# Remove any existing code
 rm -rf $appName
 
 
-# create a sample application
-# https://github.com/react-native-community/cli#using-npx-recommended
+# Create a sample application via @react-native-community/cli init
 npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" || exit 1
 
-# enter into demo project folder
+# Enter into demo project folder
 pushd $appName || exit 1
 
 # Inject esModuleInterop into tsconfig.json
@@ -27,32 +26,41 @@ sed -i '' '/"compilerOptions": {/a\
 IS_LOCAL_BUILD=true || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
-  # use directly source code from this repo instead of npm package
+  # Enter the BlinkID folder
+  pushd "$blink_id_plugin_path" > /dev/null
+
+  # Run npm install for react-native-builder-bob to prepare the build
   npm i
-  npm pack $blink_id_plugin_path
-  npm i --save blinkid-react-native-7.2.0.tgz
+
+  # Pack the libary
+  npm pack
+
+  # Go the sample folder and install the library
+  popd > /dev/null
+  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.2.0.tgz
+
 else
   # download npm package
   echo "Downloading blinkid-react-native module"
-  npm i --save blinkid-react-native
+  npm i --save @microblink/blinkid-react-native
 fi
 
-# react-native-image-picker plugin needed only for sample application with DirectAPI to get the document images
+# React-native-image-picker plugin needed only for sample application with DirectAPI to get the document images
 npm i react-native-image-picker
 
-# enter into android project folder
+# Enter into android project folder
 pushd android || exit 1
 
-# patch the build.gradle to add "maven { url https://maven.microblink.com }"" repository
+# Patch the build.gradle to add "maven { url https://maven.microblink.com }"" repository
 perl -i~ -pe "BEGIN{$/ = undef;} s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
 
-# return from android project folder
+# Return from the android project folder
 popd
 
-# enter into ios project folder
+# Enter into the ios project folder
 pushd ios || exit 1
 
-#Force minimal iOS version
+# Force minimal iOS version
 sed -i '' "s/platform :ios, min_ios_version_supported/platform :ios, '16.0'/" Podfile
 
 # Add the camera and photo usage descriptions into Info.plist to enable camera scanning and the image upload via gallery
@@ -63,19 +71,19 @@ sed -i '' '/<dict>/a\
   <string>Enable photo gallery usage for BlinkID DirectAPI scanning</string>\
 ' $appName/Info.plist
 
-#Disable Flipper since it spams console with errors
+# Disable Flipper since it spams console with errors
 export NO_FLIPPER=1
 
 pod install
 
-# return from ios project folder
+# Return from the ios project folder
 popd
 
-# add the sample files with the BlinkID integration code to the sample application
+# Add the sample files with the BlinkID integration code to the sample application
 cp ../sample_files/App.tsx ./
 cp ../sample_files/BlinkIdResultBuilder.ts ./
 
-# return to root folder
+# Return to the root folder
 popd
 echo "
 Instruction for running the $appName sample application:

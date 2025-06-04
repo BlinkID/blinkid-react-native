@@ -16,7 +16,7 @@ import {
   DataMatchState,
   MRZDocumentType,
   BarcodeType,
-} from 'blinkid-react-native';
+} from '@microblink/blinkid-react-native';
 
 export class BlinkIdResultBuilder {
   static getIdResultString(result?: BlinkIdScanningResult): string {

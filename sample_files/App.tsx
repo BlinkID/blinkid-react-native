@@ -32,7 +32,7 @@ import {
   DocumentNumberAnonymizationSettings,
   RecognitionModeFilter,
   AnonymizationMode,
-} from 'blinkid-react-native';
+} from '@microblink/blinkid-react-native';
 
 import {BlinkIdResultBuilder} from './BlinkIdResultBuilder';
 import {launchImageLibrary} from 'react-native-image-picker';
