@@ -253,7 +253,7 @@ export class BlinkIdScanningSettings {
   *
   * Default: `false`
    */
-  enableBarcodeScanOnly: false;
+  enableBarcodeScanOnly: boolean;
 
 /**
   * Defines custom rules for specific document class.
@@ -359,7 +359,7 @@ export class BlinkIdScanningSettings {
   *
   * Default: `false`
    */
-  scanUnsupportedBack: false;
+  scanUnsupportedBack: boolean;
 
 /**
   * Indicates whether scanning can continue to the next side despite an uncertain front-side scan.
