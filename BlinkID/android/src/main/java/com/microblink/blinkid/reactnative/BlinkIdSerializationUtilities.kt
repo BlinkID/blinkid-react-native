@@ -200,19 +200,26 @@ object BlinkIdSerializationUtilities {
 
   private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject {
     val dateResultJson = JSONObject()
-    dateResult?.day?.let {
-      dateResultJson.put("day", it)
-    }
-    dateResult?.month?.let {
-      dateResultJson.put("month", it)
-    }
-    dateResult?.year?.let {
-      dateResultJson.put("year", it)
-    }
+
+    dateResultJson.put("date", serializeSimpleDateResult(dateResult));
     dateResultJson.put("filledByDomainKnowledge", dateResult?.filledByDomainKnowledge)
     dateResultJson.put("successfullyParsed", dateResult?.successfullyParsed)
-    dateResultJson.put("originalString", dateResult?.originalString)
+    dateResultJson.put("originalString", serializeStringType(dateResult?.originalString))
     return dateResultJson
+  }
+
+  private fun <T> serializeSimpleDateResult(dateResult: DateResult<T>?): JSONObject {
+    val simpleDateResultJson = JSONObject()
+    dateResult?.day?.let {
+      simpleDateResultJson.put("day", it)
+    }
+    dateResult?.month?.let {
+      simpleDateResultJson.put("month", it)
+    }
+    dateResult?.year?.let {
+      simpleDateResultJson.put("year", it)
+    }
+    return simpleDateResultJson;
   }
 
   private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject {
@@ -451,7 +458,7 @@ object BlinkIdSerializationUtilities {
     mrzResultJson.put("opt1", mrzResult?.opt1)
     mrzResultJson.put("opt2", mrzResult?.opt2)
     mrzResultJson.put("primaryID", mrzResult?.primaryID)
-    mrzResultJson.put("rawMrzString", mrzResult?.rawMRZString)
+    mrzResultJson.put("rawMRZString", mrzResult?.rawMRZString)
     mrzResultJson.put("sanitizedDocumentCode", mrzResult?.sanitizedDocumentCode)
     mrzResultJson.put("sanitizedDocumentNumber", mrzResult?.sanitizedDocumentNumber)
     mrzResultJson.put("sanitizedIssuer", mrzResult?.sanitizedIssuer)
