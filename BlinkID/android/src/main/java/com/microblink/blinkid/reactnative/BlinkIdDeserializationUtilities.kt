@@ -227,8 +227,7 @@ object BlinkIdDeserializationUtilities {
         }
       }
 
-      val documentFilter =
-        item.optJSONObject("documentFilter")?.let { deserializeDocumentFilter(it) }?: DocumentFilter()
+      val documentFilter = deserializeDocumentFilter(item.optJSONObject("documentFilter"))
       val documentNumberAnonymizationSettings = item
         .optJSONObject("documentNumberAnonymizationSettings")
         ?.let { deserializeDocumentNumberAnonymizationSettings(it) }
