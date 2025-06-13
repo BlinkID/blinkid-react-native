@@ -32,6 +32,7 @@ import {
   DocumentNumberAnonymizationSettings,
   RecognitionModeFilter,
   AnonymizationMode,
+  BlinkIdUiSettings,
 } from '@microblink/blinkid-react-native';
 
 import {BlinkIdResultBuilder} from './BlinkIdResultBuilder';
@@ -164,6 +165,14 @@ export default function App() {
       sessionSettings.scanningSettings = scanningSettings;
 
       /**
+       * Modify BlinkID UI settings.
+       * This parameter is optional
+       */
+      const blinkIdUiSettings = new BlinkIdUiSettings();
+      blinkIdUiSettings.showHelpButton = true;
+      blinkIdUiSettings.showOnboardingDialog = false;
+
+      /**
        * Add the document class filter. This parameter is optional.
        */
       const classFilter = new ClassFilter();
@@ -175,7 +184,7 @@ export default function App() {
        * Call the performScan method, where the SDK and session settings need to be passed
        * Here, you can also pass the optional ClassFilter.
        */
-      await performScan(sdkSettings, sessionSettings) // -> classFilter
+      await performScan(sdkSettings, sessionSettings, blinkIdUiSettings) // -> classFilter
         .then((result: BlinkIdScanningResult) => {
           //handle the results here.
           console.log(result.firstName?.value);
