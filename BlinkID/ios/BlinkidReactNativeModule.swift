@@ -16,7 +16,7 @@ import Combine
     private var cancellables = Set<AnyCancellable>()
     private var classFilterDict: [String: Any]?
     
-    @objc public func performScan(_ rootVc: UIViewController, blinkIdSdkSettings: [String: Any], blinkIdSessionSettings: [String: Any], classFilterSettings: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
+    @objc public func performScan(_ rootVc: UIViewController, blinkIdSdkSettings: [String: Any], blinkIdSessionSettings: [String: Any], blinkIdUiSettings: [String: Any], classFilterSettings: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
         Task {
             do {
                 
@@ -36,7 +36,19 @@ import Combine
                     classFilter: self
                 )
                 
-                let scanningUxModel = await BlinkIDUXModel(analyzer: analyzer, shouldShowIntroductionAlert: true)
+                var shouldShowIntroductionAlert = true
+                if let showOnboardingDialog = blinkIdUiSettings["showOnboardingDialog"] as? Bool {
+                    shouldShowIntroductionAlert = showOnboardingDialog
+                }
+                var shouldShowHelpButton = true
+                if let showHelpButton = blinkIdUiSettings["showHelpButton"] as? Bool {
+                    shouldShowHelpButton = showHelpButton
+                }
+                
+                let scanningUxModel = await BlinkIDUXModel(
+                    analyzer: analyzer,
+                    shouldShowIntroductionAlert: shouldShowIntroductionAlert,
+                    showHelpButton: shouldShowHelpButton)
                 await scanningUxModel.$result
                     .sink { [weak self] scanningResultState in
                         if let scanningResultState {

@@ -33,7 +33,7 @@ RCT_EXPORT_MODULE()
     return dict;
 }
 
-- (void)performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings classFilter:(nonnull NSString *)classFilter resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
+- (void)performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSettings:(NSString *)blinkIdSessionSettings blinkIdUiSettings:(NSString *)blinkIdUiSettings classFilter:(NSString *)classFilter resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *keyWindow = nil;
@@ -54,18 +54,19 @@ RCT_EXPORT_MODULE()
         }
         
         [self->moduleImplementation
-         performScan: keyWindow.rootViewController
-         blinkIdSdkSettings: [self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
-         blinkIdSessionSettings: [self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
-         classFilterSettings: [self createDictionaryFromBlinkIdObject: classFilter]
+         performScan:keyWindow.rootViewController
+         blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
+         blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
+         blinkIdUiSettings:[self createDictionaryFromBlinkIdObject:blinkIdUiSettings]
+         classFilterSettings:[self createDictionaryFromBlinkIdObject: classFilter]
          onResolve:^(NSString * _Nonnull result) {
             resolve(@[result]);
-        }
-         onReject:^(NSString * _Nonnull error) {
+        } onReject:^(NSString * _Nonnull error) {
             reject(@"BlinkIdIosError", error, nil);
         }];
     });
 }
+
 
 - (void)performDirectApiScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings firstImage:(nonnull NSString *)firstImage secondImage:(nonnull NSString *)secondImage resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
     [self->moduleImplementation
