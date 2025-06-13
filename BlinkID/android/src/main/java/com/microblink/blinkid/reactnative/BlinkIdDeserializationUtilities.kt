@@ -32,6 +32,7 @@ import android.util.Base64
 import com.microblink.blinkid.core.session.InputImageSource
 import com.microblink.blinkid.core.settings.DocumentNumberAnonymizationSettings
 import com.microblink.core.network.RequestTimeout
+import com.microblink.ux.UiSettings
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -118,7 +119,7 @@ object BlinkIdDeserializationUtilities {
       croppedImageSettings = deserializeCroppedImageSettings(scanningSettingsMap.optJSONObject("croppedImageSettings")),
     )
   }
-
+  
   private fun deserializeCroppedImageSettings(croppedImageSettingsMap: JSONObject?): CroppedImageSettings {
     if (croppedImageSettingsMap == null) return CroppedImageSettings()
     return CroppedImageSettings(
@@ -283,7 +284,7 @@ object BlinkIdDeserializationUtilities {
         "stepTimeoutDuration",
         15000
       ).milliseconds),
-      classFilter = classFilterMap?.let { CustomClassFilter(it.toString()) }
+      classFilter = classFilterMap?.let { CustomClassFilter(it.toString()) },
     )
   }
 

@@ -13,6 +13,7 @@ import com.microblink.blinkid.ux.contract.BlinkIdScanActivitySettings
 import com.microblink.blinkid.ux.contract.MbBlinkIdScan
 import com.microblink.core.LicenseLockedException
 import com.microblink.core.image.InputImage
+import com.microblink.ux.UiSettings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -69,10 +70,10 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     })
   }
 
-
   override fun performScan(
     blinkIdSdkSettings: String?,
     blinkIdSessionSettings: String?,
+    blinkIdUiSettings: String?,
     classFilter: String?,
     promise: Promise?
   ) {
@@ -82,7 +83,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
       val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
       val classFilterJson = classFilter?.let { JSONObject(it) }
-
+      val blinkIdUiSettingsJson = blinkIdUiSettings?.let { JSONObject(it) }
       val sdkSettings = sdkSettingsJson?.let {
         BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(it)
       } ?: run {
@@ -101,8 +102,10 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
             ),
             uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdUxSettings(
               sessionSettingsJson,
-              classFilterJson
-            )
+              classFilterJson,
+            ),
+            showHelpButton = blinkIdUiSettingsJson?.getBoolean("showHelpButton") ?: true,
+            showOnboardingDialog = blinkIdUiSettingsJson?.getBoolean("showOnboardingDialog") ?: true
           )
         )
         currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
