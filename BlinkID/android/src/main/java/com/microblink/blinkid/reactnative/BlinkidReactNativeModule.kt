@@ -104,8 +104,8 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
               sessionSettingsJson,
               classFilterJson,
             ),
-            showHelpButton = blinkIdUiSettingsJson?.getBoolean("showHelpButton") ?: true,
-            showOnboardingDialog = blinkIdUiSettingsJson?.getBoolean("showOnboardingDialog") ?: true
+            showHelpButton = blinkIdUiSettingsJson?.optBoolean("showHelpButton", true)?: true,
+            showOnboardingDialog = blinkIdUiSettingsJson?.optBoolean("showOnboardingDialog", true) ?: true
           )
         )
         currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
