@@ -224,7 +224,7 @@ export class BlinkIdResultBuilder {
       result.dateOfExpiryPermanent !== undefined
       ? (result.dateOfExpiryPermanent ? "YES" : "NO")
       : undefined
-      );
+      ) +
       this.buildDependentsInfoResult(result.dependentsInfo);
 
     return resultString == '' ? '' : `VIZ result:\n${resultString}\n`;
@@ -289,6 +289,10 @@ export class BlinkIdResultBuilder {
 
     if (result.originalString != undefined) {
       stringResult += `${this.handleStringType('Original date string', result.originalString)}\n`;
+    }
+
+    if (result.successfullyParsed != undefined) {
+      stringResult += `Successfully parsed: ${result.successfullyParsed}`;
     }
 
     return stringResult == '' ? '' : `${propertyName}:\n${stringResult}`;

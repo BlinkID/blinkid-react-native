@@ -55,6 +55,8 @@ export default function App() {
   const [secondInputImage, setSecondInputImage] = useState<
     string | undefined
   >();
+  const [barcodeInputImage, setBarcodeInputImage] = useState<string | undefined>();
+
 
   const licenseKey = Platform.select({
     ios: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTkRZM01ETXhNREk1T0RRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PZj1qzwW3YWd5hB0gRmxRAs1HcAzNYHM32LNFCsjU8syiBzQqljDpF9KFwmvmwrOaFfyggW5qd+vc2DZWZanqcrs2ApDoHhhRa3b2MEOe3QvVHsoR1u6tl9QDAewWQ==',
@@ -118,7 +120,7 @@ export default function App() {
             new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
             new DetailedFieldType(FieldType.LastName, AlphabetType.Latin),
           ],
-          filterTwo,
+          //filterTwo,
         ),
       ];
 
@@ -163,7 +165,7 @@ export default function App() {
        * Place the scanning settings in the session settings
        */
       sessionSettings.scanningSettings = scanningSettings;
-
+      sessionSettings.stepTimeoutDuration = 1000;
       /**
        * Modify BlinkID UI settings.
        * This parameter is optional
@@ -411,6 +413,7 @@ export default function App() {
     setSignatureImage(result.signatureImage?.image);
     setFirstInputImage(result.firstInputImage);
     setSecondInputImage(result.secondInputImage);
+    setBarcodeInputImage(result.barcodeInputImage);
   }
 
   function resetImages() {
@@ -420,6 +423,7 @@ export default function App() {
     setSignatureImage(undefined);
     setFirstInputImage(undefined);
     setSecondInputImage(undefined);
+    setBarcodeInputImage(undefined);
   }
 
   return (
@@ -478,6 +482,12 @@ export default function App() {
           <DocumentImageContainer
             label="Second Input Image"
             imageUri={`data:image/jpeg;base64,${secondInputImage}`}
+          />
+        )}
+        {barcodeInputImage && (
+          <DocumentImageContainer
+            label="Barcode Input Image"
+            imageUri={`data:image/jpeg;base64,${barcodeInputImage}`}
           />
         )}
       </ScrollView>
