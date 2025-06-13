@@ -219,6 +219,12 @@ export class BlinkIdResultBuilder {
       this.buildResult('Vehicle owner', result.vehicleOwner) +
       this.buildResult('Vehicle type', result.vehicleType) +
       this.buildResult('Visa type', result.visaType) +
+      this.buildStringResult(
+     'Date of expiry permanent',
+      result.dateOfExpiryPermanent !== undefined
+      ? (result.dateOfExpiryPermanent ? "YES" : "NO")
+      : undefined
+      );
       this.buildDependentsInfoResult(result.dependentsInfo);
 
     return resultString == '' ? '' : `VIZ result:\n${resultString}\n`;
@@ -253,13 +259,13 @@ export class BlinkIdResultBuilder {
     }
 
     if (result.arabic != null || result.arabic != undefined) {
-      resultString += `${result.arabic}`;
+      resultString += ` ${result.arabic}`;
     }
     if (result.cyrillic != null || result.cyrillic != undefined) {
-      resultString += `${result.cyrillic}`;
+      resultString += ` ${result.cyrillic}`;
     }
     if (result.greek != null || result.greek != undefined) {
-      resultString += `${result.greek}`;
+      resultString += ` ${result.greek}`;
     }
     return `${propertyName}: ${resultString}\n`;
   }
