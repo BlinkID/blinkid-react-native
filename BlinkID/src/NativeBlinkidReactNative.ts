@@ -17,11 +17,15 @@ export interface Spec extends TurboModule {
    * 
    * @param blinkIdSdkSettings - BlinkID SDK Settings - the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK
    * needs for the scanning process, should be obtained.
-   * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com
+   * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
+   * 
    * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+   * 
+   * @param blinkIdUiSettings - BlinkID UI Settings - the class that allows customization of various aspects of the UI used during the scanning process.
+   * 
    * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session. See [ClassFilter] for more implementation information.
    */
-  performScan(blinkIdSdkSettings: string, blinkIdSessionSettings: string, classFilter?: string): Promise<string>
+  performScan(blinkIdSdkSettings: string, blinkIdSessionSettings: string, blinkIdUiSettings?: string, classFilter?: string): Promise<string>
 
   /**
    * The `performDirectApiScan` platform channel method launches the BlinkID scanning process inteded for information extraction from static images.

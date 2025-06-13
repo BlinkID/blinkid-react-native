@@ -433,6 +433,35 @@ export class BlinkIdScanningSettings {
 }
 
 /**
+ * Allows customization of various aspects of the UI
+ * used during the scanning process.
+ * 
+ */
+export class BlinkIdUiSettings {
+
+  /**
+   * A boolean indicating whether to show a help button
+   * and enable help screens during the scanning session.
+   * 
+   * Default: `true`
+   */
+  showHelpButton: boolean
+
+  /**
+   * A boolean indicating whether to show an onboarding dialog
+   * at the beginning of the scanning session.
+   * 
+   * Default: `true`
+   */
+  showOnboardingDialog: boolean;
+
+  constructor() {
+    this.showHelpButton = true;
+    this.showOnboardingDialog = true;
+  }
+}
+
+/**
  * Represents the image cropping settings.
  * 
  */
