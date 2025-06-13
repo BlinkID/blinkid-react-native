@@ -178,7 +178,7 @@ export class BlinkIdScanningSettings {
   *
   * Default: {@link DetectionLevel.Mid}
    */
-  glareDetectionLevel: DetectionLevel.Mid;
+  glareDetectionLevel: DetectionLevel;
 
   /**
   * Indicates whether images with glare in the document image should be skipped.
@@ -203,7 +203,7 @@ export class BlinkIdScanningSettings {
   *
   * Default: {@link DetectionLevel.off}
    */
-  tiltDetectionLevel: DetectionLevel.Off;
+  tiltDetectionLevel: DetectionLevel;
 
   /**
   * Indicates whether images with inadequate lighting conditions should be rejected.
