@@ -183,7 +183,7 @@ class BlinkIdDeserializationUtilities {
       var documentRulesArr = Array<DocumentRules>()
       
       for customRuleDict in customDocumentRulesArray {
-          guard let fields = customRuleDict["detailedFieldTypes"] as? Array<Dictionary<String, Any>> else { continue }
+          guard let fields = customRuleDict["fields"] as? Array<Dictionary<String, Any>> else { continue }
           
           let deserializedFields = fields.compactMap { deserializeDetailedFieldType($0) }
           var documentRule = DocumentRules(fields: deserializedFields)
