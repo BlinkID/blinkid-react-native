@@ -7,6 +7,9 @@ The version 7 release of the BlinkID SDK.
 - The plugin was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
 
 ## Breaking changes
+- The NPM package has been renamed from `blinkid-react-native` to `@microblink/blinkid-react-native`.
+- BlinkID v7 is now fully written in TypeScript for improved type safety and developer experience.
+
 - The plugin now requires:
     - iOS version 16.0 and above.
     - Android API version 24 and above.
@@ -23,11 +26,14 @@ The `performScan` method launches the BlinkID scanning process with the default 
 It takes the following parameters: 
 1. BlinkID SDK settings
 2. BlinkID session settings
+3. The optional BlinkID UI settings
 3. The optional ClassFilter object for filtering documents.
 
 **BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
 
 **BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+
+**BlinkID UI Settings** - `BlinkIdUiSettings`: the class that allows customization of various aspects of the UI used during the scanning process.
 
 The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
 

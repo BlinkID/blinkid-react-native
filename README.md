@@ -109,9 +109,9 @@ npx react-native start
 npx @react-native-community/cli init YourAppName --package-name YourPackageName --title YourAppTitle --version "React Native version"
 ```
 
-3. Install the `blinkid-react-native` dependency:
+3. Install the `@microblink/blinkid-react-native` dependency:
 ```bash
-  npm install --save blinkid-react-native
+  npm install --save @microblink/blinkid-react-native
 ```
 
 4. Android: the BlinkID library is available on Maven Central repository.
@@ -132,7 +132,7 @@ repositories {
 import {
   performScan,
   performDirectApiScan,
-} from 'blinkid-react-native';
+} from '@microblink/blinkid-react-native';
 ```
 2. Add the license key, for each platform, obtained from the [Developer Hub portal](https://developer.microblink.com/):
 ```typescript
@@ -183,6 +183,14 @@ import {
       sessionSettings.scanningSettings = scanningSettings;
 
       /**
+       * Modify the BlinkID UI settings for UI customization.
+       * This parameter is optional.
+       */
+      const uiSettings = new BlinkIdUiSettings();
+      uiSettings.showHelpButton = true;
+      uiSettings.showOnboardingDialog = false;
+
+      /**
        * Add the document class filter. This parameter is optional.
        */
       const classFilter = new ClassFilter();
@@ -197,9 +205,11 @@ import {
       /**
        * Call the performScan method, where the SDK and session settings 
        * need to be passed.
-       * Here, you can also pass the optional ClassFilter.
+       * 
+       * Here, you can also pass the optional BlinkIdUiSettings and ClassFilter
+       * parameters.
        */
-      await performScan(sdkSettings, sessionSettings) 
+      await performScan(sdkSettings, sessionSettings, uiSettings) 
         .then((result: BlinkIdScanningResult) => {
           // handle the results here.
           console.log(result.firstName?.value);
@@ -312,11 +322,14 @@ The `performScan` method launches the BlinkID scanning process with the default 
 It takes the following parameters: 
 1. BlinkID SDK settings
 2. BlinkID session settings
+4. The optional BlinkID UI settings for UI customization.
 3. The optional ClassFilter object for filtering documents.
 
 **BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
 
 **BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+
+**BlinkID UI Settings** - `BlinkIdUiSettings`: the class that allows customization of various aspects of the UI used during the scanning process.
 
 The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
 
@@ -354,7 +367,10 @@ This class holds the settings related to the resources initialization, scanning 
 These settings represent the configurable settings for scanning a document.`
 This class defines various parameters and policies related to the scanning process, including image quality handling, data extraction and anonymization, along with options for frame processing and image extraction.
 
-4. [Cropped image settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L439) - `CroppedImageSettings`\
+4. [BlinkID UI settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `BlinkIdUiSettings`\
+Allows customization of various aspects of the UI used during the scanning process.
+
+5. [Cropped image settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `CroppedImageSettings`\
 These settings represent the image cropping settings.
 
 **Additional notes:**
