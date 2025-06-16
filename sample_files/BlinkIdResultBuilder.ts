@@ -51,6 +51,7 @@ export class BlinkIdResultBuilder {
       this.buildDateResult('Date of birth', result.dateOfBirth) +
       this.buildDateResult('Date of issue', result.dateOfIssue) +
       this.buildDateResult('Date of expiry', result.dateOfExpiry) +
+      this.buildStringResult('Date of expiry permanent', `${result.dateOfExpiryPermanent}`) +
       this.buildResult('Martial status', result.maritalStatus) +
       this.buildResult('Personal Id Number', result.personalIdNumber) +
       this.buildResult('Profession', result.profession) +
@@ -219,12 +220,6 @@ export class BlinkIdResultBuilder {
       this.buildResult('Vehicle owner', result.vehicleOwner) +
       this.buildResult('Vehicle type', result.vehicleType) +
       this.buildResult('Visa type', result.visaType) +
-      this.buildStringResult(
-     'Date of expiry permanent',
-      result.dateOfExpiryPermanent !== undefined
-      ? (result.dateOfExpiryPermanent ? "YES" : "NO")
-      : undefined
-      ) +
       this.buildDependentsInfoResult(result.dependentsInfo);
 
     return resultString == '' ? '' : `VIZ result:\n${resultString}\n`;
@@ -287,15 +282,14 @@ export class BlinkIdResultBuilder {
       this.buildNumberResult('Month', result.date.month) +
       this.buildNumberResult('Year', result.date.year);
 
-    if (result.originalString != undefined) {
-      stringResult += `${this.handleStringType('Original date string', result.originalString)}\n`;
-    }
-
     if (result.successfullyParsed != undefined) {
-      stringResult += `Successfully parsed: ${result.successfullyParsed}`;
+      stringResult += `Successfully parsed: ${result.successfullyParsed}\n`;
+    }
+    if (result.originalString != undefined) {
+      stringResult += `${this.handleStringType('Original date string', result.originalString)}`;
     }
 
-    return stringResult == '' ? '' : `${propertyName}:\n${stringResult}`;
+    return stringResult == '' ? '' : `${propertyName}:\n${stringResult}\n`;
   }
 
   static buildStringResult(propertyName: string, result?: string) {
