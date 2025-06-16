@@ -9,6 +9,7 @@ The version 7 release of the BlinkID SDK.
 ## Breaking changes
 - Starting with BlinkID v7, the NPM package has been renamed and moved from `blinkid-react-native` to `@microblink/blinkid-react-native` to improve organization and maintainability.
     - The old package `blinkid-react-native` is now **deprecated** and will no longer receive updates. To continue using the latest BlinkID features and improvements, please install the new package:
+    
     ```bash
         npm install @microblink/blinkid-react-native
     ```

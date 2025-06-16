@@ -50,19 +50,13 @@ It contains the implementation for:
 3. **Singleside DirectAPI scanning** - extracting the document information from a single static images (from the gallery).
 
 To obtain and run the sample application, follow the steps below:
-Make sure you have the Node, Watchman and React Native dependencies installed before running the sample application:
+Make sure you have Node & Watchman installed before running the sample application:
 ```bash
 # install Watcman
 brew install watchman
 
 # install Node
 brew install node
-
-# install React Native types
-npm i --save-dev @types/react-native
-
-# install react-native-builder-bob
-npm i --save-dev react-native-builder-bob
 ```
 
 **To install & run the sample application:**
