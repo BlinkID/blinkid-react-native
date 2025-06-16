@@ -1,13 +1,17 @@
 ## 7.2.0
 
 The version 7 release of the BlinkID SDK.
-- Updated to [Android SDK v7.2.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.2.0) and [iOS SDK v7.2.1](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.2.1)
+- Updated to [Android SDK v7.2.1](https://github.com/BlinkID/blinkid-android/releases/tag/v7.2.1) and [iOS SDK v7.2.2](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.2.2)
 - For more information about the inital version 7 release, see the release notes for the native SDKs for [Android](https://github.com/BlinkID/blinkid-android/releases/tag/v7.0.0) and [iOS](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.0.0).
 
 - The plugin was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
 
 ## Breaking changes
-- The NPM package has been renamed from `blinkid-react-native` to `@microblink/blinkid-react-native`.
+- Starting with BlinkID v7, the NPM package has been renamed and moved from `blinkid-react-native` to `@microblink/blinkid-react-native` to improve organization and maintainability.
+    - The old package `blinkid-react-native` is now **deprecated** and will no longer receive updates. To continue using the latest BlinkID features and improvements, please install the new package:
+    ```bash
+        npm install @microblink/blinkid-react-native
+    ```
 - BlinkID v7 is now fully written in TypeScript for improved type safety and developer experience.
 
 - The plugin now requires:

@@ -363,7 +363,7 @@ These settings are used for the initialization of the BlinkID SDK.
 These settings represent the configuration settings for a scanning session.\
 This class holds the settings related to the resources initialization, scanning mode, and specific scanning configurations that define how the scanning session should behave.
 
-3. [BlinkID scanning settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`
+3. [BlinkID scanning settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`\
 These settings represent the configurable settings for scanning a document.`
 This class defines various parameters and policies related to the scanning process, including image quality handling, data extraction and anonymization, along with options for frame processing and image extraction.
 
