@@ -24,13 +24,6 @@ import {
   performScan,
   performDirectApiScan,
   DetectionLevel,
-  DocumentRules,
-  DetailedFieldType,
-  FieldType,
-  AlphabetType,
-  DocumentAnonymizationSettings,
-  DocumentNumberAnonymizationSettings,
-  RecognitionModeFilter,
   AnonymizationMode,
   BlinkIdUiSettings,
 } from '@microblink/blinkid-react-native';
@@ -78,6 +71,7 @@ export default function App() {
        */
       const sessionSettings = new BlinkIdSessionSettings();
       sessionSettings.scanningMode = ScanningMode.Automatic;
+
       /**
        * Create and modify the scanning settings
        */
@@ -85,6 +79,7 @@ export default function App() {
       scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
       scanningSettings.anonymizationMode = AnonymizationMode.FullResult;
       scanningSettings.returnInputImages = true;
+
       /**
        * Create and modify the Image settings
        */
@@ -92,79 +87,17 @@ export default function App() {
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
+
       /**
        * Place the image settings in the scanning settings
        */
       scanningSettings.croppedImageSettings = croppedImageSettings;
 
       /**
-       * Document filters for doc rules & anonymization
-       */
-      const filterOne = new DocumentFilter(Country.Croatia);
-      const filterTwo = new DocumentFilter(
-        Region.California,
-        DocumentType.Dl,
-      );
-
-      /**
-       * DOCUMENT RULES
-       */
-      const documentRules = [
-        new DocumentRules(
-          [new DetailedFieldType(FieldType.FirstName, AlphabetType.Latin)],
-          filterOne,
-        ),
-        new DocumentRules(
-          [
-            new DetailedFieldType(FieldType.Address, AlphabetType.Latin),
-            new DetailedFieldType(FieldType.LastName, AlphabetType.Latin),
-          ],
-          //filterTwo,
-        ),
-      ];
-
-      scanningSettings.customDocumentRules = documentRules;
-
-      /**
-       * ADDITIONAL ANONYMIZATION SETTINGS
-       */
-      const additionalAnonSettingsOne = new DocumentAnonymizationSettings(
-        [FieldType.FirstName, FieldType.Address],
-        filterOne,
-        new DocumentNumberAnonymizationSettings(undefined, 2),
-      );
-
-      const additionalAnonSettingsTwo = new DocumentAnonymizationSettings([
-        FieldType.BloodType,
-        FieldType.Address,
-      ]);
-
-      scanningSettings.customDocumentAnonymizationSettings = [
-        additionalAnonSettingsOne,
-        additionalAnonSettingsTwo,
-      ];
-
-      /**
-       * RECOGNITION MODE FILTER
-       */
-      const recognitionModeFilter = new RecognitionModeFilter();
-      recognitionModeFilter.enableBarcodeId = true;
-      recognitionModeFilter.enableFullDocumentRecognition = true;
-      recognitionModeFilter.enableMrzId = true;
-      recognitionModeFilter.enableMrzPassport = true;
-      recognitionModeFilter.enableMrzVisa = true;
-      recognitionModeFilter.enablePhotoId = true;
-
-      scanningSettings.recognitionModeFilter = recognitionModeFilter;
-
-      /// Place the Scanning settings in the Session settings
-      sessionSettings.scanningSettings = scanningSettings;
-
-      /**
        * Place the scanning settings in the session settings
        */
       sessionSettings.scanningSettings = scanningSettings;
-    //  sessionSettings.stepTimeoutDuration = 1000;
+
       /**
        * Modify BlinkID UI settings.
        * This parameter is optional
@@ -181,6 +114,7 @@ export default function App() {
         new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
         new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
       ];
+
       /**
        * Call the performScan method, where the SDK and session settings need to be passed
        * Here, you can also pass the optional ClassFilter.
@@ -188,13 +122,11 @@ export default function App() {
       await performScan(sdkSettings, sessionSettings, blinkIdUiSettings) // -> classFilter
         .then((result: BlinkIdScanningResult) => {
           //handle the results here.
-          console.log(result.firstName?.value);
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
         .catch(error => {
           // handle any errors here.
-          console.log(`Error during scan: ${error}`);
           setResult(`Error during scan: ${error}`);
           resetImages();
         });
@@ -268,6 +200,7 @@ export default function App() {
        */
       const scanningSettings = new BlinkIdScanningSettings();
       scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
+
       /**
        * If the input images consist solely
        * of the cropped document image, set the
@@ -282,6 +215,7 @@ export default function App() {
       croppedImageSettings.returnDocumentImage = true;
       croppedImageSettings.returnFaceImage = true;
       croppedImageSettings.returnSignatureImage = true;
+
       /**
        * Place the image settings in the scanning settings
        */
