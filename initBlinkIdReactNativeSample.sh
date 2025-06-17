@@ -23,7 +23,7 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
-IS_LOCAL_BUILD=true || exit 1
+IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
@@ -40,7 +40,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.2.0.tgz
 
 else
-  # download npm package
+  # Download BlinkID React Native via NPM
   echo "Downloading blinkid-react-native module"
   npm i --save @microblink/blinkid-react-native
 fi
