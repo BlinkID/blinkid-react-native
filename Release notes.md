@@ -1,3 +1,79 @@
+## 7.2.0
+
+The version 7 release of the BlinkID SDK.
+- Updated to [Android SDK v7.2.1](https://github.com/BlinkID/blinkid-android/releases/tag/v7.2.1) and [iOS SDK v7.2.2](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.2.2)
+- For more information about the inital version 7 release, see the release notes for the native SDKs for [Android](https://github.com/BlinkID/blinkid-android/releases/tag/v7.0.0) and [iOS](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.0.0).
+
+- The plugin was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
+
+## Breaking changes
+- Starting with BlinkID v7, the NPM package has been renamed and moved from `blinkid-react-native` to `@microblink/blinkid-react-native` to improve organization and maintainability.
+    - The old package `blinkid-react-native` is now **deprecated** and will no longer receive updates. To continue using the latest BlinkID features and improvements, please install the new package:
+    
+    ```bash
+        npm install @microblink/blinkid-react-native
+    ```
+- BlinkID v7 is now fully written in TypeScript for improved type safety and developer experience.
+
+- The plugin now requires:
+    - iOS version 16.0 and above.
+    - Android API version 24 and above.
+
+- Method `scanWithCamera` has been renamed to `performScan`.
+- Method `scanWithDirectApi` has been renamed to `performDirectApiScan`.
+- Many of the older settings have been renamed to be more intuitive, for more information see the [blinkIdSettings.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts) files, and the native documentation for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core/index.html) and [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/).
+- See section **Version 7 plugin usage** for more details about how to use each method, and how to handle the scanned results.
+
+## Version 7 plugin usage
+**The `performScan` method**
+
+The `performScan` method launches the BlinkID scanning process with the default UX properties.\
+It takes the following parameters: 
+1. BlinkID SDK settings
+2. BlinkID session settings
+3. The optional BlinkID UI settings
+3. The optional ClassFilter object for filtering documents.
+
+**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+
+**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+
+**BlinkID UI Settings** - `BlinkIdUiSettings`: the class that allows customization of various aspects of the UI used during the scanning process.
+
+The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
+
+- The implementation of the `performScan` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+
+**The `performDirectApiScanning` method**
+
+The `performDirectApiScan` method launches the BlinkID scanning process inteded for information extraction from static images.\
+It takes the following parameters: 
+1. BlinkID SDK settings
+2. BlinkID session settings
+3. First image string in the Base64 format
+4. The optional second image string in the Base64 format
+
+**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+
+**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the [ScanningMode] and [BlinkIdScanningSettings], which define various parameters that control the scanning process.
+
+The first image Base64 string - `string`: image that represents one side of the document. If the document contains two sides and the `ScanningMode` is set to `automatic`, this should contain the image of the front side of the document. In case the `ScanningMode` is set to `single`, it can be either the front or the back side of the document. If the document contains only one side (for example, various passports), the SDK will automatically detect it, and will not look for the other side.
+
+The optional second image Base64 string - `string`: needed if the information from back side of the document is required and the `ScanningMode` is set to `automatic`.
+
+- The implementation of the `performDirectApiScan` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+- All of the mentioned settings can be found in the [blinkIdSettings.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) file.
+
+**BlinkID result**
+
+- Both methods return the `BlinkIdScanningResult` object, which contains the results of scanning a document, including the extracted data and images from the document.
+
+- All of the available results can be viewed in [blinkIdResult.ts](https://github.com/BlinkID/blinkid-react-native/blob/feature/blinkid-v7/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts).
+
+**Implementation guide**
+- A detailed guide about the integration and usage of the plugin can be viewed [here](https://github.com/BlinkID/blinkid-react-native/tree/master?tab=readme-ov-file#-plugin-integration).
+- The sample application which demonstrates the usage of the SDK can be found in the [App.tsx](https://github.com/BlinkID/blinkid-react-native/blob/feature/master/sample_files/App.tsx) file.
+
 ## 6.13.1
 - Android-specific
     - Fixed naming of the deprecated `LegacyDocumentVerificationActivity` in `AndroidManifest.xml`
