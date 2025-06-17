@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 import SwiftUI
-import BlinkID
 import Combine
+import BlinkID
+import BlinkIDUX
 
 @objc public class BlinkidReactNativeModule: NSObject {
     

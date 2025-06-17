@@ -102,7 +102,6 @@ export default function App() {
        */
       const filterOne = new DocumentFilter(Country.Croatia);
       const filterTwo = new DocumentFilter(
-        undefined,
         Region.California,
         DocumentType.Dl,
       );
@@ -165,7 +164,7 @@ export default function App() {
        * Place the scanning settings in the session settings
        */
       sessionSettings.scanningSettings = scanningSettings;
-      sessionSettings.stepTimeoutDuration = 1000;
+    //  sessionSettings.stepTimeoutDuration = 1000;
       /**
        * Modify BlinkID UI settings.
        * This parameter is optional
