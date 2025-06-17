@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.private_header_files = "ios/**/*.h"
 
   # Vendored frameworks
-  s.vendored_frameworks = ["ios/Frameworks/*.xcframework"] #, "ios/Frameworks/Source/**/*"]
+  s.vendored_frameworks = ["ios/Frameworks/*.xcframework"]
 
   s.swift_version = '5.0'
 
