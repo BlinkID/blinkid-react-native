@@ -37,6 +37,9 @@ class BlinkIdDeserializationUtilities {
       if let resourceRequestTimeout = sdkSettingsDict?["resourceRequestTimeout"] as? Int {
           blinkidSdkSettings?.resourceRequestTimeout = BlinkID.RequestTimeout.default
       }
+      if let microblinkProxyUrl = sdkSettingsDict?["microblinkProxyURL"] as? String {
+          blinkidSdkSettings?.microblinkProxyURL = microblinkProxyUrl
+      }
       return blinkidSdkSettings
   }
   
