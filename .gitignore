@@ -242,7 +242,7 @@ vendor/
 # iOS prebuilds
 /packages/react-native/third-party/
 fix_*.patch
-*.xcframework
+# *.xcframework
 
 # Visual Studio Code (config dir - if present, this merges user defined
 # workspace settings on top of react-native.code-workspace)
