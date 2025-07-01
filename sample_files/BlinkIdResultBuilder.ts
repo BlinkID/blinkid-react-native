@@ -58,6 +58,9 @@ export class BlinkIdResultBuilder {
       this.buildResult('Race', result.race) +
       this.buildResult('Religion', result.religion) +
       this.buildResult('Residential Status', result.residentialStatus) +
+      this.buildResult('Country code', result.countryCode) +
+      this.buildResult('Certificate number', result.certificateNumber) +
+      this.buildResult('National insurace number', result.nationalInsuranceNumber) +
       this.buildDriverLicenceResult(result.driverLicenseDetailedInfo) +
       this.buildDataMatchResult(result.dataMatchResult) +
       this.buildDocumentClassInfoResult(result.documentClassInfo) +
@@ -220,6 +223,9 @@ export class BlinkIdResultBuilder {
       this.buildResult('Vehicle owner', result.vehicleOwner) +
       this.buildResult('Vehicle type', result.vehicleType) +
       this.buildResult('Visa type', result.visaType) +
+      this.buildResult('Country code', result.countryCode) +
+      this.buildResult('Certificate number', result.certificateNumber) +
+      this.buildResult('National insurace number', result.nationalInsuranceNumber) +
       this.buildDependentsInfoResult(result.dependentsInfo);
 
     return resultString == '' ? '' : `VIZ result:\n${resultString}\n`;
