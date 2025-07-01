@@ -40,6 +40,9 @@ public actor BlinkIDAnalyzer : BlinkIDUX.CameraFrameAnalyzer {
   public typealias Event = BlinkIDUX.UIEvent
   public typealias Result = BlinkIDUX.ScanningResult<BlinkID.BlinkIDScanningResult, BlinkIDUX.BlinkIDScanningAlertType>
   public typealias Frame = BlinkID.CameraFrame
+  public var stepTimeoutDuration: Foundation.TimeInterval {
+    get
+  }
   public init(sdk: BlinkID.BlinkIDSdk, blinkIdSessionSettings: BlinkID.BlinkIDSessionSettings = BlinkIDSessionSettings(inputImageSource: .video), eventStream: BlinkIDUX.BlinkIDEventStream, classFilter: (any BlinkIDUX.BlinkIDClassFilter)? = nil) async throws
   public func analyze(image: BlinkIDUX.BlinkIDAnalyzer.Frame) async
   public func cancel()
@@ -168,6 +171,7 @@ public protocol CameraFrameAnalyzer<Frame, Event> : Swift.Sendable {
   func end() async
   func result() async -> Self.Result
   var events: any BlinkIDUX.EventStream<Self.Event> { get }
+  var stepTimeoutDuration: Foundation.TimeInterval { get async }
 }
 #else
 public protocol CameraFrameAnalyzer : Swift.Sendable {
@@ -182,6 +186,7 @@ public protocol CameraFrameAnalyzer : Swift.Sendable {
   func end() async
   func result() async -> Self.Result
   var events: any BlinkIDUX.EventStream<Self.Event> { get }
+  var stepTimeoutDuration: Foundation.TimeInterval { get async }
 }
 #endif
 public enum PassportOrientation : Swift.Sendable, Swift.Equatable {
@@ -521,6 +526,10 @@ public enum ReticleState {
   case passport(Swift.String)
   case inactiveWithMessage(Swift.String)
   public static func == (a: BlinkIDUX.ReticleState, b: BlinkIDUX.ReticleState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 public enum UIEvent : Swift.Equatable, Swift.Sendable {
   case requestDocumentSide(side: BlinkIDUX.DocumentSide)
@@ -560,4 +569,5 @@ extension BlinkIDUX.ScanningViewModel : Swift.Sendable {}
 extension BlinkIDUX.MicroblinkColor : Swift.Equatable {}
 extension BlinkIDUX.MicroblinkColor : Swift.Hashable {}
 extension BlinkIDUX.MicroblinkColor : Swift.RawRepresentable {}
+extension BlinkIDUX.ReticleState : Swift.Hashable {}
 extension BlinkIDUX.ReticleState : Swift.Equatable {}
