@@ -1300,6 +1300,24 @@ export class VizResult {
   vehicleOwner?: StringResult;
 
   /**
+   * The country code of the document owner.
+   *
+   */
+  countryCode?: StringResult;
+
+  /**
+   * The certificate number of the document owner.
+   *
+   */
+  certificateNumber?: StringResult;
+
+  /**
+   * The national insurance number of the document owner.
+   *
+   */
+  nationalInsuranceNumber?: StringResult;
+
+  /**
    *
    * @param nativeVizResult
    *
@@ -1387,6 +1405,9 @@ export class VizResult {
     this.dependentsInfo = nativeVizResult.dependentsInfo;
     this.vehicleOwner =
       nativeVizResult.vehicleOwner;
+    this.countryCode = nativeVizResult.countryCode;
+    this.certificateNumber = nativeVizResult.certificateNumber;
+    this.nationalInsuranceNumber = nativeVizResult.nationalInsuranceNumber;
   }
 }
 
@@ -4223,6 +4244,10 @@ export enum DocumentType {
   RegistrationCertificate = 'registrationCertificate',
 
   MedicalMarijuanaId = 'medicalMarijuanaId',
+
+  NonCardTribalId = 'nonCardTribalId',
+
+  DiplomaticId = 'diplomaticId',
 }
 
 /**
@@ -4331,4 +4356,10 @@ export enum FieldType {
   SpecificDocumentValidity = 'specificDocumentValidity',
 
   VehnicleOwner = 'vehicleOwner',
+
+  NationalInsuranceNumber = 'nationalInsuranceNumber',
+
+  CountryCode = 'countryCode',
+
+  CertificateNumber = 'certificateNumber',
 }

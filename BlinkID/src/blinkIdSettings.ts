@@ -59,6 +59,18 @@ export class BlinkIdSdkSettings {
    *  
    */ 
   resourceRequestTimeout?: number;
+  /**
+   * Set a custom HTTPS URL to be used as a proxy for Ping and license checks.
+   * The proxy URL will be applied only if the license has the appropriate rights.
+   * 
+   * The URL must use the HTTPS protocol. Example: https://your-proxy.com/
+   * 
+   * If this value is defined, SDK initialization will not be successful in the following cases:
+   *    - if the URL does not use HTTPS or if the URL is invalid
+   *    - if the license does not allow proxy usage
+   * 
+   */
+  microblinkProxyURL?: string;
 
   /**
    * 
@@ -71,7 +83,8 @@ export class BlinkIdSdkSettings {
     resourceDownloadUrl?: string,
     resourceLocalFolder?: string,
     bundleURL?: string,
-    resourceRequestTimeout?: number) {
+    resourceRequestTimeout?: number,
+    microblinkProxyURL?: string) {
     this.licenseKey = licenseKey;
     this.licensee = licensee;
     this.downloadResources = downloadResources;
@@ -79,6 +92,7 @@ export class BlinkIdSdkSettings {
     this.resourceLocalFolder = resourceLocalFolder;
     this.bundleURL = bundleURL;
     this.resourceRequestTimeout = resourceRequestTimeout;
+    this.microblinkProxyURL = microblinkProxyURL
   }
 }
 

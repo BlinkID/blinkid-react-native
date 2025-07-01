@@ -249,6 +249,24 @@ export class BlinkIdScanningResult {
   visaType?: StringResult;
 
   /**
+   * The country code of the document owner.
+   *
+   */
+  countryCode?: StringResult;
+
+  /**
+   * The certificate number of the document owner.
+   *
+   */
+  certificateNumber?: StringResult;
+
+  /**
+   * The national insurance number of the document owner.
+   *
+   */
+  nationalInsuranceNumber?: StringResult;
+  
+  /**
    * The date of birth of the document owner.
    *
    */
@@ -610,6 +628,24 @@ export class BlinkIdScanningResult {
      */
     this.visaType =
       nativeBlinkIdResult.visaType;
+
+    /**
+    * The country code of the document owner.
+    *
+    */
+    this.countryCode = nativeBlinkIdResult.countryCode;
+
+    /**
+    * The certificate number of the document owner.
+    *
+    */
+    this.certificateNumber = nativeBlinkIdResult.certificateNumber;
+
+    /**
+    * The national insurance number of the document owner.
+    *
+    */
+    this.nationalInsuranceNumber = nativeBlinkIdResult.nationalInsuranceNumber;
 
     /**
      * The date of birth of the document owner.
