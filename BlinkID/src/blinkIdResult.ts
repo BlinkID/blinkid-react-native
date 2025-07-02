@@ -406,7 +406,7 @@ export class BlinkIdScanningResult {
      *
      */
     this.fullName =
-      nativeBlinkIdResult.firstName;
+      nativeBlinkIdResult.fullName;
 
     /**
      * The additional name information of the document owner.
