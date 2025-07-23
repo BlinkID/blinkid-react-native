@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   Button,
   Text,
@@ -8,7 +8,7 @@ import {
   Image,
   Platform,
   SafeAreaView,
-} from 'react-native';
+} from "react-native";
 import {
   BlinkIdScanningSettings,
   BlinkIdSdkSettings,
@@ -26,14 +26,14 @@ import {
   DetectionLevel,
   AnonymizationMode,
   BlinkIdUiSettings,
-} from '@microblink/blinkid-react-native';
+} from "@microblink/blinkid-react-native";
 
-import {BlinkIdResultBuilder} from './BlinkIdResultBuilder';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { BlinkIdResultBuilder } from "./BlinkIdResultBuilder";
+import { launchImageLibrary } from "react-native-image-picker";
 
 export default function App() {
   const [result, setResult] = useState<string | undefined>(
-    'Press the "Perform scan" button to scan documents with the Default BlinkID UX experience.\n\nPress the "Direct API MultiSide Scan" button to extract document information from multiple static images.\n\nPress the "Direct API SingleSide Scan" button to extract document information from a single static image.',
+    'Press the "Perform scan" button to scan documents with the Default BlinkID UX experience.\n\nPress the "Direct API MultiSide Scan" button to extract document information from multiple static images.\n\nPress the "Direct API SingleSide Scan" button to extract document information from a single static image.'
   );
 
   const [firstCroppedImage, setFirstCroppedImage] = useState<
@@ -48,13 +48,14 @@ export default function App() {
   const [secondInputImage, setSecondInputImage] = useState<
     string | undefined
   >();
-  const [barcodeInputImage, setBarcodeInputImage] = useState<string | undefined>();
-
+  const [barcodeInputImage, setBarcodeInputImage] = useState<
+    string | undefined
+  >();
 
   const licenseKey = Platform.select({
-    ios: 'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRFeU9ESXdNelV5TnpRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PTR7M88y4E5W2a6aJXzNCVQm2wsHQAKOY2lVVzXuZrpMNnwK2Ie4YeOJuyvyGF6HH53JRtxGZ5jnlzwADkBLSA29yfO0ijABa9mGjLwGdLYP+0or4XP6t6yQ0N9dHg==',
+    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRNeU5UZ3lNemd5TWpZc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PaTQzrfmnkykcV3qlqzI6Zp2T7vmQI5Qlz8qCcTaq9hv9/wXvwb8yQ536ICbOpdnQisfk1Y7NGMfLAd1b4NfAksBXz0mZZU+d4HEQLLRXhOQdxdOrZM8DMD19fnZNA==",
     android:
-      'sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRFeU9ERTVPVE0xTmpFc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PbpfCzRw9gf/6F93cmQEN/XWTdStZh94uIy9lC+HB6UqEx332sU79wX5RgyoyteUsdB4vXPOpyLOuCYzGZ0vPoB7vc/JaF3JpJuRIpBbkn3YqQm2dAfUQ8jfxtW6FQ==',
+      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRNeE56VXhOVEE0T0RVc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PTw1RZxpiaiPphwDAz+ymrsPRl/FNa+kTcFq6+8OWbVJiyv5mIb7IJgjZEKDNRVYbKYGb7wteoWgDPd/PbydBWxgGAP5KwD69kINQ8dCVZEI5LFQ/ffW79i7Eoshug==",
   })!;
 
   const handlePerformScan = async () => {
@@ -125,7 +126,7 @@ export default function App() {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch(error => {
+        .catch((error) => {
           // handle any errors here.
           setResult(`Error during scan: ${error}`);
           resetImages();
@@ -143,12 +144,12 @@ export default function App() {
        * Make sure it is the front side
        */
       const firstImage = await launchImageLibrary({
-        mediaType: 'photo',
+        mediaType: "photo",
         includeBase64: true,
       });
 
       if (firstImage.assets == null || !firstImage.assets[0]?.base64) {
-        setResult('First image not selected or invalid.');
+        setResult("First image not selected or invalid.");
         return;
       }
 
@@ -162,12 +163,12 @@ export default function App() {
        * Make sure it is the back side of the document
        */
       const secondImage = await launchImageLibrary({
-        mediaType: 'photo',
+        mediaType: "photo",
         includeBase64: true,
       });
 
       if (secondImage.assets == null || !secondImage.assets[0]?.base64) {
-        setResult('Second image not selected or invalid.');
+        setResult("Second image not selected or invalid.");
         return;
       }
 
@@ -234,13 +235,13 @@ export default function App() {
         sdkSettings,
         sessionSettings,
         firstImageBase64,
-        secondImageBase64,
+        secondImageBase64
       )
         .then((result: BlinkIdScanningResult) => {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch(error => {
+        .catch((error) => {
           setResult(`Error during scan: ${error}`);
           resetImages();
         });
@@ -257,12 +258,12 @@ export default function App() {
        * It can either be the front of the back side of the document
        */
       const image = await launchImageLibrary({
-        mediaType: 'photo',
+        mediaType: "photo",
         includeBase64: true,
       });
 
       if (image.assets == null || !image.assets[0]?.base64) {
-        setResult('The selected image is not selected or is invalid.');
+        setResult("The selected image is not selected or is invalid.");
         return;
       }
 
@@ -329,7 +330,7 @@ export default function App() {
           setResult(BlinkIdResultBuilder.getIdResultString(result));
           setImages(result);
         })
-        .catch(error => {
+        .catch((error) => {
           setResult(`Error during DirectAPI scan: ${error}`);
           resetImages();
         });
@@ -432,8 +433,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    backgroundColor: "#fff",
   },
   spacer: {
     height: 25,
@@ -442,10 +443,10 @@ const styles = StyleSheet.create({
   resultBox: {
     flex: 1,
     marginTop: 20,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     padding: 10,
     borderRadius: 8,
-    maxHeight: 'auto',
+    maxHeight: "auto",
   },
 
   imageScroll: {
@@ -455,7 +456,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     margin: 10,
     marginTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   imageLabel: {
     fontSize: 16,
@@ -465,7 +466,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 8,
-    backgroundColor: '#eee',
+    backgroundColor: "#eee",
   },
 });
 
@@ -482,7 +483,7 @@ const DocumentImageContainer: React.FC<DocumentImageContainerProps> = ({
     <View style={styles.imageContainer}>
       <Text style={styles.imageLabel}>{label}</Text>
       <Image
-        source={{uri: imageUri}}
+        source={{ uri: imageUri }}
         style={styles.image}
         resizeMode="contain"
       />
