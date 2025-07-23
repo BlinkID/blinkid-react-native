@@ -1,3 +1,60 @@
+## 7.4.0
+- Updated to [Android SDK v7.4.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.4.0) and [iOS SDK v7.4.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.4.0)
+
+### What's new
+- Improved extraction for Canada/Nunavut ID and DL by introducing error correction for "1" and "I" characters which look the same in the font used on a document
+
+#### New Documents Support
+- Canada, Newfoundland And Labrador - Identity Card
+- Canada, Northwest Territories - Driver's License
+- Canada, Northwest Territories - Identity Card
+- Canada, Prince Edward Island - Identity Card
+- Canada, Yukon - Identity Card
+- Canada, Nunavut - Driver's License
+- Canada, Nunavut - Identity Card
+- Liberia - Identity Card
+- Mali - Identity Card
+- UK - Military ID
+
+#### New Document Versions for Supported Documents
+- Bahrain - Identity Card
+- Canada, Yukon - Driver's License
+- Canada - Weapon Permit
+- Chile - Alien ID
+- Chile - Identity Card
+- Finland - Driver's License
+- Indonesia - Driver's License
+- Kosovo - Identity Card
+- Latvia - Polycarbonate Passport
+- Mexico, Chiapas - Driver's License
+- Mexico, Ciudad de Mexico - Driver's License
+- Mexico, Durango - Driver's License
+- Mexico, Jalisco - Driver's License
+- Sri Lanka - Driver's License
+- USA, Alaska - Driver's License
+- USA, New Hampshire - Driver's License
+- European Union - Health Insurance Card
+
+#### New Beta Documents Support
+- Canada - Non Card Tribal ID
+- Dominica - Paper Passport
+- Dominica - Polycarbonate Passport
+- UAE - Diplomatic ID
+- USA, Georgia - Medical Marijuana ID
+
+#### New Document Versions for Beta-Supported Documents
+- Egypt - Driver's License
+- Mexico, Quintana Roo - Driver's License
+- Philippines - Postal ID
+- Vietnam - Identity Card
+
+#### New Segments Supported on Documents
+- European Union, Health Insurance Card - `countryCode`
+- Italy, Identity Card - `documentOptionalAdditionalNumber`
+- France, Identity Card - `additionalNameInformation`
+- UK, Asylum Request - `residencePermitType`, `remarks`
+- UK, Residence Permit - `residencePermitType`, `remarks`, `certificateNumber`, `nationalInsuranceNumber`
+
 ## 7.2.0
 
 The version 7 release of the BlinkID SDK.
