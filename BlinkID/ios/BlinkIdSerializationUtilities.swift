@@ -284,8 +284,8 @@ class BlinkIdSerializationUtilities {
   
   static func serializeVehicleClassInfo<T>(_ vehicleClassInfo: VehicleClassInfo<T>?) -> Dictionary<String, Any> {
       let vehicleClassInfoDict: [String: Any?] = [
-          "effectiveDate": serializeStringType(vehicleClassInfo?.effectiveDate),
-          "expiryDate":  serializeStringType(vehicleClassInfo?.expiryDate),
+          "effectiveDate": serializeDateResult(vehicleClassInfo?.effectiveDate),
+          "expiryDate":  serializeDateResult(vehicleClassInfo?.expiryDate),
           "licenceType": serializeStringType(vehicleClassInfo?.licenceType),
           "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass as? String)
       ]

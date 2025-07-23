@@ -347,8 +347,8 @@ object BlinkIdSerializationUtilities {
 
   private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): JSONObject {
     val vehicleClassInfoJson = JSONObject()
-    vehicleClassInfoJson.put("effectiveDate", serializeStringType(vehicleClassInfo.effectiveDate))
-    vehicleClassInfoJson.put("expiryDate", serializeStringType(vehicleClassInfo.expiryDate))
+    vehicleClassInfoJson.put("effectiveDate", serializeDateResult(vehicleClassInfo.effectiveDate))
+    vehicleClassInfoJson.put("expiryDate", serializeDateResult(vehicleClassInfo.expiryDate))
     vehicleClassInfoJson.put("licenceType", serializeStringType(vehicleClassInfo.licenceType))
     vehicleClassInfoJson.put("vehicleClass", serializeStringType(vehicleClassInfo.vehicleClass))
     return vehicleClassInfoJson

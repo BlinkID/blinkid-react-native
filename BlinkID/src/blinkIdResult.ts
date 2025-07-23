@@ -7,8 +7,8 @@ import {
   SingleSideScanningResult,
   DriverLicenseDetailedInfo,
   DateResult,
-  DetailedCroppedImageResult
-} from './types';
+  DetailedCroppedImageResult,
+} from "./types";
 
 /**
  * Represents the results of scanning a document.
@@ -265,7 +265,7 @@ export class BlinkIdScanningResult {
    *
    */
   nationalInsuranceNumber?: StringResult;
-  
+
   /**
    * The date of birth of the document owner.
    *
@@ -370,43 +370,37 @@ export class BlinkIdScanningResult {
      *
      * See {@link RecognitionMode} for more information.
      */
-    this.recognitionMode =
-      nativeBlinkIdResult.recognitionMode;
+    this.recognitionMode = nativeBlinkIdResult.recognitionMode;
     /**
      * The document class information.
      *
      * See {@link DocumentClassInfo} for more information.
      */
-    this.documentClassInfo =
-      nativeBlinkIdResult.documentClassInfo;
+    this.documentClassInfo = nativeBlinkIdResult.documentClassInfo;
     /**
      * Info on whether the data extracted from multiple sides matches.
      *
      * See {@link DataMatchResult} for more information.
      */
-    this.dataMatchResult =
-      nativeBlinkIdResult.dataMatchResult;
+    this.dataMatchResult = nativeBlinkIdResult.dataMatchResult;
 
     /**
      * The first name of the document owner.
      *
      */
-    this.firstName =
-      nativeBlinkIdResult.firstName;
+    this.firstName = nativeBlinkIdResult.firstName;
 
     /**
      * The last name of the document owner.
      *
      */
-    this.lastName =
-      nativeBlinkIdResult.lastName;
+    this.lastName = nativeBlinkIdResult.lastName;
 
     /**
      * The full name of the document owner.
      *
      */
-    this.fullName =
-      nativeBlinkIdResult.fullName;
+    this.fullName = nativeBlinkIdResult.fullName;
 
     /**
      * The additional name information of the document owner.
@@ -419,28 +413,24 @@ export class BlinkIdScanningResult {
      * The localized name of the document owner.
      *
      */
-    this.localizedName =
-      nativeBlinkIdResult.localizedName;
+    this.localizedName = nativeBlinkIdResult.localizedName;
     /**
      * The fathers name of the document owner.
      *
      */
-    this.fathersName =
-      nativeBlinkIdResult.fathersName;
+    this.fathersName = nativeBlinkIdResult.fathersName;
 
     /**
      * The mothers name of the document owner.
      *
      */
-    this.mothersName =
-      nativeBlinkIdResult.mothersName;
+    this.mothersName = nativeBlinkIdResult.mothersName;
 
     /**
      * The address of the doicument owner.
      *
      */
-    this.address =
-      nativeBlinkIdResult.address;
+    this.address = nativeBlinkIdResult.address;
 
     /**
      * The additional address information of the document owner.
@@ -460,91 +450,78 @@ export class BlinkIdScanningResult {
      * The place of birth of the document owner.
      *
      */
-    this.placeOfBirth =
-      nativeBlinkIdResult.placeOfBirth;
+    this.placeOfBirth = nativeBlinkIdResult.placeOfBirth;
 
     /**
      * The nationality of the document owner.
      *
      */
-    this.nationality =
-      nativeBlinkIdResult.nationality;
+    this.nationality = nativeBlinkIdResult.nationality;
 
     /**
      * The race of the document owner.
      *
      */
-    this.race =
-      nativeBlinkIdResult.race;
+    this.race = nativeBlinkIdResult.race;
 
     /**
      * The religion of the document owner.
      *
      */
-    this.religion =
-      nativeBlinkIdResult.religion;
+    this.religion = nativeBlinkIdResult.religion;
 
     /**
      * The profession of the document owner.
      *
      */
-    this.profession =
-      nativeBlinkIdResult.profession;
+    this.profession = nativeBlinkIdResult.profession;
 
     /**
      * The marital status of the document owner.
      *
      */
-    this.maritalStatus =
-      nativeBlinkIdResult.maritalStatus;
+    this.maritalStatus = nativeBlinkIdResult.maritalStatus;
 
     /**
      * The residential status of the document owner.
      *
      */
-    this.residentialStatus =
-      nativeBlinkIdResult.residentialStatus;
+    this.residentialStatus = nativeBlinkIdResult.residentialStatus;
     /**
      * The employer of the document owner.
      *
      */
-    this.employer =
-      nativeBlinkIdResult.employer;
+    this.employer = nativeBlinkIdResult.employer;
 
     /**
      * The sex of the document owner.
      *
      */
-    this.sex =
-      nativeBlinkIdResult.sex;
+    this.sex = nativeBlinkIdResult.sex;
 
     /**
      * The sponsor of the document owner.
      *
      */
-    this.sponsor =
-      nativeBlinkIdResult.sponsor;
+    this.sponsor = nativeBlinkIdResult.sponsor;
 
     /**
      * The blood type of the document owner.
      *
      */
-    this.bloodType =
-      nativeBlinkIdResult.bloodType;
+    this.bloodType = nativeBlinkIdResult.bloodType;
 
     /**
      * The document number.
      *
      */
-    this.documentNumber =
-      nativeBlinkIdResult.documentNumber;
+    this.documentNumber = nativeBlinkIdResult.documentNumber;
 
     /**
      * The personal identification number.
      *
      */
-    this.personalIdNumber =
-      nativeBlinkIdResult.personalIdNumber;
+    this.personalIdNumber = nativeBlinkIdResult.personalIdNumber;
 
     /**
      * The additional number of the document.
@@ -571,49 +548,42 @@ export class BlinkIdScanningResult {
      * The issuing authority of the document.
      *
      */
-    this.issuingAuthority =
-      nativeBlinkIdResult.issuingAuthority;
+    this.issuingAuthority = nativeBlinkIdResult.issuingAuthority;
 
     /**
      * The transcription of the document subtype.
      *
      */
-    this.documentSubtype =
-      nativeBlinkIdResult.documentSubtype;
+    this.documentSubtype = nativeBlinkIdResult.documentSubtype;
 
     /**
      * The remarks on the residence permit.
      *
      */
-    this.remarks =
-      nativeBlinkIdResult.remarks;
+    this.remarks = nativeBlinkIdResult.remarks;
 
     /**
      * The residence permit type.
      *
      */
-    this.residencePermitType =
-      nativeBlinkIdResult.residencePermitType;
+    this.residencePermitType = nativeBlinkIdResult.residencePermitType;
 
     /**
      * The manufacturing year.
      *
      */
-    this.manufacturingYear =
-      nativeBlinkIdResult.manufacturingYear;
+    this.manufacturingYear = nativeBlinkIdResult.manufacturingYear;
     /**
      * The vehicle type.
      *
      */
-    this.vehicleType =
-      nativeBlinkIdResult.vehicleType;
+    this.vehicleType = nativeBlinkIdResult.vehicleType;
 
     /**
      * The eligibility category.
      *
      */
-    this.eligibilityCategory =
-      nativeBlinkIdResult.eligibilityCategory;
+    this.eligibilityCategory = nativeBlinkIdResult.eligibilityCategory;
 
     /**
      * The specific document validity.
@@ -626,47 +596,43 @@ export class BlinkIdScanningResult {
      * The visa type of the document.
      *
      */
-    this.visaType =
-      nativeBlinkIdResult.visaType;
+    this.visaType = nativeBlinkIdResult.visaType;
 
     /**
-    * The country code of the document owner.
-    *
-    */
+     * The country code of the document owner.
+     *
+     */
     this.countryCode = nativeBlinkIdResult.countryCode;
 
     /**
-    * The certificate number of the document owner.
-    *
-    */
+     * The certificate number of the document owner.
+     *
+     */
     this.certificateNumber = nativeBlinkIdResult.certificateNumber;
 
     /**
-    * The national insurance number of the document owner.
-    *
-    */
+     * The national insurance number of the document owner.
+     *
+     */
     this.nationalInsuranceNumber = nativeBlinkIdResult.nationalInsuranceNumber;
 
     /**
      * The date of birth of the document owner.
      *
      */
-    this.dateOfBirth =
-      nativeBlinkIdResult.dateOfBirth;
+    this.dateOfBirth = nativeBlinkIdResult.dateOfBirth;
 
     /**
      * The date of issue of the document.
      *
      */
-    this.dateOfIssue =
-      nativeBlinkIdResult.dateOfIssue;
+    this.dateOfIssue = nativeBlinkIdResult.dateOfIssue;
 
     /**
      * The date of expiry of the document.
      *
      */
-    this.dateOfExpiry =
-      nativeBlinkIdResult.dateOfExpiry;
+    this.dateOfExpiry = nativeBlinkIdResult.dateOfExpiry;
 
     /**
      * Determines if date of expiry is permanent.
@@ -732,8 +698,7 @@ export class BlinkIdScanningResult {
      *
      * See {@link DetailedCroppedImageResult} for more information.
      */
-    this.faceImage =
-      nativeBlinkIdResult.faceImage;
+    this.faceImage = nativeBlinkIdResult.faceImage;
 
     /**
      * Returns the cropped signature image with additional info.
@@ -741,7 +706,6 @@ export class BlinkIdScanningResult {
      *
      * See {@link DetailedCroppedImageResult} for more information.
      */
-    this.signatureImage =
-      nativeBlinkIdResult.signatureImage;
+    this.signatureImage = nativeBlinkIdResult.signatureImage;
   }
 }
