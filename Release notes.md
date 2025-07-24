@@ -55,6 +55,9 @@
 - UK, Asylum Request - `residencePermitType`, `remarks`
 - UK, Residence Permit - `residencePermitType`, `remarks`, `certificateNumber`, `nationalInsuranceNumber`
 
+#### Bug fixes
+- Fixed issue with incorrect `DriverLicenseDetailedInfo` serialization 
+
 ## 7.2.0
 
 The version 7 release of the BlinkID SDK.
