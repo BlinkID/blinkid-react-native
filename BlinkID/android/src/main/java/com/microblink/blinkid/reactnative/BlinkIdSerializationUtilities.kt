@@ -144,7 +144,15 @@ object BlinkIdSerializationUtilities {
     scanningResult?.visaType?.let {
       scanningResultJson.put("visaType", serializeStringResult(it))
     }
-
+    scanningResult?.countryCode?.let {
+      scanningResultJson.put("countryCode", serializeStringResult(it))
+    }
+    scanningResult?.certificateNumber?.let {
+      scanningResultJson.put("certificateNumber", serializeStringResult(it))
+    }
+    scanningResult?.nationalInsuranceNumber?.let {
+      scanningResultJson.put("nationalInsuranceNumber", serializeStringResult(it))
+    }
     scanningResult?.dateOfBirth?.let {
       scanningResultJson.put("dateOfBirth", serializeDateResult(it))
     }
@@ -339,8 +347,8 @@ object BlinkIdSerializationUtilities {
 
   private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): JSONObject {
     val vehicleClassInfoJson = JSONObject()
-    vehicleClassInfoJson.put("effectiveDate", serializeStringType(vehicleClassInfo.effectiveDate))
-    vehicleClassInfoJson.put("expiryDate", serializeStringType(vehicleClassInfo.expiryDate))
+    vehicleClassInfoJson.put("effectiveDate", serializeDateResult(vehicleClassInfo.effectiveDate))
+    vehicleClassInfoJson.put("expiryDate", serializeDateResult(vehicleClassInfo.expiryDate))
     vehicleClassInfoJson.put("licenceType", serializeStringType(vehicleClassInfo.licenceType))
     vehicleClassInfoJson.put("vehicleClass", serializeStringType(vehicleClassInfo.vehicleClass))
     return vehicleClassInfoJson
@@ -602,6 +610,15 @@ object BlinkIdSerializationUtilities {
     }
     vizResult?.visaType?.let {
       vizResultJson.put("visaType", serializeStringResult(it))
+    }
+    vizResult?.countryCode?.let {
+      vizResultJson.put("countryCode", serializeStringResult(it))
+    }
+    vizResult?.certificateNumber?.let {
+      vizResultJson.put("certificateNumber", serializeStringResult(it))
+    }
+    vizResult?.nationalInsuranceNumber?.let {
+      vizResultJson.put("nationalInsuranceNumber", serializeStringResult(it))
     }
     return vizResultJson
   }

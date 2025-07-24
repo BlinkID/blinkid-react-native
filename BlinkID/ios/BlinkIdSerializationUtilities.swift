@@ -117,6 +117,15 @@ class BlinkIdSerializationUtilities {
       if let vehicleType = scanningResult?.vehicleType {
           scanningResultDict["vehicleType"] = serializeStringResult(vehicleType)
       }
+      if let countryCode = scanningResult?.countryCode {
+          scanningResultDict["countryCode"] = serializeStringResult(countryCode)
+      }
+      if let certificateNumber = scanningResult?.certificateNumber {
+          scanningResultDict["certificateNumber"] = serializeStringResult(certificateNumber)
+      }
+      if let nationalInsuranceNumber = scanningResult?.nationalInsuranceNumber {
+          scanningResultDict["nationalInsuranceNumber"] = serializeStringResult(nationalInsuranceNumber)
+      }
       if let eligibilityCategory = scanningResult?.eligibilityCategory {
           scanningResultDict["eligibilityCategory"] = serializeStringResult(eligibilityCategory)
       }
@@ -275,8 +284,8 @@ class BlinkIdSerializationUtilities {
   
   static func serializeVehicleClassInfo<T>(_ vehicleClassInfo: VehicleClassInfo<T>?) -> Dictionary<String, Any> {
       let vehicleClassInfoDict: [String: Any?] = [
-          "effectiveDate": serializeStringType(vehicleClassInfo?.effectiveDate),
-          "expiryDate":  serializeStringType(vehicleClassInfo?.expiryDate),
+          "effectiveDate": serializeDateResult(vehicleClassInfo?.effectiveDate),
+          "expiryDate":  serializeDateResult(vehicleClassInfo?.expiryDate),
           "licenceType": serializeStringType(vehicleClassInfo?.licenceType),
           "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass as? String)
       ]
@@ -494,56 +503,144 @@ class BlinkIdSerializationUtilities {
       return mrzResultDict.compactMapValues { $0 }
   }
   
-  static func serializeVizResult(_ vizResult: VIZResult?) -> Dictionary<String, Any> {
-      
-      let vizResultDict: [String: Any?] =
-       [
-          "additionalAddressInformation": serializeStringResult(vizResult?.additionalAddressInformation),
-          "additionalNameInformation": serializeStringResult(vizResult?.additionalNameInformation),
-          "additionalOptionalAddressInformation": serializeStringResult(vizResult?.additionalOptionalAddressInformation),
-          "additionalPersonalIdNumber": serializeStringResult(vizResult?.additionalPersonalIdNumber),
-          "address": serializeStringResult(vizResult?.address),
-          "bloodType": serializeStringResult(vizResult?.bloodType),
-          "dateOfBirth": serializeDateResult(vizResult?.dateOfBirth),
-          "dateOfExpiry": serializeDateResult(vizResult?.dateOfExpiry),
-          "dateOfExpiryPermanent": vizResult?.dateOfExpiryPermanent,
-          "dateOfIssue": serializeDateResult(vizResult?.dateOfIssue),
-          "dependentsInfo": vizResult?.dependentsInfo.compactMap(serializeDependentInfo(_:)),
-          "documentAdditionalNumber": serializeStringResult(vizResult?.documentAdditionalNumber),
-          "documentNumber": serializeStringResult(vizResult?.documentNumber),
-          "documentOptionalAdditionalNumber": serializeStringResult(vizResult?.documentOptionalAdditionalNumber),
-          "documentSubtype": serializeStringResult(vizResult?.documentSubtype),
-          "driverLicenseDetailedInfo": serializeDriverLicenseDetailedInfo(vizResult?.driverLicenseDetailedInfo),
-          "eligibilityCategory": serializeStringResult(vizResult?.eligibilityCategory),
-          "employer": serializeStringResult(vizResult?.employer),
-          "fathersName": serializeStringResult(vizResult?.fathersName),
-          "firstName": serializeStringResult(vizResult?.firstName),
-          "fullName": serializeStringResult(vizResult?.fullName),
-          "issuingAuthority": serializeStringResult(vizResult?.issuingAuthority),
-          "lastName": serializeStringResult(vizResult?.lastName),
-          "localizedName": serializeStringResult(vizResult?.localizedName),
-          "manufacturingYear": serializeStringResult(vizResult?.manufacturingYear),
-          "maritalStatus": serializeStringResult(vizResult?.maritalStatus),
-          "mothersName": serializeStringResult(vizResult?.mothersName),
-          "nationality": serializeStringResult(vizResult?.nationality),
-          "personalIdNumber": serializeStringResult(vizResult?.personalIdNumber),
-          "placeOfBirth": serializeStringResult(vizResult?.placeOfBirth),
-          "profession": serializeStringResult(vizResult?.profession),
-          "race": serializeStringResult(vizResult?.race),
-          "religion": serializeStringResult(vizResult?.religion),
-          "remarks": serializeStringResult(vizResult?.remarks),
-          "residencePermitType": serializeStringResult(vizResult?.residencePermitType),
-          "residentialStatus": serializeStringResult(vizResult?.residentialStatus),
-          "sex": serializeStringResult(vizResult?.sex),
-          "specificDocumentValidity": serializeStringResult(vizResult?.specificDocumentValidity),
-          "sponsor": serializeStringResult(vizResult?.sponsor),
-          "vehicleOwner": serializeStringResult(vizResult?.vehicleOwner),
-          "vehicleType": serializeStringResult(vizResult?.vehicleType),
-          "visaType": serializeStringResult(vizResult?.visaType)
-      ]
-      
-      return vizResultDict.compactMapValues { $0 }
-  }
+    static func serializeVizResult(_ vizResult: VIZResult?) -> Dictionary<String, Any> {
+        var vizResultDict = Dictionary<String, Any>()
+        if let vizResult = vizResult {
+            if let additionalAddressInformation = vizResult.additionalAddressInformation {
+                vizResultDict["additionalAddressInformation"] = serializeStringResult(additionalAddressInformation)
+            }
+            
+            if let additionalNameInformation = vizResult.additionalNameInformation {
+                vizResultDict["additionalNameInformation"] = serializeStringResult(additionalNameInformation)
+            }
+            if let additionalOptionalAddressInformation = vizResult.additionalOptionalAddressInformation {
+                vizResultDict["additionalOptionalAddressInformation"] = serializeStringResult(additionalOptionalAddressInformation)
+            }
+            if let additionalPersonalIdNumber = vizResult.additionalPersonalIdNumber {
+                vizResultDict["additionalPersonalIdNumber"] = serializeStringResult(additionalPersonalIdNumber)
+            }
+            if let address = vizResult.address {
+                vizResultDict["address"] = serializeStringResult(address)
+            }
+            if let bloodType = vizResult.bloodType {
+                vizResultDict["bloodType"] = serializeStringResult(bloodType)
+            }
+            if let dateOfBirth = vizResult.dateOfBirth {
+                vizResultDict["dateOfBirth"] = serializeDateResult(dateOfBirth)
+            }
+            if let dateOfExpiry = vizResult.dateOfExpiry {
+                vizResultDict["dateOfExpiry"] = serializeDateResult(dateOfExpiry)
+            }
+            vizResultDict["dateOfExpiryPermanent"] = vizResult.dateOfExpiryPermanent
+            if let dateOfIssue = vizResult.dateOfIssue {
+                vizResultDict["dateOfIssue"] = serializeDateResult(dateOfIssue)
+            }
+            vizResultDict["dependentsInfo"] = vizResult.dependentsInfo.compactMap(serializeDependentInfo(_:))
+            if let documentAdditionalNumber = vizResult.documentAdditionalNumber {
+                vizResultDict["documentAdditionalNumber"] = serializeStringResult(documentAdditionalNumber)
+            }
+            if let documentNumber = vizResult.documentNumber {
+                vizResultDict["documentNumber"] = serializeStringResult(documentNumber)
+            }
+            if let documentOptionalAdditionalNumber = vizResult.documentOptionalAdditionalNumber {
+                vizResultDict["documentOptionalAdditionalNumber"] = serializeStringResult(documentOptionalAdditionalNumber)
+            }
+            if let documentSubtype = vizResult.documentSubtype {
+                vizResultDict["documentSubtype"] = serializeStringResult(documentSubtype)
+            }
+            if let driverLicenseDetailedInfo = vizResult.driverLicenseDetailedInfo {
+                vizResultDict["driverLicenseDetailedInfo"] = serializeDriverLicenseDetailedInfo(driverLicenseDetailedInfo)
+            }
+            if let eligibilityCategory = vizResult.eligibilityCategory {
+                vizResultDict["eligibilityCategory"] = serializeStringResult(eligibilityCategory)
+            }
+            if let employer = vizResult.employer {
+                vizResultDict["employer"] = serializeStringResult(employer)
+            }
+            if let fathersName = vizResult.fathersName {
+                vizResultDict["fathersName"] = serializeStringResult(fathersName)
+            }
+            if let firstName = vizResult.firstName {
+                vizResultDict["firstName"] = serializeStringResult(firstName)
+            }
+            if let fullName = vizResult.fullName {
+                vizResultDict["fullName"] = serializeStringResult(fullName)
+            }
+            if let issuingAuthority = vizResult.issuingAuthority {
+                vizResultDict["issuingAuthority"] = serializeStringResult(issuingAuthority)
+            }
+            if let lastName = vizResult.lastName {
+                vizResultDict["lastName"] = serializeStringResult(lastName)
+            }
+            if let localizedName = vizResult.localizedName {
+                vizResultDict["localizedName"] = serializeStringResult(localizedName)
+            }
+            if let manufacturingYear = vizResult.manufacturingYear {
+                vizResultDict["manufacturingYear"] = serializeStringResult(manufacturingYear)
+            }
+            if let maritalStatus = vizResult.maritalStatus {
+                vizResultDict["maritalStatus"] = serializeStringResult(maritalStatus)
+            }
+            if let mothersName = vizResult.mothersName {
+                vizResultDict["mothersName"] = serializeStringResult(mothersName)
+            }
+            if let nationality = vizResult.nationality {
+                vizResultDict["nationality"] = serializeStringResult(nationality)
+            }
+            if let personalIdNumber = vizResult.personalIdNumber {
+                vizResultDict["personalIdNumber"] = serializeStringResult(personalIdNumber)
+            }
+            if let placeOfBirth = vizResult.placeOfBirth {
+                vizResultDict["placeOfBirth"] = serializeStringResult(placeOfBirth)
+            }
+            if let profession = vizResult.profession {
+                vizResultDict["profession"] = serializeStringResult(profession)
+            }
+            if let race = vizResult.race {
+                vizResultDict["race"] = serializeStringResult(race)
+            }
+            if let religion = vizResult.religion {
+                vizResultDict["religion"] = serializeStringResult(religion)
+            }
+            if let remarks = vizResult.remarks {
+                vizResultDict["remarks"] = serializeStringResult(remarks)
+            }
+            if let residencePermitType = vizResult.residencePermitType {
+                vizResultDict["residencePermitType"] = serializeStringResult(residencePermitType)
+            }
+            if let residentialStatus = vizResult.residentialStatus {
+                vizResultDict["residentialStatus"] = serializeStringResult(residentialStatus)
+            }
+            if let sex = vizResult.sex {
+                vizResultDict["sex"] = serializeStringResult(sex)
+            }
+            if let specificDocumentValidity = vizResult.specificDocumentValidity {
+                vizResultDict["specificDocumentValidity"] = serializeStringResult(specificDocumentValidity)
+            }
+            if let sponsor = vizResult.sponsor {
+                vizResultDict["sponsor"] = serializeStringResult(sponsor)
+            }
+            if let vehicleOwner = vizResult.vehicleOwner {
+                vizResultDict["vehicleOwner"] = serializeStringResult(vehicleOwner)
+            }
+            if let vehicleType = vizResult.vehicleType {
+                vizResultDict["vehicleType"] = serializeStringResult(vehicleType)
+            }
+            if let visaType = vizResult.visaType {
+                vizResultDict["visaType"] = serializeStringResult(visaType)
+            }
+            if let countryCode = vizResult.countryCode {
+                vizResultDict["countryCode"] = serializeStringResult(countryCode)
+            }
+            if let certificateNumber = vizResult.certificateNumber {
+                vizResultDict["certificateNumber"] = serializeStringResult(certificateNumber)
+            }
+            if let nationalInsuranceNumber = vizResult.nationalInsuranceNumber {
+                vizResultDict["nationalInsuranceNumber"] = serializeStringResult(nationalInsuranceNumber)
+            }
+        }
+        return vizResultDict
+    }
   
   static func serializeDetailedCroppedImageResult(_ detailedcroppedImageResult: DetailedCroppedImageResult?) -> Dictionary<String, Any> {
       let detailedcroppedImageResultDict: [String: Any?] = [

@@ -57,7 +57,8 @@ object BlinkIdDeserializationUtilities {
         blinkIdSdkSettingsMap.optJSONObject(
           "resourceRequestTimeout"
         )
-      )
+      ),
+      microblinkProxyUrl = if (blinkIdSdkSettingsMap.has("microblinkProxyURL")) blinkIdSdkSettingsMap.getString("microblinkProxyURL") else null,
     )
   }
 

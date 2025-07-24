@@ -83,7 +83,7 @@ export class ClassFilter {
  *
  * Used with other classes like the {@link ClassFilter}, {@link DocumentRules} and the {@link DocumentAnonymizationSettings}.
  */
-export class DocumentFilter{
+export class DocumentFilter {
   /**
    * If set, only specified country will pass the filter criteria.
    * Otherwise, issuing country will not betaken into account.
@@ -409,12 +409,9 @@ export class DocumentClassInfo {
    *
    */
   constructor(nativeDocumentClassInfo: any) {
-    this.country =
-      nativeDocumentClassInfo.country;
-    this.region =
-      nativeDocumentClassInfo.region;
-    this.documentType =
-      nativeDocumentClassInfo.documentType;
+    this.country = nativeDocumentClassInfo.country;
+    this.region = nativeDocumentClassInfo.region;
+    this.documentType = nativeDocumentClassInfo.documentType;
     this.empty = nativeDocumentClassInfo.empty;
     this.countryName = nativeDocumentClassInfo.countryName;
     this.isoNumericCountryCode = nativeDocumentClassInfo.isoNumericCountryCode;
@@ -479,10 +476,8 @@ export class DataMatchResultField {
    *
    */
   constructor(nativeDataMatchResultField: any) {
-    this.field =
-      nativeDataMatchResultField.field;
-    this.state =
-      nativeDataMatchResultField.state;
+    this.field = nativeDataMatchResultField.field;
+    this.state = nativeDataMatchResultField.state;
   }
 }
 
@@ -690,14 +685,10 @@ export class Side {
    *
    */
   constructor(nativeSide: any) {
-    this.latin =
-      nativeSide.latin;
-    this.arabic =
-      nativeSide.arabic;
-    this.cyrillic =
-      nativeSide.cyrillic;
-    this.greek =
-      nativeSide.greek;
+    this.latin = nativeSide.latin;
+    this.arabic = nativeSide.arabic;
+    this.cyrillic = nativeSide.cyrillic;
+    this.greek = nativeSide.greek;
   }
 }
 
@@ -734,9 +725,10 @@ export class DateResult<T> {
   successfullyParsed?: boolean;
 
   constructor(nativeDateResult: any) {
-    this.date =
-      nativeDateResult.date;
-    this.originalString = BlinkIdUtilities.handleStringType<T>(nativeDateResult.originalString);
+    this.date = nativeDateResult.date;
+    this.originalString = BlinkIdUtilities.handleStringType<T>(
+      nativeDateResult.originalString
+    );
     this.isFilledByDomainKnowledge = nativeDateResult.isFilledByDomainKnowledge;
     this.successfullyParsed = nativeDateResult.successfullyParsed;
   }
@@ -813,7 +805,7 @@ export class DriverLicenseDetailedInfo<T> {
    *
    * See {@link VehicleClassInfo} for more information.
    */
-  vehicleClassesInfo?: VehicleClassInfo<T>;
+  vehicleClassesInfo?: VehicleClassInfo<T>[];
 
   constructor(nativeDriverLicenseDetailedInfo: any) {
     this.restrictions = BlinkIdUtilities.handleStringType(
@@ -826,11 +818,7 @@ export class DriverLicenseDetailedInfo<T> {
       nativeDriverLicenseDetailedInfo.vehicleClass
     );
     this.vehicleClassesInfo =
-      nativeDriverLicenseDetailedInfo.vehicleClassesInfo != undefined
-        ? new VehicleClassInfo<T>(
-            nativeDriverLicenseDetailedInfo.vehicleClassesInfo
-          )
-        : undefined;
+      nativeDriverLicenseDetailedInfo.vehicleClassesInfo;
   }
 }
 
@@ -866,14 +854,14 @@ export class VehicleClassInfo<T> {
   expiryDate?: DateResult<T>;
 
   constructor(nativeVehicleClassInfo: any) {
-    this.licenceType = BlinkIdUtilities.handleStringType<T>(nativeVehicleClassInfo.licenceType);
+    this.licenceType = BlinkIdUtilities.handleStringType<T>(
+      nativeVehicleClassInfo.licenceType
+    );
     this.vehicleClass = BlinkIdUtilities.handleStringType<T>(
       nativeVehicleClassInfo.vehicleClass
     );
-    this.effectiveDate =
-      nativeVehicleClassInfo.effectiveDate;
-    this.expiryDate =
-      nativeVehicleClassInfo.expiryDate;
+    this.effectiveDate = nativeVehicleClassInfo.effectiveDate;
+    this.expiryDate = nativeVehicleClassInfo.expiryDate;
   }
 }
 
@@ -913,14 +901,10 @@ export class DependentInfo {
   empty?: boolean;
 
   constructor(nativeDependentInfo: any) {
-    this.dateOfBirth =
-      nativeDependentInfo.dateOfBirth;
-    this.sex =
-      nativeDependentInfo.sex;
-    this.documentNumber =
-      nativeDependentInfo.documentNumber;
-    this.fullName =
-      nativeDependentInfo.fullName;
+    this.dateOfBirth = nativeDependentInfo.dateOfBirth;
+    this.sex = nativeDependentInfo.sex;
+    this.documentNumber = nativeDependentInfo.documentNumber;
+    this.fullName = nativeDependentInfo.fullName;
     this.empty = nativeDependentInfo.empty;
   }
 }
@@ -1027,19 +1011,14 @@ export class SingleSideScanningResult {
    *
    */
   constructor(nativeSingleSideScanningResult: any) {
-    this.viz =
-      nativeSingleSideScanningResult.viz;
-    this.mrz =
-      nativeSingleSideScanningResult.mrz;;
-    this.barcode =
-      nativeSingleSideScanningResult.barcode;
+    this.viz = nativeSingleSideScanningResult.viz;
+    this.mrz = nativeSingleSideScanningResult.mrz;
+    this.barcode = nativeSingleSideScanningResult.barcode;
     this.inputImage = nativeSingleSideScanningResult.inputImage;
     this.barcodeInputImage = nativeSingleSideScanningResult.barcodeInputImage;
     this.documentImage = nativeSingleSideScanningResult.documentImage;
-    this.faceImage =
-      nativeSingleSideScanningResult.faceImage;
-    this.signatureImage =
-      nativeSingleSideScanningResult.signatureImage;
+    this.faceImage = nativeSingleSideScanningResult.faceImage;
+    this.signatureImage = nativeSingleSideScanningResult.signatureImage;
   }
 }
 
@@ -1300,93 +1279,78 @@ export class VizResult {
   vehicleOwner?: StringResult;
 
   /**
+   * The country code of the document owner.
+   *
+   */
+  countryCode?: StringResult;
+
+  /**
+   * The certificate number of the document owner.
+   *
+   */
+  certificateNumber?: StringResult;
+
+  /**
+   * The national insurance number of the document owner.
+   *
+   */
+  nationalInsuranceNumber?: StringResult;
+
+  /**
    *
    * @param nativeVizResult
    *
    */
   constructor(nativeVizResult: any) {
-    this.firstName =
-      nativeVizResult.firstName;
-    this.lastName =
-      nativeVizResult.lastName;
-    this.fullName =
-      nativeVizResult.fullName;;
-    this.additionalNameInformation =
-      nativeVizResult.additionalNameInformation;
-    this.localizedName =
-      nativeVizResult.localizedName;
-    this.fathersName =
-      nativeVizResult.fathersName;
-    this.mothersName =
-      nativeVizResult.mothersName;
-    this.address =
-      nativeVizResult.address;
+    this.firstName = nativeVizResult.firstName;
+    this.lastName = nativeVizResult.lastName;
+    this.fullName = nativeVizResult.fullName;
+    this.additionalNameInformation = nativeVizResult.additionalNameInformation;
+    this.localizedName = nativeVizResult.localizedName;
+    this.fathersName = nativeVizResult.fathersName;
+    this.mothersName = nativeVizResult.mothersName;
+    this.address = nativeVizResult.address;
     this.additionalAddressInformation =
       nativeVizResult.additionalAddressInformation;
     this.additionalOptionalAddressInformation =
       nativeVizResult.additionalOptionalAddressInformation;
-    this.placeOfBirth =
-      nativeVizResult.placeOfBirth;
-    this.nationality =
-      nativeVizResult.nationality;
-    this.race =
-      nativeVizResult.race;
-    this.religion =
-      nativeVizResult.religion;
-    this.profession =
-      nativeVizResult.profession;
-    this.maritalStatus =
-      nativeVizResult.maritalStatus;
-    this.residentialStatus =
-      nativeVizResult.residentialStatus;
-    this.employer =
-      nativeVizResult.employer;
-    this.sex =
-      nativeVizResult.sex;
-    this.sponsor =
-      nativeVizResult.sponsor;
-    this.bloodType =
-      nativeVizResult.bloodType;
-    this.dateOfBirth =
-      nativeVizResult.dateOfBirth;
-    this.dateOfIssue =
-      nativeVizResult.dateOfIssue;
-    this.dateOfExpiry =
-      nativeVizResult.dateOfExpiry;
+    this.placeOfBirth = nativeVizResult.placeOfBirth;
+    this.nationality = nativeVizResult.nationality;
+    this.race = nativeVizResult.race;
+    this.religion = nativeVizResult.religion;
+    this.profession = nativeVizResult.profession;
+    this.maritalStatus = nativeVizResult.maritalStatus;
+    this.residentialStatus = nativeVizResult.residentialStatus;
+    this.employer = nativeVizResult.employer;
+    this.sex = nativeVizResult.sex;
+    this.sponsor = nativeVizResult.sponsor;
+    this.bloodType = nativeVizResult.bloodType;
+    this.dateOfBirth = nativeVizResult.dateOfBirth;
+    this.dateOfIssue = nativeVizResult.dateOfIssue;
+    this.dateOfExpiry = nativeVizResult.dateOfExpiry;
     this.dateOfExpiryPermanent = nativeVizResult.dateOfExpiryPermanent;
-    this.documentNumber =
-      nativeVizResult.documentNumber;
-    this.personalIdNumber =
-      nativeVizResult.personalIdNumber;
-    this.documentAdditionalNumber =
-      nativeVizResult.documentAdditionalNumber;
+    this.documentNumber = nativeVizResult.documentNumber;
+    this.personalIdNumber = nativeVizResult.personalIdNumber;
+    this.documentAdditionalNumber = nativeVizResult.documentAdditionalNumber;
     this.documentOptionalAdditionalNumber =
       nativeVizResult.documentOptionalAdditionalNumber;
     this.additionalPersonalIdNumber =
       nativeVizResult.additionalPersonalIdNumber;
-    this.issuingAuthority =
-      nativeVizResult.issuingAuthority;
-    this.visaType =
-      nativeVizResult.visaType;
-    this.driverLicenseDetailedInfo =
-      nativeVizResult.driverLicenseDetailedInfo;
-    this.documentSubtype =
-      nativeVizResult.documentSubtype;
-    this.remarks =
-      nativeVizResult.remarks;
-    this.residencePermitType =
-      nativeVizResult.residencePermitType;
-    this.manufacturingYear =
-      nativeVizResult.manufacturingYear;
-    this.vehicleType =
-      nativeVizResult.vehicleType;
-    this.eligibilityCategory =
-      nativeVizResult.eligibilityCategory;
-    this.specificDocumentValidity =
-      nativeVizResult.specificDocumentValidity;
+    this.issuingAuthority = nativeVizResult.issuingAuthority;
+    this.visaType = nativeVizResult.visaType;
+    this.driverLicenseDetailedInfo = nativeVizResult.driverLicenseDetailedInfo;
+    this.documentSubtype = nativeVizResult.documentSubtype;
+    this.remarks = nativeVizResult.remarks;
+    this.residencePermitType = nativeVizResult.residencePermitType;
+    this.manufacturingYear = nativeVizResult.manufacturingYear;
+    this.vehicleType = nativeVizResult.vehicleType;
+    this.eligibilityCategory = nativeVizResult.eligibilityCategory;
+    this.specificDocumentValidity = nativeVizResult.specificDocumentValidity;
     this.dependentsInfo = nativeVizResult.dependentsInfo;
-    this.vehicleOwner =
-      nativeVizResult.vehicleOwner;
+    this.vehicleOwner = nativeVizResult.vehicleOwner;
+    this.countryCode = nativeVizResult.countryCode;
+    this.certificateNumber = nativeVizResult.certificateNumber;
+    this.nationalInsuranceNumber = nativeVizResult.nationalInsuranceNumber;
   }
 }
 
@@ -1567,12 +1531,9 @@ export class MrzResult {
     this.issuerName = nativeMrzResult.issuerName;
     this.nationalityName = nativeMrzResult.nationalityName;
     this.verified = nativeMrzResult.verified;
-    this.dateOfBirth =
-      nativeMrzResult.dateOfBirth;
-    this.dateOfExpiry =
-      nativeMrzResult.dateOfExpiry;
-    this.documentType =
-      nativeMrzResult.documentType;
+    this.dateOfBirth = nativeMrzResult.dateOfBirth;
+    this.dateOfExpiry = nativeMrzResult.dateOfExpiry;
+    this.documentType = nativeMrzResult.documentType;
     this.sanitizedOpt1 = nativeMrzResult.sanitizedOpt1;
     this.sanitizedOpt2 = nativeMrzResult.sanitizedOpt2;
     this.sanitizedNationality = nativeMrzResult.sanitizedNationality;
@@ -1748,8 +1709,7 @@ export class BarcodeResult {
    * @param nativeBarcodeResult
    */
   constructor(nativeBarcodeResult: any) {
-    this.barcodeData =
-      nativeBarcodeResult.barcodeData;
+    this.barcodeData = nativeBarcodeResult.barcodeData;
     this.firstName = nativeBarcodeResult.firstName;
     this.middleName = nativeBarcodeResult.middleName;
     this.lastName = nativeBarcodeResult.lastName;
@@ -1766,23 +1726,18 @@ export class BarcodeResult {
     this.residentialStatus = nativeBarcodeResult.residentialStatus;
     this.employer = nativeBarcodeResult.employer;
     this.sex = nativeBarcodeResult.sex;
-    this.dateOfBirth =
-      nativeBarcodeResult.dateOfBirth;
-    this.dateOfIssue =
-      nativeBarcodeResult.dateOfIssue;
-    this.dateOfExpiry =
-      nativeBarcodeResult.dateOfExpiry;
+    this.dateOfBirth = nativeBarcodeResult.dateOfBirth;
+    this.dateOfIssue = nativeBarcodeResult.dateOfIssue;
+    this.dateOfExpiry = nativeBarcodeResult.dateOfExpiry;
     this.documentNumber = nativeBarcodeResult.documentNumber;
     this.personalIdNumber = nativeBarcodeResult.personalIdNumber;
     this.documentAdditionalNumber =
       nativeBarcodeResult.documentAdditionalNumber;
     this.issuingAuthority = nativeBarcodeResult.issuingAuthority;
-    this.addressDetailedInfo =
-      nativeBarcodeResult.addressDetailedInfo;
+    this.addressDetailedInfo = nativeBarcodeResult.addressDetailedInfo;
     this.driverLicenseDetailedInfo =
       nativeBarcodeResult.driverLicenseDetailedInfo;
-    this.extendedElements =
-      nativeBarcodeResult.extendedElements;
+    this.extendedElements = nativeBarcodeResult.extendedElements;
   }
 }
 
@@ -1820,8 +1775,7 @@ export class BarcodeData {
    * @param nativeBarcodeData - specifies the barcode data obtained from the native SDK.
    */
   constructor(nativeBarcodeData: any) {
-    this.barcodeType =
-      nativeBarcodeData.barcodeType;
+    this.barcodeType = nativeBarcodeData.barcodeType;
     this.rawData = nativeBarcodeData.rawData;
     this.stringData = nativeBarcodeData.stringData;
     this.uncertain = nativeBarcodeData.uncertain;
@@ -2727,7 +2681,7 @@ export class BarcodeExtendedElements {
   weightRange?: string;
 
   /**
-   * 
+   *
    * @param nativeBarcodeExtendedElements - specifies the extended barcode elements obtained from the native SDK.
    */
   constructor(nativeBarcodeExtendedElements: any) {
@@ -2880,25 +2834,25 @@ export enum AlphabetType {
    * The Latin alphabet type
    *
    */
-  Latin = 'latin',
+  Latin = "latin",
 
   /**
    * The Arabic alphabet type
    *
    */
-  Arabic = 'arabic',
+  Arabic = "arabic",
 
   /**
    * The Cyrillic alphabet type
    *
    */
-  Cyrillic = 'cyrillic',
+  Cyrillic = "cyrillic",
 
   /**
    * The Greek alphabet type
    *
    */
-  Greek = 'greek',
+  Greek = "greek",
 }
 
 /**
@@ -2938,30 +2892,30 @@ export enum DetectionLevel {
 
 /**
  * Represents level of anonymization performed on the scanning result.
- * 
+ *
  */
 export enum AnonymizationMode {
   /**
    * Anonymization will not be performed.
-   * 
+   *
    */
   None = "none",
 
   /**
    * Full document image is anonymized with black boxes covering sensitive data.
-   * 
+   *
    */
   ImageOnly = "imageOnly",
 
   /**
    * Result fields containing sensitive data are removed from result.
-   * 
+   *
    */
   ResultFieldsOnly = "resultFieldsOnly",
 
   /**
    * This mode is combination of `imageOnly` and `resultFieldsOnly` modes.
-   * 
+   *
    */
   FullResult = "fullResult",
 }
@@ -2975,44 +2929,44 @@ export const enum RecognitionMode {
    * No recognition performed.
    *
    */
-  None = 'none',
+  None = "none",
 
   /**
    * Recognition of mrz document (does not include visa and passport).
    *
    */
-  MrzId = 'mrzId',
+  MrzId = "mrzId",
 
   /**
    * Recognition of visa mrz.
    *
    */
-  MrzVisa = 'mrzVisa',
+  MrzVisa = "mrzVisa",
 
   /**
    * Recognition of passport mrz.
    *
    */
 
-  MrzPassport = 'mrzPassport',
+  MrzPassport = "mrzPassport",
 
   /*
    * Recognition of documents that have face photo on the front.
    *
    */
-  PhotoId = 'photoId',
+  PhotoId = "photoId",
 
   /**
    * Detailed document recognition.
    *
    */
-  FullRecognition = 'fullRecognition',
+  FullRecognition = "fullRecognition",
 
   /**
    * Recognition of barcode document.
    *
    */
-  BarcodeId = 'barcodeId',
+  BarcodeId = "barcodeId",
 }
 
 /**
@@ -3256,807 +3210,806 @@ export enum DataMatchState {
   Success = 2,
 }
 
-
 /**
  * Document country.
  *
  */
 export enum Country {
-  None = 'none',
+  None = "none",
 
-  Albania = 'albania',
+  Albania = "albania",
 
-  Algeria = 'algeria',
+  Algeria = "algeria",
 
-  Argentina = 'argentina',
+  Argentina = "argentina",
 
-  Australia = 'australia',
+  Australia = "australia",
 
-  Austria = 'austria',
+  Austria = "austria",
 
-  Azerbaijan = 'azerbaijan',
+  Azerbaijan = "azerbaijan",
 
-  Bahrain = 'bahrain',
+  Bahrain = "bahrain",
 
-  Bangladesh = 'bangladesh',
+  Bangladesh = "bangladesh",
 
-  Belgium = 'belgium',
+  Belgium = "belgium",
 
-  BosniaAndHerzegovina = 'bosniaAndHerzegovina',
+  BosniaAndHerzegovina = "bosniaAndHerzegovina",
 
-  Brunei = 'brunei',
+  Brunei = "brunei",
 
-  Bulgaria = 'bulgaria',
+  Bulgaria = "bulgaria",
 
-  Bambodia = 'bambodia',
+  Bambodia = "bambodia",
 
-  Canada = 'canada',
+  Canada = "canada",
 
-  Chile = 'chile',
+  Chile = "chile",
 
-  Colombia = 'colombia',
+  Colombia = "colombia",
 
-  CostaRica = 'costaRica',
+  CostaRica = "costaRica",
 
-  Croatia = 'croatia',
+  Croatia = "croatia",
 
-  Cyprus = 'cyprus',
+  Cyprus = "cyprus",
 
-  Czechia = 'czechia',
+  Czechia = "czechia",
 
-  Denmark = 'denmark',
+  Denmark = "denmark",
 
-  DominicanRepublic = 'dominicanRepublic',
+  DominicanRepublic = "dominicanRepublic",
 
-  Egypt = 'egypt',
+  Egypt = "egypt",
 
-  Estonia = 'estonia',
+  Estonia = "estonia",
 
-  Finland = 'finland',
+  Finland = "finland",
 
-  France = 'france',
+  France = "france",
 
-  Georgia = 'georgia',
+  Georgia = "georgia",
 
-  Germany = 'germany',
+  Germany = "germany",
 
-  Ghana = 'ghana',
+  Ghana = "ghana",
 
-  Greece = 'greece',
+  Greece = "greece",
 
-  Guatemala = 'guatemala',
+  Guatemala = "guatemala",
 
-  HongKong = 'hongKong',
+  HongKong = "hongKong",
 
-  Hungary = 'hungary',
+  Hungary = "hungary",
 
-  India = 'india',
+  India = "india",
 
-  Indonesia = 'indonesia',
+  Indonesia = "indonesia",
 
-  Ireland = 'ireland',
+  Ireland = "ireland",
 
-  Israel = 'israel',
+  Israel = "israel",
 
-  Italy = 'italy',
+  Italy = "italy",
 
-  Jordan = 'jordan',
+  Jordan = "jordan",
 
-  Kazakhstan = 'kazakhstan',
+  Kazakhstan = "kazakhstan",
 
-  Kenya = 'kenya',
+  Kenya = "kenya",
 
-  Kosovo = 'kosovo',
+  Kosovo = "kosovo",
 
-  Kuwait = 'kuwait',
+  Kuwait = "kuwait",
 
-  Latvia = 'latvia',
+  Latvia = "latvia",
 
-  Lithuania = 'lithuania',
+  Lithuania = "lithuania",
 
-  Malaysia = 'malaysia',
+  Malaysia = "malaysia",
 
-  Maldives = 'maldives',
+  Maldives = "maldives",
 
-  Malta = 'malta',
+  Malta = "malta",
 
-  Mauritius = 'mauritius',
+  Mauritius = "mauritius",
 
-  Mexico = 'mexico',
+  Mexico = "mexico",
 
-  Morocco = 'morocco',
+  Morocco = "morocco",
 
-  Netherlands = 'netherlands',
+  Netherlands = "netherlands",
 
-  NewZealand = 'newZealand',
+  NewZealand = "newZealand",
 
-  Nigeria = 'nigeria',
+  Nigeria = "nigeria",
 
-  Pakistan = 'pakistan',
+  Pakistan = "pakistan",
 
-  Panama = 'panama',
+  Panama = "panama",
 
-  Paraguay = 'paraguay',
+  Paraguay = "paraguay",
 
-  Philippines = 'philippines',
+  Philippines = "philippines",
 
-  Poland = 'poland',
+  Poland = "poland",
 
-  Portugal = 'portugal',
+  Portugal = "portugal",
 
-  PuertoRico = 'puertoRico',
+  PuertoRico = "puertoRico",
 
-  Qatar = 'qatar',
+  Qatar = "qatar",
 
-  Romania = 'romania',
+  Romania = "romania",
 
-  Russia = 'russia',
+  Russia = "russia",
 
-  SaudiArabia = 'saudiArabia',
+  SaudiArabia = "saudiArabia",
 
-  Serbia = 'serbia',
+  Serbia = "serbia",
 
-  Singapore = 'singapore',
+  Singapore = "singapore",
 
-  Slovakia = 'slovakia',
+  Slovakia = "slovakia",
 
-  Slovenia = 'slovenia',
+  Slovenia = "slovenia",
 
-  SouthAfrica = 'southAfrica',
+  SouthAfrica = "southAfrica",
 
-  Spain = 'spain',
+  Spain = "spain",
 
-  Sweden = 'sweden',
+  Sweden = "sweden",
 
-  Switzerland = 'switzerland',
+  Switzerland = "switzerland",
 
-  Taiwan = 'taiwan',
+  Taiwan = "taiwan",
 
-  Thailand = 'thailand',
+  Thailand = "thailand",
 
-  Tunisia = 'tunisia',
+  Tunisia = "tunisia",
 
-  Turkey = 'turkey',
+  Turkey = "turkey",
 
-  UAE = 'uae',
+  UAE = "uae",
 
-  Ganda = 'gganda',
+  Ganda = "gganda",
 
-  UK = 'uk',
+  UK = "uk",
 
-  Ukraine = 'ukraine',
+  Ukraine = "ukraine",
 
-  USA = 'usa',
+  USA = "usa",
 
-  Vietnam = 'vietnam',
+  Vietnam = "vietnam",
 
-  Brazil = 'brazil',
+  Brazil = "brazil",
 
-  Norway = 'norway',
+  Norway = "norway",
 
-  Oman = 'oman',
+  Oman = "oman",
 
-  Ecuador = 'ecuador',
+  Ecuador = "ecuador",
 
-  ElSalvador = 'elSalvador',
+  ElSalvador = "elSalvador",
 
-  SriLanka = 'sriLanka',
+  SriLanka = "sriLanka",
 
-  Peru = 'peru',
+  Peru = "peru",
 
-  Uruguay = 'uruguay',
+  Uruguay = "uruguay",
 
-  Bahamas = 'bahamas',
+  Bahamas = "bahamas",
 
-  Bermuda = 'bermuda',
+  Bermuda = "bermuda",
 
-  Bolivia = 'bolivia',
+  Bolivia = "bolivia",
 
-  China = 'china',
+  China = "china",
 
-  EuropeanUnion = 'europeanUnion',
+  EuropeanUnion = "europeanUnion",
 
-  Haiti = 'haiti',
+  Haiti = "haiti",
 
-  Honduras = 'honduras',
+  Honduras = "honduras",
 
-  Iceland = 'iceland',
+  Iceland = "iceland",
 
-  Japan = 'japan',
+  Japan = "japan",
 
-  Luxembourg = 'luxembourg',
+  Luxembourg = "luxembourg",
 
-  Montenegro = 'montenegro',
+  Montenegro = "montenegro",
 
-  Nicaragua = 'nicaragua',
+  Nicaragua = "nicaragua",
 
-  SouthKorea = 'southKorea',
+  SouthKorea = "southKorea",
 
-  Venezuela = 'venezuela',
+  Venezuela = "venezuela",
 
-  Afghanistan = 'afghanistan',
+  Afghanistan = "afghanistan",
 
-  AlandIslands = 'alandIslands',
+  AlandIslands = "alandIslands",
 
-  AmericanSamoa = 'americanSamoa',
+  AmericanSamoa = "americanSamoa",
 
-  Andorra = 'andorra',
+  Andorra = "andorra",
 
-  Angola = 'angola',
+  Angola = "angola",
 
-  Anguilla = 'anguilla',
+  Anguilla = "anguilla",
 
-  Antartica = 'antarctica',
+  Antartica = "antarctica",
 
-  AntiguaAndBarbuda = 'antiguaAndBarbuda',
+  AntiguaAndBarbuda = "antiguaAndBarbuda",
 
-  Armenia = 'armenia',
+  Armenia = "armenia",
 
-  Aruba = 'aruba',
+  Aruba = "aruba",
 
-  BailiwickOfGuernsey = 'bailiwickOfGuernsey',
+  BailiwickOfGuernsey = "bailiwickOfGuernsey",
 
-  BailiwickOfJersey = 'bailiwickOfJersey',
+  BailiwickOfJersey = "bailiwickOfJersey",
 
-  Barbados = 'barbados',
+  Barbados = "barbados",
 
-  Belarus = 'belarus',
+  Belarus = "belarus",
 
-  Belize = 'belize',
+  Belize = "belize",
 
-  Benin = 'benin',
+  Benin = "benin",
 
-  Bhutan = 'bhutan',
+  Bhutan = "bhutan",
 
-  BonaireSaintEustatiusAndSaba = 'bonaireSaintEustatiusAndSaba',
+  BonaireSaintEustatiusAndSaba = "bonaireSaintEustatiusAndSaba",
 
-  Botswana = 'botswana',
+  Botswana = "botswana",
 
-  BouvetIsland = 'bouvetIsland',
+  BouvetIsland = "bouvetIsland",
 
-  BritishIndianOceanTerritory = 'britishIndianOceanTerritory',
+  BritishIndianOceanTerritory = "britishIndianOceanTerritory",
 
-  BurkinaFaso = 'burkinaFaso',
+  BurkinaFaso = "burkinaFaso",
 
-  Burundi = 'burundi',
+  Burundi = "burundi",
 
-  Cameroon = 'cameroon',
+  Cameroon = "cameroon",
 
-  CapeVerde = 'capeVerde',
+  CapeVerde = "capeVerde",
 
-  CaribbeanNetherlands = 'caribbeanNetherlands',
+  CaribbeanNetherlands = "caribbeanNetherlands",
 
-  CaymanIslands = 'caymanIslands',
+  CaymanIslands = "caymanIslands",
 
-  CentralAfricanRepublic = 'centralAfricanRepublic',
+  CentralAfricanRepublic = "centralAfricanRepublic",
 
-  Chad = 'chad',
+  Chad = "chad",
 
-  ChristmasIsland = 'christmasIsland',
+  ChristmasIsland = "christmasIsland",
 
-  CocosIslands = 'cocosIslands',
+  CocosIslands = "cocosIslands",
 
-  Comoros = 'comoros',
+  Comoros = "comoros",
 
-  Congo = 'congo',
+  Congo = "congo",
 
-  CookIslands = 'cookIslands',
+  CookIslands = "cookIslands",
 
-  Cuba = 'cuba',
+  Cuba = "cuba",
 
-  Curacao = 'curacao',
+  Curacao = "curacao",
 
-  DemocraticRepublicOfTheCongo = 'democraticRepublicOfTheCongo',
+  DemocraticRepublicOfTheCongo = "democraticRepublicOfTheCongo",
 
-  Djibouti = 'djibouti',
+  Djibouti = "djibouti",
 
-  Dominica = 'dominica',
+  Dominica = "dominica",
 
-  EastTimor = 'eastTimor',
+  EastTimor = "eastTimor",
 
-  EquatorialGuinea = 'equatorialGuinea',
+  EquatorialGuinea = "equatorialGuinea",
 
-  Eritrea = 'eritrea',
+  Eritrea = "eritrea",
 
-  Ethiopia = 'ethiopia',
+  Ethiopia = "ethiopia",
 
-  FalklandIslands = 'falklandIslands',
+  FalklandIslands = "falklandIslands",
 
-  FaroeIslands = 'faroeIslands',
+  FaroeIslands = "faroeIslands",
 
-  FederatedStatesOfMicronesia = 'federatedStatesOfMicronesia',
+  FederatedStatesOfMicronesia = "federatedStatesOfMicronesia",
 
-  Fiji = 'fiji',
+  Fiji = "fiji",
 
-  FrenchGuiana = 'frenchGuiana',
+  FrenchGuiana = "frenchGuiana",
 
-  FrenchPolynesia = 'frenchPolynesia',
+  FrenchPolynesia = "frenchPolynesia",
 
-  FrenchSouthernTerritories = 'frenchSouthernTerritories',
+  FrenchSouthernTerritories = "frenchSouthernTerritories",
 
-  Gabon = 'gabon',
+  Gabon = "gabon",
 
-  Gambia = 'gambia',
+  Gambia = "gambia",
 
-  Gibraltar = 'gibraltar',
+  Gibraltar = "gibraltar",
 
-  Greenland = 'greenland',
+  Greenland = "greenland",
 
-  Grenada = 'grenada',
+  Grenada = "grenada",
 
-  Guadeloupe = 'guadeloupe',
+  Guadeloupe = "guadeloupe",
 
-  Guam = 'guam',
+  Guam = "guam",
 
-  Guinea = 'guinea',
+  Guinea = "guinea",
 
-  GuineaBissau = 'guineaBissau',
+  GuineaBissau = "guineaBissau",
 
-  Guyana = 'guyana',
+  Guyana = "guyana",
 
-  HeardIslandAndMcdonaldIslands = 'heardIslandAndMcdonaldIslands',
+  HeardIslandAndMcdonaldIslands = "heardIslandAndMcdonaldIslands",
 
-  Iran = 'iran',
+  Iran = "iran",
 
-  Iraq = 'iraq',
+  Iraq = "iraq",
 
-  IsleOfMan = 'isleOfMan',
+  IsleOfMan = "isleOfMan",
 
-  IvoryCoast = 'ivoryCoast',
+  IvoryCoast = "ivoryCoast",
 
-  Jamaica = 'jamaica',
+  Jamaica = "jamaica",
 
-  Kiribati = 'kiribati',
+  Kiribati = "kiribati",
 
-  Kyrgyzstan = 'kyrgyzstan',
+  Kyrgyzstan = "kyrgyzstan",
 
-  Laos = 'laos',
+  Laos = "laos",
 
-  Lebanon = 'lebanon',
+  Lebanon = "lebanon",
 
-  Lesotho = 'lesotho',
+  Lesotho = "lesotho",
 
-  Liberia = 'liberia',
+  Liberia = "liberia",
 
-  Libya = 'libya',
+  Libya = "libya",
 
-  Liechtenstein = 'liechtenstein',
+  Liechtenstein = "liechtenstein",
 
-  Macau = 'macau',
+  Macau = "macau",
 
-  Madagascar = 'madagascar',
+  Madagascar = "madagascar",
 
-  Malawi = 'malawi',
+  Malawi = "malawi",
 
-  Mali = 'mali',
+  Mali = "mali",
 
-  MarshallIslands = 'marshallIslands',
+  MarshallIslands = "marshallIslands",
 
-  Martinique = 'martinique',
+  Martinique = "martinique",
 
-  Mauritania = 'mauritania',
+  Mauritania = "mauritania",
 
-  Mayotte = 'mayotte',
+  Mayotte = "mayotte",
 
-  Moldova = 'moldova',
+  Moldova = "moldova",
 
-  Monaco = 'monaco',
+  Monaco = "monaco",
 
-  Mongolia = 'mongolia',
+  Mongolia = "mongolia",
 
-  Montserrat = 'montserrat',
+  Montserrat = "montserrat",
 
-  Mozambique = 'mozambique',
+  Mozambique = "mozambique",
 
-  Myanmar = 'myanmar',
+  Myanmar = "myanmar",
 
-  Namibia = 'namibia',
+  Namibia = "namibia",
 
-  Nauru = 'nauru',
+  Nauru = "nauru",
 
-  Nepal = 'nepal',
+  Nepal = "nepal",
 
-  NewCaledonia = 'newCaledonia',
+  NewCaledonia = "newCaledonia",
 
-  Niger = 'niger',
+  Niger = "niger",
 
-  Niue = 'niue',
+  Niue = "niue",
 
-  NorfolkIsland = 'norfolkIsland',
+  NorfolkIsland = "norfolkIsland",
 
-  NorthernCyprus = 'northernCyprus',
+  NorthernCyprus = "northernCyprus",
 
-  NorthernMarianaIslands = 'northernMarianaIslands',
+  NorthernMarianaIslands = "northernMarianaIslands",
 
-  NorthKorea = 'northKorea',
+  NorthKorea = "northKorea",
 
-  NorthMacedonia = 'northMacedonia',
+  NorthMacedonia = "northMacedonia",
 
-  Palau = 'palau',
+  Palau = "palau",
 
-  Palestine = 'palestine',
+  Palestine = "palestine",
 
-  PapuaNewGuinea = 'papuaNewGuinea',
+  PapuaNewGuinea = "papuaNewGuinea",
 
-  Pitcairn = 'pitcairn',
+  Pitcairn = "pitcairn",
 
-  Reunion = 'reunion',
+  Reunion = "reunion",
 
-  Rwanda = 'rwanda',
+  Rwanda = "rwanda",
 
-  SaintBarthelemy = 'saintBarthelemy',
+  SaintBarthelemy = "saintBarthelemy",
 
-  SaintHelenaAscensionAndTristianDaCunha = 'saintHelenaAscensionAndTristianDaCunha',
+  SaintHelenaAscensionAndTristianDaCunha = "saintHelenaAscensionAndTristianDaCunha",
 
-  SaintKittsAndNevis = 'saintKittsAndNevis',
+  SaintKittsAndNevis = "saintKittsAndNevis",
 
-  SaintLucia = 'saintLucia',
+  SaintLucia = "saintLucia",
 
-  SaintMartin = 'saintMartin',
+  SaintMartin = "saintMartin",
 
-  SaintPierreAndMiquelon = 'saintPierreAndMiquelon',
+  SaintPierreAndMiquelon = "saintPierreAndMiquelon",
 
-  SaintVincentAndTheGrenadines = 'saintVincentAndTheGrenadines',
+  SaintVincentAndTheGrenadines = "saintVincentAndTheGrenadines",
 
-  Samoa = 'samoa',
+  Samoa = "samoa",
 
-  SanMarino = 'sanMarino',
+  SanMarino = "sanMarino",
 
-  SaoTomeAndPrincipe = 'saoTomeAndPrincipe',
+  SaoTomeAndPrincipe = "saoTomeAndPrincipe",
 
-  Senegal = 'senegal',
+  Senegal = "senegal",
 
-  Seychelles = 'seychelles',
+  Seychelles = "seychelles",
 
-  SierraLeone = 'sierraLeone',
+  SierraLeone = "sierraLeone",
 
-  SintMaarten = 'sintMaarten',
+  SintMaarten = "sintMaarten",
 
-  SolomonIslands = 'solomonIslands',
+  SolomonIslands = "solomonIslands",
 
-  Somalia = 'somalia',
+  Somalia = "somalia",
 
-  SouthGeorgiaAndTheSouthSandwichIslands = 'southGeorgiaAndTheSouthSandwichIslands',
+  SouthGeorgiaAndTheSouthSandwichIslands = "southGeorgiaAndTheSouthSandwichIslands",
 
-  SouthSudan = 'southSudan',
+  SouthSudan = "southSudan",
 
-  Sudan = 'sudan',
+  Sudan = "sudan",
 
-  Suriname = 'suriname',
+  Suriname = "suriname",
 
-  SvalbardAndJanMayen = 'svalbardAndJanMayen',
+  SvalbardAndJanMayen = "svalbardAndJanMayen",
 
-  Eswatini = 'eswatini',
+  Eswatini = "eswatini",
 
-  Syria = 'syria',
+  Syria = "syria",
 
-  Tajikistan = 'tajikistan',
+  Tajikistan = "tajikistan",
 
-  Tanzania = 'tanzania',
+  Tanzania = "tanzania",
 
-  Togo = 'togo',
+  Togo = "togo",
 
-  Tokelau = 'tokelau',
+  Tokelau = "tokelau",
 
-  Tonga = 'tonga',
+  Tonga = "tonga",
 
-  TrinidadAndTobago = 'trinidadAndTobago',
+  TrinidadAndTobago = "trinidadAndTobago",
 
-  Turkmenistan = 'turkmenistan',
+  Turkmenistan = "turkmenistan",
 
-  TurksAndCaicosIslands = 'turksAndCaicosIslands',
+  TurksAndCaicosIslands = "turksAndCaicosIslands",
 
-  Tuvalu = 'tuvalu',
+  Tuvalu = "tuvalu",
 
-  UnitedStatesMinorOutlyingIslands = 'unitedStatesMinorOutlyingIslands',
+  UnitedStatesMinorOutlyingIslands = "unitedStatesMinorOutlyingIslands",
 
-  Uzbekistan = 'uzbekistan',
+  Uzbekistan = "uzbekistan",
 
-  Vanuatu = 'vanuatu',
+  Vanuatu = "vanuatu",
 
-  VaticanCity = 'vaticanCity',
+  VaticanCity = "vaticanCity",
 
-  VirginIslandsBritish = 'virginIslandsBritish',
+  VirginIslandsBritish = "virginIslandsBritish",
 
-  VirginIslandsUs = 'virginIslandsUs',
+  VirginIslandsUs = "virginIslandsUs",
 
-  WallisAndFutuna = 'wallisAndFutuna',
+  WallisAndFutuna = "wallisAndFutuna",
 
-  WesternSahara = 'westernSahara',
+  WesternSahara = "westernSahara",
 
-  Yemen = 'yemen',
+  Yemen = "yemen",
 
-  Yugoslavia = 'yugoslavia',
+  Yugoslavia = "yugoslavia",
 
-  Zambia = 'zambia',
+  Zambia = "zambia",
 
-  Zimbabwe = 'zimbabwe',
+  Zimbabwe = "zimbabwe",
 
-  SchengenArea = 'schengenArea',
+  SchengenArea = "schengenArea",
 }
 /**
  * Document region.
  */
 export enum Region {
-  None = 'none',
+  None = "none",
 
-  Alabama = 'alabama',
+  Alabama = "alabama",
 
-  Alaska = 'alaska',
+  Alaska = "alaska",
 
-  Alberta = 'alberta',
+  Alberta = "alberta",
 
-  Arizona = 'arizona',
+  Arizona = "arizona",
 
-  Arkansas = 'arkansas',
+  Arkansas = "arkansas",
 
-  AustralianCapitalTerritory = 'australianCapitalTerritory',
+  AustralianCapitalTerritory = "australianCapitalTerritory",
 
-  BritishColumbia = 'britishColumbia',
+  BritishColumbia = "britishColumbia",
 
-  California = 'california',
+  California = "california",
 
-  Colorado = 'colorado',
+  Colorado = "colorado",
 
-  Connecticut = 'connecticut',
+  Connecticut = "connecticut",
 
-  Delaware = 'delaware',
+  Delaware = "delaware",
 
-  DistrictOfColumbia = 'districtOfColumbia',
+  DistrictOfColumbia = "districtOfColumbia",
 
-  Florida = 'florida',
+  Florida = "florida",
 
-  Georgia = 'georgia',
+  Georgia = "georgia",
 
-  Hawaii = 'hawaii',
+  Hawaii = "hawaii",
 
-  Idaho = 'idaho',
+  Idaho = "idaho",
 
-  Illinois = 'illinois',
+  Illinois = "illinois",
 
-  Indiana = 'indiana',
+  Indiana = "indiana",
 
-  Iowa = 'iowa',
+  Iowa = "iowa",
 
-  Kansas = 'kansas',
+  Kansas = "kansas",
 
-  Kentucky = 'kentucky',
+  Kentucky = "kentucky",
 
-  Louisiana = 'louisiana',
+  Louisiana = "louisiana",
 
-  Maine = 'maine',
+  Maine = "maine",
 
-  Manitoba = 'manitoba',
+  Manitoba = "manitoba",
 
-  Maryland = 'maryland',
+  Maryland = "maryland",
 
-  Massachusetts = 'massachusetts',
+  Massachusetts = "massachusetts",
 
-  Michigan = 'michigan',
+  Michigan = "michigan",
 
-  Minnesota = 'minnesota',
+  Minnesota = "minnesota",
 
-  Mississippi = 'mississippi',
+  Mississippi = "mississippi",
 
-  Missouri = 'missouri',
+  Missouri = "missouri",
 
-  Montana = 'montana',
+  Montana = "montana",
 
-  Nebraska = 'nebraska',
+  Nebraska = "nebraska",
 
-  Nevada = 'nevada',
+  Nevada = "nevada",
 
-  NewBrunswick = 'newBrunswick',
+  NewBrunswick = "newBrunswick",
 
-  NewHampshire = 'newHampshire',
+  NewHampshire = "newHampshire",
 
-  NewJersey = 'newJersey',
+  NewJersey = "newJersey",
 
-  NewMexico = 'newMexico',
+  NewMexico = "newMexico",
 
-  NewSouthWales = 'newSouthWales',
+  NewSouthWales = "newSouthWales",
 
-  NewYork = 'newYork',
+  NewYork = "newYork",
 
-  NorthernTerritory = 'northernTerritory',
+  NorthernTerritory = "northernTerritory",
 
-  NorthCarolina = 'northCarolina',
+  NorthCarolina = "northCarolina",
 
-  NorthDakota = 'northDakota',
+  NorthDakota = "northDakota",
 
-  NovaScotia = 'novaScotia',
+  NovaScotia = "novaScotia",
 
-  Ohio = 'ohio',
+  Ohio = "ohio",
 
-  Oklahoma = 'oklahoma',
+  Oklahoma = "oklahoma",
 
-  Ontario = 'ontario',
+  Ontario = "ontario",
 
-  Oregon = 'oregon',
+  Oregon = "oregon",
 
-  Pennsylvania = 'pennsylvania',
+  Pennsylvania = "pennsylvania",
 
-  Quebec = 'quebec',
+  Quebec = "quebec",
 
-  Queensland = 'queensland',
+  Queensland = "queensland",
 
-  RhodeIsland = 'rhodeIsland',
+  RhodeIsland = "rhodeIsland",
 
-  Saskatchewan = 'saskatchewan',
+  Saskatchewan = "saskatchewan",
 
-  SouthAustralia = 'southAustralia',
+  SouthAustralia = "southAustralia",
 
-  SouthCarolina = 'southCarolina',
+  SouthCarolina = "southCarolina",
 
-  SouthDakota = 'southDakota',
+  SouthDakota = "southDakota",
 
-  Tasmania = 'tasmania',
+  Tasmania = "tasmania",
 
-  Tennessee = 'tennessee',
+  Tennessee = "tennessee",
 
-  Texas = 'texas',
+  Texas = "texas",
 
-  Utah = 'utah',
+  Utah = "utah",
 
-  Vermont = 'vermont',
+  Vermont = "vermont",
 
-  Victoria = 'victoria',
+  Victoria = "victoria",
 
-  Virginia = 'virginia',
+  Virginia = "virginia",
 
-  Washington = 'washington',
+  Washington = "washington",
 
-  WesternAustralia = 'westernAustralia',
+  WesternAustralia = "westernAustralia",
 
-  WestVirginia = 'westVirginia',
+  WestVirginia = "westVirginia",
 
-  Wisconsin = 'wisconsin',
+  Wisconsin = "wisconsin",
 
-  Wyoming = 'wyoming',
+  Wyoming = "wyoming",
 
-  Yukon = 'yukon',
+  Yukon = "yukon",
 
-  CiudadDeMexico = 'ciudadDeMexico',
+  CiudadDeMexico = "ciudadDeMexico",
 
-  Jalisco = 'jalisco',
+  Jalisco = "jalisco",
 
-  NewfoundlandAndLabrador = 'newfoundlandAndLabrador',
+  NewfoundlandAndLabrador = "newfoundlandAndLabrador",
 
-  NuevoLeon = 'nuevoLeon',
+  NuevoLeon = "nuevoLeon",
 
-  BajaCalifornia = 'bajaCalifornia',
+  BajaCalifornia = "bajaCalifornia",
 
-  Chihuahua = 'chihuahua',
+  Chihuahua = "chihuahua",
 
-  Guanajuato = 'guanajuato',
+  Guanajuato = "guanajuato",
 
-  Guerrero = 'guerrero',
+  Guerrero = "guerrero",
 
-  Mexico = 'mexico',
+  Mexico = "mexico",
 
-  Michoacan = 'michoacan',
+  Michoacan = "michoacan",
 
-  NewYorkCity = 'newYorkCity',
+  NewYorkCity = "newYorkCity",
 
-  Tamaulipas = 'tamaulipas',
+  Tamaulipas = "tamaulipas",
 
-  Veracruz = 'veracruz',
+  Veracruz = "veracruz",
 
-  Chiapas = 'chiapas',
+  Chiapas = "chiapas",
 
-  Coahuila = 'coahuila',
+  Coahuila = "coahuila",
 
-  Durago = 'durango',
+  Durago = "durango",
 
-  GuerreroCocula = 'guerreroCocula',
+  GuerreroCocula = "guerreroCocula",
 
-  GuerreroJuchitan = 'guerreroJuchitan',
+  GuerreroJuchitan = "guerreroJuchitan",
 
-  GuerreroTepecoacuilco = 'guerreroTepecoacuilco',
+  GuerreroTepecoacuilco = "guerreroTepecoacuilco",
 
-  GuerreroTlacoapa = 'guerreroTlacoapa',
+  GuerreroTlacoapa = "guerreroTlacoapa",
 
-  Gujarat = 'gujarat',
+  Gujarat = "gujarat",
 
-  Hidalgo = 'hidalgo',
+  Hidalgo = "hidalgo",
 
-  Karnataka = 'karnataka',
+  Karnataka = "karnataka",
 
-  Kerala = 'kerala',
+  Kerala = "kerala",
 
-  KhyberPakhtunkhwa = 'khyberPakhtunkhwa',
+  KhyberPakhtunkhwa = "khyberPakhtunkhwa",
 
-  MadhyaPradesh = 'madhyaPradesh',
+  MadhyaPradesh = "madhyaPradesh",
 
-  Maharashtra = 'maharashtra',
+  Maharashtra = "maharashtra",
 
-  Morelos = 'morelos',
+  Morelos = "morelos",
 
-  Nayarit = 'nayarit',
+  Nayarit = "nayarit",
 
-  Oaxaca = 'oaxaca',
+  Oaxaca = "oaxaca",
 
-  Puebla = 'puebla',
+  Puebla = "puebla",
 
-  Punjab = 'punjab',
+  Punjab = "punjab",
 
-  Queretaro = 'queretaro',
+  Queretaro = "queretaro",
 
-  SanLuisPotosi = 'sanLuisPotosi',
+  SanLuisPotosi = "sanLuisPotosi",
 
-  Sinaloa = 'sinaloa',
+  Sinaloa = "sinaloa",
 
-  Sonora = 'sonora',
+  Sonora = "sonora",
 
-  Tabasco = 'tabasco',
+  Tabasco = "tabasco",
 
-  TamilNadu = 'tamilNadu',
+  TamilNadu = "tamilNadu",
 
-  Yucatan = 'yucatan',
+  Yucatan = "yucatan",
 
-  Zacatecas = 'zacatecas',
+  Zacatecas = "zacatecas",
 
-  Aguascalientes = 'aguascalientes',
+  Aguascalientes = "aguascalientes",
 
-  BajaCaliforniaSur = 'bajaCaliforniaSur',
+  BajaCaliforniaSur = "bajaCaliforniaSur",
 
-  Campeche = 'campeche',
+  Campeche = "campeche",
 
-  Colima = 'colima',
+  Colima = "colima",
 
-  QuintanaRooBenitoJuarez = 'quintanaRooBenitoJuarez',
+  QuintanaRooBenitoJuarez = "quintanaRooBenitoJuarez",
 
-  QuintanaRoo = 'quintanaRoo',
+  QuintanaRoo = "quintanaRoo",
 
-  QuintanaRooSolidaridad = 'quintanaRooSolidaridad',
+  QuintanaRooSolidaridad = "quintanaRooSolidaridad",
 
-  Tlaxcala = 'tlaxcala',
+  Tlaxcala = "tlaxcala",
 
-  QuintanaRooCozumel = 'quintanaRooCozumel',
+  QuintanaRooCozumel = "quintanaRooCozumel",
 
-  SanPaolo = 'saoPaolo',
+  SanPaolo = "saoPaolo",
 
-  RioDeJaniero = 'rioDeJaneiro',
+  RioDeJaniero = "rioDeJaneiro",
 
-  RioGrandeDoSul = 'rioGrandeDoSul',
+  RioGrandeDoSul = "rioGrandeDoSul",
 
-  NorthWestTerritories = 'northWestTerritories',
+  NorthWestTerritories = "northWestTerritories",
 
-  Nunavut = 'nunavut',
+  Nunavut = "nunavut",
 
-  PrinceEdwardIsland = 'princeEdwardIsland',
+  PrinceEdwardIsland = "princeEdwardIsland",
 
-  DistritoFederal = 'distritoFederal',
+  DistritoFederal = "distritoFederal",
 
-  Maranhao = 'maranhao',
+  Maranhao = "maranhao",
 
-  MatoGrosso = 'matoGrosso',
+  MatoGrosso = "matoGrosso",
 
-  MinasGerais = 'minasGerais',
+  MinasGerais = "minasGerais",
 
-  Para = 'para',
+  Para = "para",
 
-  Parana = 'parana',
+  Parana = "parana",
 
-  Pernambuco = 'pernambuco',
+  Pernambuco = "pernambuco",
 
-  SantaCatarina = 'santaCatarina',
+  SantaCatarina = "santaCatarina",
 
-  AndhraPradesh = 'andhraPradesh',
+  AndhraPradesh = "andhraPradesh",
 
-  Ceara = 'ceara',
+  Ceara = "ceara",
 
-  Goias = 'goias',
+  Goias = "goias",
 
-  GuerreroAcapulcoDeJuarez = 'guerreroAcapulcoDeJuarez',
+  GuerreroAcapulcoDeJuarez = "guerreroAcapulcoDeJuarez",
 
-  Haryana = 'haryana',
+  Haryana = "haryana",
 
-  Sergipe = 'sergipe',
+  Sergipe = "sergipe",
 
-  Alagos = 'alagos',
+  Alagos = "alagos",
 
-  Bangsamoro = 'bangsamoro',
+  Bangsamoro = "bangsamoro",
 }
 
 /**
@@ -4064,165 +4017,165 @@ export enum Region {
  *
  */
 export enum DocumentType {
-  None = 'none',
+  None = "none",
 
-  ConsularId = 'consularId',
+  ConsularId = "consularId",
 
-  Dl = 'dl',
+  Dl = "dl",
 
-  DlPublicServicesCard = 'dlPublicServicesCard',
+  DlPublicServicesCard = "dlPublicServicesCard",
 
-  EmploymentPass = 'employmentPass',
+  EmploymentPass = "employmentPass",
 
-  FinCard = 'finCard',
+  FinCard = "finCard",
 
-  Id = 'id',
+  Id = "id",
 
-  MultipurposeId = 'multipurposeId',
+  MultipurposeId = "multipurposeId",
 
-  MyKad = 'myKad',
+  MyKad = "myKad",
 
-  MyKid = 'myKid',
+  MyKid = "myKid",
 
-  MyPr = 'myPR',
+  MyPr = "myPR",
 
-  MyTentera = 'myTentera',
+  MyTentera = "myTentera",
 
-  PanCard = 'panCard',
+  PanCard = "panCard",
 
-  ProfessionalId = 'professionalId',
+  ProfessionalId = "professionalId",
 
-  PublicServicesCard = 'publicServicesCard',
+  PublicServicesCard = "publicServicesCard",
 
-  ResidencePermit = 'residencePermit',
+  ResidencePermit = "residencePermit",
 
-  ResidentId = 'residentId',
+  ResidentId = "residentId",
 
-  TemporaryResidencePermit = 'temporaryResidencePermit',
+  TemporaryResidencePermit = "temporaryResidencePermit",
 
-  VoterId = 'voterId',
+  VoterId = "voterId",
 
-  WorkPermit = 'workPermit',
+  WorkPermit = "workPermit",
 
-  IKad = 'iKad',
+  IKad = "iKad",
 
-  MilitaryId = 'militaryId',
+  MilitaryId = "militaryId",
 
-  MyKas = 'myKas',
+  MyKas = "myKas",
 
-  DocialSecurityCard = 'docialSecurityCard',
+  DocialSecurityCard = "docialSecurityCard",
 
-  HealthInsuranceCard = 'healthInsuranceCard',
+  HealthInsuranceCard = "healthInsuranceCard",
 
-  Passport = 'passport',
+  Passport = "passport",
 
-  SPass = 'sPass',
+  SPass = "sPass",
 
-  AddressCard = 'addressCard',
+  AddressCard = "addressCard",
 
-  AlienId = 'alienId',
+  AlienId = "alienId",
 
-  AlienPassport = 'alienPassport',
+  AlienPassport = "alienPassport",
 
-  GreenCard = 'greenCard',
+  GreenCard = "greenCard",
 
-  MinorsId = 'minorsId',
+  MinorsId = "minorsId",
 
-  PostalId = 'postalId',
+  PostalId = "postalId",
 
-  ProfessionalDl = 'professionalDl',
+  ProfessionalDl = "professionalDl",
 
-  TaxId = 'taxId',
+  TaxId = "taxId",
 
-  WeaponPermit = 'weaponPermit',
+  WeaponPermit = "weaponPermit",
 
-  Visa = 'visa',
+  Visa = "visa",
 
-  BorderCrossingCard = 'borderCrossingCard',
+  BorderCrossingCard = "borderCrossingCard",
 
-  DriverCard = 'driverCard',
+  DriverCard = "driverCard",
 
-  GlobalEntryCard = 'globalEntryCard',
+  GlobalEntryCard = "globalEntryCard",
 
-  MyPolis = 'mypolis',
+  MyPolis = "mypolis",
 
-  NexusCard = 'nexusCard',
+  NexusCard = "nexusCard",
 
-  PassportCard = 'passportCard',
+  PassportCard = "passportCard",
 
-  ProofOfAgeCard = 'proofOfAgeCard',
+  ProofOfAgeCard = "proofOfAgeCard",
 
-  RefugeeId = 'refugeeId',
+  RefugeeId = "refugeeId",
 
-  TribalId = 'tribalId',
+  TribalId = "tribalId",
 
-  VeteranId = 'veteranId',
+  VeteranId = "veteranId",
 
-  CitizenshipCertificate = 'citizenshipCertificate',
+  CitizenshipCertificate = "citizenshipCertificate",
 
-  MyNumberCard = 'myNumberCard',
+  MyNumberCard = "myNumberCard",
 
-  ConsularPassport = 'consularPassport',
+  ConsularPassport = "consularPassport",
 
-  MinorsPassport = 'minorsPassport',
+  MinorsPassport = "minorsPassport",
 
-  MinorsPublicServicesCard = 'minorsPublicServicesCard',
+  MinorsPublicServicesCard = "minorsPublicServicesCard",
 
-  DrivingPriviligeCard = 'drivingPriviligeCard',
+  DrivingPriviligeCard = "drivingPriviligeCard",
 
-  AsylumRequest = 'asylumRequest',
+  AsylumRequest = "asylumRequest",
 
-  DriverQualificationCard = 'driverQualificationCard',
+  DriverQualificationCard = "driverQualificationCard",
 
-  ProvisionalDl = 'provisionalDl',
+  ProvisionalDl = "provisionalDl",
 
-  RefugeePassport = 'refugeePassport',
+  RefugeePassport = "refugeePassport",
 
-  SpecialId = 'specialId',
+  SpecialId = "specialId",
 
-  UniformedServicesId = 'uniformedServicesId',
+  UniformedServicesId = "uniformedServicesId",
 
-  ImmigrantVisa = 'immigrantVisa',
+  ImmigrantVisa = "immigrantVisa",
 
-  ConsularVoterId = 'consularVoterId',
+  ConsularVoterId = "consularVoterId",
 
-  TwicCard = 'twicCard',
+  TwicCard = "twicCard",
 
-  ExitEntryPermit = 'exitEntryPermit',
+  ExitEntryPermit = "exitEntryPermit",
 
-  MainlandTravelPermitTaiwan = 'mainlandTravelPermitTaiwan',
+  MainlandTravelPermitTaiwan = "mainlandTravelPermitTaiwan",
 
-  NbiClearance = 'nbiClearance',
+  NbiClearance = "nbiClearance",
 
-  ProofOfRegistration = 'proofOfRegistration',
+  ProofOfRegistration = "proofOfRegistration",
 
-  TemporaryProtectionPermit = 'temporaryProtectionPermit',
+  TemporaryProtectionPermit = "temporaryProtectionPermit",
 
-  AfghanCitizenCard = 'afghanCitizenCard',
+  AfghanCitizenCard = "afghanCitizenCard",
 
-  EId = 'eId',
+  EId = "eId",
 
-  Pass = 'pass',
+  Pass = "pass",
 
-  SisId = 'sisId',
+  SisId = "sisId",
 
-  AsicCard = 'asicCard',
+  AsicCard = "asicCard",
 
-  BidoonCard = 'bidoonCard',
+  BidoonCard = "bidoonCard",
 
-  InterimHealthInsuranceCard = 'interimHealthInsuranceCard',
+  InterimHealthInsuranceCard = "interimHealthInsuranceCard",
 
-  NonVoterId = 'nonVoterId',
+  NonVoterId = "nonVoterId",
 
-  ReciprocalHealthInsuranceCard = 'reciprocalHealthInsuranceCard',
+  ReciprocalHealthInsuranceCard = "reciprocalHealthInsuranceCard",
 
-  VehicleRegistration = 'vehicleRegistration',
+  VehicleRegistration = "vehicleRegistration",
 
-  EsaadCard = 'esaadCard',
+  EsaadCard = "esaadCard",
 
-  RegistrationCertificate = 'registrationCertificate',
+  RegistrationCertificate = "registrationCertificate",
 
-  MedicalMarijuanaId = 'medicalMarijuanaId',
+  MedicalMarijuanaId = "medicalMarijuanaId",
 }
 
 /**
@@ -4230,105 +4183,105 @@ export enum DocumentType {
  *
  */
 export enum FieldType {
-  AdditionalAddressInformation = 'additionalAddressInformation',
+  AdditionalAddressInformation = "additionalAddressInformation",
 
-  AdditionalNameInformation = 'additionalNameInformation',
+  AdditionalNameInformation = "additionalNameInformation",
 
-  AdditionalOptionalAddressInformation = 'additionalOptionalAddressInformation',
+  AdditionalOptionalAddressInformation = "additionalOptionalAddressInformation",
 
-  AdditionalPersonalIdNumber = 'additionalPersonalIdNumber',
+  AdditionalPersonalIdNumber = "additionalPersonalIdNumber",
 
-  Address = 'address',
+  Address = "address",
 
-  ClassEffectiveDate = 'classEffectiveDate',
+  ClassEffectiveDate = "classEffectiveDate",
 
-  ClassExpiryDate = 'classExpiryDate',
+  ClassExpiryDate = "classExpiryDate",
 
-  Conditions = 'conditions',
+  Conditions = "conditions",
 
-  DateOfBirth = 'dateOfBirth',
+  DateOfBirth = "dateOfBirth",
 
-  DateOfExpiry = 'dateOfExpiry',
+  DateOfExpiry = "dateOfExpiry",
 
-  DateOfIssue = 'dateOfIssue',
+  DateOfIssue = "dateOfIssue",
 
-  DocumentAdditionalNumber = 'documentAdditionalNumber',
+  DocumentAdditionalNumber = "documentAdditionalNumber",
 
-  DocumentOptionalAdditionalNumber = 'documentOptionalAdditionalNumber',
+  DocumentOptionalAdditionalNumber = "documentOptionalAdditionalNumber",
 
-  DocumentNumber = 'documentNumber',
+  DocumentNumber = "documentNumber",
 
-  Employer = 'employer',
+  Employer = "employer",
 
-  Endorsements = 'endorsements',
+  Endorsements = "endorsements",
 
-  FathersName = 'fathersName',
+  FathersName = "fathersName",
 
-  FirstName = 'firstName',
+  FirstName = "firstName",
 
-  FullName = 'fullName',
+  FullName = "fullName",
 
-  IssuingAuthority = 'issuingAuthority',
+  IssuingAuthority = "issuingAuthority",
 
-  LastName = 'lastName',
+  LastName = "lastName",
 
-  LicenseType = 'licenceType',
+  LicenseType = "licenceType",
 
-  LocalizedName = 'localizedName',
+  LocalizedName = "localizedName",
 
-  MaritalStatus = 'maritalStatus',
+  MaritalStatus = "maritalStatus",
 
-  MothersName = 'mothersName',
+  MothersName = "mothersName",
 
-  Mrz = 'mrz',
+  Mrz = "mrz",
 
-  Nationality = 'nationality',
+  Nationality = "nationality",
 
-  PersonalIdNumber = 'personalIdNumber',
+  PersonalIdNumber = "personalIdNumber",
 
-  PlaceOfBirth = 'placeOfBirth',
+  PlaceOfBirth = "placeOfBirth",
 
-  Profession = 'profession',
+  Profession = "profession",
 
-  Race = 'race',
+  Race = "race",
 
-  Religion = 'religion',
+  Religion = "religion",
 
-  ResidentialStatus = 'residentialStatus',
+  ResidentialStatus = "residentialStatus",
 
-  Restriction = 'restrictions',
+  Restriction = "restrictions",
 
-  Sex = 'sex',
+  Sex = "sex",
 
-  VehicleClass = 'vehicleClass',
+  VehicleClass = "vehicleClass",
 
-  BloodType = 'bloodType',
+  BloodType = "bloodType",
 
-  Sponsor = 'sponsor',
+  Sponsor = "sponsor",
 
-  VisaType = 'visaType',
+  VisaType = "visaType",
 
-  DocumentSubtype = 'documentSubtype',
+  DocumentSubtype = "documentSubtype",
 
-  Remarks = 'remarks',
+  Remarks = "remarks",
 
-  ResidencePermitType = 'residencePermitType',
+  ResidencePermitType = "residencePermitType",
 
-  ManufacturingYear = 'manufacturingYear',
+  ManufacturingYear = "manufacturingYear",
 
-  VehicleType = 'vehicleType',
+  VehicleType = "vehicleType",
 
-  DependentDateOfBirth = 'dependentDateOfBirth',
+  DependentDateOfBirth = "dependentDateOfBirth",
 
-  DependentSex = 'dependentSex',
+  DependentSex = "dependentSex",
 
-  DependentDocumentNumber = 'dependentDocumentNumber',
+  DependentDocumentNumber = "dependentDocumentNumber",
 
-  DependentFullName = 'dependentFullName',
+  DependentFullName = "dependentFullName",
 
-  EligibilityCategory = 'eligibilityCategory',
+  EligibilityCategory = "eligibilityCategory",
 
-  SpecificDocumentValidity = 'specificDocumentValidity',
+  SpecificDocumentValidity = "specificDocumentValidity",
 
-  VehnicleOwner = 'vehicleOwner',
+  VehnicleOwner = "vehicleOwner",
 }

@@ -1,4 +1,4 @@
-import { StringResult } from './types';
+import { StringResult } from "./types";
 
 export class BlinkIdUtilities {
   /**
@@ -6,12 +6,12 @@ export class BlinkIdUtilities {
    * based on the document information source.
    */
   static handleStringType<T>(raw: any): T | undefined {
-    if (typeof raw === 'string') {
+    if (typeof raw === "string") {
       return raw as T;
     }
 
     // Heuristically assume it's a StringResult if it's an object and matches expected shape
-    if (typeof raw === 'object' && raw !== null && 'value' in raw) {
+    if (typeof raw === "object" && raw !== null && "value" in raw) {
       return new StringResult(raw) as T;
     }
 
