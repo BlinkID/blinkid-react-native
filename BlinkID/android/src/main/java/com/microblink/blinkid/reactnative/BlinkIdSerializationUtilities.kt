@@ -423,6 +423,7 @@ object BlinkIdSerializationUtilities {
     barcodeResultJson.put("religion", barcodeResult?.religion)
     barcodeResultJson.put("residentialStatus", barcodeResult?.residentialStatus)
     barcodeResultJson.put("sex", barcodeResult?.sex)
+    barcodeResultJson.put("parsed", barcodeResult?.parsed)
     barcodeResultJson.put(
       "extendedElements",
       serializeBarcodeExtendedElements(barcodeResult?.extendedElements?.barcodeElements)
