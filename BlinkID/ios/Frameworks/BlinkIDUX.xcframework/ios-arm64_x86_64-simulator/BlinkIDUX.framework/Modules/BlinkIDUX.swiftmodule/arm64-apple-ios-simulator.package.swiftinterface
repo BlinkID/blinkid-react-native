@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
-// swift-module-flags: -target arm64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature ExistentialAny -module-name BlinkIDUX -package-name blinkid_ios
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -module-name BlinkIDUX -package-name blinkid_ios
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
 import AVFoundation
 import BlinkID
 import Combine
@@ -44,6 +45,9 @@ public actor BlinkIDAnalyzer : BlinkIDUX.CameraFrameAnalyzer {
     get
   }
   public init(sdk: BlinkID.BlinkIDSdk, blinkIdSessionSettings: BlinkID.BlinkIDSessionSettings = BlinkIDSessionSettings(inputImageSource: .video), eventStream: BlinkIDUX.BlinkIDEventStream, classFilter: (any BlinkIDUX.BlinkIDClassFilter)? = nil) async throws
+  nonisolated public var sessionNumber: Swift.Int {
+    get
+  }
   public func analyze(image: BlinkIDUX.BlinkIDAnalyzer.Frame) async
   public func cancel()
   public func result() async -> BlinkIDUX.ScanningResult<BlinkID.BlinkIDScanningResult, BlinkIDUX.BlinkIDScanningAlertType>
@@ -91,7 +95,7 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
-  @_Concurrency.MainActor override public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = true, showHelpButton: Swift.Bool = true)
+  @_Concurrency.MainActor override public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = true, showHelpButton: Swift.Bool = true, sessionNumber: Swift.Int)
   @_Concurrency.MainActor override final public func analyze() async
   @_Concurrency.MainActor override final public func processAnalyzerResult() async
   @_Concurrency.MainActor override final public func licenseErrorAlertDismised()
@@ -105,7 +109,6 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = @_opaqueReturnTypeOf("$s9BlinkIDUX0A8IDUXViewV4bodyQrvp", 0) __
 }
 @_hasMissingDesignatedInitializers final public class BlinkIDTheme : BlinkIDUX.UXThemeProtocol {
@@ -147,18 +150,10 @@ public enum ScanningResult<T, U> : BlinkIDUX.ScanningResultProtocol where T : Sw
     get
   }
 }
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 public protocol EventStream<Event> : Swift.Sendable {
   associatedtype Event : Swift.Sendable
   var stream: _Concurrency.AsyncStream<[Self.Event]> { get async }
 }
-#else
-public protocol EventStream : Swift.Sendable {
-  associatedtype Event : Swift.Sendable
-  var stream: _Concurrency.AsyncStream<[Self.Event]> { get async }
-}
-#endif
-#if compiler(>=5.3) && $PrimaryAssociatedTypes2
 public protocol CameraFrameAnalyzer<Frame, Event> : Swift.Sendable {
   associatedtype Result : BlinkIDUX.ScanningResultProtocol
   associatedtype Frame : Swift.Sendable
@@ -172,29 +167,14 @@ public protocol CameraFrameAnalyzer<Frame, Event> : Swift.Sendable {
   func result() async -> Self.Result
   var events: any BlinkIDUX.EventStream<Self.Event> { get }
   var stepTimeoutDuration: Foundation.TimeInterval { get async }
+  var sessionNumber: Swift.Int { get }
 }
-#else
-public protocol CameraFrameAnalyzer : Swift.Sendable {
-  associatedtype Result : BlinkIDUX.ScanningResultProtocol
-  associatedtype Frame : Swift.Sendable
-  associatedtype Event : Swift.Sendable
-  func analyze(image: Self.Frame) async
-  func cancel() async
-  func pause() async
-  func resume() async
-  func restart() async throws
-  func end() async
-  func result() async -> Self.Result
-  var events: any BlinkIDUX.EventStream<Self.Event> { get }
-  var stepTimeoutDuration: Foundation.TimeInterval { get async }
-}
-#endif
 public enum PassportOrientation : Swift.Sendable, Swift.Equatable {
   case none
   case left90
   case right90
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: BlinkIDUX.PassportOrientation, b: BlinkIDUX.PassportOrientation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -222,6 +202,7 @@ public enum DocumentSide : Swift.Sendable, Swift.Equatable {
   @_Concurrency.MainActor final public var orientation: AVFoundation.AVCaptureVideoOrientation {
     get
   }
+  @_Concurrency.MainActor final public let captureService: BlinkIDUX.CaptureService
   @_Concurrency.MainActor final public var previewSource: any BlinkIDUX.PreviewSource {
     get
   }
@@ -231,6 +212,7 @@ public enum DocumentSide : Swift.Sendable, Swift.Equatable {
   @_Concurrency.MainActor public init()
   @objc deinit
   @_Concurrency.MainActor final public func start() async
+  @_Concurrency.MainActor final public func checkAuthorization(sessionNumber: Swift.Int) async
   @_Concurrency.MainActor final public func stop() async
   @_Concurrency.MainActor final public func focusAndExpose(at point: CoreFoundation.CGPoint) async
   @_Concurrency.MainActor final public var sampleBuffer: _Concurrency.AsyncStream<BlinkIDUX.SampleBuffer> {
@@ -245,6 +227,13 @@ public enum DocumentSide : Swift.Sendable, Swift.Equatable {
 @_hasMissingDesignatedInitializers final public class SampleBuffer : @unchecked Swift.Sendable {
   final public let buffer: CoreMedia.CMSampleBuffer
   @objc deinit
+}
+@_hasMissingDesignatedInitializers public actor CaptureService {
+  @objc deinit
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
+    get
+  }
 }
 @_Concurrency.MainActor public protocol CameraModel : AnyObject {
   @_Concurrency.MainActor var status: BlinkIDUX.CameraStatus { get }
@@ -279,7 +268,6 @@ public enum CaptureMode : Swift.String, Swift.Identifiable, Swift.CaseIterable {
   case video
   public init?(rawValue: Swift.String)
   public typealias AllCases = [BlinkIDUX.CaptureMode]
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ID = BlinkIDUX.CaptureMode
   public typealias RawValue = Swift.String
   nonisolated public static var allCases: [BlinkIDUX.CaptureMode] {
@@ -313,15 +301,8 @@ public enum CaptureActivity {
     nonisolated public func setSession(_ session: AVFoundation.AVCaptureSession)
     @objc deinit
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = Swift.Never
-  @available(iOS 13.0, tvOS 13.0, *)
-  @available(watchOS, unavailable)
-  @available(macOS, unavailable)
   public typealias Coordinator = Swift.Void
-  @available(iOS 13.0, tvOS 13.0, *)
-  @available(watchOS, unavailable)
-  @available(macOS, unavailable)
   public typealias UIViewType = BlinkIDUX.CameraPreview.PreviewView
 }
 public protocol PreviewSource : Swift.Sendable {
@@ -335,7 +316,6 @@ public protocol PreviewTarget {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = @_opaqueReturnTypeOf("$s9BlinkIDUX10CameraViewV4bodyQrvp", 0) __<Camera>
 }
 @_Concurrency.MainActor public class NetworkMonitor : Combine.ObservableObject {
@@ -356,7 +336,6 @@ public protocol PreviewTarget {
   }
   @_Concurrency.MainActor public init()
   @objc deinit
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
 @_Concurrency.MainActor @preconcurrency public struct NoInternetView : SwiftUICore.View {
@@ -364,7 +343,6 @@ public protocol PreviewTarget {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias Body = @_opaqueReturnTypeOf("$s9BlinkIDUX14NoInternetViewV4bodyQrvp", 0) __
 }
 public protocol AlertTypeProtocol {
@@ -452,7 +430,7 @@ public protocol AlertTypeProtocol {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
-  @_Concurrency.MainActor public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = false, showHelpButton: Swift.Bool = false)
+  @_Concurrency.MainActor public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = false, showHelpButton: Swift.Bool = false, sessionNumber: Swift.Int)
   @objc deinit
   @_Concurrency.MainActor public func analyze() async
   @_Concurrency.MainActor public func processAnalyzerResult() async
@@ -465,7 +443,6 @@ public protocol AlertTypeProtocol {
   @_Concurrency.MainActor public func resumeScanning()
   @_Concurrency.MainActor public func restartScanning()
   @_Concurrency.MainActor public func scanningDidCancel()
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
 public protocol UXThemeProtocol {

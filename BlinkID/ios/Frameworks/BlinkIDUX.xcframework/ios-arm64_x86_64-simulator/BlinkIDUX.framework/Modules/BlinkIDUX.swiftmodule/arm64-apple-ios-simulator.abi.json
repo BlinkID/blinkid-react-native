@@ -479,6 +479,47 @@
             "init_kind": "Designated"
           },
           {
+            "kind": "Var",
+            "name": "sessionNumber",
+            "printedName": "sessionNumber",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A10IDAnalyzerC13sessionNumberSivp",
+            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC13sessionNumberSivp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl",
+              "Nonisolated"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A10IDAnalyzerC13sessionNumberSivg",
+                "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC13sessionNumberSivg",
+                "moduleName": "BlinkIDUX",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Function",
             "name": "analyze",
             "printedName": "analyze(image:)",
@@ -1556,7 +1597,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(analyzer:shouldShowIntroductionAlert:showHelpButton:)",
+            "printedName": "init(analyzer:shouldShowIntroductionAlert:showHelpButton:sessionNumber:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -1583,11 +1624,17 @@
                 "printedName": "Swift.Bool",
                 "hasDefaultArg": true,
                 "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9BlinkIDUX0A9IDUXModelC8analyzer27shouldShowIntroductionAlert14showHelpButtonAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaGPRts_0A2ID0lM0V0M0AKRtsXP_S2btcfc",
-            "mangledName": "$s9BlinkIDUX0A9IDUXModelC8analyzer27shouldShowIntroductionAlert14showHelpButtonAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaGPRts_0A2ID0lM0V0M0AKRtsXP_S2btcfc",
+            "usr": "s:9BlinkIDUX0A9IDUXModelC8analyzer27shouldShowIntroductionAlert14showHelpButton13sessionNumberAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaHPRts_0A2ID0nO0V0O0ALRtsXP_S2bSitcfc",
+            "mangledName": "$s9BlinkIDUX0A9IDUXModelC8analyzer27shouldShowIntroductionAlert14showHelpButton13sessionNumberAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaHPRts_0A2ID0nO0V0O0ALRtsXP_S2bSitcfc",
             "moduleName": "BlinkIDUX",
             "overriding": true,
             "declAttributes": [
@@ -5049,6 +5096,48 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Var",
+            "name": "sessionNumber",
+            "printedName": "sessionNumber",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP13sessionNumberSivp",
+            "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP13sessionNumberSivp",
+            "moduleName": "BlinkIDUX",
+            "protocolReq": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP13sessionNumberSivg",
+                "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP13sessionNumberSivg",
+                "moduleName": "BlinkIDUX",
+                "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.CameraFrameAnalyzer>",
+                "sugared_genericSig": "<Self where Self : BlinkIDUX.CameraFrameAnalyzer>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
           }
         ],
         "declKind": "Protocol",
@@ -5639,6 +5728,13 @@
         ]
       },
       {
+        "kind": "Import",
+        "name": "BlinkID",
+        "printedName": "BlinkID",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX"
+      },
+      {
         "kind": "TypeDecl",
         "name": "Camera",
         "printedName": "Camera",
@@ -5910,6 +6006,57 @@
           },
           {
             "kind": "Var",
+            "name": "captureService",
+            "printedName": "captureService",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CaptureService",
+                "printedName": "BlinkIDUX.CaptureService",
+                "usr": "s:9BlinkIDUX14CaptureServiceC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX6CameraC14captureServiceAA07CaptureE0Cvp",
+            "mangledName": "$s9BlinkIDUX6CameraC14captureServiceAA07CaptureE0Cvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CaptureService",
+                    "printedName": "BlinkIDUX.CaptureService",
+                    "usr": "s:9BlinkIDUX14CaptureServiceC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX6CameraC14captureServiceAA07CaptureE0Cvg",
+                "mangledName": "$s9BlinkIDUX6CameraC14captureServiceAA07CaptureE0Cvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "previewSource",
             "printedName": "previewSource",
             "children": [
@@ -6041,6 +6188,35 @@
             "declKind": "Func",
             "usr": "s:9BlinkIDUX6CameraC5startyyYaF",
             "mangledName": "$s9BlinkIDUX6CameraC5startyyYaF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "Custom",
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "checkAuthorization",
+            "printedName": "checkAuthorization(sessionNumber:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX6CameraC18checkAuthorization13sessionNumberySi_tYaF",
+            "mangledName": "$s9BlinkIDUX6CameraC18checkAuthorization13sessionNumberySi_tYaF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "Custom",
@@ -6469,6 +6645,114 @@
         "moduleName": "BlinkIDUX",
         "declAttributes": [
           "Preconcurrency"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "BlinkID",
+        "printedName": "BlinkID",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "CaptureService",
+        "printedName": "CaptureService",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "unownedExecutor",
+            "printedName": "unownedExecutor",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UnownedSerialExecutor",
+                "printedName": "_Concurrency.UnownedSerialExecutor",
+                "usr": "s:Sce"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX14CaptureServiceC15unownedExecutorScevp",
+            "mangledName": "$s9BlinkIDUX14CaptureServiceC15unownedExecutorScevp",
+            "moduleName": "BlinkIDUX",
+            "implicit": true,
+            "intro_Macosx": "10.15",
+            "intro_iOS": "13.0",
+            "intro_tvOS": "13.0",
+            "intro_watchOS": "6.0",
+            "declAttributes": [
+              "Available",
+              "Available",
+              "Available",
+              "Available",
+              "Final",
+              "Nonisolated",
+              "Semantics"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UnownedSerialExecutor",
+                    "printedName": "_Concurrency.UnownedSerialExecutor",
+                    "usr": "s:Sce"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX14CaptureServiceC15unownedExecutorScevg",
+                "mangledName": "$s9BlinkIDUX14CaptureServiceC15unownedExecutorScevg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:9BlinkIDUX14CaptureServiceC",
+        "mangledName": "$s9BlinkIDUX14CaptureServiceC",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Actor",
+            "printedName": "Actor",
+            "usr": "s:ScA",
+            "mangledName": "$sScA"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
         ]
       },
       {
@@ -9531,6 +9815,13 @@
       },
       {
         "kind": "Import",
+        "name": "BlinkID",
+        "printedName": "BlinkID",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX"
+      },
+      {
+        "kind": "Import",
         "name": "AVFoundation",
         "printedName": "AVFoundation",
         "declKind": "Import",
@@ -11180,7 +11471,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(analyzer:shouldShowIntroductionAlert:showHelpButton:)",
+            "printedName": "init(analyzer:shouldShowIntroductionAlert:showHelpButton:sessionNumber:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -11219,11 +11510,17 @@
                 "printedName": "Swift.Bool",
                 "hasDefaultArg": true,
                 "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9BlinkIDUX17ScanningViewModelC8analyzer27shouldShowIntroductionAlert14showHelpButtonACyxq_GAA19CameraFrameAnalyzer_pAA7UIEventO5EventRts_0A2ID0nO0V0O0RtsXP_S2btcfc",
-            "mangledName": "$s9BlinkIDUX17ScanningViewModelC8analyzer27shouldShowIntroductionAlert14showHelpButtonACyxq_GAA19CameraFrameAnalyzer_pAA7UIEventO5EventRts_0A2ID0nO0V0O0RtsXP_S2btcfc",
+            "usr": "s:9BlinkIDUX17ScanningViewModelC8analyzer27shouldShowIntroductionAlert14showHelpButton13sessionNumberACyxq_GAA19CameraFrameAnalyzer_pAA7UIEventO5EventRts_0A2ID0pQ0V0Q0RtsXP_S2bSitcfc",
+            "mangledName": "$s9BlinkIDUX17ScanningViewModelC8analyzer27shouldShowIntroductionAlert14showHelpButton13sessionNumberACyxq_GAA19CameraFrameAnalyzer_pAA7UIEventO5EventRts_0A2ID0pQ0V0Q0RtsXP_S2bSitcfc",
             "moduleName": "BlinkIDUX",
             "genericSig": "<τ_0_0, τ_0_1>",
             "sugared_genericSig": "<T, U>",
@@ -12973,6 +13270,13 @@
       },
       {
         "kind": "Import",
+        "name": "BlinkID",
+        "printedName": "BlinkID",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX"
+      },
+      {
+        "kind": "Import",
         "name": "SwiftUI",
         "printedName": "SwiftUI",
         "declKind": "Import",
@@ -14668,931 +14972,945 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
       "kind": "StringLiteral",
       "offset": 295,
       "length": 21,
       "value": "\"BlinkIDUX_BlinkIDUX\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
       "kind": "Array",
       "offset": 963,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
       "kind": "StringLiteral",
       "offset": 1490,
       "length": 9,
       "value": "\".bundle\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/resource_bundle_accessor.swift",
       "kind": "StringLiteral",
       "offset": 1642,
       "length": 49,
       "value": "\"unable to find bundle named BlinkIDUX_BlinkIDUX\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1568,
+      "offset": 1569,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1599,
+      "offset": 1600,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
+      "kind": "StringLiteral",
+      "offset": 2660,
+      "length": 25,
+      "value": "\"Session not initialized\""
+    },
+    {
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "BooleanLiteral",
       "offset": 869,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "BooleanLiteral",
       "offset": 922,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "FloatLiteral",
       "offset": 1342,
       "length": 3,
       "value": "0.4"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "FloatLiteral",
       "offset": 1390,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "FloatLiteral",
       "offset": 1438,
       "length": 3,
       "value": "2.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "FloatLiteral",
       "offset": 1485,
       "length": 3,
       "value": "0.5"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "IntegerLiteral",
       "offset": 1673,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1856,
+      "offset": 1931,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
       "kind": "BooleanLiteral",
-      "offset": 1885,
+      "offset": 1960,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
       "kind": "BooleanLiteral",
       "offset": 306,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
       "kind": "BooleanLiteral",
       "offset": 354,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
       "kind": "BooleanLiteral",
       "offset": 403,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
       "kind": "BooleanLiteral",
       "offset": 451,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
       "kind": "BooleanLiteral",
       "offset": 495,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
       "kind": "FloatLiteral",
       "offset": 5579,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
       "kind": "IntegerLiteral",
       "offset": 5610,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 878,
+      "offset": 978,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 1533,
+      "offset": 1850,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1889,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 3571,
+      "offset": 5646,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 3619,
+      "offset": 5694,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 3940,
+      "offset": 6015,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "BooleanLiteral",
-      "offset": 5168,
+      "offset": 7516,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "StringLiteral",
-      "offset": 6749,
+      "offset": 9097,
       "length": 23,
       "value": "\"com.microblink.camera\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "StringLiteral",
-      "offset": 6784,
+      "offset": 9132,
       "length": 8,
       "value": "\"Camera\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "BooleanLiteral",
-      "offset": 961,
+      "offset": 1068,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "BooleanLiteral",
-      "offset": 1074,
+      "offset": 1181,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "BooleanLiteral",
-      "offset": 2167,
+      "offset": 2274,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "StringLiteral",
-      "offset": 17492,
+      "offset": 17599,
       "length": 23,
       "value": "\"com.microblink.camera\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "StringLiteral",
-      "offset": 17527,
+      "offset": 17634,
       "length": 16,
       "value": "\"CaptureService\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Device\/DeviceLookup.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Device\/DeviceLookup.swift",
       "kind": "IntegerLiteral",
       "offset": 682,
       "length": 3,
       "value": "100"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Model\/Types.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Model\/Types.swift",
       "kind": "BooleanLiteral",
       "offset": 1481,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Views\/CameraView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Views\/CameraView.swift",
       "kind": "IntegerLiteral",
       "offset": 475,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Network\/NetworkMonitor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Network\/NetworkMonitor.swift",
       "kind": "StringLiteral",
       "offset": 486,
       "length": 31,
       "value": "\"com.microblink.networkmonitor\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Network\/NetworkMonitor.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Network\/NetworkMonitor.swift",
       "kind": "BooleanLiteral",
       "offset": 669,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2006,
+      "offset": 2033,
       "length": 7,
       "value": "\"xmark\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2037,
+      "offset": 2064,
       "length": 8,
       "value": "\"Cancel\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2067,
+      "offset": 2094,
       "length": 27,
       "value": "\"Cancel scanning procedure\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2170,
+      "offset": 2197,
       "length": 17,
       "value": "\"bolt.slash.fill\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2210,
+      "offset": 2237,
       "length": 7,
       "value": "\"Torch\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2249,
+      "offset": 2276,
       "length": 20,
       "value": "\"Turn flashlight on\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2445,
+      "offset": 2534,
       "length": 11,
       "value": "\"bolt.fill\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2478,
+      "offset": 2567,
       "length": 17,
       "value": "\"bolt.slash.fill\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2533,
+      "offset": 2622,
       "length": 20,
       "value": "\"Turn flashlight on\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2556,
+      "offset": 2645,
       "length": 21,
       "value": "\"Turn flashlight off\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 2657,
+      "offset": 2746,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 2319,
+      "offset": 2346,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 2746,
+      "offset": 2835,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2814,
+      "offset": 2903,
       "length": 26,
       "value": "\"questionmark.circle.fill\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2862,
+      "offset": 2951,
       "length": 6,
       "value": "\"Help\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2888,
+      "offset": 2977,
       "length": 31,
       "value": "\"Open scanning onboarding help\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 2951,
+      "offset": 3040,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3335,
+      "offset": 3670,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3171,
+      "offset": 3260,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3556,
+      "offset": 3891,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3831,
+      "offset": 4793,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 4089,
+      "offset": 5398,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 4457,
+      "offset": 6009,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4558,
+      "offset": 6110,
       "length": 5,
       "value": "180.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4607,
+      "offset": 6159,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4638,
+      "offset": 6190,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 4691,
+      "offset": 6243,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4799,
+      "offset": 6351,
       "length": 3,
       "value": "0.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4843,
+      "offset": 6395,
       "length": 5,
       "value": "0.586"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 4896,
+      "offset": 6448,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4947,
+      "offset": 6499,
       "length": 3,
       "value": "0.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 4998,
+      "offset": 6550,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 5040,
+      "offset": 6592,
       "length": 4,
       "value": "0.45"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "Dictionary",
-      "offset": 5232,
+      "offset": 6784,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 5282,
+      "offset": 6834,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 5458,
+      "offset": 7010,
       "length": 3,
       "value": "1.5"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 5948,
+      "offset": 7500,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 5978,
+      "offset": 7530,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 8569,
+      "offset": 10184,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 326,
       "length": 18,
       "value": "\"verify_secondary\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 364,
       "length": 16,
       "value": "\"verify_primary\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 410,
       "length": 27,
       "value": "\"verify_tooltip_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 464,
       "length": 24,
       "value": "\"verify_help_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 511,
       "length": 19,
       "value": "\"verify_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 568,
       "length": 19,
       "value": "\"need_help_tooltip\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/Color+Extension.swift",
       "kind": "StringLiteral",
       "offset": 620,
       "length": 18,
       "value": "\"toast_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/ViewModifiers.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Extensions\/ViewModifiers.swift",
       "kind": "BooleanLiteral",
       "offset": 1185,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingAlertView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingAlertView.swift",
       "kind": "IntegerLiteral",
       "offset": 426,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 343,
+      "offset": 443,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 3095,
+      "offset": 3795,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 5154,
+      "offset": 5854,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "BooleanLiteral",
       "offset": 907,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2221,
       "length": 3,
       "value": "3.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "IntegerLiteral",
       "offset": 2275,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "IntegerLiteral",
       "offset": 2388,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2628,
       "length": 3,
       "value": "1.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2639,
       "length": 3,
       "value": "0.2"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2714,
       "length": 4,
       "value": "1.13"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "BooleanLiteral",
       "offset": 2757,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2779,
       "length": 3,
       "value": "1.5"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2861,
       "length": 4,
       "value": "0.55"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2942,
       "length": 4,
       "value": "0.55"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 2954,
       "length": 4,
       "value": "0.55"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 3034,
       "length": 4,
       "value": "0.55"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "BooleanLiteral",
       "offset": 3077,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Reticle.swift",
       "kind": "FloatLiteral",
       "offset": 3099,
       "length": 4,
       "value": "0.55"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
       "kind": "IntegerLiteral",
       "offset": 337,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
       "kind": "FloatLiteral",
       "offset": 431,
       "length": 3,
       "value": "3.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
       "kind": "FloatLiteral",
       "offset": 489,
       "length": 3,
       "value": "0.8"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
       "kind": "FloatLiteral",
       "offset": 2971,
       "length": 3,
       "value": "3.0"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/Toast\/Toast.swift",
       "kind": "FloatLiteral",
       "offset": 3029,
       "length": 3,
       "value": "0.8"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/ViewModels\/OnboardingSheetViewModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/ViewModels\/OnboardingSheetViewModel.swift",
       "kind": "IntegerLiteral",
       "offset": 301,
       "length": 10,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/ViewModels\/OnboardingSheetViewModel.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/ViewModels\/OnboardingSheetViewModel.swift",
       "kind": "IntegerLiteral",
       "offset": 313,
       "length": 9,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 640,
       "length": 19,
       "value": "\"need_help_tooltip\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 800,
       "length": 18,
       "value": "\"toast_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 961,
       "length": 19,
       "value": "\"verify_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 1132,
       "length": 24,
       "value": "\"verify_help_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 1293,
       "length": 16,
       "value": "\"verify_primary\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 1450,
       "length": 18,
       "value": "\"verify_secondary\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 1626,
       "length": 27,
       "value": "\"verify_tooltip_background\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 1904,
       "length": 21,
       "value": "\"all_details_visible\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2069,
       "length": 20,
       "value": "\"all_fields_visible\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2212,
       "length": 9,
       "value": "\"back_id\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2354,
       "length": 14,
       "value": "\"demo_overlay\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2493,
       "length": 10,
       "value": "\"front_id\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2634,
       "length": 13,
       "value": "\"harsh_light\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2776,
       "length": 12,
       "value": "\"keep_still\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 2921,
       "length": 14,
       "value": "\"mb_checkmark\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 3075,
       "length": 18,
       "value": "\"no_camera_access\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 3232,
       "length": 17,
       "value": "\"passport_bottom\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 3394,
       "length": 20,
       "value": "\"passport_highlight\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 3547,
       "length": 14,
       "value": "\"passport_top\""
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "filePath": "\/Users\/milanparadina\/Development\/native\/sdk\/docver\/sdk-document-verification-v2-ios\/blinkid-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
       "offset": 3706,
       "length": 20,
