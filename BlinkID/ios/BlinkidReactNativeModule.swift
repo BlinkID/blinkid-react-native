@@ -64,6 +64,9 @@ import BlinkIDUX
                                 }
                             }
                             else {
+                                Task {
+                                    await BlinkIDSdk.terminateBlinkIDSdk()
+                                }
                                 DispatchQueue.main.async {
                                     onReject("Scanning has been canceled")
                                     rootVc.dismiss(animated: true)

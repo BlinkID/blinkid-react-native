@@ -58,6 +58,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
 
             BlinkIdScanActivityResultStatus.Canceled -> {
               pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Scanning is canceled.")
+              suspend { BlinkIdSdk.sdkInstance?.close() }
             }
 
             BlinkIdScanActivityResultStatus.ErrorSdkInit -> {
