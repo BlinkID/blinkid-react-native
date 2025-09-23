@@ -1,6 +1,7 @@
 package com.microblink.blinkid.reactnative
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import com.facebook.react.bridge.BaseActivityEventListener
 import com.facebook.react.bridge.Promise
@@ -13,7 +14,8 @@ import com.microblink.blinkid.ux.contract.BlinkIdScanActivitySettings
 import com.microblink.blinkid.ux.contract.MbBlinkIdScan
 import com.microblink.core.LicenseLockedException
 import com.microblink.core.image.InputImage
-import com.microblink.ux.UiSettings
+import com.microblink.core.ping.PingManager
+import com.microblink.core.ping.pinglets.WrapperProductInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -56,6 +58,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
 
             BlinkIdScanActivityResultStatus.Canceled -> {
               pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Scanning is canceled.")
+              suspend { BlinkIdSdk.sdkInstance?.close() }
             }
 
             BlinkIdScanActivityResultStatus.ErrorSdkInit -> {
@@ -108,6 +111,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
             showOnboardingDialog = blinkIdUiSettingsJson?.optBoolean("showOnboardingDialog", true) ?: true
           )
         )
+        addReactNativePinglet(it)
         currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
       } ?: pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Activity not found.")
     } catch (error: Exception) {
@@ -147,6 +151,9 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
           }
 
         val sdkInit = BlinkIdSdk.initializeSdk(context, sdkSettings)
+
+        addReactNativePinglet(context)
+
         when {
           sdkInit.isSuccess -> {
             val instance = sdkInit.getOrNull() ?: return@launch withContext(Dispatchers.Main) {
@@ -202,7 +209,12 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       }
     }
   }
-
+  private fun addReactNativePinglet(context: Context) {
+    PingManager.getInstance(context).add(
+      WrapperProductInfo(
+        wrapperProduct = WrapperProductInfo.WrapperProduct.CROSSPLATFORMREACTNATIVE),
+      0)
+  }
   companion object {
     const val NAME = "BlinkidReactNative"
   }

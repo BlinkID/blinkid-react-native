@@ -1705,6 +1705,11 @@ export class BarcodeResult {
   extendedElements?: BarcodeExtendedElements;
 
   /**
+   * Indicates whether the barcode was successfully parsed.
+   */
+  parsed?: boolean;
+
+  /**
    *
    * @param nativeBarcodeResult
    */
@@ -1738,6 +1743,7 @@ export class BarcodeResult {
     this.driverLicenseDetailedInfo =
       nativeBarcodeResult.driverLicenseDetailedInfo;
     this.extendedElements = nativeBarcodeResult.extendedElements;
+    this.parsed = nativeBarcodeResult.parsed;
   }
 }
 

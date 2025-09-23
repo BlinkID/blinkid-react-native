@@ -343,7 +343,8 @@ class BlinkIdSerializationUtilities {
           "race": barcodeResult?.race,
           "religion": barcodeResult?.religion,
           "residentialStatus": barcodeResult?.residentialStatus,
-          "sex": barcodeResult?.sex
+          "sex": barcodeResult?.sex,
+          "parsed": barcodeResult?.parsed
       ]
       
       return barcodeResultDict.compactMapValues { $0 }
@@ -535,7 +536,7 @@ class BlinkIdSerializationUtilities {
             if let dateOfIssue = vizResult.dateOfIssue {
                 vizResultDict["dateOfIssue"] = serializeDateResult(dateOfIssue)
             }
-            vizResultDict["dependentsInfo"] = vizResult.dependentsInfo.compactMap(serializeDependentInfo(_:))
+            vizResultDict["dependentsInfo"] = vizResult.dependentsInfo?.compactMap(serializeDependentInfo(_:))
             if let documentAdditionalNumber = vizResult.documentAdditionalNumber {
                 vizResultDict["documentAdditionalNumber"] = serializeStringResult(documentAdditionalNumber)
             }

@@ -36,6 +36,7 @@ import BlinkIDUX
                     eventStream: BlinkIDEventStream(),
                     classFilter: self
                 )
+                await addReactNativePinglet(with: analyzer.sessionNumber)
                 
                 var shouldShowIntroductionAlert = true
                 if let showOnboardingDialog = blinkIdUiSettings["showOnboardingDialog"] as? Bool {
@@ -49,7 +50,8 @@ import BlinkIDUX
                 let scanningUxModel = await BlinkIDUXModel(
                     analyzer: analyzer,
                     shouldShowIntroductionAlert: shouldShowIntroductionAlert,
-                    showHelpButton: shouldShowHelpButton)
+                    showHelpButton: shouldShowHelpButton, sessionNumber: analyzer.sessionNumber)
+                
                 await scanningUxModel.$result
                     .sink { [weak self] scanningResultState in
                         if let scanningResultState {
@@ -62,6 +64,9 @@ import BlinkIDUX
                                 }
                             }
                             else {
+                                Task {
+                                    await BlinkIDSdk.terminateBlinkIDSdk()
+                                }
                                 DispatchQueue.main.async {
                                     onReject("Scanning has been canceled")
                                     rootVc.dismiss(animated: true)
@@ -74,7 +79,11 @@ import BlinkIDUX
                 
                 self.presentScanningUI(scanningUxModel, rootVc)
             } catch {
-                onReject(error.localizedDescription)
+                if let sdkError = error as? InvalidLicenseKeyError {
+                    onReject(sdkError.message)
+                } else {
+                    onReject(error.localizedDescription)
+                }
             }
         }
     }
@@ -92,6 +101,8 @@ import BlinkIDUX
                 
                 let blinkidSdk = try await BlinkIDSdk.createBlinkIDSdk(withSettings: sdkSettings)
                 let session = try await blinkidSdk.createScanningSession(sessionSettings: sessionSettings)
+                
+                await addReactNativePinglet(with: session.getSessionNumber())
                 
                 guard let frontUIImage = BlinkIdDeserializationUtilities.deserializeBase64Image(firstImage) else {
                     onReject("Could not extract the information from the first image! An image of a valid document needs to be sent.")
@@ -113,7 +124,11 @@ import BlinkIDUX
                     }
                 }
             } catch {
-                onReject(error.localizedDescription)
+                if let sdkError = error as? InvalidLicenseKeyError {
+                    onReject(sdkError.message)
+                } else {
+                    onReject(error.localizedDescription)
+                }
             }
         }
         
@@ -125,6 +140,10 @@ import BlinkIDUX
             viewController.modalPresentationStyle = .fullScreen
             rootVc.present(viewController, animated: true)
         }
+    }
+    
+    private func addReactNativePinglet(with sessionNumber: Int) async {
+        await PingManager.shared.addPinglet(pinglet: WrapperProductInfoPinglet(wrapperProduct: .crossplatformreactnative), sessionNumber: sessionNumber)
     }
 }
 
