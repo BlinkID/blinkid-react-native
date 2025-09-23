@@ -1,3 +1,13 @@
+## v7.5.0
+
+- Updated to [Android SDK v7.5.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.5.0) and [iOS SDK v7.5.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.5.0)
+
+### What's New
+- We introduced event tracking across the SDK lifecycle, giving you deeper insights into user journeys, success rates, and drop-off points during scanning sessions. These enhanced analytics make it easier to identify optimization opportunities and ensure the best possible user experience.
+- Updated detection analysis logic in case of photo mode
+- Added new `parsed` result member to the BarcodeResult which indicates whether the raw barcode data was successfully parsed
+- Barcode recognition is now allowed on all document classes; unparsable barcodes will be returned as raw data
+
 ## 7.4.0
 - Updated to [Android SDK v7.4.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.4.0) and [iOS SDK v7.4.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.4.0)
 
