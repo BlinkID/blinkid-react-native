@@ -11,6 +11,30 @@ import { TurboModuleRegistry } from "react-native";
  */
 export interface Spec extends TurboModule {
   /**
+   * The `loadBlinkIdSdk` Turbo Module method initializes the BlinkID SDK.
+   *
+   * Pre-loading the SDK will decrease the loading time when calling the `performScan` and `performDirectApiScan` methods, as all of the resources will be obtained.
+   *
+   * It takes the `BlinkIdSdkSettings` parameter.
+   *
+   * @param blinkIdSdkSettings - BlinkID SDK Settings - the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK
+   * needs for the scanning process, should be obtained.
+   * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
+   */
+  loadBlinkIdSdk(blinkIdSdkSettings: string): Promise<void>;
+
+  /**
+   * The `unloadBlinkIdSdk` Turbo Module method unloads the BlinkID SDK.
+   *
+   *
+   * It takes the `deleteCachedResources` parameter.
+   *
+   * @param deleteCachedResources - flag that indicates whether the downloaded resources from the SDK will also be removed.
+   * Setting the paramater to `true` will increase the loading time of the SDK if `loadBlinkId` is called again since all resources will need to be obtained again.
+   */
+  unloadBlinkIdSdk(deleteCachedResources: boolean): Promise<void>;
+
+  /**
    * The `performScan` Turbo Module method launches the BlinkID scanning process with the default UX properties.
    *
    * It takes the following parameters: `BlinkIdSdkSettings`, `BlinkIdSessionSettings` and the optional `ClassFilter` class.

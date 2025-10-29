@@ -22,6 +22,38 @@ export { BlinkIdScanningResult } from "./blinkIdResult";
 export * from "./types";
 
 /**
+ * The `loadBlinkIdSdk` method initializes the BlinkID SDK.
+ *
+ * Pre-loading the SDK will decrease the loading time when calling the `performScan` and `performDirectApiScan` methods, as all of the resources will be obtained.
+ *
+ * It takes the `BlinkIdSdkSettings` parameter.
+ *
+ * @param blinkIdSdkSettings - BlinkID SDK Settings - the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK
+ * needs for the scanning process, should be obtained.
+ * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
+ */
+export async function loadBlinkIdSdk(
+  blinkIdSdkSettings: BlinkIdSdkSettings
+): Promise<void> {
+  await BlinkidReactNative.loadBlinkIdSdk(JSON.stringify(blinkIdSdkSettings));
+}
+
+/**
+ * The `unloadBlinkIdSdk` Turbo Module method unloads the BlinkID SDK.
+ *
+ *
+ * It takes the `deleteCachedResources` parameter.
+ *
+ * @param deleteCachedResources - flag that indicates whether the downloaded resources from the SDK will also be removed.
+ * Setting the paramater to `true` will increase the loading time of the SDK if `loadBlinkId` is called again since all resources will need to be obtained again.
+ */
+export async function unloadBlinkIdSdk(
+  deleteCachedResources: boolean
+): Promise<void> {
+  await BlinkidReactNative.unloadBlinkIdSdk(deleteCachedResources);
+}
+
+/**
  * The `performScan` method launches the BlinkID scanning process with the default UX properties.
  *
  * It takes the following parameters: {@link BlinkIdSdkSettings}, {@link BlinkIdSessionSettings} and the optional {@link BlinkIdUiSettings} and {@link ClassFilter} settings.
