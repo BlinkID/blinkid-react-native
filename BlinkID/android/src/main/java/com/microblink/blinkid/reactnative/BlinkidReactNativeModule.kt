@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 import org.json.JSONObject
 
 @ReactModule(name = BlinkidReactNativeModule.NAME)
@@ -27,17 +28,68 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
   NativeBlinkidReactNativeSpec(reactContext) {
   private val BLINKID_REQUEST_CODE = 1453
   private val BLINKID_ERROR_RESULT_CODE = "BlinkIdAndroid"
-
   var pendingPromise: Promise? = null
 
   override fun getName(): String {
     return NAME
   }
 
+  override fun loadBlinkIdSdk(
+    blinkIdSdkSettings: String?,
+    promise: Promise?
+  ) {
+    pendingPromise = promise
+    try {
+      val blinkIdSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
+      val settings = blinkIdSettingsJson?.let { BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(it) }?: run {
+        pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings.")
+        return
+      }
+      currentActivity?.applicationContext?.let {
+        CoroutineScope(Dispatchers.Default).launch {
+          val maybeInstance = BlinkIdSdk.initializeSdk(it, settings)
+          when {
+            maybeInstance.isSuccess -> {pendingPromise?.resolve("")}
+            maybeInstance.isFailure -> {
+              val exception = maybeInstance.exceptionOrNull()
+              promise?.reject(BLINKID_ERROR_RESULT_CODE, exception?.message)
+            }
+          }
+        }
+      }
+    } catch (error: Exception) {
+      when (error) {
+        is LicenseLockedException -> {
+          pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
+        }
+        else -> {
+          pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
+        }
+      }
+    }
+  }
+
+  override fun unloadBlinkIdSdk(
+    deleteCachedResources: Boolean,
+    promise: Promise?
+  ) {
+    try {
+        if (deleteCachedResources) {
+          BlinkIdSdk.sdkInstance?.closeAndDeleteCachedAssets()
+        } else {
+          BlinkIdSdk.sdkInstance?.close()
+        }
+        pendingPromise?.resolve("")
+    } catch (exception: Exception) {
+      pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, exception.message, null)
+    }
+  }
+
   init {
     reactApplicationContext.addActivityEventListener(object : BaseActivityEventListener() {
+
       override fun onActivityResult(
-        activity: Activity?,
+        activity: Activity,
         requestCode: Int,
         resultCode: Int,
         data: Intent?
