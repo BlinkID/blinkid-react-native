@@ -81,7 +81,22 @@ RCT_EXPORT_MODULE()
     }];
 }
 
+- (void)loadBlinkIdSdk:(nonnull NSString *)blinkIdSdkSettings resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
+    [self->moduleImplementation loadSdk:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings] onResolve:^(NSString * _Nonnull) {
+        resolve(@"");
+    } onReject:^(NSString * _Nonnull error) {
+        reject(@"BlinkIdIosError", error, nil);
+    }];
+}
 
+
+- (void)unloadBlinkIdSdk:(BOOL)deleteCachedResources resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
+    [self->moduleImplementation unloadSdk:deleteCachedResources onResolve:^(NSString * _Nonnull) {
+        resolve(@"");
+    } onReject:^(NSString * _Nonnull error) {
+        reject(@"BlinkIdIosError", error, nil);
+    }];
+}
 
 - (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString {
     NSError *jsonError;

@@ -17,21 +17,65 @@ import BlinkIDUX
     private var cancellables = Set<AnyCancellable>()
     private var classFilterDict: [String: Any]?
     
+    private var blinkIdSdk: BlinkIDSdk?
+    private var isSdkLoaded: Bool = false
+    
+    @objc public func loadSdk(_ blinkIdSdkSettings: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
+        Task {
+            guard let sdkSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(blinkIdSdkSettings) else {
+                onReject("Could not initialize the SDK!")
+                return
+            }
+            do {
+                blinkIdSdk = try await BlinkIDSdk.createBlinkIDSdk(withSettings: sdkSettings)
+                isSdkLoaded = true
+                onResolve("")
+            } catch {
+                blinkIdSdk = nil
+                isSdkLoaded = false
+                onReject("Could not initialize the SDK! Reason: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func loadSdkAsync(_ blinkIdSdkSettings: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) async throws {
+        await withCheckedContinuation { continuation in
+            loadSdk(blinkIdSdkSettings) { _ in
+                continuation.resume()
+            } onReject: { errorMessage in
+                onReject(errorMessage)
+                continuation.resume()
+            }
+        }
+    }
+    
+    @objc public func unloadSdk(_ deleteCachedResources: Bool, onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
+        Task {
+            if deleteCachedResources {
+               await BlinkIDSdk.terminateBlinkIDSdkAndDeleteCachedResources()
+            } else {
+                await BlinkIDSdk.terminateBlinkIDSdk()
+            }
+            blinkIdSdk = nil
+            isSdkLoaded = false
+            onResolve("")
+        }
+    }
+    
     @objc public func performScan(_ rootVc: UIViewController, blinkIdSdkSettings: [String: Any], blinkIdSessionSettings: [String: Any], blinkIdUiSettings: [String: Any], classFilterSettings: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
         Task {
             do {
                 
-                guard let sdkSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(blinkIdSdkSettings) else {
-                    onReject("Could not initialize the SDK!")
+                if !isSdkLoaded { try await loadSdkAsync(blinkIdSdkSettings, onResolve: onResolve, onReject: onReject) }
+                guard let blinkIdSdk = blinkIdSdk else {
+                    onReject("The SDK is not loaded!")
                     return
                 }
-                
                 let sessionSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(blinkIdSessionSettings)
                 classFilterDict = classFilterSettings
                 
-                let sdkInstance = try await BlinkIDSdk.createBlinkIDSdk(withSettings: sdkSettings)
                 let analyzer = try await BlinkIDAnalyzer(
-                    sdk: sdkInstance,
+                    sdk: blinkIdSdk,
                     blinkIdSessionSettings: sessionSettings,
                     eventStream: BlinkIDEventStream(),
                     classFilter: self
@@ -91,16 +135,16 @@ import BlinkIDUX
     @objc public func performDirectApiScan(blinkIdSdkSettings: [String: Any], blinkIdSessionSettings: [String: Any], firstImage: String, secondImage: String?, onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
         Task{
             do {
-                guard let sdkSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(blinkIdSdkSettings) else {
-                    onReject("Could not initialize the SDK!")
+                if !isSdkLoaded { try await loadSdkAsync(blinkIdSdkSettings, onResolve: onResolve, onReject: onReject) }
+                
+                guard let blinkIdSdk = blinkIdSdk else {
+                    onReject("The BlinkID SDK is not initialized!")
                     return
                 }
-                
                 var sessionSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(blinkIdSessionSettings)
                 sessionSettings.inputImageSource = .photo
                 
-                let blinkidSdk = try await BlinkIDSdk.createBlinkIDSdk(withSettings: sdkSettings)
-                let session = try await blinkidSdk.createScanningSession(sessionSettings: sessionSettings)
+                let session = try await blinkIdSdk.createScanningSession(sessionSettings: sessionSettings)
                 
                 await addReactNativePinglet(with: session.getSessionNumber())
                 
