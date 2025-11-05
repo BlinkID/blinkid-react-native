@@ -1172,6 +1172,66 @@ export class VizResult {
   dateOfExpiry?: DateResult<StringResult>;
 
   /**
+   * The date of entry of the document owner.
+   *
+   */
+  dateOfEntry?: DateResult<StringResult>;
+
+  /**
+   * The locality code of the document owner.
+   *
+   */
+  localityCode?: StringResult;
+
+  /**
+   * The maiden name of the document owner.
+   *
+   */
+  maidenName?: StringResult;
+
+  /**
+   * The municipality code of the document owner.
+   *
+   */
+  municipalityCode?: StringResult;
+
+  /**
+   * The municipality of registration of the document owner.
+   *
+   */
+  municipalityOfRegistration?: StringResult;
+
+  /**
+   * The polling station code of the document owner.
+   *
+   */
+  pollingStationCode?: StringResult;
+
+  /**
+   * The registration center code of the document owner.
+   *
+   */
+  registrationCenterCode?: StringResult;
+
+  /**
+   * The section code of the document owner.
+   *
+   */
+  sectionCode?: StringResult;
+
+  /**
+   * The state code of the document owner.
+   *
+   */
+  stateCode?: StringResult;
+
+  /**
+   * The state of the document owner.
+   *
+   */
+  stateName?: StringResult;
+
+  /**
    * Determines if date of expiry is permanent.
    *
    */
@@ -1328,6 +1388,17 @@ export class VizResult {
     this.dateOfBirth = nativeVizResult.dateOfBirth;
     this.dateOfIssue = nativeVizResult.dateOfIssue;
     this.dateOfExpiry = nativeVizResult.dateOfExpiry;
+    this.dateOfEntry = nativeVizResult.dateOfEntry;
+    this.localityCode = nativeVizResult.localityCode;
+    this.maidenName = nativeVizResult.maidenName;
+    this.municipalityCode = nativeVizResult.municipalityCode;
+    this.municipalityOfRegistration =
+      nativeVizResult.municipalityOfRegistration;
+    this.pollingStationCode = nativeVizResult.pollingStationCode;
+    this.registrationCenterCode = nativeVizResult.registrationCenterCode;
+    this.sectionCode = nativeVizResult.sectionCode;
+    this.stateCode = nativeVizResult.stateCode;
+    this.stateName = nativeVizResult.stateName;
     this.dateOfExpiryPermanent = nativeVizResult.dateOfExpiryPermanent;
     this.documentNumber = nativeVizResult.documentNumber;
     this.personalIdNumber = nativeVizResult.personalIdNumber;
@@ -4016,6 +4087,8 @@ export enum Region {
   Alagos = "alagos",
 
   Bangsamoro = "bangsamoro",
+
+  Telangana = "telangana",
 }
 
 /**
@@ -4182,6 +4255,18 @@ export enum DocumentType {
   RegistrationCertificate = "registrationCertificate",
 
   MedicalMarijuanaId = "medicalMarijuanaId",
+
+  NonCardTribalId = "nonCardTribalId",
+
+  DiplomaticId = "diplomaticId",
+
+  EmergencyPassport = "emergencyPassport",
+
+  temporaryPassport = "temporaryPassport",
+
+  metisFederationCard = "metisFederationCard",
+
+  adrCertificate = "adrCertificate",
 }
 
 /**
@@ -4289,5 +4374,47 @@ export enum FieldType {
 
   SpecificDocumentValidity = "specificDocumentValidity",
 
-  VehnicleOwner = "vehicleOwner",
+  VehicleOwner = "vehicleOwner",
+
+  nationalInsuranceNumber = "nationalInsuranceNumber",
+
+  CountryCode = "countryCode",
+
+  CertificateNumber = "certificateNumber",
+
+  MunicipalityOfRegistration = "municipalityOfRegistration",
+
+  LocalityCode = "localityCode",
+
+  MaidenName = "maidenName",
+
+  StateCode = "stateCode",
+
+  DateOfEntry = "dateOfEntry",
+
+  MunicipalityCode = "municipalityCode",
+
+  PollingStationCode = "pollingStationCode",
+
+  SectionCode = "sectionCode",
+
+  RegistrationCenterCode = "registrationCenterCode",
+
+  StateName = "stateName",
+}
+
+/** An enum indicating preffered camera position for document capturing. */
+export enum PreferredCamera {
+  /**
+   * Use the back-facing camera
+   *
+   * This is the default value
+   */
+  Back = "back",
+
+  /**
+   * Use the front-facing camera
+   *
+   */
+  Front = "front",
 }

@@ -45,14 +45,14 @@ export interface Spec extends TurboModule {
    *
    * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
    *
-   * @param blinkIdUiSettings - BlinkID UI Settings - the class that allows customization of various aspects of the UI used during the scanning process.
+   * @param blinkIdScanningUxSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
    *
    * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session. See [ClassFilter] for more implementation information.
    */
   performScan(
     blinkIdSdkSettings: string,
     blinkIdSessionSettings: string,
-    blinkIdUiSettings?: string,
+    blinkIdScanningUxSettings?: string,
     classFilter?: string
   ): Promise<string>;
 
