@@ -7,6 +7,7 @@
 
 import Foundation
 import BlinkID
+import BlinkIDUX
 
 class BlinkIdDeserializationUtilities {
   static func deserializeBlinkIdSdkSettings(_ sdkSettingsDict: Dictionary<String, Any>?) -> BlinkIDSdkSettings? {
@@ -30,9 +31,9 @@ class BlinkIdDeserializationUtilities {
       if let resourceLocalFolder = sdkSettingsDict?["resourceLocalFolder"] as? String {
           blinkidSdkSettings?.resourceLocalFolder = resourceLocalFolder
       }
-      if let bundleURL = sdkSettingsDict?["bundleURL"] as? String,
-         let url = URL(string: bundleURL) {
-          blinkidSdkSettings?.bundleURL = url
+      if let bundleIdentifier = sdkSettingsDict?["bundleIdentifier"] as? String,
+         let bundle = Bundle.init(identifier: bundleIdentifier) {
+          blinkidSdkSettings?.bundleURL = bundle.bundleURL
       }
       if let resourceRequestTimeout = sdkSettingsDict?["resourceRequestTimeout"] as? Int {
           blinkidSdkSettings?.resourceRequestTimeout = BlinkID.RequestTimeout.default
@@ -157,6 +158,20 @@ class BlinkIdDeserializationUtilities {
       
       return croppedImageSettings
   }
+    static func deserializeBlinkIdUxScanningSettings(_ scanningUxSettingsDict: Dictionary<String, Any>?) -> ScanningUXSettings {
+        if let scanningUxSettingsDict = scanningUxSettingsDict,
+           let allowHapticFeedback = scanningUxSettingsDict["allowHapticFeedback"] as? Bool,
+           let preferredCameraPosition = scanningUxSettingsDict["preferredCamera"] as? String,
+           let showHelpButton = scanningUxSettingsDict["showHelpButton"] as? Bool,
+           let showIntroductionAlert = scanningUxSettingsDict["showOnboardingDialog"] as? Bool {
+            return ScanningUXSettings(
+                showIntroductionAlert: showIntroductionAlert,
+                showHelpButton: showHelpButton,
+                preferredCameraPosition: deserializePrefferedCameraPosition(preferredCameraPosition),
+                allowHapticFeedback: allowHapticFeedback)
+        }
+        return ScanningUXSettings()
+    }
   
   static func deserializeRecognitionModeFilter(_ recognitionModeFilterDict: Dictionary<String, Any>) -> RecognitionModeFilter {
       var recognitionModeFilter = RecognitionModeFilter()
@@ -322,6 +337,17 @@ class BlinkIdDeserializationUtilities {
             return ScanningMode.automatic
         default:
             return ScanningMode.automatic
+        }
+    }
+    
+    static func deserializePrefferedCameraPosition(_ value: String) -> Camera.CameraPosition {
+        switch value {
+        case "front":
+            return Camera.CameraPosition.front
+        case "back":
+            return Camera.CameraPosition.back
+        default:
+            return Camera.CameraPosition.back
         }
     }
   

@@ -33,7 +33,7 @@ RCT_EXPORT_MODULE()
     return dict;
 }
 
-- (void)performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSettings:(NSString *)blinkIdSessionSettings blinkIdUiSettings:(NSString *)blinkIdUiSettings classFilter:(NSString *)classFilter resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings blinkIdScanningUxSettings:(nonnull NSString *)blinkIdScanningUxSettings classFilter:(nonnull NSString *)classFilter resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *keyWindow = nil;
@@ -55,10 +55,10 @@ RCT_EXPORT_MODULE()
         
         [self->moduleImplementation
          performScan:keyWindow.rootViewController
-         blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
-         blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
-         blinkIdUiSettings:[self createDictionaryFromBlinkIdObject:blinkIdUiSettings]
-         classFilterSettings:[self createDictionaryFromBlinkIdObject: classFilter]
+         blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings]
+         blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject:blinkIdSessionSettings]
+         blinkIdScanningUxSettings:[self createDictionaryFromBlinkIdObject:blinkIdScanningUxSettings]
+         classFilterSettings:[self createDictionaryFromBlinkIdObject:classFilter]
          onResolve:^(NSString * _Nonnull result) {
             resolve(@[result]);
         } onReject:^(NSString * _Nonnull error) {
