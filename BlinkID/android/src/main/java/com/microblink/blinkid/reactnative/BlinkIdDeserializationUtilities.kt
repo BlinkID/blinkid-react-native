@@ -28,11 +28,14 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import android.graphics.Bitmap
+import android.graphics.Camera
 import android.util.Base64
 import com.microblink.blinkid.core.session.InputImageSource
 import com.microblink.blinkid.core.settings.DocumentNumberAnonymizationSettings
 import com.microblink.core.network.RequestTimeout
 import com.microblink.ux.UiSettings
+import com.microblink.ux.camera.CameraLensFacing
+import com.microblink.ux.camera.CameraSettings
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -275,18 +278,31 @@ object BlinkIdDeserializationUtilities {
   }
 
 
-  fun deserializeBlinkIdUxSettings(
-    blinkidUxSettingsMap: JSONObject?,
+  fun deserializeBlinkIdScanningUxSettings(
+    blinkidScanningUxSettingsMap: JSONObject?,
     classFilterMap: JSONObject?
   ): BlinkIdUxSettings {
-    if (blinkidUxSettingsMap == null) return BlinkIdUxSettings()
+    if (blinkidScanningUxSettingsMap == null) return BlinkIdUxSettings()
     return BlinkIdUxSettings(
-      stepTimeoutDuration = (blinkidUxSettingsMap.optInt(
+      stepTimeoutDuration = (blinkidScanningUxSettingsMap.optInt(
         "stepTimeoutDuration",
         15000
       ).milliseconds),
+      allowHapticFeedback = blinkidScanningUxSettingsMap.optBoolean("allowHapticFeedback", true),
       classFilter = classFilterMap?.let { CustomClassFilter(it.toString()) },
     )
+  }
+  fun deserializeCameraSettings(blinkidScanningUxSettingsMap: JSONObject?): CameraSettings {
+    if (blinkidScanningUxSettingsMap == null) return CameraSettings()
+    return CameraSettings(lensFacing = deserializeLensFacingCamera(blinkidScanningUxSettingsMap.optString("preferredCamera")))
+  }
+
+  fun deserializeLensFacingCamera(lens: String?): CameraLensFacing {
+    return when (lens?.lowercase()) {
+      "front" -> CameraLensFacing.LensFacingFront
+      "back" -> CameraLensFacing.LensFacingBack
+      else -> CameraLensFacing.LensFacingBack
+    }
   }
 
   fun deserializeClassFilter(

@@ -135,6 +135,9 @@ object BlinkIdSerializationUtilities {
     scanningResult?.vehicleType?.let {
       scanningResultJson.put("vehicleType", serializeStringResult(it))
     }
+    scanningResult?.vehicleOwner?.let {
+      scanningResultJson.put("vehicleOwner", serializeStringResult(it))
+    }
     scanningResult?.eligibilityCategory?.let {
       scanningResultJson.put("eligibilityCategory", serializeStringResult(it))
     }
@@ -162,6 +165,36 @@ object BlinkIdSerializationUtilities {
     scanningResult?.dateOfExpiry?.let {
       scanningResultJson.put("dateOfExpiry", serializeDateResult(it))
     }
+    scanningResult?.dateOfEntry?.let {
+      scanningResultJson.put("dateOfEntry", serializeDateResult(it))
+    }
+    scanningResult?.localityCode?.let {
+      scanningResultJson.put("localityCode", serializeStringResult(it))
+    }
+    scanningResult?.maidenName?.let {
+      scanningResultJson.put("maidenName", serializeStringResult(it))
+    }
+    scanningResult?.municipalityCode?.let {
+      scanningResultJson.put("municipalityCode", serializeStringResult(it))
+    }
+    scanningResult?.municipalityOfRegistration?.let {
+      scanningResultJson.put("municipalityOfRegistration", serializeStringResult(it))
+    }
+    scanningResult?.pollingStationCode?.let {
+      scanningResultJson.put("pollingStationCode", serializeStringResult(it))
+    }
+    scanningResult?.registrationCenterCode?.let {
+      scanningResultJson.put("registrationCenterCode", serializeStringResult(it))
+    }
+    scanningResult?.sectionCode?.let {
+      scanningResultJson.put("sectionCode", serializeStringResult(it))
+    }
+    scanningResult?.stateCode?.let {
+      scanningResultJson.put("stateCode", serializeStringResult(it))
+    }
+    scanningResult?.stateName?.let {
+      scanningResultJson.put("stateName", serializeStringResult(it))
+    }
     scanningResult?.dateOfExpiryPermanent?.let {
       scanningResultJson.put("dateOfExpiryPermanent", it)
     }
@@ -180,7 +213,6 @@ object BlinkIdSerializationUtilities {
         JSONArray(it.map { subResult -> serializeSubResult(subResult) })
       )
     }
-
     scanningResult?.inputImage(ScanningSide.First)?.let {
       scanningResultJson.put("firstInputImage", encodeBase64Image(it.bitmap))
     }
@@ -509,6 +541,36 @@ object BlinkIdSerializationUtilities {
     }
     vizResult?.dateOfIssue?.let {
       vizResultJson.put("dateOfIssue", serializeDateResult(it))
+    }
+    vizResult?.dateOfEntry?.let {
+      vizResultJson.put("dateOfEntry", serializeDateResult(it))
+    }
+    vizResult?.localityCode?.let {
+      vizResultJson.put("localityCode", serializeStringResult(it))
+    }
+    vizResult?.maidenName?.let {
+      vizResultJson.put("maidenName", serializeStringResult(it))
+    }
+    vizResult?.municipalityCode?.let {
+      vizResultJson.put("municipalityCode", serializeStringResult(it))
+    }
+    vizResult?.municipalityOfRegistration?.let {
+      vizResultJson.put("municipalityOfRegistration", serializeStringResult(it))
+    }
+    vizResult?.pollingStationCode?.let {
+      vizResultJson.put("pollingStationCode", serializeStringResult(it))
+    }
+    vizResult?.registrationCenterCode?.let {
+      vizResultJson.put("registrationCenterCode", serializeStringResult(it))
+    }
+    vizResult?.sectionCode?.let {
+      vizResultJson.put("sectionCode", serializeStringResult(it))
+    }
+    vizResult?.stateCode?.let {
+      vizResultJson.put("stateCode", serializeStringResult(it))
+    }
+    vizResult?.stateName?.let {
+      vizResultJson.put("stateName", serializeStringResult(it))
     }
     vizResult?.dateOfExpiryPermanent?.let {
       vizResultJson.put("dateOfExpiryPermanent", it)
