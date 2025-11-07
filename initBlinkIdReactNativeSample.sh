@@ -23,7 +23,7 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
-IS_LOCAL_BUILD=true || exit 1
+IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
