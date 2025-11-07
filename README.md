@@ -20,6 +20,7 @@ However, since the wrapper is open source, you can add the features you need on 
 - [Plugin usage](#plugin-usage)
 - [Plugin specifics](#plugin-specifics)
   - [Scanning methods](#scanning-methods)
+  - [SDK loading & unloading](#sdk-loading--unloading)
   - [BlinkID Settings](#blinkid-settings)
   - [BlinkID Results](#blinkid-results)
 - [Additional information and Support](#additional-information-and-support)
@@ -30,7 +31,7 @@ A valid license key is required to initialize the BlinkID plugin. A free trial l
 
 ## <a name="requirements"></a> Requirements
 
-- BlinkID React Native was built and tested with [React Native v0.79.0](https://github.com/facebook/react-native/releases/tag/v0.79.0)
+- BlinkID React Native was built and tested with [React Native v0.82.1](https://github.com/facebook/react-native/releases/tag/v0.82.1)
 - For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
 
 **Device requirements**
@@ -347,6 +348,28 @@ The first image Base64 string - `String`: image that represents one side of the 
 The optional second image Base64 string - `String`: needed if the information from back side of the document is required and the `ScanningMode` is set to `automatic`.
 
 - The implementation of the `performDirectApiScanning` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+
+### <a name="sdk-loading--unloading"></a> SDK loading & unloading
+The BlinkID SDK also contains methods for loading and unloading. These methods can be called before the scanning methods (mentioned above), and are helpful to preload the neccessary resources and decrease the waiting time for the scanning session, but also to remove any resources after the scanning sessions ends.
+
+**The `loadBlinkIdSdk` method**
+
+The `loadBlinkIdSdk` method creates or retrieves the instance of the BlinkID SDK It initializes and loads the BlinkID SDK if it is not already loaded.
+
+It can be called in advance to **preload** the SDK before starting a scanning session. Doing so reduces loading time for the `performScan` and `performDirectApiScan` methods, since all resources will already be available and the license verified.
+
+If the method is not called beforehand, it will still be automatically invoked on the native platform channels when a scan starts. However, the initial scan may take longer due to resource loading and license checks.
+
+It takes the following parameter: [BlinkIdSdkSettings](#blinkid-settings), which is explained in more details below.
+
+**The `unloadBlinkIdSdk` method**
+
+The `unloadBlinkIdSdk` platform method terminates the BlinkID SDK and releases all associated resources. It safely shuts down the SDK instance and frees any allocated memory.
+After calling this method, you must reinitialize the SDK (by calling `loadBlinkIdSdk` or any of the scanning methods) before using it again.
+
+If set to `true` (`false` is default), the method performs a **complete cleanup**, including deletion of all downloaded and cached SDK resources from the device.
+
+This method is automatically called after each successful scan session.
 
 ### <a name="blinkid-settings"></a> BlinkID Settings
 The BlinkID SDK contains various settings, modifying different parts of scanning process:

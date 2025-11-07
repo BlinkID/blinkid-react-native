@@ -71,7 +71,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-<<<<<<< HEAD
   "@react-native-community/cli": "17.0.1",
   "react-native": "^0.82.1",
   "del-cli": "^5.1.0",
