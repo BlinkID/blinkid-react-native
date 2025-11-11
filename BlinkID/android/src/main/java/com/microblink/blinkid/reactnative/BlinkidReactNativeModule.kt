@@ -226,6 +226,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
           }
 
           it.close()
+          blinkIdSdk = null
         }?:pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Reason: The BlinkID SDK is not initialized. Call the loadBlinkIdSdk() method to pre-load the SDK first, or try running the performDirectApiScan() method with a valid internet connection.", null)
       } catch (e: Exception) {
         withContext(Dispatchers.Main) {

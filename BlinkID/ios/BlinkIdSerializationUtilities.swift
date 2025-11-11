@@ -320,7 +320,7 @@ class BlinkIdSerializationUtilities {
           "effectiveDate": serializeDateResult(vehicleClassInfo?.effectiveDate),
           "expiryDate":  serializeDateResult(vehicleClassInfo?.expiryDate),
           "licenceType": serializeStringType(vehicleClassInfo?.licenceType),
-          "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass as? String)
+          "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass)
       ]
       return vehicleClassInfoDict.compactMapValues { $0 }
   }
@@ -335,15 +335,17 @@ class BlinkIdSerializationUtilities {
   }
   
   static func serializeSingleSideScanningResult(_ singleSideScanningResult: SingleSideScanningResult?) -> Dictionary<String, Any> {
+      guard let singleSideScanningResult else { return [:] }
+      
       let singleSideScanningDict: [String: Any?] = [
-              "barcode": serializeBarcodeResult(singleSideScanningResult?.barcode),
-              "barcodeInputImage": encodeImage(singleSideScanningResult?.barcodeInputImage?.uiImage),
-              "documentImage": encodeImage(singleSideScanningResult?.documentImage?.uiImage),
-              "faceImage": serializeDetailedCroppedImageResult(singleSideScanningResult?.faceImage),
-              "inputImage": encodeImage(singleSideScanningResult?.inputImage?.uiImage),
-              "mrz": serializeMrzResult(singleSideScanningResult?.mrz),
-              "signatureImage": serializeDetailedCroppedImageResult(singleSideScanningResult?.signatureImage),
-              "viz": serializeVizResult(singleSideScanningResult?.viz)
+              "barcode": serializeBarcodeResult(singleSideScanningResult.barcode),
+              "barcodeInputImage": encodeImage(singleSideScanningResult.barcodeInputImage?.uiImage),
+              "documentImage": encodeImage(singleSideScanningResult.documentImage?.uiImage),
+              "faceImage": serializeDetailedCroppedImageResult(singleSideScanningResult.faceImage),
+              "inputImage": encodeImage(singleSideScanningResult.inputImage?.uiImage),
+              "mrz": serializeMrzResult(singleSideScanningResult.mrz),
+              "signatureImage": serializeDetailedCroppedImageResult(singleSideScanningResult.signatureImage),
+              "viz": serializeVizResult(singleSideScanningResult.viz)
           ]
       
       return singleSideScanningDict.compactMapValues { $0 }
