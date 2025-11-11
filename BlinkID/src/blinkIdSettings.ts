@@ -5,6 +5,7 @@ import {
   DocumentRules,
   DocumentAnonymizationSettings,
   RecognitionModeFilter,
+  PreferredCamera,
 } from "./types";
 
 /**
@@ -49,10 +50,10 @@ export class BlinkIdSdkSettings {
   resourceLocalFolder?: string;
 
   /**
-   * If resources downloading is disabled, this defines the bundle of your app where the resources reside.
+   * [iOS-specific] If resources downloading is disabled, this defines the bundle of your app where the resources reside.
    *
    */
-  bundleURL?: string;
+  bundleIdentifier?: string;
 
   /**
    * Timeout settings for resource downloads.
@@ -82,7 +83,7 @@ export class BlinkIdSdkSettings {
     downloadResources?: boolean,
     resourceDownloadUrl?: string,
     resourceLocalFolder?: string,
-    bundleURL?: string,
+    bundleIdentifier?: string,
     resourceRequestTimeout?: number,
     microblinkProxyURL?: string
   ) {
@@ -91,7 +92,7 @@ export class BlinkIdSdkSettings {
     this.downloadResources = downloadResources;
     this.resourceDownloadUrl = resourceDownloadUrl;
     this.resourceLocalFolder = resourceLocalFolder;
-    this.bundleURL = bundleURL;
+    this.bundleIdentifier = bundleIdentifier;
     this.resourceRequestTimeout = resourceRequestTimeout;
     this.microblinkProxyURL = microblinkProxyURL;
   }
@@ -216,7 +217,7 @@ export class BlinkIdScanningSettings {
    * `low` – less sensitive to tilt.
    * `high` – highly sensitive to tilt.
    *
-   * Default: {@link DetectionLevel.off}
+   * Default: {@link DetectionLevel.Mid}
    */
   tiltDetectionLevel: DetectionLevel;
 
@@ -428,7 +429,7 @@ export class BlinkIdScanningSettings {
     this.skipImagesWithBlur = true;
     this.glareDetectionLevel = DetectionLevel.Mid;
     this.skipImagesWithGlare = true;
-    this.tiltDetectionLevel = DetectionLevel.Off;
+    this.tiltDetectionLevel = DetectionLevel.Mid;
     this.skipImagesWithInadequateLightingConditions = true;
     this.skipImagesOccludedByHand = true;
     this.combineResultsFromMultipleInputImages = true;
@@ -452,7 +453,7 @@ export class BlinkIdScanningSettings {
  * used during the scanning process.
  *
  */
-export class BlinkIdUiSettings {
+export class BlinkIdScanningUxSettings {
   /**
    * A boolean indicating whether to show a help button
    * and enable help screens during the scanning session.
@@ -468,10 +469,32 @@ export class BlinkIdUiSettings {
    * Default: `true`
    */
   showOnboardingDialog: boolean;
+  /**
+   * Determines whether haptic feedback is played for scanning-related events.
+   *
+   * When enabled, haptic responses are generated during scanning activities,
+   * such as detection updates or user interactions (e.g., toggling the flashlight).
+   *
+   * When disabled, no haptic feedback is produced.
+   * Default: `true`
+   */
+  allowHapticFeedback: boolean;
+
+  /**
+   * The preferred camera position to use when capturing document.
+   *
+   * This value represents the user’s choice of front or back camera.
+   * The system determines the actual physical camera device.
+   *
+   * Default: {@link PrefferedCamera.back}
+   */
+  preferredCamera: PreferredCamera;
 
   constructor() {
     this.showHelpButton = true;
     this.showOnboardingDialog = true;
+    this.allowHapticFeedback = true;
+    this.preferredCamera = PreferredCamera.Back;
   }
 }
 

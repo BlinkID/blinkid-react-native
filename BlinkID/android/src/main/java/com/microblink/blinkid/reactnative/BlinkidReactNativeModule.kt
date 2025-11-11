@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 import org.json.JSONObject
 
 @ReactModule(name = BlinkidReactNativeModule.NAME)
@@ -27,17 +28,61 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
   NativeBlinkidReactNativeSpec(reactContext) {
   private val BLINKID_REQUEST_CODE = 1453
   private val BLINKID_ERROR_RESULT_CODE = "BlinkIdAndroid"
-
   var pendingPromise: Promise? = null
+  private var blinkIdSdk: BlinkIdSdk? = null
 
   override fun getName(): String {
     return NAME
   }
 
+  override fun loadBlinkIdSdk(
+    blinkIdSdkSettings: String?,
+    promise: Promise?
+  ) {
+    pendingPromise = promise
+    CoroutineScope(Dispatchers.Main).launch {
+      try {
+        val blinkIdSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
+        ensureLoadedSdk(blinkIdSettingsJson)
+        pendingPromise?.resolve("")
+      } catch (error: Exception) {
+        blinkIdSdk = null
+        when (error) {
+          is LicenseLockedException -> {
+            pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
+          }
+          else -> {
+            pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, error.message)
+          }
+        }
+      }
+    }
+  }
+
+  override fun unloadBlinkIdSdk(
+    deleteCachedResources: Boolean,
+    promise: Promise?
+  ) {
+    try {
+      pendingPromise = promise
+      if (deleteCachedResources) {
+          BlinkIdSdk.sdkInstance?.closeAndDeleteCachedAssets()
+        } else {
+          BlinkIdSdk.sdkInstance?.close()
+        }
+        blinkIdSdk = null
+        pendingPromise?.resolve("")
+    } catch (exception: Exception) {
+      blinkIdSdk = null
+      pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, exception.message, null)
+    }
+  }
+
   init {
     reactApplicationContext.addActivityEventListener(object : BaseActivityEventListener() {
+
       override fun onActivityResult(
-        activity: Activity?,
+        activity: Activity,
         requestCode: Int,
         resultCode: Int,
         data: Intent?
@@ -76,7 +121,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
   override fun performScan(
     blinkIdSdkSettings: String?,
     blinkIdSessionSettings: String?,
-    blinkIdUiSettings: String?,
+    blinkIdScanningUxSettings: String?,
     classFilter: String?,
     promise: Promise?
   ) {
@@ -86,7 +131,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
       val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
       val classFilterJson = classFilter?.let { JSONObject(it) }
-      val blinkIdUiSettingsJson = blinkIdUiSettings?.let { JSONObject(it) }
+      val blinkIdScanningUxJson = blinkIdScanningUxSettings?.let { JSONObject(it) }
       val sdkSettings = sdkSettingsJson?.let {
         BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(it)
       } ?: run {
@@ -94,25 +139,26 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
         return
       }
 
-      currentActivity?.applicationContext?.let {
-        val intent = MbBlinkIdScan().createIntent(
+      reactApplicationContext.currentActivity?.applicationContext?.let {
+      val intent = MbBlinkIdScan().createIntent(
           it,
           BlinkIdScanActivitySettings(
             sdkSettings = sdkSettings,
+            cameraSettings = BlinkIdDeserializationUtilities.deserializeCameraSettings(blinkIdScanningUxJson),
             scanningSessionSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
               sessionSettingsJson,
               false
             ),
-            uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdUxSettings(
-              sessionSettingsJson,
+            uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdScanningUxSettings(
+              blinkIdScanningUxJson,
               classFilterJson,
             ),
-            showHelpButton = blinkIdUiSettingsJson?.optBoolean("showHelpButton", true)?: true,
-            showOnboardingDialog = blinkIdUiSettingsJson?.optBoolean("showOnboardingDialog", true) ?: true
+            showHelpButton = blinkIdScanningUxJson?.optBoolean("showHelpButton", true)?: true,
+            showOnboardingDialog = blinkIdScanningUxJson?.optBoolean("showOnboardingDialog", true) ?: true
           )
         )
         addReactNativePinglet(it)
-        currentActivity?.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
+        reactApplicationContext.startActivityForResult(intent, BLINKID_REQUEST_CODE, null)
       } ?: pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Activity not found.")
     } catch (error: Exception) {
       when (error) {
@@ -134,74 +180,54 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     secondImage: String?,
     promise: Promise?
   ) {
+    pendingPromise = promise
     CoroutineScope(Dispatchers.Default).launch {
       try {
         val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
         val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
 
-        val sdkSettings =
-          BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(sdkSettingsJson)
-            ?: return@launch withContext(Dispatchers.Main) {
-              promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
-            }
-
-        val context = currentActivity?.applicationContext
+        val context = reactApplicationContext.applicationContext
           ?: return@launch withContext(Dispatchers.Main) {
             promise?.reject(BLINKID_ERROR_RESULT_CODE, "No activity")
           }
-
-        val sdkInit = BlinkIdSdk.initializeSdk(context, sdkSettings)
-
-        addReactNativePinglet(context)
-
-        when {
-          sdkInit.isSuccess -> {
-            val instance = sdkInit.getOrNull() ?: return@launch withContext(Dispatchers.Main) {
-              promise?.reject(BLINKID_ERROR_RESULT_CODE, "SDK returned null instance")
-            }
-
-            val session = instance.createScanningSession(
-              BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
-                sessionSettingsJson,
-                true
-              )
+        blinkIdSdk = ensureLoadedSdk(sdkSettingsJson)
+        blinkIdSdk?.let {
+          addReactNativePinglet(context)
+          val session = it.createScanningSession(
+            BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
+              sessionSettingsJson,
+              true
             )
+          )
 
-            val inputImages = listOfNotNull(
-              firstImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) },
-              secondImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) }
-            )
+          val inputImages = listOfNotNull(
+            firstImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) },
+            secondImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) }
+          )
 
-            var result: Result<BlinkIdProcessResult>? = null
+          var result: Result<BlinkIdProcessResult>? = null
 
-            for (img in inputImages) {
-              result = session.process(InputImage.createFromBitmap(img))
-            }
-
-            if (result?.isSuccess == true) {
-              val scanResult = session.getResult()
-              val resultJson =
-                BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
-
-              withContext(Dispatchers.Main) {
-                promise?.resolve(resultJson.toString())
-              }
-            } else {
-              withContext(Dispatchers.Main) {
-                promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
-              }
-            }
-
-            instance.close()
+          for (img in inputImages) {
+            result = session.process(InputImage.createFromBitmap(img))
           }
 
-          sdkInit.isFailure -> {
-            return@launch withContext(Dispatchers.Main) {
-              promise?.reject(BLINKID_ERROR_RESULT_CODE, sdkInit.exceptionOrNull()?.message)
+          if (result?.isSuccess == true) {
+            val scanResult = session.getResult()
+            val resultJson =
+              BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
+
+            withContext(Dispatchers.Main) {
+              promise?.resolve(resultJson.toString())
+            }
+          } else {
+            withContext(Dispatchers.Main) {
+              promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
             }
           }
-        }
 
+          it.close()
+          blinkIdSdk = null
+        }?:pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Reason: The BlinkID SDK is not initialized. Call the loadBlinkIdSdk() method to pre-load the SDK first, or try running the performDirectApiScan() method with a valid internet connection.", null)
       } catch (e: Exception) {
         withContext(Dispatchers.Main) {
           promise?.reject(BLINKID_ERROR_RESULT_CODE, e.message)
@@ -209,6 +235,32 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       }
     }
   }
+
+  private suspend fun ensureLoadedSdk(blinkidSdkSettings: JSONObject?): BlinkIdSdk? {
+
+    blinkIdSdk?.let { return it }
+
+    val sdkSettings = BlinkIdDeserializationUtilities
+      .deserializeBlinkIdSdkSettings(blinkidSdkSettings)?: throw IllegalStateException("Incorrect SDK Settings.")
+
+    reactApplicationContext.currentActivity?.let {
+      val maybeInstance = BlinkIdSdk.initializeSdk(it, sdkSettings)
+      when {
+        maybeInstance.isSuccess -> {
+          blinkIdSdk = maybeInstance.getOrNull()
+          return blinkIdSdk
+        }
+
+        maybeInstance.isFailure -> {
+          blinkIdSdk = null
+          throw maybeInstance.exceptionOrNull() ?: IllegalStateException("SDK initialization failed.")
+        }
+      }
+    }?: throw IllegalStateException("Activity not available.")
+
+    return null
+  }
+
   private fun addReactNativePinglet(context: Context) {
     PingManager.getInstance(context).add(
       WrapperProductInfo(

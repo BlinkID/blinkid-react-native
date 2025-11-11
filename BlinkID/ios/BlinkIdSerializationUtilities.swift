@@ -117,6 +117,9 @@ class BlinkIdSerializationUtilities {
       if let vehicleType = scanningResult?.vehicleType {
           scanningResultDict["vehicleType"] = serializeStringResult(vehicleType)
       }
+      if let vehicleOwner = scanningResult?.vehicleOwner {
+          scanningResultDict["vehicleOwner"] = serializeStringResult(vehicleOwner)
+      }
       if let countryCode = scanningResult?.countryCode {
           scanningResultDict["countryCode"] = serializeStringResult(countryCode)
       }
@@ -146,6 +149,36 @@ class BlinkIdSerializationUtilities {
       }
       if let dateOfExpiry = scanningResult?.dateOfExpiry {
           scanningResultDict["dateOfExpiry"] = serializeDateResult(dateOfExpiry)
+      }
+      if let dateOfEntry = scanningResult?.dateOfEntry {
+          scanningResultDict["dateOfEntry"] = serializeDateResult(dateOfEntry)
+      }
+      if let localityCode = scanningResult?.localityCode {
+          scanningResultDict["localityCode"] = serializeStringResult(localityCode)
+      }
+      if let maidenName = scanningResult?.maidenName {
+          scanningResultDict["maidenName"] = serializeStringResult(maidenName)
+      }
+      if let municipalityCode = scanningResult?.municipalityCode {
+          scanningResultDict["municipalityCode"] = serializeStringResult(municipalityCode)
+      }
+      if let municipalityOfRegistration = scanningResult?.municipalityOfRegistration {
+          scanningResultDict["municipalityOfRegistration"] = serializeStringResult(municipalityOfRegistration)
+      }
+      if let pollingStationCode = scanningResult?.pollingStationCode {
+          scanningResultDict["pollingStationCode"] = serializeStringResult(pollingStationCode)
+      }
+      if let registrationCenterCode = scanningResult?.registrationCenterCode {
+          scanningResultDict["registrationCenterCode"] = serializeStringResult(registrationCenterCode)
+      }
+      if let sectionCode = scanningResult?.sectionCode {
+          scanningResultDict["sectionCode"] = serializeStringResult(sectionCode)
+      }
+      if let stateCode = scanningResult?.stateCode {
+          scanningResultDict["stateCode"] = serializeStringResult(stateCode)
+      }
+      if let stateName = scanningResult?.stateName {
+          scanningResultDict["stateName"] = serializeStringResult(stateName)
       }
       if let driverLicenseDetailedInfo = scanningResult?.driverLicenseDetailedInfo {
           scanningResultDict["driverLicenseDetailedInfo"] = serializeDriverLicenseDetailedInfo(driverLicenseDetailedInfo)
@@ -287,7 +320,7 @@ class BlinkIdSerializationUtilities {
           "effectiveDate": serializeDateResult(vehicleClassInfo?.effectiveDate),
           "expiryDate":  serializeDateResult(vehicleClassInfo?.expiryDate),
           "licenceType": serializeStringType(vehicleClassInfo?.licenceType),
-          "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass as? String)
+          "vehicleClass": serializeStringType(vehicleClassInfo?.vehicleClass)
       ]
       return vehicleClassInfoDict.compactMapValues { $0 }
   }
@@ -302,15 +335,17 @@ class BlinkIdSerializationUtilities {
   }
   
   static func serializeSingleSideScanningResult(_ singleSideScanningResult: SingleSideScanningResult?) -> Dictionary<String, Any> {
+      guard let singleSideScanningResult else { return [:] }
+      
       let singleSideScanningDict: [String: Any?] = [
-              "barcode": serializeBarcodeResult(singleSideScanningResult?.barcode),
-              "barcodeInputImage": encodeImage(singleSideScanningResult?.barcodeInputImage?.uiImage),
-              "documentImage": encodeImage(singleSideScanningResult?.documentImage?.uiImage),
-              "faceImage": serializeDetailedCroppedImageResult(singleSideScanningResult?.faceImage),
-              "inputImage": encodeImage(singleSideScanningResult?.inputImage?.uiImage),
-              "mrz": serializeMrzResult(singleSideScanningResult?.mrz),
-              "signatureImage": serializeDetailedCroppedImageResult(singleSideScanningResult?.signatureImage),
-              "viz": serializeVizResult(singleSideScanningResult?.viz)
+              "barcode": serializeBarcodeResult(singleSideScanningResult.barcode),
+              "barcodeInputImage": encodeImage(singleSideScanningResult.barcodeInputImage?.uiImage),
+              "documentImage": encodeImage(singleSideScanningResult.documentImage?.uiImage),
+              "faceImage": serializeDetailedCroppedImageResult(singleSideScanningResult.faceImage),
+              "inputImage": encodeImage(singleSideScanningResult.inputImage?.uiImage),
+              "mrz": serializeMrzResult(singleSideScanningResult.mrz),
+              "signatureImage": serializeDetailedCroppedImageResult(singleSideScanningResult.signatureImage),
+              "viz": serializeVizResult(singleSideScanningResult.viz)
           ]
       
       return singleSideScanningDict.compactMapValues { $0 }
@@ -638,6 +673,36 @@ class BlinkIdSerializationUtilities {
             }
             if let nationalInsuranceNumber = vizResult.nationalInsuranceNumber {
                 vizResultDict["nationalInsuranceNumber"] = serializeStringResult(nationalInsuranceNumber)
+            }
+            if let dateOfEntry = vizResult.dateOfEntry {
+                vizResultDict["dateOfEntry"] = serializeDateResult(dateOfEntry)
+            }
+            if let localityCode = vizResult.localityCode {
+                vizResultDict["localityCode"] = serializeStringResult(localityCode)
+            }
+            if let maidenName = vizResult.maidenName {
+                vizResultDict["maidenName"] = serializeStringResult(maidenName)
+            }
+            if let municipalityCode = vizResult.municipalityCode {
+                vizResultDict["municipalityCode"] = serializeStringResult(municipalityCode)
+            }
+            if let municipalityOfRegistration = vizResult.municipalityOfRegistration {
+                vizResultDict["municipalityOfRegistration"] = serializeStringResult(municipalityOfRegistration)
+            }
+            if let pollingStationCode = vizResult.pollingStationCode {
+                vizResultDict["pollingStationCode"] = serializeStringResult(pollingStationCode)
+            }
+            if let registrationCenterCode = vizResult.registrationCenterCode {
+                vizResultDict["registrationCenterCode"] = serializeStringResult(registrationCenterCode)
+            }
+            if let sectionCode = vizResult.sectionCode {
+                vizResultDict["sectionCode"] = serializeStringResult(sectionCode)
+            }
+            if let stateCode = vizResult.stateCode {
+                vizResultDict["stateCode"] = serializeStringResult(stateCode)
+            }
+            if let stateName = vizResult.stateName {
+                vizResultDict["stateName"] = serializeStringResult(stateName)
             }
         }
         return vizResultDict

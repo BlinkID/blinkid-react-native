@@ -2,7 +2,7 @@ import { BlinkIdScanningResult } from "./blinkIdResult";
 import type {
   BlinkIdSdkSettings,
   BlinkIdSessionSettings,
-  BlinkIdUiSettings,
+  BlinkIdScanningUxSettings,
 } from "./blinkIdSettings";
 import BlinkidReactNative from "./NativeBlinkidReactNative";
 import type { ClassFilter } from "./types";
@@ -12,7 +12,7 @@ export {
   BlinkIdScanningSettings,
   BlinkIdSdkSettings,
   BlinkIdSessionSettings,
-  BlinkIdUiSettings,
+  BlinkIdScanningUxSettings,
   CroppedImageSettings,
 } from "./blinkIdSettings";
 
@@ -20,6 +20,53 @@ export { BlinkIdScanningResult } from "./blinkIdResult";
 
 // Types & enums
 export * from "./types";
+
+/**  The `loadBlinkIdSdk` method creates or retrieves the instance of the BlinkID SDK.
+ *
+ * Initializes and loads the BlinkID SDK if it is not already loaded.
+ *
+ * This method handles:
+ * - SDK initialization
+ * - Resource downloading
+ * - License verification
+ *
+ * It ensures that only one SDK instance exists at any time.
+ *
+ * You can call this method in advance to **preload** the SDK before starting a scanning session.
+ * Doing so reduces loading time for the {@link performScan} and {@link performDirectApiScan} methods,
+ * since all resources will already be available and the license verified.
+ *
+ * If you do not call this method beforehand, it will still be automatically invoked on the native platform channels
+ * when a scan starts. However, the initial scan may take longer due to resource loading and license checks.
+ *
+ * @param blinkIdSdkSettings - {@link BlinkIdSdkSettings} - the class that contains all of the available SDK settings.
+ * It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+ *
+ * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
+ */
+export async function loadBlinkIdSdk(
+  blinkIdSdkSettings: BlinkIdSdkSettings
+): Promise<void> {
+  await BlinkidReactNative.loadBlinkIdSdk(JSON.stringify(blinkIdSdkSettings));
+}
+
+/**
+ * The `unloadBlinkIdSdk` method terminates the BlinkID SDK and releases all associated resources.
+ *
+ * This method safely shuts down the SDK instance and frees any allocated memory.
+ * After calling this method, you must reinitialize the SDK (by calling {@link loadBlinkIdSdk}
+ * or any of the scanning methods) before using it again.
+ *
+ * This method is automatically called after each successful scan session.
+ *
+ * @param deleteCachedResources - if set to `true` (`false` is default), the method performs a **complete cleanup**,
+ * including deletion of all downloaded and cached SDK resources from the device.
+ */
+export async function unloadBlinkIdSdk(
+  deleteCachedResources: boolean
+): Promise<void> {
+  await BlinkidReactNative.unloadBlinkIdSdk(deleteCachedResources);
+}
 
 /**
  * The `performScan` method launches the BlinkID scanning process with the default UX properties.
@@ -35,7 +82,7 @@ export * from "./types";
  * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the {@link ScanningMode} and
  * {@link BlinkIdScanningSettings}, which define various parameters that control the scanning process.
  *
- * @param blinkIdUiSettings - BlinkID UI Settings - the class that allows customization of various aspects of the UI used during the scanning process.
+ * @param blinkIdUiSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
  *
  * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session.
  * See {@link ClassFilter} for more implementation information.
@@ -47,13 +94,13 @@ export * from "./types";
 export async function performScan(
   blinkIdSdkSettings: BlinkIdSdkSettings,
   blinkIdSessionSettings: BlinkIdSessionSettings,
-  blinkIdUiSettings?: BlinkIdUiSettings,
+  blinkIdScanningUxSettings?: BlinkIdScanningUxSettings,
   classFilter?: ClassFilter
 ): Promise<BlinkIdScanningResult> {
   const jsonResult = await BlinkidReactNative.performScan(
     JSON.stringify(blinkIdSdkSettings),
     JSON.stringify(blinkIdSessionSettings),
-    JSON.stringify(blinkIdUiSettings),
+    JSON.stringify(blinkIdScanningUxSettings),
     JSON.stringify(classFilter)
   );
   return new BlinkIdScanningResult(JSON.parse(jsonResult));

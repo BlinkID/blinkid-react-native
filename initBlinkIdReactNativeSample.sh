@@ -3,7 +3,7 @@
 blink_id_plugin_path=`pwd`/BlinkID
 appName=BlinkIdSample
 appId=com.microblink.sample
-rn_version="0.79.0"
+rn_version="0.82.0"
 
 # Remove any existing code
 rm -rf $appName
@@ -23,7 +23,7 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
-IS_LOCAL_BUILD=true || exit 1
+IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
@@ -37,7 +37,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
 
   # Go the sample folder and install the library
   popd > /dev/null
-  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.5.0.tgz
+  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.6.0.tgz
 
 else
   # Download BlinkID React Native via NPM

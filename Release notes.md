@@ -1,3 +1,100 @@
+## v7.6.0
+
+- Updated to [Android SDK v7.6.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.6.0) and [iOS SDK v7.6.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.6.0)
+
+### What's New
+- Added two new methods in `BlinkidReactNative`: `loadBlinkIdSdk` & `unloadBlinkIdSdk`
+    - `loadBlinkIdSdk` - Initializes and loads the BlinkID SDK if it is not already loaded. This method can be called in advance to **preload** the SDK before starting a scanning session. Doing so reduces loading time for the `performScan` and `performDirectApiScan` methods since all resources will already be available and the license verified.
+    - `unloadBlinkIdSdk` - Terminates the BlinkID SDK and releases all associated resources. This method safely shuts down the SDK instance and frees any allocated memory. If the parameter `deleteCachedResources` is set to `true`, the method performs a complete cleanup, including deletion of all downloaded and cached SDK resources from the device.
+- You can now configure the SDK to load resources locally instead of downloading them. Set `downloadResources` to false, and provide the local resource path using `resourceLocalFolder` (Android) and `bundleIdentifier` (iOS).
+- Added support for capturing the back of US and India passports that feature a barcode
+- Prevent parsing of two-line MRZ in TD1 format unless it's explicitly allowed. This will prevent false positive MRZ extraction on documents where the last line of the MRZ is covered or not fully visible
+
+### New Documents Support
+- Angola - Paper Passport
+- Bahrain - Polycarbonate Passport
+- Burkina Faso - Polycarbonate Passport
+- Cameroon - Driver's License
+- Canada, Manitoba - Metis Federation Card
+- East Timor - Polycarbonate Passport
+- El Salvador - Paper Passport
+- Eritrea - Paper Passport
+- France - Adr Certificate
+- Germany - Adr Certificate
+- Ghana - Voter ID
+- India, Telangana - Driver's License
+- Ivory Coast - Paper Passport
+- Japan - Polycarbonate Passport
+- Liberia - Paper Passport
+- Liberia - Voter ID
+- Malawi - Identity Card
+- Malawi - Paper Passport
+- Maldives - Polycarbonate Passport
+- Mali - Paper Passport
+- Mauritius - Paper Passport
+- Oman - Vehicle Registration
+- Paraguay - Polycarbonate Passport
+- Rwanda - Driver's License
+- Senegal - Driver's License
+- Sierra Leone - Paper Passport
+- Somalia - Paper Passport
+- Switzerland - Adr Certificate
+- Togo - Driver's License
+- Togo - Paper Passport
+- USA, Maryland - Medical Marijuana ID
+- Vietnam - Paper Passport
+
+#### New Document Versions for Supported Documents
+- Chile - Polycarbonate Passport
+- India - Paper Passport
+- Moldova - Identity Card
+- Pakistan - Identity Card
+- Peru - Identity Card
+- Romania - Identity Card
+- Slovakia - Identity Card
+- USA, California - Driver's License
+- USA, California - Identity Card
+- USA, New Hampshire - Identity Card
+- USA, Georgia - Medical Marijuana ID
+- USA, Pennsylvania - Medical Marijuana ID
+- USA, South Carolina - Driver's License
+- USA, South Carolina - Identity Card
+- USA, Texas - Driver's License
+- USA, Texas - Identity Card
+
+##### New Segments Supported on Documents
+- Switzerland, Residence Permit - `dateOfEntry`
+- Hungary, Identity Card - `maidenName`, `nationality`, `sexOrGender`, `documentNumber`, `dateOfBirth`
+- Greece, Identity Card - `fathersName` (Latin and Greek), `mothersName` (Latin and Greek), `personalIdNumber`, `issuingAuthority` (Greek), `municipalityOfRegistration` (Greek)
+- Mexico, Voter ID - `sectionCode`, `stateCode`, `municipalityCode`, `localityCode`
+- Mexico, Consular Voter ID - `stateCode`, `stateName`
+
+##### Renamed segments
+- Hungary - Identity Card - `additionalNameInformation` -> `mothersName`
+
+### New languages
+- Added 33 new languages (see full list [here](https://github.com/BlinkID/blinkid-android?tab=readme-ov-file#-new-languages-v76))
+
+### Breaking changes
+- Renamed the `bundleURL` to `bundleIdentifier` in `BlinkIdSdkSettings`.
+- Renamed `BlinkIdUiSettings` to `BlinkIdScanningUxSettings`.
+
+### Native platform changes
+**iOS**
+- The SDK was built with Xcode 26
+
+**Android**
+- Updated Kotlin to `v2.0.21` in the `blinkid-core` library. The `blinkid-ux` and `microblink-ux` libraries already used Kotlin `v2.1.20`.
+- Target SDK updated to API Level 36
+
+### Bugfixes
+- Fixed issues with React Native v0.8 compatibility.
+- Users are no longer forced to scan back sides of Alien and Refugee passports
+- Fixed the issue with Togo ID where document number from VIZ was overriden by a wrong value from MRZ
+
+### Other changes
+- Changed default `tiltDetectionLevel` from `Off` to `Mid`
+
 ## v7.5.0
 
 - Updated to [Android SDK v7.5.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.5.0) and [iOS SDK v7.5.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.5.0)

@@ -25,7 +25,8 @@ import {
   performDirectApiScan,
   DetectionLevel,
   AnonymizationMode,
-  BlinkIdUiSettings,
+  BlinkIdScanningUxSettings,
+  PreferredCamera,
 } from "@microblink/blinkid-react-native";
 
 import { BlinkIdResultBuilder } from "./BlinkIdResultBuilder";
@@ -53,10 +54,21 @@ export default function App() {
   >();
 
   const licenseKey = Platform.select({
-    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRnMk1qVXhNVEV3T1Rnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9Pc8snatOV5SnR23Izz/uVmAxlnjnKTX5yTXm0dgc5MlwEfBm78B0zTyIs+M1V6v1X3ki3fRM+oR0s6TrzSyQMOfiVz7pfds3nrkMFi7TJszhagRgIyFceyoBM6wEbJU=",
+    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTmpJeE56QTROVE01Tnpnc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PYp8/JA4wSFGiNehLMfx8e5TtiIcdUR0YKx2/x/XlY+a10Qzw9Jsm/+aZS0QMqn14qrI6pmDxwkACGS4XkicR81ECuJIKtxe+7Tc/rLcmO2wjnFwuATJm69ERvdGDPw=",
     android:
-      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTlRnMk1qVXdNVEUwTVRFc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PUNjywBb+jl19HvimWYl9nT65zjTggOygi15/sM0R5q/pxIaxO2Z/bp6Ns/lePdj7abWCk+9+BYzaGleKLNh+psPaanLy65HsWCAlfy7sy/EvmtxL6TnxnT0+twgVW0=",
+      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTmpJeE56QTRNakF3TkRRc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRpURkVPwuO0koYgtsId0UoOnkvZdrc5+ewfldLFcoG9SoE1NurAQ6fYusivk5aUxIRrbWM7ak7bZfr/Y8ud9ayh2GEgB96T6uufqumXoW22/XJDPAcU4Mp8uzbIjps=",
   })!;
+
+  /**
+   * NOTE: if needed, the SDK can be pre-loaded before the scanning session starts.
+   * This will ensure that the SDK is initialized, that the resources have been obtained, and the license verified.
+   * This results in reducing the loading time of the scanning sessions.
+   * To do this, call the loadBlinkIdMethod:
+   * loadBlinkIdSdk(new BlinkIdSdkSettings(licenseKey));
+   *
+   * To unload the SDK, or to be more precise, terminate the BlinkID SDK and releases all associated resources, call:
+   * await unloadBlinkIdSdk(true);
+   */
 
   const handlePerformScan = async () => {
     try {
@@ -103,9 +115,11 @@ export default function App() {
        * Modify BlinkID UI settings.
        * This parameter is optional
        */
-      const blinkIdUiSettings = new BlinkIdUiSettings();
-      blinkIdUiSettings.showHelpButton = true;
-      blinkIdUiSettings.showOnboardingDialog = false;
+      const blinkIdScanningUxSettings = new BlinkIdScanningUxSettings();
+      blinkIdScanningUxSettings.showHelpButton = true;
+      blinkIdScanningUxSettings.showOnboardingDialog = true;
+      blinkIdScanningUxSettings.allowHapticFeedback = true;
+      blinkIdScanningUxSettings.preferredCamera = PreferredCamera.Back;
 
       /**
        * Add the document class filter. This parameter is optional.
@@ -120,7 +134,7 @@ export default function App() {
        * Call the performScan method, where the SDK and session settings need to be passed
        * Here, you can also pass the optional ClassFilter.
        */
-      await performScan(sdkSettings, sessionSettings, blinkIdUiSettings) // -> classFilter
+      await performScan(sdkSettings, sessionSettings, blinkIdScanningUxSettings) // -> classFilter
         .then((result: BlinkIdScanningResult) => {
           //handle the results here.
           setResult(BlinkIdResultBuilder.getIdResultString(result));

@@ -225,6 +225,12 @@ export class BlinkIdScanningResult {
   manufacturingYear?: StringResult;
 
   /**
+   * The vehicle owner.
+   *
+   */
+  vehicleOwner?: StringResult;
+
+  /**
    * The vehicle type.
    *
    */
@@ -289,6 +295,65 @@ export class BlinkIdScanningResult {
    *
    */
   dateOfExpiryPermanent?: boolean;
+  /**
+   * The date of entry of the document owner.
+   *
+   */
+  dateOfEntry?: DateResult<StringResult>;
+
+  /**
+   * The locality code of the document owner.
+   *
+   */
+  localityCode?: StringResult;
+
+  /**
+   * The maiden name of the document owner.
+   *
+   */
+  maidenName?: StringResult;
+
+  /**
+   * The municipality code of the document owner.
+   *
+   */
+  municipalityCode?: StringResult;
+
+  /**
+   * The municipality of registration of the document owner.
+   *
+   */
+  municipalityOfRegistration?: StringResult;
+
+  /**
+   * The polling station code of the document owner.
+   *
+   */
+  pollingStationCode?: StringResult;
+
+  /**
+   * The registration center code of the document owner.
+   *
+   */
+  registrationCenterCode?: StringResult;
+
+  /**
+   * The section code of the document owner.
+   *
+   */
+  sectionCode?: StringResult;
+
+  /**
+   * The state code of the document owner.
+   *
+   */
+  stateCode?: StringResult;
+
+  /**
+   * The state of the document owner.
+   *
+   */
+  stateName?: StringResult;
 
   /**
    * The driver license detailed info.
@@ -573,6 +638,13 @@ export class BlinkIdScanningResult {
      *
      */
     this.manufacturingYear = nativeBlinkIdResult.manufacturingYear;
+
+    /**
+     * The vehicle owner.
+     *
+     */
+    this.vehicleOwner = nativeBlinkIdResult.vehicleOwner;
+
     /**
      * The vehicle type.
      *
@@ -633,6 +705,67 @@ export class BlinkIdScanningResult {
      *
      */
     this.dateOfExpiry = nativeBlinkIdResult.dateOfExpiry;
+
+    /**
+     * The date of entry of the document owner.
+     *
+     */
+    this.dateOfEntry = nativeBlinkIdResult.dateOfEntry;
+
+    /**
+     * The locality code of the document owner.
+     *
+     */
+    this.localityCode = nativeBlinkIdResult.localityCode;
+
+    /**
+     * The maiden name of the document owner.
+     *
+     */
+    this.maidenName = nativeBlinkIdResult.maidenName;
+
+    /**
+     * The municipality code of the document owner.
+     *
+     */
+    this.municipalityCode = nativeBlinkIdResult.municipalityCode;
+
+    /**
+     * The municipality of registration of the document owner.
+     *
+     */
+    this.municipalityOfRegistration =
+      nativeBlinkIdResult.municipalityOfRegistration;
+
+    /**
+     * The polling station code of the document owner.
+     *
+     */
+    this.pollingStationCode = nativeBlinkIdResult.pollingStationCode;
+
+    /**
+     * The registration center code of the document owner.
+     *
+     */
+    this.registrationCenterCode = nativeBlinkIdResult.registrationCenterCode;
+
+    /**
+     * The section code of the document owner.
+     *
+     */
+    this.sectionCode = nativeBlinkIdResult.sectionCode;
+
+    /**
+     * The state code of the document owner.
+     *
+     */
+    this.stateCode = nativeBlinkIdResult.stateCode;
+
+    /**
+     * The state of the document owner.
+     *
+     */
+    this.stateName = nativeBlinkIdResult.stateName;
 
     /**
      * Determines if date of expiry is permanent.

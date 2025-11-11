@@ -23,12 +23,12 @@ import os.log
 import os
 public actor BlinkIDEventStream : BlinkIDUX.EventStream {
   public init()
+  @objc deinit
   public func send(_ events: [BlinkIDUX.UIEvent])
   public var stream: _Concurrency.AsyncStream<[BlinkIDUX.UIEvent]> {
     get
   }
   public typealias Event = BlinkIDUX.UIEvent
-  @objc deinit
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   @_semantics("defaultActor") nonisolated final public var unownedExecutor: _Concurrency.UnownedSerialExecutor {
     get
@@ -54,7 +54,7 @@ public actor BlinkIDAnalyzer : BlinkIDUX.CameraFrameAnalyzer {
   public func pause()
   public func resume()
   public func restart() throws
-  public func end() async
+  public func end()
   nonisolated public var events: any BlinkIDUX.EventStream<BlinkIDUX.UIEvent> {
     get
   }
@@ -95,11 +95,10 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
-  @_Concurrency.MainActor override public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = true, showHelpButton: Swift.Bool = true, sessionNumber: Swift.Int)
+  @_Concurrency.MainActor override public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, uxSettings: BlinkIDUX.ScanningUXSettings = ScanningUXSettings(), sessionNumber: Swift.Int)
   @_Concurrency.MainActor override final public func analyze() async
   @_Concurrency.MainActor override final public func processAnalyzerResult() async
   @_Concurrency.MainActor override final public func licenseErrorAlertDismised()
-  @_Concurrency.MainActor override final public func scanningDidCancel()
   @_Concurrency.MainActor override final public func timeoutAlertDismised()
   @_Concurrency.MainActor final public func finishScan() async
   @objc deinit
@@ -184,9 +183,23 @@ public enum DocumentSide : Swift.Sendable, Swift.Equatable {
   case back
   case barcode
   case passport(BlinkIDUX.PassportOrientation)
+  case passportBarcode
   public static func == (a: BlinkIDUX.DocumentSide, b: BlinkIDUX.DocumentSide) -> Swift.Bool
 }
 @_Concurrency.MainActor final public class Camera : BlinkIDUX.CameraModel {
+  public enum CameraPosition : Swift.Equatable {
+    case back
+    case front
+    public static func == (a: BlinkIDUX.Camera.CameraPosition, b: BlinkIDUX.Camera.CameraPosition) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor final public var preferredCamera: BlinkIDUX.Camera.CameraPosition {
+    get
+    set
+  }
   @Combine.Published @_projectedValueProperty($status) @_Concurrency.MainActor final public var status: BlinkIDUX.CameraStatus {
     get
   }
@@ -349,6 +362,9 @@ public protocol AlertTypeProtocol {
   var title: Swift.String { get }
   var description: Swift.String { get }
 }
+public struct ScanningUXSettings {
+  public init(showIntroductionAlert: Swift.Bool = true, showHelpButton: Swift.Bool = true, preferredCameraPosition: BlinkIDUX.Camera.CameraPosition = .back, allowHapticFeedback: Swift.Bool = true)
+}
 @_Concurrency.MainActor public class ScanningViewModel<T, U> : Foundation.ObservableObject {
   @Combine.Published @_projectedValueProperty($scanningResult) @_Concurrency.MainActor public var scanningResult: T? {
     get
@@ -430,7 +446,7 @@ public protocol AlertTypeProtocol {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
-  @_Concurrency.MainActor public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, shouldShowIntroductionAlert: Swift.Bool = false, showHelpButton: Swift.Bool = false, sessionNumber: Swift.Int)
+  @_Concurrency.MainActor public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, uxSettings: BlinkIDUX.ScanningUXSettings = ScanningUXSettings(), sessionNumber: Swift.Int)
   @objc deinit
   @_Concurrency.MainActor public func analyze() async
   @_Concurrency.MainActor public func processAnalyzerResult() async
@@ -442,7 +458,6 @@ public protocol AlertTypeProtocol {
   @_Concurrency.MainActor public func pauseScanning()
   @_Concurrency.MainActor public func resumeScanning()
   @_Concurrency.MainActor public func restartScanning()
-  @_Concurrency.MainActor public func scanningDidCancel()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
 }
 public protocol UXThemeProtocol {
@@ -523,6 +538,7 @@ public enum UIEvent : Swift.Equatable, Swift.Sendable {
   case tooDark
   case tooBright
   case facePhotoNotFullyVisible
+  case wrongSidePassportWithBarcode
   public static func == (a: BlinkIDUX.UIEvent, b: BlinkIDUX.UIEvent) -> Swift.Bool
 }
 extension BlinkIDUX.BlinkIDScanningAlertType : Swift.Equatable {}
@@ -530,6 +546,7 @@ extension BlinkIDUX.BlinkIDScanningAlertType : Swift.Hashable {}
 extension BlinkIDUX.BlinkIDUXView : Swift.Sendable {}
 extension BlinkIDUX.PassportOrientation : Swift.Hashable {}
 extension BlinkIDUX.Camera : Swift.Sendable {}
+extension BlinkIDUX.Camera.CameraPosition : Swift.Hashable {}
 extension BlinkIDUX.CameraStatus : Swift.Equatable {}
 extension BlinkIDUX.CameraStatus : Swift.Hashable {}
 extension BlinkIDUX.CaptureMode : Swift.Equatable {}

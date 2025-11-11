@@ -10,6 +10,45 @@ import { TurboModuleRegistry } from "react-native";
  * The Turbo Module contains the functions `performScan` and `performDirectApiScan` which enable the BlinkID scanning process, with the default UX properties, and with static images.
  */
 export interface Spec extends TurboModule {
+  /**  The `loadBlinkIdSdk` Turbo Module method creates or retrieves the instance of the BlinkID SDK.
+   *
+   * Initializes and loads the BlinkID SDK if it is not already loaded.
+   *
+   * This method handles:
+   * - SDK initialization
+   * - Resource downloading
+   * - License verification
+   *
+   * It ensures that only one SDK instance exists at any time.
+   *
+   * You can call this method in advance to **preload** the SDK before starting a scanning session.
+   * Doing so reduces loading time for the {@link performScan} and {@link performDirectApiScan} methods,
+   * since all resources will already be available and the license verified.
+   *
+   * If you do not call this method beforehand, it will still be automatically invoked on the native platform channels
+   * when a scan starts. However, the initial scan may take longer due to resource loading and license checks.
+   *
+   * @param blinkIdSdkSettings - {@link BlinkIdSdkSettings} - the class that contains all of the available SDK settings.
+   * It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+   *
+   * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
+   */
+  loadBlinkIdSdk(blinkIdSdkSettings: string): Promise<void>;
+
+  /**
+   * The `unloadBlinkIdSdk` method terminates the BlinkID SDK and releases all associated resources.
+   *
+   * This method safely shuts down the SDK instance and frees any allocated memory.
+   * After calling this method, you must reinitialize the SDK (by calling {@link loadBlinkIdSdk}
+   * or any of the scanning methods) before using it again.
+   *
+   * This method is automatically called after each successful scan session.
+   *
+   * @param deleteCachedResources - if set to `true` (`false` is default), the method performs a **complete cleanup**,
+   * including deletion of all downloaded and cached SDK resources from the device.
+   */
+  unloadBlinkIdSdk(deleteCachedResources: boolean): Promise<void>;
+
   /**
    * The `performScan` Turbo Module method launches the BlinkID scanning process with the default UX properties.
    *
@@ -21,14 +60,14 @@ export interface Spec extends TurboModule {
    *
    * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
    *
-   * @param blinkIdUiSettings - BlinkID UI Settings - the class that allows customization of various aspects of the UI used during the scanning process.
+   * @param blinkIdScanningUxSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
    *
    * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session. See [ClassFilter] for more implementation information.
    */
   performScan(
     blinkIdSdkSettings: string,
     blinkIdSessionSettings: string,
-    blinkIdUiSettings?: string,
+    blinkIdScanningUxSettings?: string,
     classFilter?: string
   ): Promise<string>;
 
