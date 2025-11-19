@@ -65630,6 +65630,46 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "subfieldDesignator",
+            "printedName": "subfieldDesignator",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkID.BarcodeElementKey.Type) -> BlinkID.BarcodeElementKey",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BarcodeElementKey",
+                    "printedName": "BlinkID.BarcodeElementKey",
+                    "usr": "s:7BlinkID17BarcodeElementKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkID.BarcodeElementKey.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BarcodeElementKey",
+                        "printedName": "BlinkID.BarcodeElementKey",
+                        "usr": "s:7BlinkID17BarcodeElementKeyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:7BlinkID17BarcodeElementKeyO18subfieldDesignatoryA2CmF",
+            "mangledName": "$s7BlinkID17BarcodeElementKeyO18subfieldDesignatoryA2CmF",
+            "moduleName": "BlinkID",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
             "kind": "Function",
             "name": "==",
             "printedName": "==(_:_:)",
