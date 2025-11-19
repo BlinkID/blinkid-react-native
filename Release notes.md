@@ -1,3 +1,11 @@
+## v7.6.1
+
+- Updated to [Android SDK v7.6.1](https://github.com/BlinkID/blinkid-android/releases/tag/v7.6.1) and [iOS SDK v7.6.2](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.6.2)
+
+### What's New
+- For some documents document type was returned as None, which was causing confusion. To prevent this, we are filling in document type from the barcode in case customers are using BarcodeId mode.
+- The fix is applied to all the AAMVA types, plus some others (Argentina, Canada, Colombia, Nigeria, Panama, Paraguay, SouthAfrica)
+
 ## v7.6.0
 
 - Updated to [Android SDK v7.6.0](https://github.com/BlinkID/blinkid-android/releases/tag/v7.6.0) and [iOS SDK v7.6.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.6.0)
