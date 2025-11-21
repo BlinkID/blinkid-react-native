@@ -2767,7 +2767,7 @@ export class BarcodeExtendedElements {
    *
    *  For example: ANSI 636010090002DL00410267ZF03080067DLDAQS1234567812300000000000000 ^^ |           | |           +-- SubField Designator (DL, ID, EN, etc.) +----- IIN (636010)
    */
-  subfieldDesignator?: string;
+  subFieldDesignator?: string;
 
   /**
    *
@@ -2890,7 +2890,7 @@ export class BarcodeExtendedElements {
     this.weightKilograms = nativeBarcodeExtendedElements.weightKilograms;
     this.weightPounds = nativeBarcodeExtendedElements.weightPounds;
     this.weightRange = nativeBarcodeExtendedElements.weightRange;
-    this.subfieldDesignator = nativeBarcodeExtendedElements.subfieldDesignator;
+    this.subFieldDesignator = nativeBarcodeExtendedElements.subFieldDesignator;
   }
 }
 
