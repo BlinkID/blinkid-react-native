@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
 // swift-module-flags: -target arm64-apple-ios16.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -module-name BlinkIDUX -package-name blinkid_ios
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 import BlinkID
 import Combine
@@ -44,7 +44,9 @@ public actor BlinkIDAnalyzer : BlinkIDUX.CameraFrameAnalyzer {
   public var stepTimeoutDuration: Foundation.TimeInterval {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(sdk: BlinkID.BlinkIDSdk, blinkIdSessionSettings: BlinkID.BlinkIDSessionSettings = BlinkIDSessionSettings(inputImageSource: .video), eventStream: BlinkIDUX.BlinkIDEventStream, classFilter: (any BlinkIDUX.BlinkIDClassFilter)? = nil) async throws
+  #endif
   nonisolated public var sessionNumber: Swift.Int {
     get
   }
@@ -83,6 +85,7 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
   }
 }
 @_inheritsConvenienceInitializers @_Concurrency.MainActor final public class BlinkIDUXModel : BlinkIDUX.ScanningViewModel<BlinkID.BlinkIDScanningResult, BlinkIDUX.BlinkIDScanningAlertType> {
+  #if compiler(>=5.3) && $NonescapableTypes
   @Combine.Published @_projectedValueProperty($result) @_Concurrency.MainActor final public var result: BlinkIDUX.BlinkIDResultState? {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -90,11 +93,14 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     _modify
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var $result: Combine.Published<BlinkIDUX.BlinkIDResultState?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  #endif
   @_Concurrency.MainActor override public init(analyzer: any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>, uxSettings: BlinkIDUX.ScanningUXSettings = ScanningUXSettings(), sessionNumber: Swift.Int)
   @_Concurrency.MainActor override final public func analyze() async
   @_Concurrency.MainActor override final public func processAnalyzerResult() async
@@ -137,7 +143,9 @@ public enum BlinkIDScanningAlertType : Swift.Sendable, BlinkIDUX.AlertTypeProtoc
 }
 public protocol ScanningResultProtocol : Swift.Sendable {
   associatedtype Result : Swift.Sendable
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated var scanResult: Self.Result? { get }
+  #endif
 }
 public enum ScanningResult<T, U> : BlinkIDUX.ScanningResultProtocol where T : Swift.Sendable, U : Swift.Sendable {
   public typealias Result = T
@@ -145,9 +153,11 @@ public enum ScanningResult<T, U> : BlinkIDUX.ScanningResultProtocol where T : Sw
   case interrupted(U)
   case cancelled
   case ended
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public var scanResult: T? {
     get
   }
+  #endif
 }
 public protocol EventStream<Event> : Swift.Sendable {
   associatedtype Event : Swift.Sendable
@@ -255,7 +265,9 @@ public enum DocumentSide : Swift.Sendable, Swift.Equatable {
   @_Concurrency.MainActor func start() async
   @_Concurrency.MainActor func stop() async
   @_Concurrency.MainActor func focusAndExpose(at point: CoreFoundation.CGPoint) async
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor var error: (any Swift.Error)? { get }
+  #endif
   @_Concurrency.MainActor var isTorchSupported: Swift.Bool { get }
   @_Concurrency.MainActor var isTorchEnabled: Swift.Bool { get set }
   @_Concurrency.MainActor var orientation: AVFoundation.AVCaptureVideoOrientation { get }
@@ -279,7 +291,9 @@ public enum CaptureMode : Swift.String, Swift.Identifiable, Swift.CaseIterable {
     get
   }
   case video
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias AllCases = [BlinkIDUX.CaptureMode]
   public typealias ID = BlinkIDUX.CaptureMode
   public typealias RawValue = Swift.String
@@ -366,6 +380,7 @@ public struct ScanningUXSettings {
   public init(showIntroductionAlert: Swift.Bool = true, showHelpButton: Swift.Bool = true, preferredCameraPosition: BlinkIDUX.Camera.CameraPosition = .back, allowHapticFeedback: Swift.Bool = true)
 }
 @_Concurrency.MainActor public class ScanningViewModel<T, U> : Foundation.ObservableObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @Combine.Published @_projectedValueProperty($scanningResult) @_Concurrency.MainActor public var scanningResult: T? {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -373,11 +388,15 @@ public struct ScanningUXSettings {
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     _modify
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public var $scanningResult: Combine.Published<T?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @Combine.Published @_projectedValueProperty($alertType) @_Concurrency.MainActor public var alertType: U? {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -385,11 +404,14 @@ public struct ScanningUXSettings {
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     _modify
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public var $alertType: Combine.Published<U?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  #endif
   @Combine.Published @_projectedValueProperty($roi) @_Concurrency.MainActor public var roi: BlinkID.RegionOfInterest {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -495,7 +517,9 @@ public enum MicroblinkColor : Swift.String {
   case background
   case needHelpTooltipBackground
   case toastBackgroundColor
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get

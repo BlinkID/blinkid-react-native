@@ -493,6 +493,7 @@ class BlinkIdSerializationUtilities {
           "weightKilograms": elements?.getValue(for: .weightKilograms),
           "weightPounds": elements?.getValue(for: .weightPounds),
           "weightRange": elements?.getValue(for: .weightRange),
+          "subFieldDesignator": elements?.getValue(for: .subfieldDesignator)
       ]
       return barcodeElementDict.compactMapValues { $0 }
   }

@@ -2758,6 +2758,18 @@ export class BarcodeExtendedElements {
   weightRange?: string;
 
   /**
+   * SubField Designator extracted from barcode, to support proper document classification based on the standard.
+   *
+   * Subfield designator is a 2-character code that specifies the type of document, typically DL or ID.
+   *
+   * It is located immediately after the IIN and the variable metadata structure in the PDF417 barcode data structure.
+   *
+   *
+   *  For example: ANSI 636010090002DL00410267ZF03080067DLDAQS1234567812300000000000000 ^^ |           | |           +-- SubField Designator (DL, ID, EN, etc.) +----- IIN (636010)
+   */
+  subFieldDesignator?: string;
+
+  /**
    *
    * @param nativeBarcodeExtendedElements - specifies the extended barcode elements obtained from the native SDK.
    */
@@ -2878,6 +2890,7 @@ export class BarcodeExtendedElements {
     this.weightKilograms = nativeBarcodeExtendedElements.weightKilograms;
     this.weightPounds = nativeBarcodeExtendedElements.weightPounds;
     this.weightRange = nativeBarcodeExtendedElements.weightRange;
+    this.subFieldDesignator = nativeBarcodeExtendedElements.subFieldDesignator;
   }
 }
 
