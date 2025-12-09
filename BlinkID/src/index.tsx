@@ -1,11 +1,12 @@
+// index.ts
 import { BlinkIdScanningResult } from "./blinkIdResult";
 import type {
   BlinkIdSdkSettings,
   BlinkIdSessionSettings,
   BlinkIdScanningUxSettings,
 } from "./blinkIdSettings";
-import BlinkidReactNative from "./NativeBlinkidReactNative";
 import type { ClassFilter } from "./types";
+import type { Spec } from "./NativeBlinkidReactNative";
 
 // Configuration classes
 export {
@@ -20,6 +21,10 @@ export { BlinkIdScanningResult } from "./blinkIdResult";
 
 // Types & enums
 export * from "./types";
+
+const BlinkidReactNative: Spec = require("./NativeBlinkidReactNative").default;
+
+export default BlinkidReactNative;
 
 /**  The `loadBlinkIdSdk` method creates or retrieves the instance of the BlinkID SDK.
  *
@@ -103,8 +108,10 @@ export async function performScan(
     JSON.stringify(blinkIdScanningUxSettings),
     JSON.stringify(classFilter)
   );
+
   return new BlinkIdScanningResult(JSON.parse(jsonResult));
 }
+
 /**
  * The `performDirectApiScan` platform channel method launches the BlinkID scanning process inteded for information extraction from static images.
  *
@@ -137,5 +144,6 @@ export async function performDirectApiScan(
     firstImage,
     secondImage
   );
+
   return new BlinkIdScanningResult(JSON.parse(jsonResult));
 }
