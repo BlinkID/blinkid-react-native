@@ -3,7 +3,7 @@
 blink_id_plugin_path=`pwd`/BlinkID
 appName=BlinkIdSample
 appId=com.microblink.sample
-rn_version="0.78.3"
+rn_version="0.82.0"
 
 # Remove any existing code
 rm -rf $appName
@@ -23,7 +23,7 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
-IS_LOCAL_BUILD=true || exit 1
+IS_LOCAL_BUILD=false || exit 1
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
@@ -74,7 +74,7 @@ sed -i '' '/<dict>/a\
 # Disable Flipper since it spams console with errors
 export NO_FLIPPER=1
 
-# RCT_NEW_ARCH_ENABLED=0 pod install
+# to install the iOS application with old architecture run: RCT_NEW_ARCH_ENABLED=0 pod install
 pod install
 
 # pod install
