@@ -1,3 +1,11 @@
+## v7.6.2
+
+### What's New
+- Added backward compatibility with React Native’s old architecture.
+    - The SDK now works seamlessly with both the New Architecture (TurboModules) and the legacy Native Module implementation.
+- Improved error handling. 
+    - Errors now include clearer context and more actionable messages for easier debugging.
+
 ## v7.6.1
 
 - Updated to [Android SDK v7.6.1](https://github.com/BlinkID/blinkid-android/releases/tag/v7.6.1) and [iOS SDK v7.6.2](https://github.com/BlinkID/blinkid-ios/releases/tag/v7.6.2)

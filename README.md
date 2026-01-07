@@ -32,6 +32,7 @@ A valid license key is required to initialize the BlinkID plugin. A free trial l
 ## <a name="requirements"></a> Requirements
 
 - BlinkID React Native was built and tested with [React Native v0.82.1](https://github.com/facebook/react-native/releases/tag/v0.82.1)
+  - The BlinkID React Native SDK is also compatible with React Native applications running on the old architecture as it contains backward compatibility with Native Module implementation.
 - For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
 
 **Device requirements**
@@ -181,9 +182,11 @@ import {
        * Modify the BlinkID UI settings for UI customization.
        * This parameter is optional.
        */
-      const uiSettings = new BlinkIdUiSettings();
-      uiSettings.showHelpButton = true;
-      uiSettings.showOnboardingDialog = false;
+      const blinkIdScanningUxSettings = new BlinkIdScanningUxSettings();
+      blinkIdScanningUxSettings.showHelpButton = true;
+      blinkIdScanningUxSettings.showOnboardingDialog = true;
+      blinkIdScanningUxSettings.allowHapticFeedback = true;
+      blinkIdScanningUxSettings.preferredCamera = PreferredCamera.Back;
 
       /**
        * Add the document class filter. This parameter is optional.
@@ -204,7 +207,7 @@ import {
        * Here, you can also pass the optional BlinkIdUiSettings and ClassFilter
        * parameters.
        */
-      await performScan(sdkSettings, sessionSettings, uiSettings) 
+      await performScan(sdkSettings, sessionSettings, blinkIdScanningUxSettings) 
         .then((result: BlinkIdScanningResult) => {
           // handle the results here.
           console.log(result.firstName?.value);

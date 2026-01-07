@@ -37,7 +37,7 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
 
   # Go the sample folder and install the library
   popd > /dev/null
-  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.6.1.tgz
+  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.6.2.tgz
 
 else
   # Download BlinkID React Native via NPM
@@ -74,7 +74,10 @@ sed -i '' '/<dict>/a\
 # Disable Flipper since it spams console with errors
 export NO_FLIPPER=1
 
+# to install the iOS application with old architecture run: RCT_NEW_ARCH_ENABLED=0 pod install
 pod install
+
+# pod install
 
 # Return from the ios project folder
 popd

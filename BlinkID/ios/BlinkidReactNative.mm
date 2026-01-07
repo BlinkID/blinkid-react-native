@@ -1,40 +1,55 @@
 #import "BlinkidReactNative.h"
 #import "BlinkidReactNative-Swift.h"
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <BlinkidReactNativeSpec/BlinkidReactNativeSpec.h>
+#endif
+
 @implementation BlinkidReactNative {
-    BlinkidReactNativeModule *moduleImplementation;
+  BlinkidReactNativeModule *moduleImplementation;
 }
 
--(instancetype) init {
-    self = [super init];
-    if (self) {
-        moduleImplementation = [BlinkidReactNativeModule new];
-    }
-    return self;
-}
-
-RCT_EXPORT_MODULE()
-
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-(const facebook::react::ObjCTurboModule::InitParams &)params
+- (instancetype)init
 {
-    return std::make_shared<facebook::react::NativeBlinkidReactNativeSpecJSI>(params);
+  if (self = [super init]) {
+    moduleImplementation = [BlinkidReactNativeModule new];
+  }
+  return self;
 }
 
+RCT_EXPORT_MODULE(BlinkidReactNative);
 
-+ (NSDictionary *)dictionaryFromBlinkIdObject:(NSString *)jsonString {
-    NSError *jsonError;
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) return nil;
-    
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&jsonError];
-    return dict;
+RCT_EXPORT_METHOD(loadBlinkIdSdk:(NSString *)blinkIdSdkSettings
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
+    [self->moduleImplementation loadSdk: [self createDictionaryFromBlinkIdObject:blinkIdSdkSettings] onResolve:^(NSString * _Nonnull) {
+        resolve(@"");
+    } onReject:^(NSString * _Nonnull error) {
+        reject(@"BlinkIdIosError", error, nil);
+    }];
 }
 
-- (void)performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings blinkIdScanningUxSettings:(nonnull NSString *)blinkIdScanningUxSettings classFilter:(nonnull NSString *)classFilter resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
-    
+RCT_EXPORT_METHOD(unloadBlinkIdSdk:(BOOL)deleteCachedResources
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
+    [self->moduleImplementation
+     unloadSdk:deleteCachedResources
+     onResolve:^(NSString * _Nonnull) {
+        resolve(@"");
+    } onReject:^(NSString * _Nonnull error) {
+        reject(@"BlinkIdIosError", error, nil);
+    }];
+}
+
+RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings
+                  blinkIdSessionSettings:(NSString *)blinkIdSessionSettings
+                  blinkIdScanningUxSettings:(NSString *)blinkIdScanningUxSettings
+                  classFilter:(NSString *)classFilter
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *keyWindow = nil;
         
@@ -67,8 +82,13 @@ RCT_EXPORT_MODULE()
     });
 }
 
-
-- (void)performDirectApiScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings firstImage:(nonnull NSString *)firstImage secondImage:(nonnull NSString *)secondImage resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
+RCT_EXPORT_METHOD(performDirectApiScan:(NSString *)blinkIdSdkSettings
+                  blinkIdSessionSettings:(NSString *)blinkIdSessionSettings
+                  firstImage:(NSString *)firstImage
+                  secondImage:(NSString *)secondImage
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
     [self->moduleImplementation
      performDirectApiScanWithBlinkIdSdkSettings: [self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
      blinkIdSessionSettings: [self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
@@ -81,32 +101,26 @@ RCT_EXPORT_MODULE()
     }];
 }
 
-- (void)loadBlinkIdSdk:(nonnull NSString *)blinkIdSdkSettings resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
-    [self->moduleImplementation loadSdk:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings] onResolve:^(NSString * _Nonnull) {
-        resolve(@"");
-    } onReject:^(NSString * _Nonnull error) {
-        reject(@"BlinkIdIosError", error, nil);
-    }];
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+  return std::make_shared<facebook::react::NativeBlinkidReactNativeSpecJSI>(params);
 }
+#endif // RCT_NEW_ARCH_ENABLED
 
+- (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString
+{
+  NSError *jsonError;
+  NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+  if (!data) {
+    return nil;
+  }
 
-- (void)unloadBlinkIdSdk:(BOOL)deleteCachedResources resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject {
-    [self->moduleImplementation unloadSdk:deleteCachedResources onResolve:^(NSString * _Nonnull) {
-        resolve(@"");
-    } onReject:^(NSString * _Nonnull error) {
-        reject(@"BlinkIdIosError", error, nil);
-    }];
-}
-
-- (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString {
-    NSError *jsonError;
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    if (!data) return nil;
-    
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&jsonError];
-    return dict;
+  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:NSJSONReadingMutableContainers
+                                                         error:&jsonError];
+  return dict;
 }
 
 @end

@@ -91,4 +91,7 @@ export interface Spec extends TurboModule {
   ): Promise<string>;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>("BlinkidReactNative");
+const BlinkidReactNative: Spec =
+  TurboModuleRegistry.getEnforcing<Spec>("BlinkidReactNative");
+
+export default BlinkidReactNative;
