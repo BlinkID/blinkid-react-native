@@ -8,6 +8,7 @@ import {
   DriverLicenseDetailedInfo,
   DateResult,
   DetailedCroppedImageResult,
+  ParentInfo,
 } from "./types";
 
 /**
@@ -421,6 +422,38 @@ export class BlinkIdScanningResult {
    * See {@link DetailedCroppedImageResult} for more information.
    */
   signatureImage?: DetailedCroppedImageResult;
+
+  /**
+   * The effective date of the document.
+   */
+  effectiveDate?: DateResult<StringResult>;
+
+  /**
+   * The parents info.
+   *
+   * See {@link ParentInfo} for more information.
+   */
+  parentsInfo?: ParentInfo[];
+
+  /**
+   * The husband name of the document owner.
+   */
+  husbandName?: StringResult;
+
+  /**
+   * The legal status of the document owner.
+   */
+  legalStatus?: StringResult;
+
+  /**
+   * The social security status of the document owner.
+   */
+  socialSecurityStatus?: StringResult;
+
+  /**
+   * The work restriction of the document owner.
+   */
+  workRestriction?: StringResult;
 
   /**
    * Represents the results of scanning a document.
@@ -840,5 +873,37 @@ export class BlinkIdScanningResult {
      * See {@link DetailedCroppedImageResult} for more information.
      */
     this.signatureImage = nativeBlinkIdResult.signatureImage;
+
+    /**
+     * The effective date of the document.
+     */
+    this.effectiveDate = nativeBlinkIdResult.effectiveDate;
+
+    /**
+     * The parents info.
+     *
+     * See {@link ParentInfo} for more information.
+     */
+    this.parentsInfo = nativeBlinkIdResult.parentsInfo;
+
+    /**
+     * The husband name of the document owner.
+     */
+    this.husbandName = nativeBlinkIdResult.husbandName;
+
+    /**
+     * The legal status of the document owner.
+     */
+    this.legalStatus = nativeBlinkIdResult.legalStatus;
+
+    /**
+     * The social security status of the document owner.
+     */
+    this.socialSecurityStatus = nativeBlinkIdResult.socialSecurityStatus;
+
+    /**
+     * The work restriction of the document owner.
+     */
+    this.workRestriction = nativeBlinkIdResult.workRestriction;
   }
 }
