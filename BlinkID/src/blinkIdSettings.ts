@@ -85,7 +85,7 @@ export class BlinkIdSdkSettings {
     resourceLocalFolder?: string,
     bundleIdentifier?: string,
     resourceRequestTimeout?: number,
-    microblinkProxyURL?: string
+    microblinkProxyURL?: string,
   ) {
     this.licenseKey = licenseKey;
     this.licensee = licensee;

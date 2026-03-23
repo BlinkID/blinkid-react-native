@@ -77,8 +77,8 @@ import BlinkIDUX
                 
                 let scanningUxModel = await BlinkIDUXModel(
                     analyzer: analyzer,
-                    uxSettings: BlinkIdDeserializationUtilities.deserializeBlinkIdUxScanningSettings(blinkIdScanningUxSettings),
-                    sessionNumber: analyzer.sessionNumber)
+                    uxSettings: BlinkIdDeserializationUtilities.deserializeBlinkIdUxScanningSettings(blinkIdScanningUxSettings)
+                )
                 
                 await scanningUxModel.$result
                     .sink { [weak self] scanningResultState in

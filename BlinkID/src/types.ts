@@ -71,7 +71,7 @@ export class ClassFilter {
    */
   constructor(
     includeDocuments?: DocumentFilter[],
-    excludeDocuments?: DocumentFilter[]
+    excludeDocuments?: DocumentFilter[],
   ) {
     this.includeDocuments = includeDocuments;
     this.excludeDocuments = excludeDocuments;
@@ -255,7 +255,7 @@ export class DocumentAnonymizationSettings {
   constructor(
     fields: FieldType[],
     documentFilter?: DocumentFilter,
-    documentNumberAnonymizationSettings?: DocumentNumberAnonymizationSettings
+    documentNumberAnonymizationSettings?: DocumentNumberAnonymizationSettings,
   ) {
     this.fields = fields;
     this.documentFilter = documentFilter;
@@ -289,7 +289,7 @@ export class DocumentNumberAnonymizationSettings {
 
   constructor(
     prefixDigitsVisible: number = 0,
-    suffixDigitsVisible: number = 0
+    suffixDigitsVisible: number = 0,
   ) {
     this.prefixDigitsVisible = prefixDigitsVisible;
     this.suffixDigitsVisible = suffixDigitsVisible;
@@ -727,7 +727,7 @@ export class DateResult<T> {
   constructor(nativeDateResult: any) {
     this.date = nativeDateResult.date;
     this.originalString = BlinkIdUtilities.handleStringType<T>(
-      nativeDateResult.originalString
+      nativeDateResult.originalString,
     );
     this.isFilledByDomainKnowledge = nativeDateResult.isFilledByDomainKnowledge;
     this.successfullyParsed = nativeDateResult.successfullyParsed;
@@ -809,13 +809,13 @@ export class DriverLicenseDetailedInfo<T> {
 
   constructor(nativeDriverLicenseDetailedInfo: any) {
     this.restrictions = BlinkIdUtilities.handleStringType(
-      nativeDriverLicenseDetailedInfo.restrictions
+      nativeDriverLicenseDetailedInfo.restrictions,
     );
     this.endorsements = BlinkIdUtilities.handleStringType(
-      nativeDriverLicenseDetailedInfo.endorsements
+      nativeDriverLicenseDetailedInfo.endorsements,
     );
     this.vehicleClass = BlinkIdUtilities.handleStringType(
-      nativeDriverLicenseDetailedInfo.vehicleClass
+      nativeDriverLicenseDetailedInfo.vehicleClass,
     );
     this.vehicleClassesInfo =
       nativeDriverLicenseDetailedInfo.vehicleClassesInfo;
@@ -855,10 +855,10 @@ export class VehicleClassInfo<T> {
 
   constructor(nativeVehicleClassInfo: any) {
     this.licenceType = BlinkIdUtilities.handleStringType<T>(
-      nativeVehicleClassInfo.licenceType
+      nativeVehicleClassInfo.licenceType,
     );
     this.vehicleClass = BlinkIdUtilities.handleStringType<T>(
-      nativeVehicleClassInfo.vehicleClass
+      nativeVehicleClassInfo.vehicleClass,
     );
     this.effectiveDate = nativeVehicleClassInfo.effectiveDate;
     this.expiryDate = nativeVehicleClassInfo.expiryDate;
@@ -1357,6 +1357,38 @@ export class VizResult {
   nationalInsuranceNumber?: StringResult;
 
   /**
+   * The effective date of the document.
+   */
+  effectiveDate?: DateResult<StringResult>;
+
+  /**
+   * The parents info.
+   *
+   * See {@link ParentInfo} for more information.
+   */
+  parentsInfo?: ParentInfo[];
+
+  /**
+   * The husband name of the document owner.
+   */
+  husbandName?: StringResult;
+
+  /**
+   * The legal status of the document owner.
+   */
+  legalStatus?: StringResult;
+
+  /**
+   * The social security status of the document owner.
+   */
+  socialSecurityStatus?: StringResult;
+
+  /**
+   * The work restriction of the document owner.
+   */
+  workRestriction?: StringResult;
+
+  /**
    *
    * @param nativeVizResult
    *
@@ -1422,6 +1454,12 @@ export class VizResult {
     this.countryCode = nativeVizResult.countryCode;
     this.certificateNumber = nativeVizResult.certificateNumber;
     this.nationalInsuranceNumber = nativeVizResult.nationalInsuranceNumber;
+    this.effectiveDate = nativeVizResult.effectiveDate;
+    this.parentsInfo = nativeVizResult.parentsInfo;
+    this.husbandName = nativeVizResult.husbandName;
+    this.legalStatus = nativeVizResult.legalStatus;
+    this.socialSecurityStatus = nativeVizResult.socialSecurityStatus;
+    this.workRestriction = nativeVizResult.workRestriction;
   }
 }
 
@@ -2895,6 +2933,26 @@ export class BarcodeExtendedElements {
 }
 
 /**
+ * The results of parents info.
+ */
+export class ParentInfo {
+  /**
+   * The first name of one of the document owner's parents.
+   */
+  firstName?: StringResult;
+
+  /**
+   * The last name of one of the document owner's parents.
+   */
+  lastName?: StringResult;
+
+  constructor(nativeParentInfo: any) {
+    this.firstName = nativeParentInfo.firstName;
+    this.lastName = nativeParentInfo.lastName;
+  }
+}
+
+/**
  * Represents the mode of document scanning.
  *
  * This enum class defines whether the scanning process is limited to a single
@@ -3816,6 +3874,8 @@ export enum Country {
   Zimbabwe = "zimbabwe",
 
   SchengenArea = "schengenArea",
+
+  SaintThomasAndPrince = "saintThomasAndPrince",
 }
 /**
  * Document region.
@@ -4102,6 +4162,24 @@ export enum Region {
   Bangsamoro = "bangsamoro",
 
   Telangana = "telangana",
+
+  Acre = "acre",
+
+  EspiritoSanto = "espiritoSanto",
+
+  MatoGrossoDoSul = "matoGrossoDoSul",
+
+  Paraiba = "paraiba",
+
+  Piaui = "piaui",
+
+  RioGrandeDoNorte = "rioGrandeDoNorte",
+
+  Tocantins = "tocantins",
+
+  Odisha = "odisha",
+
+  Uttarakhand = "uttarakhand",
 }
 
 /**
@@ -4275,11 +4353,21 @@ export enum DocumentType {
 
   EmergencyPassport = "emergencyPassport",
 
-  temporaryPassport = "temporaryPassport",
+  TemporaryPassport = "temporaryPassport",
 
-  metisFederationCard = "metisFederationCard",
+  MetisFederationCard = "metisFederationCard",
 
-  adrCertificate = "adrCertificate",
+  SocialSecurityCard = "socialSecurityCard",
+
+  AdrCertificate = "adrCertificate",
+
+  NinCard = "ninCard",
+
+  MysssCard = "mysssCard",
+
+  GendarmerieId = "gendarmerieId",
+
+  PoliceId = "policeId",
 }
 
 /**
@@ -4414,6 +4502,26 @@ export enum FieldType {
   RegistrationCenterCode = "registrationCenterCode",
 
   StateName = "stateName",
+
+  EffectiveDate = "effectiveDate",
+
+  ParentsLastName = "parentsLastName",
+
+  ParentsLastName2 = "parentsLastName2",
+
+  ParentsFirstName = "parentsFirstName",
+
+  ParentsFirstName2 = "parentsFirstName2",
+
+  WorkRestriction = "workRestriction",
+
+  SocialSecurityStatus = "socialSecurityStatus",
+
+  LegalStatus = "legalStatus",
+
+  HusbandName = "husbandName",
+
+  ChinPermanentExpiry = "chinPermanentExpiry",
 }
 
 /** An enum indicating preffered camera position for document capturing. */

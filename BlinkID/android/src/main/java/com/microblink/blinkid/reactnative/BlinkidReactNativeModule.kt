@@ -10,12 +10,12 @@ import com.facebook.react.module.annotations.ReactModule
 import com.microblink.blinkid.core.BlinkIdSdk
 import com.microblink.blinkid.core.BlinkIdSdkSettings
 import com.microblink.blinkid.core.session.BlinkIdProcessResult
-import com.microblink.blinkid.ux.contract.BlinkIdScanActivityResultStatus
 import com.microblink.blinkid.ux.contract.BlinkIdScanActivitySettings
 import com.microblink.blinkid.ux.contract.MbBlinkIdScan
 import com.microblink.core.image.InputImage
 import com.microblink.core.ping.PingManager
 import com.microblink.core.ping.pinglets.WrapperProductInfo
+import com.microblink.ux.contract.ScanActivityResultStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,7 +83,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
 
           val blinkIdResult = MbBlinkIdScan().parseResult(resultCode, data)
           when (blinkIdResult.status) {
-            BlinkIdScanActivityResultStatus.DocumentScanned -> {
+            ScanActivityResultStatus.Scanned -> {
               blinkIdResult.result?.let { scanningResult ->
                 val success = BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(
                   scanningResult
@@ -93,7 +93,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
               } ?: pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "BlinkID result is empty.")
             }
 
-            BlinkIdScanActivityResultStatus.Canceled -> {
+              ScanActivityResultStatus.Canceled -> {
               pendingPromise?.reject(BLINKID_ERROR_RESULT_CODE, "Scanning is canceled.")
               blinkIdSdk = null
               suspend {
@@ -101,7 +101,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
               }
             }
 
-            BlinkIdScanActivityResultStatus.ErrorSdkInit -> {
+              ScanActivityResultStatus.ErrorSdkInit -> {
               pendingPromise?.reject(
                 BLINKID_ERROR_RESULT_CODE,
                 "Could not initialize the SDK."
