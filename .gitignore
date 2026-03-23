@@ -110,7 +110,7 @@ project.xcworkspace
 **/.xcode.env.local
 
 # Gradle
-/build/
+BlinkID/android/build/
 /packages/rn-tester/build
 /packages/rn-tester/android/app/.cxx/
 /packages/rn-tester/android/app/build/
@@ -266,6 +266,9 @@ fix_*.patch
 
 # WebStorm
 .idea/
+
+# Yarn
+yarn.lock
 
 # Sample application
 BlinkIdSample/
