@@ -7,7 +7,7 @@
 The BlinkID SDK is a comprehensive solution for implementing secure document scanning on the React Native cross-platform.
 It offers powerful capabilities for capturing and analyzing a wide range of identification documents. The Flutter plugin consists of BlinkID, which serves as the core module, and the BlinkIDUX package that provides a complete, ready-to-use solution with a user-friendly interface.
 
-**Please note that, for maximum performance and full access to all features, it’s best to go with one of our native SDKs (for [iOS](https://github.com/BlinkID/blinkid-ios) or [Android](https://github.com/BlinkID/blinkid-android)).**
+**Please note that, for maximum performance and full access to all features, it’s best to go with one of our native SDKs (for [iOS](https://github.com/microblink/blinkid-ios) or [Android](https://github.com/microblink/blinkid-android)).**
 
 However, since the wrapper is open source, you can add the features you need on your own.
 
@@ -41,7 +41,7 @@ The BlinkID React Native plugin requires:
 - iOS version 16.0 and above
 - Android API version 24 and above
 
-- For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/BlinkID/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/BlinkID/blinkid-ios?tab=readme-ov-file#requirements)).
+- For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/microblink/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/microblink/blinkid-ios?tab=readme-ov-file#requirements)).
 
 ## <a name="quickstart-with-the-sample-application"></a> Quickstart with the sample application
 The sample application demonstrates how the BlinkID plugin is implemented, used and shows how to obtain the scanned results. 
@@ -64,7 +64,7 @@ brew install node
 **To install & run the sample application:**
 1. Git clone the repository:
 ```bash
-git clone https://github.com/BlinkID/blinkid-react-native.git
+git clone https://github.com/microblink/blinkid-react-native.git
 ```
 2. Position to the obtained BlinkID folder and run the `initBlinkIdReactNativeSample.sh` script:
 ```bash
@@ -305,11 +305,11 @@ import {
         });
 ```
 **Note:**
-- The whole integration process can be found in the sample app `App.tsx` file [here](https://github.com/BlinkID/blinkid-react-native/blob/master/sample_files/App.tsx).
+- The whole integration process can be found in the sample app `App.tsx` file [here](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/App.tsx).
 - The settings and the results that can be used with the BlinkID plugin can be found in the paragraphs below, but also in the comments of each BlinkID TS file.
 
 ## <a name="plugin-specifics"></a> Plugin specifics
-The BlinkID plugin implementation is located in the `src` folder [here](https://github.com/BlinkID/blinkid-react-native/tree/master/BlinkID/src), while platform-specific implementation is located in the `android` and `ios` folders.
+The BlinkID plugin implementation is located in the `src` folder [here](https://github.com/microblink/blinkid-react-native/tree/master/BlinkID/src), while platform-specific implementation is located in the `android` and `ios` folders.
 
 ### <a name="scanning-methods"></a> Scanning methods
 Currently, the BlinkID plugin contains the two main methods of scanning: `performScan` and `performDirectApiScan`.
@@ -331,7 +331,7 @@ It takes the following parameters:
 
 The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
 
-- The implementation of the `performScan` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+- The implementation of the `performScan` method can be viewed here in the [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
 
 **The `performDirectApiScan` method**
 
@@ -350,7 +350,7 @@ The first image Base64 string - `String`: image that represents one side of the 
 
 The optional second image Base64 string - `String`: needed if the information from back side of the document is required and the `ScanningMode` is set to `automatic`.
 
-- The implementation of the `performDirectApiScanning` method can be viewed here in the [index.tsx](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+- The implementation of the `performDirectApiScanning` method can be viewed here in the [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
 
 ### <a name="sdk-loading--unloading"></a> SDK loading & unloading
 The BlinkID SDK also contains methods for loading and unloading. These methods can be called before the scanning methods (mentioned above), and are helpful to preload the neccessary resources and decrease the waiting time for the scanning session, but also to remove any resources after the scanning sessions ends.
@@ -376,30 +376,30 @@ This method is automatically called after each successful scan session.
 
 ### <a name="blinkid-settings"></a> BlinkID Settings
 The BlinkID SDK contains various settings, modifying different parts of scanning process:
-1. [BlinkID SDK settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L14) - `BlinkIdSdkSettings` \
+1. [BlinkID SDK settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L14) - `BlinkIdSdkSettings` \
 These settings are used for the initialization of the BlinkID SDK.
 
-2. [BlinkID session settings](https://github.com/BlinkID/blinkid-react-native/blob/feature/blinkid-v7/BlinkID/src/blinkIdSettings.ts#L92) - `BlinkIdSessionSettings`\
+2. [BlinkID session settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L92) - `BlinkIdSessionSettings`\
 These settings represent the configuration settings for a scanning session.\
 This class holds the settings related to the resources initialization, scanning mode, and specific scanning configurations that define how the scanning session should behave.
 
-3. [BlinkID scanning settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`\
+3. [BlinkID scanning settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`\
 These settings represent the configurable settings for scanning a document.`
 This class defines various parameters and policies related to the scanning process, including image quality handling, data extraction and anonymization, along with options for frame processing and image extraction.
 
-4. [BlinkID UI settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `BlinkIdUiSettings`\
+4. [BlinkID UI settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `BlinkIdUiSettings`\
 Allows customization of various aspects of the UI used during the scanning process.
 
-5. [Cropped image settings](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `CroppedImageSettings`\
+5. [Cropped image settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `CroppedImageSettings`\
 These settings represent the image cropping settings.
 
 **Additional notes:**
 
-- The [blinkIdSettings.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contains all the settings that can be modified and explains what each setting does in more detail.
+- The [blinkIdSettings.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contains all the settings that can be modified and explains what each setting does in more detail.
 
 - The native documentation for the above mentioned settings can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/).
 
-- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdDeserializationUtilities.kt) & [iOS](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdDeserializationUtilities.swift) in the BlinkID deserialization utilities.
+- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdDeserializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdDeserializationUtilities.swift) in the BlinkID deserialization utilities.
 
 ### <a name="blinkid-result"></a> BlinkID Results
 
@@ -425,11 +425,11 @@ Represents the result of the image crop transformation with additional details.
 
 **Additional notes:**
 
-- The [blinkIdResult.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all the results after the scanning process finishes.
+- The [blinkIdResult.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all the results after the scanning process finishes.
 
 - The native documentation for the above mentioned results can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core.result/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/blinkidscanningresult).
 
-- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/BlinkID/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdSerializationUtilities.swift) in the BlinkID deserialization utilities.
+- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdSerializationUtilities.swift) in the BlinkID deserialization utilities.
 
 ## <a name="additional-information-and-support"></a> Additional information and Support
 For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team via mail support@microblink.com.
