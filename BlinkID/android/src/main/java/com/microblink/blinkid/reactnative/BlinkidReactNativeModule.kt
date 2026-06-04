@@ -122,6 +122,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     blinkIdSessionSettings: String?,
     blinkIdScanningUxSettings: String?,
     classFilter: String?,
+    redactionSettingsResolver: String?,
     promise: Promise?
   ) {
     CoroutineScope(Dispatchers.Main).launch {
@@ -129,32 +130,38 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       try {
         val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
         val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
-        val classFilterJson = classFilter?.let { JSONObject(it) }
-        val blinkIdScanningUxJson = blinkIdScanningUxSettings?.let { JSONObject(it) }
+        val classFilterJson = parseOptionalJsonObject(classFilter)
+        val redactionResolverJson = parseOptionalJsonObject(redactionSettingsResolver)
+        val blinkIdScanningUxJson = parseOptionalJsonObject(blinkIdScanningUxSettings)
         val sdkSettings: BlinkIdSdkSettings = sdkSettingsJson?.let {
           BlinkIdDeserializationUtilities.deserializeBlinkIdSdkSettings(it)
-        }?:return@launch withContext(Dispatchers.Main) {
+        } ?: return@launch withContext(Dispatchers.Main) {
           promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
         }
 
-       blinkIdSdk = ensureLoadedSdk(sdkSettingsJson)
+        blinkIdSdk = ensureLoadedSdk(sdkSettingsJson)
 
         reactApplicationContext.currentActivity?.applicationContext?.let {
           val intent = MbBlinkIdScan().createIntent(
             it,
             BlinkIdScanActivitySettings(
               sdkSettings = sdkSettings,
-              cameraSettings = BlinkIdDeserializationUtilities.deserializeCameraSettings(blinkIdScanningUxJson),
+              cameraSettings = BlinkIdDeserializationUtilities.deserializeCameraSettings(
+                blinkIdScanningUxJson
+              ),
               scanningSessionSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdSessionSettings(
                 sessionSettingsJson,
                 false
               ),
-              uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdScanningUxSettings(
+              uxSettings = BlinkIdDeserializationUtilities.deserializeBlinkIdUxSettings(
                 blinkIdScanningUxJson,
+                sessionSettingsJson,
                 classFilterJson,
+                redactionResolverJson,
               ),
-              showHelpButton = blinkIdScanningUxJson?.optBoolean("showHelpButton", true)?: true,
-              showOnboardingDialog = blinkIdScanningUxJson?.optBoolean("showOnboardingDialog", true) ?: true
+              showHelpButton = blinkIdScanningUxJson?.optBoolean("showHelpButton", true) ?: true,
+              showOnboardingDialog = blinkIdScanningUxJson?.optBoolean("showOnboardingDialog", true)
+                ?: true
             )
           )
           addReactNativePinglet(it)
@@ -173,6 +180,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
     blinkIdSessionSettings: String?,
     firstImage: String?,
     secondImage: String?,
+    redactionSettings: String?,
     promise: Promise?
   ) {
     pendingPromise = promise
@@ -180,6 +188,7 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
       try {
         val sdkSettingsJson = blinkIdSdkSettings?.let { JSONObject(it) }
         val sessionSettingsJson = blinkIdSessionSettings?.let { JSONObject(it) }
+        val redactionSettingsJson = parseOptionalJsonObject(redactionSettings)
 
         val context = reactApplicationContext.applicationContext
           ?: return@launch withContext(Dispatchers.Main) {
@@ -207,7 +216,9 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
           }
 
           if (result?.isSuccess == true) {
-            val scanResult = session.getResult()
+            val scanResult = session.getResult(
+              BlinkIdDeserializationUtilities.deserializeRedactionSettings(redactionSettingsJson)
+            )
             val resultJson =
               BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
 
@@ -264,6 +275,13 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
         wrapperProduct = WrapperProductInfo.WrapperProduct.CROSSPLATFORMREACTNATIVE),
       0)
   }
+  private fun parseOptionalJsonObject(value: String?): JSONObject? {
+    if (value.isNullOrBlank() || value == "null" || value == "undefined") {
+      return null
+    }
+    return JSONObject(value)
+  }
+
   companion object {
     const val NAME = "BlinkidReactNative"
   }

@@ -43,11 +43,12 @@ struct BlinkIdDeserializationUtils {
             blinkidSdkSettings?.bundleURL = bundle.bundleURL
         }
 
-        if let resourceRequestTimeout = sdkSettingsDict?["resourceRequestTimeout"] as? Int {
+        if sdkSettingsDict?["resourceRequestTimeout"] != nil {
             blinkidSdkSettings?.resourceRequestTimeout = BlinkID.RequestTimeout.default
         }
         
-        if let microblinkProxyUrl = sdkSettingsDict?["microblinkProxyUrl"] as? String {
+        if let microblinkProxyUrl = sdkSettingsDict?["microblinkProxyURL"] as? String
+            ?? sdkSettingsDict?["microblinkProxyUrl"] as? String {
             blinkidSdkSettings?.microblinkProxyURL = microblinkProxyUrl
         }
         
@@ -300,12 +301,14 @@ struct BlinkIdDeserializationUtils {
             redactionSettings?.mode = mode
         }
 
-        if let redactBarcodeResult = redactionDict["redactBarcodeResult"] as? Bool {
-            redactionSettings?.redactBarcodeResult = redactBarcodeResult
+        if let redactBarcode = redactionDict["redactBarcode"] as? Bool
+            ?? redactionDict["redactBarcodeResult"] as? Bool {
+            redactionSettings?.redactBarcode = redactBarcode
         }
 
-        if let redactMrzResult = redactionDict["redactMrzResult"] as? Bool {
-            redactionSettings?.redactMrzResult = redactMrzResult
+        if let redactMrz = redactionDict["redactMrz"] as? Bool
+            ?? redactionDict["redactMrzResult"] as? Bool {
+            redactionSettings?.redactMrz = redactMrz
         }
 
         if let documentNumberRedactionDict = redactionDict["documentNumberRedactionSettings"] as? Dictionary<String, Any> {
@@ -332,18 +335,17 @@ struct BlinkIdDeserializationUtils {
     
     
     static func deserializeBlinkIdUxScanningSettings(_ scanningUxSettingsDict: Dictionary<String, Any>?) -> ScanningUXSettings {
-        if let scanningUxSettingsDict = scanningUxSettingsDict,
-           let allowHapticFeedback = scanningUxSettingsDict["allowHapticFeedback"] as? Bool,
-           let preferredCameraPosition = scanningUxSettingsDict["preferredCamera"] as? String,
-           let showHelpButton = scanningUxSettingsDict["showHelpButton"] as? Bool,
-           let showIntroductionAlert = scanningUxSettingsDict["showOnboardingDialog"] as? Bool {
-            return ScanningUXSettings(
-                showIntroductionAlert: showIntroductionAlert,
-                showHelpButton: showHelpButton,
-                preferredCameraPosition: deserializePrefferedCameraPosition(preferredCameraPosition),
-                allowHapticFeedback: allowHapticFeedback)
+        guard let scanningUxSettingsDict = scanningUxSettingsDict,
+              !scanningUxSettingsDict.isEmpty else {
+            return ScanningUXSettings()
         }
-        return ScanningUXSettings()
+
+        let preferredCameraRaw = scanningUxSettingsDict["preferredCamera"] as? String
+        return ScanningUXSettings(
+            showIntroductionAlert: scanningUxSettingsDict["showOnboardingDialog"] as? Bool ?? true,
+            showHelpButton: scanningUxSettingsDict["showHelpButton"] as? Bool ?? true,
+            preferredCameraPosition: deserializePrefferedCameraPosition(preferredCameraRaw ?? "back"),
+            allowHapticFeedback: scanningUxSettingsDict["allowHapticFeedback"] as? Bool ?? true)
     }
     
     static func deserializePrefferedCameraPosition(_ value: String) -> Camera.CameraPosition {
@@ -402,17 +404,20 @@ struct BlinkIdDeserializationUtils {
         _ redactionDict: [String: Any],
         classInfo: BlinkID.BlinkIDSDK.DocumentClassInfo
     ) -> Bool {
-        guard let documentFilters = redactionDict["documentFilter"] as? [[String: Any]] else {
-            return true
+        if let documentFilters = redactionDict["documentFilter"] as? [[String: Any]] {
+            if documentFilters.isEmpty {
+                return true
+            }
+            return documentFilters.contains { filterDict in
+                matchClassFilter(filterDict, classInfo: classInfo)
+            }
         }
 
-        if documentFilters.isEmpty {
-            return true
+        if let documentFilter = redactionDict["documentFilter"] as? Dictionary<String, Any> {
+            return matchClassFilter(documentFilter, classInfo: classInfo)
         }
 
-        return documentFilters.contains { filterDict in
-            matchClassFilter(filterDict, classInfo: classInfo)
-        }
+        return true
     }
     
     static func deserializeClassFilter(_ classFilterDictArr: Dictionary<String, Any>?, _ classInfo: BlinkID.BlinkIDSDK.DocumentClassInfo) -> Bool {
@@ -443,8 +448,8 @@ struct BlinkIdDeserializationUtils {
         let region = filteredClass["region"] as? String
         
         return (country == nil || classInfo.country == Country.init(rawValue: country!)) &&
-        (type == nil || classInfo.documentType == DocumentType.init(rawValue: type!) &&
-         (region == nil || classInfo.region == Region.init(rawValue: region!)))
+        (type == nil || classInfo.documentType == DocumentType.init(rawValue: type!)) &&
+        (region == nil || classInfo.region == Region.init(rawValue: region!))
     }
     
     static func sanitizeDictionary(_ dictionary: Dictionary<String, Any>?) -> Dictionary<String, Any>? {

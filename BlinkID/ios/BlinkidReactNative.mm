@@ -1,5 +1,6 @@
 #import "BlinkidReactNative.h"
 #import "BlinkidReactNative-Swift.h"
+#import <React/RCTUtils.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 #import <BlinkidReactNativeSpec/BlinkidReactNativeSpec.h>
@@ -51,41 +52,36 @@ RCT_EXPORT_METHOD(performDirectApiScan:(nonnull NSString *)blinkIdSdkSettings bl
      firstImage:firstImage
      secondImage:secondImage
      onResolve:^(NSString * _Nonnull result) {
-        resolve(@[result]);
+        resolve(result);
     } onReject:^(NSString * _Nonnull error) {
         reject(@"BlinkIdIosError", error, nil);
     }];
 }
 
 
-RCT_EXPORT_METHOD(performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings blinkIdScanningUxSettings:(nonnull NSString *)blinkIdScanningUxSettings classFilter:(nonnull NSString *)classFilter redactionSettingsResolver:(nonnull NSString *)redactionSettingsResolver resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSettings:(NSString *)blinkIdSessionSettings blinkIdScanningUxSettings:(NSString *)blinkIdScanningUxSettings classFilter:(NSString *)classFilter redactionSettingsResolver:(NSString *)redactionSettingsResolver resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIWindow *keyWindow = nil;
-        
-        for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
-            if (scene.activationState == UISceneActivationStateForegroundActive &&
-                [scene isKindOfClass:[UIWindowScene class]]) {
-                for (UIWindow *window in scene.windows) {
-                    if (window.isKeyWindow) {
-                        keyWindow = window;
-                        break;
-                    }
-                }
-            }
-            if (keyWindow) {
-                break;
-            }
+        UIViewController *rootViewController = RCTPresentedViewController();
+        if (rootViewController == nil) {
+            reject(@"BlinkIdIosError", @"No view controller is available to present the BlinkID scanning UI.", nil);
+            return;
         }
-        
+
+        NSDictionary *sdkSettingsDict = [self createDictionaryFromBlinkIdObject:blinkIdSdkSettings];
+        if (sdkSettingsDict[@"licenseKey"] == nil || [sdkSettingsDict[@"licenseKey"] isKindOfClass:[NSNull class]]) {
+            reject(@"BlinkIdIosError", @"BlinkID SDK settings must include a licenseKey.", nil);
+            return;
+        }
+
         [self->moduleImplementation
-         performScan:keyWindow.rootViewController
-         blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings]
+         performScan:rootViewController
+         blinkIdSdkSettings:sdkSettingsDict
          blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject:blinkIdSessionSettings]
          blinkIdScanningUxSettings:[self createDictionaryFromBlinkIdObject:blinkIdScanningUxSettings]
          classFilterSettings:[self createDictionaryFromBlinkIdObject:classFilter]
          redactionSettingsResolver: [self createDictionaryFromBlinkIdObject:redactionSettingsResolver]
          onResolve:^(NSString * _Nonnull result) {
-            resolve(@[result]);
+            resolve(result);
         } onReject:^(NSString * _Nonnull error) {
             reject(@"BlinkIdIosError", error, nil);
         }];
@@ -102,16 +98,24 @@ RCT_EXPORT_METHOD(performScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSess
 
 - (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString
 {
-  NSError *jsonError;
-  NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-  if (!data) {
-    return nil;
+  if (jsonString == nil || jsonString.length == 0) {
+    return @{};
   }
 
-  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                       options:NSJSONReadingMutableContainers
-                                                         error:&jsonError];
-  return dict;
+  NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+  if (data == nil) {
+    return @{};
+  }
+
+  NSError *jsonError = nil;
+  id parsed = [NSJSONSerialization JSONObjectWithData:data
+                                              options:NSJSONReadingMutableContainers
+                                                error:&jsonError];
+  if (![parsed isKindOfClass:[NSDictionary class]]) {
+    return @{};
+  }
+
+  return (NSDictionary *)parsed;
 }
 
 @end

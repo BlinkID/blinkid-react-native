@@ -25,7 +25,7 @@ import BlinkIDUX
                 let _ = try await ensureLoadedSdk(blinkIdSdkSettings)
                 onResolve("")
             } catch {
-                onReject(error.localizedDescription)
+                onReject(BlinkIdReactNativeError.message(for: error))
             }
         }
     }
@@ -34,7 +34,8 @@ import BlinkIDUX
         if let blinkIdSdk = blinkIdSdk { return blinkIdSdk }
         do {
             guard let settings = BlinkIdDeserializationUtils.deserializeBlinkIdSdkSettings(blinkIdSdkSettings) else {
-                throw BlinkIdReactNativeError.incorrectArgument(" BlinkID SDK settings") }
+                throw BlinkIdReactNativeError.incorrectArgument("BlinkID SDK settings (licenseKey is required)")
+            }
             blinkIdSdk = try await BlinkIDSdk.createBlinkIDSdk(withSettings: settings)
             return blinkIdSdk
         } catch {
@@ -92,7 +93,7 @@ import BlinkIDUX
                         else {
                             Task { await BlinkIDSdk.terminateBlinkIDSdk() }
                             DispatchQueue.main.async {
-                                onReject(BlinkIdReactNativeError.scanningCancelled.localizedDescription)
+                                onReject(BlinkIdReactNativeError.message(for: BlinkIdReactNativeError.scanningCancelled))
                                 rootVc.dismiss(animated: true)
                             }
                         }
@@ -105,7 +106,7 @@ import BlinkIDUX
                 if let sdkError = error as? InvalidLicenseKeyError {
                     onReject(sdkError.message)
                 } else {
-                    onReject(error.localizedDescription)
+                    onReject(BlinkIdReactNativeError.message(for: error))
                 }
             }
         }
@@ -146,7 +147,7 @@ import BlinkIDUX
                 if let sdkError = error as? InvalidLicenseKeyError {
                     onReject(sdkError.message)
                 } else {
-                    onReject(error.localizedDescription)
+                    onReject(BlinkIdReactNativeError.message(for: error))
                 }
             }
         }
@@ -167,15 +168,18 @@ import BlinkIDUX
 
 extension BlinkidReactNativeModule: BlinkIDClassFilter {
     public func classAllowed(classInfo: BlinkID.BlinkIDSDK.DocumentClassInfo) -> Bool {
-        if let classInfoFilterDict = classFilterDict {
-            return BlinkIdDeserializationUtils.deserializeClassFilter(classInfoFilterDict, classInfo)
+        guard let classInfoFilterDict = classFilterDict, !classInfoFilterDict.isEmpty else {
+            return true
         }
-        return true
+        return BlinkIdDeserializationUtils.deserializeClassFilter(classInfoFilterDict, classInfo)
     }
 }
 
 extension BlinkidReactNativeModule: RedactionSettingsResolver {
     public func resolveRedactionSettings(classInfo: BlinkID.BlinkIDSDK.DocumentClassInfo) -> BlinkID.RedactionSettings? {
+        guard let redactionSettingsResolverDict, !redactionSettingsResolverDict.isEmpty else {
+            return nil
+        }
         return BlinkIdDeserializationUtils.deserializeRedactionSettingsResolver(redactionSettingsResolverDict, classInfo)
     }
 }
@@ -187,7 +191,7 @@ enum BlinkIdReactNativeError: LocalizedError {
     case frontImageError
     case scanningCancelled
     
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .incorrectArgument(let argument):
             return "Incorrect argument passed for \(argument)"
@@ -200,6 +204,14 @@ enum BlinkIdReactNativeError: LocalizedError {
         case .scanningCancelled:
             return "Scanning has been cancelled"
         }
+    }
+    
+    static func message(for error: Error) -> String {
+        if let localizedError = error as? LocalizedError,
+           let description = localizedError.errorDescription {
+            return description
+        }
+        return error.localizedDescription
     }
     
     static var iosErrorName : String {
