@@ -59,7 +59,6 @@ import BlinkIDUX
     @objc public func performScan(_ rootVc: UIViewController, blinkIdSdkSettings: [String: Any], blinkIdSessionSettings: [String: Any], blinkIdScanningUxSettings: [String: Any], classFilterSettings: [String: Any], redactionSettingsResolver: [String: Any], onResolve: @escaping (String) -> Void, onReject: @escaping (String) -> Void) {
         Task {
             do {
-                
                 blinkIdSdk = try await ensureLoadedSdk(blinkIdSdkSettings)
                 guard let blinkIdSdk = blinkIdSdk else {
                     throw BlinkIdReactNativeError.initError("The BlinkID SDK is not initialized. Call the loadBlinkIdSdk() method to pre-load the SDK first, or try running the performScan() method with a valid internet connection.")
@@ -102,6 +101,8 @@ import BlinkIDUX
                 )
                 
                 self.presentScanningUI(scanningUxModel, rootVc)
+            } catch let blinkIdError as BlinkIdReactNativeError {
+                onReject(BlinkIdReactNativeError.message(for: blinkIdError))
             } catch {
                 if let sdkError = error as? InvalidLicenseKeyError {
                     onReject(sdkError.message)
@@ -129,10 +130,10 @@ import BlinkIDUX
                     throw BlinkIdReactNativeError.frontImageError
                 }
                 
-                let _ = await session.process(inputImage: InputImage(uiImage: frontUIImage))
+                let _ = try await session.process(inputImage: InputImage(uiImage: frontUIImage))
                 
                 if let backUIImage = BlinkIdDeserializationUtils.deserializeBase64Image(secondImage) {
-                    let _ = await session.process(inputImage: InputImage(uiImage: backUIImage))
+                    let _ = try await session.process(inputImage: InputImage(uiImage: backUIImage))
                 }
                 
                 let scannedResults = await session.getResult(redactionSettings: BlinkIdDeserializationUtils.deserializeRedactionSettings(redactionSettings))
@@ -143,6 +144,8 @@ import BlinkIDUX
                         onReject("Could not retrive the results from DirectAPI scanning!")
                     }
                 }
+            } catch let blinkIdError as BlinkIdReactNativeError {
+                onReject(BlinkIdReactNativeError.message(for: blinkIdError))
             } catch {
                 if let sdkError = error as? InvalidLicenseKeyError {
                     onReject(sdkError.message)

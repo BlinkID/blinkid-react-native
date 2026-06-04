@@ -67,15 +67,9 @@ RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSetti
             return;
         }
 
-        NSDictionary *sdkSettingsDict = [self createDictionaryFromBlinkIdObject:blinkIdSdkSettings];
-        if (sdkSettingsDict[@"licenseKey"] == nil || [sdkSettingsDict[@"licenseKey"] isKindOfClass:[NSNull class]]) {
-            reject(@"BlinkIdIosError", @"BlinkID SDK settings must include a licenseKey.", nil);
-            return;
-        }
-
         [self->moduleImplementation
          performScan:rootViewController
-         blinkIdSdkSettings:sdkSettingsDict
+         blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings]
          blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject:blinkIdSessionSettings]
          blinkIdScanningUxSettings:[self createDictionaryFromBlinkIdObject:blinkIdScanningUxSettings]
          classFilterSettings:[self createDictionaryFromBlinkIdObject:classFilter]
@@ -83,7 +77,8 @@ RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSetti
          onResolve:^(NSString * _Nonnull result) {
             resolve(result);
         } onReject:^(NSString * _Nonnull error) {
-            reject(@"BlinkIdIosError", error, nil);
+            NSString *message = error.length > 0 ? error : @"Unknown BlinkID iOS error.";
+            reject(@"BlinkIdIosError", message, nil);
         }];
     });
 }
