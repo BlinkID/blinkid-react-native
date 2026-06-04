@@ -21606,6 +21606,45 @@
                 ]
               },
               {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(country:region:documentType:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DocumentClassInfo",
+                    "printedName": "BlinkID.BlinkIDSDK.DocumentClassInfo",
+                    "usr": "s:7BlinkID0A5IDSDKV17DocumentClassInfoV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Country",
+                    "printedName": "BlinkID.Country",
+                    "usr": "s:7BlinkID7CountryO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Region",
+                    "printedName": "BlinkID.Region",
+                    "usr": "s:7BlinkID6RegionO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DocumentType",
+                    "printedName": "BlinkID.DocumentType",
+                    "usr": "s:7BlinkID12DocumentTypeO"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:7BlinkID0A5IDSDKV17DocumentClassInfoV7country6region12documentTypeAeA7CountryO_AA6RegionOAA0dJ0Otcfc",
+                "mangledName": "$s7BlinkID0A5IDSDKV17DocumentClassInfoV7country6region12documentTypeAeA7CountryO_AA6RegionOAA0dJ0Otcfc",
+                "moduleName": "BlinkID",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "init_kind": "Designated"
+              },
+              {
                 "kind": "Function",
                 "name": "isEmpty",
                 "printedName": "isEmpty()",
@@ -58142,8 +58181,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:7BlinkID0A9IDSessionC7process10inputImageAA18FrameProcessResultVAA05InputF0C_tF",
-            "mangledName": "$s7BlinkID0A9IDSessionC7process10inputImageAA18FrameProcessResultVAA05InputF0C_tF",
+            "usr": "s:7BlinkID0A9IDSessionC7process10inputImageAA18FrameProcessResultVAA05InputF0C_tYaKF",
+            "mangledName": "$s7BlinkID0A9IDSessionC7process10inputImageAA18FrameProcessResultVAA05InputF0C_tYaKF",
             "moduleName": "BlinkID",
             "declAttributes": [
               "Final",
@@ -58151,6 +58190,7 @@
               "Custom",
               "RawDocComment"
             ],
+            "throwing": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -58222,6 +58262,29 @@
               "AccessControl",
               "Custom",
               "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getResolvedSessionSettings",
+            "printedName": "getResolvedSessionSettings()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BlinkIDSessionSettings",
+                "printedName": "BlinkID.BlinkIDSessionSettings",
+                "usr": "s:7BlinkID0A17IDSessionSettingsV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:7BlinkID0A9IDSessionC26getResolvedSessionSettingsAA0acG0VyF",
+            "mangledName": "$s7BlinkID0A9IDSessionC26getResolvedSessionSettingsAA0acG0VyF",
+            "moduleName": "BlinkID",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Custom"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -59300,46 +59363,6 @@
             "declKind": "EnumElement",
             "usr": "s:7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmF",
             "mangledName": "$s7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmF",
-            "moduleName": "BlinkID",
-            "declAttributes": [
-              "RawDocComment"
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "documentFiltered",
-            "printedName": "documentFiltered",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(BlinkID.ProcessingStatus.Type) -> BlinkID.ProcessingStatus",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProcessingStatus",
-                    "printedName": "BlinkID.ProcessingStatus",
-                    "usr": "s:7BlinkID16ProcessingStatusO"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "BlinkID.ProcessingStatus.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ProcessingStatus",
-                        "printedName": "BlinkID.ProcessingStatus",
-                        "usr": "s:7BlinkID16ProcessingStatusO"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "s:7BlinkID16ProcessingStatusO16documentFilteredyA2CmF",
-            "mangledName": "$s7BlinkID16ProcessingStatusO16documentFilteredyA2CmF",
             "moduleName": "BlinkID",
             "declAttributes": [
               "RawDocComment"
@@ -61419,8 +61442,8 @@
           },
           {
             "kind": "Var",
-            "name": "redactMrzResult",
-            "printedName": "redactMrzResult",
+            "name": "redactMrz",
+            "printedName": "redactMrz",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -61430,8 +61453,8 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:7BlinkID17RedactionSettingsV15redactMrzResultSbvp",
-            "mangledName": "$s7BlinkID17RedactionSettingsV15redactMrzResultSbvp",
+            "usr": "s:7BlinkID17RedactionSettingsV9redactMrzSbvp",
+            "mangledName": "$s7BlinkID17RedactionSettingsV9redactMrzSbvp",
             "moduleName": "BlinkID",
             "declAttributes": [
               "HasStorage",
@@ -61453,8 +61476,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV15redactMrzResultSbvg",
-                "mangledName": "$s7BlinkID17RedactionSettingsV15redactMrzResultSbvg",
+                "usr": "s:7BlinkID17RedactionSettingsV9redactMrzSbvg",
+                "mangledName": "$s7BlinkID17RedactionSettingsV9redactMrzSbvg",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "get"
@@ -61477,8 +61500,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV15redactMrzResultSbvs",
-                "mangledName": "$s7BlinkID17RedactionSettingsV15redactMrzResultSbvs",
+                "usr": "s:7BlinkID17RedactionSettingsV9redactMrzSbvs",
+                "mangledName": "$s7BlinkID17RedactionSettingsV9redactMrzSbvs",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "set"
@@ -61495,8 +61518,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV15redactMrzResultSbvM",
-                "mangledName": "$s7BlinkID17RedactionSettingsV15redactMrzResultSbvM",
+                "usr": "s:7BlinkID17RedactionSettingsV9redactMrzSbvM",
+                "mangledName": "$s7BlinkID17RedactionSettingsV9redactMrzSbvM",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "_modify"
@@ -61505,8 +61528,8 @@
           },
           {
             "kind": "Var",
-            "name": "redactBarcodeResult",
-            "printedName": "redactBarcodeResult",
+            "name": "redactBarcode",
+            "printedName": "redactBarcode",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -61516,8 +61539,8 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvp",
-            "mangledName": "$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvp",
+            "usr": "s:7BlinkID17RedactionSettingsV13redactBarcodeSbvp",
+            "mangledName": "$s7BlinkID17RedactionSettingsV13redactBarcodeSbvp",
             "moduleName": "BlinkID",
             "declAttributes": [
               "HasStorage",
@@ -61539,8 +61562,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvg",
-                "mangledName": "$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvg",
+                "usr": "s:7BlinkID17RedactionSettingsV13redactBarcodeSbvg",
+                "mangledName": "$s7BlinkID17RedactionSettingsV13redactBarcodeSbvg",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "get"
@@ -61563,8 +61586,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvs",
-                "mangledName": "$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvs",
+                "usr": "s:7BlinkID17RedactionSettingsV13redactBarcodeSbvs",
+                "mangledName": "$s7BlinkID17RedactionSettingsV13redactBarcodeSbvs",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "set"
@@ -61581,8 +61604,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvM",
-                "mangledName": "$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvM",
+                "usr": "s:7BlinkID17RedactionSettingsV13redactBarcodeSbvM",
+                "mangledName": "$s7BlinkID17RedactionSettingsV13redactBarcodeSbvM",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "_modify"
@@ -61592,7 +61615,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(mode:fields:documentNumberRedactionSettings:redactMrzResult:redactBarcodeResult:)",
+            "printedName": "init(mode:fields:documentNumberRedactionSettings:redactMrz:redactBarcode:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -61652,8 +61675,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD015redactMrzResult0i7BarcodeK0AcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc",
-            "mangledName": "$s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD015redactMrzResult0i7BarcodeK0AcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc",
+            "usr": "s:7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD09redactMrz0I7BarcodeAcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc",
+            "mangledName": "$s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD09redactMrz0I7BarcodeAcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc",
             "moduleName": "BlinkID",
             "declAttributes": [
               "AccessControl"
@@ -68959,14 +68982,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "MBSampleBufferWrapper",
-                "printedName": "BlinkID.MBSampleBufferWrapper",
-                "usr": "c:objc(cs)MBSampleBufferWrapper"
+                "name": "CMSampleBuffer",
+                "printedName": "CoreMedia.CMSampleBuffer",
+                "usr": "c:@T@CMSampleBufferRef"
               }
             ],
             "declKind": "Var",
-            "usr": "s:7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvp",
-            "mangledName": "$s7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvp",
+            "usr": "s:7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavp",
+            "mangledName": "$s7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavp",
             "moduleName": "BlinkID",
             "declAttributes": [
               "HasStorage",
@@ -68983,14 +69006,14 @@
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "MBSampleBufferWrapper",
-                    "printedName": "BlinkID.MBSampleBufferWrapper",
-                    "usr": "c:objc(cs)MBSampleBufferWrapper"
+                    "name": "CMSampleBuffer",
+                    "printedName": "CoreMedia.CMSampleBuffer",
+                    "usr": "c:@T@CMSampleBufferRef"
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvg",
-                "mangledName": "$s7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvg",
+                "usr": "s:7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavg",
+                "mangledName": "$s7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavg",
                 "moduleName": "BlinkID",
                 "implicit": true,
                 "accessorKind": "get"
@@ -69100,9 +69123,9 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "MBSampleBufferWrapper",
-                "printedName": "BlinkID.MBSampleBufferWrapper",
-                "usr": "c:objc(cs)MBSampleBufferWrapper"
+                "name": "CMSampleBuffer",
+                "printedName": "CoreMedia.CMSampleBuffer",
+                "usr": "c:@T@CMSampleBufferRef"
               },
               {
                 "kind": "TypeNominal",
@@ -69120,8 +69143,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:7BlinkID11CameraFrameV6buffer3roi11orientationACSo21MBSampleBufferWrapperC_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc",
-            "mangledName": "$s7BlinkID11CameraFrameV6buffer3roi11orientationACSo21MBSampleBufferWrapperC_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc",
+            "usr": "s:7BlinkID11CameraFrameV6buffer3roi11orientationACSo17CMSampleBufferRefa_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc",
+            "mangledName": "$s7BlinkID11CameraFrameV6buffer3roi11orientationACSo17CMSampleBufferRefa_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc",
             "moduleName": "BlinkID",
             "declAttributes": [
               "AccessControl",
@@ -90207,7 +90230,7 @@
       "kind": "Dictionary",
       "offset": 118,
       "length": 3026,
-      "value": "[(\"ccc_lookup_table.zzip\", \"25fcbe37707d6bd1f4e0dbc7032700b1099d4b82a5fac20770133834a5431d60\"), (\"Model_8326c5065a6d8451d6d004db73babf4a4a9f502c68643a14934cc098d04bf44f.strop\", \"a92a1867405dc9019231b2eaa1a1e4572975d20aee997b231b8bddc9e4f1185c\"), (\"Model_2880751121560047e6dc571bc8ff4683aeb863886f7c0789234594ceb1e23577.strop\", \"a9501dd262ffd1a74cf73304d1a6c258ef42c79305cf6bc2222bd7bb9d42364f\"), (\"Model_e57db06b96a854e265125119c6d6b4c956fa3713aaecf44d9e110096646ae51c.strop\", \"4f71ae79c05a4ee2fa75e7954326c47e517a643d36e8324166d000f2c1a81752\"), (\"serialized_embedder_db_1.12.bin\", \"9eb2e7c6ae44abe6107dc4441f8da2d0cd0f809d4d69b8fb63aac61ed2fb30b8\"), (\"Model_a1516add883f909ebecf9b565238086f8f31bbb3e7fb2113258e3ae7c659555e.strop\", \"e327f3c9da2e4d5e2be98195b24aabae557ec3cfb99b91e5630d7efab8ef93d8\"), (\"Model_3b11c3ffacbbf390b932fb9a7024f1a0016f66281ea8c790f8b5903374ad89c2.strop\", \"b4d598a0f368c1accbf2d0b5342517035c25fe4197570f69990ba48f8c02a67c\"), (\"Model_07c7ab860e77ec2e92bb822f6d62424b8595a5beb4340f6b2f7f6a4cffa5d050.strop\", \"ffb65e14de57564460d5cc2bd68785d315e6c8b7a8cae2b56792b080075a5561\"), (\"Model_f2874f5766b779c063dbe30467979163497dc4b29c43bab23d70c798ee32993a.strop\", \"e07141ce6e363a2c7718ee8dc8bdee275c0947c0812ce56044ec03d8064a7c3a\"), (\"Model_36d8e94f4cb46097bd6b7385f2aa91fcdee1a5fefeec59e56d1b9e82c94b00a7.strop\", \"43eb07f0ad07e4a0dd2b5d8973fae1b0c66e586838da4b6eb85655aea4b75b69\"), (\"Model_c5a91c9c674a51d2243b9fce7804aed845c089b9c5d9ac874bd47dcdb9997422.strop\", \"80557324eecbd9e8d1b96fea9db8553ff68bc3552a0272cac79ca79c5590a8a7\"), (\"Model_93607315418f2c5d3abec06d0b2a81e69abeb1b8d0506ed6373d7d74bd5e4b05.strop\", \"79bb41b564a2904e832fd6d6610b20308210293a89a47e606e96197bc7d84cda\"), (\"Model_d08a72e6ee68dea50b91816dd10ee8a9009d78fb75eee0b332b4ed10d633530f.strop\", \"60a03fa939e789771875d206528862e2f9800ef53d2283db92d9ec6a040daa8c\"), (\"Model_f531088a1f65a31d6ba039e09446fe24c18360080fec3792308ac01514803620.strop\", \"403290ec4e4b5987cd36e5c930d6563bb35e94ff8b1884132503cb324c5899d2\"), (\"Model_e89a89677e2469c66d02864bd83e04ceb72f0c95cd943b883875f8796b370495.strop\", \"680d1482f44fb172d14ef265ea4207e3c65e2804cb7439fa7b86e3840d4f4883\"), (\"Model_8c7727da554fd257fa758787ca3d0f517b47f6c5ba791792f516da7dd210fde8.strop\", \"637c348c0f5940c4edeb50b1dbf5e5574b97060ab373fed9667e4762375e3248\"), (\"Model_473ac5f5e256623c0a6b282698c1f1b033b9fb5359e6aa142e9fb4a4022afe4e.strop\", \"8bece4d92f69a65e3611d9a0da87d1bf337003195f62ce0caf0d02a3277d410b\"), (\"Model_5c3ce8ee662bb907221a996cde55d0f4aae47facdfa0b13115f73d03cca0f283.strop\", \"b9c08a9dd37a59e9434416d8645cf3ff659092026917707278dcb52ae574f7de\"), (\"Model_b452fd3cd4037080cfcb4c423dba5bc58c8ceafc28427fdf9c5778fb353f088e.strop\", \"180119c1917935b4c0a44793d1bf3a7f4afdfae2b24ba95932e6781d48a43127\"), (\"Model_38a69625879a5def5ed58d768f00e49df43fce8fc74c2e37099b680b526b96df.strop\", \"67bb9bfcb5db0cbb956b67d40e5a6fc101d7e92dd03078703c9d4c93bd21cee8\")]"
+      "value": "[(\"ccc_lookup_table.zzip\", \"25fcbe37707d6bd1f4e0dbc7032700b1099d4b82a5fac20770133834a5431d60\"), (\"Model_8326c5065a6d8451d6d004db73babf4a4a9f502c68643a14934cc098d04bf44f.strop\", \"a92a1867405dc9019231b2eaa1a1e4572975d20aee997b231b8bddc9e4f1185c\"), (\"Model_2880751121560047e6dc571bc8ff4683aeb863886f7c0789234594ceb1e23577.strop\", \"a9501dd262ffd1a74cf73304d1a6c258ef42c79305cf6bc2222bd7bb9d42364f\"), (\"serialized_embedder_db_1.12.bin\", \"9eb2e7c6ae44abe6107dc4441f8da2d0cd0f809d4d69b8fb63aac61ed2fb30b8\"), (\"Model_a1516add883f909ebecf9b565238086f8f31bbb3e7fb2113258e3ae7c659555e.strop\", \"e327f3c9da2e4d5e2be98195b24aabae557ec3cfb99b91e5630d7efab8ef93d8\"), (\"Model_f64218cba75f4fd879729341a58d376d371def418ab752ac8ff4050d34f6ea10.strop\", \"c13cc038450d236f52e8d3096dcfd8acf096272c16a3f4a4fa78588e7cf12f89\"), (\"Model_3b11c3ffacbbf390b932fb9a7024f1a0016f66281ea8c790f8b5903374ad89c2.strop\", \"b4d598a0f368c1accbf2d0b5342517035c25fe4197570f69990ba48f8c02a67c\"), (\"Model_07c7ab860e77ec2e92bb822f6d62424b8595a5beb4340f6b2f7f6a4cffa5d050.strop\", \"ffb65e14de57564460d5cc2bd68785d315e6c8b7a8cae2b56792b080075a5561\"), (\"Model_f2874f5766b779c063dbe30467979163497dc4b29c43bab23d70c798ee32993a.strop\", \"e07141ce6e363a2c7718ee8dc8bdee275c0947c0812ce56044ec03d8064a7c3a\"), (\"Model_36d8e94f4cb46097bd6b7385f2aa91fcdee1a5fefeec59e56d1b9e82c94b00a7.strop\", \"43eb07f0ad07e4a0dd2b5d8973fae1b0c66e586838da4b6eb85655aea4b75b69\"), (\"Model_c5a91c9c674a51d2243b9fce7804aed845c089b9c5d9ac874bd47dcdb9997422.strop\", \"80557324eecbd9e8d1b96fea9db8553ff68bc3552a0272cac79ca79c5590a8a7\"), (\"Model_93607315418f2c5d3abec06d0b2a81e69abeb1b8d0506ed6373d7d74bd5e4b05.strop\", \"79bb41b564a2904e832fd6d6610b20308210293a89a47e606e96197bc7d84cda\"), (\"Model_d08a72e6ee68dea50b91816dd10ee8a9009d78fb75eee0b332b4ed10d633530f.strop\", \"60a03fa939e789771875d206528862e2f9800ef53d2283db92d9ec6a040daa8c\"), (\"Model_f531088a1f65a31d6ba039e09446fe24c18360080fec3792308ac01514803620.strop\", \"403290ec4e4b5987cd36e5c930d6563bb35e94ff8b1884132503cb324c5899d2\"), (\"Model_e89a89677e2469c66d02864bd83e04ceb72f0c95cd943b883875f8796b370495.strop\", \"680d1482f44fb172d14ef265ea4207e3c65e2804cb7439fa7b86e3840d4f4883\"), (\"Model_8c7727da554fd257fa758787ca3d0f517b47f6c5ba791792f516da7dd210fde8.strop\", \"637c348c0f5940c4edeb50b1dbf5e5574b97060ab373fed9667e4762375e3248\"), (\"Model_473ac5f5e256623c0a6b282698c1f1b033b9fb5359e6aa142e9fb4a4022afe4e.strop\", \"8bece4d92f69a65e3611d9a0da87d1bf337003195f62ce0caf0d02a3277d410b\"), (\"Model_5c3ce8ee662bb907221a996cde55d0f4aae47facdfa0b13115f73d03cca0f283.strop\", \"b9c08a9dd37a59e9434416d8645cf3ff659092026917707278dcb52ae574f7de\"), (\"Model_b452fd3cd4037080cfcb4c423dba5bc58c8ceafc28427fdf9c5778fb353f088e.strop\", \"180119c1917935b4c0a44793d1bf3a7f4afdfae2b24ba95932e6781d48a43127\"), (\"Model_38a69625879a5def5ed58d768f00e49df43fce8fc74c2e37099b680b526b96df.strop\", \"67bb9bfcb5db0cbb956b67d40e5a6fc101d7e92dd03078703c9d4c93bd21cee8\")]"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/Shared\/ProcessResult\/DocumentRotation.swift",
@@ -91227,7 +91250,7 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSession.swift",
       "kind": "BooleanLiteral",
-      "offset": 12541,
+      "offset": 12635,
       "length": 5,
       "value": "false"
     },
@@ -91248,259 +91271,259 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 4203,
+      "offset": 4185,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 4238,
+      "offset": 4214,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14581,
+      "offset": 14509,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14632,
+      "offset": 14560,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14694,
+      "offset": 14622,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14741,
+      "offset": 14669,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14790,
+      "offset": 14718,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14840,
+      "offset": 14768,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14887,
+      "offset": 14815,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 14937,
+      "offset": 14865,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "FloatLiteral",
-      "offset": 14979,
+      "offset": 14907,
       "length": 4,
       "value": "0.02"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "IntegerLiteral",
-      "offset": 15012,
+      "offset": 14940,
       "length": 3,
       "value": "250"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "FloatLiteral",
-      "offset": 15050,
+      "offset": 14978,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 15149,
+      "offset": 15077,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 15251,
+      "offset": 15179,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 15358,
+      "offset": 15286,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 15412,
+      "offset": 15340,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 17546,
+      "offset": 17474,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21669,
+      "offset": 21597,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21718,
+      "offset": 21646,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21763,
+      "offset": 21691,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21803,
+      "offset": 21731,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21845,
+      "offset": 21773,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21888,
+      "offset": 21816,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21934,
+      "offset": 21862,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21979,
+      "offset": 21907,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 22022,
+      "offset": 21950,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 22066,
+      "offset": 21994,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 22108,
+      "offset": 22036,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 22157,
+      "offset": 22085,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 25432,
+      "offset": 25360,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 25487,
+      "offset": 25415,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 25537,
+      "offset": 25465,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "BooleanLiteral",
-      "offset": 25585,
+      "offset": 25513,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "IntegerLiteral",
-      "offset": 28338,
+      "offset": 28266,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "FloatLiteral",
-      "offset": 30466,
+      "offset": 30394,
       "length": 4,
       "value": "60.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/DocumentVerification\/DocumentVerification\/Capture\/Swift\/BlinkID\/Session\/BlinkIDSessionSettings.swift",
       "kind": "FloatLiteral",
-      "offset": 30530,
+      "offset": 30458,
       "length": 4,
       "value": "10.0"
     },

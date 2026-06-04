@@ -326,7 +326,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-#pragma clang module import BlinkID
+#pragma clang module import CoreMedia
 #pragma clang module import UIKit
 #endif
 
@@ -4489,6 +4489,7 @@ SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_uint64_t_0_8_void_ptr_8_16 
 SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_uint64_t_0_8_void_ptr_8_16 $s7BlinkID0A5IDSDKV17DocumentClassInfoV21isoNumericCountryCodeSSvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_uint64_t_0_8_void_ptr_8_16 $s7BlinkID0A5IDSDKV17DocumentClassInfoV20isoAlpha2CountryCodeSSvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_uint64_t_0_8_void_ptr_8_16 $s7BlinkID0A5IDSDKV17DocumentClassInfoV20isoAlpha3CountryCodeSSvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s7BlinkID0A5IDSDKV17DocumentClassInfoV7country6region12documentTypeAeA7CountryO_AA6RegionOAA0dJ0OtcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull country, const void * _Nonnull region, const void * _Nonnull documentType) SWIFT_NOEXCEPT SWIFT_CALL; // init(country:region:documentType:)
 SWIFT_EXTERN bool $s7BlinkID0A5IDSDKV17DocumentClassInfoV7isEmptySbyF(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // isEmpty()
 SWIFT_EXTERN void $s7BlinkID0A5IDSDKV24InputImageAnalysisResultV16processingStatusAA010ProcessingI0Ovg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_void_ptr_0_8 $s7BlinkID0A5IDSDKV24InputImageAnalysisResultV22missingMandatoryFieldsSayAA9FieldTypeOGvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
@@ -4635,10 +4636,10 @@ SWIFT_EXTERN void $s7BlinkID0A17IDSessionSettingsV19stepTimeoutDurationSdvs(doub
 SWIFT_EXTERN double $s7BlinkID0A17IDSessionSettingsV25inactivityTimeoutDurationSdvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID0A17IDSessionSettingsV25inactivityTimeoutDurationSdvs(double value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID0A17IDSessionSettingsV16inputImageSource12scanningMode0hD019stepTimeoutDuration010inactivitykL0AcA05InputfG0O_AA08ScanningI0OAA0oD0VS2dtcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull inputImageSource, const void * _Nonnull scanningMode, const void * _Nonnull scanningSettings, double stepTimeoutDuration, double inactivityTimeoutDuration) SWIFT_NOEXCEPT SWIFT_CALL; // init(inputImageSource:scanningMode:scanningSettings:stepTimeoutDuration:inactivityTimeoutDuration:)
-SWIFT_EXTERN MBSampleBufferWrapper *_Nonnull $s7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN CMSampleBufferRef _Nonnull $s7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID11CameraFrameV3roiAA16RegionOfInterestVvg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID11CameraFrameV11orientationAA0cD16VideoOrientationOvg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN void $s7BlinkID11CameraFrameV6buffer3roi11orientationACSo21MBSampleBufferWrapperC_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, MBSampleBufferWrapper *_Nonnull buffer, const void * _Nonnull roi, const void * _Nonnull orientation) SWIFT_NOEXCEPT SWIFT_CALL; // init(buffer:roi:orientation:)
+SWIFT_EXTERN void $s7BlinkID11CameraFrameV6buffer3roi11orientationACSo17CMSampleBufferRefa_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, CMSampleBufferRef _Nonnull buffer, const void * _Nonnull roi, const void * _Nonnull orientation) SWIFT_NOEXCEPT SWIFT_CALL; // init(buffer:roi:orientation:)
 SWIFT_EXTERN ptrdiff_t $s7BlinkID11CameraFrameV5widthSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN ptrdiff_t $s7BlinkID11CameraFrameV6heightSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN ptrdiff_t $s7BlinkID27CameraFrameVideoOrientationO9hashValueSivg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
@@ -4920,11 +4921,11 @@ SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_void_ptr_0_8 $s7BlinkID17Re
 SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV6fieldsSayAA9FieldTypeOGvs(struct swift_interop_passStub_BlinkID_void_ptr_0_8 value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV014documentNumbercD0AA08DocumentfcD0VSgvg(SWIFT_INDIRECT_RESULT void * _Nonnull, SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
 SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV014documentNumbercD0AA08DocumentfcD0VSgvs(const void * _Nonnull value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN bool $s7BlinkID17RedactionSettingsV15redactMrzResultSbvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV15redactMrzResultSbvs(bool value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN bool $s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvs(bool value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
-SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD015redactMrzResult0i7BarcodeK0AcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull mode, struct swift_interop_passStub_BlinkID_void_ptr_0_8 fields, const void * _Nonnull documentNumberRedactionSettings, bool redactMrzResult, bool redactBarcodeResult) SWIFT_NOEXCEPT SWIFT_CALL; // init(mode:fields:documentNumberRedactionSettings:redactMrzResult:redactBarcodeResult:)
+SWIFT_EXTERN bool $s7BlinkID17RedactionSettingsV9redactMrzSbvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV9redactMrzSbvs(bool value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN bool $s7BlinkID17RedactionSettingsV13redactBarcodeSbvg(SWIFT_CONTEXT const void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV13redactBarcodeSbvs(bool value, SWIFT_CONTEXT void * _Nonnull _self) SWIFT_NOEXCEPT SWIFT_CALL; // _
+SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD09redactMrz0I7BarcodeAcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull mode, struct swift_interop_passStub_BlinkID_void_ptr_0_8 fields, const void * _Nonnull documentNumberRedactionSettings, bool redactMrz, bool redactBarcode) SWIFT_NOEXCEPT SWIFT_CALL; // init(mode:fields:documentNumberRedactionSettings:redactMrz:redactBarcode:)
 SWIFT_EXTERN void $s7BlinkID17RedactionSettingsV010getDefaultcD03forAcA0A5IDSDKV17DocumentClassInfoV_tFZ(SWIFT_INDIRECT_RESULT void * _Nonnull, const void * _Nonnull classInfo) SWIFT_NOEXCEPT SWIFT_CALL; // getDefaultRedactionSettings(for:)
 SWIFT_EXTERN void $s7BlinkID6RegionO8rawValueACSgSS_tcfC(SWIFT_INDIRECT_RESULT void * _Nonnull, struct swift_interop_passStub_BlinkID_uint64_t_0_8_void_ptr_8_16 rawValue) SWIFT_NOEXCEPT SWIFT_CALL; // init(rawValue:)
 SWIFT_EXTERN struct swift_interop_returnStub_BlinkID_void_ptr_0_8 $s7BlinkID6RegionO8allCasesSayACGvgZ(void) SWIFT_NOEXCEPT SWIFT_CALL; // _
@@ -11898,6 +11899,7 @@ public:
   SWIFT_INLINE_THUNK swift::String getIsoNumericCountryCode() const SWIFT_SYMBOL("s:7BlinkID0A5IDSDKV17DocumentClassInfoV21isoNumericCountryCodeSSvp");
   SWIFT_INLINE_THUNK swift::String getIsoAlpha2CountryCode() const SWIFT_SYMBOL("s:7BlinkID0A5IDSDKV17DocumentClassInfoV20isoAlpha2CountryCodeSSvp");
   SWIFT_INLINE_THUNK swift::String getIsoAlpha3CountryCode() const SWIFT_SYMBOL("s:7BlinkID0A5IDSDKV17DocumentClassInfoV20isoAlpha3CountryCodeSSvp");
+  static SWIFT_INLINE_THUNK __BlinkIDSDKNested::DocumentClassInfo init(const Country& country, const Region& region, const DocumentType& documentType) SWIFT_SYMBOL("s:7BlinkID0A5IDSDKV17DocumentClassInfoV7country6region12documentTypeAeA7CountryO_AA6RegionOAA0dJ0Otcfc");
   SWIFT_INLINE_THUNK bool isEmpty() const SWIFT_SYMBOL("s:7BlinkID0A5IDSDKV17DocumentClassInfoV7isEmptySbyF");
 private:
   SWIFT_INLINE_THUNK DocumentClassInfo(swift::_impl::ValueWitnessTable * _Nonnull vwTable) noexcept : _storage(vwTable->size, vwTable->getAlignment()) {}
@@ -13341,33 +13343,6 @@ struct implClassFor<BlinkID::BlinkIDSessionSettings> { using type = BlinkID::_im
 
 namespace BlinkID SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("BlinkID") {
 
-namespace _impl {
-
-// Type metadata accessor for MBSampleBufferWrapper
-SWIFT_EXTERN swift::_impl::MetadataResponseTy $sSo21MBSampleBufferWrapperCMa(swift::_impl::MetadataRequestTy) SWIFT_NOEXCEPT SWIFT_CALL;
-
-
-} // namespace _impl
-
-} // end namespace 
-
-namespace swift SWIFT_PRIVATE_ATTR {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++17-extensions"
-template<>
-inline const constexpr bool isUsableInGenericContext<MBSampleBufferWrapper*> = true;
-template<>
-struct TypeMetadataTrait<MBSampleBufferWrapper*> {
-  static SWIFT_INLINE_PRIVATE_HELPER void * _Nonnull getTypeMetadata() {
-    return BlinkID::_impl::$sSo21MBSampleBufferWrapperCMa(0)._0;
-  }
-};
-namespace _impl{
-} // namespace
-#pragma clang diagnostic pop
-} // namespace swift
-
-namespace BlinkID SWIFT_PRIVATE_ATTR SWIFT_SYMBOL_MODULE("BlinkID") {
 class SWIFT_SYMBOL("s:7BlinkID16RegionOfInterestV") RegionOfInterest;
 } // end namespace 
 
@@ -13454,17 +13429,17 @@ public:
   swift::_impl::_swift_stdlib_reportFatalError("swift", 5, "C++ does not support moving a Swift value yet", 45, 0);
   abort();
   }
-  SWIFT_INLINE_THUNK MBSampleBufferWrapper *_Nonnull getBuffer() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvp");
+  SWIFT_INLINE_THUNK CMSampleBufferRef _Nonnull getBuffer() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavp");
   SWIFT_INLINE_THUNK RegionOfInterest getRoi() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV3roiAA16RegionOfInterestVvp");
   SWIFT_INLINE_THUNK CameraFrameVideoOrientation getOrientation() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV11orientationAA0cD16VideoOrientationOvp");
 /// Creates a new camera frame instance.
-/// \param buffer The wrapped sample buffer containing the image data
+/// \param buffer The sample buffer containing the image data
 ///
 /// \param roi The region of interest within the frame. Defaults to full frame
 ///
 /// \param orientation The orientation of the camera. Defaults to portrait
 ///
-  static SWIFT_INLINE_THUNK CameraFrame init(MBSampleBufferWrapper *_Nonnull buffer, const RegionOfInterest& roi, const CameraFrameVideoOrientation& orientation) SWIFT_SYMBOL("s:7BlinkID11CameraFrameV6buffer3roi11orientationACSo21MBSampleBufferWrapperC_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc");
+  static SWIFT_INLINE_THUNK CameraFrame init(CMSampleBufferRef _Nonnull buffer, const RegionOfInterest& roi, const CameraFrameVideoOrientation& orientation) SWIFT_SYMBOL("s:7BlinkID11CameraFrameV6buffer3roi11orientationACSo17CMSampleBufferRefa_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfc");
   SWIFT_INLINE_THUNK swift::Int getWidth() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV5widthSivp");
   SWIFT_INLINE_THUNK swift::Int getHeight() const SWIFT_SYMBOL("s:7BlinkID11CameraFrameV6heightSivp");
 private:
@@ -28092,7 +28067,6 @@ extern unsigned $s7BlinkID16ProcessingStatusO22invalidCharactersFoundyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO17imageReturnFailedyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO24barcodeRecognitionFailedyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmFWC;
-extern unsigned $s7BlinkID16ProcessingStatusO16documentFilteredyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO19unsupportedDocumentyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO17awaitingOtherSideyA2CmFWC;
 extern unsigned $s7BlinkID16ProcessingStatusO10notScannedyA2CmFWC;
@@ -28157,7 +28131,6 @@ public:
     imageReturnFailed SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO17imageReturnFailedyA2CmF"),
     barcodeRecognitionFailed SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO24barcodeRecognitionFailedyA2CmF"),
     mrzParsingFailed SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmF"),
-    documentFiltered SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO16documentFilteredyA2CmF"),
     unsupportedDocument SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO19unsupportedDocumentyA2CmF"),
     awaitingOtherSide SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO17awaitingOtherSideyA2CmF"),
     notScanned SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO10notScannedyA2CmF"),
@@ -28258,14 +28231,6 @@ public:
   } mrzParsingFailed SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmF");
   SWIFT_INLINE_THUNK bool isMrzParsingFailed() const;
 
-  inline const static struct _impl_documentFiltered {  // impl struct for case documentFiltered
-    SWIFT_INLINE_THUNK constexpr operator cases() const {
-      return cases::documentFiltered;
-    }
-    SWIFT_INLINE_THUNK ProcessingStatus operator()() const;
-  } documentFiltered SWIFT_SYMBOL("s:7BlinkID16ProcessingStatusO16documentFilteredyA2CmF");
-  SWIFT_INLINE_THUNK bool isDocumentFiltered() const;
-
   inline const static struct _impl_unsupportedDocument {  // impl struct for case unsupportedDocument
     SWIFT_INLINE_THUNK constexpr operator cases() const {
       return cases::unsupportedDocument;
@@ -28343,7 +28308,6 @@ public:
     if (tag == _impl::$s7BlinkID16ProcessingStatusO17imageReturnFailedyA2CmFWC) return cases::imageReturnFailed;
     if (tag == _impl::$s7BlinkID16ProcessingStatusO24barcodeRecognitionFailedyA2CmFWC) return cases::barcodeRecognitionFailed;
     if (tag == _impl::$s7BlinkID16ProcessingStatusO16mrzParsingFailedyA2CmFWC) return cases::mrzParsingFailed;
-    if (tag == _impl::$s7BlinkID16ProcessingStatusO16documentFilteredyA2CmFWC) return cases::documentFiltered;
     if (tag == _impl::$s7BlinkID16ProcessingStatusO19unsupportedDocumentyA2CmFWC) return cases::unsupportedDocument;
     if (tag == _impl::$s7BlinkID16ProcessingStatusO17awaitingOtherSideyA2CmFWC) return cases::awaitingOtherSide;
     if (tag == _impl::$s7BlinkID16ProcessingStatusO10notScannedyA2CmFWC) return cases::notScanned;
@@ -29183,11 +29147,11 @@ public:
   SWIFT_INLINE_THUNK void setFields(const swift::Array<FieldType>& value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV6fieldsSayAA9FieldTypeOGvp");
   SWIFT_INLINE_THUNK swift::Optional<DocumentNumberRedactionSettings> getDocumentNumberRedactionSettings() const SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV014documentNumbercD0AA08DocumentfcD0VSgvp");
   SWIFT_INLINE_THUNK void setDocumentNumberRedactionSettings(const swift::Optional<DocumentNumberRedactionSettings>& value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV014documentNumbercD0AA08DocumentfcD0VSgvp");
-  SWIFT_INLINE_THUNK bool getRedactMrzResult() const SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV15redactMrzResultSbvp");
-  SWIFT_INLINE_THUNK void setRedactMrzResult(bool value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV15redactMrzResultSbvp");
-  SWIFT_INLINE_THUNK bool getRedactBarcodeResult() const SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvp");
-  SWIFT_INLINE_THUNK void setRedactBarcodeResult(bool value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV19redactBarcodeResultSbvp");
-  static SWIFT_INLINE_THUNK RedactionSettings init(const RedactionMode& mode, const swift::Array<FieldType>& fields, const swift::Optional<DocumentNumberRedactionSettings>& documentNumberRedactionSettings, bool redactMrzResult, bool redactBarcodeResult) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD015redactMrzResult0i7BarcodeK0AcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc");
+  SWIFT_INLINE_THUNK bool getRedactMrz() const SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV9redactMrzSbvp");
+  SWIFT_INLINE_THUNK void setRedactMrz(bool value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV9redactMrzSbvp");
+  SWIFT_INLINE_THUNK bool getRedactBarcode() const SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV13redactBarcodeSbvp");
+  SWIFT_INLINE_THUNK void setRedactBarcode(bool value) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV13redactBarcodeSbvp");
+  static SWIFT_INLINE_THUNK RedactionSettings init(const RedactionMode& mode, const swift::Array<FieldType>& fields, const swift::Optional<DocumentNumberRedactionSettings>& documentNumberRedactionSettings, bool redactMrz, bool redactBarcode) SWIFT_SYMBOL("s:7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD09redactMrz0I7BarcodeAcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfc");
 /// Returns the SDK’s default <code>RedactionSettings</code> for a given document class.
 /// The SDK ships with built-in redaction defaults tailored to each supported document
 /// class — covering country, region, and document type. Use this function to retrieve
@@ -39513,6 +39477,20 @@ static_assert(swift::isUsableInGenericContext<T_0_1>, "type cannot be used in a 
     BlinkID::_impl::swift_interop_returnDirect_BlinkID_uint64_t_0_8_void_ptr_8_16(result, BlinkID::_impl::$s7BlinkID0A5IDSDKV17DocumentClassInfoV20isoAlpha3CountryCodeSSvg(_getOpaquePointer()));
   });
   }
+  SWIFT_INLINE_THUNK __BlinkIDSDKNested::DocumentClassInfo __BlinkIDSDKNested::DocumentClassInfo::init(const Country& country, const Region& region, const DocumentType& documentType) {
+  alignas(alignof(Country)) char copyBuffer_consumedParamCopy_country[sizeof(Country)];
+  auto &consumedParamCopy_country = *(new(copyBuffer_consumedParamCopy_country) Country(country));
+  swift::_impl::ConsumedValueStorageDestroyer<Country> storageGuard_consumedParamCopy_country(consumedParamCopy_country);
+  alignas(alignof(Region)) char copyBuffer_consumedParamCopy_region[sizeof(Region)];
+  auto &consumedParamCopy_region = *(new(copyBuffer_consumedParamCopy_region) Region(region));
+  swift::_impl::ConsumedValueStorageDestroyer<Region> storageGuard_consumedParamCopy_region(consumedParamCopy_region);
+  alignas(alignof(DocumentType)) char copyBuffer_consumedParamCopy_documentType[sizeof(DocumentType)];
+  auto &consumedParamCopy_documentType = *(new(copyBuffer_consumedParamCopy_documentType) DocumentType(documentType));
+  swift::_impl::ConsumedValueStorageDestroyer<DocumentType> storageGuard_consumedParamCopy_documentType(consumedParamCopy_documentType);
+  return BlinkID::__BlinkIDSDKNested::_impl::_impl_DocumentClassInfo::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
+    BlinkID::_impl::$s7BlinkID0A5IDSDKV17DocumentClassInfoV7country6region12documentTypeAeA7CountryO_AA6RegionOAA0dJ0OtcfC(result, BlinkID::_impl::_impl_Country::getOpaquePointer(consumedParamCopy_country), BlinkID::_impl::_impl_Region::getOpaquePointer(consumedParamCopy_region), BlinkID::_impl::_impl_DocumentType::getOpaquePointer(consumedParamCopy_documentType));
+  });
+  }
   SWIFT_INLINE_THUNK bool __BlinkIDSDKNested::DocumentClassInfo::isEmpty() const {
   return BlinkID::_impl::$s7BlinkID0A5IDSDKV17DocumentClassInfoV7isEmptySbyF(_getOpaquePointer());
   }
@@ -40170,8 +40148,8 @@ static_assert(swift::isUsableInGenericContext<T_0_1>, "type cannot be used in a 
     BlinkID::_impl::$s7BlinkID0A17IDSessionSettingsV16inputImageSource12scanningMode0hD019stepTimeoutDuration010inactivitykL0AcA05InputfG0O_AA08ScanningI0OAA0oD0VS2dtcfC(result, BlinkID::_impl::_impl_InputImageSource::getOpaquePointer(consumedParamCopy_inputImageSource), BlinkID::_impl::_impl_ScanningMode::getOpaquePointer(consumedParamCopy_scanningMode), BlinkID::_impl::_impl_ScanningSettings::getOpaquePointer(consumedParamCopy_scanningSettings), stepTimeoutDuration, inactivityTimeoutDuration);
   });
   }
-  SWIFT_INLINE_THUNK MBSampleBufferWrapper *_Nonnull CameraFrame::getBuffer() const {
-return (__bridge_transfer MBSampleBufferWrapper *)(__bridge void *)BlinkID::_impl::$s7BlinkID11CameraFrameV6bufferSo21MBSampleBufferWrapperCvg(_getOpaquePointer());
+  SWIFT_INLINE_THUNK CMSampleBufferRef _Nonnull CameraFrame::getBuffer() const {
+return BlinkID::_impl::$s7BlinkID11CameraFrameV6bufferSo17CMSampleBufferRefavg(_getOpaquePointer());
   }
   SWIFT_INLINE_THUNK RegionOfInterest CameraFrame::getRoi() const {
   return BlinkID::_impl::_impl_RegionOfInterest::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
@@ -40183,10 +40161,10 @@ return (__bridge_transfer MBSampleBufferWrapper *)(__bridge void *)BlinkID::_imp
     BlinkID::_impl::$s7BlinkID11CameraFrameV11orientationAA0cD16VideoOrientationOvg(result, _getOpaquePointer());
   });
   }
-  SWIFT_INLINE_THUNK CameraFrame CameraFrame::init(MBSampleBufferWrapper *_Nonnull buffer, const RegionOfInterest& roi, const CameraFrameVideoOrientation& orientation) {
-  alignas(alignof(MBSampleBufferWrapper *_Nonnull)) char copyBuffer_consumedParamCopy_buffer[sizeof(MBSampleBufferWrapper *_Nonnull)];
-  auto &consumedParamCopy_buffer = *(new(copyBuffer_consumedParamCopy_buffer) MBSampleBufferWrapper *_Nonnull(buffer));
-  swift::_impl::ConsumedValueStorageDestroyer<MBSampleBufferWrapper *_Nonnull> storageGuard_consumedParamCopy_buffer(consumedParamCopy_buffer);
+  SWIFT_INLINE_THUNK CameraFrame CameraFrame::init(CMSampleBufferRef _Nonnull buffer, const RegionOfInterest& roi, const CameraFrameVideoOrientation& orientation) {
+  alignas(alignof(CMSampleBufferRef _Nonnull)) char copyBuffer_consumedParamCopy_buffer[sizeof(CMSampleBufferRef _Nonnull)];
+  auto &consumedParamCopy_buffer = *(new(copyBuffer_consumedParamCopy_buffer) CMSampleBufferRef _Nonnull(buffer));
+  swift::_impl::ConsumedValueStorageDestroyer<CMSampleBufferRef _Nonnull> storageGuard_consumedParamCopy_buffer(consumedParamCopy_buffer);
   alignas(alignof(RegionOfInterest)) char copyBuffer_consumedParamCopy_roi[sizeof(RegionOfInterest)];
   auto &consumedParamCopy_roi = *(new(copyBuffer_consumedParamCopy_roi) RegionOfInterest(roi));
   swift::_impl::ConsumedValueStorageDestroyer<RegionOfInterest> storageGuard_consumedParamCopy_roi(consumedParamCopy_roi);
@@ -40194,7 +40172,7 @@ return (__bridge_transfer MBSampleBufferWrapper *)(__bridge void *)BlinkID::_imp
   auto &consumedParamCopy_orientation = *(new(copyBuffer_consumedParamCopy_orientation) CameraFrameVideoOrientation(orientation));
   swift::_impl::ConsumedValueStorageDestroyer<CameraFrameVideoOrientation> storageGuard_consumedParamCopy_orientation(consumedParamCopy_orientation);
   return BlinkID::_impl::_impl_CameraFrame::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
-    BlinkID::_impl::$s7BlinkID11CameraFrameV6buffer3roi11orientationACSo21MBSampleBufferWrapperC_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfC(result, consumedParamCopy_buffer, BlinkID::_impl::_impl_RegionOfInterest::getOpaquePointer(consumedParamCopy_roi), BlinkID::_impl::_impl_CameraFrameVideoOrientation::getOpaquePointer(consumedParamCopy_orientation));
+    BlinkID::_impl::$s7BlinkID11CameraFrameV6buffer3roi11orientationACSo17CMSampleBufferRefa_AA16RegionOfInterestVAA0cD16VideoOrientationOtcfC(result, consumedParamCopy_buffer, BlinkID::_impl::_impl_RegionOfInterest::getOpaquePointer(consumedParamCopy_roi), BlinkID::_impl::_impl_CameraFrameVideoOrientation::getOpaquePointer(consumedParamCopy_orientation));
   });
   }
   SWIFT_INLINE_THUNK swift::Int CameraFrame::getWidth() const {
@@ -45511,14 +45489,6 @@ return (__bridge_transfer UIImage *)(__bridge void *)BlinkID::_impl::$s7BlinkID1
   SWIFT_INLINE_THUNK  bool ProcessingStatus::isMrzParsingFailed() const {
     return *this == ProcessingStatus::mrzParsingFailed;
   }
-  SWIFT_INLINE_THUNK ProcessingStatus ProcessingStatus::_impl_documentFiltered::operator()() const {
-    auto result = ProcessingStatus::_make();
-    result._destructiveInjectEnumTag(_impl::$s7BlinkID16ProcessingStatusO16documentFilteredyA2CmFWC);
-    return result;
-  }
-  SWIFT_INLINE_THUNK  bool ProcessingStatus::isDocumentFiltered() const {
-    return *this == ProcessingStatus::documentFiltered;
-  }
   SWIFT_INLINE_THUNK ProcessingStatus ProcessingStatus::_impl_unsupportedDocument::operator()() const {
     auto result = ProcessingStatus::_make();
     result._destructiveInjectEnumTag(_impl::$s7BlinkID16ProcessingStatusO19unsupportedDocumentyA2CmFWC);
@@ -45719,19 +45689,19 @@ return (__bridge_transfer UIImage *)(__bridge void *)BlinkID::_impl::$s7BlinkID1
   swift::_impl::ConsumedValueStorageDestroyer<swift::Optional<DocumentNumberRedactionSettings>> storageGuard_consumedParamCopy_value(consumedParamCopy_value);
   BlinkID::_impl::$s7BlinkID17RedactionSettingsV014documentNumbercD0AA08DocumentfcD0VSgvs(swift::_impl::_impl_Optional<DocumentNumberRedactionSettings>::getOpaquePointer(consumedParamCopy_value), _getOpaquePointer());
   }
-  SWIFT_INLINE_THUNK bool RedactionSettings::getRedactMrzResult() const {
-  return BlinkID::_impl::$s7BlinkID17RedactionSettingsV15redactMrzResultSbvg(_getOpaquePointer());
+  SWIFT_INLINE_THUNK bool RedactionSettings::getRedactMrz() const {
+  return BlinkID::_impl::$s7BlinkID17RedactionSettingsV9redactMrzSbvg(_getOpaquePointer());
   }
-  SWIFT_INLINE_THUNK void RedactionSettings::setRedactMrzResult(bool value) {
-  BlinkID::_impl::$s7BlinkID17RedactionSettingsV15redactMrzResultSbvs(value, _getOpaquePointer());
+  SWIFT_INLINE_THUNK void RedactionSettings::setRedactMrz(bool value) {
+  BlinkID::_impl::$s7BlinkID17RedactionSettingsV9redactMrzSbvs(value, _getOpaquePointer());
   }
-  SWIFT_INLINE_THUNK bool RedactionSettings::getRedactBarcodeResult() const {
-  return BlinkID::_impl::$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvg(_getOpaquePointer());
+  SWIFT_INLINE_THUNK bool RedactionSettings::getRedactBarcode() const {
+  return BlinkID::_impl::$s7BlinkID17RedactionSettingsV13redactBarcodeSbvg(_getOpaquePointer());
   }
-  SWIFT_INLINE_THUNK void RedactionSettings::setRedactBarcodeResult(bool value) {
-  BlinkID::_impl::$s7BlinkID17RedactionSettingsV19redactBarcodeResultSbvs(value, _getOpaquePointer());
+  SWIFT_INLINE_THUNK void RedactionSettings::setRedactBarcode(bool value) {
+  BlinkID::_impl::$s7BlinkID17RedactionSettingsV13redactBarcodeSbvs(value, _getOpaquePointer());
   }
-  SWIFT_INLINE_THUNK RedactionSettings RedactionSettings::init(const RedactionMode& mode, const swift::Array<FieldType>& fields, const swift::Optional<DocumentNumberRedactionSettings>& documentNumberRedactionSettings, bool redactMrzResult, bool redactBarcodeResult) {
+  SWIFT_INLINE_THUNK RedactionSettings RedactionSettings::init(const RedactionMode& mode, const swift::Array<FieldType>& fields, const swift::Optional<DocumentNumberRedactionSettings>& documentNumberRedactionSettings, bool redactMrz, bool redactBarcode) {
   alignas(alignof(RedactionMode)) char copyBuffer_consumedParamCopy_mode[sizeof(RedactionMode)];
   auto &consumedParamCopy_mode = *(new(copyBuffer_consumedParamCopy_mode) RedactionMode(mode));
   swift::_impl::ConsumedValueStorageDestroyer<RedactionMode> storageGuard_consumedParamCopy_mode(consumedParamCopy_mode);
@@ -45742,7 +45712,7 @@ return (__bridge_transfer UIImage *)(__bridge void *)BlinkID::_impl::$s7BlinkID1
   auto &consumedParamCopy_documentNumberRedactionSettings = *(new(copyBuffer_consumedParamCopy_documentNumberRedactionSettings) swift::Optional<DocumentNumberRedactionSettings>(documentNumberRedactionSettings));
   swift::_impl::ConsumedValueStorageDestroyer<swift::Optional<DocumentNumberRedactionSettings>> storageGuard_consumedParamCopy_documentNumberRedactionSettings(consumedParamCopy_documentNumberRedactionSettings);
   return BlinkID::_impl::_impl_RedactionSettings::returnNewValue([&](char * _Nonnull result) SWIFT_INLINE_THUNK_ATTRIBUTES {
-    BlinkID::_impl::$s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD015redactMrzResult0i7BarcodeK0AcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfC(result, BlinkID::_impl::_impl_RedactionMode::getOpaquePointer(consumedParamCopy_mode), BlinkID::_impl::swift_interop_passDirect_BlinkID_void_ptr_0_8(swift::_impl::_impl_Array<FieldType>::getOpaquePointer(consumedParamCopy_fields)), swift::_impl::_impl_Optional<DocumentNumberRedactionSettings>::getOpaquePointer(consumedParamCopy_documentNumberRedactionSettings), redactMrzResult, redactBarcodeResult);
+    BlinkID::_impl::$s7BlinkID17RedactionSettingsV4mode6fields014documentNumbercD09redactMrz0I7BarcodeAcA0C4ModeO_SayAA9FieldTypeOGAA08DocumenthcD0VSgS2btcfC(result, BlinkID::_impl::_impl_RedactionMode::getOpaquePointer(consumedParamCopy_mode), BlinkID::_impl::swift_interop_passDirect_BlinkID_void_ptr_0_8(swift::_impl::_impl_Array<FieldType>::getOpaquePointer(consumedParamCopy_fields)), swift::_impl::_impl_Optional<DocumentNumberRedactionSettings>::getOpaquePointer(consumedParamCopy_documentNumberRedactionSettings), redactMrz, redactBarcode);
   });
   }
   SWIFT_INLINE_THUNK RedactionSettings RedactionSettings::getDefaultRedactionSettings(const __BlinkIDSDKNested::DocumentClassInfo& classInfo) {

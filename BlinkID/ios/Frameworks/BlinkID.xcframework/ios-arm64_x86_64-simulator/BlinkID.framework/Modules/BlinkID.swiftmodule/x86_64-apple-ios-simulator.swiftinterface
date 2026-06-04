@@ -642,6 +642,7 @@ public struct BlinkIDSDK {
     public let isoNumericCountryCode: Swift.String
     public let isoAlpha2CountryCode: Swift.String
     public let isoAlpha3CountryCode: Swift.String
+    public init(country: BlinkID.Country, region: BlinkID.Region, documentType: BlinkID.DocumentType)
     public func isEmpty() -> Swift.Bool
   }
   public struct InputImageAnalysisResult : Swift.Sendable {
@@ -1580,10 +1581,11 @@ public struct SingleSideScanningResult : Swift.Sendable {
   @objc deinit
   final public func cancelActiveProcessing()
   final public func resumeActiveProcessing()
-  @BlinkID.ProcessingActor final public func process(inputImage: BlinkID.InputImage) -> BlinkID.FrameProcessResult
+  @BlinkID.ProcessingActor final public func process(inputImage: BlinkID.InputImage) async throws -> BlinkID.FrameProcessResult
   @BlinkID.ProcessingActor final public func reset() throws
   @BlinkID.ProcessingActor final public func resolveCurrentStep() throws
   @BlinkID.ProcessingActor final public func getScanningStatus() -> BlinkID.BlinkIDSDK.ScanningStatus
+  @BlinkID.ProcessingActor final public func getResolvedSessionSettings() -> BlinkID.BlinkIDSessionSettings
   #if compiler(>=5.3) && $NonescapableTypes
   @BlinkID.ProcessingActor final public func getResult(redactionSettings: BlinkID.RedactionSettings? = nil) -> BlinkID.BlinkIDScanningResult
   #endif
@@ -1624,7 +1626,6 @@ public enum ProcessingStatus : Swift.String, Swift.Decodable, Swift.Sendable {
   case imageReturnFailed
   case barcodeRecognitionFailed
   case mrzParsingFailed
-  case documentFiltered
   case unsupportedDocument
   case awaitingOtherSide
   case notScanned
@@ -1693,10 +1694,10 @@ public struct RedactionSettings : Swift.Sendable {
   public var mode: BlinkID.RedactionMode
   public var fields: Swift.Array<BlinkID.FieldType>
   public var documentNumberRedactionSettings: BlinkID.DocumentNumberRedactionSettings?
-  public var redactMrzResult: Swift.Bool
-  public var redactBarcodeResult: Swift.Bool
+  public var redactMrz: Swift.Bool
+  public var redactBarcode: Swift.Bool
   #if compiler(>=5.3) && $NonescapableTypes
-  public init(mode: BlinkID.RedactionMode = .fullResult, fields: Swift.Array<BlinkID.FieldType>, documentNumberRedactionSettings: BlinkID.DocumentNumberRedactionSettings? = nil, redactMrzResult: Swift.Bool = false, redactBarcodeResult: Swift.Bool = false)
+  public init(mode: BlinkID.RedactionMode = .fullResult, fields: Swift.Array<BlinkID.FieldType>, documentNumberRedactionSettings: BlinkID.DocumentNumberRedactionSettings? = nil, redactMrz: Swift.Bool = false, redactBarcode: Swift.Bool = false)
   #endif
   public static func getDefaultRedactionSettings(for classInfo: BlinkID.BlinkIDSDK.DocumentClassInfo) -> BlinkID.RedactionSettings
 }
@@ -1843,10 +1844,10 @@ public enum CameraFrameVideoOrientation : Swift.Sendable {
   }
 }
 public struct CameraFrame : @unchecked Swift.Sendable {
-  public let buffer: BlinkID.MBSampleBufferWrapper
+  public let buffer: CoreMedia.CMSampleBuffer
   public let roi: BlinkID.RegionOfInterest
   public let orientation: BlinkID.CameraFrameVideoOrientation
-  public init(buffer: BlinkID.MBSampleBufferWrapper, roi: BlinkID.RegionOfInterest = RegionOfInterest(), orientation: BlinkID.CameraFrameVideoOrientation = .portrait)
+  public init(buffer: CoreMedia.CMSampleBuffer, roi: BlinkID.RegionOfInterest = RegionOfInterest(), orientation: BlinkID.CameraFrameVideoOrientation = .portrait)
   public var width: Swift.Int {
     get
   }
