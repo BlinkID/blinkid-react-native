@@ -22,18 +22,21 @@ import com.microblink.blinkid.core.settings.scanning.MrzModuleSettings
 import com.microblink.blinkid.core.settings.scanning.VizModuleSettings
 import com.microblink.blinkid.ux.settings.BlinkIdUxSettings
 import com.microblink.blinkid.ux.settings.ClassFilter
-import com.microblink.core.network.RequestTimeout
-import com.microblink.core.session.InputImageSource
-import com.microblink.core.settings.RedactionMode
-import com.microblink.core.utils.defaultResourceDownloadUrl
-import com.microblink.core.utils.defaultResourcesLocalFolder
-import com.microblink.ux.camera.CameraLensFacing
-import com.microblink.ux.camera.CameraSettings
+import com.microblink.blinkid.core.network.RequestTimeout
+import com.microblink.blinkid.core.session.InputImageSource
+import com.microblink.blinkid.core.settings.RedactionMode
+import com.microblink.blinkid.ux.camera.CameraLensFacing
+import com.microblink.blinkid.ux.camera.CameraSettings
 import kotlin.time.Duration.Companion.milliseconds
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import org.json.JSONArray
 import org.json.JSONObject
 
 object BlinkIdDeserializationUtilities {
+
+  private const val DEFAULT_RESOURCE_DOWNLOAD_URL = "https://models.cdn.microblink.com/resources"
+  private const val DEFAULT_RESOURCES_LOCAL_FOLDER = "MLModels"
 
   fun deserializeBlinkIdSdkSettings(blinkIdSdkSettingsMap: JSONObject?): BlinkIdSdkSettings? {
     val licenseKey = blinkIdSdkSettingsMap?.optString("licenseKey")?.takeIf { it.isNotBlank() }
@@ -45,11 +48,11 @@ object BlinkIdDeserializationUtilities {
       downloadResources = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
       resourceDownloadUrl = blinkIdSdkSettingsMap.optString(
         "resourceDownloadUrl",
-        defaultResourceDownloadUrl
+        DEFAULT_RESOURCE_DOWNLOAD_URL
       ),
       resourceLocalFolder = blinkIdSdkSettingsMap.optString(
         "resourceLocalFolder",
-        defaultResourcesLocalFolder
+        DEFAULT_RESOURCES_LOCAL_FOLDER
       ),
       resourceRequestTimeout = deserializeResourceRequestTimeout(
         blinkIdSdkSettingsMap.opt("resourceRequestTimeout")
@@ -93,7 +96,7 @@ object BlinkIdDeserializationUtilities {
 
     return BlinkIdUxSettings(
       stepTimeoutDuration = stepTimeoutMs.milliseconds,
-      stateBasedTimeoutDuration = inactivityTimeoutMs.milliseconds,
+      inactivityTimeoutDuration = inactivityTimeoutMs.milliseconds,
       allowHapticFeedback = scanningUxSettingsMap?.optBoolean("allowHapticFeedback", true) ?: true,
       classFilter = classFilterMap?.let { CustomClassFilter(it.toString()) },
       redactionSettingsResolver = redactionSettingsResolverMap?.let {
@@ -206,7 +209,9 @@ object BlinkIdDeserializationUtilities {
         ?.let { deserializeMrzModule(it) },
       vizModule = scanningSettingsMap.optJSONObject("vizModule")
         ?.let { deserializeVizModule(it) },
-      maxAllowedMismatchesPerField = scanningSettingsMap.optInt("maxAllowedMismatchesPerField", 0),
+      maxAllowedMismatchesPerField = scanningSettingsMap
+        .optInt("maxAllowedMismatchesPerField", 0)
+        .toUInt(),
     )
   }
 
@@ -226,7 +231,7 @@ object BlinkIdDeserializationUtilities {
       inputImageReturnEnabled = moduleMap.optBoolean("inputImageReturnEnabled", false),
       documentImageReturnEnabled = moduleMap.optBoolean("documentImageReturnEnabled", false),
       inputImageMargin = moduleMap.optDouble("inputImageMargin", 0.02).toFloat(),
-      dotsPerInch = moduleMap.optInt("dotsPerInch", 250).toUShort(),
+      dotsPerInch = moduleMap.optInt("dotsPerInch", 250),
       extensionFactor = moduleMap.optDouble("extensionFactor", 0.0).toFloat(),
       blurSensitivityLevel = parseSensitivityLevel(
         moduleMap.optString("blurSensitivityLevel", "mid")
@@ -294,11 +299,20 @@ object BlinkIdDeserializationUtilities {
 
   private fun deserializeResourceRequestTimeout(timeoutValue: Any?): RequestTimeout {
     return when (timeoutValue) {
-      is Number -> RequestTimeout(connectionTimeoutMillis = timeoutValue.toInt())
+      is Number -> {
+        val timeout = timeoutValue.toInt().milliseconds
+        RequestTimeout(
+          connectionTimeout = timeout,
+          writeTimeout = timeout,
+          readTimeout = timeout,
+        )
+      }
       is JSONObject -> RequestTimeout(
-        connectionTimeoutMillis = timeoutValue.optInt("connectionTimeoutMilliseconds", 10_000),
-        writeTimeoutMillis = timeoutValue.optInt("writeTimeoutMilliseconds", 10_000),
-        readTimeoutMillis = timeoutValue.optInt("readTimeoutMilliseconds", 10_000),
+        connectionTimeout = timeoutValue
+          .optInt("connectionTimeoutMilliseconds", 10_000)
+          .milliseconds,
+        writeTimeout = timeoutValue.optInt("writeTimeoutMilliseconds", 10_000).milliseconds,
+        readTimeout = timeoutValue.optInt("readTimeoutMilliseconds", 10_000).milliseconds,
       )
       else -> RequestTimeout.DEFAULT
     }
@@ -391,9 +405,10 @@ object BlinkIdDeserializationUtilities {
     Type.entries.find { it.name.equals(value, ignoreCase = true) }
 }
 
+@Parcelize
 private class CustomClassFilter(
   private val classFilterMap: String
-) : ClassFilter {
+) : ClassFilter, Parcelable {
   override fun classAllowed(documentClass: DocumentClassInfo): Boolean {
     return BlinkIdDeserializationUtilities.deserializeClassFilter(
       JSONObject(classFilterMap),
@@ -402,9 +417,10 @@ private class CustomClassFilter(
   }
 }
 
+@Parcelize
 private class CustomRedactionSettingsResolver(
   private val redactionResolverMap: String
-) : RedactionSettingsResolver {
+) : RedactionSettingsResolver, Parcelable {
   override fun resolveRedactionSettings(
     classInfo: DocumentClassInfo
   ): RedactionSettings? {

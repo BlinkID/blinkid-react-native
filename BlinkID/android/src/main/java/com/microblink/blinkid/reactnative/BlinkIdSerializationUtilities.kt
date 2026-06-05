@@ -21,19 +21,16 @@ import java.io.ByteArrayOutputStream
 import android.util.Base64
 import com.microblink.blinkid.core.result.ParentInfo
 import com.microblink.blinkid.core.result.barcode.BarcodeElement
-import com.microblink.core.result.DateResult
-import com.microblink.core.result.DetailedCroppedImageResult
-import com.microblink.core.result.Rectangle
-import com.microblink.core.result.ScanningSide
+import com.microblink.blinkid.core.result.DateResult
+import com.microblink.blinkid.core.result.DetailedCroppedImageResult
+import com.microblink.blinkid.core.result.Rectangle
+import com.microblink.blinkid.core.result.ScanningSide
 import org.json.JSONArray
 
 object BlinkIdSerializationUtilities {
     fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String {
         val scanningResultJson: JSONObject = JSONObject()
 
-        scanningResult?.mode.let {
-            scanningResultJson.put("recognitionMode", it?.name)
-        }
         scanningResult?.documentClassInfo?.let {
             scanningResultJson.put("documentClassInfo", serializeDocumentClassInfo(it))
         }
@@ -247,8 +244,8 @@ object BlinkIdSerializationUtilities {
         scanningResult?.inputImage(ScanningSide.Second)?.let {
             scanningResultJson.put("secondInputImage", encodeBase64Image(it.bitmap))
         }
-        scanningResult?.barcodeInputImage()?.let {
-            scanningResultJson.put("barcodeInputImage", encodeBase64Image(it.bitmap))
+        scanningResult?.barcodeImage()?.let {
+            scanningResultJson.put("barcodeImage", encodeBase64Image(it.bitmap))
         }
         scanningResult?.documentImage(ScanningSide.First)?.let {
             scanningResultJson.put("firstDocumentImage", encodeBase64Image(it.bitmap))
@@ -266,7 +263,7 @@ object BlinkIdSerializationUtilities {
         return scanningResultJson.toString()
     }
 
-    private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject {
+    private fun serializeDateResult(dateResult: DateResult<*>?): JSONObject {
         val dateResultJson = JSONObject()
 
         dateResultJson.put("date", serializeSimpleDateResult(dateResult));
@@ -276,7 +273,7 @@ object BlinkIdSerializationUtilities {
         return dateResultJson
     }
 
-    private fun <T> serializeSimpleDateResult(dateResult: DateResult<T>?): JSONObject {
+    private fun serializeSimpleDateResult(dateResult: DateResult<*>?): JSONObject {
         val simpleDateResultJson = JSONObject()
         dateResult?.day?.let {
             simpleDateResultJson.put("day", it)
@@ -386,8 +383,8 @@ object BlinkIdSerializationUtilities {
         return locationJson
     }
 
-    private fun <T> serializeDriverLicenseDetailedInfo(
-        driverLicenseDetailedInfo: DriverLicenseDetailedInfo<T>?
+    private fun serializeDriverLicenseDetailedInfo(
+        driverLicenseDetailedInfo: DriverLicenseDetailedInfo<*>?
     ): JSONObject {
         val json = JSONObject()
 
@@ -407,7 +404,7 @@ object BlinkIdSerializationUtilities {
         return json
     }
 
-    private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): JSONObject {
+    private fun serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<*>): JSONObject {
         val vehicleClassInfoJson = JSONObject()
         vehicleClassInfoJson.put(
             "effectiveDate",
@@ -443,8 +440,8 @@ object BlinkIdSerializationUtilities {
         val subResultJson = JSONObject()
         subResultJson.put("barcode", serializeBarcodeResult(subResult.barcode))
         subResultJson.put(
-            "barcodeInputImage",
-            encodeBase64Image(subResult.barcodeInputImage?.bitmap)
+            "barcodeImage",
+            encodeBase64Image(subResult.barcodeImage?.bitmap)
         )
         subResultJson.put("documentImage", encodeBase64Image(subResult.documentImage?.bitmap))
         subResultJson.put("faceImage", serializeDetailedCroppedImageResult(subResult.faceImage))
@@ -754,11 +751,17 @@ object BlinkIdSerializationUtilities {
         detailedCroppedImageResult?.location?.let {
             detailedCroppedImageResultJson.put("location", serializeLocation(it))
         }
-        detailedCroppedImageResult?.side?.let {
-            detailedCroppedImageResultJson.put("side", it.ordinal)
-
+        detailedCroppedImageResult?.side?.let { side ->
+            detailedCroppedImageResultJson.put("side", serializeScanningSide(side))
         }
         return detailedCroppedImageResultJson
+    }
+
+    private fun serializeScanningSide(side: ScanningSide): Int {
+        return when (side) {
+            ScanningSide.First -> 0
+            ScanningSide.Second -> 1
+        }
     }
 
     private fun serializeBarcodeExtendedElements(barcodeExtendedElements: Array<BarcodeElement>?): JSONObject {

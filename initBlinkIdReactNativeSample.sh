@@ -65,6 +65,27 @@ sed -i '' "s|ex.autolinkLibrariesFromCommand()|ex.autolinkLibrariesFromCommand([
 # Patch app/build.gradle to use the full node path for codegen and bundling
 sed -i '' "s|// nodeExecutableAndArgs = \[\"node\"\]|nodeExecutableAndArgs = [\"$NODE_DIR/node\"]|" app/build.gradle
 
+# Fix settings.gradle to use Kotlin 2.1.20 and add Compose plugin
+perl -i -pe 'BEGIN{$/=undef;} s/pluginManagement \{ includeBuild\("\.\.\/node_modules\/\@react-native\/gradle-plugin"\) \}/pluginManagement {\n    includeBuild("..\/node_modules\/\@react-native\/gradle-plugin")\n    plugins {\n        id("org.jetbrains.kotlin.android") version "2.1.20"\n        id("org.jetbrains.kotlin.plugin.compose") version "2.1.20"\n    }\n}/' settings.gradle
+
+# Ensure Kotlin 2.1.20 (required by BlinkID SDK on AGP 9.0)
+sed -i '' 's/kotlinVersion = "[0-9.]*"/kotlinVersion = "2.1.20"/' build.gradle
+
+# Add Compose compiler plugin to buildscript classpath (required for apply plugin syntax)
+sed -i '' '/classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")/a\
+        classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.20")
+' build.gradle
+
+# Add Compose plugin to app/build.gradle
+sed -i '' '/apply plugin: "org.jetbrains.kotlin.android"/a\
+apply plugin: "org.jetbrains.kotlin.plugin.compose"
+' app/build.gradle
+
+# Add buildFeatures and configurations to force Compose 1.11.2 (fixes $stable field crash)
+perl -i -pe 'BEGIN{$/=undef;} s/android \{/android {\n    buildFeatures {\n        compose = true\n    }\n    composeCompiler {\n        enableStrongSkippingMode = true\n    }\n/' app/build.gradle
+
+perl -i -pe 'BEGIN{$/=undef;} s/\ndependencies \{/configurations.all {\n    resolutionStrategy {\n        force("androidx.compose.ui:ui-graphics:1.11.2")\n        force("androidx.compose.ui:ui:1.11.2")\n        force("androidx.compose.runtime:runtime:1.11.2")\n        force("androidx.compose.foundation:foundation:1.11.2")\n        force("androidx.compose.material3:material3:1.4.0")\n    }\n}\n\ndependencies {\n    implementation(platform("androidx.compose:compose-bom:2026.05.01"))\n    implementation("androidx.compose.ui:ui")\n    implementation("androidx.compose.ui:ui-graphics")\n    implementation("androidx.compose.material3:material3")\n\n/' app/build.gradle
+
 # Return from the android project folder
 popd
 

@@ -12,10 +12,10 @@ import com.microblink.blinkid.core.BlinkIdSdkSettings
 import com.microblink.blinkid.core.session.BlinkIdProcessResult
 import com.microblink.blinkid.ux.contract.BlinkIdScanActivitySettings
 import com.microblink.blinkid.ux.contract.MbBlinkIdScan
-import com.microblink.core.image.InputImage
-import com.microblink.core.ping.PingManager
-import com.microblink.core.ping.pinglets.WrapperProductInfo
-import com.microblink.ux.contract.ScanActivityResultStatus
+import com.microblink.blinkid.core.image.InputImage
+import com.microblink.blinkid.core.ping.PingManager
+import com.microblink.blinkid.core.ping.pinglets.WrapperProductInfo
+import com.microblink.blinkid.ux.contract.ScanActivityResultStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -202,33 +202,25 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
               sessionSettingsJson,
               true
             )
-          )
+          ).getOrThrow()
 
           val inputImages = listOfNotNull(
             firstImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) },
             secondImage?.let { BlinkIdDeserializationUtilities.base64ToBitmap(it) }
           )
 
-          var result: Result<BlinkIdProcessResult>? = null
-
           for (img in inputImages) {
-            result = session.process(InputImage.createFromBitmap(img))
+            session.process(InputImage.createFromBitmap(img)).getOrThrow()
           }
 
-          if (result?.isSuccess == true) {
-            val scanResult = session.getResult(
-              BlinkIdDeserializationUtilities.deserializeRedactionSettings(redactionSettingsJson)
-            )
-            val resultJson =
-              BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
+          val scanResult = session.getResult(
+            BlinkIdDeserializationUtilities.deserializeRedactionSettings(redactionSettingsJson)
+          ).getOrThrow()
+          val resultJson =
+            BlinkIdSerializationUtilities.serializeBlinkIdScanningResult(scanResult)
 
-            withContext(Dispatchers.Main) {
-              promise?.resolve(resultJson.toString())
-            }
-          } else {
-            withContext(Dispatchers.Main) {
-              promise?.reject(BLINKID_ERROR_RESULT_CODE, "Could not get the results.")
-            }
+          withContext(Dispatchers.Main) {
+            promise?.resolve(resultJson)
           }
 
           it.close()
@@ -271,9 +263,9 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
 
   private fun addReactNativePinglet(context: Context) {
     PingManager.getInstance(context).add(
-      WrapperProductInfo(
-        wrapperProduct = WrapperProductInfo.WrapperProduct.CROSSPLATFORMREACTNATIVE),
-      0)
+      WrapperProductInfo(WrapperProductInfo.WrapperProduct.CROSSPLATFORMREACTNATIVE),
+      0
+    )
   }
   private fun parseOptionalJsonObject(value: String?): JSONObject? {
     if (value.isNullOrBlank() || value == "null" || value == "undefined") {
