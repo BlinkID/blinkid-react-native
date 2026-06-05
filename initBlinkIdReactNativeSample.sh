@@ -121,8 +121,8 @@ pod install
 popd
 
 # Add the sample files with the BlinkID integration code to the sample application
-cp ../sample_files/App.tsx ./
-cp ../sample_files/BlinkIdResultBuilder.ts ./
+cp ../sample_files/*.tsx ./
+cp ../sample_files/*.ts ./
 
 # Return to the root folder
 popd
