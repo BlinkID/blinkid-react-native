@@ -82,6 +82,69 @@ export function EnumDropdown<T extends string>({
   );
 }
 
+export function OptionalEnumDropdown<T extends string>({
+  label,
+  value,
+  options,
+  onChanged,
+}: {
+  label: string;
+  value?: T;
+  options: readonly T[];
+  onChanged: (value: T | undefined) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const displayValue = value ?? "None";
+
+  return (
+    <View style={styles.fieldWrap}>
+      <Text style={styles.fieldLabel}>{label}</Text>
+      <Pressable style={styles.dropdown} onPress={() => setOpen(true)}>
+        <Text>{displayValue}</Text>
+      </Pressable>
+      <Modal visible={open} transparent animationType="fade">
+        <Pressable style={styles.modalBackdrop} onPress={() => setOpen(false)}>
+          <View style={styles.modalSheet}>
+            <Pressable
+              style={styles.modalOption}
+              onPress={() => {
+                onChanged(undefined);
+                setOpen(false);
+              }}
+            >
+              <Text
+                style={
+                  value === undefined ? styles.modalOptionSelected : undefined
+                }
+              >
+                None
+              </Text>
+            </Pressable>
+            {options.map((option) => (
+              <Pressable
+                key={option}
+                style={styles.modalOption}
+                onPress={() => {
+                  onChanged(option);
+                  setOpen(false);
+                }}
+              >
+                <Text
+                  style={
+                    option === value ? styles.modalOptionSelected : undefined
+                  }
+                >
+                  {option}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        </Pressable>
+      </Modal>
+    </View>
+  );
+}
+
 export function IntSettingField({
   label,
   value,
@@ -219,17 +282,30 @@ export function ModuleCard({
           onPress={() => enabled && setExpanded((e) => !e)}
           disabled={!enabled}
         >
-          <Text style={[styles.cardTitle, !enabled && styles.disabledText]}>
-            {title}
-          </Text>
-          {subtitle ? (
-            <Text style={styles.cardSubtitle}>{subtitle}</Text>
-          ) : null}
-          {enabled ? (
-            <Text style={styles.expandHint}>
-              {expanded ? "Tap to collapse" : "Tap to expand settings"}
+          <View style={styles.moduleTitleRow}>
+            <Text
+              style={[
+                styles.expandChevron,
+                !enabled && styles.disabledText,
+                expanded && styles.expandChevronOpen,
+              ]}
+            >
+              ›
             </Text>
-          ) : null}
+            <View style={styles.moduleTitleText}>
+              <Text style={[styles.cardTitle, !enabled && styles.disabledText]}>
+                {title}
+              </Text>
+              {subtitle ? (
+                <Text style={styles.cardSubtitle}>{subtitle}</Text>
+              ) : null}
+              {enabled ? (
+                <Text style={styles.expandHint}>
+                  {expanded ? "Tap to collapse" : "Tap to expand settings"}
+                </Text>
+              ) : null}
+            </View>
+          </View>
         </Pressable>
         <Switch value={enabled} onValueChange={onEnabledChanged} />
       </View>
@@ -321,6 +397,16 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   moduleTitleArea: { flex: 1, marginRight: 8 },
+  moduleTitleRow: { flexDirection: "row", alignItems: "flex-start" },
+  moduleTitleText: { flex: 1 },
+  expandChevron: {
+    fontSize: 22,
+    lineHeight: 24,
+    color: "#1565C0",
+    marginRight: 6,
+    marginTop: -1,
+  },
+  expandChevronOpen: { transform: [{ rotate: "90deg" }] },
   moduleBody: { paddingHorizontal: 4, paddingBottom: 12 },
   expandHint: { fontSize: 11, color: "#888", marginTop: 4 },
   disabledText: { color: "#999" },

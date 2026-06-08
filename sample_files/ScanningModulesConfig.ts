@@ -1,14 +1,26 @@
-import type {
-  BarcodeModuleSettings,
-  BlinkIdScanningUxSettings,
-  BlinkIdSessionSettings,
-  BlinkIdScanningSettings,
-  DocumentCaptureModuleSettings,
-  MrzModuleSettings,
-  ScanningMode,
-  SensitivityLevel,
-  VizModuleSettings,
+import {
+  Country,
+  DocumentType,
+  FieldType,
+  Region,
+  type BarcodeModuleSettings,
+  type BlinkIdScanningUxSettings,
+  type BlinkIdSessionSettings,
+  type BlinkIdScanningSettings,
+  type ClassFilter,
+  type DocumentCaptureModuleSettings,
+  type MrzModuleSettings,
+  type RedactionSettings,
+  type RedactionSettingsResolver,
+  type ScanningMode,
+  type SensitivityLevel,
+  type VizModuleSettings,
 } from "@microblink/blinkid-react-native";
+import {
+  hasDocumentFilterCriteria,
+  uiToDocumentFilter,
+  type UiDocumentFilter,
+} from "./SampleFilterOptions";
 
 /** UI-driven scanning configuration for the BlinkID sample app. */
 export class ScanningModulesConfig {
@@ -30,6 +42,19 @@ export class ScanningModulesConfig {
 
   vizEnabled = true;
   viz: VizModuleSettings = ScanningModulesConfig.defaultVizModule();
+
+  classFilterEnabled = false;
+  classFilterInclude: UiDocumentFilter[] = [];
+  classFilterExclude: UiDocumentFilter[] = [];
+
+  redactionResolverEnabled = false;
+  redactionResolverEntries: RedactionSettings[] = [
+    ScanningModulesConfig.defaultRedactionSettings(),
+  ];
+
+  directApiRedactionEnabled = false;
+  directApiRedaction: RedactionSettings =
+    ScanningModulesConfig.defaultRedactionSettings();
 
   static defaultBarcodeModule(): BarcodeModuleSettings {
     return {
@@ -84,6 +109,64 @@ export class ScanningModulesConfig {
     };
   }
 
+  static defaultRedactionSettings(): RedactionSettings {
+    return {
+      mode: "fullResult",
+      documentNumberRedactionSettings: {
+        prefixDigitsVisible: 0,
+        suffixDigitsVisible: 1,
+      },
+      fields: [FieldType.FirstName, FieldType.LastName],
+      redactMrzResult: false,
+      redactBarcodeResult: false,
+      documentFilter: {
+        country: Country.USA,
+        region: Region.California,
+        documentType: DocumentType.Id,
+      },
+    };
+  }
+
+  toClassFilter(): ClassFilter | undefined {
+    if (!this.classFilterEnabled) {
+      return undefined;
+    }
+
+    const includeDocuments = this.classFilterInclude
+      .filter(hasDocumentFilterCriteria)
+      .map(uiToDocumentFilter);
+    const excludeDocuments = this.classFilterExclude
+      .filter(hasDocumentFilterCriteria)
+      .map(uiToDocumentFilter);
+
+    if (includeDocuments.length === 0 && excludeDocuments.length === 0) {
+      return undefined;
+    }
+
+    const filter: ClassFilter = {};
+    if (includeDocuments.length > 0) {
+      filter.includeDocuments = includeDocuments;
+    }
+    if (excludeDocuments.length > 0) {
+      filter.excludeDocuments = excludeDocuments;
+    }
+    return filter;
+  }
+
+  toRedactionSettingsResolver(): RedactionSettingsResolver | undefined {
+    if (!this.redactionResolverEnabled || this.redactionResolverEntries.length === 0) {
+      return undefined;
+    }
+    return { documentRedactionList: this.redactionResolverEntries };
+  }
+
+  toDirectApiRedactionSettings(): RedactionSettings | undefined {
+    if (!this.directApiRedactionEnabled) {
+      return undefined;
+    }
+    return this.directApiRedaction;
+  }
+
   toScanningSettings(): BlinkIdScanningSettings {
     const settings: BlinkIdScanningSettings = {};
     if (this.barcodeEnabled) {
@@ -133,6 +216,16 @@ export class ScanningModulesConfig {
     this.mrz = ScanningModulesConfig.defaultMrzModule();
     this.vizEnabled = true;
     this.viz = ScanningModulesConfig.defaultVizModule();
+
+    this.classFilterEnabled = false;
+    this.classFilterInclude = [];
+    this.classFilterExclude = [];
+    this.redactionResolverEnabled = false;
+    this.redactionResolverEntries = [
+      ScanningModulesConfig.defaultRedactionSettings(),
+    ];
+    this.directApiRedactionEnabled = false;
+    this.directApiRedaction = ScanningModulesConfig.defaultRedactionSettings();
   }
 }
 

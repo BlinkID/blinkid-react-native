@@ -11,6 +11,7 @@ import {
   SENSITIVITY_LEVELS,
   ScanningModulesConfig,
 } from "./ScanningModulesConfig";
+import { OptionalScanSettingsPanel } from "./OptionalScanSettingsPanel";
 import {
   BoolSettingTile,
   DoubleSettingField,
@@ -120,6 +121,7 @@ export function ModuleSettingsPanel({ config, onChanged }: Props) {
       </Pressable>
 
       <View style={styles.divider} />
+      <OptionalScanSettingsPanel config={config} onChanged={onChanged} />
     </View>
   );
 }

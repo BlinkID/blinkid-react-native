@@ -79,6 +79,18 @@ export default function App() {
       `[BlinkIdSample] full sessionSettings:`,
       JSON.stringify(sessionSettings),
     );
+    console.log(
+      `[BlinkIdSample] classFilter:`,
+      JSON.stringify(modulesConfig.toClassFilter() ?? null),
+    );
+    console.log(
+      `[BlinkIdSample] redactionSettingsResolver:`,
+      JSON.stringify(modulesConfig.toRedactionSettingsResolver() ?? null),
+    );
+    console.log(
+      `[BlinkIdSample] directApiRedaction:`,
+      JSON.stringify(modulesConfig.toDirectApiRedactionSettings() ?? null),
+    );
   };
 
   const handlePerformScan = async () => {
@@ -88,6 +100,8 @@ export default function App() {
         sdkSettings: buildSdkSettings(),
         sessionSettings: modulesConfig.toSessionSettings(),
         scanningUxSettings: modulesConfig.toUxSettings(),
+        classFilter: modulesConfig.toClassFilter(),
+        redactionSettingsResolver: modulesConfig.toRedactionSettingsResolver(),
       })
         .then((scanResult: BlinkIdScanningResult) => {
           resetImages();
@@ -135,6 +149,7 @@ export default function App() {
         sessionSettings: modulesConfig.toSessionSettings(),
         firstImage: assets[0].base64,
         secondImage: assets[1].base64,
+        redactionSettings: modulesConfig.toDirectApiRedactionSettings(),
       })
         .then((scanResult: BlinkIdScanningResult) => {
           resetImages();
@@ -167,6 +182,7 @@ export default function App() {
         sdkSettings: buildSdkSettings(),
         sessionSettings: modulesConfig.toSessionSettings(),
         firstImage: pickerResult.assets[0].base64,
+        redactionSettings: modulesConfig.toDirectApiRedactionSettings(),
       })
         .then((scanResult: BlinkIdScanningResult) => {
           resetImages();
