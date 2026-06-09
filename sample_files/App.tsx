@@ -43,12 +43,13 @@ export default function App() {
   const licenseKey = Platform.select({
     ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE56VTBNekE0T1Rrc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PaObKYfb4FlwqmqVoofXLicsmElmnSm1gmoXWaFx8MgdmmJRSLpdAfP6uV5xAr3K4rColEBYQ38GNh+FT081yjXPFB16LwdVhDiJcEK07cTBG5hQPXRy8+hoJJ1U7w==",
     android:
-      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE1ESXpOVGMxT1RBc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRXlOs6VFBOfXCx1+6HuENpn05k2kl20pJr4kQ4S1sMxuSzZ+B8YhC9rYMsFXr3HSskFmMFwEe+44OQ1ZE2sm9iHUpxNBmVGpgBTKPOrc2vquGbpqmFwm1feyTL9Aw==",
+      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUACm1pY3JvYmxpbmuR1jKtFvk9xE3vABHwur1/E0/yRpw+eYAD3hlbfZRvaopENT4LKsLqPRuBdGFVXvWK2Zqg4nl6cdguNGhS5tYjbTXHOZIMogpVl+DxCXCFhenDeFKil4MzqT/ndOSYhARb5Q==",
   })!;
 
   const buildSdkSettings = () => ({
     licenseKey,
     downloadResources: true,
+    microblinkProxyURL: "https://mb-ping-baltazar-proxy.devel.microblink.com",
   });
 
   const logScanConfiguration = (action: string) => {
