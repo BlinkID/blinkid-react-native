@@ -76,15 +76,13 @@ sed -i '' '/classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")/a\
         classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.20")
 ' build.gradle
 
-# Add Compose plugin to app/build.gradle
+# Enable Compose in the host app. Compose library versions are aligned transitively by the
+# blinkid-react-native Android module via its Compose BOM dependency — no app-level forcing needed.
 sed -i '' '/apply plugin: "org.jetbrains.kotlin.android"/a\
 apply plugin: "org.jetbrains.kotlin.plugin.compose"
 ' app/build.gradle
 
-# Add buildFeatures and configurations to force Compose 1.11.2 (fixes $stable field crash)
-perl -i -pe 'BEGIN{$/=undef;} s/android \{/android {\n    buildFeatures {\n        compose = true\n    }\n    composeCompiler {\n        enableStrongSkippingMode = true\n    }\n/' app/build.gradle
-
-perl -i -pe 'BEGIN{$/=undef;} s/\ndependencies \{/configurations.all {\n    resolutionStrategy {\n        force("androidx.compose.ui:ui-graphics:1.11.2")\n        force("androidx.compose.ui:ui:1.11.2")\n        force("androidx.compose.runtime:runtime:1.11.2")\n        force("androidx.compose.foundation:foundation:1.11.2")\n        force("androidx.compose.material3:material3:1.4.0")\n    }\n}\n\ndependencies {\n    implementation(platform("androidx.compose:compose-bom:2026.05.01"))\n    implementation("androidx.compose.ui:ui")\n    implementation("androidx.compose.ui:ui-graphics")\n    implementation("androidx.compose.material3:material3")\n\n/' app/build.gradle
+perl -i -pe 'BEGIN{$/=undef;} s/android \{/android {\n    buildFeatures {\n        compose = true\n    }\n/' app/build.gradle
 
 # Return from the android project folder
 popd

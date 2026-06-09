@@ -75,6 +75,15 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // Align Compose versions for host apps via the BOM. BlinkID UX is built with Compose and
+  // requires matching runtime artifacts (mismatches cause NoSuchFieldError on $stable fields).
+  def composeBom = platform("androidx.compose:compose-bom:2026.05.01")
+  api composeBom
+  api "androidx.compose.ui:ui"
+  api "androidx.compose.ui:ui-graphics"
+  api "androidx.compose.material3:material3"
+
   implementation("com.microblink:blinkid-ux:8000.0.0")
 }
 
