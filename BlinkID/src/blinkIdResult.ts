@@ -387,11 +387,12 @@ export type BlinkIdScanningResult = {
   secondInputImage?: string;
 
   /**
-   * Returns the input image containing parsable barcode.
+   * Returns the cropped barcode image in the Base64 format when
+   * {@link BarcodeModuleSettings.barcodeImageReturnEnabled} is enabled.
    *
-   * Or `null` if the barcode input image is not available.
+   * Or `null` if the barcode image is not available.
    */
-  barcodeInputImage?: string;
+  barcodeImage?: string;
   /**
    * Returns the cropped document image for the first scanning side.
    *

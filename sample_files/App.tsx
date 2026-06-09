@@ -38,7 +38,7 @@ export default function App() {
   const [signatureImage, setSignatureImage] = useState<string>();
   const [firstInputImage, setFirstInputImage] = useState<string>();
   const [secondInputImage, setSecondInputImage] = useState<string>();
-  const [barcodeInputImage, setBarcodeInputImage] = useState<string>();
+  const [barcodeImage, setBarcodeImage] = useState<string>();
 
   const licenseKey = Platform.select({
     ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE56VTBNekE0T1Rrc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PaObKYfb4FlwqmqVoofXLicsmElmnSm1gmoXWaFx8MgdmmJRSLpdAfP6uV5xAr3K4rColEBYQ38GNh+FT081yjXPFB16LwdVhDiJcEK07cTBG5hQPXRy8+hoJJ1U7w==",
@@ -210,7 +210,7 @@ export default function App() {
     setSignatureImage(scanResult.signatureImage?.image);
     setFirstInputImage(scanResult.firstInputImage);
     setSecondInputImage(scanResult.secondInputImage);
-    setBarcodeInputImage(scanResult.barcodeInputImage);
+    setBarcodeImage(scanResult.barcodeImage);
   }
 
   function resetImages() {
@@ -220,7 +220,7 @@ export default function App() {
     setSignatureImage(undefined);
     setFirstInputImage(undefined);
     setSecondInputImage(undefined);
-    setBarcodeInputImage(undefined);
+    setBarcodeImage(undefined);
   }
 
   return (
@@ -294,10 +294,10 @@ export default function App() {
               imageUri={`data:image/jpeg;base64,${secondInputImage}`}
             />
           ) : null}
-          {barcodeInputImage ? (
+          {barcodeImage ? (
             <DocumentImageContainer
-              label="Barcode input image:"
-              imageUri={`data:image/jpeg;base64,${barcodeInputImage}`}
+              label="Barcode image:"
+              imageUri={`data:image/jpeg;base64,${barcodeImage}`}
             />
           ) : null}
           {faceImage ? (

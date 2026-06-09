@@ -609,7 +609,7 @@ Key result members:
 2. **Data match information** — `dataMatchResult` (`DataMatchResult`)
 3. **Per-side results** — `subResults` (`SingleSideScanningResult[]`) — contains VIZ, MRZ, and barcode data per side
 4. **Aggregated fields** — top-level fields such as `firstName`, `lastName`, `documentNumber`, etc.
-5. **Images** — `firstDocumentImage`, `secondDocumentImage`, `faceImage`, `signatureImage`, `firstInputImage`, `secondInputImage`, `barcodeInputImage`
+5. **Images** — `firstDocumentImage`, `secondDocumentImage`, `faceImage`, `signatureImage`, `firstInputImage`, `secondInputImage`, `barcodeImage`
 
 Each `SingleSideScanningResult` contains:
 - `viz` — Visual Inspection Zone data

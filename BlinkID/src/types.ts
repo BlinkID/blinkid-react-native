@@ -1030,10 +1030,11 @@ export type SingleSideScanningResult = {
   inputImage?: string;
 
   /**
-   * The input image containing parsable barcode in the Base64 format.
+   * The cropped barcode image in the Base64 format when
+   * {@link BarcodeModuleSettings.barcodeImageReturnEnabled} is enabled.
    *
    */
-  barcodeInputImage?: string;
+  barcodeImage?: string;
 
   /**
    * The cropped document image in the Base64 format.
