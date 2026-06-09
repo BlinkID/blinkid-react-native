@@ -41,7 +41,7 @@ export default function App() {
   const [barcodeImage, setBarcodeImage] = useState<string>();
 
   const licenseKey = Platform.select({
-    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE56VTBNekE0T1Rrc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PaObKYfb4FlwqmqVoofXLicsmElmnSm1gmoXWaFx8MgdmmJRSLpdAfP6uV5xAr3K4rColEBYQ38GNh+FT081yjXPFB16LwdVhDiJcEK07cTBG5hQPXRy8+hoJJ1U7w==",
+    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBCm1pY3JvYmxpbmvKFE4PWyeoqP5EZMp/XTSFigyqyFuNq82r6VkIM4+wcvaGKXe2CWs3TfYuRn/zJU0M+jimRG8RNYPDKZFBBJRHA0P3nu+zmzMTO+BoipRTVWFmWEfD0oyeqSg51jC4/omn1g==",
     android:
       "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUACm1pY3JvYmxpbmuR1jKtFvk9xE3vABHwur1/E0/yRpw+eYAD3hlbfZRvaopENT4LKsLqPRuBdGFVXvWK2Zqg4nl6cdguNGhS5tYjbTXHOZIMogpVl+DxCXCFhenDeFKil4MzqT/ndOSYhARb5Q==",
   })!;
