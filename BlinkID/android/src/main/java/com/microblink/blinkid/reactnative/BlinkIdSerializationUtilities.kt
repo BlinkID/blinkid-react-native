@@ -296,6 +296,9 @@ object BlinkIdSerializationUtilities {
 
     private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject {
         val documentClassInfoJson = JSONObject()
+        // TODO: Align country/region/documentType strings with iOS (rawValue). Android uses
+        // enum.name with only the first character lowercased; values usually match but are not
+        // guaranteed identical for every enum. Prefer shared explicit string mappers on both platforms.
         documentClassInfo.country?.name?.let {
             documentClassInfoJson.put("country", it.replaceFirstChar { char -> char.lowercase() })
         }
@@ -659,10 +662,10 @@ object BlinkIdSerializationUtilities {
         vizResult?.documentAdditionalNumber?.let {
             vizResultJson.put("documentAdditionalNumber", serializeStringResult(it))
         }
-        vizResult?.dependentsInfo.let {
+        vizResult?.dependentsInfo?.let {
             vizResultJson.put(
                 "dependentsInfo",
-                JSONArray(it?.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
+                JSONArray(it.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
             )
         }
         vizResult?.documentNumber?.let {

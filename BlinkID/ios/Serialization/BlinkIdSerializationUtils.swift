@@ -236,7 +236,9 @@ class BlinkIdSerializationUtils {
     }
     
     static func serializeDocumentClassInfo(_ documentClassInfo: BlinkIDSDK.DocumentClassInfo) -> Dictionary<String, Any?> {
-        
+        // TODO: Align country/region/documentType strings with Android (enum.name lowercased).
+        // iOS uses rawValue here; values usually match TS types but are not guaranteed identical
+        // for every enum. Prefer shared explicit string mappers on both platforms.
         [
             "country": documentClassInfo.country.rawValue,
             "region": documentClassInfo.region.rawValue,
