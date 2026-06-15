@@ -15,7 +15,6 @@ However, since the wrapper is open source, you can add the features you need on 
 > If you are upgrading from v7.x, see [Migrating from v7.x](#migrating-from-v7x).
 
 # Table of contents
-- [What's new in v8000](#whats-new-in-v8000)
 - [Licensing](#licensing)
 - [Requirements](#requirements)
 - [Quickstart with the sample application](#quickstart-with-the-sample-application)
@@ -38,40 +37,22 @@ However, since the wrapper is open source, you can add the features you need on 
   - [SDK loading & unloading](#sdk-loading--unloading)
   - [BlinkID settings](#blinkid-settings)
   - [BlinkID results](#blinkid-results)
-- [Migrating from v7.x](#migrating-from-v7x)
+- [What's new in v8000](#whats-new-in-v8000)
+  - [Migrating from v7.x](#migrating-from-v7x)
 - [Additional information and Support](#additional-information-and-support)
 
-## <a name="whats-new-in-v8000"></a> What's new in v8000
-
-BlinkID v8000 introduces a **modular recognition architecture**. Instead of flat scanning settings and fallback recognition modes, extraction is driven by four independent modules that you enable and configure separately:
-
-| Module | Purpose |
-| --- | --- |
-| **Document capture** | Document detection, image quality checks (blur, glare, tilt, lighting), and cropped image extraction |
-| **MRZ** | Machine Readable Zone detection and parsing (passports, visas, ID cards) |
-| **Barcode** | 1D/2D barcode detection and parsing (PDF417, QR, retail codes, and more) |
-| **VIZ** | Visual Inspection Zone field extraction, character validation, and signature images |
-
-Other notable changes:
-
-- Settings are **plain TypeScript objects** (no class constructors).
-- Scanning methods accept a **single settings object** (recommended) or legacy positional arguments.
-- **Anonymization** has been renamed to **redaction** (`RedactionSettings`, `RedactionSettingsResolver`).
-- Image return and quality settings moved from `CroppedImageSettings` into `documentCaptureModule` and `vizModule`.
-- Detection levels (`DetectionLevel`) are replaced by **sensitivity levels** (`SensitivityLevel`: `off`, `low`, `mid`, `high`).
-- Scanning sessions include a new **inactivity timeout** (defaults to 10 seconds).
-
-For the full native migration guide, see [Migrate to v8000](https://docs.microblink.com/blinkid/migration-v8000).
-
 ## <a name="licensing"></a> Licensing
-A valid license key is required to initialize the BlinkID plugin. Existing v7 license keys remain compatible with v8000. A free trial license key can be requested after registering at the [Microblink Developer Hub](https://developer.microblink.com/).
+A valid license key is required to initialize the BlinkID plugin.
+
+A free trial license key can be requested after registering at the [Microblink Developer Hub](https://developer.microblink.com/).
 
 
 ## <a name="requirements"></a> Requirements
 
-- BlinkID React Native v8000 was built and tested with [React Native v0.82.x](https://github.com/facebook/react-native/releases/tag/v0.82.1)
-  - The BlinkID React Native SDK is also compatible with React Native applications running on the old architecture as it contains backward compatibility with Native Module implementation.
-- For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
+BlinkID React Native v8000 was built and tested with [React Native v0.82.x](https://github.com/facebook/react-native/releases/tag/v0.82.1)
+- The BlinkID React Native SDK is also compatible with React Native applications running on the old architecture as it contains backward compatibility with Native Module implementation.
+
+For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
 
 **Device requirements**
 
@@ -79,17 +60,7 @@ The BlinkID React Native plugin requires:
 - iOS version 16.0 and above
 - Android API version 24 and above
 
-- For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/microblink/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/microblink/blinkid-ios?tab=readme-ov-file#requirements)).
-
-**Android host app requirements**
-
-Because the native BlinkID UX module is built with Jetpack Compose, your Android application must:
-
-- Use **Kotlin 2.1.20** or newer
-- Enable **Jetpack Compose** in your app module
-- Add the **Microblink Maven repository** (see [Android setup](#android-setup))
-
-The `initBlinkIdReactNativeSample.sh` script applies these settings automatically when generating the sample app.
+For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/microblink/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/microblink/blinkid-ios?tab=readme-ov-file#requirements)).
 
 ## <a name="quickstart-with-the-sample-application"></a> Quickstart with the sample application
 The sample application demonstrates how the BlinkID plugin is implemented and shows how to configure scanning modules and obtain results.
@@ -116,17 +87,22 @@ brew install node
 ```bash
 git clone https://github.com/microblink/blinkid-react-native.git
 ```
+
 2. Position to the obtained BlinkID folder and run the `initBlinkIdReactNativeSample.sh` script:
+
 ```bash
 cd blinkid-react-native && ./initBlinkIdReactNativeSample.sh
 ```
+
+Running `initBlinkIdReactNativeSample.sh` script will create a sample app, with required configurations applied.
+
 3. After the script finishes running, position to the `BlinkIdSample` folder.
 
-**Running the sample application on Android**
+### <a name="android-sample-application"></a> Android sample application
 
-## <a name="android-sample-application"></a> Android sample application
+Running the sample application on Android
 
-### <a name="on-an-emulator"></a> On an emulator:
+#### <a name="on-an-emulator"></a> On an emulator:
 
 Simply execute the following command:
 
@@ -148,7 +124,7 @@ npx react-native start
 ```
 2. Open the `android` folder via Android Studio in the `BlinkIdSample` folder to run the Android sample application.
 
-### <a name="on-a-physical-device-via-usb"></a> On a physical device via USB:
+#### <a name="on-a-physical-device-via-usb"></a> On a physical device via USB:
 
 1. Connect your device via USB and enable USB debugging in Developer Options.
 2. Forward the Metro bundler port:
@@ -166,9 +142,9 @@ npx react-native run-android
 
 or open it in Android Studio and run it on the physical device from there.
 
-## <a name="ios-sample-application"></a> iOS sample application
+### <a name="ios-sample-application"></a> iOS sample application
 
-**Running the sample application on iOS**
+Running the sample application on iOS
 
 1. For running the sample application on iOS, execute the following command:
 ```bash
@@ -208,7 +184,7 @@ dependencyResolutionManagement {
 }
 ```
 
-Ensure your app module uses **Kotlin 2.1.20** or newer and enables Jetpack Compose. At minimum, your `android/app/build.gradle` should include:
+Ensure your app module uses **Kotlin v2.2.21** or newer and enables Jetpack Compose. At minimum, your `android/app/build.gradle` should include:
 
 ```groovy
 apply plugin: "org.jetbrains.kotlin.android"
@@ -228,12 +204,12 @@ dependencies {
 }
 ```
 
-Also set Kotlin 2.1.20 in your project-level `android/build.gradle`:
+Also set Kotlin version in your project-level `android/build.gradle`:
 
 ```groovy
 buildscript {
     ext {
-        kotlinVersion = "2.1.20"
+        kotlinVersion = "2.2.21"
     }
 }
 ```
@@ -625,15 +601,31 @@ Each `SingleSideScanningResult` contains:
 
 - Native serialization: [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/microblink/blinkid/reactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/Serialization/BlinkIdSerializationUtils.swift).
 
-## <a name="migrating-from-v7x"></a> Migrating from v7.x
+## <a name="whats-new-in-v8000"></a> What's new in v8000
+
+BlinkID v8000 introduces a **modular recognition architecture**. Instead of flat scanning settings and fallback recognition modes, extraction is driven by four independent modules that you enable and configure separately:
+
+| Module | Purpose |
+| --- | --- |
+| **Document capture** | Document detection, image quality checks (blur, glare, tilt, lighting), and cropped image extraction |
+| **MRZ** | Machine Readable Zone detection and parsing (passports, visas, ID cards) |
+| **Barcode** | 1D/2D barcode detection and parsing (PDF417, QR, retail codes, and more) |
+| **VIZ** | Visual Inspection Zone field extraction, character validation, and signature images |
+
+Other notable changes:
+
+- Settings are **plain TypeScript objects** (no class constructors).
+- Scanning methods accept a **single settings object** (recommended) or legacy positional arguments.
+- **Anonymization** has been renamed to **redaction** (`RedactionSettings`, `RedactionSettingsResolver`).
+- Image return and quality settings moved from `CroppedImageSettings` into `documentCaptureModule` and `vizModule`.
+- Detection levels (`DetectionLevel`) are replaced by **sensitivity levels** (`SensitivityLevel`: `off`, `low`, `mid`, `high`).
+- Scanning sessions include a new **inactivity timeout** (defaults to 10 seconds).
+
+### <a name="migrating-from-v7x"></a> Migrating from v7.x
 
 If you are upgrading from `@microblink/blinkid-react-native@7.x` (e.g. 7.7.0), the following changes apply.
 
-### Version numbering
-
-BlinkID v8000 uses epoch versioning: `8000.x.x` instead of `8.x.x`.
-
-### Settings are plain objects
+#### Settings are plain objects
 
 ```typescript
 // v7
@@ -644,7 +636,7 @@ sdkSettings.downloadResources = true;
 const sdkSettings = { licenseKey, downloadResources: true };
 ```
 
-### Modular scanning settings
+#### Modular scanning settings
 
 Flat v7 settings map to module settings in v8000:
 
@@ -667,7 +659,7 @@ Flat v7 settings map to module settings in v8000:
 
 Removed types: `CroppedImageSettings`, `AnonymizationMode`, `DetectionLevel`, `RecognitionMode`.
 
-### Method call style
+#### Method call style
 
 ```typescript
 // v7 — positional arguments
@@ -682,9 +674,7 @@ await performScan({ sdkSettings, sessionSettings, scanningUxSettings: uxSettings
 await unloadBlinkIdSdk({ deleteCachedResources: false });
 ```
 
-### Android integration
-
-v8000 requires Kotlin 2.1.20+, Jetpack Compose, and the Microblink Maven repository. See [Android setup](#android-setup).
+BlinkID Android SDK v8000 requires Kotlin v2.2.21+. See [Android setup](#android-setup) for more details.
 
 For the complete migration guide with all setting mappings, see [Migrate to v8000](https://docs.microblink.com/blinkid/migration-v8000).
 
