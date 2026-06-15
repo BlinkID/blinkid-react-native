@@ -14,6 +14,7 @@ import com.microblink.blinkid.core.result.StringResult
 import com.microblink.blinkid.core.result.VehicleClassInfo
 import com.microblink.blinkid.core.result.barcode.BarcodeData
 import com.microblink.blinkid.core.result.barcode.BarcodeResult
+import com.microblink.blinkid.core.result.barcode.BarcodeType
 import com.microblink.blinkid.core.result.classinfo.DocumentClassInfo
 import com.microblink.blinkid.core.result.mrz.MrzResult
 import com.microblink.blinkid.core.result.viz.VizResult
@@ -530,12 +531,30 @@ object BlinkIdSerializationUtilities {
 
     private fun serializeBarcodeData(barcodeData: BarcodeData?): JSONObject {
         val barcodeDataJson = JSONObject()
-        barcodeDataJson.put("barcodeType", barcodeData?.barcodeType?.ordinal)
+        barcodeDataJson.put("barcodeType", serializeBarcodeType(barcodeData?.barcodeType))
         barcodeDataJson.put("rawData", barcodeData?.rawData.toString())
         barcodeDataJson.put("stringData", barcodeData?.stringData)
         barcodeDataJson.put("uncertain", barcodeData?.uncertain)
 
         return barcodeDataJson
+    }
+
+    private fun serializeBarcodeType(barcodeType: BarcodeType?): String {
+        return when (barcodeType) {
+            BarcodeType.None -> "none"
+            BarcodeType.QRCode -> "qrCode"
+            BarcodeType.DataMatrix -> "dataMatrix"
+            BarcodeType.UPCE -> "upce"
+            BarcodeType.UPCA -> "upca"
+            BarcodeType.EAN8 -> "ean8"
+            BarcodeType.EAN13 -> "ean13"
+            BarcodeType.Code128 -> "code128"
+            BarcodeType.Code39 -> "code39"
+            BarcodeType.ITF -> "itf"
+            BarcodeType.Aztec -> "aztec"
+            BarcodeType.PDF417 -> "pdf417"
+            null -> "none"
+        }
     }
 
     private fun serializeMrzResult(mrzResult: MrzResult?): JSONObject {
