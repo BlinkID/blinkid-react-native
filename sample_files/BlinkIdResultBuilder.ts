@@ -354,7 +354,7 @@ export class BlinkIdResultBuilder {
 
     let dataMatchResultString =
       dataMatchresult.overallState != undefined
-        ? `\nData match information:\nState for whole document: ${dataMatchresult.overallState}\n`
+        ? `\nData match information\nState for whole document: ${dataMatchresult.overallState}\n`
         : "";
     if (dataMatchresult.states != null || dataMatchresult.states != undefined) {
       for (const fieldState of dataMatchresult?.states) {

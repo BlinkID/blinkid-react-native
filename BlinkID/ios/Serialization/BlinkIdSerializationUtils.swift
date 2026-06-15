@@ -833,7 +833,7 @@ class BlinkIdSerializationUtils {
     
     static func deserializeDataMatchState(_ state: DataMatchState?) -> String {
         switch state {
-        case .notPerformed: return "notPerfomed"
+        case .notPerformed: return "notPerformed"
         case .failed: return "failed"
         case .success: return "success"
         case .none: return "none"

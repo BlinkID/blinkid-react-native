@@ -4,7 +4,9 @@ import android.graphics.Bitmap
 import com.microblink.blinkid.core.result.AddressDetailedInfo
 import com.microblink.blinkid.core.result.AlphabetType
 import com.microblink.blinkid.core.result.DataMatchFieldState
+import com.microblink.blinkid.core.result.DataMatchFieldType
 import com.microblink.blinkid.core.result.DataMatchResult
+import com.microblink.blinkid.core.result.DataMatchState
 import com.microblink.blinkid.core.result.DependentInfo
 import com.microblink.blinkid.core.result.DriverLicenseDetailedInfo
 import com.microblink.blinkid.core.result.SingleSideScanningResult
@@ -321,16 +323,35 @@ object BlinkIdSerializationUtilities {
         }
 
         dataMatchResultJson.put("states", statesArray)
-        dataMatchResultJson.put("overallState", dataMatchResult.overallState.ordinal)
+        dataMatchResultJson.put("overallState", serializeDataMatchState(dataMatchResult.overallState))
 
         return dataMatchResultJson
     }
 
     private fun serializeDataMatchField(dataMatchField: DataMatchFieldState): JSONObject {
         val dataMatchFieldJson = JSONObject()
-        dataMatchFieldJson.put("field", dataMatchField.fieldType.ordinal)
-        dataMatchFieldJson.put("state", dataMatchField.state.ordinal)
+        dataMatchFieldJson.put("field", serializeDataMatchFieldType(dataMatchField.fieldType))
+        dataMatchFieldJson.put("state", serializeDataMatchState(dataMatchField.state))
         return dataMatchFieldJson
+    }
+
+    private fun serializeDataMatchFieldType(fieldType: DataMatchFieldType): String {
+        return when (fieldType) {
+            DataMatchFieldType.DateOfBirth -> "dateOfBirth"
+            DataMatchFieldType.DateOfExpiry -> "dateOfExpiry"
+            DataMatchFieldType.DocumentNumber -> "documentNumber"
+            DataMatchFieldType.DocumentAdditionalNumber -> "documentAdditionalNumber"
+            DataMatchFieldType.DocumentOptionalAdditionalNumber -> "documentOptionalAdditionalNumber"
+            DataMatchFieldType.PersonalIdNumber -> "personalIdNumber"
+        }
+    }
+
+    private fun serializeDataMatchState(state: DataMatchState): String {
+        return when (state) {
+            DataMatchState.NotPerformed -> "notPerformed"
+            DataMatchState.Failed -> "failed"
+            DataMatchState.Success -> "success"
+        }
     }
 
     private fun serializeStringResult(stringResult: StringResult): JSONObject {
