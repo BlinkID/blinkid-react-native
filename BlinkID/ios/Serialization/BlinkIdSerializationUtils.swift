@@ -592,26 +592,26 @@ class BlinkIdSerializationUtils {
         ]
     }
     
-    static func serializeMrzDocumentType(_ documentType: MRZDocumentType?) -> Int? {
+    static func serializeMrzDocumentType(_ documentType: MRZDocumentType?) -> String? {
         switch documentType {
         case .unknown:
-            return 0
+            return "unknown"
         case .identityCard:
-            return 1
+            return "identityCard"
         case .passport:
-            return 2
+            return "passport"
         case .visa:
-            return 3
+            return "visa"
         case .greenCard:
-            return 4
+            return "greenCard"
         case .mysPassIMM13P:
-            return 5
+            return "mysPassIMM13P"
         case .driverLicense:
-            return 6
+            return "driverLicense"
         case .internalTravelDocument:
-            return 7
+            return "internalTravelDocument"
         case .borderCrossingCard:
-            return 8
+            return "borderCrossingCard"
         case .none:
             return nil
         @unknown default:
@@ -818,12 +818,12 @@ class BlinkIdSerializationUtils {
         ]
     }
     
-    static func serializeScanningSide(_ side: ScanningSide?) -> Int? {
+    static func serializeScanningSide(_ side: ScanningSide?) -> String? {
         switch side {
         case .first:
-            return 0
+            return "first"
         case .second:
-            return 1
+            return "second"
         case .none:
             return nil
         @unknown default:

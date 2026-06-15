@@ -16,6 +16,7 @@ import com.microblink.blinkid.core.result.barcode.BarcodeData
 import com.microblink.blinkid.core.result.barcode.BarcodeResult
 import com.microblink.blinkid.core.result.barcode.BarcodeType
 import com.microblink.blinkid.core.result.classinfo.DocumentClassInfo
+import com.microblink.blinkid.core.result.mrz.DocumentType
 import com.microblink.blinkid.core.result.mrz.MrzResult
 import com.microblink.blinkid.core.result.viz.VizResult
 import com.microblink.blinkid.core.session.BlinkIdScanningResult
@@ -380,16 +381,16 @@ object BlinkIdSerializationUtilities {
 
         val sideJson = JSONObject()
         stringResult.side(AlphabetType.Latin)?.let {
-            sideJson.put("latin", it.ordinal)
+            sideJson.put("latin", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Arabic)?.let {
-            sideJson.put("arabic", it.ordinal)
+            sideJson.put("arabic", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Cyrillic)?.let {
-            sideJson.put("cyrillic", it.ordinal)
+            sideJson.put("cyrillic", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Greek)?.let {
-            sideJson.put("greek", it.ordinal)
+            sideJson.put("greek", serializeScanningSide(it))
         }
         stringResultJson.put("side", sideJson)
 
@@ -563,7 +564,7 @@ object BlinkIdSerializationUtilities {
         mrzResultJson.put("dateOfExpiry", serializeDateResult(mrzResult?.dateOfExpiry))
         mrzResultJson.put("documentCode", mrzResult?.documentCode)
         mrzResultJson.put("documentNumber", mrzResult?.documentNumber)
-        mrzResultJson.put("documentType", mrzResult?.documentType?.ordinal)
+        mrzResultJson.put("documentType", serializeMrzDocumentType(mrzResult?.documentType))
         mrzResultJson.put("gender", mrzResult?.gender)
         mrzResultJson.put("issuer", mrzResult?.issuer)
         mrzResultJson.put("issuerName", mrzResult?.issuerName)
@@ -797,10 +798,25 @@ object BlinkIdSerializationUtilities {
         return detailedCroppedImageResultJson
     }
 
-    private fun serializeScanningSide(side: ScanningSide): Int {
+    private fun serializeMrzDocumentType(documentType: DocumentType?): String? {
+        return when (documentType) {
+            DocumentType.Unknown -> "unknown"
+            DocumentType.IdentityCard -> "identityCard"
+            DocumentType.Passport -> "passport"
+            DocumentType.Visa -> "visa"
+            DocumentType.GreenCard -> "greenCard"
+            DocumentType.MysPassIMM13P -> "mysPassIMM13P"
+            DocumentType.DriverLicense -> "driverLicense"
+            DocumentType.InternalTravelDocument -> "internalTravelDocument"
+            DocumentType.BorderCrossingCard -> "borderCrossingCard"
+            null -> null
+        }
+    }
+
+    private fun serializeScanningSide(side: ScanningSide): String {
         return when (side) {
-            ScanningSide.First -> 0
-            ScanningSide.Second -> 1
+            ScanningSide.First -> "first"
+            ScanningSide.Second -> "second"
         }
     }
 

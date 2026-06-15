@@ -780,33 +780,33 @@ export type Location = {
 };
 
 /**
- * Side of the document on which the specific result is located.
+ * Scanning side on which the specific result is located.
  *
  */
 export type Side = {
   /**
-   * Document side of the result extracted from the OCR in the latin alphabet.
+   * Scanning side of the result extracted from the OCR in the latin alphabet.
    *
    */
-  latin?: DocumentSide;
+  latin?: ScanningSide;
 
   /**
-   * Document side of the result extracted from the OCR in the arabic alphabet.
+   * Scanning side of the result extracted from the OCR in the arabic alphabet.
    *
    */
-  arabic?: DocumentSide;
+  arabic?: ScanningSide;
 
   /**
-   * Document side of the result extracted from the OCR in the cyrillic alphabet.
+   * Scanning side of the result extracted from the OCR in the cyrillic alphabet.
    *
    */
-  cyrillic?: DocumentSide;
+  cyrillic?: ScanningSide;
 
   /**
-   * Document side of the result extracted from the OCR in the cyrillic alphabet.
+   * Scanning side of the result extracted from the OCR in the greek alphabet.
    *
    */
-  greek?: DocumentSide;
+  greek?: ScanningSide;
 };
 
 /**
@@ -2808,23 +2808,6 @@ export type RedactionMode =
    *
    */
   | "fullResult";
-
-/**
- * Define document side where the document field is located.
- *
- */
-export type DocumentSide =
-  /**
-   * The field is located on the front side of the document
-   *
-   */
-  | "front"
-
-  /**
-   * The field is located on the back side of the document
-   *
-   */
-  | "back";
 
 /**
  * Represents the type of scanned barcode
