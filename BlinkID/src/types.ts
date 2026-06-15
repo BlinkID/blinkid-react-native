@@ -2989,7 +2989,7 @@ export type DataMatchField =
    * The document additional number field.
    *
    */
-  | "DocumentAdditionalNumber"
+  | "documentAdditionalNumber"
 
   /**
    * The document optional additional number field.
