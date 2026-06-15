@@ -130,9 +130,12 @@ export type BlinkIdScanningSettings = Partial<{
    * This module is responsible for the initial document detection, image extraction
    * (such as face and document images), and image quality validation (blur, glare,
    * and lighting checks).
+   *
+   * Set to `null` to disable this module.
+   *
    * See {@link DocumentCaptureModuleSettings} for more information.
    */
-  documentCaptureModule: Partial<DocumentCaptureModuleSettings>;
+  documentCaptureModule: Partial<DocumentCaptureModuleSettings> | null;
 
   /*
    * Settings for the MRZ (Machine Readable Zone) extraction module.
@@ -140,9 +143,11 @@ export type BlinkIdScanningSettings = Partial<{
    * This module is dedicated to the detection and parsing of machine-readable
    * zone typically found on passports, visas, and identity cards.
    *
+   * Set to `null` to disable this module.
+   *
    * See {@link MrzModuleSettings} for more information.
    */
-  mrzModule: Partial<MrzModuleSettings>;
+  mrzModule: Partial<MrzModuleSettings> | null;
 
   /**
    * Settings for the barcode extraction module.
@@ -152,9 +157,11 @@ export type BlinkIdScanningSettings = Partial<{
    *
    * It can operate as a standalone module or in combination with document capture.
    *
+   * Set to `null` to disable this module.
+   *
    * See {@link BarcodeModuleSettings} for more information.
    */
-  barcodeModule: Partial<BarcodeModuleSettings>;
+  barcodeModule: Partial<BarcodeModuleSettings> | null;
 
   /**
    * Settings for the VIZ (Visual Inspection Zone) extraction module.
@@ -165,9 +172,11 @@ export type BlinkIdScanningSettings = Partial<{
    * It supports features such as character validation for increased accuracy,
    * signature image extraction, and data aggregation across multiple video frames.
    *
+   * Set to `null` to disable this module.
+   *
    * See {@link VizModuleSettings} for more information.
    */
-  vizModule: Partial<VizModuleSettings>;
+  vizModule: Partial<VizModuleSettings> | null;
 
   /**
    * The maximum allowed mismatches per field during data matching.

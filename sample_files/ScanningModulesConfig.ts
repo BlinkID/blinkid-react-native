@@ -168,20 +168,14 @@ export class ScanningModulesConfig {
   }
 
   toScanningSettings(): BlinkIdScanningSettings {
-    const settings: BlinkIdScanningSettings = {};
-    if (this.barcodeEnabled) {
-      settings.barcodeModule = { ...this.barcode };
-    }
-    if (this.documentCaptureEnabled) {
-      settings.documentCaptureModule = { ...this.documentCapture };
-    }
-    if (this.mrzEnabled) {
-      settings.mrzModule = { ...this.mrz };
-    }
-    if (this.vizEnabled) {
-      settings.vizModule = { ...this.viz };
-    }
-    return settings;
+    return {
+      barcodeModule: this.barcodeEnabled ? { ...this.barcode } : null,
+      documentCaptureModule: this.documentCaptureEnabled
+        ? { ...this.documentCapture }
+        : null,
+      mrzModule: this.mrzEnabled ? { ...this.mrz } : null,
+      vizModule: this.vizEnabled ? { ...this.viz } : null,
+    };
   }
 
   toSessionSettings(): BlinkIdSessionSettings {

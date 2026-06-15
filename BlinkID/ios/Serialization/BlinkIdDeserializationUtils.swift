@@ -83,29 +83,46 @@ struct BlinkIdDeserializationUtils {
     
     static func deserializeBlinkIdScanningSettings(_ scanningSettingsDict: Dictionary<String, Any>?) -> ScanningSettings {
         var scanningSettings = ScanningSettings()
-        
-        if let barcodeModuleDict = scanningSettingsDict?["barcodeModule"] as? Dictionary<String, Any> {
-            scanningSettings.barcodeModule = deserializeBarcodeModule(barcodeModuleDict)
+        guard let scanningSettingsDict else {
+            return scanningSettings
         }
-        
-        if let documentCaptureDict = scanningSettingsDict?["documentCaptureModule"] as? Dictionary<String, Any> {
-            scanningSettings.documentCaptureModule = deserializeDocumentCaptureModule(documentCaptureDict)
+
+        if scanningSettingsDict.keys.contains("barcodeModule") {
+            if let barcodeModuleDict = scanningSettingsDict["barcodeModule"] as? Dictionary<String, Any> {
+                scanningSettings.barcodeModule = deserializeBarcodeModule(barcodeModuleDict)
+            } else {
+                scanningSettings.barcodeModule = nil
+            }
         }
-        
-        if let mrzModuleDict = scanningSettingsDict?["mrzModule"] as? Dictionary<String, Any> {
-            scanningSettings.mrzModule = deserializeMrzModule(mrzModuleDict)
+
+        if scanningSettingsDict.keys.contains("documentCaptureModule") {
+            if let documentCaptureDict = scanningSettingsDict["documentCaptureModule"] as? Dictionary<String, Any> {
+                scanningSettings.documentCaptureModule = deserializeDocumentCaptureModule(documentCaptureDict)
+            } else {
+                scanningSettings.documentCaptureModule = nil
+            }
         }
-        
-        if let vizModuleDict = scanningSettingsDict?["vizModule"] as? Dictionary<String, Any> {
-            scanningSettings.vizModule = deserializeVizModule(vizModuleDict)
-            
+
+        if scanningSettingsDict.keys.contains("mrzModule") {
+            if let mrzModuleDict = scanningSettingsDict["mrzModule"] as? Dictionary<String, Any> {
+                scanningSettings.mrzModule = deserializeMrzModule(mrzModuleDict)
+            } else {
+                scanningSettings.mrzModule = nil
+            }
         }
-        
-        if let maxAllowedMismatchesPerField = scanningSettingsDict?["maxAllowedMismatchesPerField"] as? Int {
+
+        if scanningSettingsDict.keys.contains("vizModule") {
+            if let vizModuleDict = scanningSettingsDict["vizModule"] as? Dictionary<String, Any> {
+                scanningSettings.vizModule = deserializeVizModule(vizModuleDict)
+            } else {
+                scanningSettings.vizModule = nil
+            }
+        }
+
+        if let maxAllowedMismatchesPerField = scanningSettingsDict["maxAllowedMismatchesPerField"] as? Int {
             scanningSettings.maxAllowedMismatchesPerField = maxAllowedMismatchesPerField
         }
-        
-        
+
         return scanningSettings
     }
     
