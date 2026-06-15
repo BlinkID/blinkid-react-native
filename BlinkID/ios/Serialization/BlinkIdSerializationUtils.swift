@@ -245,7 +245,7 @@ class BlinkIdSerializationUtils {
             "isoNumericCountryCode": documentClassInfo.isoNumericCountryCode,
             "isoAlpha2CountryCode": documentClassInfo.isoAlpha2CountryCode,
             "isoAlpha3CountryCode": documentClassInfo.isoAlpha3CountryCode,
-            "isEmpty": documentClassInfo.isEmpty()
+            "empty": documentClassInfo.isEmpty()
         ]
     }
     

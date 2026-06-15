@@ -36,6 +36,7 @@ export class BlinkIdResultBuilder {
         result.additionalAddressInformation,
       ) +
       this.buildResult("Document number", result.documentNumber) +
+      this.buildResult("Card access number", result.cardAccessNumber) +
       this.buildResult(
         "Additional document number",
         result.documentAdditionalNumber,
@@ -187,6 +188,7 @@ export class BlinkIdResultBuilder {
       this.buildDateResult("Date of expiry", result.dateOfExpiry) +
       this.buildDateResult("Date of issue", result.dateOfIssue) +
       this.buildResult("Document number", result.documentNumber) +
+      this.buildResult("Card access number", result.cardAccessNumber) +
       this.buildResult("Issuing authority", result.issuingAuthority) +
       this.buildResult("Document subtype", result.documentSubtype) +
       this.buildResult(
@@ -273,7 +275,7 @@ export class BlinkIdResultBuilder {
   static buildDocumentClassInfoResult(result?: DocumentClassInfo) {
     if (result == null || result == undefined) return "";
 
-    return `\nDocument class information\nCountry: ${result.country}\nRegion: ${result.region}\nDocument type: ${result.documentType}\n`;
+    return `\nDocument class information\nCountry: ${result.country}\nRegion: ${result.region}\nDocument type: ${result.documentType}\nISO numeric country code: ${result.isoNumericCountryCode}\n`;
   }
 
   static buildDateResult<T>(

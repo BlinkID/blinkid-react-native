@@ -110,6 +110,9 @@ object BlinkIdSerializationUtilities {
         scanningResult?.documentNumber?.let {
             scanningResultJson.put("documentNumber", serializeStringResult(it))
         }
+        scanningResult?.cardAccessNumber?.let {
+            scanningResultJson.put("cardAccessNumber", serializeStringResult(it))
+        }
         scanningResult?.personalIdNumber?.let {
             scanningResultJson.put("personalIdNumber", serializeStringResult(it))
         }
@@ -313,6 +316,10 @@ object BlinkIdSerializationUtilities {
         documentClassInfo.isoAlpha3CountryCode?.let {
             documentClassInfoJson.put("isoAlpha3CountryCode", it)
         }
+        documentClassInfo.isoNumericCountryCode?.let {
+            documentClassInfoJson.put("isoNumericCountryCode", it)
+        }
+        documentClassInfoJson.put("empty", documentClassInfo.isEmpty())
         return documentClassInfoJson
     }
 
@@ -533,7 +540,7 @@ object BlinkIdSerializationUtilities {
     private fun serializeBarcodeData(barcodeData: BarcodeData?): JSONObject {
         val barcodeDataJson = JSONObject()
         barcodeDataJson.put("barcodeType", serializeBarcodeType(barcodeData?.barcodeType))
-        barcodeDataJson.put("rawData", barcodeData?.rawData.toString())
+        barcodeDataJson.put("rawData", encodeBase64Bytes(barcodeData?.rawData))
         barcodeDataJson.put("stringData", barcodeData?.stringData)
         barcodeDataJson.put("uncertain", barcodeData?.uncertain)
 
@@ -660,6 +667,9 @@ object BlinkIdSerializationUtilities {
         }
         vizResult?.documentNumber?.let {
             vizResultJson.put("documentNumber", serializeStringResult(it))
+        }
+        vizResult?.cardAccessNumber?.let {
+            vizResultJson.put("cardAccessNumber", serializeStringResult(it))
         }
         vizResult?.documentOptionalAdditionalNumber?.let {
             vizResultJson.put("documentOptionalAdditionalNumber", serializeStringResult(it))
@@ -853,6 +863,12 @@ object BlinkIdSerializationUtilities {
             is StringResult -> serializeStringResult(value)
             is String -> value
             else -> null
+        }
+    }
+
+    private fun encodeBase64Bytes(data: ByteArray?): String? {
+        return data?.let {
+            Base64.encodeToString(it, Base64.NO_WRAP)
         }
     }
 
