@@ -10,7 +10,7 @@ rm -rf $appName
 
 
 # Create a sample application via @react-native-community/cli init
-npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" || exit 1
+npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" --skip-git-init  || exit 1
 
 # Enter into demo project folder
 pushd $appName || exit 1
