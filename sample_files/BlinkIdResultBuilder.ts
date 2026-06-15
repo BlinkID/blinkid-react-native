@@ -80,7 +80,7 @@ export class BlinkIdResultBuilder {
         const barcode = this.buildBarcodeResult(result.barcode);
 
         return (
-          `\nDocument side ${index + 1} information:\n` + viz + mrz + barcode
+          `\nDocument side ${index + 1} information\n` + viz + mrz + barcode
         );
       })
       .join("");
@@ -165,7 +165,7 @@ export class BlinkIdResultBuilder {
       this.buildDriverLicenceResult(result.driverLicenseDetailedInfo) +
       this.buildBarcodeData(result.barcodeData);
 
-    return resultString == "" ? "" : `Barcode result:\n${resultString}\n`;
+    return resultString == "" ? "" : `Barcode result\n${resultString}\n`;
   }
 
   static buildVizResult(result?: VizResult) {
@@ -273,7 +273,7 @@ export class BlinkIdResultBuilder {
   static buildDocumentClassInfoResult(result?: DocumentClassInfo) {
     if (result == null || result == undefined) return "";
 
-    return `\nDocument class information:\nCountry: ${result.country}\nRegion: ${result.region}\nDocument type: ${result.documentType}\n`;
+    return `\nDocument class information\nCountry: ${result.country}\nRegion: ${result.region}\nDocument type: ${result.documentType}\n`;
   }
 
   static buildDateResult<T>(
@@ -297,7 +297,7 @@ export class BlinkIdResultBuilder {
       )}`;
     }
 
-    return stringResult == "" ? "" : `${propertyName}:\n${stringResult}\n`;
+    return stringResult == "" ? "" : `${propertyName}\n${stringResult}\n`;
   }
 
   static buildStringResult(propertyName: string, result?: string) {
