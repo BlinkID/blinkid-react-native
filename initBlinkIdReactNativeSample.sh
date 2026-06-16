@@ -10,7 +10,7 @@ rm -rf $appName
 
 
 # Create a sample application via @react-native-community/cli init
-npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" || exit 1
+npx @react-native-community/cli init $appName --package-name $appId --title "BlinkID React-Native Sample" --version "$rn_version" --skip-git-init  || exit 1
 
 # Enter into demo project folder
 pushd $appName || exit 1
@@ -23,7 +23,9 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
+# Toggle whether to use the local BlinkID plugin from this repo (true) or NPM (false).
 IS_LOCAL_BUILD=false || exit 1
+
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
@@ -32,12 +34,12 @@ if [ "$IS_LOCAL_BUILD" = true ]; then
   # Run npm install for react-native-builder-bob to prepare the build
   npm i
 
-  # Pack the libary
+  # Pack the library
   npm pack
 
   # Go the sample folder and install the library
   popd > /dev/null
-  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-7.7.0.tgz
+  npm i --save $blink_id_plugin_path/microblink-blinkid-react-native-8000.0.0.tgz
 
 else
   # Download BlinkID React Native via NPM
@@ -48,24 +50,9 @@ fi
 # React-native-image-picker plugin needed only for sample application with DirectAPI to get the document images
 npm i react-native-image-picker
 
-# Enter into android project folder
+# BlinkID SDK Kotlin requirements
 pushd android || exit 1
-
-# Patch the build.gradle to add "maven { url https://maven.microblink.com }"" repository
-perl -i~ -pe "BEGIN{$/ = undef;} s/maven \{/maven \{ url 'https:\\/\\/maven.microblink.com' }\n        maven {/" build.gradle
-
-# Fix node/npx path resolution for Android Studio (Gradle daemon doesn't inherit shell PATH)
-# Use process.execPath to get the real node binary path, not a symlink that the JVM may fail to resolve
-NODE_EXEC=$(node -e "console.log(process.execPath)")
-NODE_DIR=$(dirname "$NODE_EXEC")
-
-# Patch settings.gradle to use the full npx path for autolinking
-sed -i '' "s|ex.autolinkLibrariesFromCommand()|ex.autolinkLibrariesFromCommand([\"$NODE_DIR/npx\", \"@react-native-community/cli\", \"config\"])|" settings.gradle
-
-# Patch app/build.gradle to use the full node path for codegen and bundling
-sed -i '' "s|// nodeExecutableAndArgs = \[\"node\"\]|nodeExecutableAndArgs = [\"$NODE_DIR/node\"]|" app/build.gradle
-
-# Return from the android project folder
+sed -i '' 's/kotlinVersion = "[0-9.]*"/kotlinVersion = "2.2.21"/' build.gradle
 popd
 
 # Enter into the ios project folder
@@ -115,14 +102,12 @@ export NO_FLIPPER=1
 # to install the iOS application with old architecture run: RCT_NEW_ARCH_ENABLED=0 pod install
 pod install
 
-# pod install
-
 # Return from the ios project folder
 popd
 
 # Add the sample files with the BlinkID integration code to the sample application
-cp ../sample_files/App.tsx ./
-cp ../sample_files/BlinkIdResultBuilder.ts ./
+cp ../sample_files/*.tsx ./
+cp ../sample_files/*.ts ./
 
 # Return to the root folder
 popd
@@ -133,7 +118,8 @@ Go to the React Native project folder: cd $appName
 
 ----- Android instructions -----
 
-Execute: npx react-native run-android
+1. Execute npx react-native start
+2. Then in another terminal execute npx react-native run-android
 
 ----- iOS instructions -----
 

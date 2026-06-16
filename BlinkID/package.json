@@ -1,6 +1,6 @@
 {
   "name": "@microblink/blinkid-react-native",
-  "version": "7.7.0",
+  "version": "8000.0.0",
   "description": "A small and powerful ID card scanning library. Powered by Microblink (www.microblink.com).",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
@@ -56,7 +56,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BlinkID/blinkid-react-native.git"
+    "url": "git+https://github.com/microblink/blinkid-react-native.git",
+    "directory": "BlinkID"
   },
   "author": {
     "name": "Microblink (https://microblink.com)",
@@ -64,9 +65,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BlinkID/blinkid-react-native/issues"
+    "url": "https://github.com/microblink/blinkid-react-native/issues"
   },
-  "homepage": "https://github.com/BlinkID/blinkid-react-native#readme",
+  "homepage": "https://github.com/microblink/blinkid-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

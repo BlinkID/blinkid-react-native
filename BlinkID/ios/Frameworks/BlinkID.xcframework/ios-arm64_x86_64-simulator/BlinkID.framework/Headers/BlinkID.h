@@ -16,4 +16,5 @@ FOUNDATION_EXPORT const unsigned char BlinkIDVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <BlinkID/PublicHeader.h>
 
-#import <BlinkID/MBSampleBufferWrapper.h>
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>

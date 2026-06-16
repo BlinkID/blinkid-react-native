@@ -1,5 +1,6 @@
 #import "BlinkidReactNative.h"
 #import "BlinkidReactNative-Swift.h"
+#import <React/RCTUtils.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 #import <BlinkidReactNativeSpec/BlinkidReactNativeSpec.h>
@@ -43,62 +44,43 @@ RCT_EXPORT_METHOD(unloadBlinkIdSdk:(BOOL)deleteCachedResources
     }];
 }
 
-RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings
-                  blinkIdSessionSettings:(NSString *)blinkIdSessionSettings
-                  blinkIdScanningUxSettings:(NSString *)blinkIdScanningUxSettings
-                  classFilter:(NSString *)classFilter
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
+RCT_EXPORT_METHOD(performDirectApiScan:(nonnull NSString *)blinkIdSdkSettings blinkIdSessionSettings:(nonnull NSString *)blinkIdSessionSettings firstImage:(nonnull NSString *)firstImage secondImage:(nonnull NSString *)secondImage redactionSettings:(nonnull NSString *)redactionSettings resolve:(nonnull RCTPromiseResolveBlock)resolve reject:(nonnull RCTPromiseRejectBlock)reject) {
+    [self->moduleImplementation
+     performDirectApiScanWithBlinkIdSdkSettings: [self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
+     blinkIdSessionSettings: [self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
+     redactionSettings: [self createDictionaryFromBlinkIdObject:redactionSettings]
+     firstImage:firstImage
+     secondImage:secondImage
+     onResolve:^(NSString * _Nonnull result) {
+        resolve(result);
+    } onReject:^(NSString * _Nonnull error) {
+        reject(@"BlinkIdIosError", error, nil);
+    }];
+}
+
+
+RCT_EXPORT_METHOD(performScan:(NSString *)blinkIdSdkSettings blinkIdSessionSettings:(NSString *)blinkIdSessionSettings blinkIdScanningUxSettings:(NSString *)blinkIdScanningUxSettings classFilter:(NSString *)classFilter redactionSettingsResolver:(NSString *)redactionSettingsResolver resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIWindow *keyWindow = nil;
-        
-        for (UIWindowScene *scene in [UIApplication sharedApplication].connectedScenes) {
-            if (scene.activationState == UISceneActivationStateForegroundActive &&
-                [scene isKindOfClass:[UIWindowScene class]]) {
-                for (UIWindow *window in scene.windows) {
-                    if (window.isKeyWindow) {
-                        keyWindow = window;
-                        break;
-                    }
-                }
-            }
-            if (keyWindow) {
-                break;
-            }
+        UIViewController *rootViewController = RCTPresentedViewController();
+        if (rootViewController == nil) {
+            reject(@"BlinkIdIosError", @"No view controller is available to present the BlinkID scanning UI.", nil);
+            return;
         }
-        
+
         [self->moduleImplementation
-         performScan:keyWindow.rootViewController
+         performScan:rootViewController
          blinkIdSdkSettings:[self createDictionaryFromBlinkIdObject:blinkIdSdkSettings]
          blinkIdSessionSettings:[self createDictionaryFromBlinkIdObject:blinkIdSessionSettings]
          blinkIdScanningUxSettings:[self createDictionaryFromBlinkIdObject:blinkIdScanningUxSettings]
          classFilterSettings:[self createDictionaryFromBlinkIdObject:classFilter]
+         redactionSettingsResolver: [self createDictionaryFromBlinkIdObject:redactionSettingsResolver]
          onResolve:^(NSString * _Nonnull result) {
-            resolve(@[result]);
+            resolve(result);
         } onReject:^(NSString * _Nonnull error) {
-            reject(@"BlinkIdIosError", error, nil);
+            NSString *message = error.length > 0 ? error : @"Unknown BlinkID iOS error.";
+            reject(@"BlinkIdIosError", message, nil);
         }];
     });
-}
-
-RCT_EXPORT_METHOD(performDirectApiScan:(NSString *)blinkIdSdkSettings
-                  blinkIdSessionSettings:(NSString *)blinkIdSessionSettings
-                  firstImage:(NSString *)firstImage
-                  secondImage:(NSString *)secondImage
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
-    [self->moduleImplementation
-     performDirectApiScanWithBlinkIdSdkSettings: [self createDictionaryFromBlinkIdObject: blinkIdSdkSettings]
-     blinkIdSessionSettings: [self createDictionaryFromBlinkIdObject: blinkIdSessionSettings]
-     firstImage:firstImage
-     secondImage:secondImage
-     onResolve:^(NSString * _Nonnull result) {
-        resolve(@[result]);
-    } onReject:^(NSString * _Nonnull error) {
-        reject(@"BlinkIdIosError", error, nil);
-    }];
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED
@@ -111,16 +93,24 @@ RCT_EXPORT_METHOD(performDirectApiScan:(NSString *)blinkIdSdkSettings
 
 - (NSDictionary *)createDictionaryFromBlinkIdObject:(NSString *)jsonString
 {
-  NSError *jsonError;
-  NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-  if (!data) {
-    return nil;
+  if (jsonString == nil || jsonString.length == 0) {
+    return @{};
   }
 
-  NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                       options:NSJSONReadingMutableContainers
-                                                         error:&jsonError];
-  return dict;
+  NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+  if (data == nil) {
+    return @{};
+  }
+
+  NSError *jsonError = nil;
+  id parsed = [NSJSONSerialization JSONObjectWithData:data
+                                              options:NSJSONReadingMutableContainers
+                                                error:&jsonError];
+  if (![parsed isKindOfClass:[NSDictionary class]]) {
+    return @{};
+  }
+
+  return (NSDictionary *)parsed;
 }
 
 @end

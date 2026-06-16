@@ -1,23 +1,22 @@
 // index.ts
-import { BlinkIdScanningResult } from "./blinkIdResult";
+import type { BlinkIdScanningResult } from "./blinkIdResult";
 import type {
   BlinkIdSdkSettings,
   BlinkIdSessionSettings,
   BlinkIdScanningUxSettings,
 } from "./blinkIdSettings";
-import type { ClassFilter } from "./types";
+import type {
+  ClassFilter,
+  RedactionSettings,
+  RedactionSettingsResolver,
+} from "./types";
 import type { Spec } from "./NativeBlinkidReactNative";
 
 // Configuration classes
-export {
-  BlinkIdScanningSettings,
-  BlinkIdSdkSettings,
-  BlinkIdSessionSettings,
-  BlinkIdScanningUxSettings,
-  CroppedImageSettings,
-} from "./blinkIdSettings";
+export * from "./blinkIdSettings";
 
-export { BlinkIdScanningResult } from "./blinkIdResult";
+// BlinkID result
+export type { BlinkIdScanningResult } from "./blinkIdResult";
 
 // Types & enums
 export * from "./types";
@@ -25,6 +24,113 @@ export * from "./types";
 const BlinkidReactNative: Spec = require("./NativeBlinkidReactNative").default;
 
 export default BlinkidReactNative;
+
+function stringifySettings(value: unknown): string {
+  return JSON.stringify(value ?? null);
+}
+
+function parseNativeScanResult(jsonResult: string): BlinkIdScanningResult {
+  const parsed: unknown =
+    typeof jsonResult === "string" ? JSON.parse(jsonResult) : jsonResult;
+
+  const payload = Array.isArray(parsed) ? parsed[0] : parsed;
+  if (typeof payload === "string") {
+    return JSON.parse(payload) as BlinkIdScanningResult;
+  }
+
+  return payload as BlinkIdScanningResult;
+}
+
+function assertSdkSettings(
+  sdkSettings: BlinkIdSdkSettings | undefined,
+  methodName: string,
+): BlinkIdSdkSettings {
+  if (!sdkSettings?.licenseKey) {
+    throw new Error(
+      `${methodName} requires sdkSettings with a licenseKey. ` +
+        `Use ${methodName}({ sdkSettings: { licenseKey, ... }, sessionSettings: { ... } }) ` +
+        `instead of the legacy positional call style.`,
+    );
+  }
+
+  return sdkSettings;
+}
+
+function resolvePerformScanSettings(
+  first: PerformScanSettings | BlinkIdSdkSettings,
+  sessionSettings?: BlinkIdSessionSettings,
+  scanningUxSettings?: BlinkIdScanningUxSettings,
+  classFilter?: ClassFilter,
+  redactionSettingsResolver?: RedactionSettingsResolver,
+): PerformScanSettings {
+  if (
+    typeof first === "object" &&
+    first !== null &&
+    "sdkSettings" in first &&
+    "sessionSettings" in first
+  ) {
+    return first as PerformScanSettings;
+  }
+
+  if (
+    typeof first === "object" &&
+    first !== null &&
+    "licenseKey" in first &&
+    sessionSettings
+  ) {
+    return {
+      sdkSettings: first as BlinkIdSdkSettings,
+      sessionSettings,
+      scanningUxSettings,
+      classFilter,
+      redactionSettingsResolver,
+    };
+  }
+
+  throw new Error(
+    "Invalid performScan arguments. Pass a single settings object: " +
+      "performScan({ sdkSettings, sessionSettings, ... }).",
+  );
+}
+
+function resolvePerformDirectApiScanSettings(
+  first: PerformDirectApiScanSettings | BlinkIdSdkSettings,
+  sessionSettings?: BlinkIdSessionSettings,
+  firstImage?: string,
+  secondImage?: string,
+  redactionSettings?: RedactionSettings,
+): PerformDirectApiScanSettings {
+  if (
+    typeof first === "object" &&
+    first !== null &&
+    "sdkSettings" in first &&
+    "sessionSettings" in first &&
+    "firstImage" in first
+  ) {
+    return first as PerformDirectApiScanSettings;
+  }
+
+  if (
+    typeof first === "object" &&
+    first !== null &&
+    "licenseKey" in first &&
+    sessionSettings &&
+    firstImage
+  ) {
+    return {
+      sdkSettings: first as BlinkIdSdkSettings,
+      sessionSettings,
+      firstImage,
+      secondImage,
+      redactionSettings,
+    };
+  }
+
+  throw new Error(
+    "Invalid performDirectApiScan arguments. Pass a single settings object: " +
+      "performDirectApiScan({ sdkSettings, sessionSettings, firstImage, ... }).",
+  );
+}
 
 /**  The `loadBlinkIdSdk` method creates or retrieves the instance of the BlinkID SDK.
  *
@@ -50,10 +156,21 @@ export default BlinkidReactNative;
  * To obtain a valid license key, please visit https://developer.microblink.com/ or contact us directly at https://help.microblink.com.
  */
 export async function loadBlinkIdSdk(
-  blinkIdSdkSettings: BlinkIdSdkSettings
+  settingsOrSdk: LoadBlinkIdSdkSettings | BlinkIdSdkSettings,
 ): Promise<void> {
-  await BlinkidReactNative.loadBlinkIdSdk(JSON.stringify(blinkIdSdkSettings));
+  const sdkSettings =
+    "sdkSettings" in settingsOrSdk
+      ? settingsOrSdk.sdkSettings
+      : settingsOrSdk;
+
+  await BlinkidReactNative.loadBlinkIdSdk(
+    stringifySettings(assertSdkSettings(sdkSettings, "loadBlinkIdSdk")),
+  );
 }
+
+export type LoadBlinkIdSdkSettings = {
+  sdkSettings: BlinkIdSdkSettings;
+};
 
 /**
  * The `unloadBlinkIdSdk` method terminates the BlinkID SDK and releases all associated resources.
@@ -67,16 +184,20 @@ export async function loadBlinkIdSdk(
  * @param deleteCachedResources - if set to `true` (`false` is default), the method performs a **complete cleanup**,
  * including deletion of all downloaded and cached SDK resources from the device.
  */
-export async function unloadBlinkIdSdk(
-  deleteCachedResources: boolean
-): Promise<void> {
+export async function unloadBlinkIdSdk({
+  deleteCachedResources = false,
+}: UnloadBlinkIdSdkSettings = {}): Promise<void> {
   await BlinkidReactNative.unloadBlinkIdSdk(deleteCachedResources);
 }
+
+export type UnloadBlinkIdSdkSettings = {
+  deleteCachedResources?: boolean;
+};
 
 /**
  * The `performScan` method launches the BlinkID scanning process with the default UX properties.
  *
- * It takes the following parameters: {@link BlinkIdSdkSettings}, {@link BlinkIdSessionSettings} and the optional {@link BlinkIdUiSettings} and {@link ClassFilter} settings.
+ * It takes the following parameters: {@link BlinkIdSdkSettings}, {@link BlinkIdSessionSettings} {@link BlinkIdScanningUxSettings}, {@link RedactionSettingsResolver} {@link ClassFilter}.
  *
  * It returns the {@link BlinkIdScanningResult}.
  *
@@ -87,30 +208,59 @@ export async function unloadBlinkIdSdk(
  * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the {@link ScanningMode} and
  * {@link BlinkIdScanningSettings}, which define various parameters that control the scanning process.
  *
- * @param blinkIdUiSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
+ * @param scanningUxSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
  *
  * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session.
  * See {@link ClassFilter} for more implementation information.
+ *
+ * @param redactionSettingsResolver - The optional Redaction Settings Resolver- Represents the document redaction settings. Use this when need per-document redaction behavior is neede — for example,
+ * anonymizing different fields depending on the document's country or type.
+ *
+ * The resolver is invoked by the SDK immediately before the scanning result is finalized.
  *
  * @returns `BlinkIdScanningResult` - BlinkID scanning result - Represents the results of scanning a document.
  * This class contains the results of scanning a document, including the extracted data and images from the document.
  *
  */
 export async function performScan(
-  blinkIdSdkSettings: BlinkIdSdkSettings,
-  blinkIdSessionSettings: BlinkIdSessionSettings,
-  blinkIdScanningUxSettings?: BlinkIdScanningUxSettings,
-  classFilter?: ClassFilter
+  settingsOrSdk: PerformScanSettings | BlinkIdSdkSettings,
+  sessionSettings?: BlinkIdSessionSettings,
+  scanningUxSettings?: BlinkIdScanningUxSettings,
+  classFilter?: ClassFilter,
+  redactionSettingsResolver?: RedactionSettingsResolver,
 ): Promise<BlinkIdScanningResult> {
-  const jsonResult = await BlinkidReactNative.performScan(
-    JSON.stringify(blinkIdSdkSettings),
-    JSON.stringify(blinkIdSessionSettings),
-    JSON.stringify(blinkIdScanningUxSettings),
-    JSON.stringify(classFilter)
+  const {
+    sdkSettings,
+    sessionSettings: resolvedSessionSettings,
+    scanningUxSettings: resolvedScanningUxSettings,
+    classFilter: resolvedClassFilter,
+    redactionSettingsResolver: resolvedRedactionSettingsResolver,
+  } = resolvePerformScanSettings(
+    settingsOrSdk,
+    sessionSettings,
+    scanningUxSettings,
+    classFilter,
+    redactionSettingsResolver,
   );
 
-  return new BlinkIdScanningResult(JSON.parse(jsonResult));
+  const jsonResult = await BlinkidReactNative.performScan(
+    stringifySettings(assertSdkSettings(sdkSettings, "performScan")),
+    stringifySettings(resolvedSessionSettings),
+    stringifySettings(resolvedScanningUxSettings),
+    stringifySettings(resolvedClassFilter),
+    stringifySettings(resolvedRedactionSettingsResolver),
+  );
+
+  return parseNativeScanResult(jsonResult);
 }
+
+export type PerformScanSettings = {
+  sdkSettings: BlinkIdSdkSettings;
+  sessionSettings: BlinkIdSessionSettings;
+  scanningUxSettings?: BlinkIdScanningUxSettings;
+  classFilter?: ClassFilter;
+  redactionSettingsResolver?: RedactionSettingsResolver;
+};
 
 /**
  * The `performDirectApiScan` platform channel method launches the BlinkID scanning process inteded for information extraction from static images.
@@ -123,6 +273,9 @@ export async function performScan(
  *
  * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
  *
+ * @param redactionSettings - The optional Redaction settings - Represents the document redaction settings. Use this when need per-document redaction behavior is neede — for example,
+ * anonymizing different fields depending on the document's country or type.
+ *
  * @param firstImage - The `firstImage` Base64 string - image that represents one side of the document.
  * If the document contains two sides and the `ScanningMode` is set to `automatic`, this should contain the image of the front side of the document. In case the [ScanningMode] is set to `single`, it can
  * be either the front or the back side of the document.
@@ -133,17 +286,37 @@ export async function performScan(
  * This class contains the results of scanning a document, including the extracted data and images from the document.
  */
 export async function performDirectApiScan(
-  blinkIdSdkSettings: BlinkIdSdkSettings,
-  blinkIdSessionSettings: BlinkIdSessionSettings,
-  firstImage: string,
-  secondImage?: string
+  settingsOrSdk: PerformDirectApiScanSettings | BlinkIdSdkSettings,
+  sessionSettings?: BlinkIdSessionSettings,
+  firstImage?: string,
+  secondImage?: string,
+  redactionSettings?: RedactionSettings,
 ): Promise<BlinkIdScanningResult> {
-  const jsonResult = await BlinkidReactNative.performDirectApiScan(
-    JSON.stringify(blinkIdSdkSettings),
-    JSON.stringify(blinkIdSessionSettings),
+  const resolvedSettings = resolvePerformDirectApiScanSettings(
+    settingsOrSdk,
+    sessionSettings,
     firstImage,
-    secondImage
+    secondImage,
+    redactionSettings,
   );
 
-  return new BlinkIdScanningResult(JSON.parse(jsonResult));
+  const jsonResult = await BlinkidReactNative.performDirectApiScan(
+    stringifySettings(
+      assertSdkSettings(resolvedSettings.sdkSettings, "performDirectApiScan"),
+    ),
+    stringifySettings(resolvedSettings.sessionSettings),
+    resolvedSettings.firstImage,
+    resolvedSettings.secondImage,
+    stringifySettings(resolvedSettings.redactionSettings),
+  );
+
+  return parseNativeScanResult(jsonResult);
 }
+
+export type PerformDirectApiScanSettings = {
+  sdkSettings: BlinkIdSdkSettings;
+  sessionSettings: BlinkIdSessionSettings;
+  redactionSettings?: RedactionSettings;
+  firstImage: string;
+  secondImage?: string;
+};

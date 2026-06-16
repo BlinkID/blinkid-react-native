@@ -119,8 +119,7 @@
             "mangledName": "$s9BlinkIDUX0A13IDEventStreamC4sendyySayAA7UIEventOGF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -157,8 +156,7 @@
             "mangledName": "$s9BlinkIDUX0A13IDEventStreamC6streamScSySayAA7UIEventOGGvp",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "accessors": [
               {
@@ -359,8 +357,7 @@
         "mangledName": "$s9BlinkIDUX0A13IDClassFilterP",
         "moduleName": "BlinkIDUX",
         "declAttributes": [
-          "AccessControl",
-          "RawDocComment"
+          "AccessControl"
         ],
         "conformances": [
           {
@@ -376,6 +373,271 @@
             "printedName": "Copyable",
             "usr": "s:s8CopyableP",
             "mangledName": "$ss8CopyableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BlinkIDExtractionMode",
+        "printedName": "BlinkIDExtractionMode",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "barcodeOnly",
+            "printedName": "barcodeOnly",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDExtractionMode.Type) -> BlinkIDUX.BlinkIDExtractionMode",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDExtractionMode",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                    "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BlinkIDExtractionMode",
+                        "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                        "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO11barcodeOnlyyA2CmF",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO11barcodeOnlyyA2CmF",
+            "moduleName": "BlinkIDUX"
+          },
+          {
+            "kind": "Var",
+            "name": "documentWithBarcode",
+            "printedName": "documentWithBarcode",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDExtractionMode.Type) -> BlinkIDUX.BlinkIDExtractionMode",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDExtractionMode",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                    "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BlinkIDExtractionMode",
+                        "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                        "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO19documentWithBarcodeyA2CmF",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO19documentWithBarcodeyA2CmF",
+            "moduleName": "BlinkIDUX"
+          },
+          {
+            "kind": "Var",
+            "name": "fullDocument",
+            "printedName": "fullDocument",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDExtractionMode.Type) -> BlinkIDUX.BlinkIDExtractionMode",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDExtractionMode",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                    "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BlinkIDExtractionMode",
+                        "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                        "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO12fullDocumentyA2CmF",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO12fullDocumentyA2CmF",
+            "moduleName": "BlinkIDUX"
+          },
+          {
+            "kind": "Function",
+            "name": "==",
+            "printedName": "==(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "BlinkIDExtractionMode",
+                "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "BlinkIDExtractionMode",
+                "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO2eeoiySbAC_ACtFZ",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO2eeoiySbAC_ACtFZ",
+            "moduleName": "BlinkIDUX",
+            "static": true,
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "hashValue",
+            "printedName": "hashValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO9hashValueSivp",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO9hashValueSivp",
+            "moduleName": "BlinkIDUX",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A16IDExtractionModeO9hashValueSivg",
+                "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO9hashValueSivg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "hash",
+            "printedName": "hash(into:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Hasher",
+                "printedName": "Swift.Hasher",
+                "paramValueOwnership": "InOut",
+                "usr": "s:s6HasherV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX0A16IDExtractionModeO4hash4intoys6HasherVz_tF",
+            "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO4hash4intoys6HasherVz_tF",
+            "moduleName": "BlinkIDUX",
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:9BlinkIDUX0A16IDExtractionModeO",
+        "mangledName": "$s9BlinkIDUX0A16IDExtractionModeO",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
           }
         ]
       },
@@ -429,9 +691,53 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "inactivityTimeoutDuration",
+            "printedName": "inactivityTimeoutDuration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A10IDAnalyzerC25inactivityTimeoutDurationSdvp",
+            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC25inactivityTimeoutDurationSdvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A10IDAnalyzerC25inactivityTimeoutDurationSdvg",
+                "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC25inactivityTimeoutDurationSdvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(sdk:blinkIdSessionSettings:eventStream:classFilter:)",
+            "printedName": "init(sdk:blinkIdSessionSettings:eventStream:classFilter:redactionSettingsResolver:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -456,6 +762,7 @@
                 "kind": "TypeNominal",
                 "name": "BlinkIDEventStream",
                 "printedName": "BlinkIDUX.BlinkIDEventStream",
+                "hasDefaultArg": true,
                 "usr": "s:9BlinkIDUX0A13IDEventStreamC"
               },
               {
@@ -472,11 +779,26 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any BlinkID.RedactionSettingsResolver)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "RedactionSettingsResolver",
+                    "printedName": "any BlinkID.RedactionSettingsResolver",
+                    "usr": "s:7BlinkID25RedactionSettingsResolverP"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9BlinkIDUX0A10IDAnalyzerC3sdk22blinkIdSessionSettings11eventStream11classFilterAC0A2ID0A5IDSdkC_AH0a9IDSessionH0VAA0a7IDEventJ0CAA0a7IDClassL0_pSgtYaKcfc",
-            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC3sdk22blinkIdSessionSettings11eventStream11classFilterAC0A2ID0A5IDSdkC_AH0a9IDSessionH0VAA0a7IDEventJ0CAA0a7IDClassL0_pSgtYaKcfc",
+            "usr": "s:9BlinkIDUX0A10IDAnalyzerC3sdk22blinkIdSessionSettings11eventStream11classFilter09redactionH8ResolverAC0A2ID0A5IDSdkC_AI0a9IDSessionH0VAA0a7IDEventJ0CAA0a7IDClassL0_pSgAI09RedactionhN0_pSgtYaKcfc",
+            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC3sdk22blinkIdSessionSettings11eventStream11classFilter09redactionH8ResolverAC0A2ID0A5IDSdkC_AI0a9IDSessionH0VAA0a7IDEventJ0CAA0a7IDClassL0_pSgAI09RedactionhN0_pSgtYaKcfc",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "AccessControl",
@@ -527,6 +849,47 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "extractionMode",
+            "printedName": "extractionMode",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BlinkIDExtractionMode",
+                "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A10IDAnalyzerC14extractionModeAA0a12IDExtractionE0Ovp",
+            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC14extractionModeAA0a12IDExtractionE0Ovp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl",
+              "Nonisolated"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDExtractionMode",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                    "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A10IDAnalyzerC14extractionModeAA0a12IDExtractionE0Ovg",
+                "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC14extractionModeAA0a12IDExtractionE0Ovg",
+                "moduleName": "BlinkIDUX",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Function",
             "name": "analyze",
             "printedName": "analyze(image:)",
@@ -569,8 +932,7 @@
             "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC6cancelyyF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -605,8 +967,7 @@
             "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC6resultAA14ScanningResultOy0A2ID0a10IDScanningF0VAA0aH9AlertTypeOGyYaF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -626,8 +987,7 @@
             "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC5pauseyyF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -647,8 +1007,7 @@
             "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC6resumeyyF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -668,10 +1027,29 @@
             "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC7restartyyKF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resetStepTimer",
+            "printedName": "resetStepTimer()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX0A10IDAnalyzerC14resetStepTimeryyF",
+            "mangledName": "$s9BlinkIDUX0A10IDAnalyzerC14resetStepTimeryyF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl"
+            ],
             "funcSelfKind": "NonMutating"
           },
           {
@@ -712,8 +1090,7 @@
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "AccessControl",
-              "Nonisolated",
-              "RawDocComment"
+              "Nonisolated"
             ],
             "accessors": [
               {
@@ -882,6 +1259,499 @@
             ],
             "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP",
             "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "BlinkID",
+        "printedName": "BlinkID",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "FrameProcessResultHandle",
+        "printedName": "FrameProcessResultHandle",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "processResult",
+            "printedName": "processResult",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "BlinkID.BlinkIDSDK.ProcessResult?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProcessResult",
+                    "printedName": "BlinkID.BlinkIDSDK.ProcessResult",
+                    "usr": "s:7BlinkID0A5IDSDKV13ProcessResultV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX24FrameProcessResultHandleV07processE00A2ID0A5IDSDKV0dE0VSgvp",
+            "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV07processE00A2ID0A5IDSDKV0dE0VSgvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "BlinkID.BlinkIDSDK.ProcessResult?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProcessResult",
+                        "printedName": "BlinkID.BlinkIDSDK.ProcessResult",
+                        "usr": "s:7BlinkID0A5IDSDKV13ProcessResultV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX24FrameProcessResultHandleV07processE00A2ID0A5IDSDKV0dE0VSgvg",
+                "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV07processE00A2ID0A5IDSDKV0dE0VSgvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "advanceToNextStep",
+            "printedName": "advanceToNextStep",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() async -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX24FrameProcessResultHandleV17advanceToNextStepyyYaYbcvp",
+            "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV17advanceToNextStepyyYaYbcvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() async -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX24FrameProcessResultHandleV17advanceToNextStepyyYaYbcvg",
+                "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV17advanceToNextStepyyYaYbcvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "getLastFrame",
+            "printedName": "getLastFrame",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> BlinkIDUX.LastFrameResult?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "BlinkIDUX.LastFrameResult?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "LastFrameResult",
+                        "printedName": "BlinkIDUX.LastFrameResult",
+                        "usr": "s:9BlinkIDUX15LastFrameResultV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX24FrameProcessResultHandleV07getLastC0AA0hcE0VSgyYbcvp",
+            "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV07getLastC0AA0hcE0VSgyYbcvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> BlinkIDUX.LastFrameResult?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "BlinkIDUX.LastFrameResult?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "LastFrameResult",
+                            "printedName": "BlinkIDUX.LastFrameResult",
+                            "usr": "s:9BlinkIDUX15LastFrameResultV"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX24FrameProcessResultHandleV07getLastC0AA0hcE0VSgyYbcvg",
+                "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV07getLastC0AA0hcE0VSgyYbcvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "triggerStepTimeout",
+            "printedName": "triggerStepTimeout",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX24FrameProcessResultHandleV18triggerStepTimeoutyyYbcvp",
+            "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV18triggerStepTimeoutyyYbcvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX24FrameProcessResultHandleV18triggerStepTimeoutyyYbcvg",
+                "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV18triggerStepTimeoutyyYbcvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:9BlinkIDUX24FrameProcessResultHandleV",
+        "mangledName": "$s9BlinkIDUX24FrameProcessResultHandleV",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "LastFrameResult",
+        "printedName": "LastFrameResult",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "image",
+            "printedName": "image",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIImage?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX15LastFrameResultV5imageSo7UIImageCSgvp",
+            "mangledName": "$s9BlinkIDUX15LastFrameResultV5imageSo7UIImageCSgvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX15LastFrameResultV5imageSo7UIImageCSgvg",
+                "mangledName": "$s9BlinkIDUX15LastFrameResultV5imageSo7UIImageCSgvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "orientation",
+            "printedName": "orientation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CameraFrameVideoOrientation",
+                "printedName": "BlinkID.CameraFrameVideoOrientation",
+                "usr": "s:7BlinkID27CameraFrameVideoOrientationO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX15LastFrameResultV11orientation0A2ID06CameraD16VideoOrientationOvp",
+            "mangledName": "$s9BlinkIDUX15LastFrameResultV11orientation0A2ID06CameraD16VideoOrientationOvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CameraFrameVideoOrientation",
+                    "printedName": "BlinkID.CameraFrameVideoOrientation",
+                    "usr": "s:7BlinkID27CameraFrameVideoOrientationO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX15LastFrameResultV11orientation0A2ID06CameraD16VideoOrientationOvg",
+                "mangledName": "$s9BlinkIDUX15LastFrameResultV11orientation0A2ID06CameraD16VideoOrientationOvg",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:9BlinkIDUX15LastFrameResultV",
+        "mangledName": "$s9BlinkIDUX15LastFrameResultV",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -1133,6 +2003,46 @@
             "declKind": "EnumElement",
             "usr": "s:9BlinkIDUX0A19IDScanningAlertTypeO15disallowedClassyA2CmF",
             "mangledName": "$s9BlinkIDUX0A19IDScanningAlertTypeO15disallowedClassyA2CmF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "unsupportedDocument",
+            "printedName": "unsupportedDocument",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDScanningAlertType.Type) -> BlinkIDUX.BlinkIDScanningAlertType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDScanningAlertType",
+                    "printedName": "BlinkIDUX.BlinkIDScanningAlertType",
+                    "usr": "s:9BlinkIDUX0A19IDScanningAlertTypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.BlinkIDScanningAlertType.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BlinkIDScanningAlertType",
+                        "printedName": "BlinkIDUX.BlinkIDScanningAlertType",
+                        "usr": "s:9BlinkIDUX0A19IDScanningAlertTypeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX0A19IDScanningAlertTypeO19unsupportedDocumentyA2CmF",
+            "mangledName": "$s9BlinkIDUX0A19IDScanningAlertTypeO19unsupportedDocumentyA2CmF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "RawDocComment"
@@ -1527,256 +2437,9 @@
         "printedName": "BlinkIDUXModel",
         "children": [
           {
-            "kind": "Var",
-            "name": "result",
-            "printedName": "result",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "BlinkIDUX.BlinkIDResultState?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "BlinkIDResultState",
-                    "printedName": "BlinkIDUX.BlinkIDResultState",
-                    "usr": "s:9BlinkIDUX0A13IDResultStateV"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvp",
-            "mangledName": "$s9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvp",
-            "moduleName": "BlinkIDUX",
-            "declAttributes": [
-              "Final",
-              "Custom",
-              "ProjectedValueProperty",
-              "AccessControl",
-              "Custom",
-              "RawDocComment"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "BlinkIDUX.BlinkIDResultState?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "BlinkIDResultState",
-                        "printedName": "BlinkIDUX.BlinkIDResultState",
-                        "usr": "s:9BlinkIDUX0A13IDResultStateV"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvg",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvg",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "declAttributes": [
-                  "Final"
-                ],
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "BlinkIDUX.BlinkIDResultState?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "BlinkIDResultState",
-                        "printedName": "BlinkIDUX.BlinkIDResultState",
-                        "usr": "s:9BlinkIDUX0A13IDResultStateV"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvs",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvs",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "intro_Macosx": "10.15",
-                "intro_iOS": "13.0",
-                "intro_tvOS": "13.0",
-                "intro_watchOS": "6.0",
-                "declAttributes": [
-                  "Final",
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available"
-                ],
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvM",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC6resultAA0A13IDResultStateVSgvM",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "intro_Macosx": "10.15",
-                "intro_iOS": "13.0",
-                "intro_tvOS": "13.0",
-                "intro_watchOS": "6.0",
-                "declAttributes": [
-                  "Final",
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available"
-                ],
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "$result",
-            "printedName": "$result",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Publisher",
-                "printedName": "Combine.Published<Swift.Optional<BlinkIDUX.BlinkIDResultState>>.Publisher",
-                "usr": "s:7Combine9PublishedV9PublisherV"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvp",
-            "mangledName": "$s9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvp",
-            "moduleName": "BlinkIDUX",
-            "implicit": true,
-            "declAttributes": [
-              "Final",
-              "Custom"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Publisher",
-                    "printedName": "Combine.Published<Swift.Optional<BlinkIDUX.BlinkIDResultState>>.Publisher",
-                    "usr": "s:7Combine9PublishedV9PublisherV"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvg",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvg",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "declAttributes": [
-                  "Final"
-                ],
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Publisher",
-                    "printedName": "Combine.Published<Swift.Optional<BlinkIDUX.BlinkIDResultState>>.Publisher",
-                    "usr": "s:7Combine9PublishedV9PublisherV"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvs",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_Gvs",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "intro_Macosx": "11.0",
-                "intro_iOS": "14.0",
-                "intro_tvOS": "14.0",
-                "intro_watchOS": "7.0",
-                "declAttributes": [
-                  "Final",
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available"
-                ],
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_GvM",
-                "mangledName": "$s9BlinkIDUX0A9IDUXModelC7$result7Combine9PublishedV9PublisherVyAA0A13IDResultStateVSg_GvM",
-                "moduleName": "BlinkIDUX",
-                "implicit": true,
-                "intro_Macosx": "11.0",
-                "intro_iOS": "14.0",
-                "intro_tvOS": "14.0",
-                "intro_watchOS": "7.0",
-                "declAttributes": [
-                  "Final",
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available"
-                ],
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(analyzer:uxSettings:)",
+            "printedName": "init(analyzer:uxSettings:onScanCompleted:onFrameProcessResult:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -1796,11 +2459,56 @@
                 "printedName": "BlinkIDUX.ScanningUXSettings",
                 "hasDefaultArg": true,
                 "usr": "s:9BlinkIDUX18ScanningUXSettingsV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDResultState) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDResultState",
+                    "printedName": "BlinkIDUX.BlinkIDResultState",
+                    "usr": "s:9BlinkIDUX0A13IDResultStateV"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((BlinkIDUX.FrameProcessResultHandle) async -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(BlinkIDUX.FrameProcessResultHandle) async -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "FrameProcessResultHandle",
+                        "printedName": "BlinkIDUX.FrameProcessResultHandle",
+                        "usr": "s:9BlinkIDUX24FrameProcessResultHandleV"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9BlinkIDUX0A9IDUXModelC8analyzer10uxSettingsAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaFPRts_0A2ID0gH0V0H0AJRtsXP_AA18ScanningUXSettingsVtcfc",
-            "mangledName": "$s9BlinkIDUX0A9IDUXModelC8analyzer10uxSettingsAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaFPRts_0A2ID0gH0V0H0AJRtsXP_AA18ScanningUXSettingsVtcfc",
+            "usr": "s:9BlinkIDUX0A9IDUXModelC8analyzer10uxSettings15onScanCompleted0G18FrameProcessResultAcA06CameraJ8Analyzer_pAA7UIEventO5EventAaHPRts_0A2ID0mJ0V0J0ALRtsXP_AA18ScanningUXSettingsVyAA0A13IDResultStateVcyAA0jkL6HandleVYaYbcSgtcfc",
+            "mangledName": "$s9BlinkIDUX0A9IDUXModelC8analyzer10uxSettings15onScanCompleted0G18FrameProcessResultAcA06CameraJ8Analyzer_pAA7UIEventO5EventAaHPRts_0A2ID0mJ0V0J0ALRtsXP_AA18ScanningUXSettingsVyAA0A13IDResultStateVcyAA0jkL6HandleVYaYbcSgtcfc",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "Custom",
@@ -2005,6 +2713,53 @@
           {
             "kind": "Constructor",
             "name": "init",
+            "printedName": "init(analyzer:onScanCompleted:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BlinkIDUXView",
+                "printedName": "BlinkIDUX.BlinkIDUXView",
+                "usr": "s:9BlinkIDUX0A8IDUXViewV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CameraFrameAnalyzer",
+                "printedName": "any BlinkIDUX.CameraFrameAnalyzer<BlinkID.CameraFrame, BlinkIDUX.UIEvent>",
+                "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.BlinkIDResultState) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDResultState",
+                    "printedName": "BlinkIDUX.BlinkIDResultState",
+                    "usr": "s:9BlinkIDUX0A13IDResultStateV"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:9BlinkIDUX0A8IDUXViewV8analyzer15onScanCompletedAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaFPRts_0A2ID0hI0V0I0AJRtsXP_yAA0A13IDResultStateVctcfc",
+            "mangledName": "$s9BlinkIDUX0A8IDUXViewV8analyzer15onScanCompletedAcA19CameraFrameAnalyzer_pAA7UIEventO5EventAaFPRts_0A2ID0hI0V0I0AJRtsXP_yAA0A13IDResultStateVctcfc",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
             "printedName": "init(viewModel:)",
             "children": [
               {
@@ -2027,7 +2782,8 @@
             "declAttributes": [
               "Preconcurrency",
               "Custom",
-              "AccessControl"
+              "AccessControl",
+              "RawDocComment"
             ],
             "init_kind": "Designated"
           },
@@ -2149,6 +2905,16 @@
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
           }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "RawDocComment"
         ]
       },
       {
@@ -2446,6 +3212,26 @@
             "usr": "s:s16SendableMetatypeP",
             "mangledName": "$ss16SendableMetatypeP"
           }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "BlinkIDUX",
+        "declAttributes": [
+          "RawDocComment"
         ]
       },
       {
@@ -2842,6 +3628,43 @@
           },
           {
             "kind": "Var",
+            "name": "barcodeSide",
+            "printedName": "barcodeSide",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.ReticleState.Type) -> BlinkIDUX.ReticleState",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ReticleState",
+                    "printedName": "BlinkIDUX.ReticleState",
+                    "usr": "s:9BlinkIDUX12ReticleStateO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.ReticleState.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ReticleState",
+                        "printedName": "BlinkIDUX.ReticleState",
+                        "usr": "s:9BlinkIDUX12ReticleStateO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX12ReticleStateO11barcodeSideyA2CmF",
+            "mangledName": "$s9BlinkIDUX12ReticleStateO11barcodeSideyA2CmF",
+            "moduleName": "BlinkIDUX"
+          },
+          {
+            "kind": "Var",
             "name": "detecting",
             "printedName": "detecting",
             "children": [
@@ -3100,48 +3923,6 @@
             "usr": "s:9BlinkIDUX12ReticleStateO19inactiveWithMessageyACSScACmF",
             "mangledName": "$s9BlinkIDUX12ReticleStateO19inactiveWithMessageyACSScACmF",
             "moduleName": "BlinkIDUX"
-          },
-          {
-            "kind": "Var",
-            "name": "initialState",
-            "printedName": "initialState",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "ReticleState",
-                "printedName": "BlinkIDUX.ReticleState",
-                "usr": "s:9BlinkIDUX12ReticleStateO"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9BlinkIDUX12ReticleStateO07initialD0ACvpZ",
-            "mangledName": "$s9BlinkIDUX12ReticleStateO07initialD0ACvpZ",
-            "moduleName": "BlinkIDUX",
-            "static": true,
-            "declAttributes": [
-              "AccessControl"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ReticleState",
-                    "printedName": "BlinkIDUX.ReticleState",
-                    "usr": "s:9BlinkIDUX12ReticleStateO"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX12ReticleStateO07initialD0ACvgZ",
-                "mangledName": "$s9BlinkIDUX12ReticleStateO07initialD0ACvgZ",
-                "moduleName": "BlinkIDUX",
-                "static": true,
-                "accessorKind": "get"
-              }
-            ]
           },
           {
             "kind": "Var",
@@ -4197,18 +4978,32 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init()",
+            "printedName": "init(extractionMode:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "ReticleStateMachine",
                 "printedName": "BlinkIDUX.ReticleStateMachine",
                 "usr": "s:9BlinkIDUX19ReticleStateMachineC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "BlinkIDUX.BlinkIDExtractionMode?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BlinkIDExtractionMode",
+                    "printedName": "BlinkIDUX.BlinkIDExtractionMode",
+                    "usr": "s:9BlinkIDUX0A16IDExtractionModeO"
+                  }
+                ],
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:9BlinkIDUX19ReticleStateMachineCACycfc",
-            "mangledName": "$s9BlinkIDUX19ReticleStateMachineCACycfc",
+            "usr": "s:9BlinkIDUX19ReticleStateMachineC14extractionModeAcA0a12IDExtractionG0OSg_tcfc",
+            "mangledName": "$s9BlinkIDUX19ReticleStateMachineC14extractionModeAcA0a12IDExtractionG0OSg_tcfc",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "AccessControl"
@@ -4236,6 +5031,52 @@
             "declKind": "Func",
             "usr": "s:9BlinkIDUX19ReticleStateMachineC09calculateD05usingAA0cD0OAG_tF",
             "mangledName": "$s9BlinkIDUX19ReticleStateMachineC09calculateD05usingAA0cD0OAG_tF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "forcedState",
+            "printedName": "forcedState(state:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ReticleState",
+                "printedName": "BlinkIDUX.ReticleState",
+                "usr": "s:9BlinkIDUX12ReticleStateO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX19ReticleStateMachineC06forcedD05stateyAA0cD0O_tF",
+            "mangledName": "$s9BlinkIDUX19ReticleStateMachineC06forcedD05stateyAA0cD0O_tF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setInitialState",
+            "printedName": "setInitialState()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX19ReticleStateMachineC010setInitialD0yyF",
+            "mangledName": "$s9BlinkIDUX19ReticleStateMachineC010setInitialD0yyF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "AccessControl"
@@ -4951,6 +5792,126 @@
             "declKind": "EnumElement",
             "usr": "s:9BlinkIDUX7UIEventO28wrongSidePassportWithBarcodeyA2CmF",
             "mangledName": "$s9BlinkIDUX7UIEventO28wrongSidePassportWithBarcodeyA2CmF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "unsupportedDocument",
+            "printedName": "unsupportedDocument",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.UIEvent.Type) -> BlinkIDUX.UIEvent",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIEvent",
+                    "printedName": "BlinkIDUX.UIEvent",
+                    "usr": "s:9BlinkIDUX7UIEventO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.UIEvent.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIEvent",
+                        "printedName": "BlinkIDUX.UIEvent",
+                        "usr": "s:9BlinkIDUX7UIEventO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX7UIEventO19unsupportedDocumentyA2CmF",
+            "mangledName": "$s9BlinkIDUX7UIEventO19unsupportedDocumentyA2CmF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "unparsableBarcode",
+            "printedName": "unparsableBarcode",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.UIEvent.Type) -> BlinkIDUX.UIEvent",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIEvent",
+                    "printedName": "BlinkIDUX.UIEvent",
+                    "usr": "s:9BlinkIDUX7UIEventO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.UIEvent.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIEvent",
+                        "printedName": "BlinkIDUX.UIEvent",
+                        "usr": "s:9BlinkIDUX7UIEventO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX7UIEventO17unparsableBarcodeyA2CmF",
+            "mangledName": "$s9BlinkIDUX7UIEventO17unparsableBarcodeyA2CmF",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "undetectedBarcode",
+            "printedName": "undetectedBarcode",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.UIEvent.Type) -> BlinkIDUX.UIEvent",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIEvent",
+                    "printedName": "BlinkIDUX.UIEvent",
+                    "usr": "s:9BlinkIDUX7UIEventO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "BlinkIDUX.UIEvent.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIEvent",
+                        "printedName": "BlinkIDUX.UIEvent",
+                        "usr": "s:9BlinkIDUX7UIEventO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9BlinkIDUX7UIEventO17undetectedBarcodeyA2CmF",
+            "mangledName": "$s9BlinkIDUX7UIEventO17undetectedBarcodeyA2CmF",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
               "RawDocComment"
@@ -7989,6 +8950,30 @@
           },
           {
             "kind": "Function",
+            "name": "resetStepTimer",
+            "printedName": "resetStepTimer()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP14resetStepTimeryyYaF",
+            "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP14resetStepTimeryyYaF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.CameraFrameAnalyzer>",
+            "sugared_genericSig": "<Self where Self : BlinkIDUX.CameraFrameAnalyzer>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "end",
             "printedName": "end()",
             "children": [
@@ -8127,6 +9112,51 @@
           },
           {
             "kind": "Var",
+            "name": "inactivityTimeoutDuration",
+            "printedName": "inactivityTimeoutDuration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP25inactivityTimeoutDurationSdvp",
+            "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP25inactivityTimeoutDurationSdvp",
+            "moduleName": "BlinkIDUX",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX19CameraFrameAnalyzerP25inactivityTimeoutDurationSdvg",
+                "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerP25inactivityTimeoutDurationSdvg",
+                "moduleName": "BlinkIDUX",
+                "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.CameraFrameAnalyzer>",
+                "sugared_genericSig": "<Self where Self : BlinkIDUX.CameraFrameAnalyzer>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "sessionNumber",
             "printedName": "sessionNumber",
             "children": [
@@ -8166,6 +9196,29 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "resetStepTimer",
+            "printedName": "resetStepTimer()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX19CameraFrameAnalyzerPAAE14resetStepTimeryyYaF",
+            "mangledName": "$s9BlinkIDUX19CameraFrameAnalyzerPAAE14resetStepTimeryyYaF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.CameraFrameAnalyzer>",
+            "sugared_genericSig": "<Self where Self : BlinkIDUX.CameraFrameAnalyzer>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Protocol",
@@ -13407,8 +14460,8 @@
             "mangledName": "$s9BlinkIDUX17ScanningViewModelC19reticleStateMachineq0_vp",
             "moduleName": "BlinkIDUX",
             "declAttributes": [
-              "Custom",
               "HasStorage",
+              "Custom",
               "Final",
               "AccessControl"
             ],
@@ -14648,6 +15701,29 @@
             "declKind": "Func",
             "usr": "s:9BlinkIDUX17ScanningViewModelC07restartC0yyF",
             "mangledName": "$s9BlinkIDUX17ScanningViewModelC07restartC0yyF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0, τ_0_1, τ_0_2, τ_0_3 where τ_0_2 : BlinkIDUX.ReticleStateMachineProtocol, τ_0_3 : BlinkIDUX.AlertTypeProtocol>",
+            "sugared_genericSig": "<T, U, V, A where V : BlinkIDUX.ReticleStateMachineProtocol, A : BlinkIDUX.AlertTypeProtocol>",
+            "declAttributes": [
+              "Custom",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resetStepTimer",
+            "printedName": "resetStepTimer()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX17ScanningViewModelC14resetStepTimeryyF",
+            "mangledName": "$s9BlinkIDUX17ScanningViewModelC14resetStepTimeryyF",
             "moduleName": "BlinkIDUX",
             "genericSig": "<τ_0_0, τ_0_1, τ_0_2, τ_0_3 where τ_0_2 : BlinkIDUX.ReticleStateMachineProtocol, τ_0_3 : BlinkIDUX.AlertTypeProtocol>",
             "sugared_genericSig": "<T, U, V, A where V : BlinkIDUX.ReticleStateMachineProtocol, A : BlinkIDUX.AlertTypeProtocol>",
@@ -17264,6 +18340,32 @@
           },
           {
             "kind": "Function",
+            "name": "forcedState",
+            "printedName": "forcedState(state:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "DependentMember",
+                "printedName": "τ_0_0.ReticleStateType"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9BlinkIDUX27ReticleStateMachineProtocolP06forcedD05statey0cD4TypeQz_tF",
+            "mangledName": "$s9BlinkIDUX27ReticleStateMachineProtocolP06forcedD05statey0cD4TypeQz_tF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.ReticleStateMachineProtocol>",
+            "sugared_genericSig": "<Self where Self : BlinkIDUX.ReticleStateMachineProtocol>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "setInitialState",
             "printedName": "setInitialState()",
             "children": [
@@ -17385,29 +18487,6 @@
             "declKind": "Func",
             "usr": "s:9BlinkIDUX27ReticleStateMachineProtocolPAAE22calculateRemainingTime13stateDurationS2dSg_tF",
             "mangledName": "$s9BlinkIDUX27ReticleStateMachineProtocolPAAE22calculateRemainingTime13stateDurationS2dSg_tF",
-            "moduleName": "BlinkIDUX",
-            "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.ReticleStateMachineProtocol>",
-            "sugared_genericSig": "<Self where Self : BlinkIDUX.ReticleStateMachineProtocol>",
-            "declAttributes": [
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "setInitialState",
-            "printedName": "setInitialState()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:9BlinkIDUX27ReticleStateMachineProtocolPAAE010setInitialD0yyF",
-            "mangledName": "$s9BlinkIDUX27ReticleStateMachineProtocolPAAE010setInitialD0yyF",
             "moduleName": "BlinkIDUX",
             "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.ReticleStateMachineProtocol>",
             "sugared_genericSig": "<Self where Self : BlinkIDUX.ReticleStateMachineProtocol>",
@@ -17684,48 +18763,6 @@
           },
           {
             "kind": "Var",
-            "name": "initialState",
-            "printedName": "initialState",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "GenericTypeParam",
-                "printedName": "τ_0_0"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9BlinkIDUX20ReticleStateProtocolP07initialD0xvpZ",
-            "mangledName": "$s9BlinkIDUX20ReticleStateProtocolP07initialD0xvpZ",
-            "moduleName": "BlinkIDUX",
-            "static": true,
-            "protocolReq": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "GenericTypeParam",
-                    "printedName": "τ_0_0"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9BlinkIDUX20ReticleStateProtocolP07initialD0xvgZ",
-                "mangledName": "$s9BlinkIDUX20ReticleStateProtocolP07initialD0xvgZ",
-                "moduleName": "BlinkIDUX",
-                "genericSig": "<τ_0_0 where τ_0_0 : BlinkIDUX.ReticleStateProtocol>",
-                "sugared_genericSig": "<Self where Self : BlinkIDUX.ReticleStateProtocol>",
-                "static": true,
-                "protocolReq": true,
-                "reqNewWitnessTableEntry": true,
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "inactiveState",
             "printedName": "inactiveState",
             "children": [
@@ -17906,6 +18943,270 @@
         "moduleName": "BlinkIDUX",
         "declAttributes": [
           "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "DocumentRotation",
+        "printedName": "DocumentRotation",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "passportOrientation",
+            "printedName": "passportOrientation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PassportOrientation",
+                "printedName": "BlinkIDUX.PassportOrientation",
+                "usr": "s:9BlinkIDUX19PassportOrientationO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7BlinkID16DocumentRotationO0A4IDUXE19passportOrientationAD08PassportG0Ovp",
+            "mangledName": "$s7BlinkID16DocumentRotationO0A4IDUXE19passportOrientationAD08PassportG0Ovp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PassportOrientation",
+                    "printedName": "BlinkIDUX.PassportOrientation",
+                    "usr": "s:9BlinkIDUX19PassportOrientationO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7BlinkID16DocumentRotationO0A4IDUXE19passportOrientationAD08PassportG0Ovg",
+                "mangledName": "$s7BlinkID16DocumentRotationO0A4IDUXE19passportOrientationAD08PassportG0Ovg",
+                "moduleName": "BlinkIDUX",
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:7BlinkID16DocumentRotationO",
+        "mangledName": "$s7BlinkID16DocumentRotationO",
+        "moduleName": "BlinkID",
+        "enumRawTypeName": "Int",
+        "isExternal": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "View",
+        "printedName": "View",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "uxSettings",
+            "printedName": "uxSettings(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ScanningUXSettings",
+                "printedName": "BlinkIDUX.ScanningUXSettings",
+                "usr": "s:9BlinkIDUX18ScanningUXSettingsV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:7SwiftUI4ViewP9BlinkIDUXE10uxSettingsyQrAD18ScanningUXSettingsVF",
+            "mangledName": "$s7SwiftUI4ViewP9BlinkIDUXE10uxSettingsyQrAD18ScanningUXSettingsVF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+            "sugared_genericSig": "<Self where Self : SwiftUI.View>",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onFrameProcessResult",
+            "printedName": "onFrameProcessResult(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(BlinkIDUX.FrameProcessResultHandle) async -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FrameProcessResultHandle",
+                    "printedName": "BlinkIDUX.FrameProcessResultHandle",
+                    "usr": "s:9BlinkIDUX24FrameProcessResultHandleV"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:7SwiftUI4ViewP9BlinkIDUXE20onFrameProcessResultyQryAD0ghI6HandleVYacF",
+            "mangledName": "$s7SwiftUI4ViewP9BlinkIDUXE20onFrameProcessResultyQryAD0ghI6HandleVYacF",
+            "moduleName": "BlinkIDUX",
+            "genericSig": "<τ_0_0 where τ_0_0 : SwiftUI.View>",
+            "sugared_genericSig": "<Self where Self : SwiftUI.View>",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:7SwiftUI4ViewP",
+        "mangledName": "$s7SwiftUI4ViewP",
+        "moduleName": "SwiftUICore",
+        "genericSig": "<τ_0_0.Body : SwiftUI.View>",
+        "sugared_genericSig": "<Self.Body : SwiftUI.View>",
+        "intro_Macosx": "10.15",
+        "intro_iOS": "13.0",
+        "intro_tvOS": "13.0",
+        "intro_watchOS": "6.0",
+        "declAttributes": [
+          "Preconcurrency",
+          "TypeEraser",
+          "TypeEraser",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
+          "OriginallyDefinedIn",
+          "Available",
+          "Available",
+          "Available",
+          "Available",
+          "Custom"
+        ],
+        "isExternal": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -18382,16 +19683,23 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1627,
+      "offset": 2317,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
       "kind": "BooleanLiteral",
-      "offset": 1658,
+      "offset": 2348,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/Analyzer\/BlinkIDAnalyzer.swift",
+      "kind": "Array",
+      "offset": 2956,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDScanningAlertType.swift",
@@ -18401,53 +19709,11 @@
       "value": "1"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "BooleanLiteral",
-      "offset": 899,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "BooleanLiteral",
-      "offset": 952,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "FloatLiteral",
-      "offset": 1372,
-      "length": 3,
-      "value": "0.4"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "FloatLiteral",
-      "offset": 1420,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "FloatLiteral",
-      "offset": 1468,
-      "length": 3,
-      "value": "2.0"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
-      "kind": "FloatLiteral",
-      "offset": 1515,
-      "length": 3,
-      "value": "0.5"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXModel.swift",
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDScanningAlertType.swift",
       "kind": "IntegerLiteral",
-      "offset": 1703,
-      "length": 1,
-      "value": "0"
+      "offset": 630,
+      "length": 19,
+      "value": "2"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXTranslator.swift",
@@ -18485,32 +19751,116 @@
       "value": "false"
     },
     {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
-      "kind": "FloatLiteral",
-      "offset": 6183,
-      "length": 3,
-      "value": "1.0"
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/BlinkIDUXView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 6214,
-      "length": 1,
-      "value": "0"
-    },
-    {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 296,
+      "offset": 308,
       "length": 10,
       "value": "1"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
       "kind": "IntegerLiteral",
-      "offset": 308,
+      "offset": 320,
       "length": 9,
       "value": "2"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1277,
+      "length": 10,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1289,
+      "length": 9,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2304,
+      "length": 10,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/OnboardingStep.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2316,
+      "length": 9,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "BooleanLiteral",
+      "offset": 233,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "BooleanLiteral",
+      "offset": 267,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "IntegerLiteral",
+      "offset": 516,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "IntegerLiteral",
+      "offset": 603,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "FloatLiteral",
+      "offset": 635,
+      "length": 3,
+      "value": "0.4"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "FloatLiteral",
+      "offset": 666,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "FloatLiteral",
+      "offset": 706,
+      "length": 3,
+      "value": "2.0"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimatable.swift",
+      "kind": "FloatLiteral",
+      "offset": 745,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimationViews.swift",
+      "kind": "FloatLiteral",
+      "offset": 281,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/BlinkIDUX\/ScanningUX\/PassportAnimationViews.swift",
+      "kind": "IntegerLiteral",
+      "offset": 312,
+      "length": 1,
+      "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
@@ -18571,14 +19921,14 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "StringLiteral",
-      "offset": 9562,
+      "offset": 9611,
       "length": 23,
       "value": "\"com.microblink.camera\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",
       "kind": "StringLiteral",
-      "offset": 9597,
+      "offset": 9646,
       "length": 8,
       "value": "\"Camera\""
     },
@@ -18606,23 +19956,16 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "StringLiteral",
-      "offset": 17857,
+      "offset": 18078,
       "length": 23,
       "value": "\"com.microblink.camera\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/CaptureService.swift",
       "kind": "StringLiteral",
-      "offset": 17892,
+      "offset": 18113,
       "length": 16,
       "value": "\"CaptureService\""
-    },
-    {
-      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Device\/DeviceLookup.swift",
-      "kind": "IntegerLiteral",
-      "offset": 760,
-      "length": 3,
-      "value": "100"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/Camera\/Device\/DeviceObserver.swift",
@@ -18683,252 +20026,252 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2333,
+      "offset": 2359,
       "length": 7,
       "value": "\"xmark\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2364,
+      "offset": 2390,
       "length": 8,
       "value": "\"Cancel\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2394,
+      "offset": 2420,
       "length": 27,
       "value": "\"Cancel scanning procedure\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2497,
+      "offset": 2523,
       "length": 17,
       "value": "\"bolt.slash.fill\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2537,
+      "offset": 2563,
       "length": 7,
       "value": "\"Torch\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2576,
+      "offset": 2602,
       "length": 20,
       "value": "\"Turn flashlight on\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2900,
+      "offset": 2926,
       "length": 11,
       "value": "\"bolt.fill\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2933,
+      "offset": 2959,
       "length": 17,
       "value": "\"bolt.slash.fill\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 2988,
+      "offset": 3014,
       "length": 20,
       "value": "\"Turn flashlight on\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 3011,
+      "offset": 3037,
       "length": 21,
       "value": "\"Turn flashlight off\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3112,
+      "offset": 3138,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 2646,
+      "offset": 2672,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3201,
+      "offset": 3227,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 3269,
+      "offset": 3295,
       "length": 26,
       "value": "\"questionmark.circle.fill\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 3317,
+      "offset": 3343,
       "length": 6,
       "value": "\"Help\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "StringLiteral",
-      "offset": 3343,
+      "offset": 3369,
       "length": 31,
       "value": "\"Open scanning onboarding help\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3406,
+      "offset": 3432,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "IntegerLiteral",
-      "offset": 3621,
+      "offset": 3647,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 3495,
+      "offset": 3521,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "IntegerLiteral",
-      "offset": 4380,
+      "offset": 4406,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "IntegerLiteral",
-      "offset": 5024,
+      "offset": 5050,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 4866,
+      "offset": 4892,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "IntegerLiteral",
-      "offset": 5774,
+      "offset": 5800,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 5618,
+      "offset": 5644,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 6303,
+      "offset": 6329,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6391,
+      "offset": 6417,
       "length": 5,
       "value": "180.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6440,
+      "offset": 6466,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6471,
+      "offset": 6497,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 6524,
+      "offset": 6550,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6632,
+      "offset": 6658,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6676,
+      "offset": 6702,
       "length": 5,
       "value": "0.586"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 6729,
+      "offset": 6755,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6780,
+      "offset": 6806,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6831,
+      "offset": 6857,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "FloatLiteral",
-      "offset": 6873,
+      "offset": 6899,
       "length": 4,
       "value": "0.45"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/ScanningUX\/ScanningViewModelProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 10773,
+      "offset": 10912,
       "length": 5,
       "value": "false"
     },
@@ -18998,21 +20341,21 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 516,
+      "offset": 489,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 3988,
+      "offset": 4011,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/OnboardingSheetView.swift",
       "kind": "IntegerLiteral",
-      "offset": 6122,
+      "offset": 6145,
       "length": 2,
       "value": "40"
     },
@@ -19131,7 +20474,7 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/blinkid-ios\/Source\/Shared\/UIComponents\/State\/ReticleStateMachineProtocol.swift",
       "kind": "BooleanLiteral",
-      "offset": 1031,
+      "offset": 1077,
       "length": 5,
       "value": "false"
     },
@@ -19264,49 +20607,91 @@
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 2776,
+      "offset": 2793,
+      "length": 21,
+      "value": "\"harsh_light_barcode\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 2962,
+      "length": 22,
+      "value": "\"keep_barcode_visible\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3137,
+      "length": 25,
+      "value": "\"keep_barcode_visible_id\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3291,
       "length": 12,
       "value": "\"keep_still\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 2921,
+      "offset": 3447,
+      "length": 20,
+      "value": "\"keep_still_barcode\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3604,
+      "length": 16,
+      "value": "\"locate_barcode\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3762,
+      "length": 19,
+      "value": "\"locate_barcode_id\""
+    },
+    {
+      "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
+      "kind": "StringLiteral",
+      "offset": 3914,
       "length": 14,
       "value": "\"mb_checkmark\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 3075,
+      "offset": 4068,
       "length": 18,
       "value": "\"no_camera_access\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 3232,
+      "offset": 4225,
       "length": 17,
       "value": "\"passport_bottom\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 3394,
+      "offset": 4387,
       "length": 20,
       "value": "\"passport_highlight\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 3547,
+      "offset": 4540,
       "length": 14,
       "value": "\"passport_top\""
     },
     {
       "filePath": "\/Users\/tonikreso\/Desktop\/sdks\/sdk-document-verification-v2-ios\/.build\/Build\/Intermediates.noindex\/ArchiveIntermediates\/BlinkIDUX\/IntermediateBuildFilesPath\/BlinkIDUX.build\/Release-iphonesimulator\/BlinkIDUX.build\/DerivedSources\/GeneratedAssetSymbols.swift",
       "kind": "StringLiteral",
-      "offset": 3706,
+      "offset": 4699,
       "length": 20,
       "value": "\"production_overlay\""
     }

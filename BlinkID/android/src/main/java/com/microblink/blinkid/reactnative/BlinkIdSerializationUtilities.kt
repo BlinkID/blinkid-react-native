@@ -4,7 +4,9 @@ import android.graphics.Bitmap
 import com.microblink.blinkid.core.result.AddressDetailedInfo
 import com.microblink.blinkid.core.result.AlphabetType
 import com.microblink.blinkid.core.result.DataMatchFieldState
+import com.microblink.blinkid.core.result.DataMatchFieldType
 import com.microblink.blinkid.core.result.DataMatchResult
+import com.microblink.blinkid.core.result.DataMatchState
 import com.microblink.blinkid.core.result.DependentInfo
 import com.microblink.blinkid.core.result.DriverLicenseDetailedInfo
 import com.microblink.blinkid.core.result.SingleSideScanningResult
@@ -12,7 +14,9 @@ import com.microblink.blinkid.core.result.StringResult
 import com.microblink.blinkid.core.result.VehicleClassInfo
 import com.microblink.blinkid.core.result.barcode.BarcodeData
 import com.microblink.blinkid.core.result.barcode.BarcodeResult
+import com.microblink.blinkid.core.result.barcode.BarcodeType
 import com.microblink.blinkid.core.result.classinfo.DocumentClassInfo
+import com.microblink.blinkid.core.result.mrz.DocumentType
 import com.microblink.blinkid.core.result.mrz.MrzResult
 import com.microblink.blinkid.core.result.viz.VizResult
 import com.microblink.blinkid.core.session.BlinkIdScanningResult
@@ -21,19 +25,16 @@ import java.io.ByteArrayOutputStream
 import android.util.Base64
 import com.microblink.blinkid.core.result.ParentInfo
 import com.microblink.blinkid.core.result.barcode.BarcodeElement
-import com.microblink.core.result.DateResult
-import com.microblink.core.result.DetailedCroppedImageResult
-import com.microblink.core.result.Rectangle
-import com.microblink.core.result.ScanningSide
+import com.microblink.blinkid.core.result.DateResult
+import com.microblink.blinkid.core.result.DetailedCroppedImageResult
+import com.microblink.blinkid.core.result.Rectangle
+import com.microblink.blinkid.core.result.ScanningSide
 import org.json.JSONArray
 
 object BlinkIdSerializationUtilities {
     fun serializeBlinkIdScanningResult(scanningResult: BlinkIdScanningResult?): String {
         val scanningResultJson: JSONObject = JSONObject()
 
-        scanningResult?.mode.let {
-            scanningResultJson.put("recognitionMode", it?.name)
-        }
         scanningResult?.documentClassInfo?.let {
             scanningResultJson.put("documentClassInfo", serializeDocumentClassInfo(it))
         }
@@ -108,6 +109,9 @@ object BlinkIdSerializationUtilities {
         }
         scanningResult?.documentNumber?.let {
             scanningResultJson.put("documentNumber", serializeStringResult(it))
+        }
+        scanningResult?.cardAccessNumber?.let {
+            scanningResultJson.put("cardAccessNumber", serializeStringResult(it))
         }
         scanningResult?.personalIdNumber?.let {
             scanningResultJson.put("personalIdNumber", serializeStringResult(it))
@@ -247,8 +251,8 @@ object BlinkIdSerializationUtilities {
         scanningResult?.inputImage(ScanningSide.Second)?.let {
             scanningResultJson.put("secondInputImage", encodeBase64Image(it.bitmap))
         }
-        scanningResult?.barcodeInputImage()?.let {
-            scanningResultJson.put("barcodeInputImage", encodeBase64Image(it.bitmap))
+        scanningResult?.barcodeImage()?.let {
+            scanningResultJson.put("barcodeImage", encodeBase64Image(it.bitmap))
         }
         scanningResult?.documentImage(ScanningSide.First)?.let {
             scanningResultJson.put("firstDocumentImage", encodeBase64Image(it.bitmap))
@@ -266,7 +270,7 @@ object BlinkIdSerializationUtilities {
         return scanningResultJson.toString()
     }
 
-    private fun <T> serializeDateResult(dateResult: DateResult<T>?): JSONObject {
+    private fun serializeDateResult(dateResult: DateResult<*>?): JSONObject {
         val dateResultJson = JSONObject()
 
         dateResultJson.put("date", serializeSimpleDateResult(dateResult));
@@ -276,7 +280,7 @@ object BlinkIdSerializationUtilities {
         return dateResultJson
     }
 
-    private fun <T> serializeSimpleDateResult(dateResult: DateResult<T>?): JSONObject {
+    private fun serializeSimpleDateResult(dateResult: DateResult<*>?): JSONObject {
         val simpleDateResultJson = JSONObject()
         dateResult?.day?.let {
             simpleDateResultJson.put("day", it)
@@ -292,6 +296,9 @@ object BlinkIdSerializationUtilities {
 
     private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject {
         val documentClassInfoJson = JSONObject()
+        // TODO: Align country/region/documentType strings with iOS (rawValue). Android uses
+        // enum.name with only the first character lowercased; values usually match but are not
+        // guaranteed identical for every enum. Prefer shared explicit string mappers on both platforms.
         documentClassInfo.country?.name?.let {
             documentClassInfoJson.put("country", it.replaceFirstChar { char -> char.lowercase() })
         }
@@ -312,6 +319,10 @@ object BlinkIdSerializationUtilities {
         documentClassInfo.isoAlpha3CountryCode?.let {
             documentClassInfoJson.put("isoAlpha3CountryCode", it)
         }
+        documentClassInfo.isoNumericCountryCode?.let {
+            documentClassInfoJson.put("isoNumericCountryCode", it)
+        }
+        documentClassInfoJson.put("empty", documentClassInfo.isEmpty())
         return documentClassInfoJson
     }
 
@@ -324,16 +335,35 @@ object BlinkIdSerializationUtilities {
         }
 
         dataMatchResultJson.put("states", statesArray)
-        dataMatchResultJson.put("overallState", dataMatchResult.overallState.ordinal)
+        dataMatchResultJson.put("overallState", serializeDataMatchState(dataMatchResult.overallState))
 
         return dataMatchResultJson
     }
 
     private fun serializeDataMatchField(dataMatchField: DataMatchFieldState): JSONObject {
         val dataMatchFieldJson = JSONObject()
-        dataMatchFieldJson.put("field", dataMatchField.fieldType.ordinal)
-        dataMatchFieldJson.put("state", dataMatchField.state.ordinal)
+        dataMatchFieldJson.put("field", serializeDataMatchFieldType(dataMatchField.fieldType))
+        dataMatchFieldJson.put("state", serializeDataMatchState(dataMatchField.state))
         return dataMatchFieldJson
+    }
+
+    private fun serializeDataMatchFieldType(fieldType: DataMatchFieldType): String {
+        return when (fieldType) {
+            DataMatchFieldType.DateOfBirth -> "dateOfBirth"
+            DataMatchFieldType.DateOfExpiry -> "dateOfExpiry"
+            DataMatchFieldType.DocumentNumber -> "documentNumber"
+            DataMatchFieldType.DocumentAdditionalNumber -> "documentAdditionalNumber"
+            DataMatchFieldType.DocumentOptionalAdditionalNumber -> "documentOptionalAdditionalNumber"
+            DataMatchFieldType.PersonalIdNumber -> "personalIdNumber"
+        }
+    }
+
+    private fun serializeDataMatchState(state: DataMatchState): String {
+        return when (state) {
+            DataMatchState.NotPerformed -> "notPerformed"
+            DataMatchState.Failed -> "failed"
+            DataMatchState.Success -> "success"
+        }
     }
 
     private fun serializeStringResult(stringResult: StringResult): JSONObject {
@@ -361,16 +391,16 @@ object BlinkIdSerializationUtilities {
 
         val sideJson = JSONObject()
         stringResult.side(AlphabetType.Latin)?.let {
-            sideJson.put("latin", it.ordinal)
+            sideJson.put("latin", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Arabic)?.let {
-            sideJson.put("arabic", it.ordinal)
+            sideJson.put("arabic", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Cyrillic)?.let {
-            sideJson.put("cyrillic", it.ordinal)
+            sideJson.put("cyrillic", serializeScanningSide(it))
         }
         stringResult.side(AlphabetType.Greek)?.let {
-            sideJson.put("greek", it.ordinal)
+            sideJson.put("greek", serializeScanningSide(it))
         }
         stringResultJson.put("side", sideJson)
 
@@ -386,8 +416,8 @@ object BlinkIdSerializationUtilities {
         return locationJson
     }
 
-    private fun <T> serializeDriverLicenseDetailedInfo(
-        driverLicenseDetailedInfo: DriverLicenseDetailedInfo<T>?
+    private fun serializeDriverLicenseDetailedInfo(
+        driverLicenseDetailedInfo: DriverLicenseDetailedInfo<*>?
     ): JSONObject {
         val json = JSONObject()
 
@@ -407,7 +437,7 @@ object BlinkIdSerializationUtilities {
         return json
     }
 
-    private fun <T> serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<T>): JSONObject {
+    private fun serializeVehicleClassInfo(vehicleClassInfo: VehicleClassInfo<*>): JSONObject {
         val vehicleClassInfoJson = JSONObject()
         vehicleClassInfoJson.put(
             "effectiveDate",
@@ -443,8 +473,8 @@ object BlinkIdSerializationUtilities {
         val subResultJson = JSONObject()
         subResultJson.put("barcode", serializeBarcodeResult(subResult.barcode))
         subResultJson.put(
-            "barcodeInputImage",
-            encodeBase64Image(subResult.barcodeInputImage?.bitmap)
+            "barcodeImage",
+            encodeBase64Image(subResult.barcodeImage?.bitmap)
         )
         subResultJson.put("documentImage", encodeBase64Image(subResult.documentImage?.bitmap))
         subResultJson.put("faceImage", serializeDetailedCroppedImageResult(subResult.faceImage))
@@ -512,12 +542,30 @@ object BlinkIdSerializationUtilities {
 
     private fun serializeBarcodeData(barcodeData: BarcodeData?): JSONObject {
         val barcodeDataJson = JSONObject()
-        barcodeDataJson.put("barcodeType", barcodeData?.barcodeType?.ordinal)
-        barcodeDataJson.put("rawData", barcodeData?.rawData.toString())
+        barcodeDataJson.put("barcodeType", serializeBarcodeType(barcodeData?.barcodeType))
+        barcodeDataJson.put("rawData", encodeBase64Bytes(barcodeData?.rawData))
         barcodeDataJson.put("stringData", barcodeData?.stringData)
         barcodeDataJson.put("uncertain", barcodeData?.uncertain)
 
         return barcodeDataJson
+    }
+
+    private fun serializeBarcodeType(barcodeType: BarcodeType?): String {
+        return when (barcodeType) {
+            BarcodeType.None -> "none"
+            BarcodeType.QRCode -> "qrCode"
+            BarcodeType.DataMatrix -> "dataMatrix"
+            BarcodeType.UPCE -> "upce"
+            BarcodeType.UPCA -> "upca"
+            BarcodeType.EAN8 -> "ean8"
+            BarcodeType.EAN13 -> "ean13"
+            BarcodeType.Code128 -> "code128"
+            BarcodeType.Code39 -> "code39"
+            BarcodeType.ITF -> "itf"
+            BarcodeType.Aztec -> "aztec"
+            BarcodeType.PDF417 -> "pdf417"
+            null -> "none"
+        }
     }
 
     private fun serializeMrzResult(mrzResult: MrzResult?): JSONObject {
@@ -526,7 +574,7 @@ object BlinkIdSerializationUtilities {
         mrzResultJson.put("dateOfExpiry", serializeDateResult(mrzResult?.dateOfExpiry))
         mrzResultJson.put("documentCode", mrzResult?.documentCode)
         mrzResultJson.put("documentNumber", mrzResult?.documentNumber)
-        mrzResultJson.put("documentType", mrzResult?.documentType?.ordinal)
+        mrzResultJson.put("documentType", serializeMrzDocumentType(mrzResult?.documentType))
         mrzResultJson.put("gender", mrzResult?.gender)
         mrzResultJson.put("issuer", mrzResult?.issuer)
         mrzResultJson.put("issuerName", mrzResult?.issuerName)
@@ -614,14 +662,17 @@ object BlinkIdSerializationUtilities {
         vizResult?.documentAdditionalNumber?.let {
             vizResultJson.put("documentAdditionalNumber", serializeStringResult(it))
         }
-        vizResult?.dependentsInfo.let {
+        vizResult?.dependentsInfo?.let {
             vizResultJson.put(
                 "dependentsInfo",
-                JSONArray(it?.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
+                JSONArray(it.map { dependentInfo -> serializeDependentInfo(dependentInfo) })
             )
         }
         vizResult?.documentNumber?.let {
             vizResultJson.put("documentNumber", serializeStringResult(it))
+        }
+        vizResult?.cardAccessNumber?.let {
+            vizResultJson.put("cardAccessNumber", serializeStringResult(it))
         }
         vizResult?.documentOptionalAdditionalNumber?.let {
             vizResultJson.put("documentOptionalAdditionalNumber", serializeStringResult(it))
@@ -754,11 +805,32 @@ object BlinkIdSerializationUtilities {
         detailedCroppedImageResult?.location?.let {
             detailedCroppedImageResultJson.put("location", serializeLocation(it))
         }
-        detailedCroppedImageResult?.side?.let {
-            detailedCroppedImageResultJson.put("side", it.ordinal)
-
+        detailedCroppedImageResult?.side?.let { side ->
+            detailedCroppedImageResultJson.put("side", serializeScanningSide(side))
         }
         return detailedCroppedImageResultJson
+    }
+
+    private fun serializeMrzDocumentType(documentType: DocumentType?): String? {
+        return when (documentType) {
+            DocumentType.Unknown -> "unknown"
+            DocumentType.IdentityCard -> "identityCard"
+            DocumentType.Passport -> "passport"
+            DocumentType.Visa -> "visa"
+            DocumentType.GreenCard -> "greenCard"
+            DocumentType.MysPassIMM13P -> "mysPassIMM13P"
+            DocumentType.DriverLicense -> "driverLicense"
+            DocumentType.InternalTravelDocument -> "internalTravelDocument"
+            DocumentType.BorderCrossingCard -> "borderCrossingCard"
+            null -> null
+        }
+    }
+
+    private fun serializeScanningSide(side: ScanningSide): String {
+        return when (side) {
+            ScanningSide.First -> "first"
+            ScanningSide.Second -> "second"
+        }
     }
 
     private fun serializeBarcodeExtendedElements(barcodeExtendedElements: Array<BarcodeElement>?): JSONObject {
@@ -794,6 +866,12 @@ object BlinkIdSerializationUtilities {
             is StringResult -> serializeStringResult(value)
             is String -> value
             else -> null
+        }
+    }
+
+    private fun encodeBase64Bytes(data: ByteArray?): String? {
+        return data?.let {
+            Base64.encodeToString(it, Base64.NO_WRAP)
         }
     }
 

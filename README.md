@@ -1,16 +1,18 @@
 <p align="center" >
-  <img src="https://raw.githubusercontent.com/wiki/blinkid/blinkid-android/images/logo-microblink.png" alt="Microblink" title="Microblink">
+  <img src="https://raw.githubusercontent.com/wiki/microblink/blinkid-android/images/logo-microblink.png" alt="Microblink" title="Microblink">
 </p>
 
 # _BlinkID_ React Native plugin
 
-The BlinkID SDK is a comprehensive solution for implementing secure document scanning on the React Native cross-platform.
-It offers powerful capabilities for capturing and analyzing a wide range of identification documents. The Flutter plugin consists of BlinkID, which serves as the core module, and the BlinkIDUX package that provides a complete, ready-to-use solution with a user-friendly interface.
+The BlinkID SDK is a comprehensive solution for implementing secure document scanning in React Native cross-platform applications.
+It offers powerful capabilities for capturing and analyzing a wide range of identification documents. The React Native plugin wraps the native BlinkID SDK and BlinkID UX modules, providing a complete, ready-to-use scanning experience with a user-friendly interface.
 
 **Please note that, for maximum performance and full access to all features, it’s best to go with one of our native SDKs (for [iOS](https://github.com/microblink/blinkid-ios) or [Android](https://github.com/microblink/blinkid-android)).**
 
 However, since the wrapper is open source, you can add the features you need on your own.
 
+> **Current version:** `@microblink/blinkid-react-native@8000.0.0` (BlinkID SDK v8000).  
+> If you are upgrading from v7.x, see [Migrating from v7.x](#migrating-from-v7x).
 
 # Table of contents
 - [Licensing](#licensing)
@@ -21,23 +23,36 @@ However, since the wrapper is open source, you can add the features you need on 
     - [On a physical device via USB](#on-a-physical-device-via-usb)
   - [iOS sample application](#ios-sample-application)
 - [Plugin integration](#plugin-integration)
+  - [Android setup](#android-setup)
+  - [iOS setup](#ios-setup)
+  - [Permissions](#permissions)
 - [Plugin usage](#plugin-usage)
+  - [Imports and license key](#imports-and-license-key)
+  - [Configure scanning modules](#configure-scanning-modules)
+  - [Default BlinkID UX (camera scanning)](#default-blinkid-ux-camera-scanning)
+  - [BlinkID DirectAPI (static images)](#blinkid-directapi-static-images)
+  - [Document redaction](#document-redaction)
 - [Plugin specifics](#plugin-specifics)
   - [Scanning methods](#scanning-methods)
   - [SDK loading & unloading](#sdk-loading--unloading)
-  - [BlinkID Settings](#blinkid-settings)
-  - [BlinkID Results](#blinkid-results)
+  - [BlinkID settings](#blinkid-settings)
+  - [BlinkID results](#blinkid-results)
+- [What's new in v8000](#whats-new-in-v8000)
+  - [Migrating from v7.x](#migrating-from-v7x)
 - [Additional information and Support](#additional-information-and-support)
 
 ## <a name="licensing"></a> Licensing
-A valid license key is required to initialize the BlinkID plugin. A free trial license key can be requested after registering at the [Microblink Developer Hub](https://developer.microblink.com/).
+A valid license key is required to initialize the BlinkID plugin.
+
+A free trial license key can be requested after registering at the [Microblink Developer Hub](https://developer.microblink.com/).
 
 
 ## <a name="requirements"></a> Requirements
 
-- BlinkID React Native was built and tested with [React Native v0.82.1](https://github.com/facebook/react-native/releases/tag/v0.82.1)
-  - The BlinkID React Native SDK is also compatible with React Native applications running on the old architecture as it contains backward compatibility with Native Module implementation.
-- For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
+BlinkID React Native v8000 was built and tested with [React Native v0.82.x](https://github.com/facebook/react-native/releases/tag/v0.82.1)
+- The BlinkID React Native SDK is also compatible with React Native applications running on the old architecture as it contains backward compatibility with Native Module implementation.
+
+For additional help with React-Native setup, view the official documentation [here](https://reactnative.dev/docs/set-up-your-environment).
 
 **Device requirements**
 
@@ -45,18 +60,20 @@ The BlinkID React Native plugin requires:
 - iOS version 16.0 and above
 - Android API version 24 and above
 
-- For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/microblink/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/microblink/blinkid-ios?tab=readme-ov-file#requirements)).
+For more detailed information about the BlinkID Android and iOS requirements, view the native SDK documentation here ([Android](https://github.com/microblink/blinkid-android?tab=readme-ov-file#-device-requirements) & [iOS](https://github.com/microblink/blinkid-ios?tab=readme-ov-file#requirements)).
 
 ## <a name="quickstart-with-the-sample-application"></a> Quickstart with the sample application
-The sample application demonstrates how the BlinkID plugin is implemented, used and shows how to obtain the scanned results. 
+The sample application demonstrates how the BlinkID plugin is implemented and shows how to configure scanning modules and obtain results.
 
 It contains the implementation for:
-1. The **default implementation** with the default BlinkID UX scanning experience.
-2. **Multiside DirectAPI scanning** - extracting the document information from multiple static images (from the gallery).
-3. **Singleside DirectAPI scanning** - extracting the document information from a single static images (from the gallery).
+1. **Default BlinkID UX scanning** — camera-based scanning with configurable modules.
+2. **Multiside DirectAPI scanning** — extracting document information from two static images (from the gallery).
+3. **Singleside DirectAPI scanning** — extracting document information from a single static image (from the gallery).
 
-To obtain and run the sample application, follow the steps below:
-Make sure you have Node & Watchman installed before running the sample application:
+The sample also includes a **module settings panel** where you can toggle and configure the document capture, barcode, MRZ, and VIZ modules, along with optional class filters and redaction settings.
+
+To obtain and run the sample application, follow the steps below.
+Make sure you have **Node & Watchman** installed before running the sample application:
 ```bash
 # install Watchman
 brew install watchman
@@ -70,26 +87,27 @@ brew install node
 ```bash
 git clone https://github.com/microblink/blinkid-react-native.git
 ```
-2. Position to the obtained BlinkID folder and run the `initBlinkIdReactNativeSample.sh` script:
+2. Position to the obtained `blinkid-react-native` folder
 ```bash
-cd blinkid-react-native && ./initBlinkIdReactNativeSample.sh
+cd blinkid-react-native
 ```
-3. After the script finishes running, position to the `BlinkIdSample` folder.
+3. Run the `initBlinkIdReactNativeSample.sh` script to create a sample app, with required configurations applied.
+```bash
+./initBlinkIdReactNativeSample.sh
+```
+4. After the script finishes running, position to the `BlinkIdSample` folder.
 
-**Running the sample application on Android**
+### <a name="android-sample-application"></a> Android sample application
 
-## <a name="android-sample-application"></a> Android sample application
+Running the sample application on Android
 
-### <a name="on-an-emulator"></a> On an emulator:
+#### <a name="on-an-emulator"></a> On an emulator:
 
-Simply execute the following command:
-
+1. Execute the following command:
 ```bash
 npx react-native start
 ```
-
-Then in another terminal, run:
-
+2. In another terminal, run:
 ```bash
 npx react-native run-android
 ```
@@ -102,7 +120,7 @@ npx react-native start
 ```
 2. Open the `android` folder via Android Studio in the `BlinkIdSample` folder to run the Android sample application.
 
-### <a name="on-a-physical-device-via-usb"></a> On a physical device via USB:
+#### <a name="on-a-physical-device-via-usb"></a> On a physical device via USB:
 
 1. Connect your device via USB and enable USB debugging in Developer Options.
 2. Forward the Metro bundler port:
@@ -120,9 +138,9 @@ npx react-native run-android
 
 or open it in Android Studio and run it on the physical device from there.
 
-## <a name="ios-sample-application"></a> iOS sample application
+### <a name="ios-sample-application"></a> iOS sample application
 
-**Running the sample application on iOS**
+Running the sample application on iOS
 
 1. For running the sample application on iOS, execute the following command:
 ```bash
@@ -134,336 +152,492 @@ npx react-native start
 
 ## <a name="plugin-integration"></a> Plugin integration
 
-1. To add the BlinkID plugin to a React Native project, first create empty project if needed:
+1. To add the BlinkID plugin to a React Native project, first create an empty project if needed:
 ```bash
-npx @react-native-community/cli init YourAppName --package-name YourPackageName --title YourAppTitle --version "React Native version"
+npx @react-native-community/cli init YourAppName --package-name YourPackageName --title YourAppTitle --version "0.82.0"
 ```
 
-3. Install the `@microblink/blinkid-react-native` dependency:
+2. Install the `@microblink/blinkid-react-native` dependency:
 ```bash
-  npm install --save @microblink/blinkid-react-native
+npm install --save @microblink/blinkid-react-native@8000.0.0
 ```
 
-4. Android: the BlinkID library is available on Maven Central repository.
+3. Complete the platform-specific setup below.
 
-In your project root, add `mavenCentral()` repository to the repositories list, if not already present:
-```bash
-repositories {
-    // ... other repositories
-    mavenCentral()
+### <a name="android-setup"></a> Android setup
+
+Add **Maven Central** to your project repositories.
+
+In `android/settings.gradle` (or your root `build.gradle`, depending on your React Native version):
+
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 ```
 
-5. iOS: position to the `ios` folder and run `pod install` to install the iOS dependency.
+Ensure your app uses **Kotlin v2.2.21** or newer, **minSdkVersion 24** or newer, and **compileSdkVersion 36** or newer. Use the Android Gradle Plugin and Gradle versions shipped with your React Native release (for example, React Native 0.82.x uses AGP 8.12 and Gradle 9.0).
+
+`blinkid-ux` ships its Compose-based scanning UI as a precompiled AAR, so client apps do not need to enable the Compose compiler plugin, `buildFeatures.compose`, or a Compose BOM unless they compile their own Compose code.
+
+Set the Kotlin version in your project-level `android/build.gradle`:
+
+```groovy
+buildscript {
+    ext {
+        kotlinVersion = "2.2.21"
+    }
+}
+```
+
+The sample initialization script (`initBlinkIdReactNativeSample.sh`) contains the complete, tested Android configuration if you need a reference implementation.
+
+### <a name="ios-setup"></a> iOS setup
+
+1. Set the minimum iOS deployment target to **16.0** in your `ios/Podfile`:
+```ruby
+platform :ios, '16.0'
+```
+
+2. Install pods:
+```bash
+cd ios && pod install
+```
+
+The plugin ships with vendored `BlinkID.xcframework` and `BlinkIDUX.xcframework` frameworks.
+
+### <a name="permissions"></a> Permissions
+
+Add the required usage descriptions to your app:
+
+**iOS** — in `Info.plist`:
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Camera access is required for document scanning</string>
+```
+
+If you use DirectAPI with images from the photo library, also add:
+```xml
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Photo library access is required for document image upload</string>
+```
+
+**Android** — camera permission is typically merged from the BlinkID UX library. If needed, add to `AndroidManifest.xml`:
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+```
 
 ## <a name="plugin-usage"></a> Plugin usage
-1. After the dependency has been added to the project, first add the necessary import:
+
+**Note:** The plugin usage process can be found in the sample app `App.tsx` file [here](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/App.tsx).
+
+### <a name="imports-and-license-key"></a> Imports and license key
+
+After adding the blinkid-react-native dependency, import the API and set your platform-specific license key:
+
 ```typescript
+import { Platform } from 'react-native';
 import {
   performScan,
   performDirectApiScan,
+  loadBlinkIdSdk,
+  unloadBlinkIdSdk,
+  Country,
+  DocumentType,
+  Region,
+  type BlinkIdScanningResult,
+  type BlinkIdSdkSettings,
+  type BlinkIdSessionSettings,
+  type BlinkIdScanningSettings,
+  type BlinkIdScanningUxSettings,
 } from '@microblink/blinkid-react-native';
+
+const licenseKey = Platform.select({
+  ios: 'your-ios-key',
+  android: 'your-android-key',
+})!;
 ```
-2. Add the license key, for each platform, obtained from the [Developer Hub portal](https://developer.microblink.com/):
+
+All settings are **plain objects**. You do not need class constructors.
+
+### <a name="configure-scanning-modules"></a> Configure scanning modules
+
+Scanning behavior is configured through `BlinkIdScanningSettings`, which contains up to four module settings. Include only the modules you want to use — omitting a module disables it.
+
 ```typescript
-  const licenseKey = Platform.select({
-    ios: 'your-ios-key',
-    android:
-      'your-android-key',
+const scanningSettings: BlinkIdScanningSettings = {
+  // Document capture: detection, image quality, cropped images
+  documentCaptureModule: {
+    documentImageReturnEnabled: true,
+    faceImageExtractionEnabled: true,
+    dotsPerInch: 250,
+    blurSensitivityLevel: 'mid',
+    imageWithBlurRejected: true,
+    glareSensitivityLevel: 'mid',
+    imageWithGlareRejected: true,
+    passportDataPageScanOnly: true,
+  },
+
+  // MRZ extraction (passports, visas, etc.)
+  mrzModule: {
+    presenceMandatory: false,
+  },
+
+  // Barcode extraction (PDF417, QR, etc.)
+  barcodeModule: {
+    pdf417ScanningEnabled: true,
+    qrScanningEnabled: true,
+    barcodeImageReturnEnabled: false,
+  },
+
+  // VIZ extraction (visual fields on the document)
+  vizModule: {
+    signatureImageExtractionEnabled: true,
+    characterValidationEnabled: true,
+    resultAggregationEnabled: true,
+  },
+  
+  // Max character mismatches allowed per field during cross-side data matching (default: 0)
+  maxAllowedMismatchesPerField: 0,
+};
+
+const sessionSettings: BlinkIdSessionSettings = {
+  scanningMode: 'automatic', // or 'single'
+  scanningSettings,
+  // Timeouts are in milliseconds. Set to 0 to disable.
+  stepTimeoutDuration: 60000,       // default: 60 s
+  inactivityTimeoutDuration: 10000, // default: 10 s
+};
+```
+
+**Module-only scanning examples:**
+
+- **Barcode only** — include `barcodeModule`, omit `mrzModule` and `vizModule`.
+- **Document capture only** (similar to BlinkID Capture) — include only `documentCaptureModule`.
+
+> **Note:** When using PDF417 and QR barcode scanning, enable both `pdf417ScanningEnabled` and `qrScanningEnabled` together. The analyzer treats them as a combined detection stage.
+
+For DirectAPI with pre-cropped document images, set `documentCaptureModule.inputImageCropped` to `true`.
+
+Module configuration helpers can be found in [ScanningModulesConfig.ts](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/ScanningModulesConfig.ts).
+
+### <a name="default-blinkid-ux-camera-scanning"></a> Default BlinkID UX (camera scanning)
+
+```typescript
+const sdkSettings: BlinkIdSdkSettings = {
+  licenseKey,
+  downloadResources: true,
+};
+
+const scanningUxSettings: BlinkIdScanningUxSettings = {
+  showHelpButton: true,
+  showOnboardingDialog: true,
+  allowHapticFeedback: true,
+  preferredCamera: 'back',
+};
+
+const classFilter = {
+  includeDocuments: [
+    { country: Country.Croatia, documentType: DocumentType.Id },
+    { country: Country.USA, region: Region.Texas, documentType: DocumentType.Dl },
+  ],
+};
+
+try {
+  const result: BlinkIdScanningResult = await performScan({
+    sdkSettings,
+    sessionSettings,
+    scanningUxSettings,
+    classFilter,
+    // redactionSettingsResolver, // optional — see Document redaction
   });
+
+  console.log(result.firstName?.value);
+  console.log(result.firstDocumentImage); // base64, if enabled
+} catch (error) {
+  console.log(`Error during scan: ${error}`);
+}
 ```
-**Default BlinkID UX**
-1. Set all of the necessary BlinkID settings (SDK settings, session settings, and the scanning settings). If the mentioned settings are not modified, the default values will be used:
+
+### <a name="blinkid-directapi-static-images"></a> BlinkID DirectAPI (static images)
+
+DirectAPI extracts data from Base64-encoded static images instead of using the camera UI.
+
+- Pass **two images** with `scanningMode: 'automatic'` (front side first, back side second).
+- Pass **one image** with `scanningMode: 'single'`.
+- Set `documentCaptureModule.inputImageCropped: true` when images are already cropped and perspective-corrected.
+
 ```typescript
+const firstImageBase64 = 'your-base64-image';
+const secondImageBase64 = 'your-base64-image'; // optional for single-side
 
-      /**
-       * Set the BlinkID SDK settings
-       * Add the license key here from the code above
-       */
-      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
-      sdkSettings.downloadResources = true;
+try {
+  const result = await performDirectApiScan({
+    sdkSettings: { licenseKey, downloadResources: true },
+    sessionSettings: {
+      scanningMode: 'automatic',
+      scanningSettings: {
+        documentCaptureModule: {
+          documentImageReturnEnabled: true,
+          inputImageCropped: false,
+        },
+        mrzModule: {},
+        barcodeModule: { pdf417ScanningEnabled: true, qrScanningEnabled: true },
+        vizModule: {},
+      },
+    },
+    firstImage: firstImageBase64,
+    secondImage: secondImageBase64,
+    // redactionSettings, // optional — see Document redaction
+  });
 
-      /**
-       * Create and modify the Session Settings
-       */
-      const sessionSettings = new BlinkIdSessionSettings();
-      sessionSettings.scanningMode = ScanningMode.Automatic;
-      /**
-       * Create and modify the scanning settings
-       */
-      const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
-      scanningSettings.anonymizationMode = AnonymizationMode.FullResult;
-
-      /**
-       * Create and modify the Image settings
-       */
-      const croppedImageSettings = new CroppedImageSettings();
-      croppedImageSettings.returnDocumentImage = true;
-      croppedImageSettings.returnFaceImage = true;
-      croppedImageSettings.returnSignatureImage = true;
-      /**
-       * Place the image settings in the scanning settings
-       */
-      scanningSettings.croppedImageSettings = croppedImageSettings;
-
-      /**
-       * Place the scanning settings in the session settings
-       */
-      sessionSettings.scanningSettings = scanningSettings;
-
-      /**
-       * Modify the BlinkID UI settings for UI customization.
-       * This parameter is optional.
-       */
-      const blinkIdScanningUxSettings = new BlinkIdScanningUxSettings();
-      blinkIdScanningUxSettings.showHelpButton = true;
-      blinkIdScanningUxSettings.showOnboardingDialog = true;
-      blinkIdScanningUxSettings.allowHapticFeedback = true;
-      blinkIdScanningUxSettings.preferredCamera = PreferredCamera.Back;
-
-      /**
-       * Add the document class filter. This parameter is optional.
-       */
-      const classFilter = new ClassFilter();
-      classFilter.includeDocuments = [
-        new DocumentFilter(Country.Croatia, undefined, DocumentType.Id),
-        new DocumentFilter(Country.USA, Region.Texas, DocumentType.Dl),
-      ];
+  console.log(result.fullName?.value);
+} catch (error) {
+  console.log(`Error during scan: ${error}`);
+}
 ```
 
-2. Call the `performScan` scanning method, handle the results and catch any errors:
+### <a name="document-redaction"></a> Document redaction
+
+In v8000, anonymization has been renamed to **redaction**. For camera scanning, use a `RedactionSettingsResolver` to apply per-document redaction rules. For DirectAPI, pass a single `RedactionSettings` object.
+
 ```typescript
-      /**
-       * Call the performScan method, where the SDK and session settings 
-       * need to be passed.
-       * 
-       * Here, you can also pass the optional BlinkIdUiSettings and ClassFilter
-       * parameters.
-       */
-      await performScan(sdkSettings, sessionSettings, blinkIdScanningUxSettings) 
-        .then((result: BlinkIdScanningResult) => {
-          // handle the results here.
-          console.log(result.firstName?.value);
-        })
-        .catch((error) => {
-          // handle any errors here.
-          console.log(`Error during scan: ${error}`);
-        });
-```
-**BlinkID DirectAPI**
-1. Set all of the necessary BlinkID settings (SDK settings, session settings, and the scanning settings). If the mentioned settings are not modified, the default values will be used:
-```typescript
+import { FieldType, type RedactionSettingsResolver } from '@microblink/blinkid-react-native';
 
-      /**
-       * Set the BlinkID SDK settings
-       * Add the license key here from the code above
-       */
-      const sdkSettings = new BlinkIdSdkSettings(licenseKey);
-      sdkSettings.downloadResources = true;
+const redactionSettingsResolver: RedactionSettingsResolver = {
+  documentRedactionList: [
+    {
+      mode: 'fullResult',
+      fields: [FieldType.FirstName, FieldType.LastName],
+      documentNumberRedactionSettings: {
+        prefixDigitsVisible: 0,
+        suffixDigitsVisible: 1,
+      },
+      redactMrzResult: false,
+      redactBarcodeResult: false,
+      documentFilter: {
+        country: Country.USA,
+        region: Region.California,
+        documentType: DocumentType.Id,
+      },
+    },
+  ],
+};
 
-      /**
-       * Create and modify the Session Settings
-       */
-      const sessionSettings = new BlinkIdSessionSettings();
+// Camera scanning — pass redactionSettingsResolver to performScan
+await performScan({ sdkSettings, sessionSettings, redactionSettingsResolver });
 
-      /**
-       * Important: if two images are being passed, use the `Automatic` 
-       * scanning mode
-       * if just one image is being passed, use the `Single` scanning mode.
-      */
-      sessionSettings.scanningMode = ScanningMode.Automatic;
-
-      /**
-       * Create and modify the scanning settings
-       */
-      const scanningSettings = new BlinkIdScanningSettings();
-      scanningSettings.glareDetectionLevel = DetectionLevel.Mid;
-      /**
-       * if the input images consist solely 
-       * of the cropped document image, set the 
-       * `scanCroppedDocumentImage` to true.
-       */
-      // scanningSettings.scanCroppedDocumentImage = true;
-
-      /**
-       * Create and modify the Image settings
-       */
-      const croppedImageSettings = new CroppedImageSettings();
-      croppedImageSettings.returnDocumentImage = true;
-      croppedImageSettings.returnFaceImage = true;
-      croppedImageSettings.returnSignatureImage = true;
-      /**
-       * Place the image settings in the scanning settings
-       */
-      scanningSettings.croppedImageSettings = croppedImageSettings;
-
-      /**
-       * Place the scanning settings in the session settings
-       */
-      sessionSettings.scanningSettings = scanningSettings;
-
-      /**
-       * Add the Base64 string of the first side of the document
-       */
-      const firstImageBase64 = "your-base64-image";
-
-      /**
-       * Add the Base64 string of the second side of the document
-       * This paramater is optional if only one side 
-       * of the document is requred.
-       */
-      const secondImageBase64 = "your-base64-image";
+// DirectAPI — pass redactionSettings to performDirectApiScan
+await performDirectApiScan({
+  sdkSettings,
+  sessionSettings,
+  firstImage: firstImageBase64,
+  redactionSettings: {
+    mode: 'fullResult',
+    fields: [FieldType.DocumentNumber],
+    redactMrzResult: false,
+    redactBarcodeResult: false,
+  },
+});
 ```
 
-2. Call the `performDirectApiScan` scanning method, handle the results and catch any errors:
-```typescript
-      /**
-       * Call the `performDirectApiScan` method, 
-       * where the SDK and session settings need to be passed,
-       *  along with the Base64 images.
-       */
-      await performDirectApiScan(
-        sdkSettings,
-        sessionSettings,
-        firstImageBase64,
-        secondImageBase64
-      )
-        .then((result: BlinkIdScanningResult) => {
-          //handle the results here.
-          console.log(result.firstName?.value);
-        })
-        .catch((error) => {
-          // handle any errors here.
-          console.log(`Error during scan: ${error}`);
-        });
-```
-**Note:**
-- The whole integration process can be found in the sample app `App.tsx` file [here](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/App.tsx).
-- The settings and the results that can be used with the BlinkID plugin can be found in the paragraphs below, but also in the comments of each BlinkID TS file.
+Redaction modes: `none`, `imageOnly`, `resultFieldsOnly`, `fullResult`.
 
 ## <a name="plugin-specifics"></a> Plugin specifics
 The BlinkID plugin implementation is located in the `src` folder [here](https://github.com/microblink/blinkid-react-native/tree/master/BlinkID/src), while platform-specific implementation is located in the `android` and `ios` folders.
 
 ### <a name="scanning-methods"></a> Scanning methods
-Currently, the BlinkID plugin contains the two main methods of scanning: `performScan` and `performDirectApiScan`.
+Currently, the BlinkID plugin contains two main scanning methods: `performScan` and `performDirectApiScan`.
 
 **The `performScan` method**
 
-The `performScan` method launches the BlinkID scanning process with the default UX properties.\
-It takes the following parameters: 
-1. BlinkID SDK settings
-2. BlinkID session settings
-4. The optional BlinkID UI settings for UI customization.
-3. The optional ClassFilter object for filtering documents.
+Launches the BlinkID scanning process with the default UX.
 
-**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+Recommended call style — single settings object:
 
-**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
+```typescript
+performScan({
+  sdkSettings,           // BlinkIdSdkSettings (required)
+  sessionSettings,       // BlinkIdSessionSettings (required)
+  scanningUxSettings,    // BlinkIdScanningUxSettings (optional)
+  classFilter,           // ClassFilter (optional)
+  redactionSettingsResolver, // RedactionSettingsResolver (optional)
+});
+```
 
-**BlinkID UI Settings** - `BlinkIdUiSettings`: the class that allows customization of various aspects of the UI used during the scanning process.
+| Parameter | Description |
+| --- | --- |
+| `sdkSettings` | License key, resource download configuration |
+| `sessionSettings` | Scanning mode, module settings, timeouts |
+| `scanningUxSettings` | Help button, onboarding dialog, haptic feedback, preferred camera |
+| `classFilter` | Include/exclude documents by country, region, and type |
+| `redactionSettingsResolver` | Per-document redaction rules applied before the result is finalized |
 
-The optional **ClassFilter** class - `ClassFilter`: the class which controls which documents will be accepted or reject for information extraction during the scanning session.
-
-- The implementation of the `performScan` method can be viewed here in the [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+Returns `BlinkIdScanningResult` ([implementation](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)).
 
 **The `performDirectApiScan` method**
 
-The `performDirectApiScan` method launches the BlinkID scanning process intended for information extraction from static images.\
-It takes the following parameters: 
-1. BlinkID SDK settings
-2. BlinkID session settings
-3. First image string in the Base64 format
-4. The optional second image string in the Base64 format
+Extracts document information from static Base64 images.
 
-**BlinkID SDK Settings** - `BlinkIdSdkSettings`: the class that contains all of the available SDK settings. It contains settings for the license key, and how the models, that the SDK needs for the scanning process, should be obtained.
+```typescript
+performDirectApiScan({
+  sdkSettings,        // BlinkIdSdkSettings (required)
+  sessionSettings,    // BlinkIdSessionSettings (required)
+  firstImage,         // Base64 string (required)
+  secondImage,        // Base64 string (optional)
+  redactionSettings,  // RedactionSettings (optional)
+});
+```
 
-**BlinkID Session Settings** - `BlinkIdSessionSettings`: the class that contains various settings for the scanning session. It contains the settings for the `ScanningMode` and `BlinkIdScanningSettings`, which define various parameters that control the scanning process.
-
-The first image Base64 string - `String`: image that represents one side of the document. If the document contains two sides and the `ScanningMode` is set to `automatic`, this should contain the image of the front side of the document. In case the `ScanningMode` is set to `single`, it can be either the front or the back side of the document. If the document contains only one side (for example, various passports), the SDK will automatically detect it, and will not look for the other side.
-
-The optional second image Base64 string - `String`: needed if the information from back side of the document is required and the `ScanningMode` is set to `automatic`.
-
-- The implementation of the `performDirectApiScanning` method can be viewed here in the [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx) file.
+Returns `BlinkIdScanningResult` ([implementation](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)).
 
 ### <a name="sdk-loading--unloading"></a> SDK loading & unloading
-The BlinkID SDK also contains methods for loading and unloading. These methods can be called before the scanning methods (mentioned above), and are helpful to preload the neccessary resources and decrease the waiting time for the scanning session, but also to remove any resources after the scanning sessions ends.
+
 
 **The `loadBlinkIdSdk` method**
 
-The `loadBlinkIdSdk` method creates or retrieves the instance of the BlinkID SDK It initializes and loads the BlinkID SDK if it is not already loaded.
+Creates or retrieves the BlinkID SDK instance. Handles initialization, resource downloading, and license verification. Call in advance to reduce first-scan latency.
 
-It can be called in advance to **preload** the SDK before starting a scanning session. Doing so reduces loading time for the `performScan` and `performDirectApiScan` methods, since all resources will already be available and the license verified.
+```typescript
+await loadBlinkIdSdk({ sdkSettings: { licenseKey, downloadResources: true } });
+```
 
-If the method is not called beforehand, it will still be automatically invoked on the native platform channels when a scan starts. However, the initial scan may take longer due to resource loading and license checks.
-
-It takes the following parameter: [BlinkIdSdkSettings](#blinkid-settings), which is explained in more details below.
+If you do not call `loadBlinkIdSdk`, it is invoked automatically when a scan starts.
 
 **The `unloadBlinkIdSdk` method**
 
-The `unloadBlinkIdSdk` platform method terminates the BlinkID SDK and releases all associated resources. It safely shuts down the SDK instance and frees any allocated memory.
-After calling this method, you must reinitialize the SDK (by calling `loadBlinkIdSdk` or any of the scanning methods) before using it again.
+Terminates the SDK and releases resources. Must reinitialize before the next scan.
 
-If set to `true` (`false` is default), the method performs a **complete cleanup**, including deletion of all downloaded and cached SDK resources from the device.
+```typescript
+await unloadBlinkIdSdk({ deleteCachedResources: false });
+```
 
-This method is automatically called after each successful scan session.
+Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK resources from the device.
+
+`unloadBlinkIdSdk` is called automatically after each successful scan session.
 
 ### <a name="blinkid-settings"></a> BlinkID Settings
-The BlinkID SDK contains various settings, modifying different parts of scanning process:
-1. [BlinkID SDK settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L14) - `BlinkIdSdkSettings` \
-These settings are used for the initialization of the BlinkID SDK.
 
-2. [BlinkID session settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L92) - `BlinkIdSessionSettings`\
-These settings represent the configuration settings for a scanning session.\
-This class holds the settings related to the resources initialization, scanning mode, and specific scanning configurations that define how the scanning session should behave.
+| Setting | Type | Description |
+| --- | --- | --- |
+| SDK settings | `BlinkIdSdkSettings` | License key, resource download, proxy URL |
+| Session settings | `BlinkIdSessionSettings` | Scanning mode, module settings, step/inactivity timeouts (ms; `0` disables) |
+| Scanning settings | `BlinkIdScanningSettings` | Module configuration (see below) |
+| UX settings | `BlinkIdScanningUxSettings` | UI customization during scanning |
+| Class filter | `ClassFilter` | Document include/exclude rules |
+| Redaction | `RedactionSettings` / `RedactionSettingsResolver` | Field and image redaction |
 
-3. [BlinkID scanning settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L141) - `BlinkIdScanningSettings`\
-These settings represent the configurable settings for scanning a document.`
-This class defines various parameters and policies related to the scanning process, including image quality handling, data extraction and anonymization, along with options for frame processing and image extraction.
+**Scanning module settings**
 
-4. [BlinkID UI settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `BlinkIdUiSettings`\
-Allows customization of various aspects of the UI used during the scanning process.
+| Module | Type | Key settings |
+| --- |  | --- |
+| Document capture | `DocumentCaptureModuleSettings` | Image quality (blur, glare, tilt, lighting), cropped/input image return, face extraction, passport data page only |
+| MRZ | `MrzModuleSettings` | `presenceMandatory` |
+| Barcode | `BarcodeModuleSettings` | PDF417, QR, retail barcode types, barcode image return |
+| VIZ | `VizModuleSettings` | Signature extraction, character validation, result aggregation |
 
-5. [Cropped image settings](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts#L468) - `CroppedImageSettings`\
-These settings represent the image cropping settings.
+The [blinkIdSettings.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all available settings with inline documentation.
 
-**Additional notes:**
+### <a name="blinkid-results"></a> BlinkID Results
 
-- The [blinkIdSettings.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contains all the settings that can be modified and explains what each setting does in more detail.
+The scanning result is stored in `BlinkIdScanningResult`. It contains extracted data and images from the document.
 
-- The native documentation for the above mentioned settings can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/).
+Key result members:
 
-- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdDeserializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdDeserializationUtilities.swift) in the BlinkID deserialization utilities.
+1. **Document class info** — `documentClassInfo` (`DocumentClassInfo`)
+2. **Data match information** — `dataMatchResult` (`DataMatchResult`)
+3. **Per-side results** — `subResults` (`SingleSideScanningResult[]`) — contains VIZ, MRZ, and barcode data per side
+4. **Aggregated fields** — top-level fields such as `firstName`, `lastName`, `documentNumber`, etc.
+5. **Images** — `firstDocumentImage`, `secondDocumentImage`, `faceImage`, `signatureImage`, `firstInputImage`, `secondInputImage`, `barcodeImage`
 
-### <a name="blinkid-result"></a> BlinkID Results
+Each `SingleSideScanningResult` contains:
+- `viz` — Visual Inspection Zone data
+- `mrz` — Machine Readable Zone data
+- `barcode` — Barcode data
+- `documentImage`, `faceImage`, `signatureImage`, `inputImage`
 
-The result of the scanning process is stored in the `BlinkIdScanningResult`. It contains the results of scanning a document, including the extracted data and images from the document.
 
-Along with the information scanned from the document, the BlinkID also provides additional details that was obtained during the scanning process:
+Full result types: [blinkIdResult.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts).
 
-1. **Recognition mode**- `RecognitionMode`\
-Scanning mode used to scan the current document.
+## <a name="whats-new-in-v8000"></a> What's new in v8000
 
-2. **Document class info** - `DocumentClassInfo`\
-The document class information.
+BlinkID v8000 introduces a **modular recognition architecture**. Instead of flat scanning settings and fallback recognition modes, extraction is driven by four independent modules that you enable and configure separately:
 
-3. **Data match informatoin** - `DataMatchResult`\
-Info on whether the data extracted from multiple sides matches.
+| Module | Purpose |
+| --- | --- |
+| **Document capture** | Document detection, image quality checks (blur, glare, tilt, lighting), and cropped image extraction |
+| **MRZ** | Machine Readable Zone detection and parsing (passports, visas, ID cards) |
+| **Barcode** | 1D/2D barcode detection and parsing (PDF417, QR, retail codes, and more) |
+| **VIZ** | Visual Inspection Zone field extraction, character validation, and signature images |
 
-4. **Singleside scanning result** - `SingleSideScanningResult`\
-Represents the result of scanning a single side of the document.\
-Contains the data extracted from the Visual Inspection Zone, Machine Readable Zone, barcode, the input image, and the cropped document, face, and signature images.
+Other notable changes:
 
-5. **Detailed cropped image result** - `DetailedCroppedImageResult`\
-Represents the result of the image crop transformation with additional details.
+- Settings are **plain TypeScript objects** (no class constructors).
+- Scanning methods accept a **single settings object** (recommended) or legacy positional arguments.
+- **Anonymization** has been renamed to **redaction** (`RedactionSettings`, `RedactionSettingsResolver`).
+- Image return and quality settings moved from `CroppedImageSettings` into `documentCaptureModule` and `vizModule`.
+- Detection levels (`DetectionLevel`) are replaced by **sensitivity levels** (`SensitivityLevel`: `off`, `low`, `mid`, `high`).
+- Scanning sessions include **step** and **inactivity timeouts** on `BlinkIdSessionSettings` (milliseconds; defaults `60000` and `10000`). Set either to `0` to disable.
 
-**Additional notes:**
+### <a name="migrating-from-v7x"></a> Migrating from v7.x
 
-- The [blinkIdResult.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all the results after the scanning process finishes.
+If you are upgrading from `@microblink/blinkid-react-native@7.x` (e.g. 7.7.0), the following changes apply.
 
-- The native documentation for the above mentioned results can be found here for [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core.result/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/blinkidscanningresult).
+#### Settings are plain objects
 
-- The native Kotlin & Swift implementation of all BlinkID settings can be found here for [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/blinkidreactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/BlinkIdSerializationUtilities.swift) in the BlinkID deserialization utilities.
+```typescript
+// v7
+const sdkSettings = new BlinkIdSdkSettings(licenseKey);
+sdkSettings.downloadResources = true;
+
+// v8000
+const sdkSettings = { licenseKey, downloadResources: true };
+```
+
+#### Modular scanning settings
+
+Flat v7 settings map to module settings in v8000:
+
+| v7                                                | v8000                                                 |
+|---------------------------------------------------|-------------------------------------------------------|
+| `blurDetectionLevel`                              | `documentCaptureModule.blurSensitivityLevel`          |
+| `glareDetectionLevel`                             | `documentCaptureModule.glareSensitivityLevel`         |
+| `tiltDetectionLevel`                              | `documentCaptureModule.tiltSensitivityLevel`          |
+| `skipImagesWithBlur`                              | `documentCaptureModule.imageWithBlurRejected`         |
+| `skipImagesWithGlare`                             | `documentCaptureModule.imageWithGlareRejected`        |
+| `croppedImageSettings.returnDocumentImage`        | `documentCaptureModule.documentImageReturnEnabled`    |
+| `croppedImageSettings.returnFaceImage`            | `documentCaptureModule.faceImageExtractionEnabled`    |
+| `croppedImageSettings.returnSignatureImage`       | `vizModule.signatureImageExtractionEnabled`           |
+| `croppedImageSettings.dotsPerInch`                | `documentCaptureModule.dotsPerInch`                   |
+| `scanCroppedDocumentImage`                        | `documentCaptureModule.inputImageCropped`             |
+| `enableCharacterValidation`                       | `vizModule.characterValidationEnabled`                |
+| `scanPassportDataPageOnly`                        | `documentCaptureModule.passportDataPageScanOnly`      |
+| `anonymizationMode`                               | Use `RedactionSettings` / `RedactionSettingsResolver` |
+| `recognitionModeFilter` / `enableBarcodeScanOnly` | Enable/disable modules explicitly                     |
+
+Removed types: `CroppedImageSettings`, `AnonymizationMode`, `DetectionLevel`, `RecognitionMode`.
+
+#### Method call style
+
+```typescript
+// v7 — positional arguments
+await performScan(sdkSettings, sessionSettings, uxSettings, classFilter);
+
+// v8000 — recommended object style
+await performScan({ sdkSettings, sessionSettings, scanningUxSettings: uxSettings, classFilter });
+```
+
+```typescript
+// v8000 unload API
+await unloadBlinkIdSdk({ deleteCachedResources: false });
+```
+
+BlinkID Android SDK v8000 requires Kotlin v2.2.21+. See [Android setup](#android-setup) for more details.
+
+For the complete migration guide with all setting mappings, see [Migrate to v8000](https://docs.microblink.com/blinkid/migration-v8000).
 
 ## <a name="additional-information-and-support"></a> Additional information and Support
-For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team via mail support@microblink.com.
+For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team at support@microblink.com.
