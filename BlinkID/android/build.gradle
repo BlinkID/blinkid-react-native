@@ -9,7 +9,6 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:8.7.2"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
   }
@@ -21,6 +20,16 @@ apply plugin: "kotlin-android"
 apply plugin: 'kotlin-parcelize'
 
 apply plugin: "com.facebook.react"
+
+// Minimum Compose runtime versions required by blinkid-ux for camera scanning (performScan).
+// These are enforced as lower bounds only; client apps may use newer Compose versions.
+ext {
+  blinkidUxVersion = "8000.0.0"
+  blinkidUxMinComposeUi = "1.11.2"
+  blinkidUxMinMaterial3 = "1.4.0"
+  blinkidUxMinActivityCompose = "1.13.0"
+  blinkidUxMinLifecycleViewmodelCompose = "2.10.0"
+}
 
 def getExtOrIntegerDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["BlinkidReactNative_" + name]).toInteger()
@@ -51,8 +60,13 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  kotlinOptions {
+    jvmTarget = "17"
+    freeCompilerArgs += ["-Xstring-concat=inline"]
   }
 
   sourceSets {
@@ -76,15 +90,44 @@ dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  // Align Compose versions for host apps via the BOM. BlinkID UX is built with Compose and
-  // requires matching runtime artifacts (mismatches cause NoSuchFieldError on $stable fields).
-  def composeBom = platform("androidx.compose:compose-bom:2026.05.01")
-  api composeBom
-  api "androidx.compose.ui:ui"
-  api "androidx.compose.ui:ui-graphics"
-  api "androidx.compose.material3:material3"
+  // blinkid-ux ships Compose-based scanning UI as a precompiled AAR. Client apps do not need
+  // the Compose compiler, buildFeatures.compose, or a Compose BOM. Compose runtime libraries
+  // are pulled transitively; constraints below declare minimum versions for performScan.
+  constraints {
+    def constraintReason =
+      "Minimum Compose runtime for blinkid-ux:${blinkidUxVersion} camera scanning; newer versions are allowed"
 
-  implementation("com.microblink:blinkid-ux:8000.0.0")
+    implementation("androidx.compose.ui:ui") {
+      version { require(blinkidUxMinComposeUi) }
+      because(constraintReason)
+    }
+    implementation("androidx.compose.ui:ui-graphics") {
+      version { require(blinkidUxMinComposeUi) }
+      because(constraintReason)
+    }
+    implementation("androidx.compose.runtime:runtime") {
+      version { require(blinkidUxMinComposeUi) }
+      because(constraintReason)
+    }
+    implementation("androidx.compose.foundation:foundation") {
+      version { require(blinkidUxMinComposeUi) }
+      because(constraintReason)
+    }
+    implementation("androidx.compose.material3:material3") {
+      version { require(blinkidUxMinMaterial3) }
+      because(constraintReason)
+    }
+    implementation("androidx.activity:activity-compose") {
+      version { require(blinkidUxMinActivityCompose) }
+      because(constraintReason)
+    }
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose") {
+      version { require(blinkidUxMinLifecycleViewmodelCompose) }
+      because(constraintReason)
+    }
+  }
+
+  implementation("com.microblink:blinkid-ux:${blinkidUxVersion}")
 }
 
 react {

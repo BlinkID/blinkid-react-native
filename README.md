@@ -170,7 +170,7 @@ npm install --save @microblink/blinkid-react-native@8000.0.0
 
 ### <a name="android-setup"></a> Android setup
 
-Add both **Maven Central** and the **Microblink Maven repository** to your project repositories.
+Add **Maven Central** to your project repositories.
 
 In `android/settings.gradle` (or your root `build.gradle`, depending on your React Native version):
 
@@ -179,32 +179,15 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://maven.microblink.com' }
     }
 }
 ```
 
-Ensure your app module uses **Kotlin v2.2.21** or newer and enables Jetpack Compose. At minimum, your `android/app/build.gradle` should include:
+Ensure your app uses **Kotlin v2.2.21** or newer, **minSdkVersion 24** or newer, and **compileSdkVersion 36** or newer. Use the Android Gradle Plugin and Gradle versions shipped with your React Native release (for example, React Native 0.82.x uses AGP 8.12 and Gradle 9.0).
 
-```groovy
-apply plugin: "org.jetbrains.kotlin.android"
-apply plugin: "org.jetbrains.kotlin.plugin.compose"
+`blinkid-ux` ships its Compose-based scanning UI as a precompiled AAR, so client apps do not need to enable the Compose compiler plugin, `buildFeatures.compose`, or a Compose BOM unless they compile their own Compose code.
 
-android {
-    buildFeatures {
-        compose = true
-    }
-}
-
-dependencies {
-    implementation platform("androidx.compose:compose-bom:2026.05.01")
-    implementation "androidx.compose.ui:ui"
-    implementation "androidx.compose.ui:ui-graphics"
-    implementation "androidx.compose.material3:material3"
-}
-```
-
-Also set Kotlin version in your project-level `android/build.gradle`:
+Set the Kotlin version in your project-level `android/build.gradle`:
 
 ```groovy
 buildscript {
