@@ -99,18 +99,18 @@ export type BlinkIdSessionSettings = Partial<{
   scanningSettings: Partial<BlinkIdScanningSettings>;
 
   /**
-   * Duration in seconds before scanning step times out and is cancelled.
+   * Duration in milliseconds before a scanning step times out and is cancelled.
    *
-   * If less than zero, scanning will not time out.
-   * Defaults to 15000 (miliseconds)
+   * Resets on side changes and pauses while onboarding or help dialogs are shown.
+   * Set to `0` to disable the step timeout. Defaults to `60000` (60 seconds).
    */
   stepTimeoutDuration: number;
 
   /**
-   *  Duration in seconds of UI inactivity (no state change) before timeout.
+   * Duration in milliseconds of UI inactivity (no state change) before timeout.
    *
-   * If less than or equal to zero, the inactivity timer will not fire.
-   * Defaults to 10000 (10 seconds)
+   * Resets whenever the UI state changes (reticle type or message).
+   * Set to `0` to disable the inactivity timeout. Defaults to `10000` (10 seconds).
    */
   inactivityTimeoutDuration: number;
 }>;

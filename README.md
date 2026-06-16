@@ -306,8 +306,9 @@ const scanningSettings: BlinkIdScanningSettings = {
 const sessionSettings: BlinkIdSessionSettings = {
   scanningMode: 'automatic', // or 'single'
   scanningSettings,
-  stepTimeoutDuration: 60000,
-  inactivityTimeoutDuration: 10000,
+  // Timeouts are in milliseconds. Set to 0 to disable.
+  stepTimeoutDuration: 60000,       // default: 60 s
+  inactivityTimeoutDuration: 10000, // default: 10 s
 };
 ```
 
@@ -535,7 +536,7 @@ Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK r
 | Setting | Type | Description |
 | --- | --- | --- |
 | SDK settings | `BlinkIdSdkSettings` | License key, resource download, proxy URL |
-| Session settings | `BlinkIdSessionSettings` | Scanning mode, module settings, step and inactivity timeouts |
+| Session settings | `BlinkIdSessionSettings` | Scanning mode, module settings, step/inactivity timeouts (ms; `0` disables) |
 | Scanning settings | `BlinkIdScanningSettings` | Module configuration (see below) |
 | UX settings | `BlinkIdScanningUxSettings` | UI customization during scanning |
 | Class filter | `ClassFilter` | Document include/exclude rules |
@@ -602,7 +603,7 @@ Other notable changes:
 - **Anonymization** has been renamed to **redaction** (`RedactionSettings`, `RedactionSettingsResolver`).
 - Image return and quality settings moved from `CroppedImageSettings` into `documentCaptureModule` and `vizModule`.
 - Detection levels (`DetectionLevel`) are replaced by **sensitivity levels** (`SensitivityLevel`: `off`, `low`, `mid`, `high`).
-- Scanning sessions include a new **inactivity timeout** (defaults to 10 seconds).
+- Scanning sessions include **step** and **inactivity timeouts** on `BlinkIdSessionSettings` (milliseconds; defaults `60000` and `10000`). Set either to `0` to disable.
 
 ### <a name="migrating-from-v7x"></a> Migrating from v7.x
 

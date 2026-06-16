@@ -25,7 +25,9 @@ import {
 /** UI-driven scanning configuration for the BlinkID sample app. */
 export class ScanningModulesConfig {
   scanningMode: ScanningMode = "automatic";
+  /** Milliseconds before a scanning step times out. `0` disables the timeout (default: 60000). */
   stepTimeoutDuration = 60000;
+  /** Milliseconds of UI inactivity before timeout. `0` disables the timeout (default: 10000). */
   inactivityTimeoutDuration = 10000;
   showOnboardingDialog = true;
 
