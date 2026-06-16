@@ -23,8 +23,9 @@ sed -i '' '/"compilerOptions": {/a\
 \    "skipLibCheck": true,
 ' tsconfig.json
 
-IS_LOCAL_BUILD=true
-IS_PING_ENABLED=false
+# Toggle whether to use the local BlinkID plugin from this repo (true) or NPM (false).
+IS_LOCAL_BUILD=false
+
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
   # Enter the BlinkID folder
@@ -107,14 +108,6 @@ popd
 # Add the sample files with the BlinkID integration code to the sample application
 cp ../sample_files/*.tsx ./
 cp ../sample_files/*.ts ./
-
-if [ "$IS_PING_ENABLED" = true ]; then
-  echo "Ping enabled: using production license keys in App.tsx"
-  sed -i '' 's/const isPingEnabled = .*/const isPingEnabled = true;/' App.tsx
-else
-  echo "Ping disabled: using placeholder license keys in App.tsx"
-  sed -i '' 's/const isPingEnabled = .*/const isPingEnabled = false;/' App.tsx
-fi
 
 # Return to the root folder
 popd
