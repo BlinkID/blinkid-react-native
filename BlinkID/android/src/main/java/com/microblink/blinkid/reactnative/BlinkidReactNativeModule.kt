@@ -139,8 +139,6 @@ class BlinkidReactNativeModule(reactContext: ReactApplicationContext) :
           promise?.reject(BLINKID_ERROR_RESULT_CODE, "Invalid SDK settings")
         }
 
-        blinkIdSdk = ensureLoadedSdk(sdkSettingsJson)
-
         reactApplicationContext.currentActivity?.applicationContext?.let {
           val intent = MbBlinkIdScan().createIntent(
             it,
