@@ -4043,6 +4043,8 @@ export const DocumentType = {
   GendarmerieId: "gendarmerieId",
 
   PoliceId: "policeId",
+
+  OriginCard: "originCard",
 } as const;
 export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
 /**
@@ -4182,11 +4184,7 @@ export const FieldType = {
 
   ParentsLastName: "parentsLastName",
 
-  ParentsLastName2: "parentsLastName2",
-
   ParentsFirstName: "parentsFirstName",
-
-  ParentsFirstName2: "parentsFirstName2",
 
   WorkRestriction: "workRestriction",
 
@@ -4196,7 +4194,7 @@ export const FieldType = {
 
   HusbandName: "husbandName",
 
-  ChinPermanentExpiry: "chinPermanentExpiry",
+  CardAccessNumber: "cardAccessNumber",
 } as const;
 
 export type FieldType = (typeof FieldType)[keyof typeof FieldType];
