@@ -56,7 +56,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BlinkID/blinkid-react-native.git"
+    "url": "git+https://github.com/microblink/blinkid-react-native.git",
+    "directory": "BlinkID"
   },
   "author": {
     "name": "Microblink (https://microblink.com)",
@@ -64,9 +65,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BlinkID/blinkid-react-native/issues"
+    "url": "https://github.com/microblink/blinkid-react-native/issues"
   },
-  "homepage": "https://github.com/BlinkID/blinkid-react-native#readme",
+  "homepage": "https://github.com/microblink/blinkid-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

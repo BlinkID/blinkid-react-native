@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => 16.0 }
-  s.source       = { :git => "https://github.com/BlinkID/blinkid-react-native.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/microblink/blinkid-react-native.git", :tag => "#{s.version}" }
   s.requires_arc     = true
 
   s.source_files = [
