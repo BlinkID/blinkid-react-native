@@ -197,7 +197,7 @@ export type UnloadBlinkIdSdkSettings = {
 /**
  * The `performScan` method launches the BlinkID scanning process with the default UX properties.
  *
- * It takes the following parameters: {@link BlinkIdSdkSettings}, {@link BlinkIdSessionSettings} and the optional {@link BlinkIdUiSettings}, {@link RedactionSettingsResolver} {@link ClassFilter} settings.
+ * It takes the following parameters: {@link BlinkIdSdkSettings}, {@link BlinkIdSessionSettings} {@link BlinkIdScanningUxSettings}, {@link RedactionSettingsResolver} {@link ClassFilter}.
  *
  * It returns the {@link BlinkIdScanningResult}.
  *
@@ -208,7 +208,7 @@ export type UnloadBlinkIdSdkSettings = {
  * @param blinkIdSessionSettings - BlinkID Session Settings - the class that contains various settings for the scanning session. It contains the settings for the {@link ScanningMode} and
  * {@link BlinkIdScanningSettings}, which define various parameters that control the scanning process.
  *
- * @param blinkIdUiSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
+ * @param scanningUxSettings - BlinkID Scanning UX Settings - the class that allows customization of various aspects of the UI & UX used during the scanning process.
  *
  * @param classFilter - The optional `ClassFilter` class - the class which controls which documents will be accepted or reject for information extraction during the scanning session.
  * See {@link ClassFilter} for more implementation information.
