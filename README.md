@@ -27,11 +27,11 @@ However, since the wrapper is open source, you can add the features you need on 
   - [iOS setup](#ios-setup)
   - [Permissions](#permissions)
 - [Plugin usage](#plugin-usage)
+  - [Imports and license key](#imports-and-license-key)
   - [Configure scanning modules](#configure-scanning-modules)
   - [Default BlinkID UX (camera scanning)](#default-blinkid-ux-camera-scanning)
   - [BlinkID DirectAPI (static images)](#blinkid-directapi-static-images)
   - [Document redaction](#document-redaction)
-  - [Preload and unload the SDK](#preload-and-unload-the-sdk)
 - [Plugin specifics](#plugin-specifics)
   - [Scanning methods](#scanning-methods)
   - [SDK loading & unloading](#sdk-loading--unloading)
@@ -73,7 +73,7 @@ It contains the implementation for:
 The sample also includes a **module settings panel** where you can toggle and configure the document capture, barcode, MRZ, and VIZ modules, along with optional class filters and redaction settings.
 
 To obtain and run the sample application, follow the steps below.
-Make sure you have Node & Watchman installed before running the sample application:
+Make sure you have **Node & Watchman** installed before running the sample application:
 ```bash
 # install Watchman
 brew install watchman
@@ -87,16 +87,15 @@ brew install node
 ```bash
 git clone https://github.com/microblink/blinkid-react-native.git
 ```
-
-2. Position to the obtained BlinkID folder and run the `initBlinkIdReactNativeSample.sh` script:
-
+2. Position to the obtained `blinkid-react-native` folder
 ```bash
-cd blinkid-react-native && ./initBlinkIdReactNativeSample.sh
+cd blinkid-react-native
 ```
-
-Running `initBlinkIdReactNativeSample.sh` script will create a sample app, with required configurations applied.
-
-3. After the script finishes running, position to the `BlinkIdSample` folder.
+3. Run the `initBlinkIdReactNativeSample.sh` script to create a sample app, with required configurations applied.
+```bash
+./initBlinkIdReactNativeSample.sh
+```
+4. After the script finishes running, position to the `BlinkIdSample` folder.
 
 ### <a name="android-sample-application"></a> Android sample application
 
@@ -104,14 +103,11 @@ Running the sample application on Android
 
 #### <a name="on-an-emulator"></a> On an emulator:
 
-Simply execute the following command:
-
+1. Execute the following command:
 ```bash
 npx react-native start
 ```
-
-Then in another terminal, run:
-
+2. In another terminal, run:
 ```bash
 npx react-native run-android
 ```
@@ -236,9 +232,11 @@ If you use DirectAPI with images from the photo library, also add:
 
 ## <a name="plugin-usage"></a> Plugin usage
 
-### Imports and license key
+**Note:** The plugin usage process can be found in the sample app `App.tsx` file [here](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/App.tsx).
 
-After adding the dependency, import the API and set your platform-specific license key:
+### <a name="imports-and-license-key"></a> Imports and license key
+
+After adding the blinkid-react-native dependency, import the API and set your platform-specific license key:
 
 ```typescript
 import { Platform } from 'react-native';
@@ -301,6 +299,9 @@ const scanningSettings: BlinkIdScanningSettings = {
     characterValidationEnabled: true,
     resultAggregationEnabled: true,
   },
+  
+  // Max character mismatches allowed per field during cross-side data matching (default: 0)
+  maxAllowedMismatchesPerField: 0,
 };
 
 const sessionSettings: BlinkIdSessionSettings = {
@@ -320,6 +321,8 @@ const sessionSettings: BlinkIdSessionSettings = {
 > **Note:** When using PDF417 and QR barcode scanning, enable both `pdf417ScanningEnabled` and `qrScanningEnabled` together. The analyzer treats them as a combined detection stage.
 
 For DirectAPI with pre-cropped document images, set `documentCaptureModule.inputImageCropped` to `true`.
+
+Module configuration helpers can be found in [ScanningModulesConfig.ts](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/ScanningModulesConfig.ts).
 
 ### <a name="default-blinkid-ux-camera-scanning"></a> Default BlinkID UX (camera scanning)
 
@@ -443,22 +446,6 @@ await performDirectApiScan({
 
 Redaction modes: `none`, `imageOnly`, `resultFieldsOnly`, `fullResult`.
 
-### <a name="preload-and-unload-the-sdk"></a> Preload and unload the SDK
-
-```typescript
-// Optional: preload SDK resources before scanning
-await loadBlinkIdSdk({ sdkSettings: { licenseKey, downloadResources: true } });
-
-// ... perform scans ...
-
-// Optional: release SDK resources
-await unloadBlinkIdSdk({ deleteCachedResources: false });
-```
-
-If you do not call `loadBlinkIdSdk`, it is invoked automatically when a scan starts. `unloadBlinkIdSdk` is called automatically after each successful scan session.
-
-**Note:** The whole integration process can be found in the sample app `App.tsx` file [here](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/App.tsx). Module configuration helpers are in [ScanningModulesConfig.ts](https://github.com/microblink/blinkid-react-native/blob/master/sample_files/ScanningModulesConfig.ts).
-
 ## <a name="plugin-specifics"></a> Plugin specifics
 The BlinkID plugin implementation is located in the `src` folder [here](https://github.com/microblink/blinkid-react-native/tree/master/BlinkID/src), while platform-specific implementation is located in the `android` and `ios` folders.
 
@@ -489,9 +476,7 @@ performScan({
 | `classFilter` | Include/exclude documents by country, region, and type |
 | `redactionSettingsResolver` | Per-document redaction rules applied before the result is finalized |
 
-Returns `BlinkIdScanningResult`.
-
-- Implementation: [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)
+Returns `BlinkIdScanningResult` ([implementation](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)).
 
 **The `performDirectApiScan` method**
 
@@ -507,11 +492,10 @@ performDirectApiScan({
 });
 ```
 
-Returns `BlinkIdScanningResult`.
-
-- Implementation: [index.tsx](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)
+Returns `BlinkIdScanningResult` ([implementation](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/index.tsx)).
 
 ### <a name="sdk-loading--unloading"></a> SDK loading & unloading
+
 
 **The `loadBlinkIdSdk` method**
 
@@ -520,6 +504,8 @@ Creates or retrieves the BlinkID SDK instance. Handles initialization, resource 
 ```typescript
 await loadBlinkIdSdk({ sdkSettings: { licenseKey, downloadResources: true } });
 ```
+
+If you do not call `loadBlinkIdSdk`, it is invoked automatically when a scan starts.
 
 **The `unloadBlinkIdSdk` method**
 
@@ -530,6 +516,8 @@ await unloadBlinkIdSdk({ deleteCachedResources: false });
 ```
 
 Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK resources from the device.
+
+`unloadBlinkIdSdk` is called automatically after each successful scan session.
 
 ### <a name="blinkid-settings"></a> BlinkID Settings
 
@@ -545,19 +533,13 @@ Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK r
 **Scanning module settings**
 
 | Module | Type | Key settings |
-| --- | --- | --- |
+| --- |  | --- |
 | Document capture | `DocumentCaptureModuleSettings` | Image quality (blur, glare, tilt, lighting), cropped/input image return, face extraction, passport data page only |
 | MRZ | `MrzModuleSettings` | `presenceMandatory` |
 | Barcode | `BarcodeModuleSettings` | PDF417, QR, retail barcode types, barcode image return |
 | VIZ | `VizModuleSettings` | Signature extraction, character validation, result aggregation |
 
-**Additional notes:**
-
-- The [blinkIdSettings.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all available settings with inline documentation.
-
-- Native documentation: [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/).
-
-- Native Kotlin & Swift deserialization: [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/microblink/blinkid/reactnative/BlinkIdDeserializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/Serialization/BlinkIdDeserializationUtils.swift).
+The [blinkIdSettings.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdSettings.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts) files contain all available settings with inline documentation.
 
 ### <a name="blinkid-results"></a> BlinkID Results
 
@@ -577,13 +559,8 @@ Each `SingleSideScanningResult` contains:
 - `barcode` — Barcode data
 - `documentImage`, `faceImage`, `signatureImage`, `inputImage`
 
-**Additional notes:**
 
-- Full result types: [blinkIdResult.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts).
-
-- Native documentation: [Android](https://blinkid.github.io/blinkid-android/blinkid-core/com.microblink.blinkid.core.result/index.html) & [iOS](https://blinkid.github.io/blinkid-swift-package/documentation/blinkid/blinkidscanningresult).
-
-- Native serialization: [Android](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/android/src/main/java/com/microblink/blinkid/reactnative/BlinkIdSerializationUtilities.kt) & [iOS](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/ios/Serialization/BlinkIdSerializationUtils.swift).
+Full result types: [blinkIdResult.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/blinkIdResult.ts) and [types.ts](https://github.com/microblink/blinkid-react-native/blob/master/BlinkID/src/types.ts).
 
 ## <a name="whats-new-in-v8000"></a> What's new in v8000
 
@@ -624,22 +601,22 @@ const sdkSettings = { licenseKey, downloadResources: true };
 
 Flat v7 settings map to module settings in v8000:
 
-| v7 setting | v8000 location |
-| --- | --- |
-| `blurDetectionLevel` | `documentCaptureModule.blurSensitivityLevel` |
-| `glareDetectionLevel` | `documentCaptureModule.glareSensitivityLevel` |
-| `tiltDetectionLevel` | `documentCaptureModule.tiltSensitivityLevel` |
-| `skipImagesWithBlur` | `documentCaptureModule.imageWithBlurRejected` |
-| `skipImagesWithGlare` | `documentCaptureModule.imageWithGlareRejected` |
-| `croppedImageSettings.returnDocumentImage` | `documentCaptureModule.documentImageReturnEnabled` |
-| `croppedImageSettings.returnFaceImage` | `documentCaptureModule.faceImageExtractionEnabled` |
-| `croppedImageSettings.returnSignatureImage` | `vizModule.signatureImageExtractionEnabled` |
-| `croppedImageSettings.dotsPerInch` | `documentCaptureModule.dotsPerInch` |
-| `scanCroppedDocumentImage` | `documentCaptureModule.inputImageCropped` |
-| `enableCharacterValidation` | `vizModule.characterValidationEnabled` |
-| `scanPassportDataPageOnly` | `documentCaptureModule.passportDataPageScanOnly` |
-| `anonymizationMode` | Use `RedactionSettings` / `RedactionSettingsResolver` |
-| `recognitionModeFilter` / `enableBarcodeScanOnly` | Enable/disable modules explicitly |
+| v7                                                | v8000                                                 |
+|---------------------------------------------------|-------------------------------------------------------|
+| `blurDetectionLevel`                              | `documentCaptureModule.blurSensitivityLevel`          |
+| `glareDetectionLevel`                             | `documentCaptureModule.glareSensitivityLevel`         |
+| `tiltDetectionLevel`                              | `documentCaptureModule.tiltSensitivityLevel`          |
+| `skipImagesWithBlur`                              | `documentCaptureModule.imageWithBlurRejected`         |
+| `skipImagesWithGlare`                             | `documentCaptureModule.imageWithGlareRejected`        |
+| `croppedImageSettings.returnDocumentImage`        | `documentCaptureModule.documentImageReturnEnabled`    |
+| `croppedImageSettings.returnFaceImage`            | `documentCaptureModule.faceImageExtractionEnabled`    |
+| `croppedImageSettings.returnSignatureImage`       | `vizModule.signatureImageExtractionEnabled`           |
+| `croppedImageSettings.dotsPerInch`                | `documentCaptureModule.dotsPerInch`                   |
+| `scanCroppedDocumentImage`                        | `documentCaptureModule.inputImageCropped`             |
+| `enableCharacterValidation`                       | `vizModule.characterValidationEnabled`                |
+| `scanPassportDataPageOnly`                        | `documentCaptureModule.passportDataPageScanOnly`      |
+| `anonymizationMode`                               | Use `RedactionSettings` / `RedactionSettingsResolver` |
+| `recognitionModeFilter` / `enableBarcodeScanOnly` | Enable/disable modules explicitly                     |
 
 Removed types: `CroppedImageSettings`, `AnonymizationMode`, `DetectionLevel`, `RecognitionMode`.
 
@@ -663,4 +640,4 @@ BlinkID Android SDK v8000 requires Kotlin v2.2.21+. See [Android setup](#android
 For the complete migration guide with all setting mappings, see [Migrate to v8000](https://docs.microblink.com/blinkid/migration-v8000).
 
 ## <a name="additional-information-and-support"></a> Additional information and Support
-For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team via mail support@microblink.com.
+For any additional questions and information, feel free to contact us [here](https://help.microblink.com), or directly to the Support team at support@microblink.com.

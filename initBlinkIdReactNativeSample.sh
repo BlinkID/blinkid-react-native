@@ -24,7 +24,7 @@ sed -i '' '/"compilerOptions": {/a\
 ' tsconfig.json
 
 # Toggle whether to use the local BlinkID plugin from this repo (true) or NPM (false).
-IS_LOCAL_BUILD=false
+IS_LOCAL_BUILD=false || exit 1
 
 if [ "$IS_LOCAL_BUILD" = true ]; then
   echo "Using blinkid-react-native from this repo instead from NPM"
@@ -118,7 +118,8 @@ Go to the React Native project folder: cd $appName
 
 ----- Android instructions -----
 
-Execute: npx react-native run-android
+1. Execute npx react-native start
+2. Then in another terminal execute npx react-native run-android
 
 ----- iOS instructions -----
 
