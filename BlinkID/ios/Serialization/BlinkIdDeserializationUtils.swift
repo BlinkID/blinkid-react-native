@@ -361,11 +361,11 @@ struct BlinkIdDeserializationUtils {
         return ScanningUXSettings(
             showIntroductionAlert: scanningUxSettingsDict["showOnboardingDialog"] as? Bool ?? true,
             showHelpButton: scanningUxSettingsDict["showHelpButton"] as? Bool ?? true,
-            preferredCameraPosition: deserializePrefferedCameraPosition(preferredCameraRaw ?? "back"),
+            preferredCameraPosition: deserializePreferredCameraPosition(preferredCameraRaw ?? "back"),
             allowHapticFeedback: scanningUxSettingsDict["allowHapticFeedback"] as? Bool ?? true)
     }
     
-    static func deserializePrefferedCameraPosition(_ value: String) -> Camera.CameraPosition {
+    static func deserializePreferredCameraPosition(_ value: String) -> Camera.CameraPosition {
         switch value {
         case "front":
             return Camera.CameraPosition.front

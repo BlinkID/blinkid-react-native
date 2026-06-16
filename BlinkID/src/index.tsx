@@ -186,12 +186,12 @@ export type LoadBlinkIdSdkSettings = {
  */
 export async function unloadBlinkIdSdk({
   deleteCachedResources = false,
-}: UnloadBlinkIdSdkSettings): Promise<void> {
+}: UnloadBlinkIdSdkSettings = {}): Promise<void> {
   await BlinkidReactNative.unloadBlinkIdSdk(deleteCachedResources);
 }
 
 export type UnloadBlinkIdSdkSettings = {
-  deleteCachedResources: boolean;
+  deleteCachedResources?: boolean;
 };
 
 /**

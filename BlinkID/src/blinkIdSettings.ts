@@ -226,7 +226,7 @@ export type BlinkIdScanningUxSettings = Partial<{
    * This value represents the user’s choice of front or back camera.
    * The system determines the actual physical camera device.
    *
-   * Default: {@link PrefferedCamera.back}
+   * Default: {@link PreferredCamera.back}
    */
   preferredCamera: PreferredCamera;
 }>;
