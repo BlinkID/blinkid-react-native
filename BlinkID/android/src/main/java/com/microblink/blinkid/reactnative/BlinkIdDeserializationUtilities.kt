@@ -4,11 +4,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import com.microblink.blinkid.core.BlinkIdSdkSettings
+import com.microblink.blinkid.core.settings.ResourcesConfig
 import com.microblink.blinkid.core.result.FieldType
-import com.microblink.blinkid.core.result.classinfo.Country
+import com.microblink.blinkid.core.result.classinfo.CountryId
 import com.microblink.blinkid.core.result.classinfo.DocumentClassInfo
-import com.microblink.blinkid.core.result.classinfo.Region
-import com.microblink.blinkid.core.result.classinfo.Type
+import com.microblink.blinkid.core.result.classinfo.RegionId
+import com.microblink.blinkid.core.result.classinfo.DocumentTypeId
 import com.microblink.blinkid.core.session.BlinkIdSessionSettings
 import com.microblink.blinkid.core.session.ScanningMode
 import com.microblink.blinkid.core.settings.DocumentNumberRedactionSettings
@@ -16,6 +17,8 @@ import com.microblink.blinkid.core.settings.RedactionSettings
 import com.microblink.blinkid.core.settings.RedactionSettingsResolver
 import com.microblink.blinkid.core.settings.ScanningSettings
 import com.microblink.blinkid.core.settings.SensitivityLevel
+import com.microblink.blinkid.core.image.InputImageCropType
+import com.microblink.blinkid.core.image.InputImageSelectionStrategy
 import com.microblink.blinkid.core.settings.scanning.BarcodeModuleSettings
 import com.microblink.blinkid.core.settings.scanning.DocumentCaptureModuleSettings
 import com.microblink.blinkid.core.settings.scanning.MrzModuleSettings
@@ -45,17 +48,19 @@ object BlinkIdDeserializationUtilities {
     return BlinkIdSdkSettings(
       licenseKey = licenseKey,
       licensee = blinkIdSdkSettingsMap.optString("licensee").takeIf { it.isNotBlank() },
-      downloadResources = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
-      resourceDownloadUrl = blinkIdSdkSettingsMap.optString(
-        "resourceDownloadUrl",
-        DEFAULT_RESOURCE_DOWNLOAD_URL
-      ),
-      resourceLocalFolder = blinkIdSdkSettingsMap.optString(
-        "resourceLocalFolder",
-        DEFAULT_RESOURCES_LOCAL_FOLDER
-      ),
-      resourceRequestTimeout = deserializeResourceRequestTimeout(
-        blinkIdSdkSettingsMap.opt("resourceRequestTimeout")
+      resourcesConfig = ResourcesConfig(
+        download = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
+        serviceUrl = blinkIdSdkSettingsMap.optString(
+          "resourceDownloadUrl",
+          DEFAULT_RESOURCE_DOWNLOAD_URL
+        ),
+        localFolder = blinkIdSdkSettingsMap.optString(
+          "resourceLocalFolder",
+          DEFAULT_RESOURCES_LOCAL_FOLDER
+        ),
+        requestTimeout = deserializeResourceRequestTimeout(
+          blinkIdSdkSettingsMap.opt("resourceRequestTimeout")
+        ),
       ),
       microblinkProxyUrl = blinkIdSdkSettingsMap.optString("microblinkProxyURL")
         .takeIf { it.isNotBlank() },
@@ -219,7 +224,8 @@ object BlinkIdDeserializationUtilities {
     moduleMap: JSONObject
   ): DocumentCaptureModuleSettings {
     return DocumentCaptureModuleSettings(
-      inputImageCropped = moduleMap.optBoolean("inputImageCropped", false),
+      cropType = parseInputImageCropType(moduleMap.optString("cropType", "not-cropped")),
+      inputImageSelectionStrategy = parseInputImageSelectionStrategy(moduleMap.optString("inputImageSelectionStrategy", "balanced")),
       unsupportedDocumentsAllowed = moduleMap.optBoolean("unsupportedDocumentsAllowed", false),
       secondSideWithNoExtractableDataSkipped = moduleMap.optBoolean(
         "secondSideWithNoExtractableDataSkipped",
@@ -263,6 +269,7 @@ object BlinkIdDeserializationUtilities {
       ean13ScanningEnabled = moduleMap.optBoolean("ean13ScanningEnabled", false),
       itfScanningEnabled = moduleMap.optBoolean("itfScanningEnabled", false),
       dataMatrixScanningEnabled = moduleMap.optBoolean("dataMatrixScanningEnabled", false),
+      aztecScanningEnabled = moduleMap.optBoolean("aztecScanningEnabled", false),
     )
   }
 
@@ -322,6 +329,24 @@ object BlinkIdDeserializationUtilities {
     return when (value?.lowercase()) {
       "single" -> ScanningMode.Single
       else -> ScanningMode.Automatic
+    }
+  }
+
+  private fun parseInputImageCropType(value: String): InputImageCropType {
+    return when (value.lowercase()) {
+      "cropped" -> InputImageCropType.Cropped
+      "unknown" -> InputImageCropType.Unknown
+      else -> InputImageCropType.NotCropped
+    }
+  }
+
+  private fun parseInputImageSelectionStrategy(value: String): InputImageSelectionStrategy {
+    return when (value.lowercase()) {
+      "single-image" -> InputImageSelectionStrategy.SingleImage
+      "optimize-for-speed" -> InputImageSelectionStrategy.OptimizeForSpeed
+      "balanced" -> InputImageSelectionStrategy.Balanced
+      "optimize-for-quality" -> InputImageSelectionStrategy.OptimizeForQuality
+      else -> InputImageSelectionStrategy.Balanced
     }
   }
 
@@ -390,19 +415,19 @@ object BlinkIdDeserializationUtilities {
     val region = filteredClass.optString("region").takeIf { it.isNotBlank() }
     val documentType = filteredClass.optString("documentType").takeIf { it.isNotBlank() }
 
-    return (country == null || parseCountry(country) == classInfo.country) &&
-      (region == null || parseRegion(region) == classInfo.region) &&
-      (documentType == null || parseDocumentType(documentType) == classInfo.type)
+    return (country == null || parseCountryId(country) == classInfo.country?.id) &&
+      (region == null || parseRegionId(region) == classInfo.region?.id) &&
+      (documentType == null || parseDocumentTypeId(documentType) == classInfo.documentType?.id)
   }
 
-  private fun parseCountry(value: String): Country? =
-    Country.entries.find { it.name.equals(value, ignoreCase = true) }
+  private fun parseCountryId(value: String): CountryId? =
+    CountryId.entries.find { it.name.equals(value, ignoreCase = true) }
 
-  private fun parseRegion(value: String): Region? =
-    Region.entries.find { it.name.equals(value, ignoreCase = true) }
+  private fun parseRegionId(value: String): RegionId? =
+    RegionId.entries.find { it.name.equals(value, ignoreCase = true) }
 
-  private fun parseDocumentType(value: String): Type? =
-    Type.entries.find { it.name.equals(value, ignoreCase = true) }
+  private fun parseDocumentTypeId(value: String): DocumentTypeId? =
+    DocumentTypeId.entries.find { it.name.equals(value, ignoreCase = true) }
 }
 
 @Parcelize

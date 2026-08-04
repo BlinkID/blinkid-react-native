@@ -83,6 +83,9 @@ object BlinkIdSerializationUtilities {
         scanningResult?.race?.let {
             scanningResultJson.put("race", serializeStringResult(it))
         }
+        scanningResult?.ethnicity?.let {
+            scanningResultJson.put("ethnicity", serializeStringResult(it))
+        }
         scanningResult?.religion?.let {
             scanningResultJson.put("religion", serializeStringResult(it))
         }
@@ -299,16 +302,23 @@ object BlinkIdSerializationUtilities {
         // TODO: Align country/region/documentType strings with iOS (rawValue). Android uses
         // enum.name with only the first character lowercased; values usually match but are not
         // guaranteed identical for every enum. Prefer shared explicit string mappers on both platforms.
-        documentClassInfo.country?.name?.let {
-            documentClassInfoJson.put("country", it.replaceFirstChar { char -> char.lowercase() })
+        documentClassInfo.country?.let { country ->
+            documentClassInfoJson.put("country", serializeClassInfoComponent(
+                idName = country.id?.name,
+                rawValue = country.rawValue
+            ))
         }
-        documentClassInfo.region?.name?.let {
-            documentClassInfoJson.put("region", it.replaceFirstChar { char -> char.lowercase() })
+        documentClassInfo.region?.let { region ->
+            documentClassInfoJson.put("region", serializeClassInfoComponent(
+                idName = region.id?.name,
+                rawValue = region.rawValue
+            ))
         }
-        documentClassInfo.type?.name?.let {
-            documentClassInfoJson.put(
-                "documentType",
-                it.replaceFirstChar { char -> char.lowercase() })
+        documentClassInfo.documentType?.let { documentType ->
+            documentClassInfoJson.put("documentType", serializeClassInfoComponent(
+                idName = documentType.id?.name,
+                rawValue = documentType.rawValue
+            ))
         }
         documentClassInfo.countryName?.let {
             documentClassInfoJson.put("countryName", it)
@@ -324,6 +334,15 @@ object BlinkIdSerializationUtilities {
         }
         documentClassInfoJson.put("empty", documentClassInfo.isEmpty())
         return documentClassInfoJson
+    }
+
+    private fun serializeClassInfoComponent(idName: String?, rawValue: String): JSONObject {
+        val json = JSONObject()
+        idName?.let {
+            json.put("id", it.replaceFirstChar { char -> char.lowercase() })
+        }
+        json.put("rawValue", rawValue)
+        return json
     }
 
     private fun serializeDataMatchResult(dataMatchResult: DataMatchResult): JSONObject {
@@ -731,6 +750,9 @@ object BlinkIdSerializationUtilities {
         vizResult?.race?.let {
             vizResultJson.put("race", serializeStringResult(it))
         }
+        vizResult?.ethnicity?.let {
+            vizResultJson.put("ethnicity", serializeStringResult(it))
+        }
         vizResult?.religion?.let {
             vizResultJson.put("religion", serializeStringResult(it))
         }
@@ -856,6 +878,10 @@ object BlinkIdSerializationUtilities {
 
         parentInfo.lastName?.let {
             parentInfoJson.put("lastName", serializeStringResult(it))
+        }
+
+        parentInfo.fullName?.let {
+            parentInfoJson.put("fullName", serializeStringResult(it))
         }
 
         return parentInfoJson

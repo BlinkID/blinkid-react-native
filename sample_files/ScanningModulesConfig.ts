@@ -1,8 +1,8 @@
 import {
-  Country,
-  DocumentType,
+  CountryID,
+  DocumentTypeID,
   FieldType,
-  Region,
+  RegionID,
   type BarcodeModuleSettings,
   type BlinkIdScanningUxSettings,
   type BlinkIdSessionSettings,
@@ -14,6 +14,8 @@ import {
   type RedactionSettingsResolver,
   type ScanningMode,
   type SensitivityLevel,
+  type InputImageSelectionStrategy,
+  type InputImageCropType,
   type VizModuleSettings,
 } from "@microblink/blinkid-react-native";
 import {
@@ -72,12 +74,14 @@ export class ScanningModulesConfig {
       ean13ScanningEnabled: false,
       itfScanningEnabled: false,
       dataMatrixScanningEnabled: false,
+      aztecScanningEnabled: false,
     };
   }
 
   static defaultDocumentCaptureModule(): DocumentCaptureModuleSettings {
     return {
-      inputImageCropped: false,
+      cropType: "not-cropped",
+      inputImageSelectionStrategy: "balanced",
       unsupportedDocumentsAllowed: false,
       secondSideWithNoExtractableDataSkipped: true,
       passportDataPageScanOnly: true,
@@ -122,9 +126,9 @@ export class ScanningModulesConfig {
       redactMrzResult: false,
       redactBarcodeResult: false,
       documentFilter: {
-        country: Country.USA,
-        region: Region.California,
-        documentType: DocumentType.Id,
+        country: CountryID.USA,
+        region: RegionID.California,
+        documentType: DocumentTypeID.Id,
       },
     };
   }
@@ -232,4 +236,17 @@ export const SENSITIVITY_LEVELS: SensitivityLevel[] = [
   "low",
   "mid",
   "high",
+];
+
+export const INPUT_IMAGE_CROP_TYPES: InputImageCropType[] = [
+  "not-cropped",
+  "unknown",
+  "cropped",
+];
+
+export const INPUT_IMAGE_SELECTION_STRATEGIES: InputImageSelectionStrategy[] = [
+  "single-image",
+  "optimize-for-speed",
+  "balanced",
+  "optimize-for-quality"
 ];

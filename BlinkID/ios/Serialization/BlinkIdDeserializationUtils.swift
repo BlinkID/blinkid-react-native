@@ -11,6 +11,9 @@ import UIKit
 import BlinkIDUX
 
 struct BlinkIdDeserializationUtils {
+    private static let defaultResourceDownloadUrl = "https://models.cdn.microblink.com/resources"
+    private static let defaultResourceLocalFolder = "MLModels"
+
     static func deserializeBlinkIdSdkSettings(_ sdkSettingsDict: Dictionary<String, Any>?) -> BlinkIDSdkSettings? {
         var blinkidSdkSettings: BlinkIDSdkSettings?
         
@@ -25,27 +28,30 @@ struct BlinkIdDeserializationUtils {
         if let helloLogEnabled = sdkSettingsDict?["helloLogEnabled"] as? Bool {
             blinkidSdkSettings?.helloLogEnabled = helloLogEnabled
         }
-        
-        if let downloadResources = sdkSettingsDict?["downloadResources"] as? Bool {
-            blinkidSdkSettings?.downloadResources = downloadResources
-        }
-        
-        if let resourceDownloadUrl = sdkSettingsDict?["resourceDownloadUrl"] as? String {
-            blinkidSdkSettings?.resourceDownloadUrl = resourceDownloadUrl
-        }
-        
-        if let resourceLocalFolder = sdkSettingsDict?["resourceLocalFolder"] as? String {
-            blinkidSdkSettings?.resourceLocalFolder = resourceLocalFolder
-        }
-        
-        if let bundleURL = sdkSettingsDict?["bundleIdentifier"] as? String,
-           let bundle: Bundle = Bundle.init(identifier: bundleURL) {
-            blinkidSdkSettings?.bundleURL = bundle.bundleURL
+
+        let download = sdkSettingsDict?["downloadResources"] as? Bool ?? true
+
+        let serviceUrl = sdkSettingsDict?["resourceDownloadUrl"] as? String
+            ?? defaultResourceDownloadUrl
+
+        let localFolder = sdkSettingsDict?["resourceLocalFolder"] as? String
+            ?? defaultResourceLocalFolder
+
+        var bundleUrl: URL? = nil
+
+        if let bundleIdentifier = sdkSettingsDict?["bundleIdentifier"] as? String,
+
+        let bundle = Bundle(identifier: bundleIdentifier) {
+            bundleUrl = bundle.bundleURL
         }
 
-        if sdkSettingsDict?["resourceRequestTimeout"] != nil {
-            blinkidSdkSettings?.resourceRequestTimeout = BlinkID.RequestTimeout.default
-        }
+        blinkidSdkSettings?.resourcesConfiguration = ResourcesConfig(
+            download: download,
+            serviceUrl: serviceUrl,
+            localFolder: localFolder,
+            requestTimeout: .default,
+            bundleUrl: bundleUrl
+        )
         
         if let microblinkProxyUrl = sdkSettingsDict?["microblinkProxyURL"] as? String
             ?? sdkSettingsDict?["microblinkProxyUrl"] as? String {
@@ -144,6 +150,10 @@ struct BlinkIdDeserializationUtils {
         if let dataMatrixScanningEnabled = barcodeModuleDict["dataMatrixScanningEnabled"] as? Bool {
             barodeModuleSettings.dataMatrixScanningEnabled = dataMatrixScanningEnabled
         }
+
+        if let aztecScanningEnabled = barcodeModuleDict["aztecScanningEnabled"] as? Bool {
+            barodeModuleSettings.aztecScanningEnabled = aztecScanningEnabled
+        }
         
         if let ean13ScanningEnabled = barcodeModuleDict["ean13ScanningEnabled"] as? Bool {
             barodeModuleSettings.ean13ScanningEnabled = ean13ScanningEnabled
@@ -231,8 +241,12 @@ struct BlinkIdDeserializationUtils {
             documentCaptureSettings.imageWithPoorLightingRejected = imageWithPoorLightingRejected
         }
         
-        if let inputImageCropped = documentCaptureModuleDict["inputImageCropped"] as? Bool {
-            documentCaptureSettings.inputImageCropped = inputImageCropped
+        if let cropType = documentCaptureModuleDict["cropType"] as? String {
+            documentCaptureSettings.cropType = deserializeInputImageCropType(cropType)
+        }
+
+        if let inputImageSelectionStrategy = documentCaptureModuleDict["inputImageSelectionStrategy"] as? String {
+            documentCaptureSettings.inputImageSelectionStrategy = deserializeInputImageSelectionStrategy(inputImageSelectionStrategy)
         }
         
         if let inputImageReturnEnabled = documentCaptureModuleDict["inputImageReturnEnabled"] as? Bool {
@@ -259,6 +273,25 @@ struct BlinkIdDeserializationUtils {
             documentCaptureSettings.tiltSensitivityLevel = deserializeSensitivityLevel(tiltSensitivityLevel)
         }
         return documentCaptureSettings
+    }
+
+    static func deserializeInputImageCropType(_ value: String) -> InputImageCropType {
+        switch value {
+        case "cropped": return InputImageCropType.cropped
+        case "unknown": return InputImageCropType.unknown
+        case "not-cropped": return InputImageCropType.notCropped
+        default: return InputImageCropType.notCropped
+        }
+    }
+
+    static func deserializeInputImageSelectionStrategy(_ value: String) -> InputImageSelectionStrategy {
+        switch value {
+        case "single-image": return InputImageSelectionStrategy.singleImage
+        case "optimize-for-speed": return InputImageSelectionStrategy.optimizeForSpeed
+        case "balanced": return InputImageSelectionStrategy.balanced
+        case "optimize-for-quality": return InputImageSelectionStrategy.optimizeForQuality
+        default: return InputImageSelectionStrategy.balanced
+        }
     }
     
     static func deserializeSensitivityLevel(_ sensitivityLevelRawValue: String) -> SensitivityLevel {
@@ -464,9 +497,9 @@ struct BlinkIdDeserializationUtils {
         let type = filteredClass["documentType"] as? String
         let region = filteredClass["region"] as? String
         
-        return (country == nil || classInfo.country == Country.init(rawValue: country!)) &&
-        (type == nil || classInfo.documentType == DocumentType.init(rawValue: type!)) &&
-        (region == nil || classInfo.region == Region.init(rawValue: region!))
+        return (country == nil ||  classInfo.country?.countryId == CountryID(rawValue: country!)) &&
+        (type == nil || classInfo.documentType?.documentTypeId == DocumentTypeID(rawValue: type!)) &&
+        (region == nil || classInfo.region?.regionId == RegionID(rawValue: region!))
     }
     
     static func sanitizeDictionary(_ dictionary: Dictionary<String, Any>?) -> Dictionary<String, Any>? {

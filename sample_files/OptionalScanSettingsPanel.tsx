@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import {
-  Country,
+  CountryID,
   type FieldType,
   type RedactionSettings,
 } from "@microblink/blinkid-react-native";
@@ -224,7 +224,7 @@ function DocumentFilterRuleEditor({
   onChanged: (rule: UiDocumentFilter) => void;
 }) {
   const regionOptions =
-    rule.country === Country.USA ? SAMPLE_USA_REGIONS : [];
+    rule.country === CountryID.USA ? SAMPLE_USA_REGIONS : [];
 
   return (
     <View>
