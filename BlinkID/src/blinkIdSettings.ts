@@ -8,57 +8,101 @@ import type {
 } from "./types";
 
 /**
- *  Settings for the initialization of the BlinkID SDK.
+ * Configuration for base (non-OTA) SDK resources: download, cache location, and timeouts.
  *
+ * Maps to native `ResourcesConfig` on Android and `ResourcesConfig` /
+ * `resourcesConfiguration` on iOS.
+ *
+ * When omitted on {@link BlinkIdSdkSettings}, the native SDK defaults are used
+ * (`download: true`, platform default `serviceUrl` / `localFolder`, default timeouts).
+ *
+ * @example
+ * ```ts
+ * const sdkSettings: BlinkIdSdkSettings = {
+ *   licenseKey,
+ *   resourcesConfig: { download: true },
+ * };
+ * ```
+ */
+export type ResourcesConfig = {
+  /**
+   * Whether resources required for on-device image processing should be downloaded
+   * and cached on first initialization of the SDK.
+   *
+   * If `false`, package the required resources in the app (Android assets /
+   * iOS bundle) and set {@link localFolder} / {@link bundleIdentifier} as needed.
+   *
+   * Default: `true`.
+   */
+  download?: boolean;
+
+  /**
+   * URL where base resources are hosted when {@link download} is enabled.
+   *
+   * Default: `"https://models.cdn.microblink.com/resources"`.
+   *
+   * Do not use the OTA host (`https://blinkid-ota.microblink.com`) here.
+   */
+  serviceUrl?: string;
+
+  /**
+   * Folder name under the app cache (download enabled) or assets path (download
+   * disabled) where base resources are stored.
+   *
+   * Platform defaults when omitted:
+   * - Android: `"microblink/blinkid"`
+   * - iOS: `"MLModels"`
+   *
+   * Keep this separate from the OTA resources folder.
+   */
+  localFolder?: string;
+
+  /**
+   * Timeout for resource downloads, in milliseconds.
+   *
+   * A single number applies the same duration to connection, write, and read
+   * timeouts. Omit to use the native default timeout.
+   */
+  requestTimeout?: number;
+
+  /**
+   * [iOS] Bundle identifier of the app bundle that contains prebundled resources
+   * when {@link download} is `false`.
+   *
+   * Maps to native `ResourcesConfig.bundleUrl` (the bridge resolves the
+   * identifier to a bundle URL). Ignored on Android — use {@link localFolder}
+   * under assets instead.
+   */
+  bundleIdentifier?: string;
+};
+
+/**
+ * Settings for the initialization of the BlinkID SDK.
  */
 export type BlinkIdSdkSettings = {
   /**
    * License key for the native SDK.
-   *
    */
   licenseKey: string;
 
   /**
-   * Optional licensee string if the provided license key is not tied to the single application ID.
+   * Optional licensee string if the provided license key is not tied to a single
+   * application ID.
    */
   licensee?: string;
 
   /**
-   * Whether resources required for on-device image processing should be downloaded and cached
-   * on first initialization of the SDK.
+   * Base resource download and cache configuration.
    *
-   * If set to false, you need to package all the required
-   * resources in your application's assets.
+   * Replaces the former flat fields `downloadResources`, `resourceDownloadUrl`,
+   * `resourceLocalFolder`, `resourceRequestTimeout`, and `bundleIdentifier`.
    *
+   * When omitted, native `ResourcesConfig()` defaults apply.
+   *
+   * @see {@link ResourcesConfig}
    */
-  downloadResources?: boolean;
+  resourcesConfig?: ResourcesConfig;
 
-  /**
-   * If resources are to be downloaded, the following is the URL where the resources are hosted.
-   *
-   * URL: `"https://models.cdn.microblink.com/resources"`
-   */
-  resourceDownloadUrl?: string;
-
-  /**
-   * Local folder name where resources will be downloaded and cached.
-   *
-   * If resources are being downloaded, this defines the name of the folder within your
-   * application's cache folder where resources will be cached.
-   */
-  resourceLocalFolder?: string;
-
-  /**
-   * [iOS-specific] If resources downloading is disabled, this defines the bundle of your app where the resources reside.
-   *
-   */
-  bundleIdentifier?: string;
-
-  /**
-   * Timeout settings for resource downloads.
-   *
-   */
-  resourceRequestTimeout?: number;
   /**
    * Set a custom HTTPS URL to be used as a proxy for Ping and license checks.
    * The proxy URL will be applied only if the license has the appropriate rights.

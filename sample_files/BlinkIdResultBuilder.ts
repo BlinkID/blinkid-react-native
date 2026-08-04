@@ -55,6 +55,7 @@ export class BlinkIdResultBuilder {
       this.buildResult("Personal Id Number", result.personalIdNumber) +
       this.buildResult("Profession", result.profession) +
       this.buildResult("Race", result.race) +
+      this.buildResult("Ethnicity", result.ethnicity) +
       this.buildResult("Religion", result.religion) +
       this.buildResult("Residential Status", result.residentialStatus) +
       this.buildResult("Country code", result.countryCode) +
@@ -216,6 +217,7 @@ export class BlinkIdResultBuilder {
       this.buildResult("Personal ID number", result.personalIdNumber) +
       this.buildResult("Profession", result.profession) +
       this.buildResult("Race", result.race) +
+      this.buildResult("Ethnicity", result.ethnicity) +
       this.buildResult("Religion", result.religion) +
       this.buildResult("Remarks", result.remarks) +
       this.buildResult("Residence permit type", result.residencePermitType) +
@@ -275,7 +277,7 @@ export class BlinkIdResultBuilder {
   static buildDocumentClassInfoResult(result?: DocumentClassInfo) {
     if (result == null || result == undefined) return "";
 
-    return `\nDocument class information\nCountry: ${result.country}\nRegion: ${result.region}\nDocument type: ${result.documentType}\nISO numeric country code: ${result.isoNumericCountryCode}\n`;
+    return `\nDocument class information\nCountry: ${result.country?.id}\nRegion: ${result.region?.id}\nDocument type: ${result.documentType?.id}\nISO numeric country code: ${result.isoNumericCountryCode}\n`;
   }
 
   static buildDateResult<T>(

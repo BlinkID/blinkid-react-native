@@ -29,18 +29,18 @@ struct BlinkIdDeserializationUtils {
             blinkidSdkSettings?.helloLogEnabled = helloLogEnabled
         }
 
-        let download = sdkSettingsDict?["downloadResources"] as? Bool ?? true
+        let resourcesDict = sdkSettingsDict?["resourcesConfig"] as? Dictionary<String, Any>
 
-        let serviceUrl = sdkSettingsDict?["resourceDownloadUrl"] as? String
+        let download = resourcesDict?["download"] as? Bool ?? true
+
+        let serviceUrl = resourcesDict?["serviceUrl"] as? String
             ?? defaultResourceDownloadUrl
 
-        let localFolder = sdkSettingsDict?["resourceLocalFolder"] as? String
+        let localFolder = resourcesDict?["localFolder"] as? String
             ?? defaultResourceLocalFolder
 
         var bundleUrl: URL? = nil
-
-        if let bundleIdentifier = sdkSettingsDict?["bundleIdentifier"] as? String,
-
+        if let bundleIdentifier = resourcesDict?["bundleIdentifier"] as? String,
         let bundle = Bundle(identifier: bundleIdentifier) {
             bundleUrl = bundle.bundleURL
         }

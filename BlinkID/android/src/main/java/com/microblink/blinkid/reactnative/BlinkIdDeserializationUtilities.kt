@@ -39,27 +39,27 @@ import org.json.JSONObject
 object BlinkIdDeserializationUtilities {
 
   private const val DEFAULT_RESOURCE_DOWNLOAD_URL = "https://models.cdn.microblink.com/resources"
-  private const val DEFAULT_RESOURCES_LOCAL_FOLDER = "MLModels"
+  private const val DEFAULT_RESOURCES_LOCAL_FOLDER = "microblink/blinkid"
 
   fun deserializeBlinkIdSdkSettings(blinkIdSdkSettingsMap: JSONObject?): BlinkIdSdkSettings? {
     val licenseKey = blinkIdSdkSettingsMap?.optString("licenseKey")?.takeIf { it.isNotBlank() }
       ?: return null
 
+    val resourcesMap = blinkIdSdkSettingsMap.optJSONObject("resourcesConfig")
+
     return BlinkIdSdkSettings(
       licenseKey = licenseKey,
       licensee = blinkIdSdkSettingsMap.optString("licensee").takeIf { it.isNotBlank() },
       resourcesConfig = ResourcesConfig(
-        download = blinkIdSdkSettingsMap.optBoolean("downloadResources", true),
-        serviceUrl = blinkIdSdkSettingsMap.optString(
-          "resourceDownloadUrl",
-          DEFAULT_RESOURCE_DOWNLOAD_URL
-        ),
-        localFolder = blinkIdSdkSettingsMap.optString(
-          "resourceLocalFolder",
-          DEFAULT_RESOURCES_LOCAL_FOLDER
-        ),
+        download = resourcesMap?.optBoolean("download", true) ?: true,
+        serviceUrl = resourcesMap?.optString("serviceUrl")
+          ?.takeIf { it.isNotBlank() }
+          ?: DEFAULT_RESOURCE_DOWNLOAD_URL,
+        localFolder = resourcesMap?.optString("localFolder")
+          ?.takeIf { it.isNotBlank() }
+          ?: DEFAULT_RESOURCES_LOCAL_FOLDER,
         requestTimeout = deserializeResourceRequestTimeout(
-          blinkIdSdkSettingsMap.opt("resourceRequestTimeout")
+          resourcesMap?.opt("requestTimeout")
         ),
       ),
       microblinkProxyUrl = blinkIdSdkSettingsMap.optString("microblinkProxyURL")

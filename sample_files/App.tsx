@@ -52,7 +52,7 @@ export default function App() {
 
   const buildSdkSettings = () => ({
     licenseKey,
-    downloadResources: true,
+    resourcesConfig: { download: true },
     ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
   });
 
