@@ -77,6 +77,95 @@ export type ResourcesConfig = {
 };
 
 /**
+ * Configuration for over-the-air (OTA) document resources.
+ *
+ * Behaves similarly to {@link ResourcesConfig}, with update checks and a
+ * `strict` failure mode. Maps to native `OtaResourcesConfig` on Android and
+ * `OTAResourcesConfig` / `otaResourcesConfiguration` on iOS.
+ *
+ * When omitted on {@link BlinkIdSdkSettings}, native `OtaResourcesConfig()` /
+ * `OTAResourcesConfig()` defaults apply (`checkForUpdates: true`,
+ * `strict: false`, platform default URL/folder).
+ *
+ * Do not cross-wire hosts or folders with {@link ResourcesConfig}:
+ * - OTA default URL: `"https://blinkid-ota.microblink.com"`
+ * - Base resources URL: `"https://models.cdn.microblink.com/resources"`
+ *
+ * @example
+ * ```ts
+ * const sdkSettings: BlinkIdSdkSettings = {
+ *   licenseKey,
+ *   otaResourcesConfig: { checkForUpdates: true, strict: false },
+ * };
+ * ```
+ */
+export type OtaResourcesConfig = {
+  /**
+   * Whether the SDK checks for and downloads updated OTA resources on
+   * initialization.
+   *
+   * When `false`, no update check is performed and cached/bundled OTA resources
+   * are used as-is. First-run downloads are still required when OTA resources
+   * are missing locally — this flag only suppresses update checks, not the
+   * initial fetch.
+   *
+   * Default: `true`.
+   */
+  checkForUpdates?: boolean;
+
+  /**
+   * How to handle a failed OTA update download during initialization.
+   * Only applied when {@link checkForUpdates} is `true`.
+   *
+   * - `false` (default): initialization continues and the SDK falls back to
+   *   cached/bundled OTA resources.
+   * - `true`: SDK initialization fails if the OTA download fails. Callers must
+   *   handle that error path.
+   */
+  strict?: boolean;
+
+  /**
+   * URL of the OTA versions/download service used when {@link checkForUpdates}
+   * is `true`.
+   *
+   * Default: `"https://blinkid-ota.microblink.com"`.
+   *
+   * Do not use the base resources host (`https://models.cdn.microblink.com/resources`) here.
+   */
+  serviceUrl?: string;
+
+  /**
+   * Folder where OTA resources are downloaded and cached (or found when
+   * prebundled).
+   *
+   * Platform defaults when omitted:
+   * - Android: `"microblink/blinkid/ota"`
+   * - iOS: `"OTAMLModels"`
+   *
+   * Keep this separate from {@link ResourcesConfig.localFolder}.
+   */
+  localFolder?: string;
+
+  /**
+   * Timeout for OTA resource downloads, in milliseconds.
+   *
+   * A single number applies the same duration to connection, write, and read
+   * timeouts. Omit to use the native default timeout.
+   */
+  requestTimeout?: number;
+
+  /**
+   * [iOS] Bundle identifier of the app bundle that contains prebundled OTA
+   * resources.
+   *
+   * Maps to native `OTAResourcesConfig.bundleUrl` (the bridge resolves the
+   * identifier to a bundle URL). Ignored on Android — place OTA assets under
+   * {@link localFolder} (e.g. `assets/microblink/blinkid/ota`) instead.
+   */
+  bundleIdentifier?: string;
+};
+
+/**
  * Settings for the initialization of the BlinkID SDK.
  */
 export type BlinkIdSdkSettings = {
@@ -102,6 +191,15 @@ export type BlinkIdSdkSettings = {
    * @see {@link ResourcesConfig}
    */
   resourcesConfig?: ResourcesConfig;
+
+  /**
+   * Over-the-air (OTA) resource download and cache configuration.
+   *
+   * When omitted, native OTA defaults apply (update checks enabled, non-strict).
+   *
+   * @see {@link OtaResourcesConfig}
+   */
+  otaResourcesConfig?: OtaResourcesConfig;
 
   /**
    * Set a custom HTTPS URL to be used as a proxy for Ping and license checks.

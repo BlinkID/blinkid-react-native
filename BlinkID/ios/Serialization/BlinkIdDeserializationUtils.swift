@@ -14,6 +14,9 @@ struct BlinkIdDeserializationUtils {
     private static let defaultResourceDownloadUrl = "https://models.cdn.microblink.com/resources"
     private static let defaultResourceLocalFolder = "MLModels"
 
+    private static let defaultOtaDownloadUrl = "https://blinkid-ota.microblink.com"
+    private static let defaultOtaResourcesLocalFolder = "OTAMLModels"
+
     static func deserializeBlinkIdSdkSettings(_ sdkSettingsDict: Dictionary<String, Any>?) -> BlinkIDSdkSettings? {
         var blinkidSdkSettings: BlinkIDSdkSettings?
         
@@ -51,6 +54,30 @@ struct BlinkIdDeserializationUtils {
             localFolder: localFolder,
             requestTimeout: .default,
             bundleUrl: bundleUrl
+        )
+
+        let otaResourcesDict = sdkSettingsDict?["otaResourcesConfig"] as? Dictionary<String, Any>
+
+        let otaCheckForUpdates = otaResourcesDict?["checkForUpdates"] as? Bool ?? true
+        let otaStrict = otaResourcesDict?["strict"] as? Bool ?? false
+        let otaServiceUrl = otaResourcesDict?["serviceUrl"] as? String
+            ?? defaultOtaDownloadUrl
+        let otaLocalFolder = otaResourcesDict?["localFolder"] as? String
+            ?? defaultOtaResourcesLocalFolder
+
+        var otaBundleUrl: URL? = nil
+        if let otaBundleIdentifier = otaResourcesDict?["bundleIdentifier"] as? String,
+           let otaBundle = Bundle(identifier: otaBundleIdentifier) {
+            otaBundleUrl = otaBundle.bundleURL
+        }
+
+        blinkidSdkSettings?.otaResourcesConfiguration = OTAResourcesConfig(
+            checkForUpdates: otaCheckForUpdates,
+            strict: otaStrict,
+            serviceUrl: otaServiceUrl,
+            localFolder: otaLocalFolder,
+            requestTimeout: .default,
+            bundleUrl: otaBundleUrl
         )
         
         if let microblinkProxyUrl = sdkSettingsDict?["microblinkProxyURL"] as? String

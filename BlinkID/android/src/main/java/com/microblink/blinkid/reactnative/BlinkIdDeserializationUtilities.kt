@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import com.microblink.blinkid.core.BlinkIdSdkSettings
 import com.microblink.blinkid.core.settings.ResourcesConfig
+import com.microblink.blinkid.core.settings.OtaResourcesConfig
 import com.microblink.blinkid.core.result.FieldType
 import com.microblink.blinkid.core.result.classinfo.CountryId
 import com.microblink.blinkid.core.result.classinfo.DocumentClassInfo
@@ -41,11 +42,15 @@ object BlinkIdDeserializationUtilities {
   private const val DEFAULT_RESOURCE_DOWNLOAD_URL = "https://models.cdn.microblink.com/resources"
   private const val DEFAULT_RESOURCES_LOCAL_FOLDER = "microblink/blinkid"
 
+  private const val DEFAULT_OTA_DOWNLOAD_URL = "https://blinkid-ota.microblink.com"
+  private const val DEFAULT_OTA_RESOURCES_LOCAL_FOLDER = "microblink/blinkid/ota"
+
   fun deserializeBlinkIdSdkSettings(blinkIdSdkSettingsMap: JSONObject?): BlinkIdSdkSettings? {
     val licenseKey = blinkIdSdkSettingsMap?.optString("licenseKey")?.takeIf { it.isNotBlank() }
       ?: return null
 
     val resourcesMap = blinkIdSdkSettingsMap.optJSONObject("resourcesConfig")
+    val otaResourcesMap = blinkIdSdkSettingsMap.optJSONObject("otaResourcesConfig")
 
     return BlinkIdSdkSettings(
       licenseKey = licenseKey,
@@ -60,6 +65,19 @@ object BlinkIdDeserializationUtilities {
           ?: DEFAULT_RESOURCES_LOCAL_FOLDER,
         requestTimeout = deserializeResourceRequestTimeout(
           resourcesMap?.opt("requestTimeout")
+        ),
+      ),
+      otaResourcesConfig = OtaResourcesConfig(
+        checkForUpdates = otaResourcesMap?.optBoolean("checkForUpdates", true) ?: true,
+        strict = otaResourcesMap?.optBoolean("strict", false) ?: false,
+        serviceUrl = otaResourcesMap?.optString("serviceUrl")
+          ?.takeIf { it.isNotBlank() }
+          ?: DEFAULT_OTA_DOWNLOAD_URL,
+        localFolder = otaResourcesMap?.optString("localFolder")
+          ?.takeIf { it.isNotBlank() }
+          ?: DEFAULT_OTA_RESOURCES_LOCAL_FOLDER,
+        requestTimeout = deserializeResourceRequestTimeout(
+          otaResourcesMap?.opt("requestTimeout")
         ),
       ),
       microblinkProxyUrl = blinkIdSdkSettingsMap.optString("microblinkProxyURL")
