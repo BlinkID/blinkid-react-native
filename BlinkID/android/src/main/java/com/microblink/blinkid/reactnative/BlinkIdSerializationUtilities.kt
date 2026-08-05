@@ -332,7 +332,6 @@ object BlinkIdSerializationUtilities {
         documentClassInfo.isoNumericCountryCode?.let {
             documentClassInfoJson.put("isoNumericCountryCode", it)
         }
-        documentClassInfoJson.put("empty", documentClassInfo.isEmpty())
         return documentClassInfoJson
     }
 
