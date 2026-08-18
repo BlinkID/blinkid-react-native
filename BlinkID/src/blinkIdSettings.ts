@@ -8,6 +8,17 @@ import type {
 } from "./types";
 
 /**
+ * Network timeouts for SDK resource downloads. Values are in milliseconds.
+ * Omit unset fields to keep the native SDK default for that timeout (30 seconds
+ * on current BlinkID native SDKs).
+ */
+export type RequestTimeout = {
+  connectionTimeoutMilliseconds?: number;
+  writeTimeoutMilliseconds?: number;
+  readTimeoutMilliseconds?: number;
+};
+
+/**
  * Configuration for base (non-OTA) SDK resources: download, cache location, and timeouts.
  *
  * Maps to native `ResourcesConfig` on Android and `ResourcesConfig` /
@@ -58,12 +69,10 @@ export type ResourcesConfig = {
   localFolder?: string;
 
   /**
-   * Timeout for resource downloads, in milliseconds.
-   *
-   * A single number applies the same duration to connection, write, and read
-   * timeouts. Omit to use the native default timeout.
+   * Network timeouts for resource downloads, in milliseconds.
+   * Omit to use native SDK defaults.
    */
-  requestTimeout?: number;
+  requestTimeout?: RequestTimeout;
 
   /**
    * [iOS] Bundle identifier of the app bundle that contains prebundled resources
@@ -147,12 +156,10 @@ export type OtaResourcesConfig = {
   localFolder?: string;
 
   /**
-   * Timeout for OTA resource downloads, in milliseconds.
-   *
-   * A single number applies the same duration to connection, write, and read
-   * timeouts. Omit to use the native default timeout.
+   * Network timeouts for OTA resource downloads, in milliseconds.
+   * Omit to use native SDK defaults.
    */
-  requestTimeout?: number;
+  requestTimeout?: RequestTimeout;
 
   /**
    * [iOS] Bundle identifier of the app bundle that contains prebundled OTA

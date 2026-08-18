@@ -31,6 +31,7 @@ import com.microblink.blinkid.core.session.InputImageSource
 import com.microblink.blinkid.core.settings.RedactionMode
 import com.microblink.blinkid.ux.camera.CameraLensFacing
 import com.microblink.blinkid.ux.camera.CameraSettings
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -323,23 +324,28 @@ object BlinkIdDeserializationUtilities {
   }
 
   private fun deserializeResourceRequestTimeout(timeoutValue: Any?): RequestTimeout {
-    return when (timeoutValue) {
-      is Number -> {
-        val timeout = timeoutValue.toInt().milliseconds
-        RequestTimeout(
-          connectionTimeout = timeout,
-          writeTimeout = timeout,
-          readTimeout = timeout,
-        )
-      }
-      is JSONObject -> RequestTimeout(
-        connectionTimeout = timeoutValue
-          .optInt("connectionTimeoutMilliseconds", 10_000)
-          .milliseconds,
-        writeTimeout = timeoutValue.optInt("writeTimeoutMilliseconds", 10_000).milliseconds,
-        readTimeout = timeoutValue.optInt("readTimeoutMilliseconds", 10_000).milliseconds,
-      )
-      else -> RequestTimeout.DEFAULT
+    val resourceRequestTimeoutMap = timeoutValue as? JSONObject ?: return RequestTimeout.DEFAULT
+    val defaultTimeout = RequestTimeout.DEFAULT
+    return RequestTimeout(
+      connectionTimeout = deserializeTimeoutMilliseconds(
+        resourceRequestTimeoutMap.opt("connectionTimeoutMilliseconds"),
+        defaultTimeout.connectionTimeout,
+      ),
+      writeTimeout = deserializeTimeoutMilliseconds(
+        resourceRequestTimeoutMap.opt("writeTimeoutMilliseconds"),
+        defaultTimeout.writeTimeout,
+      ),
+      readTimeout = deserializeTimeoutMilliseconds(
+        resourceRequestTimeoutMap.opt("readTimeoutMilliseconds"),
+        defaultTimeout.readTimeout,
+      ),
+    )
+  }
+
+  private fun deserializeTimeoutMilliseconds(value: Any?, default: Duration): Duration {
+    return when (value) {
+      is Number -> value.toInt().milliseconds
+      else -> default
     }
   }
 

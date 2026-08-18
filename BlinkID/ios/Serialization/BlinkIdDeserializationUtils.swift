@@ -16,6 +16,51 @@ struct BlinkIdDeserializationUtils {
 
     private static let defaultOtaDownloadUrl = "https://blinkid-ota.microblink.com"
     private static let defaultOtaResourcesLocalFolder = "OTAMLModels"
+    private static let defaultTimeoutSeconds: TimeInterval = 30
+
+    private static func deserializeResourceRequestTimeout(_ value: Any?) -> RequestTimeout {
+        guard let map = value as? [String: Any] else {
+            return .default
+        }
+
+        return RequestTimeout(
+            connectionTimeout: deserializeTimeoutSeconds(
+                map["connectionTimeoutMilliseconds"],
+                defaultSeconds: defaultTimeoutSeconds
+            ),
+            readTimeout: deserializeTimeoutSeconds(
+                map["readTimeoutMilliseconds"],
+                defaultSeconds: defaultTimeoutSeconds
+            ),
+            writeTimeout: deserializeTimeoutSeconds(
+                map["writeTimeoutMilliseconds"],
+                defaultSeconds: defaultTimeoutSeconds
+            )
+        )
+    }
+
+    private static func deserializeTimeoutSeconds(
+        _ value: Any?,
+        defaultSeconds: TimeInterval
+    ) -> TimeInterval {
+        guard let milliseconds = parseTimeoutMilliseconds(value) else {
+            return defaultSeconds
+        }
+        return Double(milliseconds) / 1000.0
+    }
+
+    private static func parseTimeoutMilliseconds(_ value: Any?) -> Int? {
+        if let intValue = value as? Int {
+            return intValue
+        }
+        if let doubleValue = value as? Double {
+            return Int(doubleValue)
+        }
+        if let numberValue = value as? NSNumber {
+            return numberValue.intValue
+        }
+        return nil
+    }
 
     static func deserializeBlinkIdSdkSettings(_ sdkSettingsDict: Dictionary<String, Any>?) -> BlinkIDSdkSettings? {
         var blinkidSdkSettings: BlinkIDSdkSettings?
@@ -52,7 +97,7 @@ struct BlinkIdDeserializationUtils {
             download: download,
             serviceUrl: serviceUrl,
             localFolder: localFolder,
-            requestTimeout: .default,
+            requestTimeout: deserializeResourceRequestTimeout(resourcesDict?["requestTimeout"]),
             bundleUrl: bundleUrl
         )
 
@@ -76,7 +121,7 @@ struct BlinkIdDeserializationUtils {
             strict: otaStrict,
             serviceUrl: otaServiceUrl,
             localFolder: otaLocalFolder,
-            requestTimeout: .default,
+            requestTimeout: deserializeResourceRequestTimeout(otaResourcesDict?["requestTimeout"]),
             bundleUrl: otaBundleUrl
         )
         

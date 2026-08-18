@@ -556,7 +556,7 @@ Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK r
 
 | Field | Description |
 | --- | --- |
-| `resourcesConfig` | Base ML resource download/cache (`download`, `serviceUrl`, `localFolder`, `requestTimeout`, iOS `bundleIdentifier`) |
+| `resourcesConfig` | Base ML resource download/cache (`download`, `serviceUrl`, `localFolder`, `requestTimeout` as [`RequestTimeout`](BlinkID/src/blinkIdSettings.ts), iOS `bundleIdentifier`) |
 | `otaResourcesConfig` | OTA document resources (`checkForUpdates`, `strict`, `serviceUrl`, `localFolder`, …). Optional; native defaults apply when omitted |
 
 Do not cross-wire base and OTA hosts: base defaults to `https://models.cdn.microblink.com/resources`; OTA defaults to `https://blinkid-ota.microblink.com`.
@@ -629,8 +629,32 @@ const sdkSettings: BlinkIdSdkSettings = {
 | `downloadResources` | `resourcesConfig.download` |
 | `resourceDownloadUrl` | `resourcesConfig.serviceUrl` |
 | `resourceLocalFolder` | `resourcesConfig.localFolder` |
-| `resourceRequestTimeout` | `resourcesConfig.requestTimeout` |
+| `resourceRequestTimeout` | `resourcesConfig.requestTimeout` ([`RequestTimeout`](BlinkID/src/blinkIdSettings.ts), milliseconds) |
 | `bundleIdentifier` | `resourcesConfig.bundleIdentifier` (iOS) |
+
+Do **not** cross-wire hosts: base resources use `https://models.cdn.microblink.com/resources`; OTA uses `https://blinkid-ota.microblink.com`.
+
+#### Resource download timeouts
+
+`resourcesConfig.requestTimeout` and `otaResourcesConfig.requestTimeout` accept a [`RequestTimeout`](BlinkID/src/blinkIdSettings.ts) object (milliseconds). Omit `requestTimeout` to use native defaults (30 seconds per timeout on current BlinkID native SDKs). Omit individual fields inside `requestTimeout` to keep the native default for that timeout.
+
+```typescript
+resourcesConfig: {
+  download: true,
+  requestTimeout: {
+    connectionTimeoutMilliseconds: 30000,
+    writeTimeoutMilliseconds: 30000,
+    readTimeoutMilliseconds: 30000,
+  },
+},
+
+otaResourcesConfig: {
+  requestTimeout: {
+    connectionTimeoutMilliseconds: 30000,
+    readTimeoutMilliseconds: 60000,
+  }, // write timeout uses native default when omitted
+},
+```
 
 #### Migrating document capture settings
 

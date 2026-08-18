@@ -24,6 +24,7 @@ Updated to BlinkID native SDKs **v8001.0.0** (Android & iOS). See also the [plat
 
 ### Bug fixes
 - Document swap data caching: fixed an issue in continuous-video mode where data from a previously scanned document could persist after a new document was introduced. The SDK now detects document swaps and clears cached images (cropped faces, signatures, barcodes, etc.) to prevent cross-contamination.
+- Fixed `resourcesConfig.requestTimeout` and `otaResourcesConfig.requestTimeout`: custom timeout values are now applied on Android and iOS (previously ignored on iOS; Android accepted a single number only).
 
 ### New documents support
 - Bailiwick Of Jersey - Driver's License
@@ -110,14 +111,14 @@ Updated to BlinkID native SDKs **v8001.0.0** (Android & iOS). See also the [plat
 - Added `FieldType.ParentFullName` and `FieldType.Ethnicity` for redaction.
 
 #### SDK settings: nested resources + OTA (breaking for customized resource fields)
-Flat resource fields on `BlinkIdSdkSettings` move into nested configs:
+Flat resource fields on `BlinkIdSdkSettings` move into nested configs. `resourcesConfig.requestTimeout` and `otaResourcesConfig.requestTimeout` are [`RequestTimeout`](BlinkID/src/blinkIdSettings.ts) (three optional millisecond fields), not `number`. Omit `requestTimeout` or unset fields to keep native defaults (30 seconds per timeout on current BlinkID native SDKs).
 
 | Old (flat) | New |
 |---|---|
 | `downloadResources` | `resourcesConfig.download` |
 | `resourceDownloadUrl` | `resourcesConfig.serviceUrl` |
 | `resourceLocalFolder` | `resourcesConfig.localFolder` |
-| `resourceRequestTimeout` | `resourcesConfig.requestTimeout` |
+| `resourceRequestTimeout` | `resourcesConfig.requestTimeout` ([`RequestTimeout`](BlinkID/src/blinkIdSettings.ts), milliseconds) |
 | `bundleIdentifier` | `resourcesConfig.bundleIdentifier` (iOS) |
 
 New optional `otaResourcesConfig`:
@@ -128,7 +129,7 @@ New optional `otaResourcesConfig`:
 | `strict` | `false` | When `true`, SDK init fails if an OTA update download fails |
 | `serviceUrl` | `https://blinkid-ota.microblink.com` | Do not cross-wire with base resources URL |
 | `localFolder` | platform default (`microblink/blinkid/ota` on Android, `OTAMLModels` on iOS) | Keep separate from base `resourcesConfig.localFolder` |
-| `requestTimeout` | native default | Milliseconds |
+| `requestTimeout` | native default (30 s per timeout) | Milliseconds; [`RequestTimeout`](BlinkID/src/blinkIdSettings.ts) with `connectionTimeoutMilliseconds`, `writeTimeoutMilliseconds`, `readTimeoutMilliseconds`; omit unset fields to keep native default for that timeout |
 | `bundleIdentifier` | — | iOS prebundled OTA resources |
 
 Minimal `{ licenseKey }` (and optional `resourcesConfig: { download: true }`) still works; OTA uses native defaults when `otaResourcesConfig` is omitted.
@@ -139,6 +140,7 @@ const sdkSettings: BlinkIdSdkSettings = {
   resourcesConfig: {
     download: true,
     // serviceUrl / localFolder optional — platform defaults apply
+    // requestTimeout: { connectionTimeoutMilliseconds: 30000, writeTimeoutMilliseconds: 30000, readTimeoutMilliseconds: 30000 },
   },
   otaResourcesConfig: {
     checkForUpdates: true,
