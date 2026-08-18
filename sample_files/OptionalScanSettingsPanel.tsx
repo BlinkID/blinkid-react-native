@@ -22,6 +22,7 @@ import {
   ModuleCard,
   OptionalEnumDropdown,
   SectionLabel,
+  StringSettingField,
 } from "./SampleUiComponents";
 
 type Props = {
@@ -41,6 +42,7 @@ export function OptionalScanSettingsPanel({ config, onChanged }: Props) {
       <ClassFilterCard config={config} onChanged={onChanged} />
       <RedactionResolverCard config={config} onChanged={onChanged} />
       <DirectApiRedactionCard config={config} onChanged={onChanged} />
+      <OtaResourcesCard config={config} onChanged={onChanged} />
     </View>
   );
 }
@@ -120,6 +122,52 @@ function RedactionResolverCard({
         entries={config.redactionResolverEntries}
         onEntriesChanged={(entries) => {
           config.redactionResolverEntries = entries;
+          onChanged();
+        }}
+      />
+    </ModuleCard>
+  );
+}
+
+function OtaResourcesCard({
+  config,
+  onChanged,
+}: {
+  config: ScanningModulesConfig;
+  onChanged: () => void;
+}) {
+  return (
+    <ModuleCard
+      title="OTA resources download"
+      subtitle={
+        config.otaResourcesDownload
+          ? "Enabled — SDK initialization"
+          : "Disabled (null)"
+      }
+      enabled={config.otaResourcesDownload}
+      onEnabledChanged={(enabled) => {
+        config.otaResourcesDownload = enabled;
+        onChanged();
+      }}
+    >
+      <Text style={styles.cardHint}>
+        Enables over-the-air document resource download during SDK
+        initialization. When disabled, OTA settings are not sent to the SDK.
+      </Text>
+      <StringSettingField
+        label="Service URL"
+        value={config.otaResourcesServiceUrl}
+        placeholder="https://blinkid-ota.microblink.com"
+        onChanged={(serviceUrl) => {
+          config.otaResourcesServiceUrl = serviceUrl;
+          onChanged();
+        }}
+      />
+      <BoolSettingTile
+        title="Strict"
+        value={config.otaResourcesStrict}
+        onChanged={(otaResourcesStrict) => {
+          config.otaResourcesStrict = otaResourcesStrict;
           onChanged();
         }}
       />

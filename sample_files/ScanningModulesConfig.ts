@@ -8,6 +8,7 @@ import {
   type BlinkIdSessionSettings,
   type BlinkIdScanningSettings,
   type ClassFilter,
+  type OtaResourcesConfig,
   type DocumentCaptureModuleSettings,
   type MrzModuleSettings,
   type RedactionSettings,
@@ -23,6 +24,9 @@ import {
   uiToDocumentFilter,
   type UiDocumentFilter,
 } from "./SampleFilterOptions";
+
+/** Default OTA service URL used by the native BlinkID SDK when omitted. */
+export const DEFAULT_OTA_SERVICE_URL = "https://blinkid-ota.microblink.com";
 
 /** UI-driven scanning configuration for the BlinkID sample app. */
 export class ScanningModulesConfig {
@@ -59,6 +63,10 @@ export class ScanningModulesConfig {
   directApiRedactionEnabled = false;
   directApiRedaction: RedactionSettings =
     ScanningModulesConfig.defaultRedactionSettings();
+
+  otaResourcesDownload = false;
+  otaResourcesStrict = false;
+  otaResourcesServiceUrl = DEFAULT_OTA_SERVICE_URL;
 
   static defaultBarcodeModule(): BarcodeModuleSettings {
     return {
@@ -173,6 +181,20 @@ export class ScanningModulesConfig {
     return this.directApiRedaction;
   }
 
+  toOtaResourcesConfig(): OtaResourcesConfig | undefined {
+    if (!this.otaResourcesDownload) {
+      return undefined;
+    }
+
+    const serviceUrl = this.otaResourcesServiceUrl.trim();
+
+    return {
+      checkForUpdates: true,
+      strict: this.otaResourcesStrict,
+      ...(serviceUrl.length > 0 ? { serviceUrl } : {}),
+    };
+  }
+
   toScanningSettings(): BlinkIdScanningSettings {
     return {
       barcodeModule: this.barcodeEnabled ? { ...this.barcode } : null,
@@ -226,6 +248,9 @@ export class ScanningModulesConfig {
     ];
     this.directApiRedactionEnabled = false;
     this.directApiRedaction = ScanningModulesConfig.defaultRedactionSettings();
+    this.otaResourcesDownload = false;
+    this.otaResourcesStrict = false;
+    this.otaResourcesServiceUrl = DEFAULT_OTA_SERVICE_URL;
   }
 }
 

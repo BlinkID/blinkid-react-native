@@ -50,11 +50,16 @@ export default function App() {
 
   const microblinkProxyURL: string | undefined = undefined;
 
-  const buildSdkSettings = () => ({
-    licenseKey,
-    resourcesConfig: { download: true },
-    ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
-  });
+  const buildSdkSettings = () => {
+    const otaResourcesConfig = modulesConfig.toOtaResourcesConfig();
+
+    return {
+      licenseKey,
+      resourcesConfig: { download: true },
+      ...(otaResourcesConfig ? { otaResourcesConfig } : {}),
+      ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
+    };
+  };
 
   const logScanConfiguration = (action: string) => {
     const sessionSettings = modulesConfig.toSessionSettings();
@@ -95,6 +100,10 @@ export default function App() {
     console.log(
       `[BlinkIdSample] directApiRedaction:`,
       JSON.stringify(modulesConfig.toDirectApiRedactionSettings() ?? null),
+    );
+    console.log(
+      `[BlinkIdSample] otaResourcesConfig:`,
+      JSON.stringify(modulesConfig.toOtaResourcesConfig() ?? null),
     );
   };
 
