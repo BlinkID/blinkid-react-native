@@ -2,7 +2,7 @@
 
 blink_id_plugin_path=`pwd`/BlinkID
 appName=BlinkIdSample
-appId=com.microblink.sample
+appId=com.microblink.sampleReactNative
 rn_version="0.82.0"
 
 # Remove any existing code
