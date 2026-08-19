@@ -64,7 +64,7 @@ export class ScanningModulesConfig {
   directApiRedaction: RedactionSettings =
     ScanningModulesConfig.defaultRedactionSettings();
 
-  otaResourcesDownload = false;
+  otaResourcesDownload = true;
   otaResourcesStrict = false;
   otaResourcesServiceUrl = DEFAULT_OTA_SERVICE_URL;
 
@@ -248,7 +248,7 @@ export class ScanningModulesConfig {
     ];
     this.directApiRedactionEnabled = false;
     this.directApiRedaction = ScanningModulesConfig.defaultRedactionSettings();
-    this.otaResourcesDownload = false;
+    this.otaResourcesDownload = true;
     this.otaResourcesStrict = false;
     this.otaResourcesServiceUrl = DEFAULT_OTA_SERVICE_URL;
   }
