@@ -1,0 +1,28 @@
+name: Dry Run Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          package-manager-cache: false
+
+      - name: Prepare Package Subfolder
+        run: cp README.md BlinkID/
+
+      - name: Install Dependencies
+        working-directory: BlinkID
+        run: npm install
+
+      - name: Execute Dry Run
+        working-directory: BlinkID
+        run: npm publish --access public --dry-run

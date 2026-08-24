@@ -1,0 +1,45 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggered automatically on GitHub Release creation
+
+permissions:
+  id-token: write # Required for npm OIDC Trusted Publishing
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false  # never use caching in release builds
+
+      - name: Verify tag matches package version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(node -p "JSON.parse(require('fs').readFileSync('./BlinkID/package.json')).version")
+          if [ "$TAG" != "$PKG" ]; then
+            echo "::error::Tag version (v$TAG) does not match BlinkID/package.json version ($PKG)"
+            exit 1
+          fi
+          echo "Version match verified: v$TAG"
+
+      - name: Prepare Package Subfolder
+        run: cp README.md BlinkID/
+
+      - name: Install Dependencies
+        working-directory: BlinkID
+        run: npm install
+
+      - name: Publish to npm
+        working-directory: BlinkID
+        run: npm publish --access public
