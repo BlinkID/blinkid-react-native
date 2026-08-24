@@ -9,6 +9,7 @@ import {
   DocumentClassInfo,
   DriverLicenseDetailedInfo,
   MrzResult,
+  ParentInfo,
   SingleSideScanningResult,
   StringResult,
   VizResult,
@@ -64,6 +65,7 @@ export class BlinkIdResultBuilder {
         "National insurace number",
         result.nationalInsuranceNumber,
       ) +
+      this.buildParentsInfoResult(result.parentsInfo) +
       this.buildDriverLicenceResult(result.driverLicenseDetailedInfo) +
       this.buildDataMatchResult(result.dataMatchResult) +
       this.buildDocumentClassInfoResult(result.documentClassInfo) +
@@ -214,6 +216,7 @@ export class BlinkIdResultBuilder {
       this.buildResult("Manufacturing year", result.manufacturingYear) +
       this.buildResult("Mother's name", result.mothersName) +
       this.buildResult("Father's name", result.fathersName) +
+      this.buildParentsInfoResult(result.parentsInfo) +
       this.buildResult("Personal ID number", result.personalIdNumber) +
       this.buildResult("Profession", result.profession) +
       this.buildResult("Race", result.race) +
@@ -369,6 +372,20 @@ export class BlinkIdResultBuilder {
       }
     }
     return dataMatchResultString;
+  }
+
+  static buildParentsInfoResult(parentsInfoResult?: ParentInfo[]): string {
+    if (parentsInfoResult == null || parentsInfoResult == undefined) return "";
+
+    let resultString = "";
+    for (const parentInfo of parentsInfoResult) {
+      resultString +=
+        this.buildResult("First name", parentInfo.firstName) +
+        this.buildResult("Last name", parentInfo.lastName) +
+        this.buildResult("Full name", parentInfo.fullName);
+    }
+
+    return resultString == "" ? "" : `Parents info:\n${resultString}`;
   }
 
   static buildDependentsInfoResult(
