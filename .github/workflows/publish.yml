@@ -3,7 +3,7 @@ name: Publish to NPM
 on:
   push:
     tags:
-      - 'v*' # Triggered automatically on GitHub Release creation
+      - 'v*' # Triggered on version tag push when creating a GitHub Release
 
 permissions:
   id-token: write # Required for npm OIDC Trusted Publishing
@@ -15,13 +15,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false  # never use caching in release builds
+          node-version: '24'
 
       - name: Verify tag matches package version
         run: |
