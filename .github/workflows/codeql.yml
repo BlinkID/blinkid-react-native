@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      # Temporary: run on this branch so we can time JS/TS before adding native jobs.
+      # Temporary: run on this branch so we can time jobs before adding iOS.
       - feature/MSDKS-2201-implement-gh-codeql
   pull_request:
     branches: [ "master" ]
@@ -21,8 +21,8 @@ permissions:
 
 jobs:
   analyze:
-    name: CodeQL Analysis
-    runs-on: ubuntu-latest
+    name: CodeQL Analysis (${{ matrix.language }})
+    runs-on: ${{ matrix.os }}
 
     permissions:
       packages: read
@@ -36,10 +36,33 @@ jobs:
         include:
           - language: javascript-typescript
             build-mode: none
+            os: ubuntu-latest
+          # Android first: same Linux runner as JS/TS, no Xcode/signing.
+          # Kotlin requires a real compile (build-mode: none skips .kt files).
+          - language: java-kotlin
+            build-mode: manual
+            os: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      if: matrix.language == 'java-kotlin'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    - name: Set up Java
+      if: matrix.language == 'java-kotlin'
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+
+    - name: Set up Android SDK
+      if: matrix.language == 'java-kotlin'
+      uses: android-actions/setup-android@v3
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
@@ -47,6 +70,12 @@ jobs:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
         queries: security-extended
+
+    - name: Build Android sample with local BlinkID
+      if: matrix.language == 'java-kotlin'
+      env:
+        CI: true
+      run: bash .github/scripts/codeql-build-android.sh
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
