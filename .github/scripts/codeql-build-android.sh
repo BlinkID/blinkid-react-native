@@ -3,29 +3,41 @@
 # for CodeQL java-kotlin analysis (Kotlin requires a real Gradle compile).
 set -euo pipefail
 
+WORKSPACE_ROOT="${GITHUB_WORKSPACE:-$(cd "$(dirname "$0")/../../" && pwd)}"
 APP_NAME=BlinkIdSample
+APP_DIR="${WORKSPACE_ROOT}/${APP_NAME}"
 RN_VERSION=0.82.0
-PLUGIN_DIR="${GITHUB_WORKSPACE}/BlinkID"
+CLI_VERSION=17.0.1
+PLUGIN_DIR="${WORKSPACE_ROOT}/BlinkID"
+
+cd "${WORKSPACE_ROOT}"
 
 # CodeQL must compile this checkout's Kotlin, not the published npm package.
-npm --prefix "$PLUGIN_DIR" install
-npm --prefix "$PLUGIN_DIR" pack --pack-destination "$PLUGIN_DIR"
-TARBALL=$(ls "$PLUGIN_DIR"/microblink-blinkid-react-native-*.tgz | head -n 1)
+cd "${PLUGIN_DIR}"
+npm install
+TARBALL_NAME=$(npm pack --pack-destination "${PLUGIN_DIR}")
+TARBALL="${PLUGIN_DIR}/${TARBALL_NAME}"
 
-npx --yes @react-native-community/cli@latest init "$APP_NAME" \
-  --version "$RN_VERSION" \
+cd "${WORKSPACE_ROOT}"
+rm -rf "${APP_DIR}"
+
+npx --yes "@react-native-community/cli@${CLI_VERSION}" init "${APP_NAME}" \
+  --version "${RN_VERSION}" \
   --package-name com.microblink.sample \
   --title "BlinkID React-Native Sample" \
   --skip-git-init \
   --pm npm
 
-npm --prefix "$APP_NAME" install --save "$TARBALL"
+cd "${APP_DIR}"
+export APP_DIR
+npm install --save "${TARBALL}"
 
 python3 - <<'PY'
 from pathlib import Path
+import os
 import re
 
-gradle = Path("BlinkIdSample/android/build.gradle")
+gradle = Path(os.environ["APP_DIR"], "android", "build.gradle")
 text = gradle.read_text()
 updated, count = re.subn(
     r'kotlinVersion\s*=\s*"[0-9.]+"',
@@ -33,9 +45,9 @@ updated, count = re.subn(
     text,
 )
 if count == 0:
-    raise SystemExit("kotlinVersion not found in BlinkIdSample/android/build.gradle")
+    raise SystemExit(f"kotlinVersion not found in {gradle}")
 gradle.write_text(updated)
 PY
 
-cd "$APP_NAME/android"
+cd "${APP_DIR}/android"
 ./gradlew assembleDebug --no-daemon
