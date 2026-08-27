@@ -15,8 +15,14 @@ cd "${WORKSPACE_ROOT}"
 # CodeQL must compile this checkout's Kotlin, not the published npm package.
 cd "${PLUGIN_DIR}"
 npm install
-TARBALL_NAME=$(npm pack --pack-destination "${PLUGIN_DIR}")
-TARBALL="${PLUGIN_DIR}/${TARBALL_NAME}"
+VERSION=$(node -p "require('./package.json').version")
+# npm pack prints lifecycle noise on stdout; derive the tarball path from package version.
+npm pack --pack-destination "${PLUGIN_DIR}" --ignore-scripts >/dev/null
+TARBALL="${PLUGIN_DIR}/microblink-blinkid-react-native-${VERSION}.tgz"
+if [[ ! -f "${TARBALL}" ]]; then
+  echo "Expected tarball not found: ${TARBALL}" >&2
+  exit 1
+fi
 
 cd "${WORKSPACE_ROOT}"
 rm -rf "${APP_DIR}"
