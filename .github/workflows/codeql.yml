@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-      # Temporary: run on this branch while validating SAST on the feature branch.
-      - feature/MSDKS-2201-implement-gh-codeql
   pull_request:
     branches: [ "master" ]
   schedule:
