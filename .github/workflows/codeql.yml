@@ -34,13 +34,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - language: javascript-typescript
-            build-mode: none
-            os: ubuntu-latest
-          # Kotlin requires a real compile (build-mode: none skips .kt files).
-          - language: java-kotlin
-            build-mode: manual
-            os: ubuntu-latest
+          # Uncomment JS/TS and Android after iOS CodeQL is validated.
+          # - language: javascript-typescript
+          #   build-mode: none
+          #   os: ubuntu-latest
+          # - language: java-kotlin
+          #   build-mode: manual
+          #   os: ubuntu-latest
           # Swift requires macOS + Xcode build (no build-mode: none).
           - language: swift
             build-mode: manual
