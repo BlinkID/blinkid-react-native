@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      # Temporary: run on this branch so we can time jobs before adding iOS.
+      # Temporary: run on this branch while validating CodeQL on the feature branch.
       - feature/MSDKS-2201-implement-gh-codeql
   pull_request:
     branches: [ "master" ]
@@ -37,18 +37,21 @@ jobs:
           - language: javascript-typescript
             build-mode: none
             os: ubuntu-latest
-          # Android first: same Linux runner as JS/TS, no Xcode/signing.
           # Kotlin requires a real compile (build-mode: none skips .kt files).
           - language: java-kotlin
             build-mode: manual
             os: ubuntu-latest
+          # Swift requires macOS + Xcode build (no build-mode: none).
+          - language: swift
+            build-mode: manual
+            os: macos-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Set up Node.js
-      if: matrix.language == 'java-kotlin'
+      if: matrix.language == 'java-kotlin' || matrix.language == 'swift'
       uses: actions/setup-node@v4
       with:
         node-version: '24'
@@ -70,12 +73,20 @@ jobs:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
         queries: security-extended
+        paths-ignore: |
+          **/Frameworks/**
 
     - name: Build Android sample with local BlinkID
       if: matrix.language == 'java-kotlin'
       env:
         CI: true
       run: bash .github/scripts/codeql-build-android.sh
+
+    - name: Build iOS sample with local BlinkID
+      if: matrix.language == 'swift'
+      env:
+        CI: true
+      run: bash .github/scripts/codeql-build-ios.sh
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
