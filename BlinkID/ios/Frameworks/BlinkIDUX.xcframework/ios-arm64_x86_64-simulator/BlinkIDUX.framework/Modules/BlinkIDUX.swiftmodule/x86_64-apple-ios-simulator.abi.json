@@ -8238,6 +8238,354 @@
                 "accessorKind": "_modify"
               }
             ]
+          },
+          {
+            "kind": "Var",
+            "name": "localizationBundle",
+            "printedName": "localizationBundle",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Bundle?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bundle",
+                    "printedName": "Foundation.Bundle",
+                    "usr": "c:objc(cs)NSBundle"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvp",
+            "mangledName": "$s9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Bundle?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bundle",
+                        "printedName": "Foundation.Bundle",
+                        "usr": "c:objc(cs)NSBundle"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvg",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvg",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.Bundle?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bundle",
+                        "printedName": "Foundation.Bundle",
+                        "usr": "c:objc(cs)NSBundle"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvs",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvs",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvM",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC18localizationBundleSo8NSBundleCSgvM",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "localizationTableName",
+            "printedName": "localizationTableName",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvp",
+            "mangledName": "$s9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvg",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvg",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvs",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvs",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvM",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC21localizationTableNameSSSgvM",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "language",
+            "printedName": "language",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9BlinkIDUX0A7IDThemeC8languageSSSgvp",
+            "mangledName": "$s9BlinkIDUX0A7IDThemeC8languageSSSgvp",
+            "moduleName": "BlinkIDUX",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC8languageSSSgvg",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC8languageSSSgvg",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC8languageSSSgvs",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC8languageSSSgvs",
+                "moduleName": "BlinkIDUX",
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9BlinkIDUX0A7IDThemeC8languageSSSgvM",
+                "mangledName": "$s9BlinkIDUX0A7IDThemeC8languageSSSgvM",
+                "moduleName": "BlinkIDUX",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -20051,6 +20399,13 @@
       "offset": 312,
       "length": 1,
       "value": "0"
+    },
+    {
+      "filePath": "\/Users\/juraskrlec\/Documents\/SDKs\/CoreIdentity\/sdk-core-ios\/blinkid-ios\/Source\/Shared\/Bundle\/Bundle+Extension.swift",
+      "kind": "Dictionary",
+      "offset": 1383,
+      "length": 3,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/juraskrlec\/Documents\/SDKs\/CoreIdentity\/sdk-core-ios\/blinkid-ios\/Source\/Shared\/Camera\/Camera.swift",

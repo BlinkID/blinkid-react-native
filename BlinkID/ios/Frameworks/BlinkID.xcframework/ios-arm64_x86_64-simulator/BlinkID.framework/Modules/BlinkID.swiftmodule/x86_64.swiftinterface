@@ -2023,7 +2023,7 @@ public struct UxEventPinglet : BlinkID.Pinglet {
   public let alertType: BlinkID.UxEventPinglet.AlertType?
   public let helpCloseType: BlinkID.UxEventPinglet.HelpCloseType?
   public init(eventType: BlinkID.UxEventPinglet.EventType, errorMessageType: BlinkID.UxEventPinglet.ErrorMessageType? = nil, alertType: BlinkID.UxEventPinglet.AlertType? = nil, helpCloseType: BlinkID.UxEventPinglet.HelpCloseType? = nil)
-  public enum EventType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum EventType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case camerastarted
     case cameraclosed
     case onboardinginfodisplayed
@@ -2047,7 +2047,7 @@ public struct UxEventPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum ErrorMessageType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum ErrorMessageType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case movecloser
     case movefarther
     case keepvisible
@@ -2068,7 +2068,7 @@ public struct UxEventPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum AlertType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum AlertType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case invalidlicensekey
     case networkerror
     case documentclassnotallowed
@@ -2086,7 +2086,7 @@ public struct UxEventPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum HelpCloseType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum HelpCloseType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case contentskipped
     case contentfullyviewed
     public init?(rawValue: Swift.String)
@@ -2108,7 +2108,7 @@ public struct WrapperProductInfoPinglet : BlinkID.Pinglet {
   public let wrapperProduct: BlinkID.WrapperProductInfoPinglet.WrapperProduct
   public let correlationId: Swift.String?
   public init(wrapperProduct: BlinkID.WrapperProductInfoPinglet.WrapperProduct, correlationId: Swift.String? = nil)
-  public enum WrapperProduct : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum WrapperProduct : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case crossplatformflutter
     case crossplatformreactnative
     case identityverification
@@ -2137,7 +2137,7 @@ public struct SdkInitStartPinglet : BlinkID.Pinglet {
   public let pingProxyEnabled: Swift.Bool
   public let baltazarProxyEnabled: Swift.Bool
   public init(product: BlinkID.SdkInitStartPinglet.Product, platform: BlinkID.SdkInitStartPinglet.Platform, platformDetails: BlinkID.SdkInitStartPinglet.PlatformDetails? = nil, packageName: Swift.String, userId: Swift.String, pingProxyEnabled: Swift.Bool, baltazarProxyEnabled: Swift.Bool)
-  public enum Product : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum Product : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case blinkcard
     case blinkid
     case blinkinput
@@ -2156,7 +2156,7 @@ public struct SdkInitStartPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum Platform : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum Platform : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case ios
     case android
     case emscripten
@@ -2173,7 +2173,7 @@ public struct SdkInitStartPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum PlatformDetails : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum PlatformDetails : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case basic
     case advanced
     case advancedThreads
@@ -2203,7 +2203,7 @@ public struct ErrorPinglet : BlinkID.Pinglet {
   public let errorMessage: Swift.String
   public let stackTrace: Swift.String?
   public init(errorType: BlinkID.ErrorPinglet.ErrorType, errorMessage: Swift.String, stackTrace: Swift.String? = nil)
-  public enum ErrorType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum ErrorType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case nonfatal
     case crash
     public init?(rawValue: Swift.String)
@@ -2224,7 +2224,7 @@ public struct CameraHardwareInfoPinglet : BlinkID.Pinglet {
   public static let schemaVersion: Swift.String
   public let availableCameras: [BlinkID.CameraHardwareInfoPinglet.AvailableCamerasItem]
   public init(availableCameras: [BlinkID.CameraHardwareInfoPinglet.AvailableCamerasItem])
-  public struct AvailableCamerasItem : Swift.Codable {
+  public struct AvailableCamerasItem : Swift.Codable, Swift.Sendable {
     public let deviceId: Swift.String
     public let cameraFacing: BlinkID.CameraHardwareInfoPinglet.CameraFacing
     public let focus: BlinkID.CameraHardwareInfoPinglet.Focus?
@@ -2233,14 +2233,14 @@ public struct CameraHardwareInfoPinglet : BlinkID.Pinglet {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct AvailableResolutionsItem : Swift.Codable {
+  public struct AvailableResolutionsItem : Swift.Codable, Swift.Sendable {
     public let width: Swift.Int64
     public let height: Swift.Int64
     public init(width: Swift.Int64, height: Swift.Int64)
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public enum CameraFacing : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum CameraFacing : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case front
     case back
     case unknown
@@ -2254,7 +2254,7 @@ public struct CameraHardwareInfoPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum Focus : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum Focus : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case auto
     case fixed
     public init?(rawValue: Swift.String)
@@ -2276,7 +2276,7 @@ public struct CameraPermissionPinglet : BlinkID.Pinglet {
   public let eventType: BlinkID.CameraPermissionPinglet.EventType
   public let cameraPermissionGranted: Swift.Bool?
   public init(eventType: BlinkID.CameraPermissionPinglet.EventType, cameraPermissionGranted: Swift.Bool? = nil)
-  public enum EventType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum EventType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case camerapermissioncheck
     case camerapermissionrequest
     case camerapermissionuserresponse
@@ -2299,7 +2299,7 @@ public struct LogPinglet : BlinkID.Pinglet {
   public let logLevel: BlinkID.LogPinglet.LogLevel
   public let logMessage: Swift.String
   public init(logLevel: BlinkID.LogPinglet.LogLevel, logMessage: Swift.String)
-  public enum LogLevel : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum LogLevel : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case info
     case warning
     public init?(rawValue: Swift.String)
@@ -2322,7 +2322,7 @@ public struct ScanningConditionsPinglet : BlinkID.Pinglet {
   public let deviceOrientation: BlinkID.ScanningConditionsPinglet.DeviceOrientation?
   public let flashlightOn: Swift.Bool?
   public init(updateType: BlinkID.ScanningConditionsPinglet.UpdateType, deviceOrientation: BlinkID.ScanningConditionsPinglet.DeviceOrientation? = nil, flashlightOn: Swift.Bool? = nil)
-  public enum UpdateType : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum UpdateType : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case deviceorientation
     case flashlightstate
     public init?(rawValue: Swift.String)
@@ -2335,7 +2335,7 @@ public struct ScanningConditionsPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum DeviceOrientation : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum DeviceOrientation : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case portrait
     case landscaperight
     case landscapeleft
@@ -2365,7 +2365,7 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
   public let browserStorageSupport: BlinkID.BrowserDeviceInfoPinglet.BrowserStorageSupport
   public let derivedDeviceInfo: BlinkID.BrowserDeviceInfoPinglet.DerivedDeviceInfo
   public init(userAgentData: BlinkID.BrowserDeviceInfoPinglet.UserAgentData? = nil, userAgent: Swift.String, threads: Swift.Int64, memory: Swift.Double? = nil, gpu: BlinkID.BrowserDeviceInfoPinglet.Gpu? = nil, screen: BlinkID.BrowserDeviceInfoPinglet.Screen, browserStorageSupport: BlinkID.BrowserDeviceInfoPinglet.BrowserStorageSupport, derivedDeviceInfo: BlinkID.BrowserDeviceInfoPinglet.DerivedDeviceInfo)
-  public struct UserAgentData : Swift.Codable {
+  public struct UserAgentData : Swift.Codable, Swift.Sendable {
     public let brands: [BlinkID.BrowserDeviceInfoPinglet.BrandsItem]?
     public let mobile: Swift.Bool?
     public let platform: Swift.String?
@@ -2380,21 +2380,21 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct BrandsItem : Swift.Codable {
+  public struct BrandsItem : Swift.Codable, Swift.Sendable {
     public let brand: Swift.String
     public let version: Swift.String
     public init(brand: Swift.String, version: Swift.String)
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct FullVersionListItem : Swift.Codable {
+  public struct FullVersionListItem : Swift.Codable, Swift.Sendable {
     public let brand: Swift.String
     public let version: Swift.String
     public init(brand: Swift.String, version: Swift.String)
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct Gpu : Swift.Codable {
+  public struct Gpu : Swift.Codable, Swift.Sendable {
     public let renderer: Swift.String
     public let shadingLanguageVersion: Swift.String
     public let vendor: Swift.String
@@ -2403,7 +2403,7 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct Screen : Swift.Codable {
+  public struct Screen : Swift.Codable, Swift.Sendable {
     public let screenWidth: Swift.Int64
     public let screenHeight: Swift.Int64
     public let devicePixelRatio: Swift.Double
@@ -2414,14 +2414,14 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct BrowserStorageSupport : Swift.Codable {
+  public struct BrowserStorageSupport : Swift.Codable, Swift.Sendable {
     public let cookieEnabled: Swift.Bool
     public let localStorageEnabled: Swift.Bool
     public init(cookieEnabled: Swift.Bool, localStorageEnabled: Swift.Bool)
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct DerivedDeviceInfo : Swift.Codable {
+  public struct DerivedDeviceInfo : Swift.Codable, Swift.Sendable {
     public let model: Swift.String
     public let formFactors: [BlinkID.BrowserDeviceInfoPinglet.DerivedDeviceInfoFormFactorsItem]
     public let platform: Swift.String
@@ -2430,14 +2430,14 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public struct Browser : Swift.Codable {
+  public struct Browser : Swift.Codable, Swift.Sendable {
     public let brand: Swift.String
     public let version: Swift.String
     public init(brand: Swift.String, version: Swift.String)
     public func encode(to encoder: any Swift.Encoder) throws
     public init(from decoder: any Swift.Decoder) throws
   }
-  public enum UserAgentDataFormFactorsItem : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum UserAgentDataFormFactorsItem : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case desktop
     case automotive
     case mobile
@@ -2455,7 +2455,7 @@ public struct BrowserDeviceInfoPinglet : BlinkID.Pinglet {
       get
     }
   }
-  public enum DerivedDeviceInfoFormFactorsItem : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum DerivedDeviceInfoFormFactorsItem : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case desktop
     case automotive
     case mobile
@@ -2487,7 +2487,7 @@ public struct CameraInputInfoPinglet : BlinkID.Pinglet {
   public let roiHeight: Swift.Int64
   public let viewPortAspectRatio: Swift.Double
   public init(deviceId: Swift.String, cameraFacing: BlinkID.CameraInputInfoPinglet.CameraFacing, cameraFrameWidth: Swift.Int64, cameraFrameHeight: Swift.Int64, roiWidth: Swift.Int64, roiHeight: Swift.Int64, viewPortAspectRatio: Swift.Double)
-  public enum CameraFacing : Swift.String, Swift.Codable, Swift.CaseIterable {
+  public enum CameraFacing : Swift.String, Swift.Codable, Swift.CaseIterable, Swift.Sendable {
     case front
     case back
     case unknown

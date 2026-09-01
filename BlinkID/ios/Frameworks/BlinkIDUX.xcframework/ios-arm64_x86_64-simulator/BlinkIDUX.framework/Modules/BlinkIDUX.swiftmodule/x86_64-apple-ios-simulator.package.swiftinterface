@@ -272,6 +272,18 @@ public enum UIEvent : Swift.Equatable, Swift.Sendable {
   final public var helpButtonTooltipForegroundColor: SwiftUICore.Color
   final public var helpButtonTooltipBackgroundColor: SwiftUICore.Color
   final public var toastBackgroundColor: SwiftUICore.Color
+  final public var localizationBundle: Foundation.Bundle? {
+    get
+    set
+  }
+  final public var localizationTableName: Swift.String? {
+    get
+    set
+  }
+  final public var language: Swift.String? {
+    get
+    set
+  }
   @objc deinit
 }
 public protocol ScanningResultProtocol : Swift.Sendable {
