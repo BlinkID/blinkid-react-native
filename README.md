@@ -247,6 +247,7 @@ import {
   performDirectApiScan,
   loadBlinkIdSdk,
   unloadBlinkIdSdk,
+  refreshLicenseLease,
   CountryID,
   DocumentTypeID,
   RegionID,
@@ -540,6 +541,14 @@ await unloadBlinkIdSdk({ deleteCachedResources: false });
 Set `deleteCachedResources` to `true` to also delete downloaded and cached SDK resources from the device.
 
 `unloadBlinkIdSdk` is called automatically after each successful scan session.
+
+**The `refreshLicenseLease` method**
+
+Refreshes the SDK license lease. Can be called periodically to maintain an active license status; the required frequency depends on your license configuration. The SDK must already be initialized (via `loadBlinkIdSdk` or a scan) before calling this method.
+
+```typescript
+await refreshLicenseLease();
+```
 
 ### <a name="blinkid-settings"></a> BlinkID Settings
 

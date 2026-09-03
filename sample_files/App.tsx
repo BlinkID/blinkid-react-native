@@ -11,10 +11,12 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Pressable,
 } from "react-native";
 import {
   performScan,
   performDirectApiScan,
+  refreshLicenseLease,
   type BlinkIdScanningResult,
 } from "@microblink/blinkid-react-native";
 import { launchImageLibrary } from "react-native-image-picker";
@@ -213,6 +215,15 @@ export default function App() {
     }
   };
 
+  const handleRefreshLicenseLease = async () => {
+    try {
+      await refreshLicenseLease();
+      setResult("License lease refreshed");
+    } catch (error) {
+      setResult(`Error refreshing license lease: ${error}`);
+    }
+  };
+
   const showInstructions = (title: string, message: string, onOk: () => void) => {
     Alert.alert(title, message, [{ text: "OK", onPress: onOk }]);
   };
@@ -280,6 +291,11 @@ export default function App() {
                 )
               }
             />
+          </View>
+          <View style={styles.buttonBlock}>
+            <Pressable onPress={handleRefreshLicenseLease}>
+              <Text style={styles.secondaryButtonText}>Refresh License Lease</Text>
+            </Pressable>
           </View>
 
           <Text style={styles.resultText}>{result}</Text>
@@ -382,5 +398,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 8,
     backgroundColor: "#eee",
+  },
+  secondaryButtonText: {
+    color: "#1565C0",
+    fontSize: 15,
+    textAlign: "center",
   },
 });

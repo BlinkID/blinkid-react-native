@@ -21,6 +21,7 @@ Updated to BlinkID native SDKs **v8001.0.0** (Android & iOS). See also the [plat
   - Improved Persian digit recognition for regional documents.
 - Mandatory data redaction: Netherlands DL QR code added to the redacted list.
 - OTA (over-the-air) resources: configure separately from base ML resources via `BlinkIdSdkSettings.otaResourcesConfig` (see [API changes](#api-changes-v8001) below).
+- Added `refreshLicenseLease` to refresh the BlinkID SDK license lease while the SDK is initialized (see [API changes](#api-changes-v8001) below).
 
 ### Bug fixes
 - Document swap data caching: fixed an issue in continuous-video mode where data from a previously scanned document could persist after a new document was introduced. The SDK now detects document swaps and clears cached images (cropped faces, signatures, barcodes, etc.) to prevent cross-contamination.
@@ -109,6 +110,9 @@ Updated to BlinkID native SDKs **v8001.0.0** (Android & iOS). See also the [plat
 - Added `ethnicity` on `BlinkIdScanningResult` and `VizResult`.
 - Added `fullName` on `ParentInfo`.
 - Added `FieldType.ParentFullName` and `FieldType.Ethnicity` for redaction.
+
+#### License lease refresh
+- Added `refreshLicenseLease()` — refreshes the BlinkID SDK license lease. Can be called periodically to maintain an active license status; the required frequency depends on your license configuration. The SDK must already be initialized (via `loadBlinkIdSdk` or a scanning method) before calling this method.
 
 #### SDK settings: nested resources + OTA (breaking for customized resource fields)
 Flat resource fields on `BlinkIdSdkSettings` move into nested configs. `resourcesConfig.requestTimeout` and `otaResourcesConfig.requestTimeout` are [`RequestTimeout`](BlinkID/src/blinkIdSettings.ts) (three optional millisecond fields), not `number`. Omit `requestTimeout` or unset fields to keep native defaults (30 seconds per timeout on current BlinkID native SDKs).
