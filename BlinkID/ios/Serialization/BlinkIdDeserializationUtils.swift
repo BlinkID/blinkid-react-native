@@ -569,9 +569,26 @@ struct BlinkIdDeserializationUtils {
         let type = filteredClass["documentType"] as? String
         let region = filteredClass["region"] as? String
         
-        return (country == nil ||  classInfo.country?.countryId == CountryID(rawValue: country!)) &&
-        (type == nil || classInfo.documentType?.documentTypeId == DocumentTypeID(rawValue: type!)) &&
-        (region == nil || classInfo.region?.regionId == RegionID(rawValue: region!))
+        return (country == nil || classInfo.country?.countryId == parseCountryId(country!)) &&
+        (type == nil || classInfo.documentType?.documentTypeId == parseDocumentTypeId(type!)) &&
+        (region == nil || classInfo.region?.regionId == parseRegionId(region!))
+    }
+
+    private static func parseCountryId(_ value: String) -> CountryID? {
+        switch value {
+        case "schengenArea":
+            return .schengen_area
+        default:
+            return CountryID(rawValue: value)
+        }
+    }
+
+    private static func parseRegionId(_ value: String) -> RegionID? {
+        RegionID(rawValue: value)
+    }
+
+    private static func parseDocumentTypeId(_ value: String) -> DocumentTypeID? {
+        DocumentTypeID(rawValue: value)
     }
     
     static func sanitizeDictionary(_ dictionary: Dictionary<String, Any>?) -> Dictionary<String, Any>? {

@@ -3902,13 +3902,13 @@ export const RegionID = {
 
   QuintanaRooCozumel: "quintanaRooCozumel",
 
-  SanPaolo: "saoPaolo",
+  SaoPaolo: "saoPaolo",
 
-  RioDeJaniero: "rioDeJaneiro",
+  RioDeJaneiro: "rioDeJaneiro",
 
   RioGrandeDoSul: "rioGrandeDoSul",
 
-  NorthWestTerritories: "northWestTerritories",
+  NorthwestTerritories: "northwestTerritories",
 
   Nunavut: "nunavut",
 
@@ -3942,7 +3942,7 @@ export const RegionID = {
 
   Sergipe: "sergipe",
 
-  Alagos: "alagos",
+  Alagoas: "alagoas",
 
   Bangsamoro: "bangsamoro",
 
@@ -4078,7 +4078,7 @@ export const DocumentTypeID = {
 
   MinorsPublicServicesCard: "minorsPublicServicesCard",
 
-  DrivingPriviligeCard: "drivingPriviligeCard",
+  DrivingPrivilegeCard: "drivingPrivilegeCard",
 
   AsylumRequest: "asylumRequest",
 
@@ -4110,7 +4110,7 @@ export const DocumentTypeID = {
 
   AfghanCitizenCard: "afghanCitizenCard",
 
-  EId: "eId",
+  Eid: "eid",
 
   Pass: "pass",
 

@@ -280,7 +280,11 @@ export class BlinkIdResultBuilder {
   static buildDocumentClassInfoResult(result?: DocumentClassInfo) {
     if (result == null || result == undefined) return "";
 
-    return `\nDocument class information\nCountry: ${result.country?.id}\nRegion: ${result.region?.id}\nDocument type: ${result.documentType?.id}\nISO numeric country code: ${result.isoNumericCountryCode}\n`;
+    return `\nDocument class information
+      Country: ${result.country?.id ?? result.country?.rawValue}
+      Region: ${result.region?.id ?? result.region?.rawValue}
+      Document type: ${result.documentType?.id ?? result.documentType?.rawValue}
+      ISO numeric country code: ${result.isoNumericCountryCode}\n`;
   }
 
   static buildDateResult<T>(

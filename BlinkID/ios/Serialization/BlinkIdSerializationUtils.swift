@@ -239,9 +239,6 @@ class BlinkIdSerializationUtils {
     }
     
     static func serializeDocumentClassInfo(_ documentClassInfo: BlinkIDSDK.DocumentClassInfo) -> Dictionary<String, Any?> {
-        // TODO: Align country/region/documentType strings with Android (enum.name lowercased).
-        // iOS uses rawValue here; values usually match TS types but are not guaranteed identical
-        // for every enum. Prefer shared explicit string mappers on both platforms.
         var result: [String: Any?] = [
             "countryName": documentClassInfo.countryName,
             "isoNumericCountryCode": documentClassInfo.isoNumericCountryCode,
@@ -252,24 +249,41 @@ class BlinkIdSerializationUtils {
 
         if let country = documentClassInfo.country {
             result["country"] = serializeClassInfoComponent(
-                id: country.countryId?.rawValue,
+                id: country.countryId.map(serializeCountryId),
                 rawValue: country.rawValue
             )
         }
         if let region = documentClassInfo.region {
             result["region"] = serializeClassInfoComponent(
-                id: region.regionId?.rawValue,
+                id: region.regionId.map(serializeRegionId),
                 rawValue: region.rawValue
             )
         }
         if let documentType = documentClassInfo.documentType {
             result["documentType"] = serializeClassInfoComponent(
-                id: documentType.documentTypeId?.rawValue,
+                id: documentType.documentTypeId.map(serializeDocumentTypeId),
                 rawValue: documentType.rawValue
             )
         }
         
         return result
+    }
+
+    private static func serializeCountryId(_ id: CountryID) -> String {
+        switch id {
+        case .schengen_area:
+            return "schengenArea"
+        default:
+            return id.rawValue
+        }
+    }
+
+    private static func serializeRegionId(_ id: RegionID) -> String {
+        id.rawValue
+    }
+
+    private static func serializeDocumentTypeId(_ id: DocumentTypeID) -> String {
+        id.rawValue
     }
 
     private static func serializeClassInfoComponent(id: String?, rawValue: String) -> [String: Any] {

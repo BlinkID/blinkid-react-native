@@ -299,24 +299,21 @@ object BlinkIdSerializationUtilities {
 
     private fun serializeDocumentClassInfo(documentClassInfo: DocumentClassInfo): JSONObject {
         val documentClassInfoJson = JSONObject()
-        // TODO: Align country/region/documentType strings with iOS (rawValue). Android uses
-        // enum.name with only the first character lowercased; values usually match but are not
-        // guaranteed identical for every enum. Prefer shared explicit string mappers on both platforms.
         documentClassInfo.country?.let { country ->
             documentClassInfoJson.put("country", serializeClassInfoComponent(
-                idName = country.id?.name,
+                id = country.id?.let { BlinkIdClassInfoIdMappings.serializeCountryId(it) },
                 rawValue = country.rawValue
             ))
         }
         documentClassInfo.region?.let { region ->
             documentClassInfoJson.put("region", serializeClassInfoComponent(
-                idName = region.id?.name,
+                id = region.id?.let { BlinkIdClassInfoIdMappings.serializeRegionId(it) },
                 rawValue = region.rawValue
             ))
         }
         documentClassInfo.documentType?.let { documentType ->
             documentClassInfoJson.put("documentType", serializeClassInfoComponent(
-                idName = documentType.id?.name,
+                id = documentType.id?.let { BlinkIdClassInfoIdMappings.serializeDocumentTypeId(it) },
                 rawValue = documentType.rawValue
             ))
         }
@@ -335,11 +332,9 @@ object BlinkIdSerializationUtilities {
         return documentClassInfoJson
     }
 
-    private fun serializeClassInfoComponent(idName: String?, rawValue: String): JSONObject {
+    private fun serializeClassInfoComponent(id: String?, rawValue: String): JSONObject {
         val json = JSONObject()
-        idName?.let {
-            json.put("id", it.replaceFirstChar { char -> char.lowercase() })
-        }
+        id?.let { json.put("id", it) }
         json.put("rawValue", rawValue)
         return json
     }
