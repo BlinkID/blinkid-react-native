@@ -343,7 +343,7 @@ class BlinkIdSerializationUtils {
             "greek": serializeRect(stringResult?.location(for: .greek))
         ]
         
-        var sideDict: Dictionary<String, Any?> = [
+        let sideDict: Dictionary<String, Any?> = [
             "latin": serializeScanningSide(stringResult?.side(for: .latin)),
             "arabic": serializeScanningSide(stringResult?.side(for: .arabic)),
             "cyrillic": serializeScanningSide(stringResult?.side(for: .cyrillic)),

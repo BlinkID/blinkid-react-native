@@ -329,7 +329,17 @@ object BlinkIdSerializationUtilities {
         documentClassInfo.isoNumericCountryCode?.let {
             documentClassInfoJson.put("isoNumericCountryCode", it)
         }
+        documentClassInfoJson.put("empty", isDocumentClassInfoEmpty(documentClassInfo))
         return documentClassInfoJson
+    }
+
+    private fun isDocumentClassInfoEmpty(documentClassInfo: DocumentClassInfo): Boolean {
+        val classIds = listOf(
+            documentClassInfo.country?.id?.name,
+            documentClassInfo.region?.id?.name,
+            documentClassInfo.documentType?.id?.name
+        )
+        return classIds.any { it == null } || classIds.all { it == "None" }
     }
 
     private fun serializeClassInfoComponent(id: String?, rawValue: String): JSONObject {
