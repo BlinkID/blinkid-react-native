@@ -58,7 +58,7 @@ export default function App() {
     return {
       licenseKey,
       resourcesConfig: { download: true },
-      ...(otaResourcesConfig ? { otaResourcesConfig } : {}),
+      otaResourcesConfig,
       ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
     };
   };

@@ -181,9 +181,9 @@ export class ScanningModulesConfig {
     return this.directApiRedaction;
   }
 
-  toOtaResourcesConfig(): OtaResourcesConfig | undefined {
+  toOtaResourcesConfig(): OtaResourcesConfig {
     if (!this.otaResourcesDownload) {
-      return undefined;
+      return { checkForUpdates: false };
     }
 
     const serviceUrl = this.otaResourcesServiceUrl.trim();
