@@ -11,10 +11,12 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  Pressable,
 } from "react-native";
 import {
   performScan,
   performDirectApiScan,
+  refreshLicenseLease,
   type BlinkIdScanningResult,
 } from "@microblink/blinkid-react-native";
 import { launchImageLibrary } from "react-native-image-picker";
@@ -43,18 +45,23 @@ export default function App() {
   /// Add a valid license key, based on the platform.
   /// A valid license key can be obtained from the Microblink Developer Hub: https://developer.microblink.com
   const licenseKey = Platform.select({
-    ios: "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUBbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE56VTBNekE0T1Rrc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PaObKYfb4FlwqmqVoofXLicsmElmnSm1gmoXWaFx8MgdmmJRSLpdAfP6uV5xAr3K4rColEBYQ38GNh+FT081yjXPFB16LwdVhDiJcEK07cTBG5hQPXRy8+hoJJ1U7w==",
+    ios: "sRwCACBjb20ubWljcm9ibGluay5zYW1wbGVSZWFjdE5hdGl2ZQEKbWljcm9ibGlua4qOLmpWqDdEZeRf8J/uD6HCbR3dqoWCPNkLapaK9SemOW02sTVcvjDrxz98BG0vjco2u7WSllgeowQWRiz3j6ggcrBWJwG6ETtI37Lb6OrwllrgWMo/rsLXqAZzKhKhWsXNYfGOdTUg/wIV0si8tlgOKfWuJPnrto8Mcg==",
     android:
-      "sRwCABVjb20ubWljcm9ibGluay5zYW1wbGUAbGV5SkRjbVZoZEdWa1QyNGlPakUzTnpreE1ESXpOVGMxT1RBc0lrTnlaV0YwWldSR2IzSWlPaUprWkdRd05qWmxaaTAxT0RJekxUUXdNRGd0T1RRNE1DMDFORFU0WWpBeFlUVTJZamdpZlE9PRXlOs6VFBOfXCx1+6HuENpn05k2kl20pJr4kQ4S1sMxuSzZ+B8YhC9rYMsFXr3HSskFmMFwEe+44OQ1ZE2sm9iHUpxNBmVGpgBTKPOrc2vquGbpqmFwm1feyTL9Aw==",
+      "sRwCACBjb20ubWljcm9ibGluay5zYW1wbGVSZWFjdE5hdGl2ZQAKbWljcm9ibGlua1ShMS27WHnPF52mrdhS8HXMfsULzqnSVp/i20wH8Zi7tVQulz6OoEr0cYl4V8MwCgfj7bL5IYUtm4IuJiCkXxh3Bl01LbzKe6nzrtNsOkGjJMal09bWq/Y2oYBVHTDTnhym7R+ovqBsuVjc5fRs/YZLAPShIU46p6mdlg==",
   })!;
 
   const microblinkProxyURL: string | undefined = undefined;
 
-  const buildSdkSettings = () => ({
-    licenseKey,
-    downloadResources: true,
-    ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
-  });
+  const buildSdkSettings = () => {
+    const otaResourcesConfig = modulesConfig.toOtaResourcesConfig();
+
+    return {
+      licenseKey,
+      resourcesConfig: { download: true },
+      otaResourcesConfig,
+      ...(microblinkProxyURL ? { microblinkProxyURL } : {}),
+    };
+  };
 
   const logScanConfiguration = (action: string) => {
     const sessionSettings = modulesConfig.toSessionSettings();
@@ -95,6 +102,10 @@ export default function App() {
     console.log(
       `[BlinkIdSample] directApiRedaction:`,
       JSON.stringify(modulesConfig.toDirectApiRedactionSettings() ?? null),
+    );
+    console.log(
+      `[BlinkIdSample] otaResourcesConfig:`,
+      JSON.stringify(modulesConfig.toOtaResourcesConfig() ?? null),
     );
   };
 
@@ -204,6 +215,15 @@ export default function App() {
     }
   };
 
+  const handleRefreshLicenseLease = async () => {
+    try {
+      await refreshLicenseLease();
+      setResult("License lease refreshed");
+    } catch (error) {
+      setResult(`Error refreshing license lease: ${error}`);
+    }
+  };
+
   const showInstructions = (title: string, message: string, onOk: () => void) => {
     Alert.alert(title, message, [{ text: "OK", onPress: onOk }]);
   };
@@ -271,6 +291,11 @@ export default function App() {
                 )
               }
             />
+          </View>
+          <View style={styles.buttonBlock}>
+            <Pressable onPress={handleRefreshLicenseLease}>
+              <Text style={styles.secondaryButtonText}>Refresh License Lease</Text>
+            </Pressable>
           </View>
 
           <Text style={styles.resultText}>{result}</Text>
@@ -373,5 +398,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 8,
     backgroundColor: "#eee",
+  },
+  secondaryButtonText: {
+    color: "#1565C0",
+    fontSize: 15,
+    textAlign: "center",
   },
 });
